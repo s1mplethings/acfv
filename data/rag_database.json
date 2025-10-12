@@ -1,0 +1,15 @@
+{
+  "clips": [
+    {
+      "id": "like_funny",
+      "text": "funny hype moment chat spam laugh frog dance",
+      "score": 0.95
+    },
+    {
+      "id": "like_strategy",
+      "text": "calm strategy thinking analyze card game turn calculation",
+      "score": 0.9
+    }
+  ],
+  "vectors": {}
+}

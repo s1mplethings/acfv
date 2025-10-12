@@ -1,0 +1,210 @@
+{
+  "video_sessions": [
+    {
+      "start_time": 1758946824.8942606,
+      "duration_seconds": 9000.006333,
+      "size_mb": 6627.264442443848,
+      "video_path": "F:/.WORK/boardacst\\just want company_2025-09-24_12-48-22_25745157.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1758946824.8962612,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1758947028.7920349,
+          "duration": 203.8957736492157
+        },
+        "说话人分离": {
+          "start_time": 1758946824.8962612,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1758946824.8962612,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1758948508.2887464,
+          "duration": 1683.3924851417542
+        },
+        "情感分析": {
+          "start_time": 1758946824.8962612,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "切片生成": {
+          "start_time": 1758946824.8962612,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1758948634.1476111,
+          "duration": 1809.2513499259949
+        }
+      },
+      "total_time": 1809.26189494133,
+      "success": true,
+      "timestamp": "2025-09-27T12:50:34.156155"
+    },
+    {
+      "start_time": 1759633906.7455478,
+      "duration_seconds": 31611.163667,
+      "size_mb": 23270.122517585754,
+      "video_path": "E:/it october.. cozy game today_2025-10-01_11-54-36_25803657.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1759633906.747555,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759634526.6334126,
+          "duration": 619.8858575820923
+        },
+        "说话人分离": {
+          "start_time": 1759633906.747555,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1759633906.747555,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1759636326.646741,
+          "duration": 2419.89918589592
+        },
+        "情感分析": {
+          "start_time": 1759633906.747555,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "切片生成": {
+          "start_time": 1759633906.747555,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759638662.8812742,
+          "duration": 4756.133719205856
+        }
+      },
+      "total_time": 4756.144972085953,
+      "success": true,
+      "timestamp": "2025-10-05T12:31:02.890519"
+    },
+    {
+      "start_time": 1759643401.9282775,
+      "duration_seconds": 31611.163667,
+      "size_mb": 23270.122517585754,
+      "video_path": "E:/it october.. cozy game today_2025-10-01_11-54-36_25803657.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1759643401.9292774,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759643497.7586112,
+          "duration": 95.82933378219604
+        },
+        "说话人分离": {
+          "start_time": 1759643401.9292774,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1759643401.9292774,
+          "estimated_items": 10,
+          "status": "running"
+        },
+        "情感分析": {
+          "start_time": 1759643401.9292774,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "切片生成": {
+          "start_time": 1759643401.9292774,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759643614.0462148,
+          "duration": 212.11693739891052
+        }
+      },
+      "total_time": 212.12193751335144,
+      "success": true,
+      "timestamp": "2025-10-05T13:53:34.050215"
+    },
+    {
+      "start_time": 1759644726.3300653,
+      "duration_seconds": 31611.163667,
+      "size_mb": 23270.122517585754,
+      "video_path": "E:/it october.. cozy game today_2025-10-01_11-54-36_25803657.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1759644726.331422,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759644999.994966,
+          "duration": 273.66354393959045
+        },
+        "说话人分离": {
+          "start_time": 1759644726.331422,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1759644726.331422,
+          "estimated_items": 10,
+          "status": "running"
+        },
+        "情感分析": {
+          "start_time": 1759644726.331422,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759645092.7397876,
+          "duration": 366.40836548805237
+        },
+        "切片生成": {
+          "start_time": 1759644726.331422,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759645220.9452364,
+          "duration": 494.61381435394287
+        }
+      },
+      "total_time": 494.6194713115692,
+      "success": true,
+      "timestamp": "2025-10-05T14:20:20.949536"
+    },
+    {
+      "start_time": 1759677985.6883473,
+      "duration_seconds": 31611.163667,
+      "size_mb": 23270.122517585754,
+      "video_path": "E:/it october.. cozy game today_2025-10-01_11-54-36_25803657.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1759677985.6883473,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "说话人分离": {
+          "start_time": 1759677985.6883473,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1759677985.6883473,
+          "estimated_items": 10,
+          "status": "running"
+        },
+        "情感分析": {
+          "start_time": 1759677985.6883473,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759678088.9225087,
+          "duration": 103.23416137695312
+        },
+        "切片生成": {
+          "start_time": 1759677985.6883473,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1759678274.927858,
+          "duration": 289.2395107746124
+        }
+      },
+      "total_time": 289.2439696788788,
+      "success": true,
+      "timestamp": "2025-10-05T23:31:14.932317"
+    }
+  ]
+}

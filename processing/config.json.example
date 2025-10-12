@@ -1,0 +1,4 @@
+{
+  "huggingface_token": "your_huggingface_token_here",
+  "description": "请将你的HuggingFace token填入huggingface_token字段，然后将此文件重命名为config.json"
+}

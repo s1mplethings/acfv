@@ -1,0 +1,16 @@
+workdir: "runs"
+audio:
+  sr: 16000
+  hop_ms: 10
+scoring:
+  weights:
+    loudness: 0.6
+    pitch_var: 0.4
+selection:
+  min_gap_s: 8
+  lead_s: 0.4
+  tail_s: 0.6
+  topk: 8
+export:
+  target_fps: 30
+  crf: 20
