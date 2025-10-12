@@ -206,3 +206,12 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 artifacts/large/
+artifacts/large/
+*.pt
+*.pth
+*.bin
+*.onnx
+*.exe
+*.mp4
+*.avi
+*.mkv
