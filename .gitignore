@@ -215,3 +215,12 @@ artifacts/large/
 *.mp4
 *.avi
 *.mkv
+artifacts/large/
+*.pt
+*.pth
+*.bin
+*.onnx
+*.exe
+*.mp4
+*.avi
+*.mkv
