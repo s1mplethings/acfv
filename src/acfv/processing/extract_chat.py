@@ -1,7 +1,7 @@
 import json
 from bs4 import BeautifulSoup
 from transformers import pipeline
-import config
+from acfv import config
 import re
 from main_logging import log_info, log_error
 
@@ -36,7 +36,7 @@ def extract_chat(input_file, output_file):
         # 某些版本 config 是一个包，实际值在 config.config_manager
         if not local_model_path:
             try:
-                from config import config_manager
+                from acfv.config import config_manager
                 local_model_path = config_manager.get('LOCAL_EMOTION_MODEL_PATH', '').strip()
             except Exception:
                 local_model_path = None
@@ -50,7 +50,7 @@ def extract_chat(input_file, output_file):
             device_id = getattr(config, 'LLM_DEVICE', 0)
         except Exception:
             try:
-                from config import config_manager
+                from acfv.config import config_manager
                 device_id = config_manager.get('LLM_DEVICE', 0)
             except Exception:
                 device_id = 0

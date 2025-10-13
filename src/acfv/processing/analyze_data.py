@@ -15,7 +15,7 @@ except ImportError:
     pass
 
 import json
-import config
+from acfv import config
 from main_logging import log_debug, log_info, log_error, log_warning
 import math
 import datetime

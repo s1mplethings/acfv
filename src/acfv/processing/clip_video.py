@@ -3,7 +3,7 @@ import subprocess
 from main_logging import log_info, log_error, log_debug, log_warning
 import datetime
 import json
-import config
+from acfv import config
 
 # 可选依赖：cv2
 try:

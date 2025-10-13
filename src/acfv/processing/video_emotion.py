@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as T
 from PIL import Image
-import config
+from acfv import config
 
 ##############################################
 # 数据预处理：前景 mask 提取与平滑处理

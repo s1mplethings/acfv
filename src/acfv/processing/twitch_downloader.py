@@ -1122,7 +1122,7 @@ class TwitchDownloadPage(QWidget):
         super().__init__(parent)
         # 兼容原有的 config 导入方式
         try:
-            import config
+            from acfv import config
             self.config = config
         except ImportError:
             self.config = None

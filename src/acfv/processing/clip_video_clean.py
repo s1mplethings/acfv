@@ -4,7 +4,7 @@ from main_logging import log_info, log_error, log_debug, log_warning
 import datetime
 import json
 import cv2
-import config
+from acfv import config
 
 # 语义分析相关导入
 try:

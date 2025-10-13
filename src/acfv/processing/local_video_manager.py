@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QSize, Qt, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap
 from modules.ui_components import VideoThumbnailLoader
-import config
+from acfv import config
 
 # 导入说话人分离集成模块
 try:

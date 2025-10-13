@@ -40,7 +40,7 @@ from typing import Dict, Any, List, Tuple, Set
 
 def _load_config_manager():
     try:
-        from config import config_manager  # type: ignore
+        from acfv.config import config_manager  # type: ignore
         return config_manager
     except Exception:
         return None

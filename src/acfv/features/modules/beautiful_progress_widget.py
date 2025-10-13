@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import logging
-from config.progress_styles import *
+from acfv.config.progress_styles import *
 
 
 class BeautifulProgressWidget(QWidget):
