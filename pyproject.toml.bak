@@ -28,5 +28,5 @@ acfv = [
 ]
 
 [project.scripts]
-acfv = "acfv.cli._entry:main"
+acfv = "acfv.cli:main"
 acfv-gui = "acfv.cli:main_gui"
