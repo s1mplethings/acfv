@@ -1,136 +1,217 @@
-# fix.sh —— 无 rsync 版本（Git Bash / WSL / Linux）
-# 用法：在仓库根执行：bash fix.sh
-set -euo pipefail
+#!/usr/bin/env bash
+# acfv_packaging.sh
+# 重构为“安装后可直接使用”的结构；不创建分支、不提交，不推送。
 
-mkdir -p src/acfv
+set -Eeuo pipefail
 
-copy_dir () {
-  local SRC="$1"
-  local DST="$2"
-  if [ -d "$SRC" ]; then
-    mkdir -p "$DST"
-    # 复制包含隐藏文件在内的全部内容
-    ( shopt -s dotglob nullglob; cp -a "$SRC"/* "$DST"/ || true )
+# 0) 预检
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  HAS_GIT=1
+  ROOT="$(git rev-parse --show-toplevel)"
+else
+  HAS_GIT=0
+  ROOT="$(pwd)"
+fi
+cd "$ROOT"
+
+mkdir -p src/acfv/assets
+
+# 便捷移动：若在 git 里且文件受管，用 git mv；否则用 mv
+track_mv() {
+  local src="$1" dst="$2"
+  [ -e "$src" ] || return 0
+  mkdir -p "$(dirname "$dst")"
+  if [ "$HAS_GIT" = "1" ] && git ls-files --error-unmatch "$src" >/dev/null 2>&1; then
+    git mv -f "$src" "$dst"
+  else
+    mv -f "$src" "$dst"
   fi
 }
 
-# 1) 把顶层 tools / config 收编到包里
-copy_dir tools  src/acfv/tools
-copy_dir config src/acfv/config
+# 1) 迁移目录/文件进包
+track_mv config                    src/acfv/config
+track_mv data                      src/acfv/data
+track_mv processing                src/acfv/processing
 
-# 2) 补 __init__.py
-: > src/acfv/__init__.py
-[ -d src/acfv/tools ]  && : > src/acfv/tools/__init__.py
-[ -d src/acfv/config ] && : > src/acfv/config/__init__.py
+track_mv launcher.py               src/acfv/launcher.py
+track_mv clip_video.py             src/acfv/clip_video.py
+track_mv clip_video_clean.py       src/acfv/clip_video_clean.py
+track_mv main_logging.py           src/acfv/main_logging.py
+track_mv error_handler.py          src/acfv/error_handler.py
+track_mv safe_callbacks.py         src/acfv/safe_callbacks.py
+track_mv silent_exit.py            src/acfv/silent_exit.py
+track_mv subprocess_utils.py       src/acfv/subprocess_utils.py
+track_mv utils.py                  src/acfv/utils.py
+track_mv warning_manager.py        src/acfv/warning_manager.py
+track_mv background_runtime.py     src/acfv/background_runtime.py
+track_mv rag_module.py             src/acfv/rag_module.py
+track_mv rag_vector_database.py    src/acfv/rag_vector_database.py
 
-# 3) 入口：仅创建占位 __main__.py（真实版本在源码库里维护）
-if [ ! -f src/acfv/__main__.py ]; then
-cat > src/acfv/__main__.py <<'PY'
-from .__future__ import annotations
-import sys
+track_mv TwitchDownloaderCLI.exe   src/acfv/assets/TwitchDownloaderCLI.exe
+track_mv best.pt                   src/acfv/assets/best.pt
 
-def main():
-    try:
-        from .cli import app  # Typer app in package directory
-        return app()
-    except Exception as first_err:  # noqa: BLE001
-        try:
-            from . import legacy_cli
-            rc = legacy_cli.main()
-            if isinstance(rc, int):
-                return rc
-            return 0
-        except Exception as second_err:  # noqa: BLE001
-            print("[acfv] CLI 启动失败:", file=sys.stderr)
-            print("  1st (Typer app) error:", repr(first_err), file=sys.stderr)
-            print("  2nd (legacy) error:", repr(second_err), file=sys.stderr)
-            return 1
+# 2) 包标记（不自动 git add/commit）
+for d in src/acfv src/acfv/processing src/acfv/config src/acfv/data; do
+  if [ -d "$d" ] && [ ! -e "$d/__init__.py" ]; then
+    printf '%s\n' '"""Package marker."""' > "$d/__init__.py"
+  fi
+done
 
-if __name__ == "__main__":  # pragma: no cover
-    sys.exit(main())
-PY
-fi
-
-# 保留 legacy_cli.py 仅在缺失时恢复
-if [ ! -f src/acfv/legacy_cli.py ]; then
-cat > src/acfv/legacy_cli.py <<'PY'
-import importlib, sys
-CANDIDATES = [
-    ("acfv.app", "main"),
-    ("acfv.main", "main"),
-    ("acfv.entry", "main"),
-    ("acfv.run", "main"),
-    ("acfv.tools.cli", "main"),
-]
-def main(argv=None):
-    last_err = None
-    for mod, func in CANDIDATES:
-        try:
-            m = importlib.import_module(mod)
-            f = getattr(m, func, None)
-            if callable(f):
-                return f()
-        except ModuleNotFoundError:
-            continue
-        except Exception as e:  # noqa: BLE001
-            last_err = e
-            break
-    msg = "[acfv] 未找到真实入口。请在以下任一位置提供 main():\n" + \
-          "\n".join(f"  - {m}.{f}" for m, f in CANDIDATES)
-    if last_err:
-        msg += f"\n最近一次错误：{type(last_err).__name__}: {last_err}"
-    print(msg, file=sys.stderr)
-    return 1
-PY
-fi
-
-# 4) 批量重写导入：tools/config -> acfv.tools / acfv.config
-cat > rewrite_imports.py <<'PY'
-import re
-from pathlib import Path
-ROOT = Path(".")
-files = [p for p in ROOT.rglob("*.py") if ".venv" not in p.parts and "site-packages" not in p.parts]
-rules = [
-    (re.compile(r"\bfrom\s+tools\b"), "from acfv.tools"),
-    (re.compile(r"\bimport\s+tools\b"), "from acfv import tools"),
-    (re.compile(r"\bfrom\s+config\b"), "from acfv.config"),
-    (re.compile(r"\bimport\s+config\b"), "from acfv import config"),
-]
-changed = 0
-for f in files:
-    s = f.read_text(encoding="utf-8")
-    s2 = s
-    for pat, rep in rules:
-        s2 = pat.sub(rep, s2)
-    if s2 != s:
-        f.write_text(s2, encoding="utf-8")
-        changed += 1
-print(f"[acfv] rewritten files: {changed}")
-PY
-python rewrite_imports.py
-
-# 5) 写 pyproject.toml（src 布局 + CLI 入口）
-cat > pyproject.toml <<'PY'
+# 3) pyproject.toml（覆盖生成；不提交）
+cat > pyproject.toml <<'TOML'
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "acfv"
 version = "0.1.0"
+description = "ACFV – tools for VTuber clip workflows"
+readme = "README.md"
 requires-python = ">=3.9"
+dependencies = []
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["acfv*"]
+
+[tool.setuptools.package-data]
+acfv = [
+  "config/**/*",
+  "processing/**/*",
+  "data/**/*",
+  "assets/*",
+  "*.yaml",
+  "*.yml",
+]
 
 [project.scripts]
-acfv = "acfv.__main__:main"
+acfv = "acfv.cli:main"
+acfv-gui = "acfv.cli:main_gui"
+TOML
+
+# 4) 包入口与工具
+cat > src/acfv/__init__.py <<'PY'
+from importlib import metadata
+try:
+    __version__ = metadata.version("acfv")
+except metadata.PackageNotFoundError:
+    __version__ = "0.0.0"
 PY
 
-echo "==> 修改完成。下一步："
-echo "   1) python -m pip install -U pip"
-echo "   2) pip install -e ."
-echo "   3) python -m acfv   （或 acfv）"
+cat > src/acfv/__main__.py <<'PY'
+from .cli import main
+if __name__ == "__main__":
+    raise SystemExit(main())
+PY
+
+cat > src/acfv/paths.py <<'PY'
+from importlib.resources import files
+from pathlib import Path
+
+PKG_ROOT = files("acfv")
+
+def pkg_path(*parts: str) -> Path:
+    return Path(PKG_ROOT.joinpath(*parts))
+
+def assets_path(*parts: str) -> Path:
+    return pkg_path("assets", *parts)
+
+def config_path(*parts: str) -> Path:
+    return pkg_path("config", *parts)
+
+def data_path(*parts: str) -> Path:
+    return pkg_path("data", *parts)
+
+def processing_path(*parts: str) -> Path:
+    return pkg_path("processing", *parts)
+PY
+
+cat > src/acfv/cli.py <<'PY'
+import sys
+import argparse
+from pathlib import Path
+from .paths import assets_path, config_path
+
+def _try_call(module_name: str, func_candidates=("main", "run", "app", "start")):
+    mod = __import__(f"acfv.{module_name}", fromlist=["*"])
+    for fn in func_candidates:
+        if hasattr(mod, fn):
+            return getattr(mod, fn)()
+    raise AttributeError(f"Module 'acfv.{module_name}' has no {func_candidates} entry.")
+
+def _inject_compat_paths():
+    pkg_root = Path(__file__).resolve().parent
+    rt_candidates = [
+        pkg_root,
+        pkg_root / "assets",
+        pkg_root / "config",
+        pkg_root.parent.parent,   # repo root in -e dev mode
+    ]
+    for p in rt_candidates:
+        s = str(p)
+        if s not in sys.path:
+            sys.path.insert(0, s)
+
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    parser = argparse.ArgumentParser(prog="acfv", add_help=True)
+    parser.add_argument("--gui", action="store_true", help="Launch GUI (acfv.launcher)")
+    parser.add_argument("--version", action="store_true", help="Show version and exit")
+    subparsers = parser.add_subparsers(dest="sub", metavar="subcommand")
+    subparsers.add_parser("clip", help="Run clip_video pipeline")
+    subparsers.add_parser("clip-clean", help="Run clip_video_clean pipeline")
+    ns, rest = parser.parse_known_args(argv)
+
+    if ns.version:
+        from . import __version__
+        print(__version__)
+        return 0
+
+    _inject_compat_paths()
+
+    import os
+    os.environ.setdefault("ACFV_ASSETS_DIR", str(assets_path()))
+    os.environ.setdefault("ACFV_CONFIG_DIR", str(config_path()))
+
+    if ns.gui:
+        return _try_call("launcher")
+
+    if ns.sub == "clip":
+        sys.argv = ["clip_video"] + rest
+        return _try_call("clip_video")
+
+    if ns.sub == "clip-clean":
+        sys.argv = ["clip_video_clean"] + rest
+        return _try_call("clip_video_clean")
+
+    return _try_call("launcher")
+
+def main_gui():
+    return _try_call("launcher")
+PY
+
+# 5) .gitignore（可选）
+if [ ! -e .gitignore ]; then
+  cat > .gitignore <<'IGN'
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.env
+.DS_Store
+IGN
+fi
+
+# 6) 结束提示（仅打印）
+printf '%s\n' "DONE. Next:
+  pip uninstall -y acfv 2>/dev/null || true
+  pip install -e .
+  acfv --help
+  acfv --gui
+  acfv clip --help"
