@@ -23,14 +23,37 @@ copy_dir config src/acfv/config
 [ -d src/acfv/tools ]  && : > src/acfv/tools/__init__.py
 [ -d src/acfv/config ] && : > src/acfv/config/__init__.py
 
-# 3) 入口：__main__.py + 动态 CLI
+# 3) 入口：仅创建占位 __main__.py（真实版本在源码库里维护）
+if [ ! -f src/acfv/__main__.py ]; then
 cat > src/acfv/__main__.py <<'PY'
-from .cli import main
-if __name__ == "__main__":
-    main()
-PY
+from .__future__ import annotations
+import sys
 
-cat > src/acfv/cli.py <<'PY'
+def main():
+    try:
+        from .cli import app  # Typer app in package directory
+        return app()
+    except Exception as first_err:  # noqa: BLE001
+        try:
+            from . import legacy_cli
+            rc = legacy_cli.main()
+            if isinstance(rc, int):
+                return rc
+            return 0
+        except Exception as second_err:  # noqa: BLE001
+            print("[acfv] CLI 启动失败:", file=sys.stderr)
+            print("  1st (Typer app) error:", repr(first_err), file=sys.stderr)
+            print("  2nd (legacy) error:", repr(second_err), file=sys.stderr)
+            return 1
+
+if __name__ == "__main__":  # pragma: no cover
+    sys.exit(main())
+PY
+fi
+
+# 保留 legacy_cli.py 仅在缺失时恢复
+if [ ! -f src/acfv/legacy_cli.py ]; then
+cat > src/acfv/legacy_cli.py <<'PY'
 import importlib, sys
 CANDIDATES = [
     ("acfv.app", "main"),
@@ -46,10 +69,10 @@ def main(argv=None):
             m = importlib.import_module(mod)
             f = getattr(m, func, None)
             if callable(f):
-                return f()  # 让被调用方自己处理 sys.argv
+                return f()
         except ModuleNotFoundError:
             continue
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             last_err = e
             break
     msg = "[acfv] 未找到真实入口。请在以下任一位置提供 main():\n" + \
@@ -59,6 +82,7 @@ def main(argv=None):
     print(msg, file=sys.stderr)
     return 1
 PY
+fi
 
 # 4) 批量重写导入：tools/config -> acfv.tools / acfv.config
 cat > rewrite_imports.py <<'PY'
