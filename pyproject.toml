@@ -1,28 +1,17 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "acfv"
 version = "0.1.0"
-description = "Auto-Clipper for VTuber (ACFV)"
-requires-python = ">=3.10"
-dependencies = [
-  "typer>=0.12",
-  "pydantic>=2.7",
-  "pyyaml>=6.0.1",
-  "rich>=13.7",
-  "numpy",
-  "opencv-python",
-  "soundfile",
-  "tqdm"
-]
+requires-python = ">=3.9"
 
-[project.scripts]
-acfv = "acfv.cli.__main__:app"
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools]
-package-dir = {"" = "src"}
+[project.scripts]
+acfv = "acfv.__main__:main"

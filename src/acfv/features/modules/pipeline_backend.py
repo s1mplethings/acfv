@@ -22,7 +22,7 @@ except ImportError:
     PYTQT5_AVAILABLE = False
     print("PyQt5 模块未安装，将跳过相关功能")
 
-import config
+from acfv import config
 import sys
 
 # 条件导入各个模块
