@@ -1,3 +1,7 @@
-from .__main__ import app
+"""CLI package for acfv.
 
-__all__ = ['app']
+This package contains the command-line interface components.
+The main entry point is in _entry.py for console scripts.
+"""
+
+__all__ = []

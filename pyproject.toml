@@ -1,17 +1,32 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "acfv"
 version = "0.1.0"
+description = "ACFV – tools for VTuber clip workflows"
+readme = "README.md"
 requires-python = ">=3.9"
+dependencies = []
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["acfv*"]
+
+[tool.setuptools.package-data]
+acfv = [
+  "config/**/*",
+  "processing/**/*",
+  "data/**/*",
+  "assets/*",
+  "*.yaml",
+  "*.yml",
+]
 
 [project.scripts]
-acfv = "acfv.__main__:main"
+acfv = "acfv.cli._entry:main"
+acfv-gui = "acfv.gui:main"

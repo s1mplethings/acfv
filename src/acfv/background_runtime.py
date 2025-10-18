@@ -360,10 +360,9 @@ class BackgroundRuntime:
 
     @staticmethod
     def _create_default_config():
-        cfg_dir = os.path.join(BASE_DIR, "config")
-        os.makedirs(cfg_dir, exist_ok=True)
-        cfg_path = os.path.join(cfg_dir, "config.txt")
-        if os.path.exists(cfg_path):
+        cfg_path = settings_path("config.json")
+        cfg_path.parent.mkdir(parents=True, exist_ok=True)
+        if cfg_path.exists():
             logging.debug("Config already exists, skipping creation")
             return
         default_cfg = {

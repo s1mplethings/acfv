@@ -26,14 +26,14 @@ from PyQt5.QtWidgets import (
 )
 
 # 导入自定义模块
-from config import config_manager
-from processing.twitch_downloader import TwitchTab
-from processing.local_video_manager import LocalVideoManager
-from modules.new_clips_manager import create_clips_manager
-from modules.ui_components import SettingsDialog, Worker
-from modules.progress_manager import ProgressManager
-from modules.progress_widget import ProgressWidget, ProgressUpdateWorker
-from modules.beautiful_progress_widget import SimpleBeautifulProgressBar
+from acfv.config.config import ConfigManager
+from acfv.processing.twitch_downloader import TwitchTab
+from acfv.processing.local_video_manager import LocalVideoManager
+from acfv.features.modules.clips_manager import create_clips_manager
+from acfv.features.modules.ui_components import SettingsDialog, Worker
+from acfv.features.modules.progress_manager import ProgressManager
+from acfv.features.modules.progress_widget import ProgressWidget, ProgressUpdateWorker
+from acfv.features.modules.beautiful_progress_widget import SimpleBeautifulProgressBar
 
 
 # 简化的工作线程
@@ -102,81 +102,31 @@ class DownloadWorker(SimpleWorker):
         self.url = url
         self.save_path = save_path
         
-    def run(self):
+    def run(self):  # pragma: no cover - threading / UI
         try:
             if self.should_stop:
                 return
             self.update_status("开始下载...")
-            
-            # 模拟下载过程，定期检查停止标志
-            for i in range(10):  # 将原来的sleep(1)分成10个100ms
+            for _ in range(10):
                 if self.should_stop:
                     self.update_status("下载已停止")
                     if os.path.exists(self.save_path):
                         os.remove(self.save_path)
                     return
                 self.msleep(100)
-            
             if not self.should_stop:
                 self.update_status("下载完成")
                 self.finished_task.emit()
-        except Exception as e:
+        except Exception as e:  # single handler
             if not self.should_stop:
-                self.log_error(f"下载失败: {str(e)}")
+                self.log_error(f"下载失败: {e}")
                 if os.path.exists(self.save_path):
-                    os.remove(self.save_path)
+                    try:
+                        os.remove(self.save_path)
+                    except OSError:
+                        pass
             self.update_status("下载完成")
             self.finished_task.emit()
-        except Exception as e:
-            self.log_error(f"下载失败: {str(e)}")
-            if os.path.exists(self.save_path):
-                os.remove(self.save_path)
-# 删除了复杂的ProgressWorker类 - 使用简单的状态显示
-                if progress_data:
-                    percentage = progress_data.get('percentage', 0)
-                    if percentage > 0:
-                        estimated_total = elapsed / (percentage / 100)
-                        remaining = max(0, estimated_total - elapsed)
-                        time_str = self._format_time(remaining)
-                        self.time_updated.emit(f"⏰ 预计剩余: {time_str}")
-                    else:
-                        self.time_updated.emit("⏰ 预估时间计算中...")
-                else:
-                    # 使用默认阶段时间估算
-                    total_estimated = sum(stage["estimated_time"] for stage in self.stages.values())
-                    remaining = max(0, total_estimated - elapsed)
-                    time_str = self._format_time(remaining)
-                    self.time_updated.emit(f"⏰ 预计剩余: {time_str}")
-        except Exception as e:
-            logging.error(f"回退时间预测失败: {e}")
-            self.time_updated.emit("⏰ 时间预测暂时不可用")
-        try:
-            # 基于已用时间估算
-            elapsed = time.time() - self.start_time
-            
-            if elapsed < 60:  # 刚开始
-                self.time_updated.emit("⏰ 预估时间计算中...")
-            else:
-                # 基于当前进度估算
-                progress_data = self.main_window._get_actual_progress()
-                if progress_data:
-                    percentage = progress_data.get('percentage', 0)
-                    if percentage > 0:
-                        estimated_total = elapsed / (percentage / 100)
-                        remaining = max(0, estimated_total - elapsed)
-                        time_str = self._format_time(remaining)
-                        self.time_updated.emit(f"⏰ 预计剩余: {time_str}")
-                    else:
-                        self.time_updated.emit("⏰ 预估时间计算中...")
-                else:
-                    # 使用默认阶段时间估算
-                    total_estimated = sum(stage["estimated_time"] for stage in self.stages.values())
-                    remaining = max(0, total_estimated - elapsed)
-                    time_str = self._format_time(remaining)
-                    self.time_updated.emit(f"⏰ 预计剩余: {time_str}")
-        except Exception as e:
-            logging.error(f"回退时间预测失败: {e}")
-            self.time_updated.emit("⏰ 时间预测暂时不可用")
     
     def _calculate_remaining_time(self, percentage):
         """改进的时间计算"""
@@ -337,7 +287,7 @@ class MainWindow(QMainWindow):
         # 初始化智能进度预测器
         self.smart_predictor = None
         try:
-            from modules.smart_progress_predictor import SmartProgressPredictor
+            from acfv.features.modules.smart_progress_predictor import SmartProgressPredictor
             self.smart_predictor = SmartProgressPredictor()
             log_info("[GUI] 智能进度预测器初始化成功")
             
@@ -351,7 +301,7 @@ class MainWindow(QMainWindow):
                     
         except ImportError:
             try:
-                from modules.smart_progress_predictor import SimplePredictor
+                from acfv.features.modules.smart_progress_predictor import SimplePredictor
                 self.smart_predictor = SimplePredictor()
                 log_info("[GUI] 使用简化进度预测器")
             except ImportError:
@@ -377,7 +327,7 @@ class MainWindow(QMainWindow):
         self.checkpoint_manager = None
         try:
             # 修正导入路径: 原 modules.analyze_data 实际位于 processing 包
-            from processing.analyze_data import CheckpointManager
+            from acfv.processing.analyze_data import CheckpointManager
             self.checkpoint_manager = CheckpointManager()
             log_info("[GUI] 断点续传模块加载成功")
         except ImportError as e:
@@ -852,7 +802,7 @@ class MainWindow(QMainWindow):
             
             # 停止管道后端处理
             try:
-                from modules.pipeline_backend import VideoProcessingPipeline
+                from acfv.features.modules.pipeline_backend import VideoProcessingPipeline
                 # 尝试停止任何正在运行的处理管道
                 import gc
                 for obj in gc.get_objects():
@@ -1026,7 +976,7 @@ class MainWindow(QMainWindow):
         
         # 🆕 清理ui_components中的线程
         try:
-            from modules.ui_components import SimpleThumbnailLoader, SimpleClipThumbnailLoader, Worker
+            from acfv.features.modules.ui_components import SimpleThumbnailLoader, SimpleClipThumbnailLoader, Worker
             
             for obj in gc.get_objects():
                 try:
@@ -1264,7 +1214,7 @@ class MainWindow(QMainWindow):
             
             # 创建进度更新工作线程
             self.progress_worker = ProgressUpdateWorker(self.progress_manager)
-            self.progress_worker.progress_updated.connect(self.on_progress_updated)
+            self.progress_worker.progress_updated.connect(self.on_pipeline_progress_updated)
             self.progress_worker.stage_finished.connect(self.on_stage_finished)
             self.progress_worker.start()
             
@@ -1285,7 +1235,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             log_error(f"启动进度显示失败: {e}")
 
-    def on_progress_updated(self, stage_name: str, substage_index: int, progress: float):
+    def on_pipeline_progress_updated(self, stage_name: str, substage_index: int, progress: float):
         """处理进度更新信号"""
         self.progress_manager.update_substage(stage_name, substage_index, progress)
 
@@ -1689,7 +1639,7 @@ class MainWindow(QMainWindow):
 
     def generate_content_indexes_for_rated_clips(self):
         """为所有已评分但未生成索引的切片生成内容索引（后台线程版本）"""
-        from modules.pipeline_backend import generate_content_indexes as backend_generate_content_indexes
+        from acfv.features.modules.pipeline_backend import generate_content_indexes as backend_generate_content_indexes
 
         def do_generate_indexes():
             # 直接复用后端实现，支持 runs/latest 与评分权重

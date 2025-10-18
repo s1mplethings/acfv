@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+  - repo: local
+    hooks:
+      - id: acfv-scan-secrets
+        name: acfv scan secrets
+        entry: python tools/scan_secrets.py
+        language: system
+        pass_filenames: false
+        stages: [commit]

@@ -8,16 +8,22 @@
 
 import warnings
 import os
-import sys
 import logging
+from typing import Set
 
 def setup_warning_filters():
     """设置警告过滤器"""
     
     # 过滤torch相关的FutureWarning
+    # Torch future deprecation messages
     warnings.filterwarnings("ignore", category=FutureWarning, module="torch.*")
-    warnings.filterwarnings("ignore", message=".*torch.distributed.reduce_op.*")
-    warnings.filterwarnings("ignore", message=".*torch.distributed.ReduceOp.*")
+    warnings.filterwarnings("ignore", message=r".*torch\.distributed\.reduce_op.*")
+    warnings.filterwarnings("ignore", message=r".*torch\.distributed\.ReduceOp.*")
+    warnings.filterwarnings(
+        "ignore",
+        category=FutureWarning,
+        message=r"`torch\.distributed\.reduce_op` is deprecated",
+    )
     
     # 过滤whisper相关的警告
     warnings.filterwarnings("ignore", category=UserWarning, module="whisper.*")
@@ -50,6 +56,31 @@ def with_suppressed_warnings(func):
             warnings.simplefilter("ignore")
             return func(*args, **kwargs)
     return wrapper
+
+# --- One-time warning helpers -------------------------------------------------
+_emitted: Set[str] = set()
+
+def warn_once(key: str, message: str, level: int = logging.WARNING) -> None:
+    """Emit a warning log only once per process lifetime.
+
+    Args:
+        key: stable identifier for the warning type.
+        message: human-readable message.
+        level: logging level (default WARNING).
+    """
+    if key in _emitted:
+        return
+    _emitted.add(key)
+    logging.log(level, message)
+
+def ensure_hf_token_notice(token_present: bool) -> None:
+    """Emit a single guidance message when HuggingFace token is missing."""
+    if token_present:
+        return
+    warn_once(
+        "hf_token_missing",
+        "⚠️ HuggingFace token 未配置。请设置环境变量 HUGGINGFACE_TOKEN 或在 secrets/config.json 中填写 huggingface_token。",
+    )
 
 # 在模块导入时自动设置
 setup_warning_filters()

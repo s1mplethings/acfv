@@ -62,7 +62,13 @@ def disable_console_immediately():
             
             # 导入静默退出模块
             try:
-                import silent_exit
+                try:
+                    from acfv.silent_exit import silent_exit  # type: ignore
+                except Exception:  # noqa: BLE001
+                    class silent_exit:  # minimal shim
+                        @staticmethod
+                        def install():
+                            pass
             except ImportError:
                 pass
     except Exception:
@@ -104,7 +110,17 @@ sys.path.insert(0, current_dir)
 
 # 导入警告管理器（必须在其他模块之前）
 try:
-    from warning_manager import setup_warning_filters, with_suppressed_warnings
+    try:
+        from acfv.warning_manager import setup_warning_filters, with_suppressed_warnings  # type: ignore
+    except Exception:  # noqa: BLE001
+        def setup_warning_filters():
+            pass
+        def with_suppressed_warnings():
+            from contextlib import contextmanager
+            @contextmanager
+            def _cm():
+                yield
+            return _cm()
     setup_warning_filters()
 except ImportError:
     # 如果警告管理器不可用，使用内置的警告过滤
@@ -113,7 +129,7 @@ except ImportError:
 
 def setup_logging():
     """设置日志系统 - 支持环境变量控制"""
-    from modules.core import LogManager
+    from acfv.features.modules.core import LogManager
     
     # 创建logs目录
     log_dir = os.path.join(current_dir, "logs")
@@ -225,7 +241,8 @@ def initialize_directories():
 
 def create_default_config():
     """创建默认配置文件 - 简化版本"""
-    config_file = os.path.join(BASE_DIR, "config", "config.txt")
+    from acfv.runtime.storage import settings_path
+    config_file = str(settings_path("config.json"))
     
     # 如果配置文件已存在，跳过创建
     if os.path.exists(config_file):
@@ -612,7 +629,8 @@ def main():
         
         def init_config_manager():
             try:
-                from config import config_manager
+                from acfv.config.config import ConfigManager
+                config_manager = ConfigManager()
                 return config_manager
             except Exception as e:
                 logging.error(f"配置管理器初始化失败: {e}")
@@ -620,7 +638,7 @@ def main():
         
         def create_main_window(config_manager):
             try:
-                from main_window import MainWindow
+                from acfv.main_window import MainWindow
                 return MainWindow(config_manager)
             except Exception as e:
                 logging.error(f"主窗口创建失败: {e}")
@@ -709,10 +727,16 @@ def main():
         disable_api = os.environ.get("DISABLE_TOOL_API", "0") == "1"
         if start_api_default == "1" and not disable_api:
             try:
-                from services.api_tools_server import start_background_server
-                port = int(os.environ.get("TOOL_API_PORT", 8099))
-                start_background_server(port=port)
-                logging.info(f"🛠 工具API已启动: http://127.0.0.1:{port}  (设置 DISABLE_TOOL_API=1 可关闭)")
+                try:
+                    from acfv.services.api_tools_server import start_background_server  # type: ignore
+                except Exception:
+                    start_background_server = None
+                if start_background_server:
+                    port = int(os.environ.get("TOOL_API_PORT", 8099))
+                    start_background_server(port=port)
+                    logging.info(f"🛠 工具API已启动: http://127.0.0.1:{port}  (设置 DISABLE_TOOL_API=1 可关闭)")
+                else:
+                    logging.debug("api_tools_server 不可用，跳过工具API启动")
             except Exception as e:
                 logging.error(f"启动工具API失败: {e}")
         else:

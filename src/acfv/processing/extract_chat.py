@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from transformers import pipeline
 from acfv import config
 import re
-from main_logging import log_info, log_error
+from acfv.main_logging import log_info, log_error
 
 def convert_timestamp_to_seconds(timestamp):
     """

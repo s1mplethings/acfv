@@ -233,3 +233,21 @@ artifacts/large/
 *.mp4
 *.avi
 *.mkv
+\n# --- ACFV Sensitive & Local Secrets (added by security audit) ---
+interest_rating/dify_key.txt
+interest_rating/dify_local.json
+interest_rating/.env
+secrets/
+config.txt
+interest_rating/config/config.txt
+*.secret.json
+*.local.json
+*.key
+*.pem
+cache/
+logs/
+thumbnails/
+artifacts/secrets/
+models/
+
+huggingface_token.txt

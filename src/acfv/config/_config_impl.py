@@ -1,9 +1,13 @@
 # config.py
 
 import json
-import os
 import logging
-from typing import Any, Dict, Optional
+import os
+import shutil
+from pathlib import Path
+from typing import Any, Dict
+
+from acfv.runtime.storage import ensure_runtime_dirs, processing_path, settings_path
 
 class ConfigManager:
     """配置管理器 - 单例模式"""
@@ -18,8 +22,30 @@ class ConfigManager:
     def _initialize(self):
         """初始化配置管理器"""
         self.config: Dict[str, Any] = {}
-        self.config_file = "config.txt"
+        ensure_runtime_dirs()
+        self.config_file = str(settings_path("config.json"))
+        self._migrate_legacy_config()
         self._load_config()
+
+    def _migrate_legacy_config(self) -> None:
+        """迁移旧版 config.txt / config/config.txt 到新的 settings 目录。"""
+        target = Path(self.config_file)
+        if target.exists():
+            return
+        legacy_candidates = [
+            Path("config.txt"),
+            Path(__file__).resolve().parent / "config" / "config.txt",
+            Path(__file__).resolve().parent / "config.txt",
+        ]
+        for candidate in legacy_candidates:
+            if candidate.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                try:
+                    shutil.copyfile(candidate, target)
+                    logging.info("ℹ️ 已迁移旧配置文件 %s -> %s", candidate, target)
+                except OSError as exc:
+                    logging.warning("⚠️ 迁移配置文件失败 (%s): %s", candidate, exc)
+                break
         
     def _load_config(self) -> None:
         """加载配置文件"""
@@ -32,19 +58,26 @@ class ConfigManager:
                 self.config = self.get_default_config()
                 self.save_config()
                 logging.info("已创建默认配置文件")
+            # 统一 token 检查（轻量，无副作用），不重复提示
+            try:
+                from acfv.runtime.token_loader import get_hf_token
+                _ = get_hf_token()
+            except Exception:
+                pass
         except Exception as e:
             logging.error(f"加载配置文件失败: {e}")
             self.config = self.get_default_config()
             
     def get_default_config(self) -> Dict[str, Any]:
         """获取默认配置"""
+        proc = processing_path
         return {
             "VIDEO_FILE": "",
             "CHAT_FILE": "",
-            "CHAT_OUTPUT": "processing/chat_with_emotes.json",
-            "TRANSCRIPTION_OUTPUT": "processing/transcription.json",
-            "ANALYSIS_OUTPUT": "processing/high_interest_segments.json",
-            "OUTPUT_CLIPS_DIR": "processing/output_clips",
+            "CHAT_OUTPUT": str(proc("chat_with_emotes.json")),
+            "TRANSCRIPTION_OUTPUT": str(proc("transcription.json")),
+            "ANALYSIS_OUTPUT": str(proc("high_interest_segments.json")),
+            "OUTPUT_CLIPS_DIR": str(proc("output_clips")),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
             "WHISPER_MODEL": "medium",
@@ -100,11 +133,13 @@ class ConfigManager:
             # Twitch 页面缩略图并发与开关
             "DISABLE_TWITCH_THUMBNAILS": False,
             "TWITCH_THUMBNAIL_CONCURRENCY": 6
+            ,"HUGGINGFACE_TOKEN": ""  # 新增：可通过设置界面直接写入
         }
     
     def save_config(self) -> bool:
         """保存配置到文件"""
         try:
+            Path(self.config_file).parent.mkdir(parents=True, exist_ok=True)
             with open(self.config_file, 'w', encoding='utf-8') as f:
                 json.dump(self.config, f, ensure_ascii=False, indent=4)
             logging.info(f"已保存配置文件: {self.config_file}")
@@ -118,6 +153,7 @@ class ConfigManager:
         if file_path is None:
             file_path = self.config_file
         try:
+            Path(file_path).parent.mkdir(parents=True, exist_ok=True)
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(self.config, f, ensure_ascii=False, indent=4)
             logging.info(f"已保存配置文件: {file_path}")
@@ -128,6 +164,21 @@ class ConfigManager:
     def get(self, key: str, default: Any = None) -> Any:
         """获取配置项"""
         return self.config.get(key, default)
+
+    def set(self, key: str, value: Any) -> None:
+        """设置配置项并自动保存（轻量）。"""
+        self.config[key] = value
+        # 若更新的是 HF Token，则同步到环境变量，供下游库使用
+        if key == "HUGGINGFACE_TOKEN":
+            if value:
+                os.environ["HUGGINGFACE_TOKEN"] = str(value)
+            else:
+                os.environ.pop("HUGGINGFACE_TOKEN", None)
+        # 立即保存（可改为批量提交，这里保持简单）
+        try:
+            self.save_config()
+        except Exception:
+            pass
     
     def set(self, key: str, value: Any) -> None:
         """设置配置项"""

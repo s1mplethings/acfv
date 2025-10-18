@@ -292,7 +292,7 @@ def download_vods_by_index(indexes: str, folder: str = "") -> str:
                         'channel': ''  # 非必须
                     })
                 # 启动下载线程
-                from processing.twitch_downloader import TwitchDownloadWorker
+                from acfv.processing.twitch_downloader import TwitchDownloadWorker
                 tab.download_worker = TwitchDownloadWorker(
                     tab.downloader, "download_vods", vods, folder, parent=mw
                 )
@@ -329,7 +329,7 @@ def download_latest_vods(streamer: str, count: int = 1) -> str:
         from PyQt5.QtCore import QTimer
         def _run():
             try:
-                from processing.twitch_downloader import TwitchDownloadWorker
+                from acfv.processing.twitch_downloader import TwitchDownloadWorker
                 tab.download_worker = TwitchDownloadWorker(
                     tab.downloader, "download_vods", target, folder, parent=mw
                 )
