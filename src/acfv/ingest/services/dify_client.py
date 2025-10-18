@@ -88,7 +88,7 @@ class DifyClient:
         timeout: Optional[float] = None,
         max_retries: int = 2,
         backoff: float = 0.8,
-        backup_api_key: Optional[str] = None,
+    backup_api_key: Optional[str] = None,
     ) -> None:
         self.base_url = (base_url or os.getenv("DIFY_BASE_URL") or "http://localhost:5001").rstrip("/")
         # 优先级：参数 > 环境变量 > .env文件 > dify_key.txt文件
@@ -103,7 +103,12 @@ class DifyClient:
                 "DifyClient requires an API key. Set env DIFY_API_KEY, pass api_key, or create a file 'dify_key.txt'"
             )
         # optional fallback key
-        self.backup_api_key = backup_api_key or os.getenv("DIFY_BACKUP_API_KEY")
+        # backup key 现在不允许硬编码；只能来自显式参数或环境变量或 secrets 文件
+        self.backup_api_key = (
+            backup_api_key
+            or os.getenv("DIFY_BACKUP_API_KEY")
+            or self._load_backup_key_from_secrets()
+        )
         self.timeout = timeout or float(os.getenv("DIFY_TIMEOUT", "60"))
         self.max_retries = max_retries
         self.backoff = backoff
@@ -151,6 +156,31 @@ class DifyClient:
                         for line in f:
                             line = line.strip()
                             if line and not line.startswith("#"):
+                                return line
+            except Exception:
+                continue
+        return None
+
+    def _load_backup_key_from_secrets(self) -> Optional[str]:
+        """Try loading a secondary/backup key from secrets directory.
+
+        Search order:
+          secrets/dify_backup_key.txt
+          secrets/dify_key_backup.txt
+        Each file: first non-comment non-empty line.
+        """
+        base = os.path.join(os.getcwd(), 'secrets')
+        candidates = [
+            os.path.join(base, 'dify_backup_key.txt'),
+            os.path.join(base, 'dify_key_backup.txt'),
+        ]
+        for path in candidates:
+            try:
+                if os.path.isfile(path):
+                    with open(path, 'r', encoding='utf-8') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line and not line.startswith('#'):
                                 return line
             except Exception:
                 continue

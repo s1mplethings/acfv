@@ -17,21 +17,18 @@ import subprocess
 from pathlib import Path
 from datetime import datetime, timedelta
 from tqdm.auto import tqdm
+from acfv.runtime.token_loader import get_hf_token
 
 # 解决OpenMP冲突 - 必须在导入其他库之前设置
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 os.environ['OMP_NUM_THREADS'] = '1'
 os.environ['MKL_NUM_THREADS'] = '1'
 
-# 导入配置管理并设置HuggingFace token
-try:
-    from config_manager import setup_huggingface_environment
-    HF_TOKEN_AVAILABLE = setup_huggingface_environment()
-    if not HF_TOKEN_AVAILABLE:
-        print("⚠️ HuggingFace token 未正确配置，请检查 config.json 文件")
-except ImportError:
-    print("⚠️ 无法导入配置管理模块，说话人分离功能可能不可用")
-    HF_TOKEN_AVAILABLE = False
+# 统一 HuggingFace token 处理
+HF_TOKEN_AVAILABLE = bool(get_hf_token())
+if not HF_TOKEN_AVAILABLE:
+    # token_loader 已记录一次警告，这里不重复
+    pass
 
 # 添加转录相关导入
 try:
@@ -42,7 +39,10 @@ except ImportError:
 
 # 添加转录功能导入
 try:
-    from transcribe_audio import transcribe_audio_segment_safe, extract_audio_segment_safe
+    from acfv.processing.transcribe_audio import (
+        transcribe_audio_segment_safe,
+        extract_audio_segment_safe,
+    )
 except ImportError:
     print("⚠️ transcribe_audio模块不可用")
 
@@ -276,7 +276,7 @@ class SpeakerDiarizationProcessor:
             
             # 检查token
             if not HF_TOKEN_AVAILABLE:
-                error_msg = "HuggingFace token 未正确配置，请检查 config.json 文件"
+                error_msg = "HuggingFace token 未配置，请设置环境变量 HUGGINGFACE_TOKEN 或 secrets/config.json"
                 self.progress_callback("错误", error_msg, 0)
                 return None
             

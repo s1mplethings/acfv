@@ -1,6 +1,6 @@
 import os
 import subprocess
-from main_logging import log_info, log_error, log_debug, log_warning
+from acfv.main_logging import log_info, log_error, log_debug, log_warning
 import datetime
 import json
 import cv2

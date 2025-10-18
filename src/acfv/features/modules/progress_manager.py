@@ -10,6 +10,7 @@ import json
 import time
 import logging
 import os
+from acfv.runtime.storage import processing_path
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
@@ -30,8 +31,8 @@ class StageInfo:
 class ProgressManager:
     """新的进度管理器"""
     
-    def __init__(self, history_file: str = "processing/progress_history.json"):
-        self.history_file = history_file
+    def __init__(self, history_file: str | None = None):
+        self.history_file = history_file or str(processing_path("progress_history.json"))
         self.current_stages = {}
         self.total_start_time = None
         self.current_stage_index = 0

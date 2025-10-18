@@ -921,7 +921,7 @@ class SettingsDialog(QDialog):
     def view_checkpoint_info(self):
         try:
             # analyze_data 位于 processing 包下，不能使用当前包的相对导入
-            from processing.analyze_data import CheckpointManager
+            from acfv.processing.analyze_data import CheckpointManager
             checkpoint_manager = CheckpointManager()
             
             if not checkpoint_manager.has_checkpoint():
@@ -950,7 +950,7 @@ class SettingsDialog(QDialog):
     
     def clear_checkpoint_confirm(self):
         try:
-            from processing.analyze_data import CheckpointManager
+            from acfv.processing.analyze_data import CheckpointManager
             checkpoint_manager = CheckpointManager()
             
             if not checkpoint_manager.has_checkpoint():

@@ -1,13 +1,6 @@
+"""Facade exposing UI helper components for the interest GUI."""
 from __future__ import annotations
 
-# Minimal Worker placeholder (GUI threads / signals replaced later)
-class Worker:
-    def __init__(self, func, parent=None, *args, **kwargs):
-        self.func = func
-    def start(self):
-        try:
-            self.func()
-        except Exception:  # noqa: BLE001
-            pass
+from acfv.features.modules.ui_components import *  # noqa: F401,F403
 
-__all__ = ["Worker"]
+# Rely on the source module's globals for exported symbols.

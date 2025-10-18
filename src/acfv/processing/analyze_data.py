@@ -16,7 +16,7 @@ except ImportError:
 
 import json
 from acfv import config
-from main_logging import log_debug, log_info, log_error, log_warning
+from acfv.main_logging import log_debug, log_info, log_error, log_warning
 import math
 import datetime
 import time
@@ -28,6 +28,8 @@ import concurrent.futures
 from functools import lru_cache
 import multiprocessing as mp
 import shutil
+
+from acfv.runtime.storage import processing_path, settings_path
 
 # 延迟导入重库
 def import_heavy_libraries():
@@ -80,7 +82,7 @@ def import_heavy_libraries():
 
 # 尝试导入RAG向量数据库
 try:
-    from rag_vector_database import RAGVectorDatabase
+    from acfv.rag_vector_database import RAGVectorDatabase
     RAG_DATABASE_AVAILABLE = True
 except ImportError as e:
     log_info(f"RAG向量数据库不可用: {e}")
@@ -134,7 +136,9 @@ def init_vader():
 class CheckpointManager:
     """断点续传管理器"""
     
-    def __init__(self, base_dir="processing"):
+    def __init__(self, base_dir=None):
+        if base_dir is None:
+            base_dir = str(processing_path())
         self.base_dir = base_dir
         self.checkpoint_file = os.path.join(base_dir, "analysis_checkpoint.json")
         self.metadata_file = os.path.join(base_dir, "analysis_metadata.json")
@@ -702,10 +706,10 @@ def get_text_analyzer(device=None):
 # ============================================================================
 
 def load_gui_config():
-    """从GUI的config.txt文件加载配置"""
+    """从GUI配置文件加载配置 (settings/config.json)"""
     config = {
         "WHISPER_MODEL": "small",
-        "GPU_DEVICE": "cuda:0", 
+        "GPU_DEVICE": "cuda:0",
         "ENABLE_GPU_ACCELERATION": True,
         "LLM_DEVICE": 0,
         "CHAT_DENSITY_WEIGHT": 0.3,
@@ -722,34 +726,33 @@ def load_gui_config():
         "CLIPS_BASE_DIR": "clips",
         "MAX_WORKERS": 4,
     }
-    
+    config_file = settings_path("config.json")
     try:
-        if os.path.exists("config.txt"):
-            with open("config.txt", "r", encoding="utf-8") as f:
+        if config_file.exists():
+            with config_file.open("r", encoding="utf-8") as f:
                 gui_config = json.load(f)
             config.update(gui_config)
-        
     except Exception as e:
         log_error(f"[配置] 加载GUI配置失败，使用默认配置: {e}")
-    
+
     return config
 
 def write_progress_file(stage, current, total, message=""):
     """写入进度文件，供GUI读取进度信息"""
     try:
-        progress_file = os.path.join("processing", "analysis_progress.json")
-        os.makedirs(os.path.dirname(progress_file), exist_ok=True)
-        
+        progress_file = processing_path("analysis_progress.json")
+        progress_file.parent.mkdir(parents=True, exist_ok=True)
+
         progress_data = {
             "stage": stage,
             "current": current,
             "total": total,
             "message": message,
             "timestamp": time.time(),
-            "percentage": (current / total * 100) if total > 0 else 0
+            "percentage": (current / total * 100) if total > 0 else 0,
         }
-        
-        with open(progress_file, "w", encoding="utf-8") as f:
+
+        with progress_file.open("w", encoding="utf-8") as f:
             json.dump(progress_data, f, ensure_ascii=False)
     except Exception as e:
         log_error(f"[进度文件] 写入失败: {e}")
@@ -790,9 +793,9 @@ def get_optimal_device(device_preference=None):
 
 def get_video_path():
     """安全地获取视频路径"""
-    video_path_file = os.path.join("processing", "selected_video.txt")
+    video_path_file = processing_path("selected_video.txt")
     
-    if not os.path.exists(video_path_file):
+    if not video_path_file.exists():
         log_error(f"[视频路径] 视频路径文件不存在: {video_path_file}")
         return None
         
@@ -1057,7 +1060,7 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
     rag_db = None
     if rag_enable:
         try:
-            from rag_vector_database import RAGVectorDatabase
+            from acfv.rag_vector_database import RAGVectorDatabase
             rag_db = RAGVectorDatabase(database_path=rag_db_path)
             log_info(f"[RAG] 已启用，数据库: {rag_db_path}, 权重: {rag_weight}")
         except Exception as e:
@@ -1615,9 +1618,9 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
 
         # 清理进度文件
         try:
-            progress_file = os.path.join("processing", "analysis_progress.json")
-            if os.path.exists(progress_file):
-                os.remove(progress_file)
+            progress_file = processing_path("analysis_progress.json")
+            if progress_file.exists():
+                progress_file.unlink()
         except Exception:
             pass
 
@@ -1701,8 +1704,8 @@ def analyze_data_with_checkpoint_new(video_clips_dir, config_manager, resume_mod
     def should_stop():
         """检查是否应该停止处理"""
         try:
-            stop_flag_file = os.path.join("processing", "stop_flag.txt")
-            return os.path.exists(stop_flag_file)
+            stop_flag_file = processing_path("stop_flag.txt")
+            return stop_flag_file.exists()
         except Exception:
             return False
     

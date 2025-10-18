@@ -23,18 +23,19 @@ except ImportError:
     print("PyQt5 模块未安装，将跳过相关功能")
 
 from acfv import config
+from acfv.runtime.storage import processing_path, settings_path
 import sys
 
 # 条件导入各个模块
 try:
-    from processing.extract_chat import extract_chat
+    from acfv.processing.extract_chat import extract_chat
     EXTRACT_CHAT_AVAILABLE = True
 except ImportError as e:
     EXTRACT_CHAT_AVAILABLE = False
     print(f"extract_chat 模块导入失败: {e}")
 
 try:
-    from processing.transcribe_audio import process_audio_segments
+    from acfv.processing.transcribe_audio import process_audio_segments
     TRANSCRIBE_AUDIO_AVAILABLE = True
 except ImportError as e:
     TRANSCRIBE_AUDIO_AVAILABLE = False
@@ -51,14 +52,14 @@ except ImportError as e:
     print(f"utils 模块导入失败: {e}")
 
 try:
-    from processing.clip_video import clip_video
+    from acfv.processing.clip_video import clip_video
     CLIP_VIDEO_AVAILABLE = True
 except ImportError as e:
     CLIP_VIDEO_AVAILABLE = False
     print(f"clip_video 模块导入失败: {e}")
 
 try:
-    from processing.video_emotion_infer import run as infer_emotion
+    from acfv.processing.video_emotion_infer import run as infer_emotion
     VIDEO_EMOTION_AVAILABLE = True
 except ImportError as e:
     VIDEO_EMOTION_AVAILABLE = False
@@ -137,15 +138,15 @@ def log_warning(message):
 
 
 class ConfigManager:
-    def __init__(self, config_file="config.txt"):
-        self.config_file = config_file
+    def __init__(self, config_file=None):
+        self.config_file = config_file or str(settings_path("config.json"))
         self.cfg = {
             "VIDEO_FILE": "",
             "CHAT_FILE": "",
-            "CHAT_OUTPUT": "processing/chat_with_emotes.json",
-            "TRANSCRIPTION_OUTPUT": "processing/transcription.json",
-            "ANALYSIS_OUTPUT": "processing/high_interest_segments.json",
-            "OUTPUT_CLIPS_DIR": "processing/output_clips",
+            "CHAT_OUTPUT": str(processing_path("chat_with_emotes.json")),
+            "TRANSCRIPTION_OUTPUT": str(processing_path("transcription.json")),
+            "ANALYSIS_OUTPUT": str(processing_path("high_interest_segments.json")),
+            "OUTPUT_CLIPS_DIR": str(processing_path("output_clips")),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
             "WHISPER_MODEL": "large",
@@ -324,8 +325,9 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 "estimated_remaining_minutes": _calculate_smart_remaining_time(total_percentage)
             }
             
-            os.makedirs("processing", exist_ok=True)
-            with open("processing/analysis_progress.json", 'w', encoding='utf-8') as f:
+            progress_file = processing_path("analysis_progress.json")
+            progress_file.parent.mkdir(parents=True, exist_ok=True)
+            with progress_file.open('w', encoding='utf-8') as f:
                 json.dump(progress_data, f, ensure_ascii=False, indent=2)
         except InterruptedError:
             raise  # 重新抛出中断异常
@@ -702,7 +704,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         if enable_speaker_separation:
             log_info("[pipeline] 并行主播音频分离...")
             try:
-                from processing.speaker_separation_integration import SpeakerSeparationIntegration
+                from acfv.processing.speaker_separation_integration import SpeakerSeparationIntegration
                 separation_output_dir = os.path.join(os.path.dirname(transcription_output), "speaker_separation")
                 speaker_separation = SpeakerSeparationIntegration(cfg_manager)
                 speaker_separation.set_progress_callback(emit_progress)
@@ -827,7 +829,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     if enable_speaker_separation and 'speaker_separation' not in futures:
         log_info("[pipeline] 串行主播音频分离...")
         try:
-            from processing.speaker_separation_integration import SpeakerSeparationIntegration
+            from acfv.processing.speaker_separation_integration import SpeakerSeparationIntegration
             separation_output_dir = os.path.join(os.path.dirname(transcription_output), "speaker_separation")
             speaker_separation = SpeakerSeparationIntegration(cfg_manager)
             speaker_separation.set_progress_callback(emit_progress)
@@ -923,10 +925,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         analyze_params = []
         _analyze_func = None
         try:
-            from processing.analyze_data import analyze_data as _analyze_func  # 兼容旧接口
+            from acfv.processing.analyze_data import analyze_data as _analyze_func  # 兼容旧接口
         except ImportError:
             try:
-                from processing.analyze_data import analyze_data_with_checkpoint as _analyze_func
+                from acfv.processing.analyze_data import analyze_data_with_checkpoint as _analyze_func
             except ImportError:
                 _analyze_func = None
         if _analyze_func is not None:
@@ -965,7 +967,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             segments_data = _analyze_func(**analyze_kwargs)
         else:
             try:
-                from processing.analyze_data import analyze_data_with_checkpoint as _fallback_analyze
+                from acfv.processing.analyze_data import analyze_data_with_checkpoint as _fallback_analyze
                 segments_data = _fallback_analyze(**analyze_kwargs)
             except Exception as _ie:
                 log_warning(f"[pipeline] 无法导入 processing.analyze_data: {_ie}; 使用空结果回退")
@@ -1350,7 +1352,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         log_info(f"[pipeline] 切片配置: 最小时长={min_clip_duration}秒, 前后文扩展={context_extend}秒")
         
         # 扩展片段时长
-        from processing.clip_video import ensure_min_duration, extend_segment
+        from acfv.processing.clip_video import ensure_min_duration, extend_segment
         
         # 步骤1：扩展片段前后文
         if context_extend > 0:
@@ -2069,7 +2071,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     
     # 生成每个切片的语义字幕（SRT）
     try:
-        from processing.subtitle_generator import generate_semantic_subtitles_for_clips
+        from acfv.processing.subtitle_generator import generate_semantic_subtitles_for_clips
         transcription_output = os.path.join(os.path.dirname(analysis_output), "transcription.json")
         if os.path.exists(transcription_output) and clip_files:
             count = generate_semantic_subtitles_for_clips(output_clips_dir, transcription_output, cfg_manager, clip_files)

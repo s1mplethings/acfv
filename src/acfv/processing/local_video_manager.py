@@ -15,8 +15,9 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QSize, Qt, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap
-from modules.ui_components import VideoThumbnailLoader
+from acfv.features.modules.ui_components import VideoThumbnailLoader
 from acfv import config
+from acfv.runtime.storage import processing_path
 
 # 导入说话人分离集成模块
 try:
@@ -25,11 +26,12 @@ except ImportError as e:
     logging.warning(f"说话人分离模块导入失败: {e}")
     SpeakerSeparationIntegration = None
 
-# 导入说话人识别模块
+# 导入说话人识别模块（改为包内显式导入，兼容打包）
 try:
-    from speaker_diarization_module import SpeakerDiarizationProcessor
+    # 旧代码使用裸模块名，导致运行时在不同工作目录下失败
+    from acfv.processing.speaker_diarization_module import SpeakerDiarizationProcessor  # type: ignore
     SPEAKER_DIARIZATION_AVAILABLE = True
-except ImportError as e:
+except Exception as e:  # noqa: BLE001
     logging.warning(f"说话人识别模块导入失败: {e}")
     SPEAKER_DIARIZATION_AVAILABLE = False
 
@@ -512,12 +514,12 @@ class LocalVideoManager:
                     logging.error(f"[pipeline] 视频文件不存在: {video_path}")
                     return None
 
-                # 写出给 analyze_data 使用的视频路径文件 (processing/selected_video.txt)
+                # 写出给 analyze_data 使用的视频路径文件
                 try:
-                    os.makedirs('processing', exist_ok=True)
-                    with open(os.path.join('processing', 'selected_video.txt'), 'w', encoding='utf-8') as f_vid:
-                        f_vid.write(video_path)
-                    logging.info(f"[pipeline] 已写入视频路径指示文件: processing/selected_video.txt -> {video_path}")
+                    selected_path = processing_path('selected_video.txt')
+                    selected_path.parent.mkdir(parents=True, exist_ok=True)
+                    selected_path.write_text(video_path, encoding='utf-8')
+                    logging.info(f'[pipeline] 已写入视频路径指示文件: {selected_path} -> {video_path}')
                 except Exception as w_err:
                     logging.warning(f"[pipeline] 写入 selected_video.txt 失败: {w_err}")
                 
@@ -740,7 +742,7 @@ class LocalVideoManager:
                         logging.warning(f"新进度回调失败: {e}")
                 
                 # 调用pipeline_backend.py中的run_pipeline函数
-                from modules.pipeline_backend import run_pipeline
+                from acfv.features.modules.pipeline_backend import run_pipeline
                 result = run_pipeline(
                     cfg_manager=self.config_manager,
                     video=video_path,

@@ -33,7 +33,7 @@ try:
 except ImportError:
     WHISPER_AVAILABLE = False
 
-from main_logging import log_info, log_error, log_debug
+from acfv.main_logging import log_info, log_error, log_debug
 
 def check_ffmpeg_availability():
     """检查ffmpeg是否可用"""
@@ -350,7 +350,7 @@ def transcribe_audio_segment_safe(audio_path, start_time, end_time, whisper_mode
         
         # 读取转录配置
         try:
-            with open("config.txt", "r", encoding="utf-8") as f:
+            with settings_path("config.json").open("r", encoding="utf-8") as f:
                 config_data = json.load(f)
             transcription_language = config_data.get("TRANSCRIPTION_LANGUAGE", "auto")
             no_speech_threshold = config_data.get("NO_SPEECH_THRESHOLD", 0.6)
@@ -422,10 +422,12 @@ def transcribe_audio_segment_safe(audio_path, start_time, end_time, whisper_mode
             except Exception as e:
                 log_debug(f"清理临时目录失败: {e}")
 
-def process_audio_segments(audio_path, output_file="processing/transcription.json", 
+def process_audio_segments(audio_path, output_file=None, 
                          segment_length=300, whisper_model_name="base", host_transcription_file=None):
     """
     处理音频片段（无pydub版本）
+    if output_file is None:
+        output_file = str(processing_path("transcription.json"))
     """
     log_info("=" * 60)
     log_info("🎤 开始音频转录处理（无pydub版本）")
@@ -480,7 +482,7 @@ def process_audio_segments(audio_path, output_file="processing/transcription.jso
         # 尝试从配置读取GPU设置
         try:
             import json
-            with open("config.txt", "r", encoding="utf-8") as f:
+            with settings_path("config.json").open("r", encoding="utf-8") as f:
                 config_data = json.load(f)
             gpu_device = config_data.get("GPU_DEVICE", "cuda:0")
             enable_gpu = config_data.get("ENABLE_GPU_ACCELERATION", True)
@@ -708,7 +710,7 @@ if __name__ == "__main__":
         sys.exit(1)
     
     audio_path = sys.argv[1]
-    output_file = sys.argv[2] if len(sys.argv) > 2 else "processing/transcription.json"
+    output_file = sys.argv[2] if len(sys.argv) > 2 else str(processing_path("transcription.json"))
     
     try:
         process_audio_segments(audio_path, output_file)

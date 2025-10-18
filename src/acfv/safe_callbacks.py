@@ -8,7 +8,7 @@
 import sys
 import traceback
 from functools import wraps
-from modules.gui_logger import gui_logger, log_error, log_exception
+from acfv.features.modules.gui_logger import gui_logger, log_error, log_exception
 
 def safe_callback(func):
     """安全的回调装饰器"""
