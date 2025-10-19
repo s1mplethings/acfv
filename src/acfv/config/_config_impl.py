@@ -165,24 +165,35 @@ class ConfigManager:
         """获取配置项"""
         return self.config.get(key, default)
 
-    def set(self, key: str, value: Any) -> None:
-        """设置配置项并自动保存（轻量）。"""
+    def _sync_hf_token(self, token: Any) -> None:
+        """同步 HuggingFace token 到相关环境变量，便于依赖库立即可用。"""
+        token_str = str(token or "").strip()
+        env_keys = (
+            "HUGGINGFACE_TOKEN",
+            "HUGGINGFACE_HUB_TOKEN",
+            "HUGGING_FACE_HUB_TOKEN",
+            "HF_TOKEN",
+        )
+        if token_str:
+            for name in env_keys:
+                os.environ[name] = token_str
+        else:
+            for name in env_keys:
+                os.environ.pop(name, None)
+
+    def set(self, key: str, value: Any, *, persist: bool = False) -> None:
+        """设置配置项并可选立即保存。
+
+        默认仅更新内存中的配置，调用方可在批量更新后显式调用 save/save_config。
+        若设置 HuggingFace token，会自动同步到常见的环境变量名称。
+        """
+        if key == "HUGGINGFACE_TOKEN" and isinstance(value, str):
+            value = value.strip()
         self.config[key] = value
-        # 若更新的是 HF Token，则同步到环境变量，供下游库使用
         if key == "HUGGINGFACE_TOKEN":
-            if value:
-                os.environ["HUGGINGFACE_TOKEN"] = str(value)
-            else:
-                os.environ.pop("HUGGINGFACE_TOKEN", None)
-        # 立即保存（可改为批量提交，这里保持简单）
-        try:
+            self._sync_hf_token(value)
+        if persist:
             self.save_config()
-        except Exception:
-            pass
-    
-    def set(self, key: str, value: Any) -> None:
-        """设置配置项"""
-        self.config[key] = value
     
     def update(self, config_dict: Dict[str, Any]) -> None:
         """更新多个配置项"""
@@ -233,7 +244,7 @@ class ConfigModule:
         if name in ['config_manager', 'ConfigManager', 'get_config', 'load_config', 'save_config'] or name.startswith('_'):
             self.__dict__[name] = value
         else:
-            config_manager.set(name, value)
+            config_manager.set(name, value, persist=True)
 
 import sys
 # 将当前模块替换为配置代理，但保留原有功能

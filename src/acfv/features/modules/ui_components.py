@@ -790,6 +790,23 @@ class SettingsDialog(QDialog):
         # Whisper模型
         self.edit_whisper = QLineEdit(self.config_manager.get("WHISPER_MODEL"))
         form_basic.addRow("Whisper 模型:", self.edit_whisper)
+
+        # HuggingFace Token（隐藏显示切换）
+        hf_layout = QHBoxLayout()
+        hf_token_value = self.config_manager.get("HUGGINGFACE_TOKEN", "") or ""
+        self.edit_hf_token = QLineEdit(hf_token_value)
+        self.edit_hf_token.setPlaceholderText("hf_xxx...")
+        self.edit_hf_token.setEchoMode(QLineEdit.Password)
+        self.edit_hf_token.setClearButtonEnabled(True)
+        self.edit_hf_token.setToolTip("在此填写 HuggingFace 访问令牌，用于需要 HuggingFace Hub 的功能。")
+        self.btn_toggle_hf = QPushButton("显示")
+        self.btn_toggle_hf.setCheckable(True)
+        self.btn_toggle_hf.setFixedWidth(60)
+        self.btn_toggle_hf.setToolTip("点击临时显示或隐藏令牌内容")
+        self.btn_toggle_hf.toggled.connect(self.toggle_hf_visibility)
+        hf_layout.addWidget(self.edit_hf_token)
+        hf_layout.addWidget(self.btn_toggle_hf)
+        form_basic.addRow("HuggingFace Token:", hf_layout)
         
         # 文本情绪模型路径
         self.edit_local_emotion = QLineEdit(self.config_manager.get("LOCAL_EMOTION_MODEL_PATH"))
@@ -912,6 +929,15 @@ class SettingsDialog(QDialog):
         d = QFileDialog.getExistingDirectory(self, "选择回放下载目录", self.edit_replay_download_dir.text())
         if d:
             self.edit_replay_download_dir.setText(d)
+
+    def toggle_hf_visibility(self, checked):
+        """切换 HuggingFace token 的显示/隐藏。"""
+        if checked:
+            self.edit_hf_token.setEchoMode(QLineEdit.Normal)
+            self.btn_toggle_hf.setText("隐藏")
+        else:
+            self.edit_hf_token.setEchoMode(QLineEdit.Password)
+            self.btn_toggle_hf.setText("显示")
     
     def on_video_emotion_toggled(self, checked):
         self.edit_video_emotion.setEnabled(checked)
@@ -979,6 +1005,7 @@ class SettingsDialog(QDialog):
         self.config_manager.set("CLIPS_BASE_DIR", self.edit_clips_base_dir.text().strip())
         self.config_manager.set("replay_download_folder", self.edit_replay_download_dir.text().strip())
         self.config_manager.set("WHISPER_MODEL", self.edit_whisper.text().strip())
+        self.config_manager.set("HUGGINGFACE_TOKEN", self.edit_hf_token.text().strip())
         self.config_manager.set("LOCAL_EMOTION_MODEL_PATH", self.edit_local_emotion.text().strip())
         self.config_manager.set("VIDEO_EMOTION_MODEL_PATH", self.edit_video_emotion.text().strip())
         self.config_manager.set("VIDEO_EMOTION_SEGMENT_LENGTH", float(self.edit_emotion_segment_length.text().strip() or 4.0))
@@ -1215,4 +1242,3 @@ class ClipRatingDialog(QDialog):
 # 兼容性别名，保持向后兼容
 VideoThumbnailLoader = SimpleThumbnailLoader
 ClipThumbnailLoader = SimpleClipThumbnailLoader
-
