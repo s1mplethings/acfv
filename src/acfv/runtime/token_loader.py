@@ -97,7 +97,7 @@ def set_hf_token(token: str) -> None:
     if ConfigManager is not None:
         try:
             cfg = ConfigManager()
-            cfg.set("HUGGINGFACE_TOKEN", token.strip())
+            cfg.set("HUGGINGFACE_TOKEN", token.strip(), persist=True)
         except Exception:
             pass
 
