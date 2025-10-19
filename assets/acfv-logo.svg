@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .outline { fill: none; stroke: #222; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      .inner { fill: none; stroke: #222; stroke-width:10; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <circle class="outline" cx="120" cy="120" r="108"/>
+  <circle class="inner" cx="120" cy="120" r="78"/>
+  <line class="inner" x1="120" y1="42" x2="120" y2="198"/>
+  <line class="inner" x1="42" y1="120" x2="198" y2="120"/>
+  <path class="inner" d="M78 78h42v42H60" />
+  <path class="inner" d="M180 78h-42v42h60" />
+</svg>

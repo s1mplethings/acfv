@@ -1,63 +1,67 @@
-# ACFV
+<h1 align="center">
+  <img src="assets/acfv-logo.svg" alt="ACFV logo" width="140"><br>
+  ACFV
+</h1>
 
-![ACFV Logo](src/acfv/config/icon.png)
-
-[简体中文](#简体中文) · [English](#english)
+<p align="center">
+  Twitch Clip & Chat Toolkit<br>
+  <a href="#zh">简体中文</a> · <a href="#en">English</a>
+</p>
 
 ---
 
-## 简体中文
+## <a id="zh"></a>简体中文
 
-### 使用方法
+### 使用方式
 - **图形界面**  
   ```bash
   python -m acfv.cli gui
   # 或安装 console_scripts 后：acfv gui
-  ```
-  打开后在「Twitch 下载」页填写 Client ID、OAuth Token、主播用户名，获取目标 VOD 并点击“下载选择”；下载完成后点击“运行管线”生成剪辑。
+  ```  
+  在「Twitch 下载」页填写 Client ID、OAuth Token、主播用户名，点击“获取 VOD”并选择目标后执行“下载选择”，完成后按“运行管线”生成剪辑。
 
 - **命令行**  
   ```bash
   python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out
   # 处理本地文件：--url path/to/video.mp4
-  ```
-  参数说明：`--url` 为 Twitch VOD 链接或本地路径，`--out-dir` 为输出目录，可通过 `--cfg` 指定自定义 YAML 配置。
+  ```  
+  `--url` 支持 Twitch VOD 链接或本地路径，`--out-dir` 为导出目录，可用 `--cfg` 指向自定义 YAML。
 
 ### 依赖与引用
-- 外部下载工具：[`TwitchDownloaderCLI`](https://github.com/lay295/TwitchDownloader)（请自行下载并放入 PATH 或程序同目录）。
-- 必备工具：`ffmpeg`、Python 3.9+、`pip install -r requirements.txt`。
-- Twitch API：使用 Helix 接口（`https://api.twitch.tv/helix/users`、`https://api.twitch.tv/helix/videos`）获取视频与聊天数据。
+- 需要预装 `ffmpeg`、Python 3.9+，以及 `pip install -r requirements.txt`。
+- 录像与弹幕下载依赖 [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader)（自行下载并放入 PATH 或程序同目录）。
+- Twitch Helix API（`https://api.twitch.tv/helix/users`、`https://api.twitch.tv/helix/videos`）用于获取用户与 VOD 列表。
 
-### 商用与自用原则
-- 本项目遵循 MIT License；作者请求仅将工具用于个人或团队内部流程验证、内容自用或非直接商业化目的。
-- 如需对外商业化运营，请自行完成合规评估并明确标注使用了 [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader)。
-- 请勿在公共仓库提交真实凭证，使用 `secrets/*.example` 模板即可。
+### 商用/自用原则
+- 项目以 MIT License 开源，但作者请求仅用于个人或团队内部流程、学习研究等非直接商业化场景。
+- 若计划对外商用，请自行完成合规审查，并在产品中标注使用了 [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader)。
+- 请勿提交真实凭证；使用 `secrets/*.example` 模板管理配置。
 
 ---
 
-## English
+## <a id="en"></a>English
 
 ### Usage
 - **GUI**  
   ```bash
   python -m acfv.cli gui
   # or, after installing console_scripts: acfv gui
-  ```
-  Fill in your Client ID, OAuth token, and target broadcaster on the “Twitch Download” tab, fetch the VOD list, choose one, then run “Download Selected”. After the assets are ready, click “Run Pipeline” to generate clips.
+  ```  
+  On the “Twitch Download” tab, enter your Client ID, OAuth token, and broadcaster handles. Fetch the VOD list, pick one, run “Download Selected”, then press “Run Pipeline” to create clips.
 
-- **Command Line**  
+- **CLI**  
   ```bash
   python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out
   # Local media: --url path/to/video.mp4
-  ```
-  Options: `--url` accepts a Twitch VOD URL or local path; `--out-dir` sets the export folder; use `--cfg` to supply a YAML override.
+  ```  
+  `--url` accepts a Twitch VOD link or local path; `--out-dir` chooses the export folder; `--cfg` can point to a custom YAML overrides file.
 
 ### Dependencies & Attribution
-- External downloader: [`TwitchDownloaderCLI`](https://github.com/lay295/TwitchDownloader) (install it yourself and keep it on PATH or beside the app).
-- Required tooling: `ffmpeg`, Python 3.9+, and `pip install -r requirements.txt`.
-- Twitch Helix endpoints (`https://api.twitch.tv/helix/users`, `https://api.twitch.tv/helix/videos`) power user/channel lookups and VOD listings.
+- Install `ffmpeg`, Python 3.9+, and run `pip install -r requirements.txt`.
+- VOD/chat downloads rely on [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader) (install it yourself and keep it on PATH or beside ACFV).
+- Twitch Helix endpoints (`https://api.twitch.tv/helix/users`, `https://api.twitch.tv/helix/videos`) provide account and VOD metadata.
 
 ### Usage Principles
-- Code is MIT licensed; the author kindly asks you to keep usage to personal or internal workflows, or non-direct-commercial scenarios.
-- For public/commercial deployment, run your own compliance review and credit [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader).
-- Never commit real credentials—rely on the `secrets/*.example` templates.
+- ACFV is MIT-licensed; the author kindly asks that you keep usage to personal, internal, or other non-direct-commercial contexts.
+- For commercial deployment, conduct your own compliance review and credit [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader).
+- Do not commit real credentials; rely on the `secrets/*.example` templates.
