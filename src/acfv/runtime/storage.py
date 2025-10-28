@@ -54,7 +54,40 @@ def settings_path(*parts: str | PathLike[str]) -> Path:
     return base if not parts else base.joinpath(*parts)
 
 
+def tools_path(*parts: str | PathLike[str]) -> Path:
+    """Return a path inside the runtime tools directory."""
+    base = _subdir("tools")
+    return base if not parts else base.joinpath(*parts)
+
+
+def logs_path(*parts: str | PathLike[str]) -> Path:
+    """Return a path inside the runtime logs directory."""
+    base = _subdir("logs")
+    return base if not parts else base.joinpath(*parts)
+
+
+def resolve_clips_base_dir(config_manager, ensure: bool = False) -> Path:
+    """Resolve the base directory used to store generated clips."""
+    runtime_root = storage_root().parent
+    try:
+        configured = config_manager.get("CLIPS_BASE_DIR")  # type: ignore[attr-defined]
+    except Exception:
+        configured = None
+
+    if configured:
+        candidate = Path(str(configured)).expanduser()
+        if not candidate.is_absolute():
+            candidate = (runtime_root / candidate).resolve()
+    else:
+        candidate = (runtime_root / "clips").resolve()
+
+    if ensure:
+        candidate.mkdir(parents=True, exist_ok=True)
+    return candidate
+
+
 def ensure_runtime_dirs() -> None:
     """Ensure commonly used subdirectories exist."""
-    for name in ("processing", "secrets", "settings", "cache", "logs"):
+    for name in ("processing", "secrets", "settings", "cache", "logs", "tools"):
         _subdir(name)
+

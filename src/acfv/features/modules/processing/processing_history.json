@@ -205,6 +205,702 @@
       "total_time": 289.2439696788788,
       "success": true,
       "timestamp": "2025-10-05T23:31:14.932317"
+    },
+    {
+      "start_time": 1760936757.4864821,
+      "duration_seconds": 4830.000667,
+      "size_mb": 3556.719102859497,
+      "video_path": "E:/.WORK/boardacst\\yap yap yap_2025-10-19_13-34-55_25959325.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1760936757.488482,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1760936787.3373666,
+          "duration": 29.84888458251953
+        },
+        "说话人分离": {
+          "start_time": 1760936757.488482,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1760936757.488482,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1760937368.4163585,
+          "duration": 610.9278764724731
+        },
+        "情感分析": {
+          "start_time": 1760936757.488482,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1760937391.5923932,
+          "duration": 634.1039111614227
+        },
+        "切片生成": {
+          "start_time": 1760936757.488482,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1760937436.643622,
+          "duration": 679.1551399230957
+        }
+      },
+      "total_time": 679.1692540645599,
+      "success": true,
+      "timestamp": "2025-10-20T13:17:16.655736"
+    },
+    {
+      "start_time": 1761059785.2714863,
+      "duration_seconds": 11350.000333,
+      "size_mb": 8360.49975681305,
+      "video_path": "E:/.WORK/boardacst\\another yappening_2025-10-20_12-05-26_25967081.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761059785.2727926,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761060628.8988004,
+          "duration": 843.6260077953339
+        },
+        "说话人分离": {
+          "start_time": 1761059785.2727926,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761059785.2727926,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761061883.8080685,
+          "duration": 2098.5352759361267
+        },
+        "情感分析": {
+          "start_time": 1761059785.2727926,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761061965.792784,
+          "duration": 2180.5199913978577
+        },
+        "切片生成": {
+          "start_time": 1761059785.2727926,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761062021.402398,
+          "duration": 2236.1296055316925
+        }
+      },
+      "total_time": 2236.136489391327,
+      "success": true,
+      "timestamp": "2025-10-21T23:53:41.407975"
+    },
+    {
+      "start_time": 1761111989.816048,
+      "duration_seconds": 10400.517667,
+      "size_mb": 7649.601913452148,
+      "video_path": "E:/.WORK/boardacst\\suh_2025-10-12_13-33-29_25899153.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761111989.8203557,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761112362.835094,
+          "duration": 373.0147383213043
+        },
+        "说话人分离": {
+          "start_time": 1761111989.8203557,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761111989.8203557,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761114079.5930638,
+          "duration": 2089.7727081775665
+        },
+        "情感分析": {
+          "start_time": 1761111989.8203557,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761114108.4577024,
+          "duration": 2118.6373467445374
+        },
+        "切片生成": {
+          "start_time": 1761111989.8203557,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761114134.094139,
+          "duration": 2144.2737834453583
+        }
+      },
+      "total_time": 2144.285898923874,
+      "success": true,
+      "timestamp": "2025-10-22T14:22:14.101946"
+    },
+    {
+      "start_time": 1761175727.2171822,
+      "duration_seconds": 18302.866667,
+      "size_mb": 13492.319990158081,
+      "video_path": "E:/.WORK/boardacst\\THE ALIENS ARE REAL! LISTEN TO ME! - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-09_12-09-09_25871583.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761175727.2195947,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761176082.951495,
+          "duration": 355.7319002151489
+        },
+        "说话人分离": {
+          "start_time": 1761175727.2195947,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761175727.2195947,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761177882.9768372,
+          "duration": 2155.7572424411774
+        },
+        "情感分析": {
+          "start_time": 1761175727.2195947,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761178151.033093,
+          "duration": 2423.8134982585907
+        },
+        "切片生成": {
+          "start_time": 1761175727.2195947,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761178215.52492,
+          "duration": 2488.305325269699
+        }
+      },
+      "total_time": 2488.31237244606,
+      "success": true,
+      "timestamp": "2025-10-23T08:10:15.529554"
+    },
+    {
+      "start_time": 1761225173.1179268,
+      "duration_seconds": 4830.000667,
+      "size_mb": 3556.719102859497,
+      "video_path": "E:/.WORK/boardacst\\yap yap yap_2025-10-19_13-34-55_25959325.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761225173.1199327,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761225518.9318366,
+          "duration": 345.81190395355225
+        },
+        "说话人分离": {
+          "start_time": 1761225173.1199327,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761225173.1199327,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761226562.1010165,
+          "duration": 1388.981083869934
+        },
+        "情感分析": {
+          "start_time": 1761225173.1199327,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761226589.6766107,
+          "duration": 1416.556678056717
+        },
+        "切片生成": {
+          "start_time": 1761225173.1199327,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761226654.8095746,
+          "duration": 1481.6896419525146
+        }
+      },
+      "total_time": 1481.6995706558228,
+      "success": true,
+      "timestamp": "2025-10-23T21:37:34.817497"
+    },
+    {
+      "start_time": 1761231452.254165,
+      "duration_seconds": 14176.333667,
+      "size_mb": 10453.443039894104,
+      "video_path": "E:/.WORK/boardacst\\CHATTING AND REACTING - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-19_12-02-39_25958788.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761231452.2557309,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761231717.2151582,
+          "duration": 264.95942735671997
+        },
+        "说话人分离": {
+          "start_time": 1761231452.2557309,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761231452.2557309,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761233517.2271807,
+          "duration": 2064.9714498519897
+        },
+        "情感分析": {
+          "start_time": 1761231452.2557309,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761235386.2828624,
+          "duration": 3934.0271315574646
+        },
+        "切片生成": {
+          "start_time": 1761231452.2557309,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761235480.6903088,
+          "duration": 4028.4345779418945
+        }
+      },
+      "total_time": 4028.44567322731,
+      "success": true,
+      "timestamp": "2025-10-24T00:04:40.699838"
+    },
+    {
+      "start_time": 1761236848.0356894,
+      "duration_seconds": 14412.45,
+      "size_mb": 10624.94058418274,
+      "video_path": "E:/.WORK/boardacst\\SILENT HILL F !! - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-18_12-02-40_25949735.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761236848.0371935,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761237229.5949056,
+          "duration": 381.5577120780945
+        },
+        "说话人分离": {
+          "start_time": 1761236848.0371935,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761236848.0371935,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761239029.6080403,
+          "duration": 2181.5708467960358
+        },
+        "情感分析": {
+          "start_time": 1761236848.0371935,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761239202.4347458,
+          "duration": 2354.397552251816
+        },
+        "切片生成": {
+          "start_time": 1761236848.0371935,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761239279.948027,
+          "duration": 2431.9108333587646
+        }
+      },
+      "total_time": 2431.9179170131683,
+      "success": true,
+      "timestamp": "2025-10-24T01:07:59.953606"
+    },
+    {
+      "start_time": 1761268103.597151,
+      "duration_seconds": 10400.517667,
+      "size_mb": 7649.601913452148,
+      "video_path": "E:/.WORK/boardacst\\suh_2025-10-12_13-33-29_25899153.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761268103.599624,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761268344.3017461,
+          "duration": 240.7021222114563
+        },
+        "说话人分离": {
+          "start_time": 1761268103.599624,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761268103.599624,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761269747.6451607,
+          "duration": 1644.0455367565155
+        },
+        "情感分析": {
+          "start_time": 1761268103.599624,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761269772.3481996,
+          "duration": 1668.7485756874084
+        },
+        "切片生成": {
+          "start_time": 1761268103.599624,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761269829.087239,
+          "duration": 1725.48761510849
+        }
+      },
+      "total_time": 1725.4950904846191,
+      "success": true,
+      "timestamp": "2025-10-24T09:37:09.092241"
+    },
+    {
+      "start_time": 1761279998.293073,
+      "duration_seconds": 4830.000667,
+      "size_mb": 3556.719102859497,
+      "video_path": "E:/.WORK/boardacst\\yap yap yap_2025-10-19_13-34-55_25959325.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761279998.295762,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761280186.41509,
+          "duration": 188.11932802200317
+        },
+        "说话人分离": {
+          "start_time": 1761279998.295762,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761279998.295762,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761280937.1252098,
+          "duration": 938.8294477462769
+        },
+        "情感分析": {
+          "start_time": 1761279998.295762,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761280960.2812383,
+          "duration": 961.9854762554169
+        },
+        "切片生成": {
+          "start_time": 1761279998.295762,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761281018.0357394,
+          "duration": 1019.7399773597717
+        }
+      },
+      "total_time": 1019.7506582736969,
+      "success": true,
+      "timestamp": "2025-10-24T12:43:38.043731"
+    },
+    {
+      "start_time": 1761283076.4232914,
+      "duration_seconds": 4830.000667,
+      "size_mb": 3556.719102859497,
+      "video_path": "E:/.WORK/boardacst\\yap yap yap_2025-10-19_13-34-55_25959325.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761283076.4249861,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "说话人分离": {
+          "start_time": 1761283076.4249861,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761283076.4249861,
+          "estimated_items": 10,
+          "status": "running"
+        },
+        "情感分析": {
+          "start_time": 1761283076.4249861,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761283104.5042682,
+          "duration": 28.07928204536438
+        },
+        "切片生成": {
+          "start_time": 1761283076.4249861,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761283159.951404,
+          "duration": 83.52641797065735
+        }
+      },
+      "total_time": 83.53770971298218,
+      "success": true,
+      "timestamp": "2025-10-24T13:19:19.961001"
+    },
+    {
+      "start_time": 1761329124.9894357,
+      "duration_seconds": 14176.333667,
+      "size_mb": 10453.443039894104,
+      "video_path": "E:/.WORK/boardacst\\CHATTING AND REACTING - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-19_12-02-39_25958788.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761329124.9909413,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761329390.0010357,
+          "duration": 265.0100944042206
+        },
+        "说话人分离": {
+          "start_time": 1761329124.9909413,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761329124.9909413,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761331190.01503,
+          "duration": 2065.0240886211395
+        },
+        "情感分析": {
+          "start_time": 1761329124.9909413,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761331299.15216,
+          "duration": 2174.1612186431885
+        },
+        "切片生成": {
+          "start_time": 1761329124.9909413,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761331358.9573925,
+          "duration": 2233.9664511680603
+        }
+      },
+      "total_time": 2233.973930835724,
+      "success": true,
+      "timestamp": "2025-10-25T02:42:38.963366"
+    },
+    {
+      "start_time": 1761353707.0158577,
+      "duration_seconds": 14176.333667,
+      "size_mb": 10453.443039894104,
+      "video_path": "E:/.WORK/boardacst\\CHATTING AND REACTING - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-19_12-02-39_25958788.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761353707.0179281,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "说话人分离": {
+          "start_time": 1761353707.0179281,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761353707.0179281,
+          "estimated_items": 10,
+          "status": "running"
+        },
+        "情感分析": {
+          "start_time": 1761353707.0179281,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761353742.4150243,
+          "duration": 35.397096157073975
+        },
+        "切片生成": {
+          "start_time": 1761353707.0179281,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761353800.4094732,
+          "duration": 93.39154505729675
+        }
+      },
+      "total_time": 93.3982412815094,
+      "success": true,
+      "timestamp": "2025-10-25T08:56:40.414098"
+    },
+    {
+      "start_time": 1761353820.2891374,
+      "duration_seconds": 14412.45,
+      "size_mb": 10624.94058418274,
+      "video_path": "E:/.WORK/boardacst\\SILENT HILL F !! - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-18_12-02-40_25949735.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761353820.290155,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761354201.4548056,
+          "duration": 381.16465067863464
+        },
+        "说话人分离": {
+          "start_time": 1761353820.290155,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761353820.290155,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761356001.4596736,
+          "duration": 2181.1695187091827
+        },
+        "情感分析": {
+          "start_time": 1761353820.290155,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761357514.2959287,
+          "duration": 3694.00577378273
+        },
+        "切片生成": {
+          "start_time": 1761353820.290155,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761357591.9925249,
+          "duration": 3771.70236992836
+        }
+      },
+      "total_time": 3771.706288576126,
+      "success": true,
+      "timestamp": "2025-10-25T09:59:51.995426"
+    },
+    {
+      "start_time": 1761379354.4750679,
+      "duration_seconds": 14176.333667,
+      "size_mb": 10453.443039894104,
+      "video_path": "E:/.WORK/boardacst\\CHATTING AND REACTING - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-19_12-02-39_25958788.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761379354.4766533,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761379620.1949196,
+          "duration": 265.718266248703
+        },
+        "说话人分离": {
+          "start_time": 1761379354.4766533,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761379354.4766533,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761381420.199516,
+          "duration": 2065.7228627204895
+        },
+        "情感分析": {
+          "start_time": 1761379354.4766533,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761382303.7578359,
+          "duration": 2949.281182527542
+        },
+        "切片生成": {
+          "start_time": 1761379354.4766533,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761382367.3514175,
+          "duration": 3012.8747642040253
+        }
+      },
+      "total_time": 3012.886904478073,
+      "success": true,
+      "timestamp": "2025-10-25T16:52:47.361972"
+    },
+    {
+      "start_time": 1761399389.399453,
+      "duration_seconds": 18302.866667,
+      "size_mb": 13492.319990158081,
+      "video_path": "E:/.WORK/boardacst\\THE ALIENS ARE REAL! LISTEN TO ME! - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-09_12-09-09_25871583.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761399389.4010224,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761399744.997024,
+          "duration": 355.59600162506104
+        },
+        "说话人分离": {
+          "start_time": 1761399389.4010224,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761399389.4010224,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761401545.0103216,
+          "duration": 2155.609299182892
+        },
+        "情感分析": {
+          "start_time": 1761399389.4010224,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761403729.064362,
+          "duration": 4339.663339614868
+        },
+        "切片生成": {
+          "start_time": 1761399389.4010224,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761403793.923318,
+          "duration": 4404.522295475006
+        }
+      },
+      "total_time": 4404.531999588013,
+      "success": true,
+      "timestamp": "2025-10-25T22:49:53.931452"
+    },
+    {
+      "start_time": 1761657504.8998282,
+      "duration_seconds": 14156.650667,
+      "size_mb": 10437.009985923767,
+      "video_path": "E:/.WORK/boardacst\\CHATTING AND REACTING - _ SARUEI _ FOR 10% OFF !gg - CHECK OUT BEYOND THE VALE !btv_2025-10-25_12-02-20_26009056.mp4",
+      "stages": {
+        "音频提取": {
+          "start_time": 1761657504.9022753,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761657743.0402524,
+          "duration": 238.1379771232605
+        },
+        "说话人分离": {
+          "start_time": 1761657504.9022753,
+          "estimated_items": 1,
+          "status": "running"
+        },
+        "音频转录": {
+          "start_time": 1761657504.9022753,
+          "estimated_items": 10,
+          "status": "completed",
+          "end_time": 1761659543.0643482,
+          "duration": 2038.1620728969574
+        },
+        "情感分析": {
+          "start_time": 1761657504.9022753,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761660523.445291,
+          "duration": 3018.54301571846
+        },
+        "切片生成": {
+          "start_time": 1761657504.9022753,
+          "estimated_items": 1,
+          "status": "completed",
+          "end_time": 1761660580.1441917,
+          "duration": 3075.2419164180756
+        }
+      },
+      "total_time": 3075.253103017807,
+      "success": true,
+      "timestamp": "2025-10-28T22:09:40.152931"
     }
   ]
 }

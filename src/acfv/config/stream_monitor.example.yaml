@@ -1,0 +1,26 @@
+# Background stream monitor configuration for StreamGet-powered recordings.
+# Copy this file to var/settings/stream_monitor.yaml (or provide --config)
+# and customise the targets section before launching `acfv stream-monitor`.
+
+ffmpeg_path: ffmpeg
+default_quality: OD          # OD/UHD/HD/SD/LD — falls back per platform support
+default_poll_interval: 120   # seconds between live-status checks
+default_format: mp4
+output_root: stream_monitor  # relative to var/processing unless absolute
+download_chat: true          # save Twitch chat alongside the recording
+twitch_client_id: ""         # Optional – enables chat download via Helix
+twitch_oauth_token: ""       # OAuth token with clips:edit | user:read:email isn't needed; app token works
+
+targets:
+  # Example entry (disabled by default). Toggle `enabled: true`
+  # and update the URL/platform/output paths to make it active.
+  - name: twitch-demo
+    url: https://www.twitch.tv/gamerbee
+    platform: twitch          # set to "auto" to infer from the URL
+    quality: OD               # optional, overrides default_quality
+    poll_interval: 90         # optional, overrides default_poll_interval
+    format: mp4               # mp4/flv/ts — ffmpeg copies the stream
+    output_subdir: twitch/gamerbee
+    cookies_file: secrets/twitch.cookies.txt   # optional
+    proxy: null               # e.g. socks5://127.0.0.1:1080
+    enabled: false

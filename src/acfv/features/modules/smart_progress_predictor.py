@@ -161,6 +161,7 @@ class SmartProgressPredictor:
                 avg_rate = sum(rates) / len(rates)
                 predicted_seconds = duration_seconds * avg_rate * 1.15  # 加安全余量
                 logging.info(f"📊 基于全局平均率预测: {predicted_seconds:.1f}秒 (avg_rate: {avg_rate:.3f})")
+                self.total_predicted_time = predicted_seconds
                 return self._format_time(predicted_seconds)
             logging.info("📊 历史率不可用，回退经验预测")
             return None
@@ -181,6 +182,8 @@ class SmartProgressPredictor:
         predicted_seconds *= 1.15
         
         logging.info(f"📊 基于 {top_k} 条相似记录预测: {predicted_seconds:.1f}秒 (处理率: {weighted_rate:.3f})")
+        
+        self.total_predicted_time = predicted_seconds
         
         return self._format_time(predicted_seconds)
     

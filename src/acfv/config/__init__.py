@@ -7,6 +7,7 @@ from .config import ConfigManager
 
 # Create a global config instance that behaves like a dict
 _config_manager = ConfigManager()
+config_manager = _config_manager
 
 def get(key, default=None):
     """Get configuration value with default fallback"""

@@ -22,6 +22,10 @@ from PyQt5.QtWidgets import (
     QMessageBox, QFileDialog
 )
 
+from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
+
+ensure_cli_on_path(auto_install=True)
+
 __all__ = ["TwitchDownloader", "TwitchDownloadWorker", "TwitchTab"]
 
 

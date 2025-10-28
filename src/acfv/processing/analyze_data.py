@@ -1061,6 +1061,9 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
     if rag_enable:
         try:
             from acfv.rag_vector_database import RAGVectorDatabase
+            rag_dir = os.path.dirname(os.path.abspath(rag_db_path))
+            if rag_dir and not os.path.exists(rag_dir):
+                os.makedirs(rag_dir, exist_ok=True)
             rag_db = RAGVectorDatabase(database_path=rag_db_path)
             log_info(f"[RAG] 已启用，数据库: {rag_db_path}, 权重: {rag_weight}")
         except Exception as e:

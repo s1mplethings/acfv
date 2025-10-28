@@ -50,24 +50,29 @@ class ConfigManager:
     def _load_config(self) -> None:
         """加载配置文件"""
         try:
+            defaults = self.get_default_config()
             if os.path.exists(self.config_file):
                 with open(self.config_file, 'r', encoding='utf-8') as f:
-                    self.config = json.load(f)
-                logging.info(f"已加载配置文件: {self.config_file}")
+                    loaded = json.load(f)
+                if not isinstance(loaded, dict):
+                    loaded = {}
+                merged = defaults.copy()
+                merged.update(loaded)
+                missing_keys = [k for k in defaults.keys() if k not in loaded]
+                self.config = merged
+                if missing_keys:
+                    self.save_config()
+                    logging.info(f"[config] added default keys: {', '.join(missing_keys)}")
+                else:
+                    logging.info(f"[config] loaded config file: {self.config_file}")
             else:
-                self.config = self.get_default_config()
+                self.config = defaults
                 self.save_config()
-                logging.info("已创建默认配置文件")
-            # 统一 token 检查（轻量，无副作用），不重复提示
-            try:
-                from acfv.runtime.token_loader import get_hf_token
-                _ = get_hf_token()
-            except Exception:
-                pass
+                logging.info('[config] created default config file')
         except Exception as e:
-            logging.error(f"加载配置文件失败: {e}")
+            logging.error(f'加载配置文件失败: {e}')
             self.config = self.get_default_config()
-            
+
     def get_default_config(self) -> Dict[str, Any]:
         """获取默认配置"""
         proc = processing_path
@@ -88,7 +93,14 @@ class ConfigManager:
             "AUDIO_TARGET_BONUS": 1.0,
             "TEXT_TARGET_BONUS": 1.0,
             "INTEREST_SCORE_THRESHOLD": 0.1,
+            "MIN_TARGET_CLIP_DURATION": 180.0,
+            "TARGET_CLIP_DURATION": 240.0,
+            "MAX_TARGET_CLIP_DURATION": 300.0,
+            "RAG_ENABLE": True,
+            "RAG_WEIGHT": 0.2,
+            "RAG_DB_PATH": str(processing_path("rag_database.json")),
             "RAG_SIMILARITY_WEIGHT": 0.2,
+            "TWITCH_DOWNLOADER_PATH": "",
             "LOCAL_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_SEGMENT_LENGTH": 4.0,
@@ -102,6 +114,7 @@ class ConfigManager:
             "MAX_WORKERS": 8,
             "GPU_DEVICE": "cuda:0",
             "ENABLE_GPU_ACCELERATION": True,
+            "FORCE_SEMANTIC_SEGMENT": True,
             "MIN_CLIP_DURATION": 60.0,
             "CLIP_CONTEXT_EXTEND": 15.0,
             "MERGE_NEARBY_CLIPS": True,

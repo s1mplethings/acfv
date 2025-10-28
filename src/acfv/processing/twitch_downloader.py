@@ -14,15 +14,16 @@ from PyQt5.QtWidgets import (
     QProgressBar, QMessageBox, QFileDialog, QListWidgetItem
 )
 
+from acfv.utils import safe_slug
+from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
+
+ensure_cli_on_path(auto_install=True)
+
 
 def sanitize_filename(name: str) -> str:
-    """
-    把 Windows/Unix 文件名里不合法的字符 (\/:*?"<>|) 和空白替换成下划线，
-    并把 ISO 时间戳里的 T 和冒号替换为安全的格式。
-    """
-    name = re.sub(r'[\\\/:*?"<>|]', '_', name)
-    name = re.sub(r'\s+', '_', name)
-    return name
+    """Return a filesystem-safe, length-limited slug for downloads."""
+    return safe_slug(name, max_length=80)
+
 
 
 def createFolderSelector(default_path="./"):

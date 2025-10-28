@@ -15,20 +15,6 @@ except ImportError as e:
     log_warning(f"[clip_video] OpenCV模块导入失败: {e}")
     log_info("[clip_video] 将使用替代方法处理视频信息")
 
-# 语义分析相关导入
-try:
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.metrics.pairwise import cosine_similarity
-    import numpy as np
-    SEMANTIC_AVAILABLE = True
-    log_info("[clip_video] 语义分析模块加载成功")
-except ImportError as e:
-    SEMANTIC_AVAILABLE = False
-    log_error(f"[clip_video] 语义分析模块导入失败: {e}")
-
-# 全局变量用于缓存TF-IDF向量器
-_tfidf_vectorizer = None
-
 def _probe_clip_info(output_path):
     """使用 ffprobe 检查输出文件的时长与是否包含视频流。
     返回 (has_video_stream: bool, has_audio_stream: bool, duration_seconds: float)
@@ -264,160 +250,178 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
     log_info(f"[clip_video] 过滤后剩余 {len(valid_segments)} 个有效片段")
     segments = valid_segments  # 使用过滤后的片段
     
-    # 语义相近聚合为自适应切片
-    log_info("[clip_video] 启用语义自适应分段模式")
+    # 基于分析排名生成固定窗口（约3-5分钟）切片
+    log_info("[clip_video] 使用分析排名生成固定窗口切片")
 
-    def _simple_tokenize(text: str):
-        import re
-        text = (text or "").lower()
-        text = re.sub(r"[^\w\u4e00-\u9fa5]+", " ", text)
-        return [tok for tok in text.split() if len(tok) > 1]
+    cm = config.config_manager
 
-    def _cosine_dict(a: dict, b: dict):
-        if not a or not b:
-            return 0.0
-        import math
-        dot = 0.0
-        for k, v in a.items():
-            if k in b:
-                dot += v * b[k]
-        na = math.sqrt(sum(v*v for v in a.values()))
-        nb = math.sqrt(sum(v*v for v in b.values()))
-        if na == 0 or nb == 0:
-            return 0.0
-        return dot / (na * nb)
-
-    def _vectorize_texts(texts):
-        """返回 (vectors, method)；优先TF-IDF，失败则稀疏计数向量"""
+    def _float_config(name, fallback):
         try:
-            global _tfidf_vectorizer
-            if SEMANTIC_AVAILABLE:
-                if _tfidf_vectorizer is None:
-                    _tfidf_vectorizer = TfidfVectorizer(max_features=5000)
-                mat = _tfidf_vectorizer.fit_transform(texts)
-                return mat, 'tfidf'
-        except Exception as e:
-            log_warning(f"[clip_video] TF-IDF向量化失败，将使用简易向量: {e}")
-        # fallback: 计数向量
-        from collections import Counter
-        vecs = [Counter(_simple_tokenize(t)) for t in texts]
-        return vecs, 'bow'
+            value = cm.get(name, fallback)
+            return float(value)
+        except (TypeError, ValueError):
+            return fallback
 
-    # 按开始时间排序
-    segments.sort(key=lambda s: (float(s.get('start', 0.0)), -float(s.get('score', 0.0))))
-    texts = [s.get('text', '') for s in segments]
-    vecs, method = _vectorize_texts(texts)
-    log_info(f"[clip_video] 语义向量方式: {method}")
+    min_target = _float_config("MIN_TARGET_CLIP_DURATION", 180.0)
+    pref_target = _float_config("TARGET_CLIP_DURATION", max(min_target, 240.0))
+    max_target = _float_config("MAX_TARGET_CLIP_DURATION", max(pref_target, 300.0))
+    context_extend = max(0.0, _float_config("CLIP_CONTEXT_EXTEND", 15.0))
+    merge_threshold = max(0.0, _float_config("CLIP_MERGE_THRESHOLD", 10.0))
+    coverage_ratio = _float_config("CLIP_COVERAGE_RATIO", 0.6)
+    coverage_ratio = min(max(coverage_ratio, 0.0), 1.0)
 
-    # 从配置读取阈值
     try:
-        cm = config.config_manager
-        min_sec = float(cm.get("MIN_CLIP_DURATION", 60.0))
-        sim_threshold = float(cm.get("SEMANTIC_SIMILARITY_THRESHOLD", 0.75))
-        max_gap = float(cm.get("SEMANTIC_MAX_TIME_GAP", 60.0))
-        # 上限为最小时长的3倍，防止过长
-        max_sec = max(min_sec * 3.0, min_sec + 1.0)
+        max_clips = int(cm.get("MAX_CLIP_COUNT", len(segments)) or len(segments))
     except Exception:
-        min_sec = 60.0
-        max_sec = 180.0
-        sim_threshold = 0.18
-        max_gap = 90.0
+        max_clips = len(segments)
 
     processed_segments = []
-    cur_start = None
-    cur_end = None
-    cur_score = 0.0
-    cur_texts = []
-    cur_indices = []
 
-    def _flush_block():
-        nonlocal cur_start, cur_end, cur_score, cur_texts, cur_indices
-        if cur_start is None:
-            return
-        processed_segments.append({
-            'start': max(0.0, cur_start),
-            'end': min(video_duration, cur_end),
-            'score': cur_score,
-            'text': ' '.join(cur_texts),
-            'semantic_approx_5min': True,
-            'original_indices': cur_indices[:]
-        })
-        cur_start = None
-        cur_end = None
-        cur_score = 0.0
-        cur_texts = []
-        cur_indices = []
+    def _highlight_already_covered(start, end):
+        highlight_len = max(1e-6, end - start)
+        for existing in processed_segments:
+            ext_start = existing['start'] - merge_threshold
+            ext_end = existing['end'] + merge_threshold
+            if start >= ext_start and end <= ext_end:
+                return True
+            overlap = max(0.0, min(existing['end'], end) - max(existing['start'], start))
+            if overlap / highlight_len >= coverage_ratio:
+                return True
+        return False
+
+    def _build_window(base_start, base_end):
+        base_start = max(0.0, float(base_start))
+        base_end = min(float(base_end), video_duration)
+        if base_end - base_start <= 0:
+            return base_start, base_end
+
+        window_min = min(min_target, video_duration) if video_duration > 0 else min_target
+        desired = max(window_min, pref_target, (base_end - base_start) + 2 * context_extend)
+        desired = min(desired, max_target, video_duration if video_duration > 0 else desired)
+        if desired < (base_end - base_start):
+            desired = min(max_target, max(base_end - base_start, window_min))
+
+        center = (base_start + base_end) / 2.0
+        half = desired / 2.0
+        start = center - half
+        end = center + half
+
+        if start < 0:
+            shift = -start
+            start = 0.0
+            end = min(video_duration, end + shift)
+        if end > video_duration:
+            shift = end - video_duration
+            end = video_duration
+            start = max(0.0, start - shift)
+
+        # Ensure minimum duration if possible
+        def _extend_to(length):
+            nonlocal start, end
+            target = min(length, video_duration)
+            while (end - start) + 1e-6 < target:
+                deficit = target - (end - start)
+                before = min(deficit / 2.0, start)
+                start -= before
+                deficit -= before
+                after = min(deficit, video_duration - end)
+                end += after
+                deficit -= after
+                if deficit <= 1e-6:
+                    break
+                # 尝试再次从两端补齐
+                if start > 0 and deficit > 1e-6:
+                    extra = min(deficit, start)
+                    start -= extra
+                    deficit -= extra
+                if end < video_duration and deficit > 1e-6:
+                    extra = min(deficit, video_duration - end)
+                    end += extra
+                    deficit -= extra
+                if deficit <= 1e-6:
+                    break
+                # 无法继续扩展
+                break
+
+        _extend_to(window_min)
+        if (end - start) < desired:
+            _extend_to(desired)
+
+        # Clamp to max duration while keeping highlight inside
+        actual = end - start
+        if actual > max_target:
+            excess = actual - max_target
+            slack_before = max(0.0, (base_start - start))
+            reduce_before = min(slack_before, excess / 2.0)
+            start += reduce_before
+            excess -= reduce_before
+            slack_after = max(0.0, (end - base_end))
+            reduce_after = min(slack_after, excess)
+            end -= reduce_after
+            excess -= reduce_after
+            if excess > 1e-6:
+                center = (base_start + base_end) / 2.0
+                start = max(0.0, center - max_target / 2.0)
+                end = min(video_duration, start + max_target)
+                if end - start < max_target and start > 0:
+                    start = max(0.0, end - max_target)
+
+        # Final guard to ensure the original highlight stays covered
+        if start > base_start:
+            start = max(0.0, base_start)
+        if end < base_end:
+            end = min(video_duration, base_end)
+
+        return start, end
 
     for idx, seg in enumerate(segments):
-        s = float(seg.get('start', 0.0))
-        e = float(seg.get('end', 0.0))
-        sc = float(seg.get('score', 0.0))
-        txt = seg.get('text', '')
-        if cur_start is None:
-            cur_start, cur_end = s, e
-            cur_score = sc
-            cur_texts = [txt]
-            cur_indices = [idx]
+        if len(processed_segments) >= max_clips:
+            break
+
+        base_start = float(seg.get('start', 0.0))
+        base_end = float(seg.get('end', 0.0))
+        if base_end - base_start <= 0:
+            log_warning(f"[clip_video] 跳过长度异常的片段 #{idx+1}")
             continue
-        # 与上一段的间隔
-        gap = s - cur_end
-        # 相似度（与上一段比较或与当前块末段比较）
-        similar = True
-        try:
-            if method == 'tfidf':
-                # 取本段与上段tfidf相似度
-                import numpy as np
-                last_idx = cur_indices[-1]
-                sim = float(cosine_similarity(vecs[last_idx], vecs[idx])[0][0])
-            else:
-                from collections import Counter
-                last_idx = cur_indices[-1]
-                sim = _cosine_dict(vecs[last_idx], vecs[idx])
-            similar = sim >= sim_threshold
-        except Exception:
-            similar = True
 
-        new_dur = (max(cur_end, e) - cur_start)
-        # 自适应规则：
-        # - 时间间隔过大 -> 结块
-        # - 达到上限 -> 结块
-        # - 已达到最小时长且语义不相似 -> 结块
-        if (gap > max_gap) or (new_dur >= max_sec) or ((new_dur >= min_sec) and (not similar)):
-            # 若当前块不足最小长度，尽量并入当前段再切
-            if (cur_end - cur_start) < min_sec and (new_dur <= max_sec):
-                # 并入
-                cur_end = max(cur_end, e)
-                cur_score = max(cur_score, sc)
-                cur_texts.append(txt)
-                cur_indices.append(idx)
-            else:
-                _flush_block()
-                cur_start, cur_end = s, e
-                cur_score = sc
-                cur_texts = [txt]
-                cur_indices = [idx]
-        else:
-            # 并入当前块
-            cur_end = max(cur_end, e)
-            cur_score = max(cur_score, sc)
-            cur_texts.append(txt)
-            cur_indices.append(idx)
+        if _highlight_already_covered(base_start, base_end):
+            log_info(f"[clip_video] 片段 #{idx+1} 已包含在之前的窗口中，跳过重复")
+            continue
 
-    _flush_block()
+        clip_start, clip_end = _build_window(base_start, base_end)
+        duration = clip_end - clip_start
+        if duration <= 1.0:
+            log_warning(f"[clip_video] 跳过时长不足的窗口 #{idx+1}: {duration:.1f}s")
+            continue
 
-    # 约束到视频范围，并过滤异常
-    processed_segments = [p for p in processed_segments if (p['end'] - p['start']) > 1.0 and p['start'] < video_duration]
-    processed_segments.sort(key=lambda x: x['start'])
-    log_info(f"[clip_video] 语义分段完成，共生成 {len(processed_segments)} 个片段")
+        processed_segments.append({
+            'start': clip_start,
+            'end': clip_end,
+            'score': float(seg.get('score', 0.0)),
+            'text': seg.get('text', ''),
+            'analysis_rank': idx + 1,
+            'source_start': base_start,
+            'source_end': base_end,
+            'source_duration': max(0.0, base_end - base_start)
+        })
+        log_info(f"[clip_video] 生成窗口 #{len(processed_segments)} "
+                 f"来自排名#{idx+1}: {clip_start:.1f}-{clip_end:.1f}s "
+                 f"(≈{duration/60:.2f}min, score={seg.get('score', 0)})")
+
+    if not processed_segments:
+        log_error("[clip_video] ❌ 未能生成任何符合条件的切片窗口")
+        return []
     
     # 保存处理计划
     plan_file = os.path.join(output_dir, "clip_plan.json")
     plan_data = {
-        "mode": "semantic_variable",
-        "min_sec": min_sec,
-        "max_sec": max_sec,
-        "sim_threshold": sim_threshold,
-        "max_gap": max_gap,
+        "mode": "score_ranked_fixed",
+        "min_sec": min_target,
+        "preferred_sec": pref_target,
+        "max_sec": max_target,
+        "context_extend": context_extend,
+        "coverage_ratio": coverage_ratio,
+        "merge_threshold": merge_threshold,
         "segments": processed_segments,
         "video_duration": video_duration,
         "total_segments": len(processed_segments)

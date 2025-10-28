@@ -9,15 +9,18 @@ import threading
 import traceback
 import subprocess
 import logging
+from pathlib import Path
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QListWidget, 
     QListWidgetItem, QMessageBox, QTabWidget, QFileDialog
 )
 from PyQt5.QtCore import QSize, Qt, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap
+from typing import List, Optional
 from acfv.features.modules.ui_components import VideoThumbnailLoader
+from acfv.utils import safe_slug
 from acfv import config
-from acfv.runtime.storage import processing_path
+from acfv.runtime.storage import processing_path, resolve_clips_base_dir
 
 # 导入说话人分离集成模块
 try:
@@ -37,12 +40,15 @@ except Exception as e:  # noqa: BLE001
 
 class ProgressEmitter(QObject):
     """线程安全的进度信号发射器"""
+
     progress_updated = pyqtSignal(str, int, int, str)  # stage, current, total, message
     detailed_progress_updated = pyqtSignal(str)  # detailed message
     percent_updated = pyqtSignal(int)  # percent
     # 🆕 在主线程启动/停止进度显示的信号
     start_progress = pyqtSignal(float, float)  # video_duration, file_size
     stop_progress = pyqtSignal()  # 无参数停止
+    stage_progress = pyqtSignal(str, int, float)  # stage_name, substage_index, progress
+    stage_finished = pyqtSignal(str)
 
 class ThreadSafeWorker(QThread):
     """线程安全的工作线程"""
@@ -133,6 +139,14 @@ class LocalVideoManager:
             self.progress_emitter.start_progress.connect(self.main_window.start_processing_progress)
         if hasattr(self.main_window, 'stop_processing_progress'):
             self.progress_emitter.stop_progress.connect(self.main_window.stop_processing_progress)
+        if hasattr(self.main_window, 'update_processing_progress'):
+            self.progress_emitter.stage_progress.connect(self.main_window.update_processing_progress)
+        if hasattr(self.main_window, 'finish_processing_stage'):
+            self.progress_emitter.stage_finished.connect(self.main_window.finish_processing_stage)
+
+        # 当前运行的剪辑元数据路径，用于刷新统计
+        self.current_run_meta_path = None
+        self.current_run_video_base = None
         
         # 初始化说话人分离集成
         if SpeakerSeparationIntegration:
@@ -478,6 +492,9 @@ class LocalVideoManager:
         logging.info("=" * 80)
         
         # 创建后台工作线程
+        self.current_run_meta_path = None
+        self.current_run_video_base = None
+
         def pipeline_worker():
             """后台处理工作函数"""
             import time
@@ -554,16 +571,34 @@ class LocalVideoManager:
                 video_basename = os.path.splitext(os.path.basename(video_path))[0]
                 
                 # 清理文件名中的非法字符
-                safe_basename = re.sub(r'[<>:"/\\|?*]', '_', video_basename)
-                safe_basename = re.sub(r'\.{2,}', '_', safe_basename)
-                safe_basename = safe_basename.strip('.')
-                if not safe_basename:
-                    safe_basename = "video"
+                safe_basename = safe_slug(video_basename, max_length=80)
+
+                # Backward compatibility: fall back to legacy naming if directory already exists.
+                legacy_basename = re.sub(r'[<>:"/\\|?*]', '_', video_basename)
+                legacy_basename = re.sub(r'\.{2,}', '_', legacy_basename).strip('.')
+                if not legacy_basename:
+                    legacy_basename = "video"
                 
                 logging.info(f"[pipeline] 原始文件名: {video_basename}")
                 logging.info(f"[pipeline] 清理后文件名: {safe_basename}")
                 
-                clips_base_dir = self.config_manager.get("CLIPS_BASE_DIR", "clips")
+                clips_base_dir_path = resolve_clips_base_dir(self.config_manager, ensure=True)
+                clips_base_dir = str(clips_base_dir_path)
+                try:
+                    self.config_manager.set("CLIPS_BASE_DIR", clips_base_dir)
+                except Exception:
+                    pass
+
+                # Use existing legacy directory when present to avoid duplicating runs.
+                legacy_dir = os.path.join(clips_base_dir, legacy_basename)
+                safe_dir = os.path.join(clips_base_dir, safe_basename)
+                if (
+                    safe_basename != legacy_basename
+                    and os.path.isdir(legacy_dir)
+                    and not os.path.isdir(safe_dir)
+                ):
+                    safe_basename = legacy_basename
+
                 video_clips_dir = os.path.join(clips_base_dir, safe_basename)
                 video_data_dir = os.path.join(video_clips_dir, "data")
                 
@@ -585,7 +620,18 @@ class LocalVideoManager:
                 if hasattr(self, 'parent') and hasattr(self.parent, 'add_processing_folder'):
                     self.parent.add_processing_folder(video_clips_dir)
                     logging.info(f"[pipeline] 已标记文件夹为正在处理: {video_clips_dir}")
-                
+
+                # 记录运行元数据（供剪辑管理器统计）
+                try:
+                    if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                        record_fn = getattr(self.parent.clips_manager, "record_run_start", None)
+                        if callable(record_fn):
+                            meta_path = record_fn(safe_basename, Path(current_run_dir))
+                            self.current_run_meta_path = meta_path
+                            self.current_run_video_base = safe_basename
+                except Exception as meta_err:
+                    logging.debug(f"[pipeline] 记录运行元数据失败: {meta_err}")
+
                 # 设置输出文件路径
                 chat_output = os.path.join(video_data_dir, "chat_with_emotes.json")
                 transcription_output = os.path.join(video_data_dir, "transcription.json")
@@ -698,12 +744,22 @@ class LocalVideoManager:
 
                         # 应用更新
                         pm.update_substage(stage_name, completed_substages, fractional)
-                        # 触发 UI 刷新
-                        self.parent.update_processing_progress(stage_name, completed_substages, fractional)
+                        # 触发 UI 刷新（通过信号回到主线程）
+                        try:
+                            self.progress_emitter.stage_progress.emit(
+                                stage_name,
+                                completed_substages,
+                                float(fractional),
+                            )
+                        except Exception:
+                            pass
 
                         # 阶段完成：推进到下一个阶段
                         if overall_progress >= 0.999:
-                            self.parent.finish_processing_stage(stage_name)
+                            try:
+                                self.progress_emitter.stage_finished.emit(stage_name)
+                            except Exception:
+                                pass
 
                         # 🆕 同步到 SmartProgressPredictor：启动/更新/完成阶段
                         if hasattr(self.parent, 'smart_predictor') and self.parent.smart_predictor:
@@ -823,18 +879,43 @@ class LocalVideoManager:
             # 停止进度显示（在主线程执行，避免跨线程Qt警告）
             try:
                 if hasattr(self.parent, 'stop_processing_progress'):
-                    self.parent.stop_processing_progress()
+                    self.parent.stop_processing_progress(success=True)
                     logging.info("🏁 进度系统已停止")
             except Exception:
                 pass
 
-            # 刷新切片页（若主窗体提供方法）
+            # 更新运行元数据状态
             try:
-                if hasattr(self.parent, 'optimized_clips_manager') and self.parent.optimized_clips_manager:
-                    if hasattr(self.parent.optimized_clips_manager, 'refresh_clips'):
-                        self.parent.optimized_clips_manager.refresh_clips()
-            except Exception:
-                pass
+                meta_path = getattr(self, "current_run_meta_path", None)
+                if meta_path and hasattr(self.parent, "clips_manager") and self.parent.clips_manager:
+                    finalize_fn = getattr(self.parent.clips_manager, "finalize_run", None)
+                    if callable(finalize_fn):
+                        clip_list: List[str] = []
+                        if isinstance(result, dict):
+                            clip_list = [str(Path(p)) for p in result.get("clips", []) if p]
+                        elif isinstance(result, (list, tuple)) and len(result) >= 2:
+                            clip_list = [str(Path(p)) for p in result[1] if p]
+                        finalize_fn(meta_path, success=True, clip_paths=clip_list)
+            except Exception as meta_err:
+                logging.debug(f"完成运行元数据失败: {meta_err}")
+            finally:
+                self.current_run_meta_path = None
+                self.current_run_video_base = None
+
+            # 刷新剪辑页（若主窗体提供方法）
+            try:
+                refreshed = False
+                if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                    refresh_fn = getattr(self.parent.clips_manager, "refresh_clips", None)
+                    if callable(refresh_fn):
+                        refresh_fn()
+                        refreshed = True
+                if not refreshed and hasattr(self.parent, 'optimized_clips_manager') and self.parent.optimized_clips_manager:
+                    refresh_fn = getattr(self.parent.optimized_clips_manager, "refresh_clips", None)
+                    if callable(refresh_fn):
+                        refresh_fn()
+            except Exception as refresh_err:
+                logging.debug(f"刷新剪辑列表失败: {refresh_err}")
 
         except Exception as e:
             logging.error(f"on_pipeline_done 处理异常: {e}")
@@ -863,10 +944,38 @@ class LocalVideoManager:
             # 停止进度显示（在主线程执行，避免跨线程Qt警告）
             try:
                 if hasattr(self.parent, 'stop_processing_progress'):
-                    self.parent.stop_processing_progress()
+                    self.parent.stop_processing_progress(success=False)
                     logging.info("🏁 进度系统已停止")
             except Exception:
                 pass
+
+            # 更新运行元数据状态
+            try:
+                meta_path = getattr(self, 'current_run_meta_path', None)
+                if meta_path and hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                    finalize_fn = getattr(self.parent.clips_manager, "finalize_run", None)
+                    if callable(finalize_fn):
+                        finalize_fn(meta_path, success=False)
+            except Exception as meta_err:
+                logging.debug(f"失败运行元数据记录时忽略错误: {meta_err}")
+            finally:
+                self.current_run_meta_path = None
+                self.current_run_video_base = None
+
+            # 刷新剪辑页，确保失败后仍能看到已有结果
+            try:
+                refreshed = False
+                if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                    refresh_fn = getattr(self.parent.clips_manager, "refresh_clips", None)
+                    if callable(refresh_fn):
+                        refresh_fn()
+                        refreshed = True
+                if not refreshed and hasattr(self.parent, 'optimized_clips_manager') and self.parent.optimized_clips_manager:
+                    refresh_fn = getattr(self.parent.optimized_clips_manager, "refresh_clips", None)
+                    if callable(refresh_fn):
+                        refresh_fn()
+            except Exception as refresh_err:
+                logging.debug(f"刷新剪辑列表失败: {refresh_err}")
 
             # 弹窗提示
             try:

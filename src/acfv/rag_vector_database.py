@@ -46,6 +46,9 @@ class RAGVectorDatabase:
     def _save_database(self):
         """保存数据库到文件"""
         try:
+            parent = os.path.dirname(self.database_path)
+            if parent and not os.path.exists(parent):
+                os.makedirs(parent, exist_ok=True)
             with open(self.database_path, 'w', encoding='utf-8') as f:
                 json.dump(self.data, f, ensure_ascii=False, indent=2)
         except Exception as e:

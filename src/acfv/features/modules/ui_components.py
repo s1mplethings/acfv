@@ -7,6 +7,7 @@ import logging
 import threading
 import subprocess
 import re
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 from datetime import datetime
@@ -741,6 +742,15 @@ class SettingsDialog(QDialog):
     def __init__(self, config_manager, parent=None):
         super().__init__(parent)
         self.config_manager = config_manager
+        self.monitor_runtime = None
+        self.monitor_config = None
+        self.monitor_cfg_path = None
+        try:
+            from acfv.runtime import stream_monitor as monitor_runtime
+            self.monitor_runtime = monitor_runtime
+            self.monitor_config, self.monitor_cfg_path, _ = monitor_runtime.load_stream_monitor_config(None)
+        except Exception as exc:
+            logging.warning(f"直播监控配置不可用：{exc}")
         self.setWindowTitle("程序设置")
         self.setMinimumWidth(700)
         self.init_ui()
@@ -757,6 +767,9 @@ class SettingsDialog(QDialog):
         
         # 权重设置标签页
         self.init_weights_tab(tabs)
+
+        # 直播监控设置
+        self.init_monitor_tab(tabs)
         
         # 底部按钮
         self.init_buttons(layout)
@@ -893,6 +906,54 @@ class SettingsDialog(QDialog):
         form_weights.addRow("兴趣分数阈值:", self.edit_interest_threshold)
         
         tabs.addTab(tab_weights, "权重设置")
+
+    def init_monitor_tab(self, tabs):
+        tab_monitor = QWidget()
+        form = QFormLayout(tab_monitor)
+
+        if not self.monitor_runtime or not self.monitor_config:
+            label = QLabel("当前环境未安装 StreamGet 或直播监控模块，无法编辑相关设置。")
+            label.setWordWrap(True)
+            form.addRow(label)
+            tabs.addTab(tab_monitor, "监控")
+            return
+
+        self.monitor_ffmpeg_edit = QLineEdit(self.monitor_config.ffmpeg_path)
+        form.addRow("ffmpeg 路径:", self.monitor_ffmpeg_edit)
+
+        self.monitor_quality_combo = QComboBox()
+        self.monitor_quality_combo.addItems(["OD", "UHD", "HD", "SD", "LD"])
+        idx = self.monitor_quality_combo.findText(self.monitor_config.default_quality)
+        if idx >= 0:
+            self.monitor_quality_combo.setCurrentIndex(idx)
+        form.addRow("默认清晰度:", self.monitor_quality_combo)
+
+        self.monitor_poll_spin = QSpinBox()
+        self.monitor_poll_spin.setRange(5, 3600)
+        self.monitor_poll_spin.setValue(int(self.monitor_config.default_poll_interval))
+        form.addRow("默认轮询间隔(秒):", self.monitor_poll_spin)
+
+        self.monitor_format_combo = QComboBox()
+        self.monitor_format_combo.addItems(["mp4", "flv", "ts", "mkv"])
+        idx = self.monitor_format_combo.findText(self.monitor_config.default_format)
+        if idx >= 0:
+            self.monitor_format_combo.setCurrentIndex(idx)
+        form.addRow("默认封装格式:", self.monitor_format_combo)
+
+        self.monitor_output_edit = QLineEdit(str(self.monitor_config.output_root))
+        out_layout = QHBoxLayout()
+        out_layout.addWidget(self.monitor_output_edit)
+        btn_choose = QPushButton("选择")
+        btn_choose.clicked.connect(self.choose_monitor_output_dir)
+        out_layout.addWidget(btn_choose)
+        form.addRow("输出根目录:", out_layout)
+
+        tabs.addTab(tab_monitor, "监控")
+
+    def choose_monitor_output_dir(self):
+        directory = QFileDialog.getExistingDirectory(self, "选择输出根目录", self.monitor_output_edit.text())
+        if directory:
+            self.monitor_output_edit.setText(directory)
     
     def init_checkpoint_management(self, form):
         checkpoint_layout = QHBoxLayout()
@@ -1030,6 +1091,16 @@ class SettingsDialog(QDialog):
         self.config_manager.set("ENABLE_SEMANTIC_MERGE", self.checkbox_enable_semantic_merge.isChecked())
         self.config_manager.set("SEMANTIC_SIMILARITY_THRESHOLD", float(self.edit_semantic_similarity_threshold.text().strip() or 0.75))
         self.config_manager.set("SEMANTIC_MAX_TIME_GAP", float(self.edit_semantic_max_time_gap.text().strip() or 60.0))
+
+        if self.monitor_runtime and self.monitor_config:
+            self.monitor_config.ffmpeg_path = self.monitor_ffmpeg_edit.text().strip() or "ffmpeg"
+            self.monitor_config.default_quality = self.monitor_quality_combo.currentText()
+            self.monitor_config.default_poll_interval = self.monitor_poll_spin.value()
+            self.monitor_config.default_format = self.monitor_format_combo.currentText()
+            output_root = self.monitor_output_edit.text().strip()
+            if output_root:
+                self.monitor_config.output_root = Path(output_root)
+            self.monitor_runtime.save_stream_monitor_config(self.monitor_config, self.monitor_cfg_path)
 
         
         self.config_manager.save()

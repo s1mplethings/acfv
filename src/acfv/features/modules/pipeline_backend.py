@@ -1,5 +1,130 @@
 # Extracted core backend functionality from main.py
 
+from __future__ import annotations
+
+from typing import List, Tuple
+
+def _segment_score(seg: dict) -> float:
+    for key in ("score", "interest_score", "rating", "density", "clip_score"):
+        val = seg.get(key)
+        if val is None:
+            continue
+        try:
+            return float(val)
+        except Exception:
+            continue
+    return 0.0
+
+def _normalize_segments_to_target(
+    segments: List[dict],
+    desired_count: int,
+    video_duration: float,
+    min_sec: float,
+    target_sec: float,
+    max_sec: float,
+    prefer_score: bool = True,
+) -> List[dict]:
+    processed: List[Tuple[float, int, float, float, dict]] = []
+    for idx, seg in enumerate(segments):
+        try:
+            start = float(seg.get("start", 0.0))
+            end = float(seg.get("end", 0.0))
+        except Exception:
+            continue
+        if end <= start:
+            continue
+        processed.append((_segment_score(seg), idx, start, end, seg))
+
+    if not processed:
+        return []
+
+    highest_end = max(item[3] for item in processed)
+    if not video_duration or video_duration < highest_end:
+        video_duration = max(highest_end, video_duration or 0.0)
+
+    if prefer_score:
+        ordering = sorted(processed, key=lambda x: (x[0], -x[2]), reverse=True)
+    else:
+        ordering = sorted(processed, key=lambda x: x[2])
+
+    selected: List[dict] = []
+    used_indices = set()
+
+    def overlaps(range_a, range_b):
+        inter = min(range_a[1], range_b[1]) - max(range_a[0], range_b[0])
+        if inter <= 0:
+            return 0.0
+        union = max(range_a[1], range_b[1]) - min(range_a[0], range_b[0])
+        return inter / union if union > 0 else 0.0
+
+    def adjust_window(start: float, end: float) -> Tuple[float, float]:
+        length = end - start
+        target = target_sec
+        if length > max_sec:
+            target = max_sec
+        elif length < min_sec:
+            target = target_sec
+        else:
+            target = max(min(length, max_sec), min_sec)
+        center = (start + end) / 2.0
+        start_new = center - target / 2.0
+        if start_new < 0.0:
+            start_new = 0.0
+        end_new = start_new + target
+        if end_new > video_duration:
+            end_new = video_duration
+            start_new = max(0.0, end_new - target)
+        if end_new - start_new < min_sec:
+            if end_new == video_duration:
+                start_new = max(0.0, video_duration - min_sec)
+                end_new = video_duration
+            else:
+                end_new = min(video_duration, start_new + min_sec)
+        return start_new, end_new
+
+    def add_candidate(score: float, idx_seg: int, start: float, end: float, origin: dict) -> bool:
+        start_adj, end_adj = adjust_window(start, end)
+        candidate_range = (start_adj, end_adj)
+        for existing in selected:
+            if overlaps(candidate_range, (existing['start'], existing['end'])) > 0.35:
+                return False
+        seg_copy = dict(origin)
+        seg_copy['start'] = float(start_adj)
+        seg_copy['end'] = float(end_adj)
+        seg_copy['score'] = float(score)
+        seg_copy['_source_index'] = idx_seg
+        selected.append(seg_copy)
+        used_indices.add(idx_seg)
+        return True
+
+    for score, idx_seg, start, end, seg in ordering:
+        if desired_count > 0 and len(selected) >= desired_count:
+            break
+        add_candidate(score, idx_seg, start, end, seg)
+
+    if desired_count > 0 and len(selected) < desired_count:
+        remaining = [item for item in sorted(processed, key=lambda x: x[2]) if item[1] not in used_indices]
+        for score, idx_seg, start, end, seg in remaining:
+            if desired_count > 0 and len(selected) >= desired_count:
+                break
+            if not add_candidate(score, idx_seg, start, end, seg):
+                start_adj, end_adj = adjust_window(start, end)
+                seg_copy = dict(seg)
+                seg_copy['start'] = float(start_adj)
+                seg_copy['end'] = float(end_adj)
+                seg_copy['score'] = float(score)
+                seg_copy['_source_index'] = idx_seg
+                selected.append(seg_copy)
+
+    if desired_count > 0 and len(selected) > desired_count:
+        selected = sorted(selected, key=lambda x: x.get('score', 0.0), reverse=True)[:desired_count]
+
+    selected.sort(key=lambda x: float(x.get('start', 0.0)))
+    for seg in selected:
+        seg.pop('_source_index', None)
+    return selected
+
+
 import os
 import json
 import threading
@@ -8,7 +133,8 @@ import importlib
 import logging
 import pickle
 import subprocess
-
+from pathlib import Path
+import re
 try:
     import faiss
     FAISS_AVAILABLE = True
@@ -23,8 +149,14 @@ except ImportError:
     print("PyQt5 模块未安装，将跳过相关功能")
 
 from acfv import config
+from acfv.utils import safe_slug
 from acfv.runtime.storage import processing_path, settings_path
 import sys
+
+
+def _sanitize_component(text: str) -> str:
+    """Sanitize and shorten a filename component for filesystem usage."""
+    return safe_slug(text, max_length=80)
 
 # 条件导入各个模块
 try:
@@ -1107,7 +1239,28 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         log_warning(f"[pipeline] 使用 ratings.json 重排失败: {e}")
 
     log_info(f"[pipeline] Final segments count: {len(segments_data)}")
-    
+
+    def _has_ranking_signals(items):
+        try:
+            for seg in items:
+                if not isinstance(seg, dict):
+                    continue
+                score = seg.get("score")
+                if score is not None:
+                    try:
+                        if float(score) > 0:
+                            return True
+                    except Exception:
+                        return True
+                source = str(seg.get("source", "")).lower()
+                if source in {"ratings.json", "manual", "acfv_ratings", "manual_rating"}:
+                    return True
+            return False
+        except Exception:
+            return False
+
+    ranked_segments_detected = bool(segments_data) and _has_ranking_signals(segments_data)
+
     # 语义分段模式（从头到尾按语义连续分段，目标约4分钟，避免过短）
     try:
         val = cfg_manager.get("SEMANTIC_SEGMENT_MODE")
@@ -1115,6 +1268,18 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         use_semantic_segment_mode = bool(val) if val is not None else True
     except Exception:
         use_semantic_segment_mode = True
+
+    if use_semantic_segment_mode and ranked_segments_detected:
+        try:
+            raw_force_semantic = cfg_manager.get("FORCE_SEMANTIC_SEGMENT")
+        except Exception:
+            raw_force_semantic = None
+        force_semantic = bool(raw_force_semantic) if raw_force_semantic is not None else False
+        if not force_semantic:
+            log_info("[pipeline] 检测到评分驱动的片段排序，优先保留评分结果，跳过语义分段。如需强制语义切块，请开启 FORCE_SEMANTIC_SEGMENT。")
+            use_semantic_segment_mode = False
+        else:
+            log_info("[pipeline] FORCE_SEMANTIC_SEGMENT 已启用，检测到评分也继续执行语义分段。")
 
     if use_semantic_segment_mode:
         log_info("[pipeline] 启用语义分段模式：从头按语义连续切分（约4分钟）")
@@ -1175,12 +1340,68 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                     return (dot / (na*nb)) if na>0 and nb>0 else 0.0
 
             # 顺序合并为语义块
+            def _avg(values):
+                return sum(values) / len(values) if values else None
+
+            def _aggregate_segment_scores(group, group_start, group_end):
+                scores = []
+                interest_scores = []
+                densities = []
+                rag_priors = []
+                volumes = []
+                for seg in group:
+                    try:
+                        if seg.get("score") is not None:
+                            scores.append(float(seg.get("score")))
+                    except Exception:
+                        pass
+                    try:
+                        if seg.get("interest_score") is not None:
+                            interest_scores.append(float(seg.get("interest_score")))
+                    except Exception:
+                        pass
+                    try:
+                        if seg.get("density") is not None:
+                            densities.append(float(seg.get("density")))
+                    except Exception:
+                        pass
+                    try:
+                        if seg.get("rag_prior") is not None:
+                            rag_priors.append(float(seg.get("rag_prior")))
+                    except Exception:
+                        pass
+                    try:
+                        if seg.get("volume_penalty") is not None:
+                            volumes.append(float(seg.get("volume_penalty")))
+                    except Exception:
+                        pass
+                payload = {}
+                avg_interest = _avg(scores or interest_scores)
+                if avg_interest is not None:
+                    payload["score"] = avg_interest
+                    payload["interest_score"] = avg_interest
+                avg_density = _avg(densities)
+                if avg_density is not None:
+                    payload["density"] = avg_density
+                avg_rag = _avg(rag_priors)
+                if avg_rag is not None:
+                    payload["rag_prior"] = avg_rag
+                avg_volume = _avg(volumes)
+                if avg_volume is not None:
+                    payload["volume_penalty"] = avg_volume
+                if "score" not in payload:
+                    duration_score = max(group_end - group_start, 0.005)
+                    payload["score"] = duration_score
+                    payload["interest_score"] = duration_score
+                return payload
+
             semantic_segments = []
-            cur_start = None; cur_end = None; cur_last_idx = None; cur_texts = []
+            cur_start = None; cur_end = None; cur_last_idx = None; cur_texts = []; cur_segments = []
             for idx, seg in enumerate(segs):
                 s = seg['start']; e = seg['end']
                 if cur_start is None:
                     cur_start, cur_end, cur_last_idx, cur_texts = s, e, idx, [seg['text']]
+                    cur_segments = [seg]
                     continue
                 gap = s - cur_end
                 similar = True
@@ -1197,15 +1418,22 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                         cur_end = max(cur_end, e)
                         cur_last_idx = idx
                         cur_texts.append(seg['text'])
+                        cur_segments.append(seg)
                     else:
-                        semantic_segments.append({'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)})
+                        merged = {'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)}
+                        merged.update(_aggregate_segment_scores(cur_segments, cur_start, cur_end))
+                        semantic_segments.append(merged)
                         cur_start, cur_end, cur_last_idx, cur_texts = s, e, idx, [seg['text']]
+                        cur_segments = [seg]
                 else:
                     cur_end = max(cur_end, e)
                     cur_last_idx = idx
                     cur_texts.append(seg['text'])
+                    cur_segments.append(seg)
             if cur_start is not None:
-                semantic_segments.append({'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)})
+                merged = {'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)}
+                merged.update(_aggregate_segment_scores(cur_segments, cur_start, cur_end))
+                semantic_segments.append(merged)
 
             # 覆盖 segments_data（顺序输出，不再按分数重排）
             segments_data = semantic_segments
@@ -1540,7 +1768,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 desired_count = 10
             # 裁剪过多
             if desired_count > 0 and len(segments_data) > desired_count:
-                segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))[:desired_count]
+                pass  # selection handled in normalize step
             # 拆分不足
             if desired_count > 0 and len(segments_data) < desired_count:
                 # 加载转录以便按边界拆分
@@ -1688,6 +1916,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             log_info(f"[pipeline] 开始串行切片生成，共 {len(segments)} 个片段")
             
             clip_files = []
+            video_base = _sanitize_component(Path(video_path).stem)
             
             # 预先探测一次视频时长，避免每个片段重复ffprobe
             try:
@@ -1722,7 +1951,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                     
                     # 生成输出文件名 - 确保索引正确
                     segment_index = index + 1  # 确保从1开始
-                    clip_filename = f"clip_{segment_index:03d}_{start_time:.1f}s-{end_time:.1f}s.mp4"
+                    clip_filename = f"{video_base}__clip_{segment_index:03d}_{start_time:.1f}s-{end_time:.1f}s.mp4"
                     output_path = os.path.join(output_dir, clip_filename)
                     
                     # 清理可能存在的旧文件

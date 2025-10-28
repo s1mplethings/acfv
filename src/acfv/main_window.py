@@ -27,13 +27,13 @@ from PyQt5.QtWidgets import (
 
 # 导入自定义模块
 from acfv.config.config import ConfigManager
-from acfv.processing.twitch_downloader import TwitchTab
-from acfv.processing.local_video_manager import LocalVideoManager
-from acfv.features.modules.clips_manager import create_clips_manager
 from acfv.features.modules.ui_components import SettingsDialog, Worker
 from acfv.features.modules.progress_manager import ProgressManager
 from acfv.features.modules.progress_widget import ProgressWidget, ProgressUpdateWorker
 from acfv.features.modules.beautiful_progress_widget import SimpleBeautifulProgressBar
+from acfv.ui.tabs import create_clips_tab, create_local_tab, create_twitch_tab
+from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
+from acfv.lifecycle.tray_manager import TrayManager
 
 
 # 简化的工作线程
@@ -276,6 +276,9 @@ class MainWindow(QMainWindow):
         self.local_manager = None
         self.clips_manager = None
         self.index_worker = None
+        self.tray_manager = None
+        self._force_exit = False
+        self._monitor_autostarted = False
         
         # 初始化新的进度系统
         self.progress_manager = ProgressManager()
@@ -344,6 +347,7 @@ class MainWindow(QMainWindow):
 
         self.init_ui()
         self.init_managers()
+        self._init_tray_icon()
 
     def init_ui(self):
         """初始化用户界面"""
@@ -416,7 +420,7 @@ class MainWindow(QMainWindow):
         self.simple_progress.set_progress_manager(self.progress_manager)
         layout.addWidget(self.simple_progress)
         # 用户要求：暂时只显示进度条，不做时间预测
-        self.enable_time_prediction = False
+        self.enable_time_prediction = True
         
         # 完全禁用其他进度组件，避免重复显示
         self.progress_widget = None  # 禁用原版进度组件
@@ -453,6 +457,20 @@ class MainWindow(QMainWindow):
             }
         """)
         layout.addWidget(self.status_label)
+        self.time_prediction_label = QLabel("预计剩余时间：--")
+        self.time_prediction_label.setStyleSheet("""
+            QLabel {
+                font-size: 12px;
+                color: #2d3748;
+                padding: 6px;
+                border: 1px dashed #cbd5f5;
+                border-radius: 4px;
+                background-color: #f0f4ff;
+            }
+        """)
+        self.time_prediction_label.setVisible(False)
+        layout.addWidget(self.time_prediction_label)
+        self.predicted_total_time_str = None
 
         # 如果之前创建了 ai_result_label，这里添加到布局末尾
         if hasattr(self, 'ai_result_label') and self.ai_result_label not in [layout.itemAt(i).widget() for i in range(layout.count()) if layout.itemAt(i) and layout.itemAt(i).widget()]:
@@ -589,35 +607,50 @@ class MainWindow(QMainWindow):
 
     def init_managers(self):
         """初始化各个功能管理器"""
-        # Twitch下载标签页
-        self.tab_twitch = QWidget()
-        self.twitch_tab = TwitchTab(self, self.config_manager)
-        self.twitch_tab.init_ui(self.tab_twitch)
-        self.tabs.addTab(self.tab_twitch, "Twitch 下载")
+        twitch_handle = create_twitch_tab(self, self.config_manager)
+        self.tab_twitch = twitch_handle.widget
+        self.twitch_tab = twitch_handle.controller
+        self.tabs.addTab(twitch_handle.widget, twitch_handle.title)
 
-        # 本地回放处理标签页
-        self.tab_local = QWidget()
-        self.local_manager = LocalVideoManager(self, self.config_manager)
-        self.local_manager.init_ui(self.tab_local)
-        self.tabs.addTab(self.tab_local, "本地回放处理")
-        # 自动加载本地回放列表（含缩略图）
+        local_handle = create_local_tab(self, self.config_manager)
+        self.tab_local = local_handle.widget
+        self.local_manager = local_handle.controller
+        self.tabs.addTab(local_handle.widget, local_handle.title)
         try:
             self.local_manager.refresh_local_videos()
         except Exception as e:
             logging.debug(f"自动加载本地回放失败: {e}")
 
-        # 切片管理标签页
-        self.tab_clips = QWidget()
-        self.clips_manager = create_clips_manager(self, self.config_manager)
-        self.clips_manager.init_ui(self.tab_clips)
-        self.tabs.addTab(self.tab_clips, "切片管理")
-        # 自动触发切片页的加载，确保首次进入就有数据
+        clips_handle = create_clips_tab(self, self.config_manager)
+        self.tab_clips = clips_handle.widget
+        self.clips_manager = clips_handle.controller
+        self.tabs.addTab(clips_handle.widget, clips_handle.title)
+
+        # Stream monitor tab
+        self.stream_monitor_widget = StreamMonitorEditorWidget()
+        self.tabs.addTab(self.stream_monitor_widget, "直播监控")
+        QTimer.singleShot(0, self._auto_launch_stream_monitor)
+
+    def _init_tray_icon(self):
         try:
-            from PyQt5.QtCore import QTimer
-            if hasattr(self.clips_manager, '_lazy_load_data'):
-                QTimer.singleShot(0, self.clips_manager._lazy_load_data)
-        except Exception:
-            pass
+            tray = TrayManager(self)
+            if tray.start():
+                self.tray_manager = tray
+            else:
+                self.tray_manager = None
+        except Exception as exc:
+            logging.debug(f"系统托盘不可用: {exc}")
+            self.tray_manager = None
+
+    def _auto_launch_stream_monitor(self):
+        if self._monitor_autostarted:
+            return
+        self._monitor_autostarted = True
+        if hasattr(self, "stream_monitor_widget"):
+            self.stream_monitor_widget.refresh_from_disk()
+            if self.stream_monitor_widget.has_enabled_targets():
+                self.tabs.setCurrentWidget(self.stream_monitor_widget)
+                self.stream_monitor_widget.start_monitor()
 
     def set_window_icon(self):
         """设置窗口图标"""
@@ -677,71 +710,73 @@ class MainWindow(QMainWindow):
             logging.warning(f"取消窗口置顶失败: {e}")
 
     def closeEvent(self, event):
-        """窗口关闭事件处理 - 避免与全局清理冲突"""
+        """窗口关闭事件处理 - 默认最小化到托盘，选择“退出”才真正关闭。"""
+        if not getattr(self, "_force_exit", False) and self.tray_manager:
+            event.ignore()
+            self.hide()
+            self.tray_manager.show_hidden_tip()
+            return
+
+        self._shutdown_cleanup()
+        if self.tray_manager:
+            self.tray_manager.shutdown()
+        super().closeEvent(event)
+
+    def restore_from_tray(self):
+        self.showNormal()
+        self.activateWindow()
+        self.raise_()
+
+    def exit_from_tray(self):
+        self._force_exit = True
+        self.restore_from_tray()
+        self.close()
+
+    def _shutdown_cleanup(self):
+        if getattr(self, "_shutdown_done", False):
+            return
+        self._shutdown_done = True
         try:
-            # 记录关闭事件的调用栈
             import traceback
             logging.info("窗口关闭事件被触发")
             logging.info("调用栈:")
             for line in traceback.format_stack()[-5:]:
                 logging.info(f"  {line.strip()}")
-            
+
             logging.info("开始清理应用程序资源...")
-            
-            # 首先设置全局停止标志
-            if hasattr(self, 'is_shutting_down'):
-                self.is_shutting_down = True
-            else:
-                self.is_shutting_down = True
-            
-            # 🆕 首先停止和清理所有定时器
+            self.is_shutting_down = True
             self._cleanup_timers()
-            
-            # 停止所有进度显示
             self.stop_progress_display()
             self.stop_smart_progress()
-            
-            # 停止智能进度更新线程
             if self.progress_worker:
                 logging.info("正在停止智能进度更新线程...")
                 self.progress_worker.stop()
-            
-            # 立即停止所有后台处理进程
             self._stop_all_processing()
-            
-            # 优雅退出后台线程 - 优先处理本地视频管理器
+
             if self.local_manager:
                 try:
                     logging.info("正在清理本地视频管理器...")
                     if hasattr(self.local_manager, 'stop_all_processing'):
                         self.local_manager.stop_all_processing()
                     self.local_manager.cleanup()
-                except (RuntimeError, AttributeError) as e:
-                    logging.debug(f"清理本地视频管理器时忽略错误: {e}")
-            
-            # 清理其他管理器
-            managers = [self.twitch_tab, self.clips_manager]
-            for manager in managers:
+                except (RuntimeError, AttributeError) as err:
+                    logging.debug(f"清理本地视频管理器时忽略错误: {err}")
+
+            for manager in (self.twitch_tab, self.clips_manager):
                 try:
                     if manager and hasattr(manager, 'cleanup'):
                         logging.info(f"正在清理管理器: {manager.__class__.__name__}")
                         if hasattr(manager, 'stop_all_processing'):
                             manager.stop_all_processing()
                         manager.cleanup()
-                except (RuntimeError, AttributeError) as e:
-                    logging.debug(f"清理管理器时忽略错误: {e}")
-            
-            # 只清理本窗口直接管理的线程，不做全局线程清理
-            # 全局线程清理由main.py的aboutToQuit信号处理
+                except (RuntimeError, AttributeError) as err:
+                    logging.debug(f"清理管理器时忽略错误: {err}")
+
             self._cleanup_direct_threads()
-            
-        except Exception as e:
-            # 记录错误但不阻止关闭
-            logging.error(f"清理资源时发生错误: {e}")
-            
+        except Exception as exc:
+            logging.error(f"清理资源时发生错误: {exc}")
         logging.info("应用程序资源清理完成")
-        super().closeEvent(event)
-    
+
     def _cleanup_timers(self):
         """清理所有定时器"""
         try:
@@ -1082,7 +1117,10 @@ class MainWindow(QMainWindow):
     def open_settings(self):
         """打开设置对话框"""
         dlg = SettingsDialog(self.config_manager, self)
-        dlg.exec_()
+        result = dlg.exec_()
+        if result == dlg.Accepted and hasattr(self, "stream_monitor_widget"):
+            self.stream_monitor_widget.stop_monitor()
+            self.stream_monitor_widget.refresh_from_disk()
 
     # ============================================================================
     # 智能进度预测系统方法
@@ -1103,6 +1141,10 @@ class MainWindow(QMainWindow):
             if hasattr(self, 'simple_progress'):
                 self.simple_progress.setVisible(True)  # 显示主要进度条
                 self.simple_progress.start_progress("初始化处理...")
+            if self.enable_time_prediction and hasattr(self, 'time_prediction_label'):
+                self.time_prediction_label.setVisible(False)
+                self.time_prediction_label.setText("预计剩余时间：--")
+                self.predicted_total_time_str = None
             
             if hasattr(self, 'detailed_progress'):
                 self.detailed_progress.setVisible(False)  # 隐藏详细进度避免重复
@@ -1139,8 +1181,19 @@ class MainWindow(QMainWindow):
                             self.smart_predictor.start_session(estimated_duration * 60, file_size, video_path)
                             log_info("📊 开始基于历史记录的智能预测会话")
                         
-                        # 预测处理时间 (通过 simple_progress 显示)
-                        # predicted_time = self.smart_predictor.predict_video_processing_time(estimated_duration * 60, file_size)
+                        if self.enable_time_prediction and self.smart_predictor:
+                            try:
+                                predicted_time = self.smart_predictor.predict_video_processing_time(
+                                    estimated_duration * 60, file_size
+                                )
+                                self.predicted_total_time_str = predicted_time
+                                if hasattr(self.smart_predictor, "start_time"):
+                                    self.smart_predictor.start_time = time.time()
+                                if predicted_time and hasattr(self, "time_prediction_label"):
+                                    self.time_prediction_label.setText(f"预计处理耗时：{predicted_time}")
+                                    self.time_prediction_label.setVisible(True)
+                            except Exception as predict_err:
+                                logging.debug(f"时间预测失败，继续处理: {predict_err}")
                         
                         log_info(f"📊 开始视频处理 (文件大小: {file_size:.1f}MB, 时长: {estimated_duration:.1f}分钟)")
                         
@@ -1152,11 +1205,12 @@ class MainWindow(QMainWindow):
             self.status_label.setVisible(True)
 
             # 启动时间预测定时器（每秒刷新）
-            if not hasattr(self, 'time_update_timer') or self.time_update_timer is None:
-                self.time_update_timer = QTimer()
-                self.time_update_timer.timeout.connect(self.update_time_prediction)
-            self.processing_start_time = time.time()
-            self.time_update_timer.start(1000)
+            if self.enable_time_prediction:
+                if not hasattr(self, 'time_update_timer') or self.time_update_timer is None:
+                    self.time_update_timer = QTimer()
+                    self.time_update_timer.timeout.connect(self.update_time_prediction)
+                self.processing_start_time = time.time()
+                self.time_update_timer.start(1000)
             
             logging.info("✅ 进度系统已启动")
             
@@ -1201,9 +1255,30 @@ class MainWindow(QMainWindow):
         pass
 
     def update_time_prediction(self):
-        """更新时间预测 - 现在通过 simple_progress 自动处理"""
-        # 已禁用（enable_time_prediction=False）
-        return
+        """更新时间预测 - 根据智能预测器显示剩余时间"""
+        if not self.enable_time_prediction:
+            return
+        if not hasattr(self, "smart_predictor") or not self.smart_predictor:
+            return
+        if not hasattr(self, "time_prediction_label"):
+            return
+
+        remaining = None
+        try:
+            if hasattr(self.smart_predictor, "get_estimated_remaining_time"):
+                remaining = self.smart_predictor.get_estimated_remaining_time()
+        except Exception as err:
+            logging.debug(f"更新时间预测失败: {err}")
+            remaining = None
+
+        if remaining:
+            self.time_prediction_label.setText(f"预计剩余时间：{remaining}")
+            self.time_prediction_label.setVisible(True)
+        elif getattr(self, "predicted_total_time_str", None):
+            self.time_prediction_label.setText(f"预计处理耗时：{self.predicted_total_time_str}")
+            self.time_prediction_label.setVisible(True)
+        else:
+            self.time_prediction_label.setVisible(False)
 
     # ...existing code...
     def start_processing_progress(self, video_duration: float = 0, file_size: float = 0):
@@ -1271,6 +1346,9 @@ class MainWindow(QMainWindow):
             # 🆕 停止时间预测定时器
             if hasattr(self, 'time_update_timer') and self.time_update_timer:
                 self.time_update_timer.stop()
+            if hasattr(self, 'time_prediction_label'):
+                self.time_prediction_label.setVisible(False)
+                self.predicted_total_time_str = None
                 
             if self.progress_worker:
                 self.progress_worker.stop()

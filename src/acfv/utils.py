@@ -25,6 +25,7 @@ except ImportError:
 # sklearn导入移到函数内部，避免NumPy兼容性问题
 SKLEARN_AVAILABLE = None
 
+
 def _get_sklearn():
     """延迟导入sklearn，避免NumPy兼容性问题"""
     global SKLEARN_AVAILABLE

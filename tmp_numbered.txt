@@ -1,0 +1,2405 @@
+    1: # Extracted core backend functionality from main.py
+    2: 
+    3: from __future__ import annotations
+    4: 
+    5: from typing import List, Tuple
+    6: 
+    7: def _segment_score(seg: dict) -> float:
+    8:     for key in ("score", "interest_score", "rating", "density", "clip_score"):
+    9:         val = seg.get(key)
+   10:         if val is None:
+   11:             continue
+   12:         try:
+   13:             return float(val)
+   14:         except Exception:
+   15:             continue
+   16:     return 0.0
+   17: 
+   18: def _normalize_segments_to_target(
+   19:     segments: List[dict],
+   20:     desired_count: int,
+   21:     video_duration: float,
+   22:     min_sec: float,
+   23:     target_sec: float,
+   24:     max_sec: float,
+   25:     prefer_score: bool = True,
+   26: ) -> List[dict]:
+   27:     processed: List[Tuple[float, int, float, float, dict]] = []
+   28:     for idx, seg in enumerate(segments):
+   29:         try:
+   30:             start = float(seg.get("start", 0.0))
+   31:             end = float(seg.get("end", 0.0))
+   32:         except Exception:
+   33:             continue
+   34:         if end <= start:
+   35:             continue
+   36:         processed.append((_segment_score(seg), idx, start, end, seg))
+   37: 
+   38:     if not processed:
+   39:         return []
+   40: 
+   41:     highest_end = max(item[3] for item in processed)
+   42:     if not video_duration or video_duration < highest_end:
+   43:         video_duration = max(highest_end, video_duration or 0.0)
+   44: 
+   45:     if prefer_score:
+   46:         ordering = sorted(processed, key=lambda x: (x[0], -x[2]), reverse=True)
+   47:     else:
+   48:         ordering = sorted(processed, key=lambda x: x[2])
+   49: 
+   50:     selected: List[dict] = []
+   51:     used_indices = set()
+   52: 
+   53:     def overlaps(range_a, range_b):
+   54:         inter = min(range_a[1], range_b[1]) - max(range_a[0], range_b[0])
+   55:         if inter <= 0:
+   56:             return 0.0
+   57:         union = max(range_a[1], range_b[1]) - min(range_a[0], range_b[0])
+   58:         return inter / union if union > 0 else 0.0
+   59: 
+   60:     def adjust_window(start: float, end: float) -> Tuple[float, float]:
+   61:         length = end - start
+   62:         target = target_sec
+   63:         if length > max_sec:
+   64:             target = max_sec
+   65:         elif length < min_sec:
+   66:             target = target_sec
+   67:         else:
+   68:             target = max(min(length, max_sec), min_sec)
+   69:         center = (start + end) / 2.0
+   70:         start_new = center - target / 2.0
+   71:         if start_new < 0.0:
+   72:             start_new = 0.0
+   73:         end_new = start_new + target
+   74:         if end_new > video_duration:
+   75:             end_new = video_duration
+   76:             start_new = max(0.0, end_new - target)
+   77:         if end_new - start_new < min_sec:
+   78:             if end_new == video_duration:
+   79:                 start_new = max(0.0, video_duration - min_sec)
+   80:                 end_new = video_duration
+   81:             else:
+   82:                 end_new = min(video_duration, start_new + min_sec)
+   83:         return start_new, end_new
+   84: 
+   85:     def add_candidate(score: float, idx_seg: int, start: float, end: float, origin: dict) -> bool:
+   86:         start_adj, end_adj = adjust_window(start, end)
+   87:         candidate_range = (start_adj, end_adj)
+   88:         for existing in selected:
+   89:             if overlaps(candidate_range, (existing['start'], existing['end'])) > 0.35:
+   90:                 return False
+   91:         seg_copy = dict(origin)
+   92:         seg_copy['start'] = float(start_adj)
+   93:         seg_copy['end'] = float(end_adj)
+   94:         seg_copy['score'] = float(score)
+   95:         seg_copy['_source_index'] = idx_seg
+   96:         selected.append(seg_copy)
+   97:         used_indices.add(idx_seg)
+   98:         return True
+   99: 
+  100:     for score, idx_seg, start, end, seg in ordering:
+  101:         if desired_count > 0 and len(selected) >= desired_count:
+  102:             break
+  103:         add_candidate(score, idx_seg, start, end, seg)
+  104: 
+  105:     if desired_count > 0 and len(selected) < desired_count:
+  106:         remaining = [item for item in sorted(processed, key=lambda x: x[2]) if item[1] not in used_indices]
+  107:         for score, idx_seg, start, end, seg in remaining:
+  108:             if desired_count > 0 and len(selected) >= desired_count:
+  109:                 break
+  110:             if not add_candidate(score, idx_seg, start, end, seg):
+  111:                 start_adj, end_adj = adjust_window(start, end)
+  112:                 seg_copy = dict(seg)
+  113:                 seg_copy['start'] = float(start_adj)
+  114:                 seg_copy['end'] = float(end_adj)
+  115:                 seg_copy['score'] = float(score)
+  116:                 seg_copy['_source_index'] = idx_seg
+  117:                 selected.append(seg_copy)
+  118: 
+  119:     if desired_count > 0 and len(selected) > desired_count:
+  120:         selected = sorted(selected, key=lambda x: x.get('score', 0.0), reverse=True)[:desired_count]
+  121: 
+  122:     selected.sort(key=lambda x: float(x.get('start', 0.0)))
+  123:     for seg in selected:
+  124:         seg.pop('_source_index', None)
+  125:     return selected
+  126: 
+  127: 
+  128: import os
+  129: import json
+  130: import threading
+  131: import shutil
+  132: import importlib
+  133: import logging
+  134: import pickle
+  135: import subprocess
+  136: from pathlib import Path
+  137: import re
+  138: try:
+  139:     import faiss
+  140:     FAISS_AVAILABLE = True
+  141: except ImportError:
+  142:     FAISS_AVAILABLE = False
+  143:     print("faiss 模块未安装，将跳过相关内容索引功能")
+  144: try:
+  145:     from PyQt5.QtCore import QThread, pyqtSignal
+  146:     PYTQT5_AVAILABLE = True
+  147: except ImportError:
+  148:     PYTQT5_AVAILABLE = False
+  149:     print("PyQt5 模块未安装，将跳过相关功能")
+  150: 
+  151: from acfv import config
+  152: from acfv.utils import safe_slug
+  153: from acfv.runtime.storage import processing_path, settings_path
+  154: import sys
+  155: 
+  156: 
+  157: def _sanitize_component(text: str) -> str:
+  158:     """Sanitize and shorten a filename component for filesystem usage."""
+  159:     return safe_slug(text, max_length=80)
+  160: 
+  161: # 条件导入各个模块
+  162: try:
+  163:     from acfv.processing.extract_chat import extract_chat
+  164:     EXTRACT_CHAT_AVAILABLE = True
+  165: except ImportError as e:
+  166:     EXTRACT_CHAT_AVAILABLE = False
+  167:     print(f"extract_chat 模块导入失败: {e}")
+  168: 
+  169: try:
+  170:     from acfv.processing.transcribe_audio import process_audio_segments
+  171:     TRANSCRIBE_AUDIO_AVAILABLE = True
+  172: except ImportError as e:
+  173:     TRANSCRIBE_AUDIO_AVAILABLE = False
+  174:     print(f"transcribe_audio 模块导入失败: {e}")
+  175: 
+  176: # 将analyze_data的导入移到函数内部，避免循环导入
+  177: ANALYZE_DATA_AVAILABLE = True
+  178: 
+  179: try:
+  180:     from utils import filter_meaningless_content, build_content_index
+  181:     UTILS_AVAILABLE = True
+  182: except ImportError as e:
+  183:     UTILS_AVAILABLE = False
+  184:     print(f"utils 模块导入失败: {e}")
+  185: 
+  186: try:
+  187:     from acfv.processing.clip_video import clip_video
+  188:     CLIP_VIDEO_AVAILABLE = True
+  189: except ImportError as e:
+  190:     CLIP_VIDEO_AVAILABLE = False
+  191:     print(f"clip_video 模块导入失败: {e}")
+  192: 
+  193: try:
+  194:     from acfv.processing.video_emotion_infer import run as infer_emotion
+  195:     VIDEO_EMOTION_AVAILABLE = True
+  196: except ImportError as e:
+  197:     VIDEO_EMOTION_AVAILABLE = False
+  198:     print(f"video_emotion_infer 模块导入失败: {e}")
+  199: 
+  200: # 配置日志系统
+  201: import logging.handlers
+  202: import os
+  203: 
+  204: # 创建logs目录
+  205: os.makedirs("logs", exist_ok=True)
+  206: 
+  207: # 配置日志处理器
+  208: logger = logging.getLogger()
+  209: logger.setLevel(logging.INFO)
+  210: 
+  211: # 清除现有的处理器
+  212: for handler in logger.handlers[:]:
+  213:     logger.removeHandler(handler)
+  214: 
+  215: # 控制台处理器
+  216: console_handler = logging.StreamHandler()
+  217: console_handler.setLevel(logging.INFO)
+  218: console_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+  219: console_handler.setFormatter(console_formatter)
+  220: logger.addHandler(console_handler)
+  221: 
+  222: # 文件处理器 - processing.log
+  223: file_handler = logging.handlers.RotatingFileHandler(
+  224:     "processing.log", 
+  225:     maxBytes=10*1024*1024,  # 10MB
+  226:     backupCount=5,
+  227:     encoding='utf-8'
+  228: )
+  229: file_handler.setLevel(logging.INFO)
+  230: file_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+  231: file_handler.setFormatter(file_formatter)
+  232: logger.addHandler(file_handler)
+  233: 
+  234: # 详细日志文件 - video_processor.log
+  235: detailed_handler = logging.handlers.RotatingFileHandler(
+  236:     "logs/video_processor.log", 
+  237:     maxBytes=10*1024*1024,  # 10MB
+  238:     backupCount=5,
+  239:     encoding='utf-8'
+  240: )
+  241: detailed_handler.setLevel(logging.DEBUG)
+  242: detailed_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+  243: detailed_handler.setFormatter(detailed_formatter)
+  244: logger.addHandler(detailed_handler)
+  245: 
+  246: def log_info(message):
+  247:     """记录信息日志"""
+  248:     logging.info(message)
+  249:     # 确保日志立即写入文件
+  250:     for handler in logging.getLogger().handlers:
+  251:         if isinstance(handler, logging.handlers.RotatingFileHandler):
+  252:             handler.flush()
+  253: 
+  254: 
+  255: def log_error(message):
+  256:     """记录错误日志"""
+  257:     logging.error(message)
+  258:     # 确保日志立即写入文件
+  259:     for handler in logging.getLogger().handlers:
+  260:         if isinstance(handler, logging.handlers.RotatingFileHandler):
+  261:             handler.flush()
+  262: 
+  263: def log_warning(message):
+  264:     """记录警告日志"""
+  265:     logging.warning(message)
+  266:     # 确保日志立即写入文件
+  267:     for handler in logging.getLogger().handlers:
+  268:         if isinstance(handler, logging.handlers.RotatingFileHandler):
+  269:             handler.flush()
+  270: 
+  271: 
+  272: class ConfigManager:
+  273:     def __init__(self, config_file=None):
+  274:         self.config_file = config_file or str(settings_path("config.json"))
+  275:         self.cfg = {
+  276:             "VIDEO_FILE": "",
+  277:             "CHAT_FILE": "",
+  278:             "CHAT_OUTPUT": str(processing_path("chat_with_emotes.json")),
+  279:             "TRANSCRIPTION_OUTPUT": str(processing_path("transcription.json")),
+  280:             "ANALYSIS_OUTPUT": str(processing_path("high_interest_segments.json")),
+  281:             "OUTPUT_CLIPS_DIR": str(processing_path("output_clips")),
+  282:             "CLIPS_BASE_DIR": "clips",
+  283:             "MAX_CLIP_COUNT": 10,
+  284:             "WHISPER_MODEL": "large",
+  285:             "LLM_DEVICE": 0,
+  286:             "CHAT_DENSITY_WEIGHT": 0.3,
+  287:             "CHAT_SENTIMENT_WEIGHT": 0.4,
+  288:             "VIDEO_EMOTION_WEIGHT": 0.3,
+  289:             "AUDIO_TARGET_BONUS": 1.0,
+  290:             "TEXT_TARGET_BONUS": 1.0,
+  291:             "INTEREST_SCORE_THRESHOLD": 0.5,
+  292:             "LOCAL_EMOTION_MODEL_PATH": "",
+  293:             "VIDEO_EMOTION_MODEL_PATH": "",
+  294:             "VIDEO_EMOTION_SEGMENT_LENGTH": 4.0,
+  295:             "ENABLE_VIDEO_EMOTION": False,
+  296:             "twitch_client_id": "",
+  297:             "twitch_oauth_token": "",
+  298:             "twitch_username": "",
+  299:             "twitch_download_folder": "./data/twitch",
+  300:         }
+  301:         self.load()
+  302: 
+  303:     def load(self):
+  304:         if not os.path.isfile(self.config_file):
+  305:             self.save()
+  306:             return
+  307:         try:
+  308:             with open(self.config_file, "r", encoding="utf-8") as f:
+  309:                 data = json.load(f)
+  310:             self.cfg.update(data)
+  311:         except Exception:
+  312:             pass
+  313: 
+  314:     def save(self):
+  315:         try:
+  316:             with open(self.config_file, "w", encoding="utf-8") as f:
+  317:                 json.dump(self.cfg, f, ensure_ascii=False, indent=4)
+  318:         except Exception:
+  319:             pass
+  320: 
+  321:     def get(self, key):
+  322:         return self.cfg.get(key)
+  323: 
+  324:     def set(self, key, value):
+  325:         self.cfg[key] = value
+  326: 
+  327: 
+  328: if PYTQT5_AVAILABLE:
+  329:     class Worker(QThread):
+  330:         finished = pyqtSignal(object)
+  331:         error = pyqtSignal(str)
+  332:         progress_update = pyqtSignal(str)
+  333:         progress_percent = pyqtSignal(int)
+  334: 
+  335:         def __init__(self, func, *args, parent=None, **kwargs):
+  336:             super().__init__(parent)
+  337:             self.func = func
+  338:             self.args = args
+  339:             self.kwargs = kwargs
+  340:             self._should_stop = False
+  341: else:
+  342:     class Worker:
+  343:         def __init__(self, func, *args, parent=None, **kwargs):
+  344:             self.func = func
+  345:             self.args = args
+  346:             self.kwargs = kwargs
+  347:             self._should_stop = False
+  348: 
+  349:         def run(self):
+  350:             try:
+  351:                 # 检查线程是否应该停止
+  352:                 if self._should_stop:
+  353:                     return
+  354:                     
+  355:                 import inspect
+  356:                 sig = inspect.signature(self.func)
+  357:                 if 'progress_callback' in sig.parameters:
+  358:                     self.kwargs['progress_callback'] = self.emit_progress
+  359:                 res = self.func(*self.args, **self.kwargs)
+  360:                 
+  361:                 # 再次检查是否应该停止
+  362:                 if not self._should_stop:
+  363:                     self.finished.emit(res)
+  364:             except Exception as e:
+  365:                 if not self._should_stop:
+  366:                     self.error.emit(str(e))
+  367: 
+  368:         def emit_progress(self, stage, current, total, message=""):
+  369:             if self._should_stop:
+  370:                 return
+  371:                 
+  372:             if total > 0:
+  373:                 percent = int((current / total) * 100)
+  374:                 self.progress_percent.emit(percent)
+  375:             progress_text = f"[{stage}] {current}/{total} - {message}"
+  376:             self.progress_update.emit(progress_text)
+  377:         
+  378:         def stop(self):
+  379:             """停止线程"""
+  380:             self._should_stop = True
+  381:             self.quit()
+  382:             if not self.wait(2000):  # 等待2秒
+  383:                 self.terminate()
+  384:                 self.wait(1000)
+  385: 
+  386: 
+  387: def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_output,
+  388:                  video_emotion_output, analysis_output, output_clips_dir,
+  389:                  video_clips_dir, progress_callback=None):
+  390:     """视频处理管道主函数 - 支持中断停止"""
+  391:     from concurrent.futures import ThreadPoolExecutor, as_completed
+  392:     
+  393:     # 全局停止标志检查函数
+  394:     def should_stop():
+  395:         """检查是否应该停止处理"""
+  396:         try:
+  397:             stop_flag_file = os.path.join("processing", "stop_flag.txt")
+  398:             return os.path.exists(stop_flag_file)
+  399:         except Exception:
+  400:             return False
+  401:     
+  402:     def cleanup_stop_flag():
+  403:         """清理停止标志文件"""
+  404:         try:
+  405:             stop_flag_file = os.path.join("processing", "stop_flag.txt")
+  406:             if os.path.exists(stop_flag_file):
+  407:                 os.remove(stop_flag_file)
+  408:         except Exception:
+  409:             pass
+  410:     
+  411:     # 清理之前的停止标志
+  412:     cleanup_stop_flag()
+  413:     
+  414:     def emit_progress(stage, current, total, message=""):
+  415:         # 检查停止标志
+  416:         if should_stop():
+  417:             logging.info(f"检测到停止信号，终止处理: {stage}")
+  418:             raise InterruptedError("用户中断处理")
+  419:             
+  420:         if progress_callback:
+  421:             progress_callback(stage, current, total, message)
+  422:         
+  423:         # 更新进度文件，包含更详细的信息
+  424:         try:
+  425:             import time
+  426:             import json
+  427:             
+  428:             # 计算更准确的进度百分比
+  429:             stage_weights = {
+  430:                 "并行数据准备": 0.4,
+  431:                 "视频情绪分析": 0.15,
+  432:                 "数据准备": 0.05,
+  433:                 "智能分析": 0.2,
+  434:                 "并行视频切片": 0.15,
+  435:                 "完成": 0.05
+  436:             }
+  437:             
+  438:             # 获取当前阶段权重
+  439:             stage_weight = stage_weights.get(stage, 0.1)
+  440:             
+  441:             # 计算阶段内进度
+  442:             stage_progress = (current / total) if total > 0 else 0
+  443:             
+  444:             # 计算累积进度（这里需要根据你的实际情况调整）
+  445:             base_progress = sum(stage_weights.get(s, 0) for s in stage_weights.keys() 
+  446:                                if s != stage and "前面已完成的阶段")
+  447:             current_stage_contribution = stage_weight * stage_progress
+  448:             total_percentage = (base_progress + current_stage_contribution) * 100
+  449:             
+  450:             progress_data = {
+  451:                 "stage": stage,
+  452:                 "current": current,
+  453:                 "total": total,
+  454:                 "message": message,
+  455:                 "timestamp": time.time(),
+  456:                 "percentage": min(100, total_percentage),
+  457:                 "estimated_remaining_minutes": _calculate_smart_remaining_time(total_percentage)
+  458:             }
+  459:             
+  460:             progress_file = processing_path("analysis_progress.json")
+  461:             progress_file.parent.mkdir(parents=True, exist_ok=True)
+  462:             with progress_file.open('w', encoding='utf-8') as f:
+  463:                 json.dump(progress_data, f, ensure_ascii=False, indent=2)
+  464:         except InterruptedError:
+  465:             raise  # 重新抛出中断异常
+  466:         except Exception as e:
+  467:             logging.error(f"更新进度文件失败: {e}")
+  468:     
+  469:     def _calculate_smart_remaining_time(percentage):
+  470:         """智能计算剩余时间（分钟），优先使用智能预测器，失败则按百分比估算"""
+  471:         try:
+  472:             if 'smart_predictor' in locals() and smart_predictor:
+  473:                 remain_str = smart_predictor.get_estimated_remaining_time()
+  474:                 if remain_str:
+  475:                     if "即将完成" in remain_str:
+  476:                         return 1
+  477:                     if "小时" in remain_str:
+  478:                         try:
+  479:                             # 形如 "2小时15分钟"
+  480:                             parts = remain_str.replace("小时", ":").replace("分钟", "").split(":")
+  481:                             hours = int(parts[0])
+  482:                             minutes = int(parts[1]) if len(parts) > 1 and parts[1] else 0
+  483:                             return max(1, hours * 60 + minutes)
+  484:                         except Exception:
+  485:                             pass
+  486:                     if "分钟" in remain_str:
+  487:                         try:
+  488:                             minutes = int(remain_str.replace("分钟", "").strip())
+  489:                             return max(1, minutes)
+  490:                         except Exception:
+  491:                             pass
+  492:                     if "秒" in remain_str:
+  493:                         try:
+  494:                             secs = int(remain_str.replace("秒", "").strip())
+  495:                             return max(1, (secs + 59) // 60)
+  496:                         except Exception:
+  497:                             pass
+  498:         except Exception:
+  499:             pass
+  500: 
+  501:         if percentage <= 0:
+  502:             return 30
+  503:         if percentage >= 100:
+  504:             return 0
+  505:         remaining_percent = 100 - percentage
+  506:         return max(1, int(remaining_percent / 8))
+  507:     
+  508:     # 启动智能进度预测 (可通过环境变量或配置禁用)
+  509:     predicted_time_info = None
+  510:     disable_smart = os.environ.get('DISABLE_SMART_PROGRESS', '0') == '1' or \
+  511:         str(cfg_manager.get('DISABLE_SMART_PROGRESS') or '').lower() in ('1','true','yes')
+  512:     smart_predictor = None
+  513:     if disable_smart:
+  514:         log_info("⚙️ 已根据配置/环境禁用智能进度预测 (DISABLE_SMART_PROGRESS=1)")
+  515:     try:
+  516:         if not disable_smart:
+  517:             from .smart_progress_predictor import SmartProgressPredictor
+  518:             smart_predictor = SmartProgressPredictor()
+  519:         
+  520:         # 预测视频处理时间
+  521:         if os.path.exists(video):
+  522:             cmd = ["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", video]
+  523:             result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+  524:             if result.returncode == 0:
+  525:                 duration = float(result.stdout.strip())
+  526:                 size_mb = os.path.getsize(video) / (1024 * 1024)
+  527:                 predicted_time = smart_predictor.predict_video_processing_time(duration, size_mb)
+  528:                 predicted_time_info = predicted_time
+  529:                 log_info(f"🎯 预测总处理时间: {predicted_time}")
+  530:                 # 开始新的预测会话，记录整体用时
+  531:                 try:
+  532:                     smart_predictor.start_session(duration_seconds=duration, size_mb=size_mb, video_path=video)
+  533:                 except Exception:
+  534:                     pass
+  535:                 
+  536:                 # 通过进度回调传递预测时间信息
+  537:                 if progress_callback:
+  538:                     progress_callback("预测时间", 1, 1, f"预计处理时间: {predicted_time}")
+  539:         
+  540:         # 启动各个处理阶段
+  541:         if smart_predictor:
+  542:             smart_predictor.start_stage("音频提取", 1)
+  543:             smart_predictor.start_stage("说话人分离", 1)
+  544:             smart_predictor.start_stage("音频转录", 10)
+  545:             smart_predictor.start_stage("情感分析", 1)
+  546:             smart_predictor.start_stage("切片生成", 1)
+  547:             log_info("✅ 智能进度预测启动成功")
+  548:         
+  549:     except ImportError as e:
+  550:         log_info("⚠️ 智能进度预测模块加载失败，使用简化预测器")
+  551:         # 使用简化版预测器作为fallback
+  552:         try:
+  553:             from .smart_progress_predictor import SimplePredictor
+  554:             smart_predictor = SimplePredictor() if not disable_smart else None
+  555:             
+  556:             # 简单预测处理时间
+  557:             if os.path.exists(video):
+  558:                 try:
+  559:                     cmd = ["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", video]
+  560:                     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=10)
+  561:                     if result.returncode == 0:
+  562:                         duration = float(result.stdout.strip())
+  563:                         size_mb = os.path.getsize(video) / (1024 * 1024)
+  564:                         predicted_time = smart_predictor.predict_video_processing_time(duration, size_mb)
+  565:                         predicted_time_info = predicted_time
+  566:                         log_info(f"🎯 预测总处理时间(简化): {predicted_time}")
+  567:                         
+  568:                         # 通过进度回调传递预测时间信息
+  569:                         if progress_callback:
+  570:                             progress_callback("预测时间", 1, 1, f"预计处理时间: {predicted_time}")
+  571:                 except Exception:
+  572:                     pass
+  573:                     
+  574:             if smart_predictor:
+  575:                 log_info("✅ 使用简化进度预测器")
+  576:         except ImportError:
+  577:             # 如果连SimplePredictor都无法导入，创建一个最基础的替代
+  578:             class BasicPredictor:
+  579:                 def predict_video_processing_time(self, duration, size_mb):
+  580:                     return f"{int(duration/30)}-{int(duration/15)}分钟"
+  581:                 def start_stage(self, stage_name, weight): pass
+  582:                 def update_progress(self, stage_name, progress): pass
+  583:                 def complete_stage(self, stage_name): pass
+  584:                 def finish_stage(self, stage_name): pass
+  585:             smart_predictor = BasicPredictor()
+  586:             log_info("✅ 使用基础进度预测器")
+  587:         
+  588:     except Exception as e:
+  589:         log_info(f"⚠️ 智能进度预测启动失败，使用基础预测器: {e}")
+  590:         # 创建基础预测器
+  591:         if not disable_smart:
+  592:             class BasicPredictor:
+  593:                 def predict_video_processing_time(self, duration, size_mb):
+  594:                     return f"{int(duration/30)}-{int(duration/15)}分钟"
+  595:                 def start_stage(self, stage_name, weight): pass
+  596:                 def update_progress(self, stage_name, progress): pass
+  597:                 def complete_stage(self, stage_name): pass
+  598:                 def finish_stage(self, stage_name): pass
+  599:             smart_predictor = BasicPredictor()
+  600: 
+  601:     enable_video_emotion = cfg_manager.get("ENABLE_VIDEO_EMOTION")
+  602:     log_info(f"[pipeline] 视频情绪分析开关状态: {enable_video_emotion}")
+  603: 
+  604:     has_transcription = os.path.exists(transcription_output) and os.path.getsize(transcription_output) > 10
+  605:     has_chat_json = has_chat and os.path.exists(chat_output) and os.path.getsize(chat_output) > 10
+  606:     has_video_emotion = enable_video_emotion and os.path.exists(video_emotion_output) and os.path.getsize(video_emotion_output) > 10
+  607: 
+  608:     # 检查是否已有完整处理内容
+  609:     has_analysis = os.path.exists(analysis_output) and os.path.getsize(analysis_output) > 10
+  610:     
+  611:     # 检查clips目录是否存在且有内容（使用运行级输出目录）
+  612:     clips_dir_exists = os.path.exists(output_clips_dir)
+  613:     existing_clips = []
+  614:     if clips_dir_exists:
+  615:         try:
+  616:             for file in os.listdir(output_clips_dir):
+  617:                 if file.lower().endswith('.mp4'):
+  618:                     clip_path = os.path.join(output_clips_dir, file)
+  619:                     if os.path.isfile(clip_path) and os.path.getsize(clip_path) > 1024:  # 大于1KB
+  620:                         existing_clips.append(file)
+  621:         except Exception as e:
+  622:             log_error(f"[pipeline] 检查切片目录失败: {e}")
+  623:     
+  624:     # 检查data目录是否存在且有内容（基于转录输出所在目录）
+  625:     data_dir = os.path.dirname(transcription_output)
+  626:     data_dir_exists = os.path.exists(data_dir)
+  627:     has_data_files = False
+  628:     if data_dir_exists:
+  629:         try:
+  630:             data_files = os.listdir(data_dir)
+  631:             has_data_files = len(data_files) > 0
+  632:             log_info(f"[pipeline] data目录包含 {len(data_files)} 个文件")
+  633:         except Exception as e:
+  634:             log_error(f"[pipeline] 检查data目录失败: {e}")
+  635:     
+  636:     # 检查是否已有完整处理内容
+  637:     has_complete_processing = (
+  638:         has_transcription and 
+  639:         has_analysis and 
+  640:         clips_dir_exists and 
+  641:         len(existing_clips) > 0
+  642:     )
+  643:     
+  644:     # 添加调试信息
+  645:     log_info(f"[DEBUG] 完整处理检查:")
+  646:     log_info(f"[DEBUG] - has_transcription: {has_transcription} ({transcription_output})")
+  647:     log_info(f"[DEBUG] - has_analysis: {has_analysis} ({analysis_output})")
+  648:     log_info(f"[DEBUG] - clips_dir_exists: {clips_dir_exists} ({output_clips_dir})")
+  649:     log_info(f"[DEBUG] - existing_clips: {len(existing_clips)} 个")
+  650:     log_info(f"[DEBUG] - has_complete_processing: {has_complete_processing}")
+  651:     
+  652:     # 如果已有完整处理内容，直接返回
+  653:     if has_complete_processing:
+  654:         log_info(f"[pipeline] 检测到完整处理内容，跳过处理")
+  655:         log_info(f"[pipeline] 转录文件: {'✅' if has_transcription else '❌'}")
+  656:         log_info(f"[pipeline] 分析文件: {'✅' if has_analysis else '❌'}")
+  657:         log_info(f"[pipeline] 切片目录: {'✅' if clips_dir_exists else '❌'}")
+  658:         log_info(f"[pipeline] 切片文件: {len(existing_clips)} 个")
+  659:         log_info(f"[pipeline] data目录: {'✅' if data_dir_exists else '❌'}")
+  660:         log_info(f"[pipeline] data文件: {'✅' if has_data_files else '❌'}")
+  661:         
+  662:         # 更新UI进度显示
+  663:         emit_progress("检查现有内容", 1, 6, "检测到完整处理内容...")
+  664:         emit_progress("跳过转录", 2, 6, "转录文件已存在")
+  665:         emit_progress("跳过分析", 3, 6, "分析文件已存在")
+  666:         emit_progress("跳过切片", 4, 6, f"已有{len(existing_clips)}个切片文件")
+  667:         emit_progress("完成", 6, 6, f"使用现有处理结果，已有{len(existing_clips)}个切片")
+  668:         
+  669:         # 更新智能进度预测 - 立即完成所有阶段
+  670:         if smart_predictor:
+  671:             smart_predictor.finish_stage("音频提取")
+  672:             smart_predictor.finish_stage("说话人分离")
+  673:             smart_predictor.finish_stage("音频转录")
+  674:             smart_predictor.finish_stage("情感分析")
+  675:             smart_predictor.finish_stage("切片生成")
+  676:             # 强制更新进度显示
+  677:             emit_progress("检查", 1, 1, "✅ 检测到已有处理内容，跳过所有步骤")
+  678:         
+  679:         return output_clips_dir, existing_clips, has_chat
+  680: 
+  681:     total_steps = 6
+  682:     current_step = 0
+  683: 
+  684:     # step 1-3: 并行数据准备
+  685:     current_step += 1
+  686:     emit_progress("并行数据准备", current_step, total_steps, "并行处理聊天提取、转录、情绪分析和主播分离...")
+  687:     
+  688:     # 添加停止检查
+  689:     if should_stop():
+  690:         logging.info("处理被中断 - 并行数据准备阶段")
+  691:         cleanup_stop_flag()
+  692:         return None, None, False
+  693:     
+  694:     # 检查强制重转录
+  695:     force_retranscription_value = cfg_manager.get("FORCE_RETRANSCRIPTION", False)
+  696:     if isinstance(force_retranscription_value, str):
+  697:         force_retranscription = force_retranscription_value
+  698:     else:
+  699:         force_retranscription = bool(force_retranscription_value)
+  700:     
+  701:     # 检查主播分离
+  702:     enable_speaker_separation_value = cfg_manager.get("ENABLE_SPEAKER_SEPARATION", False)
+  703:     if isinstance(enable_speaker_separation_value, str):
+  704:         enable_speaker_separation = enable_speaker_separation_value
+  705:     else:
+  706:         enable_speaker_separation = bool(enable_speaker_separation_value)
+  707:     
+  708:     # 并行执行数据准备任务
+  709:     host_audio_path = None
+  710:     with ThreadPoolExecutor(max_workers=4) as executor:
+  711:         futures = {}
+  712:         
+  713:         # 停止检查
+  714:         if should_stop():
+  715:             logging.info("处理被中断 - 数据准备阶段")
+  716:             cleanup_stop_flag()
+  717:             return None, None, False
+  718:         
+  719:         # 聊天提取任务
+  720:         if has_chat and not has_chat_json:
+  721:             log_info(f"[pipeline] 并行提取聊天: {chat} -> {chat_output}")
+  722:             futures['chat'] = executor.submit(extract_chat, chat, chat_output)
+  723:         
+  724:         # 音频提取任务（优先执行，确保完整提取）
+  725:         audio_save_dir = os.path.join(os.path.dirname(transcription_output), "audio")
+  726:         # 只在真正需要时才创建目录
+  727:         # os.makedirs(audio_save_dir, exist_ok=True)
+  728:         audio_save_path = os.path.join(audio_save_dir, "extracted_audio.wav")
+  729:         
+  730:         if not os.path.exists(audio_save_path):
+  731:             # 停止检查
+  732:             if should_stop():
+  733:                 logging.info("处理被中断 - 音频提取前")
+  734:                 cleanup_stop_flag()
+  735:                 return None, None, False
+  736:             
+  737:             # 在真正需要音频提取时才创建目录
+  738:             os.makedirs(audio_save_dir, exist_ok=True)
+  739:             
+  740:             log_info("[pipeline] 开始完整音频提取...")
+  741:             emit_progress("音频提取", 1, 3, "正在从视频中提取完整音频...")
+  742:             
+  743:             try:
+  744:                 cmd = [
+  745:                     "ffmpeg", "-y",
+  746:                     "-hide_banner", "-loglevel", "error", "-nostdin",
+  747:                     "-i", video, "-vn", "-acodec", "pcm_s16le",
+  748:                     "-ar", "16000", "-ac", "1",
+  749:                     "-threads", "0",
+  750:                     audio_save_path
+  751:                 ]
+  752:                 # 根据视频时长动态计算超时时间
+  753:                 try:
+  754:                     probe_cmd = ['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', video]
+  755:                     probe_result = subprocess.run(probe_cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=30)
+  756:                     if probe_result.returncode == 0:
+  757:                         import json
+  758:                         probe_data = json.loads(probe_result.stdout)
+  759:                         video_duration = float(probe_data['format']['duration'])
+  760:                         # 超时时间 = 视频时长 * 2 + 300秒缓冲
+  761:                         timeout_seconds = min(int(video_duration * 2) + 300, 7200)  # 最大2小时
+  762:                     else:
+  763:                         timeout_seconds = 3600  # 默认1小时
+  764:                 except:
+  765:                     timeout_seconds = 3600  # 默认1小时
+  766:                 
+  767:                 log_info(f"[pipeline] 音频提取超时设置: {timeout_seconds}秒")
+  768:                 result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=timeout_seconds)
+  769:                 
+  770:                 # 再次停止检查
+  771:                 if should_stop():
+  772:                     logging.info("处理被中断 - 音频提取后")
+  773:                     cleanup_stop_flag()
+  774:                     return None, None, False
+  775:                 
+  776:                 # 检查音频文件是否成功生成（即使FFmpeg被中断，文件可能已经生成）
+  777:                 if os.path.exists(audio_save_path) and os.path.getsize(audio_save_path) > 1024 * 1024:  # 大于1MB
+  778:                     file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+  779:                     log_info(f"[pipeline] 音频文件已保存: {audio_save_path} ({file_size_mb:.1f}MB)")
+  780:                     emit_progress("音频提取", 2, 3, f"音频提取完成 ({file_size_mb:.1f}MB)")
+  781:                 elif result.returncode == 0:
+  782:                     file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+  783:                     log_info(f"[pipeline] 音频文件已保存: {audio_save_path} ({file_size_mb:.1f}MB)")
+  784:                     emit_progress("音频提取", 2, 3, f"音频提取完成 ({file_size_mb:.1f}MB)")
+  785:                 else:
+  786:                     log_error(f"[pipeline] 音频文件保存失败: {result.stderr}")
+  787:                     emit_progress("音频提取", 3, 3, "音频提取失败")
+  788:                     cleanup_stop_flag()
+  789:                     return None, None, False
+  790:             except subprocess.TimeoutExpired:
+  791:                 log_error("[pipeline] 音频提取超时")
+  792:                 emit_progress("音频提取", 3, 3, "音频提取超时")
+  793:                 cleanup_stop_flag()
+  794:                 return None, None, False
+  795:             except InterruptedError:
+  796:                 log_info("[pipeline] 音频提取被用户中断")
+  797:                 cleanup_stop_flag()
+  798:                 return None, None, False
+  799:             except Exception as e:
+  800:                 log_error(f"[pipeline] 音频文件保存异常: {e}")
+  801:                 cleanup_stop_flag()
+  802:                 return None, None, False
+  803:                 emit_progress("音频提取", 3, 3, f"音频提取异常: {e}")
+  804:                 return None, None, False
+  805:         else:
+  806:             file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+  807:             log_info(f"[pipeline] 音频文件已存在: {audio_save_path} ({file_size_mb:.1f}MB)")
+  808:             emit_progress("音频提取", 3, 3, f"使用现有音频文件 ({file_size_mb:.1f}MB)")
+  809:         
+  810:         # 转录任务（使用提取的音频）
+  811:         if not has_transcription or force_retranscription:
+  812:             log_info(f"[pipeline] 开始音频转录: {audio_save_path} -> {transcription_output}")
+  813:             whisper_model_name = cfg_manager.get("WHISPER_MODEL", "medium")
+  814:             emit_progress("音频转录", 1, 2, f"使用 {whisper_model_name} 模型进行转录...")
+  815:             
+  816:             futures['transcription'] = executor.submit(
+  817:                 process_audio_segments,
+  818:                 audio_path=audio_save_path,  # 使用提取的音频文件
+  819:                 output_file=transcription_output,
+  820:                 segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
+  821:                 whisper_model_name=whisper_model_name
+  822:             )
+  823:         
+  824:         # 情绪分析任务
+  825:         if enable_video_emotion and not has_video_emotion:
+  826:             log_info(f"[pipeline] 并行情绪分析: {video} -> {video_emotion_output}")
+  827:             class EmotionArgs:
+  828:                 def __init__(self, cfg_manager):
+  829:                     self.segment_length = float(cfg_manager.get("VIDEO_EMOTION_SEGMENT_LENGTH") or 4.0)
+  830:                     self.model_path = cfg_manager.get("VIDEO_EMOTION_MODEL_PATH") or ""
+  831:                     self.device = cfg_manager.get("LLM_DEVICE") or 0
+  832:             emotion_args = EmotionArgs(cfg_manager)
+  833:             futures['emotion'] = executor.submit(infer_emotion, video, video_emotion_output, emotion_args)
+  834:         
+  835:         # 主播分离任务（可选，失败不影响主流程）
+  836:         if enable_speaker_separation:
+  837:             log_info("[pipeline] 并行主播音频分离...")
+  838:             try:
+  839:                 from acfv.processing.speaker_separation_integration import SpeakerSeparationIntegration
+  840:                 separation_output_dir = os.path.join(os.path.dirname(transcription_output), "speaker_separation")
+  841:                 speaker_separation = SpeakerSeparationIntegration(cfg_manager)
+  842:                 speaker_separation.set_progress_callback(emit_progress)
+  843:                 
+  844:                 # 设置较短的超时时间，避免阻塞
+  845:                 futures['speaker_separation'] = executor.submit(
+  846:                     speaker_separation.process_video_with_speaker_separation,
+  847:                     video_path=video,
+  848:                     output_dir=separation_output_dir
+  849:                 )
+  850:             except Exception as e:
+  851:                 log_error(f"[pipeline] 主播分离任务创建失败: {e}")
+  852:                 # 不阻止整个流程继续
+  853:                 pass
+  854:         
+  855:         # 等待所有任务完成
+  856:         for name, future in futures.items():
+  857:             try:
+  858:                 # 为说话人分离设置可配置的超时时间，因为音频文件可能很大
+  859:                 speaker_timeout = cfg_manager.get("SPEAKER_SEPARATION_TIMEOUT", 1800)
+  860:                 timeout = speaker_timeout if name == 'speaker_separation' else 1800  # 说话人分离可配置，其他30分钟
+  861:                 result = future.result(timeout=timeout)
+  862:                 if name == 'speaker_separation' and result and result.get('host_audio_file'):
+  863:                     host_audio_path = result['host_audio_file']
+  864:                     log_info(f"[pipeline] 主播音频分离完成: {host_audio_path}")
+  865:                 log_info(f"[pipeline] 并行任务 {name} 完成")
+  866:                 
+  867:                 # 更新智能进度预测
+  868:                 if smart_predictor:
+  869:                     if name == 'chat':
+  870:                         smart_predictor.finish_stage("音频提取")
+  871:                     elif name == 'speaker_separation':
+  872:                         smart_predictor.finish_stage("说话人分离")
+  873:                     elif name == 'transcription':
+  874:                         smart_predictor.finish_stage("音频转录")
+  875:                     elif name == 'emotion':
+  876:                         smart_predictor.finish_stage("情感分析")
+  877:                         
+  878:             except Exception as e:
+  879:                 log_error(f"[pipeline] 并行任务 {name} 失败: {e}")
+  880:                 # 对于说话人分离失败，不阻止整个流程
+  881:                 if name == 'speaker_separation':
+  882:                     log_warning(f"[pipeline] 说话人分离失败，继续其他处理: {e}")
+  883:                     # 更新智能进度预测，标记说话人分离完成（即使失败）
+  884:                     if smart_predictor:
+  885:                         smart_predictor.finish_stage("说话人分离")
+  886:                 else:
+  887:                     log_error(f"[pipeline] 关键任务 {name} 失败，可能影响后续处理")
+  888:                                     # 更新智能进度预测
+  889:                 if smart_predictor:
+  890:                     if name == 'chat':
+  891:                         smart_predictor.finish_stage("音频提取")
+  892:                     elif name == 'transcription':
+  893:                         smart_predictor.finish_stage("音频转录")
+  894:                     elif name == 'emotion':
+  895:                         smart_predictor.finish_stage("情感分析")
+  896:                     elif name == 'speaker_separation':
+  897:                         smart_predictor.finish_stage("说话人分离")
+  898:     
+  899:     # 处理未并行执行的任务
+  900:     if has_chat and not has_chat_json and 'chat' not in futures:
+  901:         log_info(f"[pipeline] 串行提取聊天: {chat} -> {chat_output}")
+  902:         try:
+  903:             extract_chat(chat, chat_output)
+  904:         except Exception as e:
+  905:             log_error(f"[pipeline] 聊天提取失败: {e}")
+  906:     
+  907:     if not has_transcription or force_retranscription:
+  908:         if 'transcription' not in futures:
+  909:             log_info(f"[pipeline] 串行转录: {video} -> {transcription_output}")
+  910:             try:
+  911:                 process_audio_segments(
+  912:                     audio_path=video,
+  913:                     output_file=transcription_output,
+  914:                     segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
+  915:                     whisper_model_name="medium"
+  916:                 )
+  917:                 
+  918:                 # 同时保存音频文件到clip目录
+  919:                 audio_save_dir = os.path.join(os.path.dirname(transcription_output), "audio")
+  920:                 # 只在真正需要时才创建目录
+  921:                 # os.makedirs(audio_save_dir, exist_ok=True)
+  922:                 audio_save_path = os.path.join(audio_save_dir, "extracted_audio.wav")
+  923:                 
+  924:                 # 提取并保存音频文件
+  925:                 log_info("[pipeline] 保存音频文件...")
+  926:                 try:
+  927:                     cmd = [
+  928:                         "ffmpeg", "-y",
+  929:                         "-hide_banner", "-loglevel", "error", "-nostdin",
+  930:                         "-i", video, "-vn", "-acodec", "pcm_s16le",
+  931:                         "-ar", "16000", "-ac", "1",
+  932:                         "-threads", "0",
+  933:                         audio_save_path
+  934:                     ]
+  935:                     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=600)
+  936:                     if result.returncode == 0:
+  937:                         log_info(f"[pipeline] 音频文件已保存: {audio_save_path}")
+  938:                         emit_progress("音频提取", 1, 1, f"音频文件已保存: {os.path.basename(audio_save_path)}")
+  939:                     else:
+  940:                         log_error(f"[pipeline] 音频文件保存失败: {result.stderr}")
+  941:                 except Exception as e:
+  942:                     log_error(f"[pipeline] 音频文件保存异常: {e}")
+  943:                     
+  944:             except Exception as e:
+  945:                 log_error(f"[pipeline] 转录失败: {e}")
+  946:     
+  947:     if enable_video_emotion and not has_video_emotion:
+  948:         if 'emotion' not in futures:
+  949:             log_info(f"[pipeline] 串行情绪分析: {video} -> {video_emotion_output}")
+  950:             try:
+  951:                 class EmotionArgs:
+  952:                     def __init__(self, cfg_manager):
+  953:                         self.segment_length = float(cfg_manager.get("VIDEO_EMOTION_SEGMENT_LENGTH") or 4.0)
+  954:                         self.model_path = cfg_manager.get("VIDEO_EMOTION_MODEL_PATH") or ""
+  955:                         self.device = cfg_manager.get("LLM_DEVICE") or 0
+  956:                 emotion_args = EmotionArgs(cfg_manager)
+  957:                 infer_emotion(video, video_emotion_output, emotion_args)
+  958:             except Exception as e:
+  959:                 log_error(f"[pipeline] 情绪分析失败: {e}")
+  960:     
+  961:     if enable_speaker_separation and 'speaker_separation' not in futures:
+  962:         log_info("[pipeline] 串行主播音频分离...")
+  963:         try:
+  964:             from acfv.processing.speaker_separation_integration import SpeakerSeparationIntegration
+  965:             separation_output_dir = os.path.join(os.path.dirname(transcription_output), "speaker_separation")
+  966:             speaker_separation = SpeakerSeparationIntegration(cfg_manager)
+  967:             speaker_separation.set_progress_callback(emit_progress)
+  968:             
+  969:             separation_result = speaker_separation.process_video_with_speaker_separation(
+  970:                 video_path=video,
+  971:                 output_dir=separation_output_dir
+  972:             )
+  973:             
+  974:             if separation_result and separation_result.get('host_audio_file'):
+  975:                 host_audio_path = separation_result['host_audio_file']
+  976:                 log_info(f"[pipeline] 主播音频分离完成: {host_audio_path}")
+  977:         except Exception as e:
+  978:             log_error(f"[pipeline] 主播分离失败: {e}")
+  979:             log_warning(f"[pipeline] 说话人分离失败，但不会阻止整个处理流程")
+  980:     
+  981:     log_info("[pipeline] 并行数据准备完成")
+  982: 
+  983:     # step 3 video emotion
+  984:     current_step += 1
+  985:     emit_progress("视频情绪分析", current_step, total_steps,
+  986:                   "使用深度学习模型分析视频情绪..." if enable_video_emotion else "跳过视频情绪分析...")
+  987:     t3 = None
+  988:     if enable_video_emotion and not has_video_emotion:
+  989:         log_info(f"[pipeline] Processing video emotion inference: {video} -> {video_emotion_output}")
+  990:         try:
+  991:             class EmotionArgs:
+  992:                 def __init__(self, cfg_manager):
+  993:                     self.segment_length = float(cfg_manager.get("VIDEO_EMOTION_SEGMENT_LENGTH") or 4.0)
+  994:                     self.model_path = cfg_manager.get("VIDEO_EMOTION_MODEL_PATH") or ""
+  995:                     self.device = cfg_manager.get("LLM_DEVICE") or 0
+  996:             emotion_args = EmotionArgs(cfg_manager)
+  997:             t3 = threading.Thread(target=infer_emotion, args=(video, video_emotion_output, emotion_args))
+  998:             t3.start()
+  999:         except Exception as e:
+ 1000:             log_error(f"[pipeline] Error starting video emotion inference: {e}")
+ 1001:             with open(video_emotion_output, "w", encoding="utf-8") as f:
+ 1002:                 import json
+ 1003:                 json.dump([], f)
+ 1004:     elif not enable_video_emotion:
+ 1005:         log_info(f"[pipeline] Video emotion analysis disabled, creating empty emotion file: {video_emotion_output}")
+ 1006:         with open(video_emotion_output, "w", encoding="utf-8") as f:
+ 1007:             import json
+ 1008:             json.dump([], f)
+ 1009:     else:
+ 1010:         log_info(f"[pipeline] Using existing video emotion file: {video_emotion_output}")
+ 1011: 
+ 1012:     # 等待t3线程完成（如果存在）
+ 1013:     if t3:
+ 1014:         t3.join()
+ 1015: 
+ 1016:     # step 4 data prep
+ 1017:     current_step += 1
+ 1018:     emit_progress("数据准备", current_step, total_steps, "准备分析数据...")
+ 1019:     if not has_chat and not os.path.exists(chat_output):
+ 1020:         with open(chat_output, "w", encoding="utf-8") as f:
+ 1021:             import json
+ 1022:             json.dump([], f)
+ 1023:             log_info(f"[pipeline] Created empty chat file: {chat_output}")
+ 1024: 
+ 1025:     # step 5 analyze
+ 1026:     current_step += 1
+ 1027:     emit_progress("智能分析", current_step, total_steps, "使用AI进行内容兴趣度分析...")
+ 1028:     # 安全地重载/导入 config，避免 "module config not in sys.modules" 异常
+ 1029:     try:
+ 1030:         if 'config' in sys.modules:
+ 1031:             importlib.reload(sys.modules['config'])
+ 1032:         else:
+ 1033:             importlib.import_module('config')
+ 1034:     except Exception as e:
+ 1035:         log_error(f"[pipeline] config 模块重载失败，将使用 cfg_manager 值: {e}")
+ 1036: 
+ 1037:     # 将配置写回 config 模块（若存在）供下游读取；失败则忽略并依赖 cfg_manager
+ 1038:     try:
+ 1039:         cfg_mod = sys.modules.get('config')
+ 1040:         if cfg_mod is not None:
+ 1041:             cfg_mod.CHAT_DENSITY_WEIGHT = cfg_manager.get("CHAT_DENSITY_WEIGHT")
+ 1042:             cfg_mod.CHAT_SENTIMENT_WEIGHT = cfg_manager.get("CHAT_SENTIMENT_WEIGHT")
+ 1043:             cfg_mod.TEXT_TARGET_BONUS = cfg_manager.get("TEXT_TARGET_BONUS")
+ 1044:             cfg_mod.AUDIO_TARGET_BONUS = cfg_manager.get("AUDIO_TARGET_BONUS")
+ 1045:             cfg_mod.CLIPS_BASE_DIR = cfg_manager.get("CLIPS_BASE_DIR")
+ 1046:             cfg_mod.OUTPUT_CLIPS_DIR = output_clips_dir
+ 1047:     except Exception as e:
+ 1048:         log_error(f"[pipeline] 回写 config 模块配置失败（将直接使用 cfg_manager）: {e}")
+ 1049:     max_clips = int(cfg_manager.get("MAX_CLIP_COUNT") or 0)
+ 1050:     video_emotion_weight = float(cfg_manager.get("VIDEO_EMOTION_WEIGHT") or 0.3) if enable_video_emotion else 0.0
+ 1051:     log_info(f"[pipeline] Analysis configuration: max_clips={max_clips}, video_emotion_weight={video_emotion_weight}, enable_video_emotion={enable_video_emotion}")
+ 1052:     segments_data = []
+ 1053:     analysis_success = False
+ 1054:     try:
+ 1055:         import inspect
+ 1056:         # 尝试从 processing.analyze_data 导入函数
+ 1057:         analyze_params = []
+ 1058:         _analyze_func = None
+ 1059:         try:
+ 1060:             from acfv.processing.analyze_data import analyze_data as _analyze_func  # 兼容旧接口
+ 1061:         except ImportError:
+ 1062:             try:
+ 1063:                 from acfv.processing.analyze_data import analyze_data_with_checkpoint as _analyze_func
+ 1064:             except ImportError:
+ 1065:                 _analyze_func = None
+ 1066:         if _analyze_func is not None:
+ 1067:             analyze_sig = inspect.signature(_analyze_func)
+ 1068:             analyze_params = list(analyze_sig.parameters.keys())
+ 1069:             log_info(f"[pipeline] analyze_data function parameters: {analyze_params}")
+ 1070:         else:
+ 1071:             log_warning("[pipeline] 未找到 processing.analyze_data 中的分析函数，后续将直接回退")
+ 1072:         analyze_kwargs = {
+ 1073:             'chat_file': chat_output,
+ 1074:             'transcription_file': transcription_output,
+ 1075:             'output_file': analysis_output
+ 1076:         }
+ 1077:         if 'progress_callback' in analyze_params:
+ 1078:             analyze_kwargs['progress_callback'] = emit_progress
+ 1079:         if 'enable_video_emotion' in analyze_params:
+ 1080:             analyze_kwargs.update({
+ 1081:                 'video_emotion_file': video_emotion_output,
+ 1082:                 'video_emotion_weight': video_emotion_weight,
+ 1083:                 'top_n': max_clips if max_clips > 0 else 9999,
+ 1084:                 'enable_video_emotion': enable_video_emotion,
+ 1085:                 'device': 'cuda:0'
+ 1086:             })
+ 1087:         elif 'video_emotion_file' in analyze_params and 'video_emotion_weight' in analyze_params:
+ 1088:             analyze_kwargs.update({
+ 1089:                 'video_emotion_file': video_emotion_output,
+ 1090:                 'video_emotion_weight': video_emotion_weight,
+ 1091:                 'top_n': max_clips if max_clips > 0 else 9999
+ 1092:             })
+ 1093:         elif 'top_n' in analyze_params:
+ 1094:             analyze_kwargs['top_n'] = max_clips if max_clips > 0 else 9999
+ 1095:         
+ 1096:         # 语义自适应分析
+ 1097:         log_info("[pipeline] 使用语义自适应分析模式")
+ 1098:         if _analyze_func is not None:
+ 1099:             segments_data = _analyze_func(**analyze_kwargs)
+ 1100:         else:
+ 1101:             try:
+ 1102:                 from acfv.processing.analyze_data import analyze_data_with_checkpoint as _fallback_analyze
+ 1103:                 segments_data = _fallback_analyze(**analyze_kwargs)
+ 1104:             except Exception as _ie:
+ 1105:                 log_warning(f"[pipeline] 无法导入 processing.analyze_data: {_ie}; 使用空结果回退")
+ 1106:                 segments_data = []
+ 1107:         if segments_data:
+ 1108:             analysis_success = True
+ 1109:             log_info("[pipeline] Analysis completed successfully")
+ 1110:             
+ 1111:             # 更新智能进度预测
+ 1112:             if smart_predictor:
+ 1113:                 smart_predictor.finish_stage("情感分析")
+ 1114:             # ✅ 额外校验：确认分析输出文件是否真正写出
+ 1115:             try:
+ 1116:                 if not os.path.exists(analysis_output) or os.path.getsize(analysis_output) < 50:
+ 1117:                     log_warning(f"[pipeline][diagnostic] 分析函数返回了 {len(segments_data)} 个片段，但未检测到有效分析输出文件: {analysis_output}，尝试补写…")
+ 1118:                     try:
+ 1119:                         os.makedirs(os.path.dirname(analysis_output), exist_ok=True)
+ 1120:                         with open(analysis_output, 'w', encoding='utf-8') as _af:
+ 1121:                             json.dump(segments_data, _af, ensure_ascii=False, indent=2)
+ 1122:                         log_info("[pipeline][diagnostic] 已补写 analysis_output 文件")
+ 1123:                     except Exception as _we:
+ 1124:                         log_error(f"[pipeline][diagnostic] 补写 analysis_output 失败: {_we}")
+ 1125:                 else:
+ 1126:                     log_info(f"[pipeline][diagnostic] 检测到分析输出文件: {analysis_output} ({os.path.getsize(analysis_output)} bytes)")
+ 1127:             except Exception as _ce:
+ 1128:                 log_warning(f"[pipeline][diagnostic] 分析输出文件校验失败: {_ce}")
+ 1129:             
+ 1130:             # ✅ 评估score分布，辅助发现全0问题
+ 1131:             try:
+ 1132:                 scores = [float(s.get('score', 0) or 0) for s in segments_data if isinstance(s, dict)]
+ 1133:                 if scores:
+ 1134:                     mx = max(scores); mn = min(scores); avg = sum(scores)/len(scores)
+ 1135:                     non_zero = sum(1 for v in scores if v > 0)
+ 1136:                     log_info(f"[pipeline][diagnostic] 评分统计: count={len(scores)}, non_zero={non_zero}, min={mn:.4f}, max={mx:.4f}, avg={avg:.4f}")
+ 1137:                     if mx <= 0.05:
+ 1138:                         log_warning("[pipeline][diagnostic] 检测到所有评分非常低 (max <= 0.05)，可能聊天/文本/权重全部为0 或被拆分稀释")
+ 1139:                 else:
+ 1140:                     log_warning("[pipeline][diagnostic] 分析返回的片段缺少 score 字段")
+ 1141:             except Exception as _se:
+ 1142:                 log_warning(f"[pipeline][diagnostic] 评分统计失败: {_se}")
+ 1143:                 
+ 1144:     except Exception as e:
+ 1145:         log_error(f"[pipeline] Analysis failed: {e}")
+ 1146:         analysis_success = False
+ 1147: 
+ 1148:     current_step += 1
+ 1149:     emit_progress("并行视频切片", current_step, total_steps, "并行生成视频切片文件...")
+ 1150: 
+ 1151:     if not analysis_success:
+ 1152:         if os.path.exists(analysis_output) and os.path.getsize(analysis_output) > 10:
+ 1153:             log_info(f"[pipeline] Reading analysis result: {analysis_output}")
+ 1154:             try:
+ 1155:                 with open(analysis_output, "r", encoding="utf-8") as f:
+ 1156:                     segments_data = json.load(f)
+ 1157:                 log_info(f"[pipeline] Found {len(segments_data)} segments in analysis result")
+ 1158:                 # 确保先按评分排序再限制数量，避免按时间截取
+ 1159:                 try:
+ 1160:                     segments_data = sorted(segments_data, key=lambda x: x.get('score', 0), reverse=True)
+ 1161:                 except Exception:
+ 1162:                     pass
+ 1163:                 if max_clips > 0 and len(segments_data) > max_clips:
+ 1164:                     original_count = len(segments_data)
+ 1165:                     segments_data = segments_data[:max_clips]
+ 1166:                     log_info(f"[pipeline] Limited segments from {original_count} to {len(segments_data)} based on MAX_CLIP_COUNT={max_clips}")
+ 1167:                 # Fallback 情况下同样给出评分分布诊断
+ 1168:                 try:
+ 1169:                     scores = [float(s.get('score', 0) or 0) for s in segments_data if isinstance(s, dict)]
+ 1170:                     if scores:
+ 1171:                         mx = max(scores); mn = min(scores); avg = sum(scores)/len(scores)
+ 1172:                         non_zero = sum(1 for v in scores if v > 0)
+ 1173:                         log_info(f"[pipeline][diagnostic][fallback] 评分统计: count={len(scores)}, non_zero={non_zero}, min={mn:.4f}, max={mx:.4f}, avg={avg:.4f}")
+ 1174:                         if mx <= 0.05:
+ 1175:                             log_warning("[pipeline][diagnostic][fallback] 分析结果评分全部极低或为0，可能 upstream 未写入有效评分")
+ 1176:                 except Exception:
+ 1177:                     pass
+ 1178:             except Exception as e:
+ 1179:                 log_error(f"[pipeline] Error reading analysis result: {e}")
+ 1180:                 segments_data = []
+ 1181:         else:
+ 1182:             log_warning("[pipeline][diagnostic] 分析失败且未找到可用的分析输出文件，后续步骤将使用空片段列表")
+ 1183: 
+ 1184:     # 切片前简单检测是否存在新的评分（仅日志提示）
+ 1185:     try:
+ 1186:         run_dir = os.path.dirname(analysis_output)
+ 1187:         ratings_log_path = os.path.join(run_dir, 'acfv_ratings.jsonl')
+ 1188:         if os.path.exists(ratings_log_path) and os.path.getsize(ratings_log_path) > 0:
+ 1189:             with open(ratings_log_path, 'r', encoding='utf-8') as f:
+ 1190:                 ratings_lines = sum(1 for _ in f)
+ 1191:             log_info(f"[pipeline][RAG] 检测到评分记录 {ratings_lines} 条（仅检测，不进行RAG处理）")
+ 1192:         else:
+ 1193:             log_info("[pipeline][RAG] 未检测到评分记录或评分文件为空")
+ 1194:     except Exception as e:
+ 1195:         log_warning(f"[pipeline][RAG] 评分检测失败: {e}")
+ 1196: 
+ 1197:     # 二次保障（可选）：从 ratings.json 重建片段顺序
+ 1198:     try:
+ 1199:         prefer_from_ratings = False
+ 1200:         try:
+ 1201:             prefer_from_ratings = bool(cfg_manager.get("PREFER_RATINGS_JSON", False))
+ 1202:         except Exception:
+ 1203:             prefer_from_ratings = False
+ 1204:         if prefer_from_ratings and not use_semantic_segment_mode:
+ 1205:             ratings_path = os.path.join(os.path.dirname(analysis_output), "ratings.json")
+ 1206:             video_dir = os.path.dirname(video)
+ 1207:             latest_dir = os.path.join(video_dir, "runs", "latest")
+ 1208:             candidate_latest = os.path.join(latest_dir, "ratings.json")
+ 1209:             candidate_video = os.path.join(video_dir, "ratings.json")
+ 1210:             if not os.path.exists(ratings_path):
+ 1211:                 if os.path.exists(candidate_latest):
+ 1212:                     ratings_path = candidate_latest
+ 1213:                 elif os.path.exists(candidate_video):
+ 1214:                     ratings_path = candidate_video
+ 1215:             if os.path.exists(ratings_path):
+ 1216:                 with open(ratings_path, 'r', encoding='utf-8') as f:
+ 1217:                     ratings_data = json.load(f)
+ 1218:                 rated_segments = []
+ 1219:                 for clip_name, data in ratings_data.items():
+ 1220:                     try:
+ 1221:                         rated_segments.append({
+ 1222:                             'start': float(data.get('start', 0.0)),
+ 1223:                             'end': float(data.get('end', 0.0)),
+ 1224:                             'score': float(data.get('rating', 0.0)),
+ 1225:                             'text': data.get('text', ''),
+ 1226:                             'source': 'ratings.json'
+ 1227:                         })
+ 1228:                     except Exception:
+ 1229:                         continue
+ 1230:                 if rated_segments:
+ 1231:                     rated_segments.sort(key=lambda x: x.get('score', 0.0), reverse=True)
+ 1232:                     if max_clips > 0 and len(rated_segments) > max_clips:
+ 1233:                         rated_segments = rated_segments[:max_clips]
+ 1234:                     segments_data = rated_segments
+ 1235:                     log_info(f"[pipeline] 采用 ratings.json 评分重建片段顺序，共 {len(segments_data)} 个")
+ 1236:         else:
+ 1237:             log_info("[pipeline] 已禁用从 ratings.json 重建片段（PREFER_RATINGS_JSON=False）")
+ 1238:     except Exception as e:
+ 1239:         log_warning(f"[pipeline] 使用 ratings.json 重排失败: {e}")
+ 1240: 
+ 1241:     log_info(f"[pipeline] Final segments count: {len(segments_data)}")
+ 1242: 
+ 1243:     def _has_ranking_signals(items):
+ 1244:         try:
+ 1245:             for seg in items:
+ 1246:                 if not isinstance(seg, dict):
+ 1247:                     continue
+ 1248:                 score = seg.get("score")
+ 1249:                 if score is not None:
+ 1250:                     try:
+ 1251:                         if float(score) > 0:
+ 1252:                             return True
+ 1253:                     except Exception:
+ 1254:                         return True
+ 1255:                 source = str(seg.get("source", "")).lower()
+ 1256:                 if source in {"ratings.json", "manual", "acfv_ratings", "manual_rating"}:
+ 1257:                     return True
+ 1258:             return False
+ 1259:         except Exception:
+ 1260:             return False
+ 1261: 
+ 1262:     ranked_segments_detected = bool(segments_data) and _has_ranking_signals(segments_data)
+ 1263: 
+ 1264:     # 语义分段模式（从头到尾按语义连续分段，目标约4分钟，避免过短）
+ 1265:     try:
+ 1266:         val = cfg_manager.get("SEMANTIC_SEGMENT_MODE")
+ 1267:         # 默认开启语义分段模式（用户期望"从一开始就按语义切块"）
+ 1268:         use_semantic_segment_mode = bool(val) if val is not None else True
+ 1269:     except Exception:
+ 1270:         use_semantic_segment_mode = True
+ 1271: 
+ 1272:     if use_semantic_segment_mode and ranked_segments_detected:
+ 1273:         try:
+ 1274:             raw_force_semantic = cfg_manager.get("FORCE_SEMANTIC_SEGMENT")
+ 1275:         except Exception:
+ 1276:             raw_force_semantic = None
+ 1277:         force_semantic = bool(raw_force_semantic) if raw_force_semantic is not None else False
+ 1278:         if not force_semantic:
+ 1279:             log_info("[pipeline] 检测到评分驱动的片段排序，优先保留评分结果，跳过语义分段。如需强制语义切块，请开启 FORCE_SEMANTIC_SEGMENT。")
+ 1280:             use_semantic_segment_mode = False
+ 1281:         else:
+ 1282:             log_info("[pipeline] FORCE_SEMANTIC_SEGMENT 已启用，检测到评分也继续执行语义分段。")
+ 1283: 
+ 1284:     if use_semantic_segment_mode:
+ 1285:         log_info("[pipeline] 启用语义分段模式：从头按语义连续切分（约4分钟）")
+ 1286:         try:
+ 1287:             # 加载完整转录作为分段依据
+ 1288:             if os.path.exists(transcription_output):
+ 1289:                 with open(transcription_output, 'r', encoding='utf-8') as f:
+ 1290:                     transcription_data = json.load(f)
+ 1291:             else:
+ 1292:                 transcription_data = []
+ 1293:             # 参数
+ 1294:             target_sec = float(cfg_manager.get("SEMANTIC_TARGET_DURATION") or 240.0)
+ 1295:             min_sec = float(cfg_manager.get("MIN_CLIP_DURATION") or max(60.0, target_sec * 0.6))
+ 1296:             max_sec = float(cfg_manager.get("MAX_CLIP_DURATION") or min(target_sec * 1.6, 600.0))
+ 1297:             sim_threshold = float(cfg_manager.get("SEMANTIC_SIMILARITY_THRESHOLD") or 0.75)
+ 1298:             max_gap = float(cfg_manager.get("SEMANTIC_MAX_TIME_GAP") or 60.0)
+ 1299: 
+ 1300:             # 预处理转录片段
+ 1301:             segs = []
+ 1302:             for seg in transcription_data:
+ 1303:                 try:
+ 1304:                     s = float(seg.get('start', 0.0)); e = float(seg.get('end', 0.0))
+ 1305:                     txt = seg.get('text', '') or ''
+ 1306:                     if e > s and txt.strip():
+ 1307:                         segs.append({'start': s, 'end': e, 'text': txt})
+ 1308:                 except Exception:
+ 1309:                     continue
+ 1310:             segs.sort(key=lambda x: x['start'])
+ 1311: 
+ 1312:             # 向量化（TF-IDF优先；失败则BOW）
+ 1313:             try:
+ 1314:                 from sklearn.feature_extraction.text import TfidfVectorizer
+ 1315:                 from sklearn.metrics.pairwise import cosine_similarity
+ 1316:                 texts = [s['text'] for s in segs]
+ 1317:                 vectorizer = TfidfVectorizer(max_features=5000)
+ 1318:                 mat = vectorizer.fit_transform(texts) if texts else None
+ 1319:                 def cosine(i, j):
+ 1320:                     try:
+ 1321:                         return float(cosine_similarity(mat[i], mat[j])[0][0]) if mat is not None else 1.0
+ 1322:                     except Exception:
+ 1323:                         return 1.0
+ 1324:             except Exception:
+ 1325:                 # 退化为简单词袋余弦
+ 1326:                 def to_bow(t):
+ 1327:                     import re
+ 1328:                     toks = re.findall(r"\w+", (t or '').lower())
+ 1329:                     from collections import Counter
+ 1330:                     return Counter(toks)
+ 1331:                 bows = [to_bow(s['text']) for s in segs]
+ 1332:                 import math
+ 1333:                 def cosine(i, j):
+ 1334:                     a, b = bows[i], bows[j]
+ 1335:                     if not a or not b:
+ 1336:                         return 0.0
+ 1337:                     keys = set(a) | set(b)
+ 1338:                     dot = sum(a.get(k,0) * b.get(k,0) for k in keys)
+ 1339:                     na = math.sqrt(sum(v*v for v in a.values())); nb = math.sqrt(sum(v*v for v in b.values()))
+ 1340:                     return (dot / (na*nb)) if na>0 and nb>0 else 0.0
+ 1341: 
+ 1342:             # 顺序合并为语义块
+ 1343:             def _avg(values):
+ 1344:                 return sum(values) / len(values) if values else None
+ 1345: 
+ 1346:             def _aggregate_segment_scores(group):
+ 1347:                 scores = []
+ 1348:                 interest_scores = []
+ 1349:                 densities = []
+ 1350:                 rag_priors = []
+ 1351:                 volumes = []
+ 1352:                 for seg in group:
+ 1353:                     try:
+ 1354:                         if seg.get("score") is not None:
+ 1355:                             scores.append(float(seg.get("score")))
+ 1356:                     except Exception:
+ 1357:                         pass
+ 1358:                     try:
+ 1359:                         if seg.get("interest_score") is not None:
+ 1360:                             interest_scores.append(float(seg.get("interest_score")))
+ 1361:                     except Exception:
+ 1362:                         pass
+ 1363:                     try:
+ 1364:                         if seg.get("density") is not None:
+ 1365:                             densities.append(float(seg.get("density")))
+ 1366:                     except Exception:
+ 1367:                         pass
+ 1368:                     try:
+ 1369:                         if seg.get("rag_prior") is not None:
+ 1370:                             rag_priors.append(float(seg.get("rag_prior")))
+ 1371:                     except Exception:
+ 1372:                         pass
+ 1373:                     try:
+ 1374:                         if seg.get("volume_penalty") is not None:
+ 1375:                             volumes.append(float(seg.get("volume_penalty")))
+ 1376:                     except Exception:
+ 1377:                         pass
+ 1378:                 payload = {}
+ 1379:                 avg_interest = _avg(scores or interest_scores)
+ 1380:                 if avg_interest is not None:
+ 1381:                     payload["score"] = avg_interest
+ 1382:                     payload["interest_score"] = avg_interest
+ 1383:                 avg_density = _avg(densities)
+ 1384:                 if avg_density is not None:
+ 1385:                     payload["density"] = avg_density
+ 1386:                 avg_rag = _avg(rag_priors)
+ 1387:                 if avg_rag is not None:
+ 1388:                     payload["rag_prior"] = avg_rag
+ 1389:                 avg_volume = _avg(volumes)
+ 1390:                 if avg_volume is not None:
+ 1391:                     payload["volume_penalty"] = avg_volume
+ 1392:                 return payload
+ 1393: 
+ 1394:             semantic_segments = []
+ 1395:             cur_start = None; cur_end = None; cur_last_idx = None; cur_texts = []; cur_segments = []
+ 1396:             for idx, seg in enumerate(segs):
+ 1397:                 s = seg['start']; e = seg['end']
+ 1398:                 if cur_start is None:
+ 1399:                     cur_start, cur_end, cur_last_idx, cur_texts = s, e, idx, [seg['text']]
+ 1400:                     cur_segments = [seg]
+ 1401:                     continue
+ 1402:                 gap = s - cur_end
+ 1403:                 similar = True
+ 1404:                 try:
+ 1405:                     similar = cosine(cur_last_idx, idx) >= sim_threshold
+ 1406:                 except Exception:
+ 1407:                     similar = True
+ 1408:                 new_dur = max(cur_end, e) - cur_start
+ 1409:                 # 满足以下任一条件则切块：
+ 1410:                 # 1) 间隔过大；2) 达到上限；3) 已接近目标且相似度不足
+ 1411:                 if (gap > max_gap) or (new_dur >= max_sec) or ((new_dur >= target_sec) and (not similar)):
+ 1412:                     # 若当前块过短，尽量并入
+ 1413:                     if (cur_end - cur_start) < min_sec and (new_dur <= max_sec):
+ 1414:                         cur_end = max(cur_end, e)
+ 1415:                         cur_last_idx = idx
+ 1416:                         cur_texts.append(seg['text'])
+ 1417:                         cur_segments.append(seg)
+ 1418:                     else:
+ 1419:                         merged = {'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)}
+ 1420:                         merged.update(_aggregate_segment_scores(cur_segments))
+ 1421:                         semantic_segments.append(merged)
+ 1422:                         cur_start, cur_end, cur_last_idx, cur_texts = s, e, idx, [seg['text']]
+ 1423:                         cur_segments = [seg]
+ 1424:                 else:
+ 1425:                     cur_end = max(cur_end, e)
+ 1426:                     cur_last_idx = idx
+ 1427:                     cur_texts.append(seg['text'])
+ 1428:                     cur_segments.append(seg)
+ 1429:             if cur_start is not None:
+ 1430:                 merged = {'start': cur_start, 'end': cur_end, 'text': ' '.join(cur_texts)}
+ 1431:                 merged.update(_aggregate_segment_scores(cur_segments))
+ 1432:                 semantic_segments.append(merged)
+ 1433: 
+ 1434:             # 覆盖 segments_data（顺序输出，不再按分数重排）
+ 1435:             segments_data = semantic_segments
+ 1436:             log_info(f"[pipeline] 语义分段完成，共 {len(segments_data)} 段（目标≈{target_sec:.0f}s）")
+ 1437: 
+ 1438:             # 保证输出恰好 N 段且不重叠（不足则按转录边界拆分最长段，超出则裁剪）
+ 1439:             try:
+ 1440:                 desired_count = int(cfg_manager.get("MAX_CLIP_COUNT") or 10)
+ 1441:                 if desired_count <= 0:
+ 1442:                     desired_count = 10
+ 1443:             except Exception:
+ 1444:                 desired_count = 10
+ 1445: 
+ 1446:             # 根据转录边界在片段内部寻找最优拆分点
+ 1447:             def _find_split_time_within(seg_start: float, seg_end: float, transcription_list, prefer_time: float,
+ 1448:                                         min_side: float) -> float:
+ 1449:                 try:
+ 1450:                     candidates = []
+ 1451:                     for t in transcription_list:
+ 1452:                         try:
+ 1453:                             ts = float(t.get('start', 0.0)); te = float(t.get('end', 0.0))
+ 1454:                         except Exception:
+ 1455:                             continue
+ 1456:                         if ts <= seg_start or te >= seg_end:
+ 1457:                             continue
+ 1458:                         # 选用句子边界的中点作为候选，以偏向自然停顿
+ 1459:                         mid = (ts + te) / 2.0
+ 1460:                         # 两侧需保留最小长度
+ 1461:                         if (mid - seg_start) >= min_side and (seg_end - mid) >= min_side:
+ 1462:                             candidates.append(mid)
+ 1463:                     if not candidates:
+ 1464:                         return 0.0
+ 1465:                     # 选择最接近期望时间点（通常为中点）的边界
+ 1466:                     best = min(candidates, key=lambda x: abs(x - prefer_time))
+ 1467:                     return float(best)
+ 1468:                 except Exception:
+ 1469:                     return 0.0
+ 1470: 
+ 1471:             def _split_longest_until_exact(segments, target_n: int, transcription_list, min_len: float, video_len: float):
+ 1472:                 # 允许的最低拆分子片段长度（在min_len基础上适度放宽）
+ 1473:                 min_child = max(min_len * 0.75, 30.0)
+ 1474:                 safety_counter = 0
+ 1475:                 while len(segments) < target_n and safety_counter < 200:
+ 1476:                     safety_counter += 1
+ 1477:                     # 选可拆分的最长片段
+ 1478:                     idx = -1
+ 1479:                     max_dur = -1.0
+ 1480:                     for i, s in enumerate(segments):
+ 1481:                         try:
+ 1482:                             ds = float(s.get('start', 0.0)); de = float(s.get('end', 0.0))
+ 1483:                         except Exception:
+ 1484:                             continue
+ 1485:                         dur = max(0.0, de - ds)
+ 1486:                         # 至少能拆成两个不小于 min_child 的子段
+ 1487:                         if dur >= (2.0 * min_child) and dur > max_dur:
+ 1488:                             max_dur = dur
+ 1489:                             idx = i
+ 1490:                     if idx < 0:
+ 1491:                         break  # 没有可拆分的片段
+ 1492: 
+ 1493:                     base = segments[idx]
+ 1494:                     s0 = float(base.get('start', 0.0)); e0 = float(base.get('end', 0.0))
+ 1495:                     mid_pref = (s0 + e0) / 2.0
+ 1496:                     split_t = _find_split_time_within(s0, e0, transcription_list, mid_pref, min_child)
+ 1497:                     if split_t <= 0.0:
+ 1498:                         # 没有合适的转录边界，使用中点但遵守最小长度
+ 1499:                         left = max(s0, min(mid_pref, e0 - min_child))
+ 1500:                         right = min(e0, max(mid_pref, s0 + min_child))
+ 1501:                         split_t = (left + right) / 2.0
+ 1502:                     # 构造两个新片段
+ 1503:                     left_seg = dict(base)
+ 1504:                     right_seg = dict(base)
+ 1505:                     left_seg['start'] = float(s0)
+ 1506:                     left_seg['end'] = float(split_t)
+ 1507:                     right_seg['start'] = float(split_t)
+ 1508:                     right_seg['end'] = float(e0)
+ 1509:                     # 校验长度
+ 1510:                     if (left_seg['end'] - left_seg['start']) < min_child or (right_seg['end'] - right_seg['start']) < min_child:
+ 1511:                         # 无法满足最小长度，放弃本次拆分
+ 1512:                         break
+ 1513:                     # 替换并保持时间顺序
+ 1514:                     segments.pop(idx)
+ 1515:                     segments.insert(idx, right_seg)
+ 1516:                     segments.insert(idx, left_seg)
+ 1517:                     segments.sort(key=lambda x: float(x.get('start', 0.0)))
+ 1518:                 return segments
+ 1519: 
+ 1520:             # 裁剪或拆分，保证恰好 desired_count 段
+ 1521:             try:
+ 1522:                 # 先合规排序
+ 1523:                 segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))
+ 1524:                 if len(segments_data) > desired_count:
+ 1525:                     # 若无score字段，则直接取时间顺序前N段
+ 1526:                     try:
+ 1527:                         segments_data = sorted(segments_data, key=lambda x: x.get('score', 0.0), reverse=True)[:desired_count]
+ 1528:                         segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))
+ 1529:                     except Exception:
+ 1530:                         segments_data = segments_data[:desired_count]
+ 1531:                 elif len(segments_data) < desired_count:
+ 1532:                     # 拆分最长段直至达到N段
+ 1533:                     segments_data = _split_longest_until_exact(segments_data, desired_count, transcription_data, min_sec, 0.0)
+ 1534:                 # 再次确认数量
+ 1535:                 if len(segments_data) != desired_count:
+ 1536:                     log_warning(f"[pipeline] 无法严格达到 {desired_count} 段，当前 {len(segments_data)} 段（已尽最大努力）")
+ 1537:                 # 最终确保不重叠（顺序压紧：每段结束不超过下一段开始）
+ 1538:                 segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))
+ 1539:                 for i in range(len(segments_data) - 1):
+ 1540:                     try:
+ 1541:                         if float(segments_data[i]['end']) > float(segments_data[i+1]['start']):
+ 1542:                             segments_data[i]['end'] = float(segments_data[i+1]['start'])
+ 1543:                     except Exception:
+ 1544:                         pass
+ 1545:             except Exception as _e:
+ 1546:                 log_warning(f"[pipeline] 调整为恰好N段失败，将使用语义分段原始结果: {_e}")
+ 1547:         except Exception as e:
+ 1548:             log_warning(f"[pipeline] 语义分段模式失败，回退到分析结果: {e}")
+ 1549:     
+ 1550:     # 应用切片时长扩展逻辑
+ 1551:     if segments_data:
+ 1552:         # 语义可变时长：使用配置或默认值
+ 1553:         if use_semantic_segment_mode:
+ 1554:             # 在语义分段模式下，固定强约束，避免外部把min设到300s
+ 1555:             target_sec = float(cfg_manager.get("SEMANTIC_TARGET_DURATION") or 240.0)
+ 1556:             min_clip_duration = max(150.0, target_sec * 0.6)
+ 1557:             context_extend = float(cfg_manager.get("CLIP_CONTEXT_EXTEND") or 0.0)
+ 1558:         else:
+ 1559:             min_clip_duration = float(cfg_manager.get("MIN_CLIP_DURATION") or 60.0)
+ 1560:             context_extend = float(cfg_manager.get("CLIP_CONTEXT_EXTEND") or 0.0)
+ 1561:         
+ 1562:         # 获取视频总时长
+ 1563:         try:
+ 1564:             probe_cmd = ['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', video]
+ 1565:             probe_result = subprocess.run(probe_cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=30)
+ 1566:             if probe_result.returncode == 0:
+ 1567:                 import json
+ 1568:                 probe_data = json.loads(probe_result.stdout)
+ 1569:                 video_duration = float(probe_data['format']['duration'])
+ 1570:             else:
+ 1571:                 video_duration = 30000  # 默认30分钟
+ 1572:         except:
+ 1573:             video_duration = 30000  # 默认30分钟
+ 1574:         
+ 1575:         log_info(f"[pipeline] 视频总时长: {video_duration:.1f}秒")
+ 1576:         log_info(f"[pipeline] 切片配置: 最小时长={min_clip_duration}秒, 前后文扩展={context_extend}秒")
+ 1577:         
+ 1578:         # 扩展片段时长
+ 1579:         from acfv.processing.clip_video import ensure_min_duration, extend_segment
+ 1580:         
+ 1581:         # 步骤1：扩展片段前后文
+ 1582:         if context_extend > 0:
+ 1583:             log_info(f"[pipeline] 扩展片段前后文 {context_extend}秒...")
+ 1584:             segments_data = [extend_segment(seg, context_extend, video_duration) for seg in segments_data]
+ 1585:         
+ 1586:         # 步骤2：确保达到最小时长
+ 1587:         log_info(f"[pipeline] 确保切片达到最小时长 {min_clip_duration}秒...")
+ 1588:         segments_data = ensure_min_duration(segments_data, min_clip_duration, video_duration)
+ 1589:         
+ 1590:         # 步骤3：以评分优先安排为"严格不重叠"的时间表（含可配置缓冲）
+ 1591:         buffer_sec = 0.0
+ 1592:         try:
+ 1593:             buf = cfg_manager.get("NON_OVERLAP_BUFFER_SECONDS")
+ 1594:             if isinstance(buf, (int, float)):
+ 1595:                 buffer_sec = max(0.0, float(buf))
+ 1596:         except Exception:
+ 1597:             buffer_sec = 0.0
+ 1598: 
+ 1599:         if not use_semantic_segment_mode:
+ 1600:             log_info(f"[pipeline] 按评分优先安排片段，保证无重叠（缓冲={buffer_sec:.1f}s）...")
+ 1601: 
+ 1602:             # 评分高→低排列，逐个在时间轴上安放
+ 1603:             candidates = sorted(segments_data, key=lambda x: x.get('score', 0.0), reverse=True)
+ 1604:             # 标记原始索引，便于回填
+ 1605:             for _i, _seg in enumerate(candidates):
+ 1606:                 try:
+ 1607:                     _seg['__orig_idx'] = _i
+ 1608:                 except Exception:
+ 1609:                     pass
+ 1610:             scheduled = []  # 已占用区间
+ 1611:             placed_indices = set()
+ 1612: 
+ 1613:             def _windows_from_scheduled():
+ 1614:                 # 由已占用构造空闲窗口列表
+ 1615:                 free = []
+ 1616:                 cursor = 0.0
+ 1617:                 for occ in sorted(scheduled, key=lambda x: x['start']):
+ 1618:                     os, oe = float(occ['start']), float(occ['end'])
+ 1619:                     if os - buffer_sec > cursor:
+ 1620:                         free.append((cursor, os - buffer_sec))
+ 1621:                     cursor = max(cursor, oe + buffer_sec)
+ 1622:                 if cursor < video_duration:
+ 1623:                     free.append((cursor, video_duration))
+ 1624:                 return free
+ 1625: 
+ 1626:             drops_due_to_space = 0
+ 1627: 
+ 1628:             for seg in candidates:
+ 1629:                 try:
+ 1630:                     base_s = float(seg.get('start', 0.0))
+ 1631:                     base_e = float(seg.get('end', 0.0))
+ 1632:                 except Exception:
+ 1633:                     continue
+ 1634:                 if base_e <= base_s:
+ 1635:                     continue
+ 1636: 
+ 1637:                 # 已经应用过前后文扩展与最小时长，这里只确保在空窗内落位
+ 1638:                 desired_s = max(0.0, min(base_s, video_duration))
+ 1639:                 desired_e = max(0.0, min(base_e, video_duration))
+ 1640:                 target_len = max(0.0, desired_e - desired_s)
+ 1641:                 if target_len <= 0.0:
+ 1642:                     continue
+ 1643: 
+ 1644:                 # 遍历当前空窗，选择与原中心最近的可放置窗口
+ 1645:                 free_windows = _windows_from_scheduled()
+ 1646:                 if not free_windows:
+ 1647:                     drops_due_to_space += 1
+ 1648:                     continue
+ 1649:                 center = (desired_s + desired_e) / 2.0
+ 1650:                 free_windows.sort(key=lambda w: abs(((w[0] + w[1]) / 2.0) - center))
+ 1651: 
+ 1652:                 placed = False
+ 1653:                 for (L, R) in free_windows:
+ 1654:                     # 在该窗口内尽量保持原区间，若不够则夹紧
+ 1655:                     s = max(L, desired_s)
+ 1656:                     e = min(R, desired_e)
+ 1657:                     if e - s <= 0.0:
+ 1658:                         continue
+ 1659:                     # 保持原长度的前提下，若窗口较大，尝试居中放置
+ 1660:                     length = min(target_len, R - L)
+ 1661:                     if length <= 0.0:
+ 1662:                         continue
+ 1663:                     # 调整为与原中心对齐的等长区间
+ 1664:                     half = length / 2.0
+ 1665:                     s_candidate = max(L, min(center - half, R - length))
+ 1666:                     e_candidate = s_candidate + length
+ 1667:                     if e_candidate - s_candidate > 0.0:
+ 1668:                         new_seg = dict(seg)
+ 1669:                         new_seg['start'] = float(s_candidate)
+ 1670:                         new_seg['end'] = float(e_candidate)
+ 1671:                         scheduled.append(new_seg)
+ 1672:                         if '__orig_idx' in seg:
+ 1673:                             placed_indices.add(seg['__orig_idx'])
+ 1674:                         placed = True
+ 1675:                         break
+ 1676: 
+ 1677:                 if not placed:
+ 1678:                     drops_due_to_space += 1
+ 1679: 
+ 1680:             # 二次回填：逐步减少缓冲、按可用空窗剪裁放入，直至凑满Top-N
+ 1681:             if max_clips > 0 and len(scheduled) < max_clips:
+ 1682:                 def windows_with_buffer(cur_sched, cur_buf):
+ 1683:                     free = []
+ 1684:                     cursor = 0.0
+ 1685:                     for occ in sorted(cur_sched, key=lambda x: x['start']):
+ 1686:                         os, oe = float(occ['start']), float(occ['end'])
+ 1687:                         if os - cur_buf > cursor:
+ 1688:                             free.append((cursor, os - cur_buf))
+ 1689:                         cursor = max(cursor, oe + cur_buf)
+ 1690:                     if cursor < video_duration:
+ 1691:                         free.append((cursor, video_duration))
+ 1692:                     return sorted(free, key=lambda w: (w[1]-w[0]), reverse=True)
+ 1693: 
+ 1694:                 unplaced = [seg for seg in candidates if seg.get('__orig_idx') not in placed_indices]
+ 1695:                 relax_buffers = [max(buffer_sec/2.0, 0.0), 0.0]
+ 1696:                 relax_min = [min_clip_duration, max(min_clip_duration*0.75, 60.0), max(min_clip_duration*0.5, 45.0)]
+ 1697:                 for rb in relax_buffers:
+ 1698:                     if len(scheduled) >= max_clips:
+ 1699:                         break
+ 1700:                     free_ws = windows_with_buffer(scheduled, rb)
+ 1701:                     for seg in unplaced:
+ 1702:                         if len(scheduled) >= max_clips:
+ 1703:                             break
+ 1704:                         base_s = float(seg.get('start', 0.0)); base_e = float(seg.get('end', 0.0))
+ 1705:                         if base_e <= base_s:
+ 1706:                             continue
+ 1707:                         orig_len = base_e - base_s
+ 1708:                         # 选最大的空窗，按长度剪裁放入
+ 1709:                         for L, R in free_ws:
+ 1710:                             win_len = max(0.0, R - L)
+ 1711:                             if win_len <= 0.0:
+ 1712:                                 continue
+ 1713:                             # 依次尝试更严格的最短长度
+ 1714:                             placed2 = False
+ 1715:                             for mn in relax_min:
+ 1716:                                 if win_len < mn:
+ 1717:                                     continue
+ 1718:                                 length = min(orig_len, win_len)
+ 1719:                                 # 居中摆放到窗口
+ 1720:                                 s_cand = L + max(0.0, (win_len - length)/2.0)
+ 1721:                                 e_cand = s_cand + length
+ 1722:                                 if e_cand - s_cand > 0.0:
+ 1723:                                     new_seg = dict(seg)
+ 1724:                                     new_seg['start'] = float(s_cand)
+ 1725:                                     new_seg['end'] = float(e_cand)
+ 1726:                                     scheduled.append(new_seg)
+ 1727:                                     placed2 = True
+ 1728:                                     break
+ 1729:                             if placed2:
+ 1730:                                 # 重新计算空窗
+ 1731:                                 free_ws = windows_with_buffer(scheduled, rb)
+ 1732:                                 break
+ 1733: 
+ 1734:                 # 如仍不足，记录但不阻塞
+ 1735:                 if len(scheduled) < max_clips:
+ 1736:                     remaining = max_clips - len(scheduled)
+ 1737:                     log_warning(f"[pipeline] 由于时间轴拥挤，仍有 {remaining} 个未能安放（已回填到最大可能）")
+ 1738: 
+ 1739:             # 输出为"评分优先+严格无重叠"的序列，并裁剪为Top-N
+ 1740:             segments_data = sorted(scheduled, key=lambda x: x.get('score', 0), reverse=True)
+ 1741:             if max_clips > 0 and len(segments_data) > max_clips:
+ 1742:                 segments_data = segments_data[:max_clips]
+ 1743:         else:
+ 1744:             # 语义分段模式：按时间顺序输出，若有短段则顺序并入后继直至达到最小时长
+ 1745:             segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))
+ 1746:             merged = []
+ 1747:             i = 0
+ 1748:             while i < len(segments_data):
+ 1749:                 s = float(segments_data[i].get('start', 0.0))
+ 1750:                 e = float(segments_data[i].get('end', 0.0))
+ 1751:                 txt = segments_data[i].get('text', '')
+ 1752:                 j = i
+ 1753:                 while (e - s) < min_clip_duration and (j + 1) < len(segments_data):
+ 1754:                     j += 1
+ 1755:                     e = float(segments_data[j].get('end', e))
+ 1756:                     txt = (txt + ' ' + segments_data[j].get('text', '')).strip()
+ 1757:                 merged.append({'start': s, 'end': e, 'text': txt})
+ 1758:                 i = j + 1
+ 1759:             segments_data = merged
+ 1760:             # 再次保证"恰好N段且不重叠"（合并后可能减少数量）
+ 1761:             try:
+ 1762:                 desired_count = int(cfg_manager.get("MAX_CLIP_COUNT") or 10)
+ 1763:             except Exception:
+ 1764:                 desired_count = 10
+ 1765:             # 裁剪过多
+ 1766:             if desired_count > 0 and len(segments_data) > desired_count:
+ 1767:                 pass  # selection handled in normalize step
+ 1768:             # 拆分不足
+ 1769:             if desired_count > 0 and len(segments_data) < desired_count:
+ 1770:                 # 加载转录以便按边界拆分
+ 1771:                 transcription_list = []
+ 1772:                 try:
+ 1773:                     if os.path.exists(transcription_output):
+ 1774:                         with open(transcription_output, 'r', encoding='utf-8') as f:
+ 1775:                             transcription_list = json.load(f) or []
+ 1776:                 except Exception:
+ 1777:                     transcription_list = []
+ 1778:                 def _split_by_mid(seg, min_child_len):
+ 1779:                     s0 = float(seg.get('start', 0.0)); e0 = float(seg.get('end', 0.0))
+ 1780:                     mid = (s0 + e0) / 2.0
+ 1781:                     base_score = float(seg.get('score', seg.get('interest_score', 0.0)) or 0.0)
+ 1782:                     dur = max(e0 - s0, 1e-6)
+ 1783:                     # 评分按时长比例拆分，保持总量守恒
+ 1784:                     left_score = base_score * (mid - s0) / dur
+ 1785:                     right_score = base_score * (e0 - mid) / dur
+ 1786:                     left = {'start': s0, 'end': mid, 'text': seg.get('text',''), 'score': left_score}
+ 1787:                     right = {'start': mid, 'end': e0, 'text': seg.get('text',''), 'score': right_score}
+ 1788:                     if (right['end']-right['start']) < min_child_len or (left['end']-left['start']) < min_child_len:
+ 1789:                         return None
+ 1790:                     return [left, right]
+ 1791:                 def _split_longest_semantic(segments, need_count, min_child_len):
+ 1792:                     safety = 0
+ 1793:                     while len(segments) < need_count and safety < 200:
+ 1794:                         safety += 1
+ 1795:                         # 选最长者
+ 1796:                         idx = max(range(len(segments)), key=lambda i: float(segments[i].get('end',0.0)) - float(segments[i].get('start',0.0))) if segments else -1
+ 1797:                         if idx < 0:
+ 1798:                             break
+ 1799:                         base = segments[idx]
+ 1800:                         s0 = float(base.get('start', 0.0)); e0 = float(base.get('end', 0.0))
+ 1801:                         if (e0 - s0) < (2.0 * min_child_len):
+ 1802:                             break
+ 1803:                         # 首选在转录边界中点附近拆分
+ 1804:                         try:
+ 1805:                             candidates = []
+ 1806:                             for t in transcription_list:
+ 1807:                                 try:
+ 1808:                                     ts = float(t.get('start', 0.0)); te = float(t.get('end', 0.0))
+ 1809:                                 except Exception:
+ 1810:                                     continue
+ 1811:                                 if ts <= s0 or te >= e0:
+ 1812:                                     continue
+ 1813:                                 mid = (ts + te) / 2.0
+ 1814:                                 if (mid - s0) >= min_child_len and (e0 - mid) >= min_child_len:
+ 1815:                                     candidates.append(mid)
+ 1816:                             if candidates:
+ 1817:                                 pref = (s0 + e0)/2.0
+ 1818:                                 split_t = min(candidates, key=lambda x: abs(x - pref))
+ 1819:                                 base_score = float(base.get('score', base.get('interest_score', 0.0)) or 0.0)
+ 1820:                                 dur = max(e0 - s0, 1e-6)
+ 1821:                                 left_score = base_score * (split_t - s0) / dur
+ 1822:                                 right_score = base_score * (e0 - split_t) / dur
+ 1823:                                 left = {'start': s0, 'end': split_t, 'text': base.get('text',''), 'score': left_score}
+ 1824:                                 right = {'start': split_t, 'end': e0, 'text': base.get('text',''), 'score': right_score}
+ 1825:                                 segments.pop(idx)
+ 1826:                                 segments.extend([left, right])
+ 1827:                                 segments.sort(key=lambda x: float(x.get('start', 0.0)))
+ 1828:                                 continue
+ 1829:                         except Exception:
+ 1830:                             pass
+ 1831:                         # 回退：用中点拆分
+ 1832:                         sp = _split_by_mid(base, min_child_len)
+ 1833:                         if not sp:
+ 1834:                             break
+ 1835:                         segments.pop(idx)
+ 1836:                         segments.extend(sp)
+ 1837:                         segments.sort(key=lambda x: float(x.get('start', 0.0)))
+ 1838:                     return segments
+ 1839:                 min_child = max(min_clip_duration * 0.5, 30.0)
+ 1840:                 segments_data = _split_longest_semantic(segments_data, desired_count, min_child)
+ 1841:             # 最终去重叠（压紧到相邻）
+ 1842:             segments_data = sorted(segments_data, key=lambda x: float(x.get('start', 0.0)))
+ 1843:             for i in range(len(segments_data)-1):
+ 1844:                 try:
+ 1845:                     if float(segments_data[i]['end']) > float(segments_data[i+1]['start']):
+ 1846:                         segments_data[i]['end'] = float(segments_data[i+1]['start'])
+ 1847:                 except Exception:
+ 1848:                     pass
+ 1849: 
+ 1850:         # 确保每个片段都有 score（语义拆分后继承/估算）
+ 1851:         for _seg in segments_data:
+ 1852:             if 'score' not in _seg or _seg['score'] is None:
+ 1853:                 base_val = float(_seg.get('interest_score', 0.0) or 0.0)
+ 1854:                 # 给一个很小的正值防止都是 0.000
+ 1855:                 _seg['score'] = max(base_val, 0.005) if base_val > 0 else 0.005
+ 1856:         
+ 1857:         # 显示最终的评分顺序
+ 1858:         final_scores = [f"{seg.get('score', 0):.3f}" for seg in segments_data[:5]]
+ 1859:         log_info(f"[pipeline] 最终片段顺序（按评分）: {final_scores}")
+ 1860:         
+ 1861:         log_info(f"[pipeline] 切片时长扩展完成，共 {len(segments_data)} 个片段")
+ 1862: 
+ 1863:         # 最后保险：清洗片段时间，避免出现 end < start 或持续时间为非正导致 -t 负数
+ 1864:         try:
+ 1865:             cleaned_segments = []
+ 1866:             auto_fixed = 0
+ 1867:             for _seg in segments_data:
+ 1868:                 try:
+ 1869:                     s = float(_seg.get('start', 0.0))
+ 1870:                     e = float(_seg.get('end', 0.0))
+ 1871:                 except Exception:
+ 1872:                     continue
+ 1873:                 # 修复颠倒
+ 1874:                 if e < s:
+ 1875:                     s, e = e, s
+ 1876:                     auto_fixed += 1
+ 1877:                 # 约束到视频范围
+ 1878:                 s = max(0.0, min(s, video_duration))
+ 1879:                 e = max(0.0, min(e, video_duration))
+ 1880:                 # 确保最小正时长
+ 1881:                 if e <= s:
+ 1882:                     e = min(video_duration, s + 1.0)
+ 1883:                 if e <= s:
+ 1884:                     continue
+ 1885:                 _seg['start'] = s
+ 1886:                 _seg['end'] = e
+ 1887:                 cleaned_segments.append(_seg)
+ 1888:             if auto_fixed > 0:
+ 1889:                 log_warning(f"[pipeline] 片段时间存在颠倒，已自动修复 {auto_fixed} 个")
+ 1890:             if len(cleaned_segments) != len(segments_data):
+ 1891:                 log_warning(f"[pipeline] 清洗后片段数量: {len(cleaned_segments)}/{len(segments_data)}")
+ 1892:             segments_data = cleaned_segments
+ 1893:         except Exception as _e:
+ 1894:             log_warning(f"[pipeline] 片段时间清洗失败，继续使用原片段: {_e}")
+ 1895:     
+ 1896:     log_info(f"[pipeline] Clipping video directly to: {output_clips_dir}")
+ 1897:     os.makedirs(output_clips_dir, exist_ok=True)
+ 1898:     clip_files = []
+ 1899:     
+ 1900:     if segments_data:
+ 1901:         def sequential_clip_generation(segments, video_path, output_dir, audio_source=None, progress_callback=None):
+ 1902:             """串行切片生成"""
+ 1903:             # 验证输入参数
+ 1904:             if not segments:
+ 1905:                 log_error("[pipeline] 没有片段数据，无法生成切片")
+ 1906:                 return []
+ 1907:             
+ 1908:             if not os.path.exists(video_path):
+ 1909:                 log_error(f"[pipeline] 视频文件不存在: {video_path}")
+ 1910:                 return []
+ 1911:             
+ 1912:             log_info(f"[pipeline] 开始串行切片生成，共 {len(segments)} 个片段")
+ 1913:             
+ 1914:             clip_files = []
+ 1915:             video_base = _sanitize_component(Path(video_path).stem)
+ 1916:             
+ 1917:             # 预先探测一次视频时长，避免每个片段重复ffprobe
+ 1918:             try:
+ 1919:                 _probe_cmd = ['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', video_path]
+ 1920:                 _probe_result = subprocess.run(_probe_cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=30)
+ 1921:                 if _probe_result.returncode == 0:
+ 1922:                     import json as _json
+ 1923:                     _probe_data = _json.loads(_probe_result.stdout)
+ 1924:                     video_duration_global = float(_probe_data['format']['duration'])
+ 1925:                 else:
+ 1926:                     video_duration_global = 30000.0
+ 1927:             except Exception:
+ 1928:                 video_duration_global = 30000.0
+ 1929: 
+ 1930:             # 统计总输出秒数用于"切片生成"阶段进度估计
+ 1931:             try:
+ 1932:                 total_output_seconds = sum(max(0.0, float(seg['end']) - float(seg['start'])) for seg in segments)
+ 1933:             except Exception:
+ 1934:                 total_output_seconds = float(len(segments)) * 60.0
+ 1935:             processed_output_seconds = 0.0
+ 1936: 
+ 1937:             def generate_single_clip(segment, index):
+ 1938:                 """生成单个切片"""
+ 1939:                 try:
+ 1940:                     start_time = segment['start']
+ 1941:                     end_time = segment['end']
+ 1942:                     duration = end_time - start_time
+ 1943:                     # 保险：若外层存在异常，防止出现非正时长
+ 1944:                     if duration <= 0:
+ 1945:                         end_time = min(video_duration_global, start_time + 1.0)
+ 1946:                         duration = max(0.5, end_time - start_time)
+ 1947:                     
+ 1948:                     # 生成输出文件名 - 确保索引正确
+ 1949:                     segment_index = index + 1  # 确保从1开始
+ 1950:                     clip_filename = f"{video_base}__clip_{segment_index:03d}_{start_time:.1f}s-{end_time:.1f}s.mp4"
+ 1951:                     output_path = os.path.join(output_dir, clip_filename)
+ 1952:                     
+ 1953:                     # 清理可能存在的旧文件
+ 1954:                     if os.path.exists(output_path):
+ 1955:                         try:
+ 1956:                             os.remove(output_path)
+ 1957:                             log_info(f"[pipeline] 清理旧文件: {output_path}")
+ 1958:                         except Exception as e:
+ 1959:                             log_warning(f"[pipeline] 清理旧文件失败: {e}")
+ 1960:                     
+ 1961:                     log_info(f"[pipeline] 生成切片 {index+1}/{len(segments)}: {clip_filename} ({duration:.1f}s)")
+ 1962:                     
+ 1963:                     # 使用预先探测的视频时长
+ 1964:                     video_duration = video_duration_global
+ 1965:                     use_fast_seek = start_time > video_duration_global * 0.5
+ 1966:                     
+ 1967:                     # 使用快速切片方法（直接复制流，不重新编码）
+ 1968:                     def cut_video_ffmpeg_fast(input_path, output_path, start_time, duration):
+ 1969:                         """使用FFmpeg快速切片：复制视频流，音频转AAC，避免无声/不兼容容器"""
+ 1970:                         cmd = [
+ 1971:                             "ffmpeg", "-y",
+ 1972:                             "-hide_banner", "-loglevel", "error", "-nostdin",
+ 1973:                             "-ss", str(start_time),         # 起始时间（输入寻址，快）
+ 1974:                             "-i", input_path,               # 输入视频
+ 1975:                             "-t", str(duration),            # 片段时长（秒）
+ 1976:                             "-map", "0:v:0",               # 明确映射视频
+ 1977:                             "-map", "0:a?",                # 可选映射音频
+ 1978:                             "-c:v", "copy",                # 复制视频
+ 1979:                             "-c:a", "aac",                 # 统一AAC音频
+ 1980:                             "-b:a", "160k",
+ 1981:                             "-movflags", "+faststart",     # 快速启动
+ 1982:                             output_path                     # 输出文件路径
+ 1983:                         ]
+ 1984:                         subprocess.run(cmd, check=True)
+ 1985:                     
+ 1986:                     # 构建FFmpeg命令 - 使用快速切片
+ 1987:                     if audio_source and os.path.exists(audio_source):
+ 1988:                         # 如果有音频源，尽量复制视频流，仅编码音频，加速输出
+ 1989:                         if use_fast_seek:
+ 1990:                             cmd = [
+ 1991:                                 'ffmpeg', '-y',
+ 1992:                                 '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 1993:                                 '-ss', str(start_time),
+ 1994:                                 '-i', str(video_path),
+ 1995:                                 '-i', str(audio_source),
+ 1996:                                 '-map', '0:v',
+ 1997:                                 '-map', '1:a',
+ 1998:                                 '-t', str(duration),
+ 1999:                                 '-c:v', 'copy',              # 复制视频，避免重编码
+ 2000:                                 '-c:a', 'aac',
+ 2001:                                 '-preset', 'veryfast',
+ 2002:                                 '-avoid_negative_ts', 'make_zero',
+ 2003:                                 '-movflags', '+faststart',
+ 2004:                                 '-threads', '0',
+ 2005:                                 '-max_muxing_queue_size', '1024',
+ 2006:                                 str(output_path)
+ 2007:                             ]
+ 2008:                         else:
+ 2009:                             cmd = [
+ 2010:                                 'ffmpeg', '-y',
+ 2011:                                 '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 2012:                                 '-i', str(video_path),
+ 2013:                                 '-i', str(audio_source),
+ 2014:                                 '-map', '0:v',
+ 2015:                                 '-map', '1:a',
+ 2016:                                 '-ss', str(start_time),
+ 2017:                                 '-t', str(duration),
+ 2018:                                 '-c:v', 'copy',              # 复制视频，避免重编码
+ 2019:                                 '-c:a', 'aac',
+ 2020:                                 '-preset', 'veryfast',
+ 2021:                                 '-movflags', '+faststart',
+ 2022:                                 '-threads', '0',
+ 2023:                                 '-max_muxing_queue_size', '1024',
+ 2024:                                 str(output_path)
+ 2025:                             ]
+ 2026:                     else:
+ 2027:                         # 没有音频源，使用快速切片；若输出异常（0秒/无视频流），回退到编码模式
+ 2028:                         try:
+ 2029:                             cut_video_ffmpeg_fast(str(video_path), str(output_path), start_time, duration)
+ 2030:                             # 先不返回，做一次完整性检查
+ 2031:                             try:
+ 2032:                                 probe_cmd = [
+ 2033:                                     'ffprobe', '-v', 'quiet', '-print_format', 'json',
+ 2034:                                     '-show_format', '-show_streams', str(output_path)
+ 2035:                                 ]
+ 2036:                                 probe_result_fast = subprocess.run(
+ 2037:                                     probe_cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=15
+ 2038:                                 )
+ 2039:                                 need_fallback = True
+ 2040:                                 if probe_result_fast.returncode == 0:
+ 2041:                                     import json as _json
+ 2042:                                     pdata = _json.loads(probe_result_fast.stdout or '{}')
+ 2043:                                     streams = pdata.get('streams', []) or []
+ 2044:                                     has_video_stream = any(s.get('codec_type') == 'video' for s in streams)
+ 2045:                                     duration_val = 0.0
+ 2046:                                     try:
+ 2047:                                         duration_val = float((pdata.get('format') or {}).get('duration') or 0.0)
+ 2048:                                     except Exception:
+ 2049:                                         duration_val = 0.0
+ 2050:                                     need_fallback = (not has_video_stream) or (duration_val <= 0.5)
+ 2051:                                 if need_fallback:
+ 2052:                                     # 构建回退编码命令
+ 2053:                                     if use_fast_seek:
+ 2054:                                         cmd = [
+ 2055:                                             'ffmpeg', '-y',
+ 2056:                                             '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 2057:                                             '-ss', str(start_time),
+ 2058:                                             '-i', str(video_path),
+ 2059:                                             '-t', str(duration),
+ 2060:                                             '-c:v', 'libx264',
+ 2061:                                             '-c:a', 'aac',
+ 2062:                                             '-preset', 'veryfast',
+ 2063:                                             '-crf', '23',
+ 2064:                                             '-avoid_negative_ts', 'make_zero',
+ 2065:                                             '-movflags', '+faststart',
+ 2066:                                             '-threads', '0',
+ 2067:                                             '-max_muxing_queue_size', '1024',
+ 2068:                                             str(output_path)
+ 2069:                                         ]
+ 2070:                                     else:
+ 2071:                                         cmd = [
+ 2072:                                             'ffmpeg', '-y',
+ 2073:                                             '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 2074:                                             '-i', str(video_path),
+ 2075:                                             '-ss', str(start_time),
+ 2076:                                             '-t', str(duration),
+ 2077:                                             '-c:v', 'libx264',
+ 2078:                                             '-c:a', 'aac',
+ 2079:                                             '-preset', 'veryfast',
+ 2080:                                             '-crf', '23',
+ 2081:                                             '-threads', '0',
+ 2082:                                             '-max_muxing_queue_size', '1024',
+ 2083:                                             str(output_path)
+ 2084:                                         ]
+ 2085:                                 # 如果 need_fallback 为 False，则不定义 cmd，让后续验证直接通过
+ 2086:                             except Exception:
+ 2087:                                 # 探测失败时保持现状，由后续大小/探测检查兜底
+ 2088:                                 pass
+ 2089:                         except subprocess.CalledProcessError as e:
+ 2090:                             log_warning(f"[pipeline] 快速切片失败，回退到编码模式: {e}")
+ 2091:                             # 回退到编码模式
+ 2092:                             if use_fast_seek:
+ 2093:                                 cmd = [
+ 2094:                                     'ffmpeg', '-y',
+ 2095:                                     '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 2096:                                     '-ss', str(start_time),
+ 2097:                                     '-i', str(video_path),
+ 2098:                                     '-t', str(duration),
+ 2099:                                     '-c:v', 'libx264',
+ 2100:                                     '-c:a', 'aac',
+ 2101:                                     '-preset', 'veryfast',
+ 2102:                                     '-crf', '23',
+ 2103:                                     '-avoid_negative_ts', 'make_zero',
+ 2104:                                     '-movflags', '+faststart',
+ 2105:                                     '-threads', '0',
+ 2106:                                     '-max_muxing_queue_size', '1024',
+ 2107:                                     str(output_path)
+ 2108:                                 ]
+ 2109:                             else:
+ 2110:                                 cmd = [
+ 2111:                                     'ffmpeg', '-y',
+ 2112:                                     '-hide_banner', '-loglevel', 'error', '-nostdin',
+ 2113:                                     '-i', str(video_path),
+ 2114:                                     '-ss', str(start_time),
+ 2115:                                     '-t', str(duration),
+ 2116:                                     '-c:v', 'libx264',
+ 2117:                                     '-c:a', 'aac',
+ 2118:                                     '-preset', 'veryfast',
+ 2119:                                     '-crf', '23',
+ 2120:                                     '-threads', '0',
+ 2121:                                     '-max_muxing_queue_size', '1024',
+ 2122:                                     str(output_path)
+ 2123:                                 ]
+ 2124:                     
+ 2125:                     # 动态超时时间 - 基于切片时长和位置
+ 2126:                     base_timeout = 1800  # 增加到30分钟
+ 2127:                     safe_duration = max(float(duration), 1.0)
+ 2128:                     duration_factor = min(safe_duration / 10.0, 3.0)  # 基于切片时长，最大3倍
+ 2129:                     position_factor = 1.0
+ 2130:                     if start_time > video_duration * 0.8:
+ 2131:                         position_factor = 2.0  # 视频末尾需要更多时间
+ 2132:                     elif start_time > video_duration * 0.6:
+ 2133:                         position_factor = 1.5
+ 2134:                     
+ 2135:                     timeout = int(base_timeout * duration_factor * position_factor)
+ 2136:                     log_info(f"[pipeline] 切片 {index+1} 超时设置: {timeout}s (时长:{duration:.1f}s, 位置:{start_time:.1f}s)")
+ 2137:                     
+ 2138:                     # 执行FFmpeg命令（只有在需要编码时才执行）
+ 2139:                     if 'cmd' in locals():
+ 2140:                         result = subprocess.run(
+ 2141:                             cmd, 
+ 2142:                             capture_output=True, 
+ 2143:                             text=True, 
+ 2144:                             encoding='utf-8',
+ 2145:                             errors='ignore',
+ 2146:                             timeout=timeout
+ 2147:                         )
+ 2148:                     
+ 2149:                     # 检查输出文件是否存在且有效
+ 2150:                     if os.path.exists(output_path):
+ 2151:                         file_size = os.path.getsize(output_path)
+ 2152:                         if file_size > 1024 * 1024:  # 至少1MB
+ 2153:                             # 验证文件完整性 - 改进检查逻辑
+ 2154:                             try:
+ 2155:                                 probe_cmd = [
+ 2156:                                     'ffprobe', '-v', 'quiet', '-print_format', 'json',
+ 2157:                                     '-show_format', '-show_streams', output_path
+ 2158:                                 ]
+ 2159:                                 probe_result = subprocess.run(probe_cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=30)
+ 2160:                                 
+ 2161:                                 if probe_result.returncode == 0:
+ 2162:                                     # 检查是否有视频流
+ 2163:                                     import json
+ 2164:                                     probe_data = json.loads(probe_result.stdout)
+ 2165:                                     streams = probe_data.get('streams', [])
+ 2166:                                     has_video_stream = any(stream.get('codec_type') == 'video' for stream in streams)
+ 2167:                                     has_audio_stream = any(stream.get('codec_type') == 'audio' for stream in streams)
+ 2168:                                     
+ 2169:                                     if has_video_stream:
+ 2170:                                         if not has_audio_stream:
+ 2171:                                             log_warning(f"[pipeline] 切片 {index+1} 缺少音频流: {output_path}")
+ 2172:                                         log_info(f"[pipeline] 切片 {index+1} 生成成功: {output_path} ({file_size} bytes)")
+ 2173:                                         # 更新切片阶段进度（基于累计输出秒数）
+ 2174:                                         try:
+ 2175:                                             nonlocal processed_output_seconds
+ 2176:                                             processed_output_seconds += max(0.0, float(end_time) - float(start_time))
+ 2177:                                             if 'smart_predictor' in locals() and smart_predictor and total_output_seconds > 0:
+ 2178:                                                 progress_ratio = min(max(processed_output_seconds / total_output_seconds, 0.0), 1.0)
+ 2179:                                                 smart_predictor.update_stage_progress("切片生成", progress_ratio)
+ 2180:                                         except Exception:
+ 2181:                                             pass
+ 2182:                                         return output_path
+ 2183:                                     else:
+ 2184:                                         log_error(f"[pipeline] 切片 {index+1} 缺少视频流")
+ 2185:                                         if os.path.exists(output_path):
+ 2186:                                             os.remove(output_path)
+ 2187:                                         return None
+ 2188:                                 else:
+ 2189:                                     log_error(f"[pipeline] 切片 {index+1} 文件完整性检查失败: {probe_result.stderr}")
+ 2190:                                     if os.path.exists(output_path):
+ 2191:                                         os.remove(output_path)
+ 2192:                                     return None
+ 2193:                             except Exception as e:
+ 2194:                                 log_error(f"[pipeline] 切片 {index+1} 文件检查异常: {e}")
+ 2195:                                 # 如果文件足够大，可能是检查工具问题，保留文件
+ 2196:                                 if file_size > 1024 * 1024:  # 大于1MB
+ 2197:                                     log_info(f"[pipeline] 切片 {index+1} 文件较大，保留: {output_path} ({file_size} bytes)")
+ 2198:                                     return output_path
+ 2199:                                 else:
+ 2200:                                     if os.path.exists(output_path):
+ 2201:                                         os.remove(output_path)
+ 2202:                                     return None
+ 2203:                         else:
+ 2204:                             log_error(f"[pipeline] 切片 {index+1} 文件太小: {file_size} bytes (需要至少1MB)")
+ 2205:                             if os.path.exists(output_path):
+ 2206:                                 os.remove(output_path)
+ 2207:                             return None
+ 2208:                     else:
+ 2209:                         log_error(f"[pipeline] 切片 {index+1} 输出文件不存在")
+ 2210:                         return None
+ 2211: 
+ 2212:                         
+ 2213:                 except Exception as e:
+ 2214:                     log_error(f"[pipeline] 切片 {index+1} 异常: {e}")
+ 2215:                     if os.path.exists(output_path):
+ 2216:                         try:
+ 2217:                             os.remove(output_path)
+ 2218:                         except:
+ 2219:                             pass
+ 2220:                     return None
+ 2221:             
+ 2222:             # 串行执行切片生成
+ 2223:             successful_clips = []
+ 2224:             
+ 2225:             for i, segment in enumerate(segments):
+ 2226:                 try:
+ 2227:                     clip_path = generate_single_clip(segment, i)
+ 2228:                     if clip_path:
+ 2229:                         successful_clips.append(clip_path)
+ 2230:                         log_info(f"[pipeline] 切片 {i+1} 完成，当前成功: {len(successful_clips)}/{len(segments)}")
+ 2231:                     
+ 2232:                     if progress_callback:
+ 2233:                         progress_callback(i + 1, len(segments))
+ 2234:                         
+ 2235:                 except Exception as e:
+ 2236:                     log_error(f"[pipeline] 切片 {i+1} 任务异常: {e}")
+ 2237:                     if progress_callback:
+ 2238:                         progress_callback(i + 1, len(segments))
+ 2239:             
+ 2240:             log_info(f"[pipeline] 串行切片生成完成，成功生成 {len(successful_clips)} 个切片")
+ 2241:             return successful_clips
+ 2242:         
+ 2243:         def clip_progress_callback(current, total):
+ 2244:             emit_progress("串行视频切片", current_step, total_steps, f"正在生成第{current}/{total}个切片...")
+ 2245:         
+ 2246:         try:
+ 2247:             # 使用串行切片生成
+ 2248:             clip_files = sequential_clip_generation(
+ 2249:                 segments_data, video, output_clips_dir, 
+ 2250:                 audio_source=host_audio_path, 
+ 2251:                 progress_callback=clip_progress_callback
+ 2252:             )
+ 2253:         except Exception as e:
+ 2254:             log_error(f"[pipeline] 串行切片失败: {e}")
+ 2255:             # 降级到clip_video函数
+ 2256:             try:
+ 2257:                 import inspect
+ 2258:                 clip_sig = inspect.signature(clip_video)
+ 2259:                 if 'progress_callback' in clip_sig.parameters:
+ 2260:                     clip_video(video_path=video, analysis_file=analysis_output, output_dir=output_clips_dir, 
+ 2261:                               progress_callback=clip_progress_callback, audio_source=host_audio_path)
+ 2262:                 else:
+ 2263:                     clip_video(video_path=video, analysis_file=analysis_output, output_dir=output_clips_dir, 
+ 2264:                               audio_source=host_audio_path)
+ 2265:             except Exception as e2:
+ 2266:                 log_error(f"[pipeline] 降级切片也失败: {e2}")
+ 2267:         
+ 2268:         # 检查最终目录中的切片文件
+ 2269:         final_clips = []
+ 2270:         for file in os.listdir(output_clips_dir):
+ 2271:             if file.lower().endswith('.mp4'):
+ 2272:                 clip_path = os.path.join(output_clips_dir, file)
+ 2273:                 if os.path.isfile(clip_path) and os.path.getsize(clip_path) > 1024:  # 至少1KB
+ 2274:                     final_clips.append(clip_path)
+ 2275:         
+ 2276:         log_info(f"[pipeline] 最终切片统计: 成功生成 {len(final_clips)} 个有效切片")
+ 2277:         if len(final_clips) != len(segments_data):
+ 2278:             log_warning(f"[pipeline] 切片数量不匹配: 期望 {len(segments_data)} 个，实际 {len(final_clips)} 个")
+ 2279:         
+ 2280:         # 将最终切片添加到clip_files列表
+ 2281:         for clip_path in final_clips:
+ 2282:             if clip_path not in clip_files:
+ 2283:                 clip_files.append(clip_path)
+ 2284:                 log_info(f"[pipeline] Found clip: {clip_path}")
+ 2285:         
+ 2286:         log_info(f"[pipeline] Successfully generated {len(clip_files)} clip files")
+ 2287:         
+ 2288:         # 更新智能进度预测
+ 2289:         if smart_predictor:
+ 2290:             smart_predictor.finish_stage("切片生成")
+ 2291:             
+ 2292:     else:
+ 2293:         log_error("[pipeline] No segments to clip")
+ 2294: 
+ 2295:     emit_progress("完成", total_steps, total_steps, f"处理完成！生成了{len(clip_files)}个切片")
+ 2296:     
+ 2297:     # 生成每个切片的语义字幕（SRT）
+ 2298:     try:
+ 2299:         from acfv.processing.subtitle_generator import generate_semantic_subtitles_for_clips
+ 2300:         transcription_output = os.path.join(os.path.dirname(analysis_output), "transcription.json")
+ 2301:         if os.path.exists(transcription_output) and clip_files:
+ 2302:             count = generate_semantic_subtitles_for_clips(output_clips_dir, transcription_output, cfg_manager, clip_files)
+ 2303:             log_info(f"[pipeline] 已为 {count} 个切片生成语义字幕")
+ 2304:         else:
+ 2305:             log_info("[pipeline] 跳过字幕生成（无转录或无切片）")
+ 2306:     except Exception as e:
+ 2307:         log_error(f"[pipeline] 语义字幕生成失败: {e}")
+ 2308: 
+ 2309:     # 结束智能会话记录
+ 2310:     try:
+ 2311:         if 'smart_predictor' in locals() and smart_predictor:
+ 2312:             smart_predictor.end_session(success=True)
+ 2313:     except Exception:
+ 2314:         pass
+ 2315: 
+ 2316:     return output_clips_dir, clip_files, has_chat
+ 2317: 
+ 2318: 
+ 2319: def generate_content_indexes(cfg_manager):
+ 2320:     """Generate semantic indexes for rated clips.
+ 2321:     使用切片文本与评分构建RAG索引，优先使用最近一次运行（runs/latest）。
+ 2322:     """
+ 2323:     log_info("[generate_content_indexes] Starting to generate content indexes")
+ 2324: 
+ 2325:     clips_base_dir = cfg_manager.get("CLIPS_BASE_DIR")
+ 2326:     if not os.path.exists(clips_base_dir):
+ 2327:         log_info("[generate_content_indexes] Clips base dir doesn't exist")
+ 2328:         return "索引生成完成（无需处理）"
+ 2329: 
+ 2330:     processed_count = 0
+ 2331:     for video_dir in os.listdir(clips_base_dir):
+ 2332:         video_path = os.path.join(clips_base_dir, video_dir)
+ 2333:         if not os.path.isdir(video_path):
+ 2334:             continue
+ 2335: 
+ 2336:         # 支持新结构：runs/<run_xxx>/ratings.json 优先最新一次
+ 2337:         ratings_path = os.path.join(video_path, "ratings.json")
+ 2338:         runs_dir = os.path.join(video_path, "runs")
+ 2339:         latest_run_dir = None
+ 2340:         if os.path.isdir(runs_dir):
+ 2341:             run_names = sorted([d for d in os.listdir(runs_dir) if os.path.isdir(os.path.join(runs_dir, d))])
+ 2342:             if run_names:
+ 2343:                 latest_run_dir = os.path.join(runs_dir, run_names[-1])
+ 2344:                 candidate = os.path.join(latest_run_dir, "ratings.json")
+ 2345:                 if os.path.exists(candidate):
+ 2346:                     ratings_path = candidate
+ 2347: 
+ 2348:         if not os.path.exists(ratings_path):
+ 2349:             continue
+ 2350: 
+ 2351:         # 如果索引已存在则跳过（视频目录级别或最新run级别任一存在即可）
+ 2352:         index_dir = os.path.join(video_path, "index")
+ 2353:         index_file = os.path.join(index_dir, "content_index.faiss")
+ 2354:         run_index_dir = os.path.join(latest_run_dir, "index") if latest_run_dir else None
+ 2355:         run_index_file = os.path.join(run_index_dir, "content_index.faiss") if run_index_dir else None
+ 2356:         if (index_file and os.path.exists(index_file)) or (run_index_file and os.path.exists(run_index_file)):
+ 2357:             continue
+ 2358: 
+ 2359:         try:
+ 2360:             with open(ratings_path, "r", encoding="utf-8") as f:
+ 2361:                 ratings = json.load(f)
+ 2362:             if not ratings:
+ 2363:                 continue
+ 2364: 
+ 2365:             log_info(f"[generate_content_indexes] Generating index for {video_dir}")
+ 2366: 
+ 2367:             # 读取转录文件（legacy 或 mapping），但我们只需要每个切片的文本
+ 2368:             # 从 ratings.json 里优先取 'text' 字段
+ 2369:             segments = []
+ 2370:             weights = []
+ 2371:             for clip_filename, data in ratings.items():
+ 2372:                 text = data.get("text", "")
+ 2373:                 rating = float(data.get("rating", 0.0))
+ 2374:                 if text and text.strip():
+ 2375:                     segments.append({"text": text})
+ 2376:                     weights.append(rating)
+ 2377: 
+ 2378:             if not segments:
+ 2379:                 log_info(f"[generate_content_indexes] No clip texts in ratings for {video_dir}")
+ 2380:                 continue
+ 2381: 
+ 2382:             if not FAISS_AVAILABLE:
+ 2383:                 log_info(f"[generate_content_indexes] Skipping index generation for {video_dir} (faiss not available)")
+ 2384:                 continue
+ 2385: 
+ 2386:             index, vectorizer, _ = build_content_index(segments, weights=weights)
+ 2387:             if index and vectorizer:
+ 2388:                 # 保存到视频目录级别
+ 2389:                 os.makedirs(index_dir, exist_ok=True)
+ 2390:                 faiss.write_index(index, index_file)
+ 2391:                 with open(os.path.join(index_dir, "vectorizer.pkl"), "wb") as f:
+ 2392:                     pickle.dump(vectorizer, f)
+ 2393:                 # 同时保存到最新run目录，便于按run调试
+ 2394:                 if latest_run_dir:
+ 2395:                     os.makedirs(run_index_dir, exist_ok=True)
+ 2396:                     faiss.write_index(index, run_index_file)
+ 2397:                     with open(os.path.join(run_index_dir, "vectorizer.pkl"), "wb") as f:
+ 2398:                         pickle.dump(vectorizer, f)
+ 2399:                 log_info(f"[generate_content_indexes] Successfully generated index for {video_dir}")
+ 2400:                 processed_count += 1
+ 2401:         except Exception as e:
+ 2402:             log_error(f"[generate_content_indexes] Error processing {video_dir}: {e}")
+ 2403: 
+ 2404:     log_info("[generate_content_indexes] Finished generating content indexes")
+ 2405:     return f"索引生成完成，处理了 {processed_count} 个视频目录"
