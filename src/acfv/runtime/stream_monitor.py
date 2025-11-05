@@ -267,10 +267,10 @@ class StreamMonitorConfig:
     default_poll_interval: int
     default_format: str
     output_root: Path
+    targets: list[StreamTarget]
     download_chat: bool = False
     twitch_client_id: Optional[str] = None
     twitch_oauth_token: Optional[str] = None
-    targets: list[StreamTarget]
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any], cfg_dir: Path) -> "StreamMonitorConfig":
