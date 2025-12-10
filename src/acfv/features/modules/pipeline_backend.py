@@ -177,11 +177,11 @@ except ImportError as e:
 ANALYZE_DATA_AVAILABLE = True
 
 try:
-    from utils import filter_meaningless_content, build_content_index
+    from acfv.utils import filter_meaningless_content, build_content_index
     UTILS_AVAILABLE = True
 except ImportError as e:
     UTILS_AVAILABLE = False
-    print(f"utils 模块导入失败: {e}")
+    print(f"acfv.utils 模块导入失败: {e}")
 
 try:
     from acfv.processing.clip_video import clip_video
@@ -1269,18 +1269,6 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     except Exception:
         use_semantic_segment_mode = True
 
-    if use_semantic_segment_mode and ranked_segments_detected:
-        try:
-            raw_force_semantic = cfg_manager.get("FORCE_SEMANTIC_SEGMENT")
-        except Exception:
-            raw_force_semantic = None
-        force_semantic = bool(raw_force_semantic) if raw_force_semantic is not None else False
-        if not force_semantic:
-            log_info("[pipeline] 检测到评分驱动的片段排序，优先保留评分结果，跳过语义分段。如需强制语义切块，请开启 FORCE_SEMANTIC_SEGMENT。")
-            use_semantic_segment_mode = False
-        else:
-            log_info("[pipeline] FORCE_SEMANTIC_SEGMENT 已启用，检测到评分也继续执行语义分段。")
-
     if use_semantic_segment_mode:
         log_info("[pipeline] 启用语义分段模式：从头按语义连续切分（约4分钟）")
         try:
@@ -1290,6 +1278,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                     transcription_data = json.load(f)
             else:
                 transcription_data = []
+            if not transcription_data:
+                log_info("[pipeline] 语义分段跳过：转录为空，保留原有分段结果")
+                use_semantic_segment_mode = False
+                raise RuntimeError("skip_semantic")
             # 参数
             target_sec = float(cfg_manager.get("SEMANTIC_TARGET_DURATION") or 240.0)
             min_sec = float(cfg_manager.get("MIN_CLIP_DURATION") or max(60.0, target_sec * 0.6))
@@ -1546,10 +1538,11 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                             segments_data[i]['end'] = float(segments_data[i+1]['start'])
                     except Exception:
                         pass
-            except Exception as _e:
-                log_warning(f"[pipeline] 调整为恰好N段失败，将使用语义分段原始结果: {_e}")
-        except Exception as e:
-            log_warning(f"[pipeline] 语义分段模式失败，回退到分析结果: {e}")
+        except RuntimeError:
+            # 预先标记跳过语义分段（如转录为空）
+            pass
+        except Exception as _e:
+            log_warning(f"[pipeline] 调整为恰好N段失败，将使用语义分段原始结果: {_e}")
     
     # 应用切片时长扩展逻辑
     if segments_data:
@@ -2316,6 +2309,24 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             smart_predictor.end_session(success=True)
     except Exception:
         pass
+
+    # 自动生成 RAG 索引（默认开启，可通过 RAG_ENABLE 关闭）
+    try:
+        rag_enabled = True
+        try:
+            rag_enabled = bool(cfg_manager.get("RAG_ENABLE", True))
+        except Exception:
+            rag_enabled = True
+        if rag_enabled:
+            log_info("[pipeline][RAG] 自动生成内容索引（基于评分/转录）")
+            try:
+                generate_content_indexes(cfg_manager)
+            except Exception as exc:
+                log_warning(f"[pipeline][RAG] 自动索引生成失败: {exc}")
+        else:
+            log_info("[pipeline][RAG] 已禁用（RAG_ENABLE=false）")
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] 索引生成流程异常: {exc}")
 
     return output_clips_dir, clip_files, has_chat
 

@@ -1243,7 +1243,7 @@ class MainWindow(QMainWindow):
                 log_info("📊 智能预测会话已结束（处理失败）")
         
         self.show_error_message("处理错误", error)
-        self.stop_processing()
+        self.stop_processing(success=False)
         
     def on_task_completed(self, task_id: str):
         """处理任务完成"""
@@ -1329,7 +1329,7 @@ class MainWindow(QMainWindow):
         if self.progress_worker:
             self.progress_worker.finish_stage(stage_name)
 
-    def stop_processing_progress(self):
+    def stop_processing_progress(self, success: bool = True):
         """停止进度显示"""
         try:
             # 停止主要进度条
@@ -1349,6 +1349,13 @@ class MainWindow(QMainWindow):
             if hasattr(self, 'time_prediction_label'):
                 self.time_prediction_label.setVisible(False)
                 self.predicted_total_time_str = None
+
+            # 标记进度完成/停止，避免 UI 悬挂
+            if hasattr(self, "progress_manager") and self.progress_manager:
+                if success:
+                    self.progress_manager.finish_processing()
+                else:
+                    self.progress_manager.stop_processing()
                 
             if self.progress_worker:
                 self.progress_worker.stop()
@@ -1371,7 +1378,7 @@ class MainWindow(QMainWindow):
         """简化的阶段完成"""
         log_info(f"✅ 完成阶段: {stage}")
 
-    def stop_processing(self):
+    def stop_processing(self, success: bool = True):
         """停止处理"""
         try:
             # 🆕 结束智能预测会话
@@ -1381,7 +1388,7 @@ class MainWindow(QMainWindow):
                     log_info("📊 智能预测会话已结束并记录到历史数据")
             
             # 停止进度显示系统
-            self.stop_processing_progress()
+            self.stop_processing_progress(success=success)
             
             logging.info("✅ 处理已停止")
             

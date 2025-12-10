@@ -256,3 +256,7 @@ artifacts/secrets/
 models/
 
 huggingface_token.txt
+
+# ACFV local runtime state (keep only on local machine)
+processing/stop_flag.txt
+src/acfv/features/modules/processing/processing_history.json

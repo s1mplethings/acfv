@@ -1,11 +1,14 @@
 """Utility helpers for ensuring TwitchDownloaderCLI is available."""
 
+
 from __future__ import annotations
 
 import logging
 import os
+import re
 import shutil
 import stat
+import subprocess
 import tempfile
 import zipfile
 from pathlib import Path
@@ -23,17 +26,31 @@ __all__ = [
 ]
 
 LOGGER = logging.getLogger("acfv.twitch_downloader")
-DEFAULT_RELEASE_TAG = "v1.60.4"
+# Upstream latest release as of 2025-12 (API reports 1.56.2). Keep this in sync
+# with a stable version to avoid futile upgrade loops.
+DEFAULT_RELEASE_TAG = "v1.56.2"
 DEFAULT_ASSET_TEMPLATE = (
     "https://github.com/lay295/TwitchDownloader/releases/download/"
     "{tag}/TwitchDownloaderCLI-Windows-x64.zip"
 )
 EXE_NAME = "TwitchDownloaderCLI.exe"
 _CACHED_PATH: Optional[str] = None
+MIN_CLI_VERSION: tuple[int, int, int]
 
 
 class TwitchDownloaderSetupError(RuntimeError):
     """Raised when the Twitch downloader binary cannot be prepared."""
+
+
+def _parse_version(value: str) -> tuple[int, int, int]:
+    numbers = re.findall(r"\d+", value)
+    parts = [int(num) for num in numbers[:3]]
+    while len(parts) < 3:
+        parts.append(0)
+    return tuple(parts)
+
+
+MIN_CLI_VERSION = _parse_version(DEFAULT_RELEASE_TAG)
 
 
 def resolve_twitch_cli(auto_install: bool = True) -> str:
@@ -47,9 +64,15 @@ def resolve_twitch_cli(auto_install: bool = True) -> str:
     candidates = _gather_candidate_paths()
     for candidate in candidates:
         if candidate and Path(candidate).exists():
-            _CACHED_PATH = str(Path(candidate))
-            _persist_config(_CACHED_PATH)
-            return _CACHED_PATH
+            if _is_version_sufficient(candidate):
+                _CACHED_PATH = str(Path(candidate))
+                _persist_config(_CACHED_PATH)
+                return _CACHED_PATH
+            LOGGER.warning(
+                "[TwitchDownloader] Outdated TwitchDownloaderCLI detected at %s; upgrading to %s",
+                candidate,
+                DEFAULT_RELEASE_TAG,
+            )
 
     if not auto_install:
         raise TwitchDownloaderSetupError(
@@ -109,6 +132,38 @@ def _gather_candidate_paths() -> list[str]:
     return paths
 
 
+def _get_cli_version(path: str) -> Optional[str]:
+    try:
+        result = subprocess.run(
+            [path, "--version"], capture_output=True, text=True, timeout=5
+        )
+        if result.returncode == 0:
+            output = (result.stdout or "") + (result.stderr or "")
+            match = re.search(r"(\d+\.\d+\.\d+)", output)
+            if match:
+                return match.group(1)
+    except Exception:
+        LOGGER.debug(
+            "[TwitchDownloader] Unable to query CLI version from %s", path, exc_info=True
+        )
+    return None
+
+
+def _is_version_sufficient(path: str) -> bool:
+    version = _get_cli_version(path)
+    if not version:
+        return False
+    parsed = _parse_version(version)
+    if parsed < MIN_CLI_VERSION:
+        LOGGER.info(
+            "[TwitchDownloader] CLI %s is older than required %s; reinstalling.",
+            version,
+            DEFAULT_RELEASE_TAG,
+        )
+        return False
+    return True
+
+
 def _persist_config(path: str) -> None:
     try:
         stored = config_manager.get("TWITCH_DOWNLOADER_PATH")
@@ -134,6 +189,8 @@ def _download_and_install_cli() -> Path:
             extracted = Path(archive.extract(member, path=tmp_dir))
 
         target_path = tools_dir / EXE_NAME
+        if target_path.exists():
+            target_path.unlink()
         shutil.move(str(extracted), target_path)
         # ensure executable bit (important on POSIX environments)
         target_path.chmod(target_path.stat().st_mode | stat.S_IEXEC)

@@ -12,15 +12,15 @@ from PyQt5 import QtGui
 class AppPalette:
     """Simple palette definition so we can tweak colors centrally."""
 
-    window: str = "#10141a"
-    base: str = "#1b212b"
-    text: str = "#f1f5f9"
-    subtle_text: str = "#94a3b8"
-    accent: str = "#00b2ff"
-    border: str = "#27303f"
-    success: str = "#34d399"
-    warning: str = "#fbbf24"
-    danger: str = "#f87171"
+    window: str = "#f5f7fb"
+    base: str = "#ffffff"
+    text: str = "#111827"
+    subtle_text: str = "#6b7280"
+    accent: str = "#3b82f6"
+    border: str = "#d5d9e0"
+    success: str = "#16a34a"
+    warning: str = "#eab308"
+    danger: str = "#ef4444"
 
 
 def _color(value: str) -> QtGui.QColor:
@@ -35,11 +35,11 @@ def apply_app_palette(app, palette: Optional[AppPalette] = None) -> None:
     qt_palette = QtGui.QPalette()
     qt_palette.setColor(QtGui.QPalette.Window, _color(palette.window))
     qt_palette.setColor(QtGui.QPalette.Base, _color(palette.base))
-    qt_palette.setColor(QtGui.QPalette.AlternateBase, _color("#151a23"))
+    qt_palette.setColor(QtGui.QPalette.AlternateBase, _color("#f0f2f7"))
     qt_palette.setColor(QtGui.QPalette.Text, _color(palette.text))
-    qt_palette.setColor(QtGui.QPalette.Button, _color("#1e2530"))
+    qt_palette.setColor(QtGui.QPalette.Button, _color("#e5edff"))
     qt_palette.setColor(QtGui.QPalette.ButtonText, _color(palette.text))
-    qt_palette.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor("#111827"))
+    qt_palette.setColor(QtGui.QPalette.ToolTipBase, _color("#f9fafb"))
     qt_palette.setColor(QtGui.QPalette.ToolTipText, _color(palette.text))
     app.setPalette(qt_palette)
 
@@ -66,12 +66,11 @@ def card_frame_style(palette: Optional[AppPalette] = None) -> str:
         "QPushButton {"
         "border-radius: 6px;"
         f"background-color: {palette.accent};"
-        "color: #0f172a;"
+        "color: #ffffff;"
         "padding: 6px 14px;"
         "}"
         "QPushButton:disabled {"
-        "background-color: #2f3946;"
-        "color: #7c8798;"
+        "background-color: #e5e7eb;"
+        "color: #9ca3af;"
         "}"
     )
-

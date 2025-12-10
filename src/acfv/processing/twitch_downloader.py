@@ -113,6 +113,12 @@ class TwitchDownloader:
         total = len(vods)
         self._cancel_requested = False
         self._detail_progress_cb = detail_progress_callback
+        # 确保下载目录存在，避免 CLI 抛 DirectoryNotFoundException
+        try:
+            os.makedirs(download_folder, exist_ok=True)
+        except Exception as exc:
+            logging.error(f"创建下载目录失败: {download_folder} ({exc})")
+            return results
         for idx, vod in enumerate(vods, start=1):
             # 外部请求停止
             if (stop_flag_callable and stop_flag_callable()) or self._cancel_requested:

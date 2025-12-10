@@ -338,40 +338,50 @@ def transcribe_audio_segment_safe(audio_path, start_time, end_time, whisper_mode
         
         log_debug(f"[转录] 音频片段文件大小: {file_size} bytes")
         
-        # 使用Whisper转录
-        if not WHISPER_AVAILABLE:
-            log_error("[转录] Whisper不可用")
-            return []
-        
-        # 验证GPU使用
-        import torch
-        if torch.cuda.is_available():
-            log_debug(f"[转录] GPU内存使用前: {torch.cuda.memory_allocated() / 1024**2:.1f}MB")
-        
         # 读取转录配置
         try:
             with settings_path("config.json").open("r", encoding="utf-8") as f:
                 config_data = json.load(f)
-            transcription_language = config_data.get("TRANSCRIPTION_LANGUAGE", "auto")
+            transcription_language = str(config_data.get("TRANSCRIPTION_LANGUAGE", "auto")).strip()
             no_speech_threshold = config_data.get("NO_SPEECH_THRESHOLD", 0.6)
             logprob_threshold = config_data.get("LOGPROB_THRESHOLD", -1.0)
         except Exception as e:
             log_debug(f"[转录] 无法读取配置，使用默认值: {e}")
-            transcription_language = "en"
+            transcription_language = "auto"
             no_speech_threshold = 0.6
             logprob_threshold = -1.0
-        
-        # 使用英语进行转录
+
+        # 使用Whisper转录
+        if not WHISPER_AVAILABLE:
+            log_error("[转录] Whisper不可用")
+            return []
+
+        # 验证GPU使用
+        import torch
+        if torch.cuda.is_available():
+            log_debug(f"[转录] GPU内存使用前: {torch.cuda.memory_allocated() / 1024**2:.1f}MB")
+
+        language_arg = None
+        if transcription_language and str(transcription_language).strip().lower() not in {"auto", "default", "detect"}:
+            language_arg = transcription_language
+        fp16_enabled = torch.cuda.is_available()
         try:
-            log_debug(f"[转录] 开始转录片段: {start_time}-{end_time}")
+            model_device = str(getattr(whisper_model, "device", "cuda" if torch.cuda.is_available() else "cpu"))
+            fp16_enabled = fp16_enabled and model_device.startswith("cuda")
+        except Exception:
+            fp16_enabled = torch.cuda.is_available()
+
+        # 按配置语言执行转录
+        try:
+            log_debug(f"[转录] 开始转录片段: {start_time}-{end_time} (language={language_arg or 'auto'})")
             result = whisper_model.transcribe(
                 temp_audio_path,
-                language='en',  # 固定使用英语
-                initial_prompt="",  # 移除可能导致问题的初始提示
+                language=language_arg,
+                initial_prompt="",
                 no_speech_threshold=no_speech_threshold,
                 logprob_threshold=logprob_threshold,
                 word_timestamps=True,
-                fp16=torch.cuda.is_available()  # 在GPU上使用FP16
+                fp16=fp16_enabled,
             )
             log_debug(f"[转录] Whisper转录完成，结果类型: {type(result)}")
         except Exception as e:
@@ -381,14 +391,14 @@ def transcribe_audio_segment_safe(audio_path, start_time, end_time, whisper_mode
                 log_debug(f"[转录] 尝试简化参数转录...")
                 result = whisper_model.transcribe(
                     temp_audio_path,
-                    language='en',
-                    fp16=False  # 禁用FP16
+                    language=language_arg,
+                    word_timestamps=True,
+                    fp16=False,
                 )
                 log_debug(f"[转录] 简化转录完成")
             except Exception as e2:
                 log_error(f"[转录] 简化转录也失败: {e2}")
                 return []
-        
         # 验证GPU使用后
         if torch.cuda.is_available():
             log_debug(f"[转录] GPU内存使用后: {torch.cuda.memory_allocated() / 1024**2:.1f}MB")
