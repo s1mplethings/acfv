@@ -31,7 +31,7 @@ from acfv.features.modules.ui_components import SettingsDialog, Worker
 from acfv.features.modules.progress_manager import ProgressManager
 from acfv.features.modules.progress_widget import ProgressWidget, ProgressUpdateWorker
 from acfv.features.modules.beautiful_progress_widget import SimpleBeautifulProgressBar
-from acfv.ui.tabs import create_clips_tab, create_local_tab, create_twitch_tab
+from acfv.ui.tabs import create_clips_tab, create_local_tab, create_twitch_tab, create_rag_pref_tab
 from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
 from acfv.lifecycle.tray_manager import TrayManager
 
@@ -625,6 +625,11 @@ class MainWindow(QMainWindow):
         self.tab_clips = clips_handle.widget
         self.clips_manager = clips_handle.controller
         self.tabs.addTab(clips_handle.widget, clips_handle.title)
+
+        rag_pref_handle = create_rag_pref_tab(self, self.config_manager)
+        self.tab_rag_pref = rag_pref_handle.widget
+        self.rag_pref_widget = rag_pref_handle.controller
+        self.tabs.addTab(rag_pref_handle.widget, rag_pref_handle.title)
 
         # Stream monitor tab
         self.stream_monitor_widget = StreamMonitorEditorWidget()

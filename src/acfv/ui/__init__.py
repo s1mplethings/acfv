@@ -2,7 +2,7 @@
 
 from .theme import AppPalette, apply_app_palette, card_frame_style
 from .sections import build_section_header, wrap_in_card
-from .tabs import TabHandle, create_clips_tab, create_local_tab, create_twitch_tab
+from .tabs import TabHandle, create_clips_tab, create_local_tab, create_twitch_tab, create_rag_pref_tab
 
 __all__ = [
     "AppPalette",
@@ -14,4 +14,5 @@ __all__ = [
     "create_twitch_tab",
     "create_local_tab",
     "create_clips_tab",
+    "create_rag_pref_tab",
 ]

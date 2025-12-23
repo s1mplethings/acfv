@@ -1077,12 +1077,15 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         if 'progress_callback' in analyze_params:
             analyze_kwargs['progress_callback'] = emit_progress
         if 'enable_video_emotion' in analyze_params:
+            device_setting = cfg_manager.get("GPU_DEVICE") or "cuda:0"
+            if not cfg_manager.get("ENABLE_GPU_ACCELERATION", True):
+                device_setting = "cpu"
             analyze_kwargs.update({
                 'video_emotion_file': video_emotion_output,
                 'video_emotion_weight': video_emotion_weight,
                 'top_n': max_clips if max_clips > 0 else 9999,
                 'enable_video_emotion': enable_video_emotion,
-                'device': 'cuda:0'
+                'device': device_setting
             })
         elif 'video_emotion_file' in analyze_params and 'video_emotion_weight' in analyze_params:
             analyze_kwargs.update({
@@ -1538,6 +1541,9 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                             segments_data[i]['end'] = float(segments_data[i+1]['start'])
                     except Exception:
                         pass
+            except Exception as _e:
+                # 调整片段数量失败时保留语义分段的原始结果
+                log_warning(f"[pipeline] 调整为恰好N段失败，将使用语义分段原始结果: {_e}")
         except RuntimeError:
             # 预先标记跳过语义分段（如转录为空）
             pass

@@ -944,7 +944,7 @@ def batch_sentiment_analysis(texts, device=None):
     # 获取全局文本分析器
     text_analyzer = get_text_analyzer(device)
     
-    if not torch or not GPU_AVAILABLE or not device or device.type == 'cpu' or len(texts) < 50:
+    if not torch or not GPU_AVAILABLE or not device or device.type == 'cpu':
         log_info(f"[情感分析] 使用VADER快速分析 {len(texts)} 个文本")
         return [vader_interest_score(text) for text in texts]
     

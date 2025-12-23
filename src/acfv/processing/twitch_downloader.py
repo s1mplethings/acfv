@@ -58,6 +58,8 @@ class TwitchDownloader:
         self._cancel_requested = False
         self._detail_progress_cb = None  # 细粒度进度回调
         self._current_vod_context = None  # (idx, total, safe_filename)
+        # 记录已解析的 CLI 路径，避免后续找不到可执行文件导致 WinError 2
+        self.cli_path = ensure_cli_on_path(auto_install=True)
     
     def fetch_vods(self, client_id, oauth_token, usernames):
         """获取指定用户的VOD列表"""
@@ -217,10 +219,14 @@ class TwitchDownloader:
             
         for attempt in range(max_retries):
             try:
+                cli_path = self.cli_path or ensure_cli_on_path(auto_install=True)
+                if not cli_path or not os.path.exists(cli_path):
+                    logging.error("TwitchDownloaderCLI 未找到，请检查 TWITCH_DOWNLOADER_PATH 或网络安装是否成功。")
+                    return False
                 logging.info(f"{description} (尝试 {attempt + 1}/{max_retries})")
                 
                 # 构建命令
-                command = ["TwitchDownloaderCLI.exe", command_type, "--id", vod_id, "-o", output_path] + extra_args
+                command = [cli_path, command_type, "--id", vod_id, "-o", output_path] + extra_args
                 
                 # 使用Popen来实时处理输出，自动响应覆盖提示
                 process = subprocess.Popen(
@@ -942,6 +948,25 @@ class TwitchTab:
         self.download_status_label.setText(
             f"{stage_cn}: {filename}  ({min(self._completed_items, total)}/{total})"
         )
+
+        if stage in ('video_failed', 'error'):
+            # 显式中止队列并弹出提示
+            self.finish_download_ui(canceled=True)
+            self._is_downloading = False
+            try:
+                if self.download_worker and self.download_worker.isRunning():
+                    self.download_worker.stop()
+            except Exception:
+                pass
+            try:
+                QMessageBox.critical(
+                    self.main_window,
+                    "下载失败",
+                    f"下载 {filename} 时出错，请检查 TwitchDownloaderCLI 路径或网络后重试。"
+                )
+            except Exception as e:
+                logging.debug(f"显示下载失败消息时忽略错误: {e}")
+            return
 
         if stage == 'canceled':
             self.download_progress_bar.setFormat("已取消")
