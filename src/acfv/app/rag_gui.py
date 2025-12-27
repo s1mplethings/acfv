@@ -100,6 +100,147 @@ def _iter_records_from_file(filepath: str) -> Iterable[Dict[str, object]]:
             yield _normalise_entry(str(clip_name), rec)
 
 
+def _iter_text_records_from_file(filepath: str) -> Iterable[Dict[str, object]]:
+    """Yield clip transcript records from text/json/jsonl files."""
+    suffix = Path(filepath).suffix.lower()
+    try:
+        if suffix == ".txt":
+            content = Path(filepath).read_text(encoding="utf-8")
+            blocks = re.split(r"\n\s*\n+", content)
+            for block in blocks:
+                text = re.sub(r"\s+", " ", block).strip()
+                if text:
+                    yield {"text": text}
+            return
+        if suffix == ".jsonl":
+            with open(filepath, "r", encoding="utf-8") as handle:
+                for line in handle:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        obj = json.loads(line)
+                    except Exception:
+                        continue
+                    if isinstance(obj, str):
+                        yield {"text": obj}
+                        continue
+                    if not isinstance(obj, dict):
+                        continue
+                    yield {
+                        "text": obj.get("text")
+                        or obj.get("content")
+                        or obj.get("transcript")
+                        or obj.get("transcript_text")
+                        or obj.get("raw_text")
+                        or obj.get("summary_text")
+                        or "",
+                        "clip_path": obj.get("clip_path"),
+                        "video_name": obj.get("video_name") or obj.get("video"),
+                        "start": obj.get("start") or obj.get("start_sec"),
+                        "end": obj.get("end") or obj.get("end_sec"),
+                        "rating": obj.get("rating") or obj.get("score"),
+                    }
+            return
+        if suffix == ".json":
+            with open(filepath, "r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+            items = None
+            if isinstance(payload, dict):
+                items = payload.get("clips") or payload.get("items")
+                if items is None and "text" in payload:
+                    items = [payload]
+            elif isinstance(payload, list):
+                items = payload
+            if items:
+                for obj in items:
+                    if isinstance(obj, str):
+                        yield {"text": obj}
+                        continue
+                    if not isinstance(obj, dict):
+                        continue
+                    yield {
+                        "text": obj.get("text")
+                        or obj.get("content")
+                        or obj.get("transcript")
+                        or obj.get("transcript_text")
+                        or obj.get("raw_text")
+                        or obj.get("summary_text")
+                        or "",
+                        "clip_path": obj.get("clip_path"),
+                        "video_name": obj.get("video_name") or obj.get("video"),
+                        "start": obj.get("start") or obj.get("start_sec"),
+                        "end": obj.get("end") or obj.get("end_sec"),
+                        "rating": obj.get("rating") or obj.get("score"),
+                    }
+            return
+    except Exception as exc:
+        logging.warning("[RAG GUI] Failed reading %s: %s", filepath, exc)
+        return
+
+
+def _resolve_repo_root() -> Path:
+    return Path(__file__).resolve().parents[3]
+
+
+def _resolve_clips_db_path(config: ConfigManager) -> Optional[Path]:
+    configured = (
+        config.get("RAG_CLIPS_DB_PATH")
+        or os.environ.get("RAG_CLIPS_DB_PATH")
+    )
+    candidates = []
+    if configured:
+        candidates.append(str(configured))
+    candidates.extend(["rag_store/clips.db", "clips.db"])
+    repo_root = _resolve_repo_root()
+    for candidate in candidates:
+        path = Path(candidate)
+        if not path.is_absolute():
+            path = (repo_root / path).resolve()
+        if path.exists():
+            return path
+    return None
+
+
+def _resolve_rag_db_path(config: ConfigManager) -> Optional[Path]:
+    configured = config.get("RAG_DB_PATH") or os.environ.get("RAG_DB_PATH")
+    candidates: List[Path] = []
+    if configured:
+        path = Path(str(configured))
+        if not path.is_absolute():
+            path = (_resolve_repo_root() / path).resolve()
+        candidates.append(path)
+    candidates.append(processing_path("rag_database.json"))
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _iter_records_from_rag_db(filepath: Path) -> Iterable[Dict[str, object]]:
+    try:
+        payload = json.loads(filepath.read_text(encoding="utf-8"))
+    except Exception as exc:
+        logging.warning("[RAG GUI] Failed reading %s: %s", filepath, exc)
+        return
+    if not isinstance(payload, dict):
+        return
+    clips = payload.get("clips")
+    if not isinstance(clips, list):
+        return
+    for rec in clips:
+        if not isinstance(rec, dict):
+            continue
+        yield {
+            "clip_path": rec.get("clip_path"),
+            "video_name": rec.get("video_name"),
+            "start": rec.get("clip_start_time") or rec.get("start"),
+            "end": rec.get("clip_end_time") or rec.get("end"),
+            "rating": rec.get("user_rating") or rec.get("rating"),
+            "text": rec.get("transcript_text") or rec.get("text") or "",
+        }
+
+
 # --------------------------------------------------------------------------- #
 # GUI widgets
 
@@ -154,6 +295,10 @@ class RAGManagerWindow(QtWidgets.QMainWindow):
         self.refresh_btn.clicked.connect(self.refresh_table)
         self.import_btn = QtWidgets.QPushButton("导入 ratings…")
         self.import_btn.clicked.connect(self.import_ratings)
+        self.import_text_btn = QtWidgets.QPushButton("导入剪辑内容…")
+        self.import_text_btn.clicked.connect(self.import_clip_contents)
+        self.import_db_btn = QtWidgets.QPushButton("从数据库导入")
+        self.import_db_btn.clicked.connect(self.import_from_database)
         self.summary_btn = QtWidgets.QPushButton("偏好总结")
         self.summary_btn.clicked.connect(self.show_preferences)
         self.embed_btn = QtWidgets.QPushButton("生成向量")
@@ -162,6 +307,8 @@ class RAGManagerWindow(QtWidgets.QMainWindow):
         self.clear_btn.clicked.connect(self.clear_database)
         btn_layout.addWidget(self.refresh_btn)
         btn_layout.addWidget(self.import_btn)
+        btn_layout.addWidget(self.import_text_btn)
+        btn_layout.addWidget(self.import_db_btn)
         btn_layout.addWidget(self.summary_btn)
         btn_layout.addWidget(self.embed_btn)
         btn_layout.addWidget(self.clear_btn)
@@ -264,6 +411,222 @@ class RAGManagerWindow(QtWidgets.QMainWindow):
             self._append_log(f"已导入 {added} 条剪辑。")
         else:
             self._append_log("未导入新的剪辑（可能全部已存在）。")
+        self.refresh_table()
+
+    def _build_manual_clip_path(self, source_path: str, index: int, existing: set) -> str:
+        base = Path(source_path).stem or "manual"
+        candidate = f"{base}_clip_{index}.txt"
+        suffix = 1
+        while candidate in existing:
+            candidate = f"{base}_clip_{index}_{suffix}.txt"
+            suffix += 1
+        return candidate
+
+    def import_clip_contents(self) -> None:
+        files, _ = QtWidgets.QFileDialog.getOpenFileNames(
+            self,
+            "选择剪辑内容文件",
+            os.getcwd(),
+            "文本/JSON (*.txt *.json *.jsonl);;所有文件 (*)",
+        )
+        if not files:
+            return
+        default_rating, ok = QtWidgets.QInputDialog.getInt(
+            self,
+            "默认评分",
+            "请输入默认评分 (1-5)：",
+            5,
+            1,
+            5,
+        )
+        if not ok:
+            return
+        existing = {clip.get("clip_path") for clip in self.db.get_all_clips()}
+        added = 0
+        for file_path in files:
+            index = 1
+            for record in _iter_text_records_from_file(file_path):
+                text = str(record.get("text") or "").strip()
+                if not text:
+                    continue
+                clip_path = str(record.get("clip_path") or "").strip()
+                if not clip_path:
+                    clip_path = self._build_manual_clip_path(file_path, index, existing)
+                if clip_path in existing:
+                    index += 1
+                    continue
+                video_name = str(record.get("video_name") or Path(file_path).stem)
+                try:
+                    start = float(record.get("start") or 0.0)
+                except Exception:
+                    start = 0.0
+                try:
+                    end = float(record.get("end") or 0.0)
+                except Exception:
+                    end = 0.0
+                rating_val = record.get("rating")
+                if rating_val is None:
+                    rating = default_rating
+                else:
+                    try:
+                        rating = int(round(float(rating_val)))
+                    except Exception:
+                        rating = default_rating
+                rating = max(1, min(5, rating))
+                if self.db.add_liked_clip_vector(
+                    clip_path=clip_path,
+                    transcript_text=text,
+                    video_name=video_name,
+                    clip_start_time=start,
+                    clip_end_time=end,
+                    user_rating=rating,
+                ):
+                    existing.add(clip_path)
+                    added += 1
+                index += 1
+        if added:
+            self._append_log(f"已导入 {added} 条剪辑内容。")
+        else:
+            self._append_log("未导入新的剪辑内容。")
+        self.refresh_table()
+
+    def _make_db_clip_id(self, db_path: Path, clip_id: object) -> str:
+        return f"{db_path.name}#clip-{clip_id}"
+
+    def import_from_database(self) -> None:
+        db_path = _resolve_clips_db_path(self.config)
+        if db_path:
+            self._import_from_clips_db(db_path)
+            return
+        rag_db = _resolve_rag_db_path(self.config)
+        if rag_db and rag_db.resolve() != Path(self.db_path).resolve():
+            self._import_from_rag_db(rag_db)
+            return
+        QtWidgets.QMessageBox.warning(
+            self,
+            "未找到数据库",
+            "未找到 clips.db，且 RAG_DB_PATH 与当前数据库相同或不存在。",
+        )
+
+    def _import_from_clips_db(self, db_path: Path) -> None:
+        try:
+            import sqlite3
+        except Exception as exc:
+            QtWidgets.QMessageBox.warning(self, "SQLite 不可用", str(exc))
+            return
+
+        default_rating = self.config.get("RAG_IMPORT_DEFAULT_RATING", 5)
+        try:
+            rating = int(default_rating)
+        except Exception:
+            rating = 5
+        rating = max(1, min(5, rating))
+
+        existing = {clip.get("clip_path") for clip in self.db.get_all_clips()}
+        added = 0
+        conn = None
+        try:
+            conn = sqlite3.connect(str(db_path))
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute(
+                "SELECT clip_id, video_id, start_sec, end_sec, summary_text, raw_text FROM clips"
+            ).fetchall()
+        except sqlite3.Error as exc:
+            QtWidgets.QMessageBox.warning(self, "读取失败", f"无法读取数据库: {exc}")
+            return
+        finally:
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+
+        for row in rows:
+            text = (row["summary_text"] or row["raw_text"] or "").strip()
+            if not text:
+                continue
+            clip_path = self._make_db_clip_id(db_path, row["clip_id"])
+            if clip_path in existing:
+                continue
+            try:
+                start = float(row["start_sec"] or 0.0)
+            except Exception:
+                start = 0.0
+            try:
+                end = float(row["end_sec"] or 0.0)
+            except Exception:
+                end = 0.0
+            if self.db.add_liked_clip_vector(
+                clip_path=clip_path,
+                transcript_text=text,
+                video_name=str(row["video_id"] or ""),
+                clip_start_time=start,
+                clip_end_time=end,
+                user_rating=rating,
+            ):
+                existing.add(clip_path)
+                added += 1
+
+        if added:
+            self._append_log(f"已从 clips.db 导入 {added} 条剪辑内容。")
+        else:
+            self._append_log("未导入新的剪辑内容（可能为空或已存在）。")
+        self.refresh_table()
+
+    def _import_from_rag_db(self, rag_db: Path) -> None:
+        existing = {clip.get("clip_path") for clip in self.db.get_all_clips()}
+        default_rating = self.config.get("RAG_IMPORT_DEFAULT_RATING", 5)
+        try:
+            rating_default = int(default_rating)
+        except Exception:
+            rating_default = 5
+        rating_default = max(1, min(5, rating_default))
+        added = 0
+        index = 1
+        for record in _iter_records_from_rag_db(rag_db):
+            text = str(record.get("text") or "").strip()
+            if not text:
+                continue
+            clip_path = str(record.get("clip_path") or "").strip()
+            if not clip_path:
+                clip_path = self._build_manual_clip_path(str(rag_db), index, existing)
+            if clip_path in existing:
+                index += 1
+                continue
+            video_name = str(record.get("video_name") or "imported")
+            try:
+                start = float(record.get("start") or 0.0)
+            except Exception:
+                start = 0.0
+            try:
+                end = float(record.get("end") or 0.0)
+            except Exception:
+                end = 0.0
+            rating_val = record.get("rating")
+            if rating_val is None:
+                rating = rating_default
+            else:
+                try:
+                    rating = int(round(float(rating_val)))
+                except Exception:
+                    rating = rating_default
+            rating = max(1, min(5, rating))
+            if self.db.add_liked_clip_vector(
+                clip_path=clip_path,
+                transcript_text=text,
+                video_name=video_name,
+                clip_start_time=start,
+                clip_end_time=end,
+                user_rating=rating,
+            ):
+                existing.add(clip_path)
+                added += 1
+            index += 1
+
+        if added:
+            self._append_log(f"已从 RAG_DB_PATH 导入 {added} 条剪辑内容。")
+        else:
+            self._append_log("未导入新的剪辑内容（可能为空或已存在）。")
         self.refresh_table()
 
     def ensure_embeddings(self) -> None:
@@ -469,8 +832,10 @@ class RAGManagerWindow(QtWidgets.QMainWindow):
         self._topic_llm_checked = True
         model_name = str(
             self.config.get("RAG_TOPIC_LLM_MODEL")
+            or self.config.get("LOCAL_SUMMARY_MODEL")
             or os.environ.get("RAG_TOPIC_LLM_MODEL")
-            or "google/flan-t5-small"
+            or os.environ.get("LOCAL_SUMMARY_MODEL")
+            or "google/gemma-3-4b-it"
         ).strip()
         self._topic_llm_model = model_name
         if not model_name or model_name.lower() in {"off", "none", "disable", "disabled"}:
@@ -526,9 +891,16 @@ class RAGManagerWindow(QtWidgets.QMainWindow):
         snippets = [t[:220] for t in texts[:4]]
         if llm:
             if use_chinese:
-                prompt = "根据以下剪辑转录内容，输出一个简短主题标签（2-6个词），只输出标签：\n"
+                prompt = (
+                    "根据以下剪辑转录内容，输出一个简短主题标签（2-6个词），只输出标签。\n"
+                    "要求：不要直接引用原句，避免感谢/关注/打招呼/订阅/raid 等泛用语。\n"
+                )
             else:
-                prompt = "Given the following clip transcripts, return a short topic label (2-6 words). Only return the label:\n"
+                prompt = (
+                    "Given the following clip transcripts, return a short topic label (2-6 words). "
+                    "Only return the label. Do not quote full sentences, and ignore generic "
+                    "phrases like thanks, follows, greetings, subs, raids.\n"
+                )
             prompt += "\n".join(f"- {s}" for s in snippets)
             try:
                 output = llm(prompt, max_new_tokens=24, num_beams=4, do_sample=False, truncation=True)

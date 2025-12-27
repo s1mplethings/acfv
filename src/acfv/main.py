@@ -643,6 +643,11 @@ def main():
             except Exception as e:
                 logging.error(f"主窗口创建失败: {e}")
                 return None
+
+        def _is_truthy(value) -> bool:
+            if isinstance(value, str):
+                return value.strip().lower() in {"1", "true", "yes", "on"}
+            return bool(value)
         
         # 延迟初始化
         if not load_main_modules():
@@ -678,8 +683,11 @@ def main():
                         return cand
                 # 常见备选路径
                 fallbacks = [
+                    os.path.join(current_dir, 'acfv.png'),
                     os.path.join(current_dir, 'assets', 'app.ico'),
                     os.path.join(current_dir, 'assets', 'app.png'),
+                    os.path.join(current_dir, 'assets', 'acfv-logo.ico'),
+                    os.path.join(current_dir, 'assets', 'acfv-logo.png'),
                     os.path.join(current_dir, 'icons', 'app.ico'),
                     os.path.join(current_dir, 'icons', 'app.png'),
                     os.path.join(current_dir, 'app.ico'),
@@ -718,30 +726,19 @@ def main():
         # 显示主窗口
         main_window.show()
 
-        # 启动工具API：现在默认自动启动，除非显式关闭
-        # 关闭方式：
-        #   1) 设置环境变量 DISABLE_TOOL_API=1  或
-        #   2) 设置 START_TOOL_API=0
-        # 自定义端口：设置 TOOL_API_PORT=8100 (默认 8099)
-        start_api_default = os.environ.get("START_TOOL_API", "1")  # 默认开启
-        disable_api = os.environ.get("DISABLE_TOOL_API", "0") == "1"
-        if start_api_default == "1" and not disable_api:
-            try:
-                try:
-                    from acfv.services.api_tools_server import start_background_server  # type: ignore
-                except Exception:
-                    start_background_server = None
-                if start_background_server:
-                    port = int(os.environ.get("TOOL_API_PORT", 8099))
-                    start_background_server(port=port)
-                    logging.info(f"🛠 工具API已启动: http://127.0.0.1:{port}  (设置 DISABLE_TOOL_API=1 可关闭)")
-                else:
-                    logging.debug("api_tools_server 不可用，跳过工具API启动")
-            except Exception as e:
-                logging.error(f"启动工具API失败: {e}")
-        else:
-            logging.info("工具API已被关闭 (设置 START_TOOL_API=1 且未设置 DISABLE_TOOL_API=1 可启用)")
-        
+        # 可选：启动后直接转入托盘后台运行
+        try:
+            start_in_tray = _is_truthy(config_manager.get("START_IN_TRAY", False))
+        except Exception:
+            start_in_tray = False
+        if start_in_tray:
+            if main_window.tray_manager:
+                main_window.hide()
+                main_window.tray_manager.show_hidden_tip()
+                logging.info("应用已启动为后台运行模式（托盘）")
+            else:
+                logging.info("系统托盘不可用，无法后台运行")
+
         # 移除了自动刷新功能，用户可以通过手动刷新按钮来更新clips列表
         logging.info("✅ 主窗口已显示，请使用刷新按钮来更新clips列表")
 

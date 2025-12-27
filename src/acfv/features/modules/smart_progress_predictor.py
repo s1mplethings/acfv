@@ -9,10 +9,12 @@
 import time
 import logging
 import json
-import os
 import statistics
 from typing import Dict, Any, Optional, List
 from datetime import datetime
+from pathlib import Path
+
+from acfv.runtime.storage import processing_path
 
 
 class SmartProgressPredictor:
@@ -30,27 +32,35 @@ class SmartProgressPredictor:
             "切片生成": 0.15
         }
         
-        # 🆕 历史记录相关（改为绝对路径，固定到项目 processing 目录）
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        processing_dir = os.path.join(base_dir, "processing")
-        self.history_file = os.path.join(processing_dir, "processing_history.json")
+        # 🆕 历史记录相关（运行时 processing 目录）
+        self.history_file = processing_path("processing_history.json")
+        self.legacy_history_file = Path(__file__).resolve().parent / "processing" / "processing_history.json"
         self.current_session = None
         
         # 确保history目录存在再加载
-        os.makedirs(os.path.dirname(self.history_file), exist_ok=True)
+        self.history_file.parent.mkdir(parents=True, exist_ok=True)
         self.history_data = self._load_history()
     
     def _load_history(self) -> Dict[str, List[Dict]]:
         """加载历史处理记录"""
         try:
-            if os.path.exists(self.history_file):
-                with open(self.history_file, 'r', encoding='utf-8') as f:
+            if self.history_file.exists():
+                with self.history_file.open('r', encoding='utf-8') as f:
                     data = json.load(f)
                     logging.info(f"📊 加载了 {sum(len(records) for records in data.values())} 条历史处理记录")
                     return data
-            else:
-                logging.info("📊 未找到历史记录文件，创建新的历史数据库")
-                return {"video_sessions": []}
+            if self.legacy_history_file.exists():
+                with self.legacy_history_file.open('r', encoding='utf-8') as f:
+                    data = json.load(f)
+                logging.info("加载了旧位置的历史记录，将迁移到运行时目录")
+                try:
+                    with self.history_file.open('w', encoding='utf-8') as f:
+                        json.dump(data, f, ensure_ascii=False, indent=2)
+                except Exception as e:
+                    logging.warning(f"迁移历史记录失败: {e}")
+                return data
+            logging.info("📊 未找到历史记录文件，创建新的历史数据库")
+            return {"video_sessions": []}
         except Exception as e:
             logging.warning(f"加载历史记录失败: {e}")
             return {"video_sessions": []}
@@ -58,7 +68,7 @@ class SmartProgressPredictor:
     def _save_history(self):
         """保存历史记录到文件"""
         try:
-            with open(self.history_file, 'w', encoding='utf-8') as f:
+            with self.history_file.open('w', encoding='utf-8') as f:
                 json.dump(self.history_data, f, ensure_ascii=False, indent=2)
             logging.debug("📊 历史记录已保存")
         except Exception as e:

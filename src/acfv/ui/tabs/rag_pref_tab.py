@@ -302,8 +302,10 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         self._topic_llm_checked = True
         model_name = str(
             self.config_manager.get("RAG_TOPIC_LLM_MODEL")
+            or self.config_manager.get("LOCAL_SUMMARY_MODEL")
             or os.environ.get("RAG_TOPIC_LLM_MODEL")
-            or "google/flan-t5-small"
+            or os.environ.get("LOCAL_SUMMARY_MODEL")
+            or "google/gemma-3-4b-it"
         ).strip()
         self._topic_llm_model = model_name
         if not model_name or model_name.lower() in {"off", "none", "disable", "disabled"}:
@@ -359,9 +361,16 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         snippets = [t[:220] for t in texts[:4]]
         if llm:
             if use_chinese:
-                prompt = "根据以下剪辑转录内容，输出一个简短主题标签（2-6个词），只输出标签：\n"
+                prompt = (
+                    "根据以下剪辑转录内容，输出一个简短主题标签（2-6个词），只输出标签。\n"
+                    "要求：不要直接引用原句，避免感谢/关注/打招呼/订阅/raid 等泛用语。\n"
+                )
             else:
-                prompt = "Given the following clip transcripts, return a short topic label (2-6 words). Only return the label:\n"
+                prompt = (
+                    "Given the following clip transcripts, return a short topic label (2-6 words). "
+                    "Only return the label. Do not quote full sentences, and ignore generic "
+                    "phrases like thanks, follows, greetings, subs, raids.\n"
+                )
             prompt += "\n".join(f"- {s}" for s in snippets)
             try:
                 output = llm(prompt, max_new_tokens=24, num_beams=4, do_sample=False, truncation=True)

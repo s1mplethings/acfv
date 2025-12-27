@@ -32,3 +32,4 @@ acfv = [
 [project.scripts]
 acfv = "acfv.cli._entry:main"
 acfv-gui = "acfv.gui:main"
+acfv-rag-gui = "acfv.app.rag_gui:launch_rag_gui"

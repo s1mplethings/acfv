@@ -22,7 +22,7 @@ from PyQt5.QtCore import Qt, QThread, QTimer, pyqtSignal, QSize
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QProgressBar, QLabel, QTabWidget,
-    QMessageBox, QDialog, QTextEdit, QLineEdit
+    QMessageBox, QDialog, QTextEdit
 )
 
 # 导入自定义模块
@@ -34,6 +34,7 @@ from acfv.features.modules.beautiful_progress_widget import SimpleBeautifulProgr
 from acfv.ui.tabs import create_clips_tab, create_local_tab, create_twitch_tab, create_rag_pref_tab
 from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
 from acfv.lifecycle.tray_manager import TrayManager
+from acfv.runtime.storage import processing_path
 
 
 # 简化的工作线程
@@ -364,7 +365,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.tabs)
 
     def init_top_buttons(self, layout):
-        """初始化顶部按钮 (设置/处理视频 + AI 输入与模式切换)"""
+        """初始化顶部按钮 (设置/处理视频)"""
         hb = QHBoxLayout()
         hb.setContentsMargins(8, 4, 8, 0)
         hb.setSpacing(6)
@@ -375,42 +376,9 @@ class MainWindow(QMainWindow):
         btn_all = QPushButton("处理视频")
         btn_all.clicked.connect(self.process_selected_video)
 
-        # AI 指令输入
-        self.ai_input = QLineEdit()
-        self.ai_input.setPlaceholderText("输入你的需求: 例如 '列出视频' 或 '处理 2024-08-30.mp4'")
-        self.ai_input.setMinimumWidth(260)
-
-        # AI 动作按钮
-        self.btn_ai_rate = QPushButton("AI执行")
-        self.btn_ai_rate.setToolTip("调用本地Agent或Flowise执行任务/指令")
-        self.btn_ai_rate.clicked.connect(self.on_ai_rate_clicked)
-
-        # 模式切换
-        self.btn_switch_ai_mode = QPushButton("模式:Local")
-        self.btn_switch_ai_mode.setToolTip("切换 Flowise / Local 模式")
-        self.btn_switch_ai_mode.clicked.connect(self._toggle_ai_mode)
-        self._ai_mode = "local"
-        self._flowise_client = None
-
-        # 结果显示标签 (懒加载, 在布局末尾添加)
-        if not hasattr(self, 'ai_result_label'):
-            self.ai_result_label = QLabel("")
-            self.ai_result_label.setWordWrap(True)
-            self.ai_result_label.setStyleSheet(
-                "QLabel {font-size:12px; padding:6px; border:1px solid #d0d7de; background:#f6f8fa; border-radius:4px;}"
-            )
-            self.ai_result_label.setVisible(False)
-
-        # Agent 延迟初始化标志
-        self._agent_backend = None
-        self._agent_loading = False
-
         # 添加到布局
         hb.addWidget(btn_set)
         hb.addWidget(btn_all)
-        hb.addWidget(self.ai_input)
-        hb.addWidget(self.btn_ai_rate)
-        hb.addWidget(self.btn_switch_ai_mode)
         layout.addLayout(hb)
 
     def init_progress_display(self, layout):
@@ -472,139 +440,6 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.time_prediction_label)
         self.predicted_total_time_str = None
 
-        # 如果之前创建了 ai_result_label，这里添加到布局末尾
-        if hasattr(self, 'ai_result_label') and self.ai_result_label not in [layout.itemAt(i).widget() for i in range(layout.count()) if layout.itemAt(i) and layout.itemAt(i).widget()]:
-            layout.addWidget(self.ai_result_label)
-
-    # ================== AI Agent 相关 ==================
-    def _lazy_init_agent(self):
-        """首次使用时加载 AgentBackend，避免启动时阻塞"""
-        if self._agent_backend or self._agent_loading:
-            return
-        self._agent_loading = True
-        try:
-            from services.agent_backend import AgentBackend
-            # 注册MainWindow供工具访问
-            try:
-                from services import app_actions
-                app_actions.set_main_window(self)
-            except Exception:
-                pass
-            self._agent_backend = AgentBackend()
-            logging.info("[GUI] AgentBackend 初始化完成")
-        except ImportError as e:
-            logging.error(f"AgentBackend 导入失败: {e}")
-            QMessageBox.warning(self, "智能体不可用", f"请先安装依赖: langchain, langgraph, langchain-openai\n错误: {e}")
-        except Exception as e:
-            logging.error(f"AgentBackend 初始化失败: {e}")
-            QMessageBox.warning(self, "智能体初始化失败", str(e))
-        finally:
-            self._agent_loading = False
-
-    def on_ai_rate_clicked(self):
-        """AI 智能评分按钮回调 (支持 local / flowise)"""
-        # 用户指令
-        user_query = self.ai_input.text().strip()
-        if not user_query:
-            user_query = "帮助: 请告诉我可以做什么"
-        # 可选上下文
-        video_path = self._get_selected_video_path()
-        context = f"已选视频: {video_path}" if video_path else "无选中视频"
-
-        self.ai_result_label.setText("AI 处理中... ⏳")
-        self.ai_result_label.setVisible(True)
-        self.btn_ai_rate.setEnabled(False)
-
-        if self._ai_mode == "local":
-            # 本地 Agent 模式
-            if not self._agent_backend:
-                self._lazy_init_agent()
-            if not self._agent_backend:
-                self.ai_result_label.setText("本地 Agent 初始化失败")
-                self.btn_ai_rate.setEnabled(True)
-                return
-            # 提示工程: 注入工具使用建议
-            system_hint = (
-                "你是本地视频处理智能体。根据中文指令选择合适工具。"
-                "核心工具: list_videos(), start_process_video(path), generate_indexes(), get_status(), stop_processing(), rate_clip(path)."
-                "Twitch工具: list_streamer_vods(streamer,limit), download_vods_by_index(indexes), download_latest_vods(streamer,count)."
-                "用法指引: 用户说'处理 xxx.mp4' -> start_process_video; 说'当前进度' -> get_status; 说'列出直播回放 某主播' -> list_streamer_vods; 说'下载第1 3个' -> download_vods_by_index; 说'下载主播X最新2个' -> download_latest_vods。"
-                "回复需先简短说明动作，再给结果摘要。多步骤先列出再执行。"
-            )
-            prompt = f"{system_hint}\n上下文:{context}\n用户:{user_query}"
-            try:
-                from workers.agent_worker import AgentWorker
-                self._ai_worker = AgentWorker(self._agent_backend, prompt, thread_id="gui")
-                self._ai_worker.finished.connect(self._on_ai_success)
-                self._ai_worker.failed.connect(self._on_ai_failed)
-                self._ai_worker.start()
-            except Exception as e:
-                logging.error(f"启动本地 Agent 线程失败: {e}")
-                self.ai_result_label.setText(f"启动失败: {e}")
-                self.btn_ai_rate.setEnabled(True)
-        else:
-            # Flowise 模式
-            if not self._flowise_client:
-                self._init_flowise_client()
-            if not self._flowise_client:
-                self.ai_result_label.setText("Flowise 未配置")
-                self.btn_ai_rate.setEnabled(True)
-                return
-            # 线程调用 Flowise
-            from threading import Thread
-            def run_flowise():
-                try:
-                    # 将用户指令+上下文发送给Flowise
-                    result = self._flowise_client.predict(f"{user_query}\n{context}")
-                    self._on_ai_success(result)
-                except Exception as e:
-                    logging.error(f"Flowise 调用失败: {e}")
-                    self._on_ai_failed(str(e))
-            Thread(target=run_flowise, daemon=True).start()
-
-    def _init_flowise_client(self):
-        try:
-            from services.flowise_client import FlowiseClient
-            # TODO: 替换为实际 Chatflow ID
-            self._flowise_client = FlowiseClient(chatflow_id=os.environ.get("FLOWISE_CHATFLOW_ID", ""))
-            if not self._flowise_client.is_ready():
-                QMessageBox.information(self, "Flowise 配置", "未设置 FLOWISE_CHATFLOW_ID 环境变量，无法调用。")
-        except Exception as e:
-            logging.error(f"初始化 Flowise 客户端失败: {e}")
-
-    def _toggle_ai_mode(self):
-        self._ai_mode = "flowise" if self._ai_mode == "local" else "local"
-        self.btn_switch_ai_mode.setText(f"模式:{'Flowise' if self._ai_mode=='flowise' else 'Local'}")
-        if self._ai_mode == "flowise":
-            if not self._flowise_client:
-                self._init_flowise_client()
-            self.ai_result_label.setText("已切换 Flowise 模式")
-        else:
-            self.ai_result_label.setText("已切换 Local 模式")
-
-    def _on_ai_success(self, result: str):
-        """AI 成功结果"""
-        # 简单格式化：如果是 JSON 尝试提取
-        display = result
-        try:
-            import json as _json
-            if result.strip().startswith('{') and result.strip().endswith('}'):
-                data = _json.loads(result)
-                score = data.get('score') or data.get('Score') or data.get('评分')
-                comment = data.get('comment') or data.get('reason') or data.get('说明')
-                if score is not None:
-                    display = f"评分: {score} | {comment or ''}".strip()
-        except Exception:
-            pass
-        self.ai_result_label.setText(display)
-        if hasattr(self, 'btn_ai_rate'):
-            self.btn_ai_rate.setEnabled(True)
-
-    def _on_ai_failed(self, error: str):
-        self.ai_result_label.setText(f"AI 出错: {error}")
-        if hasattr(self, 'btn_ai_rate'):
-            self.btn_ai_rate.setEnabled(True)
-
     def init_managers(self):
         """初始化各个功能管理器"""
         twitch_handle = create_twitch_tab(self, self.config_manager)
@@ -662,24 +497,35 @@ class MainWindow(QMainWindow):
         try:
             # 从配置中读取图标路径
             icon_path = self.config_manager.get("APP_ICON_PATH", "")
-            if icon_path and os.path.exists(icon_path):
-                from PyQt5.QtGui import QIcon
-                self.setWindowIcon(QIcon(icon_path))
-                logging.info(f"已设置窗口图标: {icon_path}")
-            else:
-                # 尝试默认图标路径
-                default_icons = [
-                    "./config/icon.png",
-                    "./icon.png",
-                    "./icons/app.png",
-                    "./icons/app.ico"
-                ]
-                for icon_path in default_icons:
-                    if os.path.exists(icon_path):
-                        from PyQt5.QtGui import QIcon
-                        self.setWindowIcon(QIcon(icon_path))
-                        logging.info(f"已设置默认窗口图标: {icon_path}")
-                        break
+            if icon_path:
+                candidate = icon_path
+                if not os.path.isabs(candidate):
+                    module_dir = os.path.dirname(os.path.abspath(__file__))
+                    candidate = os.path.join(module_dir, candidate)
+                    if not os.path.exists(candidate):
+                        candidate = icon_path
+                if os.path.exists(candidate):
+                    from PyQt5.QtGui import QIcon
+                    self.setWindowIcon(QIcon(candidate))
+                    logging.info(f"已设置窗口图标: {candidate}")
+                    return
+            # 尝试默认图标路径
+            module_dir = os.path.dirname(os.path.abspath(__file__))
+            default_icons = [
+                os.path.join(module_dir, "acfv.png"),
+                "./config/icon.png",
+                "./assets/acfv-logo.ico",
+                "./assets/acfv-logo.png",
+                "./icon.png",
+                "./icons/app.png",
+                "./icons/app.ico"
+            ]
+            for icon_path in default_icons:
+                if os.path.exists(icon_path):
+                    from PyQt5.QtGui import QIcon
+                    self.setWindowIcon(QIcon(icon_path))
+                    logging.info(f"已设置默认窗口图标: {icon_path}")
+                    break
         except Exception as e:
             logging.warning(f"设置窗口图标失败: {e}")
 
@@ -855,9 +701,9 @@ class MainWindow(QMainWindow):
             # 停止任何可能正在运行的分析进程
             try:
                 # 通过创建停止标志文件来通知处理进程停止
-                stop_flag_file = os.path.join("processing", "stop_flag.txt")
-                os.makedirs(os.path.dirname(stop_flag_file), exist_ok=True)
-                with open(stop_flag_file, 'w') as f:
+                stop_flag_file = processing_path("stop_flag.txt")
+                stop_flag_file.parent.mkdir(parents=True, exist_ok=True)
+                with stop_flag_file.open('w', encoding='utf-8') as f:
                     f.write("STOP")
                 logging.info("已创建停止标志文件")
             except Exception as e:

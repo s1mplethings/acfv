@@ -150,7 +150,7 @@ except ImportError:
 
 from acfv import config
 from acfv.utils import safe_slug
-from acfv.runtime.storage import processing_path, settings_path
+from acfv.runtime.storage import processing_path, settings_path, logs_path
 import sys
 
 
@@ -202,7 +202,7 @@ import logging.handlers
 import os
 
 # 创建logs目录
-os.makedirs("logs", exist_ok=True)
+logs_path()
 
 # 配置日志处理器
 logger = logging.getLogger()
@@ -221,7 +221,7 @@ logger.addHandler(console_handler)
 
 # 文件处理器 - processing.log
 file_handler = logging.handlers.RotatingFileHandler(
-    "processing.log", 
+    str(logs_path("processing.log")),
     maxBytes=10*1024*1024,  # 10MB
     backupCount=5,
     encoding='utf-8'
@@ -233,7 +233,7 @@ logger.addHandler(file_handler)
 
 # 详细日志文件 - video_processor.log
 detailed_handler = logging.handlers.RotatingFileHandler(
-    "logs/video_processor.log", 
+    str(logs_path("video_processor.log")),
     maxBytes=10*1024*1024,  # 10MB
     backupCount=5,
     encoding='utf-8'
@@ -293,6 +293,7 @@ class ConfigManager:
             "VIDEO_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_SEGMENT_LENGTH": 4.0,
             "ENABLE_VIDEO_EMOTION": False,
+            "ENABLE_SPEAKER_SEPARATION": True,
             "twitch_client_id": "",
             "twitch_oauth_token": "",
             "twitch_username": "",
@@ -394,17 +395,17 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     def should_stop():
         """检查是否应该停止处理"""
         try:
-            stop_flag_file = os.path.join("processing", "stop_flag.txt")
-            return os.path.exists(stop_flag_file)
+            stop_flag_file = processing_path("stop_flag.txt")
+            return stop_flag_file.exists()
         except Exception:
             return False
     
     def cleanup_stop_flag():
         """清理停止标志文件"""
         try:
-            stop_flag_file = os.path.join("processing", "stop_flag.txt")
-            if os.path.exists(stop_flag_file):
-                os.remove(stop_flag_file)
+            stop_flag_file = processing_path("stop_flag.txt")
+            if stop_flag_file.exists():
+                stop_flag_file.unlink()
         except Exception:
             pass
     
@@ -699,7 +700,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         force_retranscription = bool(force_retranscription_value)
     
     # 检查主播分离
-    enable_speaker_separation_value = cfg_manager.get("ENABLE_SPEAKER_SEPARATION", False)
+    enable_speaker_separation_value = cfg_manager.get("ENABLE_SPEAKER_SEPARATION", True)
     if isinstance(enable_speaker_separation_value, str):
         enable_speaker_separation = enable_speaker_separation_value
     else:
@@ -2334,6 +2335,30 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     except Exception as exc:
         log_warning(f"[pipeline][RAG] 索引生成流程异常: {exc}")
 
+    # 自动生成 clips.db（默认开启，可通过 RAG_CLIPS_DB_ENABLE 关闭）
+    try:
+        clips_db_enabled = True
+        try:
+            clips_db_enabled = bool(cfg_manager.get("RAG_CLIPS_DB_ENABLE", True))
+        except Exception:
+            clips_db_enabled = True
+        if clips_db_enabled:
+            log_info("[pipeline][RAG] 自动生成 clips.db（基于 ratings.json）")
+            try:
+                added = generate_clips_db_from_ratings(
+                    cfg_manager,
+                    analysis_output,
+                    output_clips_dir,
+                    video_clips_dir,
+                )
+                log_info(f"[pipeline][RAG] clips.db 新增 {added} 条")
+            except Exception as exc:
+                log_warning(f"[pipeline][RAG] clips.db 生成失败: {exc}")
+        else:
+            log_info("[pipeline][RAG] 已禁用 clips.db 生成（RAG_CLIPS_DB_ENABLE=false）")
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] clips.db 生成流程异常: {exc}")
+
     return output_clips_dir, clip_files, has_chat
 
 
@@ -2424,3 +2449,144 @@ def generate_content_indexes(cfg_manager):
 
     log_info("[generate_content_indexes] Finished generating content indexes")
     return f"索引生成完成，处理了 {processed_count} 个视频目录"
+
+
+def _resolve_rag_clips_db_path(cfg_manager) -> Path:
+    try:
+        configured = cfg_manager.get("RAG_CLIPS_DB_PATH")
+    except Exception:
+        configured = None
+    if not configured:
+        configured = "rag_store/clips.db"
+    path = Path(str(configured))
+    if not path.is_absolute():
+        from acfv.runtime.storage import storage_root
+        path = (storage_root().parent / path).resolve()
+    return path
+
+
+def generate_clips_db_from_ratings(cfg_manager, analysis_output, output_clips_dir, video_clips_dir):
+    """Generate/update rag_store/clips.db based on ratings.json for the current run."""
+    ratings_path = os.path.join(os.path.dirname(analysis_output), "ratings.json")
+    if not os.path.exists(ratings_path):
+        log_info("[pipeline][RAG] ratings.json not found; skip clips.db build")
+        return 0
+
+    try:
+        with open(ratings_path, "r", encoding="utf-8") as handle:
+            ratings_payload = json.load(handle)
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] Failed reading ratings.json: {exc}")
+        return 0
+
+    if not isinstance(ratings_payload, dict) or not ratings_payload:
+        log_info("[pipeline][RAG] ratings.json empty; skip clips.db build")
+        return 0
+
+    try:
+        from acfv.ragstack.storage import db as rag_db
+        from acfv.ragstack.storage.models import Clip
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] ragstack storage unavailable: {exc}")
+        return 0
+
+    db_path = _resolve_rag_clips_db_path(cfg_manager)
+    try:
+        rag_db.init_db(db_path)
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] Failed initializing clips.db: {exc}")
+        return 0
+
+    existing = set()
+    conn = None
+    try:
+        import sqlite3
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT video_id, start_sec, end_sec, summary_text, raw_text FROM clips"
+        ).fetchall()
+        for row in rows:
+            text = (row["summary_text"] or row["raw_text"] or "").strip()
+            key = (
+                row["video_id"],
+                round(float(row["start_sec"] or 0.0), 3),
+                round(float(row["end_sec"] or 0.0), 3),
+                text,
+            )
+            existing.add(key)
+    except Exception as exc:
+        log_warning(f"[pipeline][RAG] Failed reading clips.db for dedupe: {exc}")
+    finally:
+        try:
+            if conn is not None:
+                conn.close()
+        except Exception:
+            pass
+
+    video_id = os.path.basename(str(video_clips_dir)) if video_clips_dir else ""
+    added = 0
+    for clip_name, rec in ratings_payload.items():
+        if not isinstance(rec, dict):
+            continue
+        text = str(rec.get("text") or "").strip()
+        if not text:
+            continue
+        try:
+            start = float(rec.get("start") or 0.0)
+        except Exception:
+            start = 0.0
+        try:
+            end = float(rec.get("end") or 0.0)
+        except Exception:
+            end = 0.0
+        if end <= start:
+            continue
+
+        key = (video_id, round(start, 3), round(end, 3), text)
+        if key in existing:
+            continue
+
+        duration_val = rec.get("duration")
+        try:
+            duration = float(duration_val) if duration_val is not None else max(0.0, end - start)
+        except Exception:
+            duration = max(0.0, end - start)
+
+        score_val = rec.get("rating")
+        if score_val is None:
+            score_val = rec.get("score")
+        try:
+            highlight_score = float(score_val) if score_val is not None else None
+        except Exception:
+            highlight_score = None
+
+        clip_path = os.path.join(output_clips_dir, clip_name) if output_clips_dir else clip_name
+        extra = {
+            "clip_path": clip_path,
+            "rating": score_val,
+            "source": "pipeline",
+        }
+
+        clip = Clip(
+            clip_id=None,
+            video_id=video_id or "unknown",
+            start_sec=start,
+            end_sec=end,
+            duration=duration,
+            summary_text=text,
+            raw_text=text,
+            tags=[],
+            highlight_score=highlight_score,
+            emotion_score=None,
+            talk_ratio=None,
+            extra=extra,
+        )
+        try:
+            rag_db.insert_clip(db_path, clip)
+            existing.add(key)
+            added += 1
+        except Exception as exc:
+            log_warning(f"[pipeline][RAG] Failed inserting clip into clips.db: {exc}")
+
+    return added

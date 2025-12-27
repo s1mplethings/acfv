@@ -129,7 +129,7 @@ class ConfigManager:
             "ENABLE_CACHE": True,
             "CACHE_DIR": "cache",
             "ENABLE_FAST_MODE": False,
-            "ENABLE_SPEAKER_SEPARATION": False,
+            "ENABLE_SPEAKER_SEPARATION": True,
             "SPEAKER_SEPARATION_TIMEOUT": 1800,
             "HOST_AUDIO_FILE": "",
             "output_clips_folder": "./data/clips",
@@ -141,12 +141,25 @@ class ConfigManager:
             "LOGPROB_THRESHOLD": -1.0,
             "PROGRESS_UPDATE_INTERVAL": 0.5,
             "LOG_LEVEL": "INFO",
+            "APP_ICON_PATH": "acfv.png",
+            "START_IN_TRAY": True,
             # UI/性能相关：允许在问题定位时禁用视频缩略图加载
             "DISABLE_VIDEO_THUMBNAILS": False,
             # Twitch 页面缩略图并发与开关
             "DISABLE_TWITCH_THUMBNAILS": False,
-            "TWITCH_THUMBNAIL_CONCURRENCY": 6
-            ,"HUGGINGFACE_TOKEN": ""  # 新增：可通过设置界面直接写入
+            "TWITCH_THUMBNAIL_CONCURRENCY": 6,
+            "HUGGINGFACE_TOKEN": "",  # 新增：可通过设置界面直接写入
+            "SUMMARY_BACKEND": "local",
+            "LOCAL_SUMMARY_MODEL": "google/gemma-3-4b-it",
+            "RAG_TOPIC_LLM_MODEL": "google/gemma-3-4b-it",
+            "RAG_CLIPS_DB_ENABLE": True,
+            "RAG_CLIPS_DB_PATH": "rag_store/clips.db",
+            "RAG_IMPORT_DEFAULT_RATING": 5,
+            "LOCAL_SUMMARY_MAX_NEW_TOKENS": 256,
+            "LOCAL_SUMMARY_TEMPERATURE": 0.2,
+            "LOCAL_SUMMARY_TOP_P": 0.9,
+            "LOCAL_SUMMARY_REPEAT_PENALTY": 1.15,
+            "LOCAL_SUMMARY_MAX_INPUT_CHARS": 4000,
         }
     
     def save_config(self) -> bool:

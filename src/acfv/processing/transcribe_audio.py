@@ -34,6 +34,7 @@ except ImportError:
     WHISPER_AVAILABLE = False
 
 from acfv.main_logging import log_info, log_error, log_debug
+from acfv.runtime.storage import processing_path
 
 def check_ffmpeg_availability():
     """检查ffmpeg是否可用"""
@@ -446,8 +447,8 @@ def process_audio_segments(audio_path, output_file=None,
     def should_stop():
         """检查是否应该停止处理"""
         try:
-            stop_flag_file = os.path.join("processing", "stop_flag.txt")
-            return os.path.exists(stop_flag_file)
+            stop_flag_file = processing_path("stop_flag.txt")
+            return stop_flag_file.exists()
         except Exception:
             return False
     

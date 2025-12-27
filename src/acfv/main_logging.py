@@ -1,13 +1,11 @@
 # main_logging.py
 
 import logging
-import os
 from datetime import datetime
 
-# 确保日志目录存在
-log_dir = os.path.dirname("processing.log")
-if log_dir and not os.path.exists(log_dir):
-    os.makedirs(log_dir, exist_ok=True)
+from acfv.runtime.storage import logs_path
+
+log_file = logs_path("processing.log")
 
 # 配置日志
 logging.basicConfig(
@@ -15,7 +13,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     handlers=[
-        logging.FileHandler("processing.log", encoding='utf-8', mode='a'),
+        logging.FileHandler(str(log_file), encoding='utf-8', mode='a'),
         logging.StreamHandler()  # 同时输出到控制台
     ]
 )
