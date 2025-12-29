@@ -20,13 +20,13 @@ from acfv.modular.runner import PipelineRunner
 from acfv.modular.store import ArtifactStore
 from acfv.modular.types import ProgressCallback
 
-from acfv.modular.plugins.analyze_segments import spec as analyze_segments_spec
-from acfv.modular.plugins.extract_audio import spec as extract_audio_spec
-from acfv.modular.plugins.extract_chat import spec as extract_chat_spec
-from acfv.modular.plugins.render_clips import spec as render_clips_spec
-from acfv.modular.plugins.speaker_separation import spec as speaker_sep_spec
-from acfv.modular.plugins.transcribe_audio import spec as transcribe_audio_spec
-from acfv.modular.plugins.video_emotion import spec as video_emotion_spec
+from acfv.steps.analyze_segments.spec import spec as analyze_segments_spec
+from acfv.steps.extract_audio.spec import spec as extract_audio_spec
+from acfv.steps.extract_chat.spec import spec as extract_chat_spec
+from acfv.steps.render_clips.spec import spec as render_clips_spec
+from acfv.steps.speaker_separation.spec import spec as speaker_sep_spec
+from acfv.steps.transcribe_audio.spec import spec as transcribe_audio_spec
+from acfv.steps.video_emotion.spec import spec as video_emotion_spec
 
 
 def _get_bool(value: Any, default: bool = False) -> bool:
