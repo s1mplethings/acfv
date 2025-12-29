@@ -42,10 +42,12 @@ try:
     
     class ProcessingStateManager:
         """处理状态管理器"""
-        def __init__(self):
+        def __init__(self, output_dir=None):
             self.status = ProcessingStatus.IDLE
             self.current_file = None
             self.progress = 0
+            self.output_dir = output_dir
+            self.current_state = {"error_count": 0}
         
         def set_status(self, status):
             self.status = status
@@ -58,10 +60,25 @@ try:
         
         def get_progress(self):
             return self.progress
+
+        def is_recoverable(self):
+            return False
+
+        def get_recovery_info(self):
+            return None
+
+        def save_state(self, **kwargs):
+            if "error_count" in kwargs:
+                self.current_state["error_count"] = kwargs["error_count"]
+
+        def clear_state(self):
+            self.current_state = {"error_count": 0}
     
-    def generate_safe_filename(original_name):
+    def generate_safe_filename(original_name, suffix=None):
         """生成安全的文件名"""
         safe_name = re.sub(r'[<>:"/\\|?*]', '_', original_name)
+        if suffix:
+            safe_name = f"{safe_name}_{suffix}"
         return safe_name
     
     def create_safe_output_directory(base_dir, name):
@@ -85,12 +102,23 @@ except ImportError as e:
         ERROR = "错误"
     
     class ProcessingStateManager:
-        def __init__(self):
+        def __init__(self, output_dir=None):
             self.status = ProcessingStatus.IDLE
+            self.output_dir = output_dir
+            self.current_state = {"error_count": 0}
         def set_status(self, status): pass
         def get_status(self): return self.status
+        def is_recoverable(self): return False
+        def get_recovery_info(self): return None
+        def save_state(self, **kwargs):
+            if "error_count" in kwargs:
+                self.current_state["error_count"] = kwargs["error_count"]
+        def clear_state(self): self.current_state = {"error_count": 0}
     
-    def generate_safe_filename(name): return name
+    def generate_safe_filename(name, suffix=None):
+        if suffix:
+            return f"{name}_{suffix}"
+        return name
     def create_safe_output_directory(base_dir, name): 
         os.makedirs(os.path.join(base_dir, name), exist_ok=True)
         return os.path.join(base_dir, name)
@@ -130,6 +158,7 @@ class SpeakerSeparationIntegration:
             dict: 处理结果，包含主播音频文件路径等信息
         """
         try:
+            audio_path = None
             # 设置输出目录
             if output_dir is None:
                 output_dir = os.path.join(os.path.dirname(video_path), "speaker_separation")
@@ -157,15 +186,39 @@ class SpeakerSeparationIntegration:
             except ImportError as e:
                 logging.error(f"pyannote.audio 未安装: {e}")
                 logging.warning("说话人分离功能不可用，将跳过此步骤")
-                # 返回模拟结果而不是抛出异常
-                return self._create_fallback_result(audio_path)
+                return self._save_results(
+                    video_path,
+                    audio_path,
+                    [],
+                    [],
+                    None,
+                    None,
+                    None,
+                    None,
+                    None,
+                    [],
+                    output_dir,
+                    status="unavailable",
+                )
             
             # 检查token
             if not self.hf_token_available:
                 logging.error("HuggingFace token 未正确配置")
                 logging.warning("说话人分离功能不可用，将跳过此步骤")
-                # 返回模拟结果而不是抛出异常
-                return self._create_fallback_result(audio_path)
+                return self._save_results(
+                    video_path,
+                    audio_path,
+                    [],
+                    [],
+                    None,
+                    None,
+                    None,
+                    None,
+                    None,
+                    [],
+                    output_dir,
+                    status="token_missing",
+                )
             
             token = os.environ.get('HUGGINGFACE_HUB_TOKEN')
             
@@ -175,8 +228,20 @@ class SpeakerSeparationIntegration:
             if not audio_path:
                 logging.error("音频提取失败")
                 logging.warning("说话人分离功能不可用，将跳过此步骤")
-                # 返回模拟结果而不是抛出异常
-                return self._create_fallback_result(audio_path)
+                return self._save_results(
+                    video_path,
+                    audio_path,
+                    [],
+                    [],
+                    None,
+                    None,
+                    None,
+                    None,
+                    None,
+                    [],
+                    output_dir,
+                    status="audio_extract_failed",
+                )
             
             self.emit_progress("音频提取", "音频提取完成，准备进行说话人分离...", 40)
             
@@ -206,12 +271,39 @@ class SpeakerSeparationIntegration:
                 self.emit_progress("生成主播视频", "主播视频生成完成", 85)
             else:
                 self.emit_progress("生成主播视频", "主播视频生成失败", 85)
+
+            # 生成视频语音音频
+            self.emit_progress("生成视频语音", "开始生成视频语音音频文件...", 86)
+            video_speech_audio_file = self._generate_video_speech_audio(
+                segments, host_speaker, audio_path, output_dir
+            )
+            if video_speech_audio_file:
+                self.emit_progress("生成视频语音", "视频语音音频生成完成", 88)
+            else:
+                self.emit_progress("生成视频语音", "视频语音音频生成失败", 88)
+
+            # 生成背景（非语音）音频 + 标注
+            audio_duration = self._get_audio_duration(audio_path, segments)
+            label_segments, non_speech_segments = self._build_label_segments(
+                segments, host_speaker, audio_duration
+            )
+
+            self.emit_progress("生成背景音频", "开始生成背景音频文件...", 89)
+            game_audio_file = self._generate_non_speech_audio(
+                non_speech_segments, audio_path, output_dir
+            )
+            if game_audio_file:
+                self.emit_progress("生成背景音频", "背景音频生成完成", 90)
+            else:
+                self.emit_progress("生成背景音频", "背景音频生成失败", 90)
             
             # 保存结果
             self.emit_progress("保存结果", "开始保存处理结果...", 90)
             result = self._save_results(
                 video_path, audio_path, segments, speakers, 
-                host_speaker, host_audio_file, host_video_file, output_dir
+                host_speaker, host_audio_file, host_video_file,
+                video_speech_audio_file, game_audio_file,
+                label_segments, output_dir
             )
             self.emit_progress("保存结果", "结果保存完成", 95)
             
@@ -536,6 +628,164 @@ class SpeakerSeparationIntegration:
         
         merged_segments.sort(key=lambda x: x['start'])
         return merged_segments
+
+    def _get_audio_duration(self, audio_path, segments=None):
+        """获取音频时长（秒）"""
+        duration = 0.0
+        if audio_path and os.path.exists(audio_path):
+            try:
+                import subprocess
+                cmd = [
+                    "ffprobe",
+                    "-v",
+                    "quiet",
+                    "-show_entries",
+                    "format=duration",
+                    "-of",
+                    "csv=p=0",
+                    audio_path,
+                ]
+                result = subprocess.run(
+                    cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30
+                )
+                if result.returncode == 0:
+                    duration = float(result.stdout.strip() or 0.0)
+            except Exception:
+                duration = 0.0
+
+        if duration <= 0 and segments:
+            try:
+                duration = max(float(seg.get("end", 0.0)) for seg in segments)
+            except Exception:
+                duration = 0.0
+
+        return duration
+
+    def _merge_intervals(self, intervals, gap=0.0):
+        """合并重叠或相邻的时间区间"""
+        if not intervals:
+            return []
+        ordered = sorted(intervals, key=lambda x: x[0])
+        merged = [[ordered[0][0], ordered[0][1]]]
+        for start, end in ordered[1:]:
+            cur = merged[-1]
+            if start <= cur[1] + gap:
+                cur[1] = max(cur[1], end)
+            else:
+                merged.append([start, end])
+        return [(s, e) for s, e in merged]
+
+    def _invert_intervals(self, intervals, total_duration):
+        """生成非语音区间"""
+        if total_duration <= 0:
+            return []
+        out = []
+        cursor = 0.0
+        for start, end in intervals:
+            start = max(0.0, start)
+            end = max(start, end)
+            if start > cursor:
+                out.append({"start": cursor, "end": start})
+            cursor = max(cursor, end)
+        if cursor < total_duration:
+            out.append({"start": cursor, "end": total_duration})
+        return out
+
+    def _build_label_segments(self, segments, host_speaker, audio_duration):
+        """构建带标签的时间段列表"""
+        labels = []
+        speech_intervals = []
+        for seg in segments or []:
+            try:
+                start = float(seg.get("start", 0.0))
+                end = float(seg.get("end", 0.0))
+            except Exception:
+                continue
+            if end <= start:
+                continue
+            if audio_duration > 0:
+                end = min(end, audio_duration)
+            speaker = seg.get("speaker")
+            label = "streamer_speech" if speaker == host_speaker else "video_speech"
+            labels.append(
+                {
+                    "start": start,
+                    "end": end,
+                    "label": label,
+                    "speaker": speaker,
+                }
+            )
+            speech_intervals.append((start, end))
+
+        merged_speech = self._merge_intervals(speech_intervals, gap=0.0)
+        non_speech = self._invert_intervals(merged_speech, audio_duration)
+        for seg in non_speech:
+            labels.append(
+                {
+                    "start": seg["start"],
+                    "end": seg["end"],
+                    "label": "game_sound",
+                }
+            )
+
+        labels.sort(key=lambda s: (s["start"], s["end"]))
+        return labels, non_speech
+
+    def _concat_audio_segments(self, segments, audio_path, output_path):
+        """拼接多个音频片段"""
+        if not audio_path or not segments:
+            return None
+        try:
+            import subprocess
+
+            filter_parts = []
+            for i, segment in enumerate(segments):
+                try:
+                    start = float(segment.get("start", 0.0))
+                    end = float(segment.get("end", 0.0))
+                except Exception:
+                    continue
+                duration = end - start
+                if duration <= 0:
+                    continue
+                filter_parts.append(
+                    f"[0:a]atrim=start={start}:duration={duration},asetpts=PTS-STARTPTS[a{i}]"
+                )
+
+            if not filter_parts:
+                return None
+
+            if len(filter_parts) > 1:
+                concat_inputs = "".join([f"[a{i}]" for i in range(len(filter_parts))])
+                concat_filter = f"{concat_inputs}concat=n={len(filter_parts)}:v=0:a=1[out]"
+                full_filter = ";".join(filter_parts) + ";" + concat_filter
+                output_map = "[out]"
+            else:
+                full_filter = filter_parts[0]
+                output_map = "[a0]"
+
+            cmd = [
+                "ffmpeg",
+                "-y",
+                "-nostdin",
+                "-i",
+                audio_path,
+                "-filter_complex",
+                full_filter,
+                "-map",
+                output_map,
+                "-loglevel",
+                "error",
+                output_path,
+            ]
+            result = subprocess.run(
+                cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=300
+            )
+            if result.returncode == 0 and os.path.exists(output_path):
+                return output_path
+        except Exception as e:
+            logging.error(f"音频拼接失败: {e}")
+        return None
     
     def _identify_host_speaker(self, segments, speakers):
         """识别主播 - 选择说话时间最长的人"""
@@ -556,62 +806,62 @@ class SpeakerSeparationIntegration:
     
     def _generate_host_audio(self, segments, speakers, host_speaker, audio_path, output_dir):
         """生成主播音频文件"""
-        if not host_speaker:
+        if not host_speaker or not audio_path:
             return None
-        
+
         try:
-            import subprocess
-            
-            # 获取主播的所有片段
-            host_segments = [s for s in segments if s['speaker'] == host_speaker]
-            
+            host_segments = [s for s in segments if s.get("speaker") == host_speaker]
             if not host_segments:
                 return None
-            
-            # 使用安全的文件名生成
+
             safe_name = generate_safe_filename(audio_path, "host_audio")
             host_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
-            
-            # 检查输出路径长度
             if len(host_audio_file) > 200:
                 safe_name = f"host_audio_{int(time.time()) % 10000}"
                 host_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
-            
-            # 创建ffmpeg过滤器字符串
-            filter_parts = []
-            for i, segment in enumerate(host_segments):
-                start = segment['start']
-                duration = segment['duration']
-                filter_parts.append(f"[0:a]atrim=start={start}:duration={duration},asetpts=PTS-STARTPTS[a{i}]")
-            
-            # 合并所有片段
-            if len(filter_parts) > 1:
-                concat_inputs = ''.join([f"[a{i}]" for i in range(len(filter_parts))])
-                concat_filter = f"{concat_inputs}concat=n={len(filter_parts)}:v=0:a=1[out]"
-                full_filter = ';'.join(filter_parts) + ';' + concat_filter
-                output_map = "[out]"
-            else:
-                full_filter = filter_parts[0]
-                output_map = "[a0]"
-            
-            cmd = [
-                'ffmpeg', '-y',
-                '-i', audio_path,
-                '-filter_complex', full_filter,
-                '-map', output_map,
-                host_audio_file
-            ]
-            
-            result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=300)
-            
-            if result.returncode == 0 and os.path.exists(host_audio_file):
-                return host_audio_file
-            else:
-                logging.error(f"主播音频生成失败: {result.stderr}")
-                return None
-                
+
+            return self._concat_audio_segments(host_segments, audio_path, host_audio_file)
         except Exception as e:
             logging.error(f"主播音频生成异常: {e}")
+            return None
+
+    def _generate_video_speech_audio(self, segments, host_speaker, audio_path, output_dir):
+        """生成视频语音音频文件"""
+        if not audio_path:
+            return None
+        try:
+            other_segments = [s for s in segments if s.get("speaker") != host_speaker]
+            if not other_segments:
+                return None
+
+            safe_name = generate_safe_filename(audio_path, "video_speech")
+            other_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
+            if len(other_audio_file) > 200:
+                safe_name = f"video_speech_{int(time.time()) % 10000}"
+                other_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
+
+            return self._concat_audio_segments(other_segments, audio_path, other_audio_file)
+        except Exception as e:
+            logging.error(f"视频语音生成异常: {e}")
+            return None
+
+    def _generate_non_speech_audio(self, non_speech_segments, audio_path, output_dir):
+        """生成非语音（游戏/背景）音频文件"""
+        if not audio_path:
+            return None
+        try:
+            if not non_speech_segments:
+                return None
+
+            safe_name = generate_safe_filename(audio_path, "game_audio")
+            game_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
+            if len(game_audio_file) > 200:
+                safe_name = f"game_audio_{int(time.time()) % 10000}"
+                game_audio_file = os.path.join(output_dir, f"{safe_name}.wav")
+
+            return self._concat_audio_segments(non_speech_segments, audio_path, game_audio_file)
+        except Exception as e:
+            logging.error(f"背景音频生成异常: {e}")
             return None
     
     def _generate_host_video(self, segments, speakers, host_speaker, video_path, output_dir):
@@ -674,8 +924,28 @@ class SpeakerSeparationIntegration:
             logging.error(f"主播视频生成异常: {e}")
             return None
     
-    def _save_results(self, video_path, audio_path, segments, speakers, host_speaker, host_audio_file, host_video_file, output_dir):
+    def _save_results(
+        self,
+        video_path,
+        audio_path,
+        segments,
+        speakers,
+        host_speaker,
+        host_audio_file,
+        host_video_file,
+        video_speech_audio_file,
+        game_audio_file,
+        label_segments,
+        output_dir,
+        status="ok",
+    ):
         """保存处理结果"""
+        labels_file = None
+        if label_segments:
+            labels_file = os.path.join(output_dir, "audio_labels.json")
+            with open(labels_file, "w", encoding="utf-8") as f:
+                json.dump(label_segments, f, ensure_ascii=False, indent=2, default=str)
+
         result = {
             "video_file": video_path,
             "audio_file": audio_path,
@@ -683,14 +953,18 @@ class SpeakerSeparationIntegration:
             "segments": segments,
             "host_speaker": host_speaker,
             "host_audio_file": host_audio_file,
+            "video_speech_audio_file": video_speech_audio_file,
+            "game_audio_file": game_audio_file,
+            "labels_file": labels_file,
+            "labels": label_segments or [],
             "host_video_file": host_video_file,
             "timestamp": datetime.now().isoformat(),
-            "output_dir": output_dir
+            "output_dir": output_dir,
+            "status": status,
         }
-        
-        # 保存结果到JSON文件
+
         result_file = os.path.join(output_dir, "speaker_separation_result.json")
-        with open(result_file, 'w', encoding='utf-8') as f:
+        with open(result_file, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2, default=str)
-        
+
         return result

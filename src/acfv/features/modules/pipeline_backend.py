@@ -425,6 +425,8 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         try:
             import time
             import json
+            if str(os.environ.get("ACFV_DISABLE_PROGRESS_FILE", "")).lower() in ("1", "true", "yes"):
+                return
             
             # 计算更准确的进度百分比
             stage_weights = {

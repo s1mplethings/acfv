@@ -740,6 +740,8 @@ def load_gui_config():
 def write_progress_file(stage, current, total, message=""):
     """写入进度文件，供GUI读取进度信息"""
     try:
+        if str(os.environ.get("ACFV_DISABLE_PROGRESS_FILE", "")).lower() in ("1", "true", "yes"):
+            return
         progress_file = processing_path("analysis_progress.json")
         progress_file.parent.mkdir(parents=True, exist_ok=True)
 

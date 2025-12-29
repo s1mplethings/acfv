@@ -36,6 +36,25 @@ __all__ = ["create_clips_manager"]
 
 SUPPORTED_EXTS = {".mp4", ".mkv", ".mov", ".avi", ".webm"}
 ALL_VIDEOS = "__ALL_VIDEOS__"
+RUN_META_TYPE = "Run:meta.v1"
+
+
+def _wrap_run_meta(payload: dict) -> dict:
+    return {
+        "artifact_id": payload.get("run_id", ""),
+        "type": RUN_META_TYPE,
+        "schema_version": "1",
+        "timebase": "seconds",
+        "time_range": None,
+        "producer": {"name": "clips_manager", "version": "1"},
+        "payload": payload,
+    }
+
+
+def _unwrap_run_meta(data: dict) -> dict:
+    if data.get("type") == RUN_META_TYPE and isinstance(data.get("payload"), dict):
+        return data["payload"]
+    return data
 
 
 def _open_path(target: Path | str) -> None:
@@ -250,7 +269,8 @@ class ClipsManager:
         }
         meta_path = run_dir / "run.json"
         try:
-            meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+            envelope = _wrap_run_meta(meta)
+            meta_path.write_text(json.dumps(envelope, ensure_ascii=True, indent=2), encoding="utf-8")
         except Exception as exc:  # noqa: BLE001
             logging.debug("[clips_manager] failed to write run metadata: %s", exc)
         self._current_run_output = run_dir / "output_clips"
@@ -273,7 +293,7 @@ class ClipsManager:
                 meta: dict = {}
                 if meta_path.exists():
                     try:
-                        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+                        meta = _unwrap_run_meta(json.loads(meta_path.read_text(encoding="utf-8")))
                     except Exception:
                         meta = {}
                 meta["status"] = "success" if success else "failed"
@@ -281,7 +301,8 @@ class ClipsManager:
                 if clip_paths is not None:
                     meta["clip_count"] = len(clip_paths)
                     meta["clips"] = clip_paths
-                meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+                envelope = _wrap_run_meta(meta)
+                meta_path.write_text(json.dumps(envelope, ensure_ascii=True, indent=2), encoding="utf-8")
         except Exception as exc:  # noqa: BLE001
             logging.debug("[clips_manager] failed to update run metadata: %s", exc)
         finally:
@@ -743,9 +764,10 @@ class ClipsManager:
             return status, started, finished
         try:
             data = json.loads(meta_path.read_text(encoding="utf-8"))
-            status = data.get("status", status)
-            started_val = data.get("started_at")
-            finished_val = data.get("finished_at")
+            meta = _unwrap_run_meta(data)
+            status = meta.get("status", status)
+            started_val = meta.get("started_at")
+            finished_val = meta.get("finished_at")
             if started_val:
                 try:
                     started = datetime.fromisoformat(str(started_val))

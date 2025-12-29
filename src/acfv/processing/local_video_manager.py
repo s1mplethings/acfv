@@ -621,22 +621,7 @@ class LocalVideoManager:
                     self.parent.add_processing_folder(video_clips_dir)
                     logging.info(f"[pipeline] 已标记文件夹为正在处理: {video_clips_dir}")
 
-                # 记录运行元数据（供剪辑管理器统计）
-                try:
-                    if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
-                        record_fn = getattr(self.parent.clips_manager, "record_run_start", None)
-                        if callable(record_fn):
-                            meta_path = record_fn(safe_basename, Path(current_run_dir))
-                            self.current_run_meta_path = meta_path
-                            self.current_run_video_base = safe_basename
-                except Exception as meta_err:
-                    logging.debug(f"[pipeline] 记录运行元数据失败: {meta_err}")
 
-                # 设置输出文件路径
-                chat_output = os.path.join(video_data_dir, "chat_with_emotes.json")
-                transcription_output = os.path.join(video_data_dir, "transcription.json")
-                video_emotion_output = os.path.join(video_data_dir, "video_emotion_4s.json")
-                
                 # === 每次运行独立run目录，保存ratings与clips ===
                 try:
                     runs_dir = os.path.join(video_clips_dir, "runs")
@@ -656,17 +641,23 @@ class LocalVideoManager:
                     logging.warning(f"[pipeline] 创建run目录失败，回退到根目录: {e}")
                     current_run_dir = video_clips_dir
                 
-                # 将本次分析结果与切片输出写到当前run目录
-                analysis_output = os.path.join(current_run_dir, "high_interest_segments.json")
+                # 将本次切片输出写到当前run目录
                 output_clips_dir = os.path.join(current_run_dir, "output_clips")
                 os.makedirs(output_clips_dir, exist_ok=True)
+                # 记录运行元数据（供剪辑管理器统计）
+                try:
+                    if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                        record_fn = getattr(self.parent.clips_manager, "record_run_start", None)
+                        if callable(record_fn):
+                            meta_path = record_fn(safe_basename, Path(current_run_dir))
+                            self.current_run_meta_path = meta_path
+                            self.current_run_video_base = safe_basename
+                except Exception as meta_err:
+                    logging.debug(f"[pipeline] 记录运行元数据失败: {meta_err}")
                 
                 # 保持data目录用于共享的中间文件（chat/transcription/emotion 等）
                 
                 # 设置配置
-                self.config_manager.set("CHAT_OUTPUT", chat_output)
-                self.config_manager.set("TRANSCRIPTION_OUTPUT", transcription_output)
-                self.config_manager.set("ANALYSIS_OUTPUT", analysis_output)
                 self.config_manager.set("OUTPUT_CLIPS_DIR", output_clips_dir)
                 
                 # 保存配置
@@ -678,8 +669,6 @@ class LocalVideoManager:
                 logging.info(f"  - 输出目录: {video_clips_dir}")
                 logging.info(f"  - 当前运行目录: {current_run_dir}")
                 
-                # 检查聊天文件是否存在
-                has_chat = os.path.exists(chat_path)
                 
                 # 🆕 创建新进度回调函数
                 def new_progress_callback(stage, current, total, message=None):
@@ -701,7 +690,15 @@ class LocalVideoManager:
                             "并行视频切片": "切片生成",
                             "串行视频切片": "切片生成",
                             "切片生成": "切片生成",
-                            "完成": "切片生成"  # 结束阶段也归入切片生成最终推进到100%
+                            "完成": "切片生成",  # 结束阶段也归入切片生成最终推进到100%
+                            "chat_extract": "音频提取",
+                            "audio_extract": "音频提取",
+                            "speaker_separation": "说话人分离",
+                            "transcribe": "语音转录",
+                            "video_emotion": "情感分析",
+                            "analysis": "内容分析",
+                            "clip": "切片生成",
+                            "run": "切片生成",
                         }
                         stage_name = stage_name_map.get(raw_stage_name, raw_stage_name)
 
@@ -797,20 +794,15 @@ class LocalVideoManager:
                     except Exception as e:
                         logging.warning(f"新进度回调失败: {e}")
                 
-                # 调用pipeline_backend.py中的run_pipeline函数
-                from acfv.features.modules.pipeline_backend import run_pipeline
+                # 调用模块化 pipeline
+                from acfv.modular.pipeline import run_pipeline
                 result = run_pipeline(
-                    cfg_manager=self.config_manager,
-                    video=video_path,
-                    chat=chat_path,
-                    has_chat=has_chat,
-                    chat_output=chat_output,
-                    transcription_output=transcription_output,
-                    video_emotion_output=video_emotion_output,
-                    analysis_output=analysis_output,
+                    video_path=video_path,
+                    chat_path=chat_path,
+                    config_manager=self.config_manager,
+                    run_dir=Path(current_run_dir),
                     output_clips_dir=output_clips_dir,
-                    video_clips_dir=video_clips_dir,
-                    progress_callback=new_progress_callback  # 🆕 使用新的进度回调
+                    progress_callback=new_progress_callback,
                 )
                 
                 return result
