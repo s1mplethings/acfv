@@ -7,7 +7,7 @@ from typing import Any, Dict
 
 from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS, ART_VIDEO
 from acfv.modular.types import ModuleContext
-from acfv.processing.clip_video import clip_video
+from .impl import clip_video
 
 
 def _write_json(path: Path, data: Any) -> None:

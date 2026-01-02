@@ -13,7 +13,7 @@ spec = ModuleSpec(
     outputs=[ART_SEGMENTS],
     run=run,
     description="Fuse chat, transcript, and emotion into highlight segments.",
-    impl_path="src/acfv/steps/analyze_segments/step.py",
+    impl_path="src/acfv/steps/analyze_segments/impl.py",
     default_params={"max_clips": None, "video_emotion_weight": 0.3, "enable_video_emotion": False},
 )
 

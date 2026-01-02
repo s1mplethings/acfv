@@ -13,7 +13,7 @@ spec = ModuleSpec(
     outputs=[ART_VIDEO_EMOTION],
     run=run,
     description="Optional video emotion inference for segment scoring.",
-    impl_path="src/acfv/steps/video_emotion/step.py",
+    impl_path="src/acfv/steps/video_emotion/impl.py",
     default_params={"enabled": True, "segment_length": 4.0, "model_path": "", "device": 0},
 )
 

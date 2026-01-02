@@ -58,16 +58,27 @@ def resolve_twitch_cli(auto_install: bool = True) -> str:
 
     global _CACHED_PATH
 
+    if auto_install:
+        try:
+            cfg_auto = config_manager.get("TWITCH_DOWNLOADER_AUTO_INSTALL")
+            if cfg_auto is not None:
+                auto_install = bool(cfg_auto)
+        except Exception:
+            pass
+
     if _CACHED_PATH and Path(_CACHED_PATH).exists():
         return _CACHED_PATH
 
     candidates = _gather_candidate_paths()
+    fallback_candidate = None
     for candidate in candidates:
         if candidate and Path(candidate).exists():
             if _is_version_sufficient(candidate):
                 _CACHED_PATH = str(Path(candidate))
                 _persist_config(_CACHED_PATH)
                 return _CACHED_PATH
+            if not fallback_candidate:
+                fallback_candidate = candidate
             LOGGER.warning(
                 "[TwitchDownloader] Outdated TwitchDownloaderCLI detected at %s; upgrading to %s",
                 candidate,
@@ -75,6 +86,14 @@ def resolve_twitch_cli(auto_install: bool = True) -> str:
             )
 
     if not auto_install:
+        if fallback_candidate:
+            LOGGER.warning(
+                "[TwitchDownloader] Using existing CLI despite version mismatch: %s",
+                fallback_candidate,
+            )
+            _CACHED_PATH = str(Path(fallback_candidate))
+            _persist_config(_CACHED_PATH)
+            return _CACHED_PATH
         raise TwitchDownloaderSetupError(
             "TwitchDownloaderCLI.exe not found in PATH or configured locations."
         )
@@ -82,6 +101,13 @@ def resolve_twitch_cli(auto_install: bool = True) -> str:
     try:
         installed_path = _download_and_install_cli()
     except Exception as exc:
+        if fallback_candidate:
+            LOGGER.warning(
+                "[TwitchDownloader] 下载失败，继续使用已有CLI: %s", fallback_candidate
+            )
+            _CACHED_PATH = str(Path(fallback_candidate))
+            _persist_config(_CACHED_PATH)
+            return _CACHED_PATH
         raise TwitchDownloaderSetupError(str(exc)) from exc
 
     _CACHED_PATH = str(installed_path)

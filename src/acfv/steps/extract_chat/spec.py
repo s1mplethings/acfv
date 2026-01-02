@@ -13,7 +13,7 @@ spec = ModuleSpec(
     outputs=[ART_CHAT_LOG],
     run=run,
     description="Parse chat source into normalized chat log JSON.",
-    impl_path="src/acfv/steps/extract_chat/step.py",
+    impl_path="src/acfv/steps/extract_chat/impl.py",
 )
 
 __all__ = ["spec"]

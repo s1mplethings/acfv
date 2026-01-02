@@ -24,8 +24,6 @@ from PyQt5.QtWidgets import (
 
 from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
 
-ensure_cli_on_path(auto_install=True)
-
 __all__ = ["TwitchDownloader", "TwitchDownloadWorker", "TwitchTab"]
 
 
@@ -40,6 +38,7 @@ class TwitchDownloader:
         self.config_manager = config_manager
         self._current_process = None
         self._cancel_requested = False
+        self.cli_path = ensure_cli_on_path(auto_install=True)
 
     def fetch_vods(self, client_id: str, oauth_token: str, usernames: str):
         headers = {"Client-ID": client_id, "Authorization": f"Bearer {oauth_token}"}
@@ -98,7 +97,12 @@ class TwitchDownloader:
         return results
 
     def _download_video(self, vod_id: str, output_path: str) -> bool:
-        cmd = ["TwitchDownloaderCLI.exe", "videodownload", "--id", vod_id, "-o", output_path]
+        cli_path = self.cli_path or ensure_cli_on_path(auto_install=True)
+        if not cli_path:
+            logging.error("TwitchDownloaderCLI 未就绪，无法下载。")
+            return False
+        self.cli_path = cli_path
+        cmd = [cli_path, "videodownload", "--id", vod_id, "-o", output_path]
         try:
             process = subprocess.Popen(
                 cmd,

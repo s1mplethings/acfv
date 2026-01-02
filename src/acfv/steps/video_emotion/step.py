@@ -46,7 +46,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         ctx.progress("video_emotion", 0, 1, "start")
 
     try:
-        from acfv.processing.video_emotion_infer import run as infer_emotion
+        from .impl import run as infer_emotion
     except Exception:
         if ctx.progress:
             ctx.progress("video_emotion", 1, 1, "unavailable")

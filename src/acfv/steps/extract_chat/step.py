@@ -7,7 +7,7 @@ from typing import Any, Dict
 
 from acfv.modular.contracts import ART_CHAT_LOG, ART_CHAT_SOURCE
 from acfv.modular.types import ModuleContext
-from acfv.processing.extract_chat import extract_chat
+from .impl import extract_chat
 
 
 def _read_json(path: Path) -> Any:

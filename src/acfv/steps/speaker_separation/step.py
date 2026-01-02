@@ -31,7 +31,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         raise FileNotFoundError("video path missing")
 
     try:
-        from acfv.processing.speaker_separation_integration import SpeakerSeparationIntegration
+        from .impl import SpeakerSeparationIntegration
     except Exception:
         return {
             ART_AUDIO_HOST: {"path": None},

@@ -125,6 +125,20 @@ def _normalize_segments_to_target(
     return selected
 
 
+def _coerce_bool(value, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if text in ("1", "true", "yes", "on"):
+            return True
+        if text in ("0", "false", "no", "off"):
+            return False
+    return default
+
+
 import os
 import json
 import threading
@@ -281,14 +295,14 @@ class ConfigManager:
             "OUTPUT_CLIPS_DIR": str(processing_path("output_clips")),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
-            "WHISPER_MODEL": "large",
+            "WHISPER_MODEL": "medium",
             "LLM_DEVICE": 0,
-            "CHAT_DENSITY_WEIGHT": 0.3,
-            "CHAT_SENTIMENT_WEIGHT": 0.4,
-            "VIDEO_EMOTION_WEIGHT": 0.3,
+            "CHAT_DENSITY_WEIGHT": 0.2,
+            "CHAT_SENTIMENT_WEIGHT": 0.3,
+            "VIDEO_EMOTION_WEIGHT": 0.6,
             "AUDIO_TARGET_BONUS": 1.0,
             "TEXT_TARGET_BONUS": 1.0,
-            "INTEREST_SCORE_THRESHOLD": 0.5,
+            "INTEREST_SCORE_THRESHOLD": 0.1,
             "LOCAL_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_SEGMENT_LENGTH": 4.0,
@@ -445,8 +459,11 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             stage_progress = (current / total) if total > 0 else 0
             
             # 计算累积进度（这里需要根据你的实际情况调整）
-            base_progress = sum(stage_weights.get(s, 0) for s in stage_weights.keys() 
-                               if s != stage and "前面已完成的阶段")
+            stage_order = list(stage_weights.keys())
+            if stage in stage_order:
+                base_progress = sum(stage_weights[s] for s in stage_order[:stage_order.index(stage)])
+            else:
+                base_progress = 0.0
             current_stage_contribution = stage_weight * stage_progress
             total_percentage = (base_progress + current_stage_contribution) * 100
             
@@ -695,18 +712,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         return None, None, False
     
     # 检查强制重转录
-    force_retranscription_value = cfg_manager.get("FORCE_RETRANSCRIPTION", False)
-    if isinstance(force_retranscription_value, str):
-        force_retranscription = force_retranscription_value
-    else:
-        force_retranscription = bool(force_retranscription_value)
+    force_retranscription = _coerce_bool(cfg_manager.get("FORCE_RETRANSCRIPTION", False), False)
     
     # 检查主播分离
-    enable_speaker_separation_value = cfg_manager.get("ENABLE_SPEAKER_SEPARATION", True)
-    if isinstance(enable_speaker_separation_value, str):
-        enable_speaker_separation = enable_speaker_separation_value
-    else:
-        enable_speaker_separation = bool(enable_speaker_separation_value)
+    enable_speaker_separation = _coerce_bool(cfg_manager.get("ENABLE_SPEAKER_SEPARATION", True), True)
     
     # 并行执行数据准备任务
     host_audio_path = None
@@ -1030,23 +1039,24 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     emit_progress("智能分析", current_step, total_steps, "使用AI进行内容兴趣度分析...")
     # 安全地重载/导入 config，避免 "module config not in sys.modules" 异常
     try:
-        if 'config' in sys.modules:
-            importlib.reload(sys.modules['config'])
+        module_name = "acfv.config"
+        if module_name in sys.modules:
+            importlib.reload(sys.modules[module_name])
         else:
-            importlib.import_module('config')
+            importlib.import_module(module_name)
     except Exception as e:
         log_error(f"[pipeline] config 模块重载失败，将使用 cfg_manager 值: {e}")
 
     # 将配置写回 config 模块（若存在）供下游读取；失败则忽略并依赖 cfg_manager
     try:
-        cfg_mod = sys.modules.get('config')
-        if cfg_mod is not None:
-            cfg_mod.CHAT_DENSITY_WEIGHT = cfg_manager.get("CHAT_DENSITY_WEIGHT")
-            cfg_mod.CHAT_SENTIMENT_WEIGHT = cfg_manager.get("CHAT_SENTIMENT_WEIGHT")
-            cfg_mod.TEXT_TARGET_BONUS = cfg_manager.get("TEXT_TARGET_BONUS")
-            cfg_mod.AUDIO_TARGET_BONUS = cfg_manager.get("AUDIO_TARGET_BONUS")
-            cfg_mod.CLIPS_BASE_DIR = cfg_manager.get("CLIPS_BASE_DIR")
-            cfg_mod.OUTPUT_CLIPS_DIR = output_clips_dir
+        cfg_mod = sys.modules.get("acfv.config")
+        if cfg_mod is not None and hasattr(cfg_mod, "config_manager"):
+            cfg_mod.config_manager.set("CHAT_DENSITY_WEIGHT", cfg_manager.get("CHAT_DENSITY_WEIGHT"))
+            cfg_mod.config_manager.set("CHAT_SENTIMENT_WEIGHT", cfg_manager.get("CHAT_SENTIMENT_WEIGHT"))
+            cfg_mod.config_manager.set("TEXT_TARGET_BONUS", cfg_manager.get("TEXT_TARGET_BONUS"))
+            cfg_mod.config_manager.set("AUDIO_TARGET_BONUS", cfg_manager.get("AUDIO_TARGET_BONUS"))
+            cfg_mod.config_manager.set("CLIPS_BASE_DIR", cfg_manager.get("CLIPS_BASE_DIR"))
+            cfg_mod.config_manager.set("OUTPUT_CLIPS_DIR", output_clips_dir)
     except Exception as e:
         log_error(f"[pipeline] 回写 config 模块配置失败（将直接使用 cfg_manager）: {e}")
     max_clips = int(cfg_manager.get("MAX_CLIP_COUNT") or 0)

@@ -686,17 +686,13 @@ class MainWindow(QMainWindow):
         try:
             logging.info("正在停止所有后台处理进程...")
             
-            # 停止管道后端处理
+            # 停止本地回放处理任务
             try:
-                from acfv.features.modules.pipeline_backend import VideoProcessingPipeline
-                # 尝试停止任何正在运行的处理管道
-                import gc
-                for obj in gc.get_objects():
-                    if isinstance(obj, VideoProcessingPipeline) and hasattr(obj, 'stop'):
-                        logging.info("停止视频处理管道")
-                        obj.stop()
+                if getattr(self, "local_manager", None) and hasattr(self.local_manager, "cleanup_workers"):
+                    logging.info("停止本地回放处理任务")
+                    self.local_manager.cleanup_workers()
             except Exception as e:
-                logging.debug(f"停止处理管道时忽略错误: {e}")
+                logging.debug(f"停止本地处理任务时忽略错误: {e}")
             
             # 停止任何可能正在运行的分析进程
             try:

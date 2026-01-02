@@ -6,7 +6,7 @@ from typing import Any, Dict
 
 from acfv.modular.contracts import ART_CHAT_LOG, ART_SEGMENTS, ART_TRANSCRIPT, ART_VIDEO_EMOTION
 from acfv.modular.types import ModuleContext
-from acfv.processing.analyze_data import analyze_data
+from .impl import analyze_data
 
 
 def _write_json(path: Path, data: Any) -> None:

@@ -20,7 +20,7 @@ spec = ModuleSpec(
     outputs=[ART_AUDIO_HOST, ART_AUDIO_VIDEO_SPEECH, ART_AUDIO_GAME, ART_AUDIO_LABELS, ART_SPEAKER_RESULT],
     run=run,
     description="Optional speaker separation to isolate host audio.",
-    impl_path="src/acfv/steps/speaker_separation/step.py",
+    impl_path="src/acfv/steps/speaker_separation/impl.py",
     default_params={"enabled": False, "output_dir": None},
 )
 

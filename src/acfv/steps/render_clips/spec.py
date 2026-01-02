@@ -13,7 +13,7 @@ spec = ModuleSpec(
     outputs=[ART_CLIPS],
     run=run,
     description="Render highlight clips from video and segments.",
-    impl_path="src/acfv/steps/render_clips/step.py",
+    impl_path="src/acfv/steps/render_clips/impl.py",
     default_params={"output_dir": None},
 )
 

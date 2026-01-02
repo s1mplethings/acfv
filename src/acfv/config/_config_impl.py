@@ -101,6 +101,7 @@ class ConfigManager:
             "RAG_DB_PATH": str(processing_path("rag_database.json")),
             "RAG_SIMILARITY_WEIGHT": 0.2,
             "TWITCH_DOWNLOADER_PATH": "",
+            "TWITCH_DOWNLOADER_AUTO_INSTALL": True,
             "LOCAL_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_MODEL_PATH": "",
             "VIDEO_EMOTION_SEGMENT_LENGTH": 4.0,

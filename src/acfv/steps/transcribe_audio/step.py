@@ -6,7 +6,7 @@ from typing import Any, Dict
 
 from acfv.modular.contracts import ART_AUDIO, ART_TRANSCRIPT
 from acfv.modular.types import ModuleContext
-from acfv.processing.transcribe_audio import process_audio_segments
+from .impl import process_audio_segments
 
 
 def _read_json(path: Path) -> Any:
