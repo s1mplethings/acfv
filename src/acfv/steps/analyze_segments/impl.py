@@ -1239,7 +1239,11 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
                 log_error("❌ 转录数据结构无效")
                 return []
             if not transcription_data:
-                log_warning("⚠️ 转录数据为空，跳过分析")
+                try:
+                    file_size = os.path.getsize(transcription_file)
+                except Exception:
+                    file_size = -1
+                log_warning(f"⚠️ 转录数据为空，跳过分析 (file_size={file_size} bytes, path={transcription_file})")
                 return []
         except Exception as e:
             log_error(f"❌ 转录文件加载失败: {e}")

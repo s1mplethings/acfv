@@ -322,7 +322,7 @@ def transcribe_audio_segment_safe(audio_path, start_time, end_time, whisper_mode
             
             # 检查音频是否太安静
             if rms_energy < 0.001:
-                log_debug(f"[音频质量] 音频太安静，可能没有语音内容")
+                log_warning(f"[音频质量] 音频太安静，可能没有语音内容，跳过该片段 {start_time}-{end_time}s")
                 return []
         except Exception as e:
             log_debug(f"[音频质量] 音频质量检测失败: {e}")
@@ -619,6 +619,13 @@ def process_audio_segments(audio_path, output_file=None,
         if host_transcription_file:
             log_info(f"📄 主播转录文件: {host_transcription_file}")
         log_info("=" * 60)
+        
+        if not all_transcription_results:
+            try:
+                audio_size_mb = os.path.getsize(audio_path) / (1024 * 1024)
+            except Exception:
+                audio_size_mb = -1
+            log_warning(f"⚠️ 转录完成但没有得到任何文本片段，请检查音频内容或阈值设置 (audio_size_mb={audio_size_mb:.2f})")
         
         return all_transcription_results
         

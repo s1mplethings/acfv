@@ -74,6 +74,23 @@ class SmartProgressPredictor:
         except Exception as e:
             logging.warning(f"保存历史记录失败: {e}")
     
+    def _log_event(self, event_type: str, details: Dict[str, Any]):
+        """向当前会话追加结构化事件"""
+        if not self.current_session:
+            return
+        try:
+            now = time.time()
+            event = {
+                "type": event_type,
+                "time": now,
+                "offset": round(now - self.current_session.get("start_time", now), 3)
+            }
+            event.update(details)
+            self.current_session.setdefault("events", []).append(event)
+        except Exception:
+            # 记录事件失败不影响主流程
+            pass
+    
     def start_session(self, duration_seconds: float, size_mb: float, video_path: str = None):
         """🆕 开始新的处理会话"""
         self.current_session = {
@@ -82,9 +99,16 @@ class SmartProgressPredictor:
             "size_mb": size_mb,
             "video_path": video_path,
             "stages": {},
+            "events": [],
+            "predicted_total_time": self.total_predicted_time or None,
             "total_time": None,
             "success": False
         }
+        self._log_event("session_started", {
+            "duration_seconds": duration_seconds,
+            "size_mb": size_mb,
+            "video_path": video_path
+        })
         logging.info(f"📊 开始新的处理会话: {duration_seconds/60:.1f}分钟, {size_mb:.1f}MB")
     
     def end_session(self, success: bool = True):
@@ -95,6 +119,44 @@ class SmartProgressPredictor:
         self.current_session["total_time"] = time.time() - self.current_session["start_time"]
         self.current_session["success"] = success
         self.current_session["timestamp"] = datetime.now().isoformat()
+        self.current_session["ended_at"] = self.current_session["timestamp"]
+
+        # 补全未结束的阶段，避免“running”状态悬空
+        session_end = time.time()
+        for stage_name, stage_data in self.current_session["stages"].items():
+            if stage_data.get("status") != "completed":
+                status = "skipped" if stage_data.get("completed_items", 0) == 0 else "incomplete"
+                stage_data["status"] = status
+                stage_data["end_time"] = stage_data.get("end_time", session_end)
+                if stage_data.get("start_time"):
+                    stage_data["duration"] = stage_data["end_time"] - stage_data["start_time"]
+                self._log_event("stage_auto_closed", {
+                    "stage": stage_name,
+                    "status": status
+                })
+
+        # 汇总概要信息，便于后续查看
+        stages_info = self.current_session.get("stages", {})
+        completed = [name for name, data in stages_info.items() if data.get("status") == "completed"]
+        unfinished = [name for name, data in stages_info.items() if data.get("status") != "completed"]
+        processing_rate = None
+        try:
+            processing_rate = self.current_session["total_time"] / max(self.current_session.get("duration_seconds") or 1, 1)
+        except Exception:
+            processing_rate = None
+        self.current_session["summary"] = {
+            "completed_stages": completed,
+            "unfinished_stages": unfinished,
+            "predicted_total_time": self.current_session.get("predicted_total_time"),
+            "actual_total_time": self.current_session["total_time"],
+            "processing_rate": processing_rate  # 秒/秒，越小越快
+        }
+
+        self._log_event("session_finished", {
+            "success": success,
+            "total_time": self.current_session["total_time"],
+            "processing_rate": processing_rate
+        })
         
         # 添加到历史记录
         self.history_data["video_sessions"].append(self.current_session.copy())
@@ -246,7 +308,8 @@ class SmartProgressPredictor:
                 'start_time': stage_start_time,
                 'estimated_items': estimated_items,
                 'completed_items': 0,
-                'status': 'running'
+                'status': 'running',
+                'last_log_progress': 0.0
             }
             
             # 🆕 记录到当前会话
@@ -256,6 +319,10 @@ class SmartProgressPredictor:
                     "estimated_items": estimated_items,
                     "status": "running"
                 }
+                self._log_event("stage_started", {
+                    "stage": stage_name,
+                    "estimated_items": estimated_items
+                })
             
             if self.start_time is None:
                 self.start_time = stage_start_time
@@ -290,6 +357,20 @@ class SmartProgressPredictor:
                 estimated_total = elapsed / progress
                 remaining = estimated_total - elapsed
                 stage['estimated_remaining'] = max(remaining, 0)
+
+            # 每提升约15%记录一次关键节点，避免日志过于庞大
+            try:
+                last_logged = stage.get('last_log_progress', 0.0)
+                if progress >= 1.0 or progress - last_logged >= 0.15:
+                    stage['last_log_progress'] = progress
+                    self._log_event("stage_progress", {
+                        "stage": stage_name,
+                        "progress": round(progress, 3),
+                        "completed_items": stage.get('completed_items', 0),
+                        "estimated_remaining": stage.get('estimated_remaining')
+                    })
+            except Exception:
+                pass
             
             logging.debug(f"📊 {stage_name}: {progress*100:.1f}%")
             
@@ -319,6 +400,10 @@ class SmartProgressPredictor:
                         "end_time": end_time,
                         "duration": duration,
                         "status": "completed"
+                    })
+                    self._log_event("stage_completed", {
+                        "stage": stage_name,
+                        "duration": duration
                     })
                 
                 logging.debug(f"✅ 完成阶段: {stage_name} (耗时{duration:.1f}秒)")
