@@ -149,6 +149,15 @@ import pickle
 import subprocess
 from pathlib import Path
 import re
+
+def _ensure_extended_path(path: str) -> str:
+    """Add Windows long-path prefix when paths are overly long."""
+    if os.name == "nt":
+        normalized = os.path.normpath(path)
+        if not normalized.startswith("\\\\?\\") and len(normalized) >= 240:
+            return "\\\\?\\" + normalized
+        return normalized
+    return path
 try:
     import faiss
     FAISS_AVAILABLE = True
@@ -719,6 +728,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     
     # 并行执行数据准备任务
     host_audio_path = None
+    transcription_failed = False
     with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {}
         
@@ -738,8 +748,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         # 只在真正需要时才创建目录
         # os.makedirs(audio_save_dir, exist_ok=True)
         audio_save_path = os.path.join(audio_save_dir, "extracted_audio.wav")
+        audio_cmd_path = _ensure_extended_path(audio_save_path)
+        video_cmd_path = _ensure_extended_path(video)
         
-        if not os.path.exists(audio_save_path):
+        if not os.path.exists(audio_cmd_path):
             # 停止检查
             if should_stop():
                 logging.info("处理被中断 - 音频提取前")
@@ -756,10 +768,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 cmd = [
                     "ffmpeg", "-y",
                     "-hide_banner", "-loglevel", "error", "-nostdin",
-                    "-i", video, "-vn", "-acodec", "pcm_s16le",
+                    "-i", video_cmd_path, "-vn", "-acodec", "pcm_s16le",
                     "-ar", "16000", "-ac", "1",
                     "-threads", "0",
-                    audio_save_path
+                    audio_cmd_path
                 ]
                 # 根据视频时长动态计算超时时间
                 try:
@@ -786,12 +798,12 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                     return None, None, False
                 
                 # 检查音频文件是否成功生成（即使FFmpeg被中断，文件可能已经生成）
-                if os.path.exists(audio_save_path) and os.path.getsize(audio_save_path) > 1024 * 1024:  # 大于1MB
-                    file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+                if os.path.exists(audio_cmd_path) and os.path.getsize(audio_cmd_path) > 1024 * 1024:  # 大于1MB
+                    file_size_mb = os.path.getsize(audio_cmd_path) / (1024 * 1024)
                     log_info(f"[pipeline] 音频文件已保存: {audio_save_path} ({file_size_mb:.1f}MB)")
                     emit_progress("音频提取", 2, 3, f"音频提取完成 ({file_size_mb:.1f}MB)")
                 elif result.returncode == 0:
-                    file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+                    file_size_mb = os.path.getsize(audio_cmd_path) / (1024 * 1024)
                     log_info(f"[pipeline] 音频文件已保存: {audio_save_path} ({file_size_mb:.1f}MB)")
                     emit_progress("音频提取", 2, 3, f"音频提取完成 ({file_size_mb:.1f}MB)")
                 else:
@@ -815,7 +827,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 emit_progress("音频提取", 3, 3, f"音频提取异常: {e}")
                 return None, None, False
         else:
-            file_size_mb = os.path.getsize(audio_save_path) / (1024 * 1024)
+            file_size_mb = os.path.getsize(audio_cmd_path) / (1024 * 1024)
             log_info(f"[pipeline] 音频文件已存在: {audio_save_path} ({file_size_mb:.1f}MB)")
             emit_progress("音频提取", 3, 3, f"使用现有音频文件 ({file_size_mb:.1f}MB)")
         
@@ -827,7 +839,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             
             futures['transcription'] = executor.submit(
                 process_audio_segments,
-                audio_path=audio_save_path,  # 使用提取的音频文件
+                audio_path=audio_cmd_path,  # 使用提取的音频文件
                 output_file=transcription_output,
                 segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
                 whisper_model_name=whisper_model_name
@@ -897,6 +909,8 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                         smart_predictor.finish_stage("说话人分离")
                 else:
                     log_error(f"[pipeline] 关键任务 {name} 失败，可能影响后续处理")
+                    if name == 'transcription':
+                        transcription_failed = True
                                     # 更新智能进度预测
                 if smart_predictor:
                     if name == 'chat':
@@ -907,7 +921,11 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                         smart_predictor.finish_stage("情感分析")
                     elif name == 'speaker_separation':
                         smart_predictor.finish_stage("说话人分离")
-    
+
+    if transcription_failed:
+        log_error("[pipeline] 转录任务失败，终止后续分析和切片；请先检查音频提取与转录日志")
+        return None, None, False
+
     # 处理未并行执行的任务
     if has_chat and not has_chat_json and 'chat' not in futures:
         log_info(f"[pipeline] 串行提取聊天: {chat} -> {chat_output}")
@@ -936,13 +954,15 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 # 提取并保存音频文件
                 log_info("[pipeline] 保存音频文件...")
                 try:
+                    video_cmd_path = _ensure_extended_path(video)
+                    audio_cmd_path = _ensure_extended_path(audio_save_path)
                     cmd = [
                         "ffmpeg", "-y",
                         "-hide_banner", "-loglevel", "error", "-nostdin",
-                        "-i", video, "-vn", "-acodec", "pcm_s16le",
+                        "-i", video_cmd_path, "-vn", "-acodec", "pcm_s16le",
                         "-ar", "16000", "-ac", "1",
                         "-threads", "0",
-                        audio_save_path
+                        audio_cmd_path
                     ]
                     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore', timeout=600)
                     if result.returncode == 0:
@@ -955,6 +975,29 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                     
             except Exception as e:
                 log_error(f"[pipeline] 转录失败: {e}")
+                transcription_failed = True
+    
+    if transcription_failed:
+        log_error("[pipeline] 转录阶段未成功完成，终止后续分析和切片。请检查转录日志与音频文件。")
+        return None, None, False
+
+    # 强制校验转录输出，避免后续阶段在空数据上继续执行
+    try:
+        if not os.path.exists(transcription_output):
+            log_error(f"[pipeline] 转录输出不存在: {transcription_output}")
+            return None, None, False
+        transcription_size = os.path.getsize(transcription_output)
+        if transcription_size < 10:
+            log_error(f"[pipeline] 转录输出过小（{transcription_size} bytes），可能转录失败。音频文件: {audio_save_path}")
+            return None, None, False
+        with open(transcription_output, "r", encoding="utf-8") as tf:
+            transcription_data = json.load(tf)
+        if not transcription_data:
+            log_error(f"[pipeline] 转录文件内容为空（{transcription_size} bytes），终止分析和切片。音频文件: {audio_save_path}")
+            return None, None, False
+    except Exception as e:
+        log_error(f"[pipeline] 转录输出校验失败: {e}")
+        return None, None, False
     
     if enable_video_emotion and not has_video_emotion:
         if 'emotion' not in futures:
@@ -1196,6 +1239,15 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 segments_data = []
         else:
             log_warning("[pipeline][diagnostic] 分析失败且未找到可用的分析输出文件，后续步骤将使用空片段列表")
+
+    # 如果分析结果仍为空，直接终止，避免空分段导致后续报错
+    if not segments_data:
+        try:
+            trans_size = os.path.getsize(transcription_output) if os.path.exists(transcription_output) else 0
+        except Exception:
+            trans_size = -1
+        log_error(f"[pipeline] 分析结果为空，终止切片；请检查转录输出 (size={trans_size} bytes) 与分析日志")
+        return None, None, False
 
     # 切片前简单检测是否存在新的评分（仅日志提示）
     try:

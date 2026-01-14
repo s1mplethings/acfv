@@ -8,7 +8,7 @@ from .step import run
 
 spec = ModuleSpec(
     name="transcribe_audio",
-    version="1",
+    version="2",  # bump to invalidate cached empty transcripts
     inputs=[ART_AUDIO],
     outputs=[ART_TRANSCRIPT],
     run=run,

@@ -1237,17 +1237,17 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
             
             if not validate_json_structure(transcription_data, is_chat=False):
                 log_error("❌ 转录数据结构无效")
-                return []
+                raise RuntimeError("invalid transcription structure")
             if not transcription_data:
                 try:
                     file_size = os.path.getsize(transcription_file)
                 except Exception:
                     file_size = -1
-                log_warning(f"⚠️ 转录数据为空，跳过分析 (file_size={file_size} bytes, path={transcription_file})")
-                return []
+                log_error(f"⚠️ 转录数据为空，终止分析 (file_size={file_size} bytes, path={transcription_file})")
+                raise RuntimeError(f"empty transcription ({file_size} bytes) at {transcription_file}")
         except Exception as e:
             log_error(f"❌ 转录文件加载失败: {e}")
-            return []
+            raise
         
         # 加载弹幕数据
         chat_data = []
@@ -1759,7 +1759,7 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
         write_progress_file("错误", 0, 10, f"分析失败: {str(e)}")
         import traceback
         traceback.print_exc()
-        return []
+        raise
 
 # 兼容原接口
 def analyze_data(chat_file, transcription_file, output_file, 

@@ -8,7 +8,7 @@ from .step import run
 
 spec = ModuleSpec(
     name="render_clips",
-    version="1",
+    version="2",  # bump after fail-fast change
     inputs=[ART_VIDEO, ART_SEGMENTS, ART_AUDIO_HOST],
     outputs=[ART_CLIPS],
     run=run,

@@ -31,6 +31,9 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     output_dir_path = Path(output_dir)
     output_dir_path.mkdir(parents=True, exist_ok=True)
 
+    if not segments:
+        raise RuntimeError("segments list is empty; skipping clip rendering")
+
     work_dir = Path(ctx.store.run_dir) / "work"
     analysis_path = work_dir / "segments.json"
     _write_json(analysis_path, segments)

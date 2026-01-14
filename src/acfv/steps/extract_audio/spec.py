@@ -8,7 +8,7 @@ from .step import run
 
 spec = ModuleSpec(
     name="extract_audio",
-    version="1",
+    version="2",  # bump to invalidate cached bad audio artifacts
     inputs=[ART_VIDEO],
     outputs=[ART_AUDIO],
     run=run,

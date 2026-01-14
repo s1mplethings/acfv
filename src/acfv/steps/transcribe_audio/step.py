@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict
 
@@ -40,7 +41,16 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         whisper_model_name=whisper_model,
     )
 
+    if not out_path.exists():
+        raise RuntimeError(f"transcription file not found: {out_path}")
+    size_bytes = out_path.stat().st_size
+    if size_bytes < 10:
+        raise RuntimeError(f"transcription output too small ({size_bytes} bytes): {out_path}")
+
     transcript = _read_json(out_path)
+    if not isinstance(transcript, list) or not transcript:
+        raise RuntimeError(f"transcription output is empty or invalid (size={size_bytes} bytes): {out_path}")
+
     if ctx.progress:
         ctx.progress("transcribe", 1, 1, "done")
 

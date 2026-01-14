@@ -8,7 +8,7 @@ from .step import run
 
 spec = ModuleSpec(
     name="analyze_segments",
-    version="1",
+    version="2",  # bump to avoid reusing cached runs after fail-fast change
     inputs=[ART_CHAT_LOG, ART_TRANSCRIPT, ART_VIDEO_EMOTION],
     outputs=[ART_SEGMENTS],
     run=run,

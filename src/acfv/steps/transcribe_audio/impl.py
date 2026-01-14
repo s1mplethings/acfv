@@ -33,8 +33,19 @@ try:
 except ImportError:
     WHISPER_AVAILABLE = False
 
-from acfv.main_logging import log_info, log_error, log_debug
-from acfv.runtime.storage import processing_path
+from acfv.main_logging import log_info, log_error, log_debug, log_warning
+from acfv.runtime.storage import processing_path, settings_path
+
+
+def _ensure_extended_path(path: str | os.PathLike) -> str:
+    """Add Windows long-path prefix when needed to avoid ffmpeg failures."""
+    as_str = str(path)
+    if os.name == "nt":
+        normalized = os.path.normpath(as_str)
+        if not normalized.startswith("\\\\?\\") and len(normalized) >= 240:
+            return "\\\\?\\" + normalized
+        return normalized
+    return as_str
 
 def check_ffmpeg_availability():
     """检查ffmpeg是否可用"""
@@ -51,9 +62,10 @@ def check_ffmpeg_availability():
 def get_audio_info_ffprobe(audio_path):
     """使用ffprobe获取音频信息"""
     try:
+        target = _ensure_extended_path(audio_path)
         cmd = [
             "ffprobe", "-v", "quiet", "-print_format", "json", 
-            "-show_format", "-show_streams", str(audio_path)
+            "-show_format", "-show_streams", target
         ]
         result = subprocess.run(cmd, capture_output=True, text=True, 
                               encoding='utf-8', errors='ignore', timeout=30)
@@ -109,20 +121,22 @@ def extract_audio_segment_ffmpeg(audio_path, start_time, end_time, output_path):
     """使用ffmpeg提取音频片段（尽可能零拷贝）"""
     try:
         duration = end_time - start_time
+        input_path = _ensure_extended_path(audio_path)
+        output_target = _ensure_extended_path(output_path)
         
         # 优先使用输入寻址并直接复制（若源是pcm_s16le/16k/mono WAV）
         cmd = [
             "ffmpeg", "-y",
             "-hide_banner", "-loglevel", "error", "-nostdin",
             "-ss", str(start_time),  # 输入寻址更快
-            "-i", str(audio_path),
+            "-i", input_path,
             "-t", str(duration),
             # 直接输出为目标参数；若输入已是相同参数，内部将是复制
             "-acodec", "pcm_s16le",
             "-ar", "16000",
             "-ac", "1",
             "-f", "wav",
-            str(output_path)
+            output_target
         ]
         
         # 执行命令 - 修复编码问题
@@ -222,11 +236,13 @@ def extract_audio_segment_enhanced(audio_path, start_time, end_time, output_path
     """增强音频片段提取（针对低质量音频）"""
     try:
         duration = end_time - start_time
+        input_path = _ensure_extended_path(audio_path)
+        output_target = _ensure_extended_path(output_path)
         
         # 构建增强的ffmpeg命令
         cmd = [
             "ffmpeg", "-y",  # 覆盖输出文件
-            "-i", str(audio_path),
+            "-i", input_path,
             "-ss", str(start_time),  # 开始时间
             "-t", str(duration),     # 持续时间
             "-acodec", "pcm_s16le",  # 音频编码
@@ -234,7 +250,7 @@ def extract_audio_segment_enhanced(audio_path, start_time, end_time, output_path
             "-ac", "1",              # 单声道
             "-af", "highpass=f=50,lowpass=f=8000,volume=3.0,compand=0.3|0.3:1|1:-90/-60/-40/-20/-10/0:6:0:-90:0.2",  # 增强音频处理
             "-f", "wav",             # 输出格式
-            str(output_path)
+            output_target
         ]
         
         # 执行命令
@@ -461,9 +477,14 @@ def process_audio_segments(audio_path, output_file=None,
         # 检查输入文件
         if not os.path.exists(audio_path):
             raise FileNotFoundError(f"音频文件不存在: {audio_path}")
+        if os.name == "nt" and len(str(audio_path)) >= 240:
+            log_warning(f"[转录] 检测到超长音频路径，已使用长路径前缀避免ffmpeg失败: {audio_path}")
+            audio_path = _ensure_extended_path(audio_path)
         
         file_size_gb = os.path.getsize(audio_path) / (1024**3)
         log_info(f"📁 文件大小: {file_size_gb:.2f}GB")
+        if file_size_gb <= 0:
+            raise RuntimeError(f"音频文件大小为0，可能提取失败或路径不可读: {audio_path}")
         
         # 停止检查
         if should_stop():
@@ -591,6 +612,16 @@ def process_audio_segments(audio_path, output_file=None,
                 log_error(f"❌ 片段 {i} 处理失败: {e}")
                 continue
         
+        # 转录结果为空时直接失败，避免向下游输出空文件
+        if not all_transcription_results:
+            try:
+                audio_size_mb = os.path.getsize(audio_path) / (1024 * 1024)
+            except Exception:
+                audio_size_mb = -1
+            raise RuntimeError(
+                f"转录未产生文本片段，音频可能未正确提取或 Whisper 调用失败 (audio_size_mb={audio_size_mb:.2f})"
+            )
+
         # 保存结果
         log_info(f"💾 保存转录结果到: {output_file}")
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -619,14 +650,7 @@ def process_audio_segments(audio_path, output_file=None,
         if host_transcription_file:
             log_info(f"📄 主播转录文件: {host_transcription_file}")
         log_info("=" * 60)
-        
-        if not all_transcription_results:
-            try:
-                audio_size_mb = os.path.getsize(audio_path) / (1024 * 1024)
-            except Exception:
-                audio_size_mb = -1
-            log_warning(f"⚠️ 转录完成但没有得到任何文本片段，请检查音频内容或阈值设置 (audio_size_mb={audio_size_mb:.2f})")
-        
+
         return all_transcription_results
         
     except Exception as e:
