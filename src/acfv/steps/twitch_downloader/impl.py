@@ -6,6 +6,7 @@ import requests
 import subprocess
 import logging
 import time
+from pathlib import Path
 from PyQt5.QtCore import QThread, pyqtSignal, QSize
 from PyQt5.QtGui import QImage, QIcon, QPixmap
 from PyQt5.QtWidgets import (
@@ -16,6 +17,95 @@ from PyQt5.QtWidgets import (
 
 from acfv.utils import safe_slug
 from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
+from acfv.runtime.storage import processing_path
+
+SCHEMA_VERSION = "1.0.0"
+
+
+def _ensure_dir(path: str | os.PathLike) -> Path:
+    p = Path(path)
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def _parse_vod_id(url_or_id: str) -> str:
+    text = (url_or_id or "").strip()
+    if not text:
+        raise ValueError("url is required")
+    m = re.search(r"/videos/(\d+)", text)
+    if m:
+        return m.group(1)
+    if text.isdigit():
+        return text
+    raise ValueError(f"invalid twitch url or id: {url_or_id}")
+
+
+def _run_cli_with_retry(cli_path: str, args: list[str], retries: int = 2, timeout: int = 7200) -> None:
+    last_err: str | None = None
+    attempts = max(1, retries + 1)
+    for attempt in range(attempts):
+        try:
+            cmd = [cli_path] + args
+            logging.info("Running TwitchDownloaderCLI (%s/%s): %s", attempt + 1, attempts, " ".join(cmd))
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="ignore",
+                timeout=timeout,
+            )
+            if result.returncode == 0:
+                return
+            last_err = result.stderr or result.stdout or f"exit {result.returncode}"
+        except subprocess.TimeoutExpired:
+            last_err = "timeout"
+        except Exception as exc:
+            last_err = str(exc)
+        time.sleep(1)
+    raise RuntimeError(f"TwitchDownloaderCLI failed after {attempts} attempts: {last_err}")
+
+
+def download_vod_contract(payload: dict) -> dict:
+    """Contract-style downloader: validate input, download video/chat, return schema_versioned paths."""
+    if not isinstance(payload, dict):
+        raise ValueError("payload must be a dict")
+
+    vod_id = _parse_vod_id(str(payload.get("url", "")).strip())
+    out_dir = payload.get("out_dir") or processing_path("downloads")
+    out_dir_path = _ensure_dir(out_dir)
+    download_chat = bool(payload.get("download_chat", True))
+    retries = int(payload.get("retries", 2) or 0)
+
+    cli_path = ensure_cli_on_path(auto_install=True)
+    if not cli_path or not os.path.exists(cli_path):
+        raise RuntimeError("TwitchDownloaderCLI not available")
+
+    video_path = out_dir_path / f"{vod_id}.mp4"
+    chat_path = out_dir_path / f"{vod_id}_chat.json"
+
+    _run_cli_with_retry(cli_path, ["videodownload", "--id", vod_id, "-o", str(video_path)], retries=retries)
+    if not video_path.exists() or video_path.stat().st_size <= 0:
+        raise RuntimeError("video download produced empty file")
+
+    chat_written = False
+    if download_chat:
+        try:
+            _run_cli_with_retry(
+                cli_path,
+                ["chatdownload", "--id", vod_id, "-o", str(chat_path), "--format", "json"],
+                retries=retries,
+            )
+            chat_written = chat_path.exists() and chat_path.stat().st_size > 0
+        except Exception as exc:
+            logging.warning("chat download failed: %s", exc)
+
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "video_path": str(video_path),
+        "chat_path": str(chat_path) if chat_written else None,
+        "logs": [],
+    }
 
 
 def sanitize_filename(name: str) -> str:

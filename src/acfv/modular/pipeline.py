@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+import importlib
+import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -20,14 +22,7 @@ from acfv.modular.runner import PipelineRunner
 from acfv.modular.store import ArtifactStore
 from acfv.modular.types import ProgressCallback
 
-from acfv.modular.plugins.analyze_segments import spec as analyze_segments_spec
-from acfv.modular.plugins.extract_audio import spec as extract_audio_spec
-from acfv.modular.plugins.extract_chat import spec as extract_chat_spec
-from acfv.modular.plugins.render_clips import spec as render_clips_spec
-from acfv.modular.plugins.speaker_separation import spec as speaker_sep_spec
-from acfv.modular.plugins.transcribe_audio import spec as transcribe_audio_spec
-from acfv.modular.plugins.video_emotion import spec as video_emotion_spec
-
+logger = logging.getLogger(__name__)
 
 def _get_bool(value: Any, default: bool = False) -> bool:
     if value is None:
@@ -56,19 +51,34 @@ def _get_float(value: Any, default: float) -> float:
         return default
 
 
+def _load_plugin_specs() -> list:
+    """Lazily import plugin specs to avoid heavy dependencies at import time."""
+    plugin_modules = [
+        "acfv.modular.plugins.extract_chat",
+        "acfv.modular.plugins.extract_audio",
+        "acfv.modular.plugins.transcribe_audio",
+        "acfv.modular.plugins.video_emotion",
+        "acfv.modular.plugins.speaker_separation",
+        "acfv.modular.plugins.analyze_segments",
+        "acfv.modular.plugins.render_clips",
+    ]
+    specs = []
+    for module_path in plugin_modules:
+        try:
+            module = importlib.import_module(module_path)
+            spec = getattr(module, "spec", None)
+            if spec:
+                specs.append(spec)
+            else:
+                logger.warning("Plugin %s missing spec attribute; skipping", module_path)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Failed to import plugin %s: %s", module_path, exc)
+    return specs
+
+
 def _build_registries() -> tuple[ModuleRegistry, AdapterRegistry]:
     modules = ModuleRegistry()
-    modules.register_many(
-        [
-            extract_chat_spec,
-            extract_audio_spec,
-            transcribe_audio_spec,
-            video_emotion_spec,
-            speaker_sep_spec,
-            analyze_segments_spec,
-            render_clips_spec,
-        ]
-    )
+    modules.register_many(_load_plugin_specs())
     adapters = AdapterRegistry()
     return modules, adapters
 
@@ -81,6 +91,13 @@ def run_pipeline(
     output_clips_dir: Optional[str] = None,
     progress_callback: Optional[ProgressCallback] = None,
 ) -> Dict[str, Any]:
+    logger.info(
+        "[pipeline] start run_dir=%s video=%s chat=%s output_dir=%s",
+        run_dir,
+        video_path,
+        chat_path,
+        output_clips_dir or "<default>",
+    )
     run_dir = Path(run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("ACFV_DISABLE_PROGRESS_FILE", "1")
@@ -142,12 +159,61 @@ def run_pipeline(
 
     clips_payload = results.get(ART_CLIPS).payload if ART_CLIPS in results else []
 
+    clips_list: list = []
+    subtitles: list = []
+    merge_gap = None
+    max_merge = None
+    segments_out = None
+    manifest_path = None
+    thumbnails = []
+    if isinstance(clips_payload, dict):
+        clips_list = clips_payload.get("clips") or []
+        subtitles = clips_payload.get("subtitles") or []
+        merge_gap = clips_payload.get("merge_gap_sec")
+        max_merge = clips_payload.get("max_merged_duration")
+        segments_out = clips_payload.get("segments")
+        thumbnails = clips_payload.get("thumbnails") or []
+        manifest_path = clips_payload.get("manifest_path")
+    elif isinstance(clips_payload, list):
+        clips_list = clips_payload
+
     _progress("run", 1, 1, "done")
+    logger.info("[pipeline] run finished; clips=%d", len(clips_list))
+
+    work_dir = Path(run_dir) / "work"
+    segments_path = work_dir / "segments.json"
+    chat_json_path = work_dir / "chat.json"
+    manifest_json_path = work_dir / "clips_manifest.json"
+    if not manifest_path and manifest_json_path.exists():
+        manifest_path = manifest_json_path
+    logger.info(
+        "[pipeline] artifacts segments=%s chat=%s manifest=%s",
+        segments_path if segments_path.exists() else None,
+        chat_json_path if chat_json_path.exists() else None,
+        manifest_path,
+    )
+
+    contract_output = {
+        "schema_version": "1.0.0",
+        "clips": [str(c) for c in clips_list],
+        "subtitles": [str(s) for s in subtitles],
+        "segments_json": str(segments_path) if segments_path.exists() else None,
+        "chat_json": str(chat_json_path) if chat_json_path.exists() else None,
+        "clips_manifest_json": str(manifest_path) if manifest_path else None,
+        "thumbnails": [str(t) for t in thumbnails],
+        "logs": [],
+        "run_dir": str(run_dir),
+        "merge_gap_sec": merge_gap,
+        "max_merged_duration": max_merge,
+    }
+    if segments_out:
+        contract_output["segments"] = segments_out
 
     return {
-        "clips": clips_payload or [],
+        "clips": clips_list,
         "artifacts": results,
         "run_dir": str(run_dir),
+        "contract_output": contract_output,
     }
 
 

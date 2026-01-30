@@ -93,9 +93,13 @@ class ConfigManager:
             "AUDIO_TARGET_BONUS": 1.0,
             "TEXT_TARGET_BONUS": 1.0,
             "INTEREST_SCORE_THRESHOLD": 0.1,
-            "MIN_TARGET_CLIP_DURATION": 180.0,
-            "TARGET_CLIP_DURATION": 240.0,
+            # 片段合并/时长控制
+            # 剪辑目标时长（保持 4–5 分钟窗口）
+            "MIN_TARGET_CLIP_DURATION": 240.0,
+            "TARGET_CLIP_DURATION": 270.0,
             "MAX_TARGET_CLIP_DURATION": 300.0,
+            "MIN_INTEREST_SEGMENT_DURATION": 5.0,
+            "MERGE_SHORT_SEGMENT_GAP": 1.0,
             "RAG_ENABLE": True,
             "RAG_WEIGHT": 0.2,
             "RAG_DB_PATH": str(processing_path("rag_database.json")),

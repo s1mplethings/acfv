@@ -7,6 +7,7 @@ from typing import Any, Dict
 from acfv.modular.contracts import ART_AUDIO, ART_TRANSCRIPT
 from acfv.modular.types import ModuleContext, ModuleSpec
 from acfv.processing.transcribe_audio import process_audio_segments
+import logging
 
 
 def _read_json(path: Path) -> Any:
@@ -14,13 +15,17 @@ def _read_json(path: Path) -> Any:
         with path.open("r", encoding="utf-8") as f:
             return json.load(f)
     except Exception:
-        return []
+        return {}
 
 
 def run(ctx: ModuleContext) -> Dict[str, Any]:
     audio_payload = ctx.inputs[ART_AUDIO].payload or {}
-    audio_path = audio_payload.get("path") if isinstance(audio_payload, dict) else str(audio_payload)
+    if isinstance(audio_payload, dict):
+        audio_path = audio_payload.get("path") or audio_payload.get("audio_path")
+    else:
+        audio_path = str(audio_payload)
     if not audio_path:
+        logging.error("[transcribe_audio plugin] audio path missing; payload=%s", audio_payload)
         raise FileNotFoundError("audio path missing")
 
     work_dir = Path(ctx.store.run_dir) / "work"
@@ -41,6 +46,12 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     )
 
     transcript = _read_json(out_path)
+    if isinstance(transcript, list):
+        transcript = {"segments": transcript}
+    elif not isinstance(transcript, dict):
+        transcript = {"segments": []}
+    if "segments" not in transcript:
+        transcript["segments"] = []
     if ctx.progress:
         ctx.progress("transcribe", 1, 1, "done")
 

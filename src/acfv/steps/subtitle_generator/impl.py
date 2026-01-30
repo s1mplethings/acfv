@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import re
 import json
@@ -7,6 +9,8 @@ from typing import List, Dict, Any, Tuple
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
+from acfv.processing.subtitle_contract import generate_subtitle
 
 
 def _read_transcription(transcription_file: str) -> List[Dict[str, Any]]:
@@ -163,14 +167,19 @@ def generate_semantic_subtitles_for_clips(output_clips_dir: str, transcription_f
             chunks = [c for c in chunks if len((c['text'] or '').strip()) >= 1 and (c['end'] - c['start']) > 0.05]
             if not chunks:
                 continue
-            # Write SRT
-            srt_path = os.path.splitext(clip_path)[0] + ".srt"
-            with open(srt_path, 'w', encoding='utf-8') as f:
-                for idx, c in enumerate(chunks, 1):
-                    f.write(f"{idx}\n")
-                    f.write(f"{_format_srt_time(c['start']-s)} --> {_format_srt_time(c['end']-s)}\n")
-                    f.write((c['text'] or '').strip() + "\n\n")
-            written += 1
+            # Write SRT via contract generator
+            out_dir = os.path.dirname(clip_path) or "."
+            source_name = os.path.splitext(os.path.basename(clip_path))[0]
+            payload = {
+                "segments": [{"start": c["start"] - s, "end": c["end"] - s, "text": c["text"]} for c in chunks],
+                "format": "srt",
+                "out_dir": out_dir,
+                "source_name": source_name,
+                "time_offset_sec": 0.0,
+            }
+            result = generate_subtitle(payload)
+            if result.get("subtitle_path"):
+                written += 1
         except Exception:
             # Skip errors for a single clip
             continue

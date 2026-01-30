@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SegmentsCandidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "units",
+    "sort",
+    "segments"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "units": {
+      "type": "string",
+      "enum": [
+        "ms"
+      ]
+    },
+    "video_duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "merge_gap_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allow_overlap": {
+          "type": "boolean"
+        },
+        "clamp_to_duration": {
+          "type": "boolean"
+        },
+        "max_segments": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "sort": {
+      "type": "string",
+      "enum": [
+        "score_desc_start_ms_asc_end_ms_asc"
+      ]
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "start_ms",
+          "end_ms",
+          "score",
+          "rank"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "start_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "score": {
+            "type": "number"
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source": {
+            "type": "string"
+          },
+          "reason_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meta": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

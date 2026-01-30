@@ -32,6 +32,16 @@ import shutil
 
 from acfv.runtime.storage import processing_path, settings_path
 
+# 占位，避免未调用导入时变量未定义
+np = None
+faiss = None
+TfidfVectorizer = None
+pickle = None
+AudioSegment = None
+librosa = None
+nltk = None
+SentimentIntensityAnalyzer = None
+
 # 延迟导入重库
 def import_heavy_libraries():
     """延迟导入重库"""
@@ -297,6 +307,12 @@ class UltraFastExtractor:
     def __init__(self, video_path, max_workers=4):
         self.video_path = video_path
         self.max_workers = max_workers
+        import_heavy_libraries()
+        if librosa is None or np is None:
+            log_error("❌ [超快提取器] 依赖缺失（librosa/np），回退到简化模式")
+            self.use_fallback = True
+            self.full_audio = None
+            return
         
         log_info("🚀 [超快提取器] 初始化...")
         start_time = time.time()
@@ -970,6 +986,55 @@ def compute_chat_density(chat_data, start, end):
     count = sum(1 for c in chat_data if start <= float(c.get("timestamp", 0)) <= end)
     return count
 
+
+def merge_short_segments(segments, min_duration=5.0, max_gap=1.0):
+    """将过短的相邻转录片段合并，避免后续出现超短候选"""
+    if not segments:
+        return []
+    try:
+        min_duration = max(0.0, float(min_duration))
+        max_gap = max(0.0, float(max_gap))
+    except Exception:
+        min_duration = 5.0
+        max_gap = 1.0
+
+    merged = []
+    current = None
+
+    for seg in sorted(segments, key=lambda s: float(s.get("start", 0))):
+        try:
+            s = float(seg.get("start", 0.0))
+            e = float(seg.get("end", 0.0))
+        except Exception:
+            continue
+        if e <= s:
+            continue
+        text = seg.get("text", "")
+        if not isinstance(text, str):
+            text = str(text)
+
+        if current is None:
+            current = {"start": s, "end": e, "text": text}
+            continue
+
+        gap = max(0.0, s - current["end"])
+        curr_len = current["end"] - current["start"]
+        seg_len = e - s
+
+        # 合并条件：间隔可接受，且任一片段时长低于阈值
+        if gap <= max_gap and (curr_len < min_duration or seg_len < min_duration):
+            current["end"] = max(current["end"], e)
+            combined_text = (current.get("text", "") + " " + text).strip()
+            current["text"] = combined_text
+        else:
+            merged.append(current)
+            current = {"start": s, "end": e, "text": text}
+
+    if current:
+        merged.append(current)
+
+    return merged
+
 def compute_chat_sentiment_strength(chat_data, start, end):
     """计算时间段内聊天情感得分绝对值的平均"""
     if not chat_data:
@@ -1300,6 +1365,23 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
             texts_for_analysis.append(text)
         
         log_info(f"📊 有效片段: ✅ {len(valid_segments)}个")
+
+        # 合并过短的相邻片段，避免出现超短候选导致后续被丢弃
+        min_seg_dur = config.get("MIN_INTEREST_SEGMENT_DURATION", 5.0)
+        merge_gap = config.get("MERGE_SHORT_SEGMENT_GAP", 1.0)
+        try:
+            min_seg_dur = float(min_seg_dur)
+            merge_gap = float(merge_gap)
+        except Exception:
+            min_seg_dur = 5.0
+            merge_gap = 1.0
+
+        merged_segments = merge_short_segments(valid_segments, min_seg_dur, merge_gap)
+        if merged_segments:
+            if len(merged_segments) != len(valid_segments):
+                log_info(f"🧩 合并短片段: {len(valid_segments)} -> {len(merged_segments)} (min={min_seg_dur}s, gap={merge_gap}s)")
+            valid_segments = merged_segments
+            texts_for_analysis = [seg.get('text', '') for seg in valid_segments]
         
         # 验证：确保每个原始转录片段都会被处理
         log_info(f"🔍 验证: 原始转录数据有 {len(transcription_data)} 个片段")
@@ -1539,6 +1621,22 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
                 log_warning(f"[选择] 非重叠选择失败，使用原始Top-N: {_e}")
                 return sorted(candidates, key=lambda x: x.get('score', 0), reverse=True)[:max_count]
 
+        def _fill_to_target(selected: list, pool: list, target: int) -> list:
+            """若非重叠挑选数量不足，允许轻度重叠补齐到期望数量。"""
+            if target <= 0:
+                return selected
+            existing_ids = {id(s) for s in selected}
+            for seg in pool:
+                if id(seg) in existing_ids:
+                    continue
+                selected.append(seg)
+                existing_ids.add(id(seg))
+                if len(selected) >= target:
+                    break
+            return selected
+
+        min_required = max(5, top_n)  # 至少尝试输出 5 个高光
+
         if not has_chat:
             # 无弹幕模式的过滤
             old_count = len(all_segments)
@@ -1554,12 +1652,15 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
             
             buffer_sec = float(config.get("NON_OVERLAP_BUFFER_SECONDS", 0.0)) if isinstance(config.get("NON_OVERLAP_BUFFER_SECONDS", 0.0), (int, float)) else 0.0
             candidates = filtered_segments if len(filtered_segments) >= 1 else all_segments
-            # 先准备一个较大的候选集合，再做“非重叠贪心”挑选
             candidates_sorted = sorted(candidates, key=lambda x: x.get('score', 0), reverse=True)
-            top_pool = candidates_sorted[: max(top_n * 5, top_n)]  # 增大候选池，提升非重叠可选性
+            top_pool = candidates_sorted[: max(top_n * 5, top_n)]
             top_segments = _select_top_non_overlapping(top_pool, top_n, buffer_sec=buffer_sec)
             if len(top_segments) < top_n:
                 log_warning(f"[选择] 非重叠约束下仅选出 {len(top_segments)}/{top_n} 个片段")
+            if len(top_segments) < min_required:
+                target = min(min_required, len(candidates_sorted))
+                top_segments = _fill_to_target(top_segments, candidates_sorted, target)
+                log_info(f"[选择] 放宽重叠补齐到 {len(top_segments)}/{target}")
         else:
             # 有弹幕模式的过滤
             old_count = len(all_segments)
@@ -1574,6 +1675,10 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
             top_segments = _select_top_non_overlapping(top_pool, top_n, buffer_sec=buffer_sec)
             if len(top_segments) < top_n:
                 log_warning(f"[选择] 非重叠约束下仅选出 {len(top_segments)}/{top_n} 个片段")
+            if len(top_segments) < min_required:
+                target = min(min_required, len(candidates_sorted))
+                top_segments = _fill_to_target(top_segments, candidates_sorted, target)
+                log_info(f"[选择] 放宽重叠补齐到 {len(top_segments)}/{target}")
         
         # 确保有结果
         if not top_segments and all_segments:

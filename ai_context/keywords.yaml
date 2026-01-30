@@ -1,0 +1,15 @@
+# 关键词/规则文件（给 AI 先读）
+# 用于记录：常见坑、必读文件、禁止事项、项目约定等
+
+must_read:
+  - docs/00_overview.md
+  - docs/01_architecture.md
+  - docs/02_workflow.md
+  - docs/03_quality_gates.md
+  - specs/index.md
+  - ai_context/problem_registry.md
+
+rules:
+  - "任何 public API/输出契约变化：必须更新 specs/contracts/tests"
+  - "verify 必须用本机平台对应入口（sh/ps1）"
+  - "失败必记 problem_registry；豁免必记 decision_log"

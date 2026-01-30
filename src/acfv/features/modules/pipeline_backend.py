@@ -181,6 +181,16 @@ def _sanitize_component(text: str) -> str:
     """Sanitize and shorten a filename component for filesystem usage."""
     return safe_slug(text, max_length=80)
 
+
+def _ensure_transcript_segments(data):
+    """Return segment list from a contract-style transcript payload."""
+    if isinstance(data, dict):
+        segs = data.get("segments")
+        if isinstance(segs, list):
+            return segs
+        return []
+    return data if isinstance(data, list) else []
+
 # 条件导入各个模块
 try:
     from acfv.processing.extract_chat import extract_chat
@@ -991,7 +1001,8 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             log_error(f"[pipeline] 转录输出过小（{transcription_size} bytes），可能转录失败。音频文件: {audio_save_path}")
             return None, None, False
         with open(transcription_output, "r", encoding="utf-8") as tf:
-            transcription_data = json.load(tf)
+            transcription_raw = json.load(tf)
+        transcription_data = _ensure_transcript_segments(transcription_raw)
         if not transcription_data:
             log_error(f"[pipeline] 转录文件内容为空（{transcription_size} bytes），终止分析和切片。音频文件: {audio_save_path}")
             return None, None, False
@@ -1343,9 +1354,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             # 加载完整转录作为分段依据
             if os.path.exists(transcription_output):
                 with open(transcription_output, 'r', encoding='utf-8') as f:
-                    transcription_data = json.load(f)
+                    transcription_raw = json.load(f)
             else:
-                transcription_data = []
+                transcription_raw = []
+            transcription_data = _ensure_transcript_segments(transcription_raw)
             if not transcription_data:
                 log_info("[pipeline] 语义分段跳过：转录为空，保留原有分段结果")
                 use_semantic_segment_mode = False
@@ -1840,7 +1852,8 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 try:
                     if os.path.exists(transcription_output):
                         with open(transcription_output, 'r', encoding='utf-8') as f:
-                            transcription_list = json.load(f) or []
+                            transcription_raw = json.load(f)
+                        transcription_list = _ensure_transcript_segments(transcription_raw)
                 except Exception:
                     transcription_list = []
                 def _split_by_mid(seg, min_child_len):

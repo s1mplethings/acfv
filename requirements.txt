@@ -79,6 +79,6 @@ uvicorn>=0.27.0
 sseclient-py>=1.8.0
 
 # 开发工具（可选）
-# pytest>=6.0.0
+pytest>=7.4.0
 # black>=21.0.0
 # flake8>=3.9.0

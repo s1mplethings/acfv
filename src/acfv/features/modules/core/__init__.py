@@ -7,6 +7,7 @@ import time
 import logging
 import requests
 import psutil
+import json
 from typing import Dict, List, Any, Optional
 from PyQt5.QtCore import QThread, QObject, pyqtSignal
 
@@ -310,40 +311,58 @@ class LogManager:
         self._initialized = True
         
     def setup_logging(self, log_dir: str, app_name: str = "app") -> str:
-        """设置日志系统"""
+        """设置日志系统：stdout + JSONL，满足“GUI 也镜像到终端”的约束。"""
         import logging.handlers
         from datetime import datetime
-        
+        import sys
+
         os.makedirs(log_dir, exist_ok=True)
-        
-        log_file = os.path.join(log_dir, f"{app_name}_{datetime.now().strftime('%Y%m%d')}.log")
-        
-        formatter = logging.Formatter('%(asctime)s - [%(levelname)s] - %(name)s - %(message)s')
-        
-        # 文件处理器
-        file_handler = logging.handlers.TimedRotatingFileHandler(
-            filename=log_file, when='midnight', interval=1, backupCount=7, encoding='utf-8'
+
+        # 结构化文件（JSONL，便于采集）
+        jsonl_path = os.path.join(log_dir, f"{app_name}_{datetime.now().strftime('%Y%m%d')}.log.jsonl")
+        text_path = os.path.join(log_dir, f"{app_name}_{datetime.now().strftime('%Y%m%d')}.log")
+
+        text_fmt = logging.Formatter('%(asctime)s - [%(levelname)s] - %(name)s - %(message)s')
+
+        text_file = logging.handlers.TimedRotatingFileHandler(
+            filename=text_path, when='midnight', interval=1, backupCount=7, encoding='utf-8'
         )
-        file_handler.setFormatter(formatter)
-        file_handler.setLevel(logging.DEBUG)
-        
-        # 控制台处理器
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
+        text_file.setFormatter(text_fmt)
+        text_file.setLevel(logging.DEBUG)
+
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setFormatter(text_fmt)
         console_handler.setLevel(logging.INFO)
-        
-        # 配置根日志记录器
+
+        class _JsonLineFormatter(logging.Formatter):
+            def format(self, record: logging.LogRecord) -> str:
+                payload = {
+                    "ts": self.formatTime(record, datefmt="%Y-%m-%dT%H:%M:%S"),
+                    "level": record.levelname,
+                    "logger": record.name,
+                    "message": record.getMessage(),
+                }
+                if record.exc_info:
+                    payload["exc_info"] = self.formatException(record.exc_info)
+                return json.dumps(payload, ensure_ascii=False)
+
+        json_handler = logging.handlers.TimedRotatingFileHandler(
+            filename=jsonl_path, when='midnight', interval=1, backupCount=7, encoding='utf-8'
+        )
+        json_handler.setFormatter(_JsonLineFormatter())
+        json_handler.setLevel(logging.DEBUG)
+
         root_logger = logging.getLogger()
         root_logger.setLevel(logging.DEBUG)
         root_logger.handlers.clear()
-        root_logger.addHandler(file_handler)
         root_logger.addHandler(console_handler)
-        
-        # 配置特定模块的日志级别
+        root_logger.addHandler(text_file)
+        root_logger.addHandler(json_handler)
+
         logging.getLogger('PyQt5').setLevel(logging.WARNING)
         logging.getLogger('urllib3').setLevel(logging.WARNING)
-        
-        return log_file
+
+        return jsonl_path
 
 # 导出所有类和函数
 __all__ = [

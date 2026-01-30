@@ -34,7 +34,7 @@ class PackagedErrorHandler:
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     handlers=[
                         logging.FileHandler(log_file, encoding='utf-8'),
-                        logging.StreamHandler() if not self.is_packaged else logging.NullHandler()
+                        logging.StreamHandler(sys.stdout)
                     ]
                 )
             except Exception as e:

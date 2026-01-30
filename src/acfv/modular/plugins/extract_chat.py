@@ -9,6 +9,8 @@ from acfv.modular.contracts import ART_CHAT_LOG, ART_CHAT_SOURCE
 from acfv.modular.types import ModuleContext, ModuleSpec
 from acfv.processing.extract_chat import extract_chat
 
+SCHEMA_VERSION = "1.0.0"
+
 
 def _read_json(path: Path) -> Any:
     try:
@@ -31,7 +33,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     if not chat_path or not os.path.exists(chat_path):
         if ctx.progress:
             ctx.progress("chat_extract", 1, 1, "no chat")
-        return {ART_CHAT_LOG: []}
+        return {ART_CHAT_LOG: {"schema_version": SCHEMA_VERSION, "chat_path": None, "messages": 0, "records": []}}
 
     work_dir = Path(ctx.store.run_dir) / "work"
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -39,9 +41,32 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 
     try:
         extract_chat(chat_path, str(out_path))
-        chat_payload = _read_json(out_path)
+        records = _read_json(out_path)
+        if isinstance(records, dict) and "records" in records:
+            records = records["records"]
+        if not isinstance(records, list):
+            records = []
+        # 归一化排序（若有 timestamp）
+        try:
+            records = sorted(records, key=lambda r: float(r.get("timestamp", 0)))
+        except Exception:
+            pass
+        messages = len(records)
+        start_ts = None
+        end_ts = None
+        if records:
+            start_ts = records[0].get("timestamp")
+            end_ts = records[-1].get("timestamp")
+        chat_payload = {
+            "schema_version": SCHEMA_VERSION,
+            "chat_path": str(out_path),
+            "messages": messages,
+            "start_time": start_ts,
+            "end_time": end_ts,
+            "records": records,
+        }
     except Exception:
-        chat_payload = []
+        chat_payload = {"schema_version": SCHEMA_VERSION, "chat_path": str(out_path), "messages": 0, "records": []}
 
     if ctx.progress:
         ctx.progress("chat_extract", 1, 1, "done")

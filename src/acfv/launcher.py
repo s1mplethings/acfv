@@ -18,40 +18,20 @@ def setup_packaged_environment():
     os.environ['OMP_NUM_THREADS'] = '1'
     os.environ['PYTHONWARNINGS'] = 'ignore::FutureWarning,ignore::UserWarning'
     
-    # 在打包后的环境中禁用控制台输出
-    if hasattr(sys, '_MEIPASS'):
-        # 重定向所有输出到日志文件
-        log_dir = os.path.join(os.path.dirname(sys.executable), 'logs')
-        os.makedirs(log_dir, exist_ok=True)
-        
-        log_file = os.path.join(log_dir, f'startup_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
-        
-        # 设置日志
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler(log_file, encoding='utf-8'),
-                logging.StreamHandler(sys.stdout) if not hasattr(sys, '_MEIPASS') else logging.NullHandler()
-            ]
-        )
-        
-        # 重定向标准输出和错误到日志
-        class LoggingStream:
-            def __init__(self, level):
-                self.level = level
-                self.logger = logging.getLogger()
-            
-            def write(self, text):
-                if text.strip():
-                    self.logger.log(self.level, text.strip())
-            
-            def flush(self):
-                pass
-        
-        if hasattr(sys, '_MEIPASS'):
-            sys.stdout = LoggingStream(logging.INFO)
-            sys.stderr = LoggingStream(logging.ERROR)
+    # 打包环境下仍保留 stdout/stderr，满足“所有输出终端可见”要求
+    log_dir = os.path.join(os.path.dirname(sys.executable if hasattr(sys, '_MEIPASS') else sys.argv[0]), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+
+    log_file = os.path.join(log_dir, f'startup_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file, encoding='utf-8'),
+            logging.StreamHandler(sys.stdout),
+        ]
+    )
 
 def main():
     """主启动函数"""

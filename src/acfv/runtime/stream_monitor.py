@@ -37,6 +37,7 @@ from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
 
 LOGGER = logging.getLogger("acfv.stream_monitor")
 _LOG_HANDLERS: dict[Path, tuple[logging.Handler, int]] = {}
+SCHEMA_VERSION = "1.0.0"
 
 
 def _attach_log_file(path: Path) -> Path:
@@ -396,6 +397,9 @@ class StreamMonitorService:
         self._stop_event = asyncio.Event()
         self._active: dict[str, Process] = {}
         self._presence_cache: dict[str, str] = {}
+        self._recordings: list[str] = []
+        self._chat_logs: list[str] = []
+        self._last_poll: Optional[str] = None
         self._log_attachment: Optional[Path] = None
         if self.log_path:
             self._log_attachment = _attach_log_file(self.log_path)
@@ -457,6 +461,7 @@ class StreamMonitorService:
             if run_once:
                 break
             await self._sleep_with_cancel(target.poll_interval)
+            self._last_poll = datetime.utcnow().isoformat() + "Z"
 
         LOGGER.info("Watcher stopped: %s", target.name)
         self._set_presence(target, "watcher_stopped", "监控结束")
@@ -518,11 +523,14 @@ class StreamMonitorService:
             stdout, stderr = await process.communicate()
             if process.returncode == 0:
                 LOGGER.info("Recording finished: %s", output_path)
+                self._recordings.append(str(output_path))
                 self._emit_event(
                     target,
                     "recording_finished",
                     f"录制完成：{output_path}",
                     output=str(output_path),
+                    url=record_url,
+                    returncode=0,
                 )
                 await self._maybe_download_chat(target, data, output_path)
             else:
@@ -659,6 +667,7 @@ class StreamMonitorService:
 
         chat_path = video_path.with_name(video_path.stem + "_chat.json")
         if chat_path.exists():
+            self._chat_logs.append(str(chat_path))
             self._emit_event(target, "chat_skipped", "聊天文件已存在。", output=str(chat_path))
             return
 
@@ -676,6 +685,7 @@ class StreamMonitorService:
         process = await asyncio.create_subprocess_exec(*cmd, stdout=PIPE, stderr=PIPE)
         stdout, stderr = await process.communicate()
         if process.returncode == 0:
+            self._chat_logs.append(str(chat_path))
             self._emit_event(
                 target,
                 "chat_downloaded",

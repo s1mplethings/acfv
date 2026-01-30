@@ -22,60 +22,40 @@ os.environ['PYTHONWARNINGS'] = 'ignore::FutureWarning,ignore::UserWarning'
 # 🔧 设置跳过重依赖检查以解决numpy兼容性问题
 os.environ['SKIP_HEAVY_CHECKS'] = '1'  # 跳过可能导致崩溃的重依赖检查
 
-# 🚫 立即禁用控制台（在打包后的环境中）
-def disable_console_immediately():
-    """立即禁用控制台"""
+# 🚫 控制台抑制（仅在显式要求时）
+def maybe_disable_console():
+    """
+    原行为：打包环境直接吞掉 stdout/stderr。
+    新要求：所有 GUI/CLI 进度必须可见于终端，因此默认不再抑制。
+    若确需静默（CI/后台），设置环境变量 ACFV_DISABLE_STDIO=1。
+    """
     try:
-        # 检查是否在打包后的环境中
-        if hasattr(sys, '_MEIPASS'):
-            # 重定向所有输出到空设备
-            class NullDevice:
-                def write(self, text): pass
-                def flush(self): pass
-                def close(self): pass
-                def fileno(self): return -1
-                def isatty(self): return False
-                def readable(self): return False
-                def writable(self): return False
-                def seekable(self): return False
-                def read(self, size=-1): return ""
-                def readline(self, size=-1): return ""
-                def readlines(self, size=-1): return []
-                def writelines(self, lines): pass
-                def __enter__(self): return self
-                def __exit__(self, exc_type, exc_val, exc_tb): pass
-            
-            null_dev = NullDevice()
-            sys.stdout = null_dev
-            sys.stderr = null_dev
-            sys.stdin = null_dev
-            
-            # 禁用内置函数
-            import builtins
-            builtins.print = lambda *args, **kwargs: None
-            builtins.input = lambda prompt="": ""
-            builtins.help = lambda *args, **kwargs: None
-            
-            # 设置环境变量
-            os.environ['PYTHONUNBUFFERED'] = '0'
-            os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
-            
-            # 导入静默退出模块
-            try:
-                try:
-                    from acfv.silent_exit import silent_exit  # type: ignore
-                except Exception:  # noqa: BLE001
-                    class silent_exit:  # minimal shim
-                        @staticmethod
-                        def install():
-                            pass
-            except ImportError:
-                pass
+        if os.environ.get("ACFV_DISABLE_STDIO") != "1":
+            return
+        class NullDevice:
+            def write(self, text): pass
+            def flush(self): pass
+            def close(self): pass
+            def fileno(self): return -1
+            def isatty(self): return False
+            def readable(self): return False
+            def writable(self): return False
+            def seekable(self): return False
+            def read(self, size=-1): return ""
+            def readline(self, size=-1): return ""
+            def readlines(self, size=-1): return []
+            def writelines(self, lines): pass
+            def __enter__(self): return self
+            def __exit__(self, exc_type, exc_val, exc_tb): pass
+        null_dev = NullDevice()
+        sys.stdout = null_dev
+        sys.stderr = null_dev
+        sys.stdin = null_dev
     except Exception:
         pass
 
-# 立即执行控制台禁用
-disable_console_immediately()
+# 默认不禁用，除非显式设置 ACFV_DISABLE_STDIO=1
+maybe_disable_console()
 
 import sys
 import json
@@ -591,10 +571,10 @@ def main():
         # 初始化目录
         initialize_directories()
         
-        # 创建默认配置
+        # 创建默认配置（轻量，保持同步执行以供窗口读取）
         create_default_config()
-        
-        # 初始化视频映射
+
+        # 初始化视频映射（轻量 IO，保持同步避免并发竞态）
         initialize_video_mapping()
 
         # 打印欢迎信息
@@ -618,15 +598,6 @@ def main():
 
         app.aboutToQuit.connect(cleanup_on_exit)
 
-        # 延迟加载重依赖
-        def load_main_modules():
-            try:
-                check_heavy_dependencies()
-                return True
-            except Exception as e:
-                logging.error(f"重依赖检查失败: {e}")
-                return False
-        
         def init_config_manager():
             try:
                 from acfv.config.config import ConfigManager
@@ -648,11 +619,6 @@ def main():
             if isinstance(value, str):
                 return value.strip().lower() in {"1", "true", "yes", "on"}
             return bool(value)
-        
-        # 延迟初始化
-        if not load_main_modules():
-            logging.error("重依赖加载失败")
-            sys.exit(1)
         
         config_manager = init_config_manager()
         if not config_manager:
@@ -725,6 +691,29 @@ def main():
 
         # 显示主窗口
         main_window.show()
+
+        # ✅ 后台进行重依赖与映射检查，避免阻塞 UI 启动
+        def run_post_start_checks():
+            import threading
+            log = logging.getLogger("acfv.startup")
+
+            def _worker():
+                log.info("后台检查开始：重依赖/视频映射")
+                try:
+                    check_heavy_dependencies()
+                    log.info("重依赖检查完成")
+                except Exception as e:
+                    log.error(f"重依赖检查失败: {e}")
+                try:
+                    initialize_video_mapping()
+                    log.info("视频映射检查/创建完成")
+                except Exception as e:
+                    log.error(f"视频映射初始化失败: {e}")
+
+            threading.Thread(target=_worker, name="post-start-checks", daemon=True).start()
+
+        from PyQt5.QtCore import QTimer
+        QTimer.singleShot(0, run_post_start_checks)
 
         # 可选：启动后直接转入托盘后台运行
         try:

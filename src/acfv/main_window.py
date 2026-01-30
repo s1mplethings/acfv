@@ -36,6 +36,8 @@ from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
 from acfv.lifecycle.tray_manager import TrayManager
 from acfv.runtime.storage import processing_path
 
+logger = logging.getLogger(__name__)
+
 
 # 简化的工作线程
 class SimpleWorker(QThread):
@@ -53,10 +55,11 @@ class SimpleWorker(QThread):
         """更新状态"""
         if not self.should_stop:
             self.status_updated.emit(f"{self.task_name}: {status}")
+            logger.info(f"[ui] {self.task_name}: {status}")
         
     def log_error(self, error: str):
         """记录错误"""
-        logging.error(f"[{self.task_name}] {error}")
+        logger.error(f"[{self.task_name}] {error}")
         if not self.should_stop:
             self.error_occurred.emit(error)
         
@@ -190,14 +193,11 @@ class DownloadWorker(SimpleWorker):
 
 # 删除了智能进度预测相关的导入和变量
 
-# 设置日志
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-
 def log_info(message):
-    logging.info(message)
+    logger.info(message)
 
 def log_error(message):
-    logging.error(message)
+    logger.error(message)
 
 # 辅助函数
 def filter_meaningless_content(data, is_chat=False):

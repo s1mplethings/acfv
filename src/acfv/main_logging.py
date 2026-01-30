@@ -1,20 +1,21 @@
 # main_logging.py
 
 import logging
+import sys
 from datetime import datetime
 
 from acfv.runtime.storage import logs_path
 
 log_file = logs_path("processing.log")
 
-# 配置日志
+# 配置日志：stdout 镜像 + 文件
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     handlers=[
         logging.FileHandler(str(log_file), encoding='utf-8', mode='a'),
-        logging.StreamHandler()  # 同时输出到控制台
+        logging.StreamHandler(sys.stdout)
     ]
 )
 

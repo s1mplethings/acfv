@@ -1,0 +1,30 @@
+# 架构与数据流
+
+## 模块表（含输入/输出）
+| 模块 | 输入来自 | 输出给谁 | 边界 | 依赖 | 运行方式 |
+| --- | --- | --- | --- | --- | --- |
+| CLI Pipeline (`acfv.cli.pipeline`) | CLI 参数、YAML、媒体路径 | 导出目录、剪辑/字幕 JSON、评分结果 | 编排下载→转写→选段→渲染 | Python, ffmpeg, TwitchDownloaderCLI | `python -m acfv.cli.pipeline clip ...` |
+| GUI (`acfv.gui` / `acfv.main_window`) | UI 表单、配置文件 | 同 CLI + UI 状态 | 封装 CLI 调用与后台线程 | PyQt, processing | `python -m acfv.cli gui` / `acfv gui` |
+| Stream Monitor (`acfv.runtime.stream_monitor`) | `var/settings/stream_monitor.yaml` | 录制视频、chat JSON、日志 | 轮询/录制/抓弹幕 | ffmpeg, TwitchDownloaderCLI | `acfv stream-monitor [-c cfg]` |
+| Twitch Downloader (`steps/twitch_downloader`) | VOD URL、凭证、输出目录 | 本地视频与 chat JSON | 仅负责下载/落盘，不做转写 | TwitchDownloaderCLI, ffmpeg | 被 pipeline/守护调用 |
+| Transcribe Audio (`steps/transcribe_audio`) | 音频路径、模型/语言配置 | 转写 JSON、SRT/ASS | 转写与时间戳校准 | whisper, ffmpeg, numpy | 被 pipeline/processing 调用 |
+| Selection/Scoring (`steps/selection`, `steps/analyze_segments`) | 转写/情绪/弹幕数据 | 段落列表与评分 JSON | 选段与排序，不渲染 | numpy/pandas（视实现） | 被 pipeline 调用 |
+| Render Clips (`steps/render_clips`) | 选段、媒体资源、模板配置 | 剪辑文件、字幕、缩略图 | 渲染与命名，输出到 out_dir | ffmpeg | 被 pipeline 调用 |
+| Export & Storage (`processing_path`等) | 处理后的片段/字幕/评分 | 文件系统、thumbnails | 管理输出命名与落盘位置 | pathlib, json | 内部调用 |
+
+## 数据流（入口→输出）
+1) 入口（GUI/CLI/stream-monitor）收集 URL 或本地媒体 + 配置。
+2) Ingest：下载或定位本地视频（可能生成 chat JSON）。
+3) Processing：抽取音频 → 预处理 → 转写 → 分段 → 评分 → 渲染/导出。
+4) Export：写入 clips/thumbnails/subtitles/golden JSON 等至 `runs/out` 或配置路径。
+5) 日志：`var/logs/*.log`，后台守护有独立日志文件。
+
+## 稳定边界
+
+- 关键契约文件：
+  - 候选段（切片输出）：`specs/contract_output/segments.schema.json`
+  - 剪辑清单（渲染输出）：`specs/contract_output/clips_manifest.schema.json`
+
+- 输入契约：CLI/守护/GUI 接收的配置字段；媒体文件路径与可访问性检查。
+- 输出契约：导出目录结构、字幕/评分 JSON schema（含 schema_version）、渲染文件命名。
+- 外部依赖：ffmpeg/TwitchDownloaderCLI 版本与调用参数需在 specs 中固定或注明兼容范围。

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import sys
 from pathlib import Path
 from typing import Sequence
 
@@ -43,10 +44,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 def configure_logging(level: str) -> None:
     numeric = getattr(logging, level.upper(), logging.INFO)
-    logging.basicConfig(
-        level=numeric,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    )
+    formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+    console = logging.StreamHandler(sys.stdout)
+    console.setFormatter(formatter)
+
+    root = logging.getLogger()
+    root.handlers.clear()
+    root.setLevel(numeric)
+    root.addHandler(console)
 
 
 def main(argv: Sequence[str] | None = None) -> int:

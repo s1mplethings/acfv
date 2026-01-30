@@ -47,8 +47,10 @@ def load_transcription(transcription_path: str) -> List[Dict[str, Any]]:
 		raise FileNotFoundError(f"transcription not found: {transcription_path}")
 	with open(transcription_path, "r", encoding="utf-8") as f:
 		data = json.load(f)
+		if isinstance(data, dict):
+			data = data.get("segments", [])
 		if not isinstance(data, list):
-			raise ValueError("transcription.json must be a list of segments")
+			raise ValueError("transcription.json must be a list or a dict containing 'segments'")
 		return data
 
 
