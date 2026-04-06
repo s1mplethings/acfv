@@ -1,0 +1,31 @@
+# Audio Routing Configuration
+
+# 是否启用Demucs人声/伴奏分离（推荐）
+use_demucs: true
+
+# 语音活动检测（VAD）配置
+vad:
+  min_speech_sec: 0.25    # 最小语音段长度（秒），小于此值的段会被过滤或合并
+  merge_gap_sec: 0.20     # 合并间隔阈值（秒），间隔小于此值的段会被合并
+
+# 说话人分离（Diarization）配置
+diarization:
+  enabled: true           # 是否启用pyannote说话人分离
+
+# 角色映射配置
+role_mapping:
+  thr_streamer: 0.75      # 主播识别相似度阈值（0-1）
+  thr_tts: 0.75           # TTS识别相似度阈值（0-1）
+  thr_game: 0.72          # 游戏角色识别相似度阈值（0-1）
+  default_role: game_speech  # 默认角色（当无法匹配时）
+
+# 语音转录（ASR）配置
+asr:
+  max_asr_sec: 20.0       # 最大转录段长度（秒），超过会切分
+  language: auto          # 语言代码（auto/zh/en/ja等）
+
+# 游戏非语音（bgm/sfx）检测配置
+game_non_speech:
+  thr_game_bgm_db: -28.0  # bgm检测阈值（dB），音量高于此值才算bgm
+  min_bgm_sec: 0.40       # 最小bgm段长度（秒）
+  merge_gap_bgm_sec: 0.20 # bgm段合并间隔（秒）

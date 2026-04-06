@@ -72,7 +72,8 @@ def _iter_records_from_file(filepath: str) -> Iterable[Dict[str, object]]:
         return
 
     base_dir = Path(filepath).resolve().parent
-    clips_dir = (base_dir / ".." / "output_clips").resolve()
+    from acfv.runtime.storage import resolve_run_clips_dir
+    clips_dir = resolve_run_clips_dir(base_dir)
 
     def _normalise_entry(name: str, rec: Dict[str, object]) -> Dict[str, object]:
         clip_path = rec.get("clip_path")

@@ -1,5 +1,6 @@
 import os
 import subprocess
+from pathlib import Path
 from acfv.main_logging import log_info, log_error, log_debug, log_warning
 import datetime
 import json
@@ -64,7 +65,32 @@ def _normalize_segments_data(data: Any) -> List[Dict[str, Any]]:
         segments.sort(key=lambda s: (-s.get("score", 0.0), s["start"], s["end"]))
     else:
         segments.sort(key=lambda s: (s["start"], s["end"]))
+
+    # 详细输出每个片段的兴趣分数与区间，便于终端排障
+    if segments:
+        log_info(f"[clip_video] 片段列表（共 {len(segments)} 个）：")
+        for idx, seg in enumerate(segments, 1):
+            tags = ",".join(seg.get("reason_tags") or []) or "-"
+            text_hint = (seg.get("text") or "")[:40].replace("\n", " ")
+            log_info(
+                f"[clip_video]   #{idx:03d} {seg['start']:.2f}s-{seg['end']:.2f}s "
+                f"score={seg.get('score', 0):.4f} tags={tags} text='{text_hint}'"
+            )
     return segments
+
+def _get_min_clip_segment_seconds() -> float:
+    cm = getattr(config, "config_manager", None)
+    try:
+        if cm is None:
+            return float(MIN_CLIP_SEGMENT_SECONDS)
+        value = cm.get("MIN_CLIP_SEGMENT_SECONDS", None)
+        if value is None:
+            value = cm.get("MIN_INTEREST_SEGMENT_DURATION", None)
+        if value is None:
+            return float(MIN_CLIP_SEGMENT_SECONDS)
+        return float(value)
+    except (TypeError, ValueError):
+        return float(MIN_CLIP_SEGMENT_SECONDS)
 from typing import List, Dict, Any
 
 # 可选依赖：cv2
@@ -180,22 +206,25 @@ def generate_clips_from_segments(video_path, segments, output_dir, progress_call
                 rank=segment_index, HHhMMmSSs=t_label, start_ms=start_ms, end_ms=end_ms
             )
             output_path = os.path.join(output_dir, clip_filename)
-            tmp_output_path = output_path + ".tmp"
+            # 保留 .mp4 扩展，避免 ffmpeg 无法识别输出格式
+            tmp_output_path = os.path.join(
+                output_dir, f"{Path(clip_filename).stem}.tmp{Path(clip_filename).suffix}"
+            )
             
             # 清理可能存在的旧文件
-            if os.path.exists(output_path):
-                try:
-                    os.remove(output_path)
-                    log_info(f"[clip_video] 清理旧文件: {output_path}")
-                except Exception as e:
-                    log_warning(f"[clip_video] 清理旧文件失败: {e}")
-            if os.path.exists(tmp_output_path):
-                try:
-                    os.remove(tmp_output_path)
-                except Exception:
-                    pass
+            for stale in (output_path, tmp_output_path):
+                if os.path.exists(stale):
+                    try:
+                        os.remove(stale)
+                        log_info(f"[clip_video] 清理旧文件: {stale}")
+                    except Exception as e:
+                        log_warning(f"[clip_video] 清理旧文件失败: {e}")
             
-            log_info(f"[clip_video] 生成切片 {i+1}/{len(segments)}: {clip_filename} ({duration:.1f}s)")
+            log_info(
+                f"[clip_video] 生成切片 {i+1}/{len(segments)}: {clip_filename} "
+                f"({duration:.1f}s) score={segment.get('score', 0):.4f} "
+                f"tags={','.join(segment.get('reason_tags') or []) or '-'}"
+            )
             
             # 使用快速切片函数
             try:
@@ -212,8 +241,33 @@ def generate_clips_from_segments(video_path, segments, output_dir, progress_call
                 
                 if os.path.exists(output_path):
                     clip_files.append(output_path)
-                    log_info(f"[clip_video] 切片生成成功: {clip_filename}")
-                    
+                    size_mb = os.path.getsize(output_path) / (1024 * 1024)
+                    log_info(f"[clip_video] 切片生成成功: {clip_filename} ({size_mb:.2f} MB)")
+                    try:
+                        report_path = os.path.join(output_dir, f"{Path(clip_filename).stem}.report.json")
+                        report_payload = {
+                            "clip_path": output_path,
+                            "start": start_time,
+                            "end": end_time,
+                            "duration_sec": duration,
+                            "score": float(segment.get("score", 0.0)),
+                            "score_base": segment.get("score_base"),
+                            "score_scale": segment.get("score_scale"),
+                            "overlap_count": segment.get("overlap_count"),
+                            "text": segment.get("text", ""),
+                            "reason_tags": segment.get("reason_tags") or [],
+                            "analysis_rank": segment.get("analysis_rank"),
+                            "selection_mode": segment.get("selection_mode"),
+                            "selection_reason": segment.get("selection_reason"),
+                            "source_start": segment.get("source_start"),
+                            "source_end": segment.get("source_end"),
+                            "source_duration": segment.get("source_duration"),
+                        }
+                        with open(report_path, "w", encoding="utf-8") as f:
+                            json.dump(report_payload, f, ensure_ascii=False, indent=2)
+                    except Exception as e:
+                        log_warning(f"[clip_video] 写入切片报告失败: {e}")
+                     
                     # 更新进度
                     if progress_callback:
                         try:
@@ -262,6 +316,8 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
     Returns:
         list: 剪辑文件列表
     """
+    log_info(f"[clip_video] 启动剪辑 | video={video_path} analysis={analysis_file} out_dir={output_dir} audio_source={audio_source or '-'}")
+
     # 读取分析结果
     try:
         with open(analysis_file, 'r', encoding='utf-8') as f:
@@ -269,11 +325,16 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
         segments = _normalize_segments_data(raw)
         log_info(f"[clip_video] 成功读取分析结果文件: {analysis_file}")
         log_info(f"[clip_video] 分析结果包含 {len(segments)} 个片段")
+        semantic_policy = raw.get("policy") if isinstance(raw, dict) else None
+        semantic_mode = bool(isinstance(semantic_policy, dict) and semantic_policy.get("target_duration_ms") is not None)
     except Exception as e:
         log_error(f"[clip_video] Error reading analysis file: {e}")
         log_error(f"[clip_video] 分析文件路径: {analysis_file}")
         log_error(f"[clip_video] 文件是否存在: {os.path.exists(analysis_file)}")
         return []
+    else:
+        if 'semantic_mode' not in locals():
+            semantic_mode = False
 
     if not segments:
         log_error("[clip_video] No segments to clip")
@@ -303,12 +364,14 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
         return []
 
     log_info(f"[clip_video] Video duration: {video_duration:.1f}s")
+    log_info(f"[clip_video] 目标切片窗口: min={MIN_CLIP_DURATION_SEC:.1f}s pref={PREF_CLIP_DURATION_SEC:.1f}s max={MAX_CLIP_DURATION_SEC:.1f}s")
     
     # 🆕 调试：检查传入的segments数据
     log_info(f"[clip_video] 收到 {len(segments)} 个片段")
     
     # 🆕 过滤无效片段
     valid_segments = []
+    min_seg_seconds = _get_min_clip_segment_seconds()
     for i, seg in enumerate(segments):
         start = seg.get('start', 0)
         end = seg.get('end', 0)
@@ -323,8 +386,10 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
             log_warning(f"[clip_video] 跳过低分片段 {i+1}: score={score}")
             continue
 
-        if end - start < MIN_CLIP_SEGMENT_SECONDS:
-            log_warning(f"[clip_video] 跳过过短片段 {i+1}: 持续时间={end-start:.1f}s (<{MIN_CLIP_SEGMENT_SECONDS:.1f}s)")
+        if end - start < min_seg_seconds:
+            log_warning(
+                f"[clip_video] 跳过过短片段 {i+1}: 持续时间={end-start:.1f}s (<{min_seg_seconds:.1f}s)"
+            )
             continue
 
         valid_segments.append(seg)
@@ -368,8 +433,13 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
     except Exception as e:
         log_warning(f"[clip_video] 读取剪辑目标时长配置失败，使用默认 240/270/300s: {e}")
 
-    # 基于分析排名生成固定窗口（约3-5分钟）切片
-    log_info(f"[clip_video] 使用分析排名生成固定窗口切片 (min={min_target:.1f}s pref={pref_target:.1f}s max={max_target:.1f}s)")
+    if semantic_mode:
+        log_info("[clip_video] 使用语义合并窗口（保留原始时长，非固定窗口）")
+    else:
+        # 基于分析排名生成固定窗口（约3-5分钟）切片
+        log_info(
+            f"[clip_video] 使用分析排名生成固定窗口切片 (min={min_target:.1f}s pref={pref_target:.1f}s max={max_target:.1f}s)"
+        )
 
     context_extend = max(0.0, _float_config("CLIP_CONTEXT_EXTEND", 15.0))
     merge_threshold = max(0.0, _float_config("CLIP_MERGE_THRESHOLD", 10.0))
@@ -480,48 +550,87 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
 
         return start, end
 
-    for idx, seg in enumerate(segments):
-        if len(processed_segments) >= max_clips:
-            break
+    if semantic_mode:
+        for idx, seg in enumerate(segments):
+            if len(processed_segments) >= max_clips:
+                break
+            clip_start = float(seg.get('start', 0.0))
+            clip_end = float(seg.get('end', 0.0))
+            duration = clip_end - clip_start
+            if duration <= 1.0:
+                log_warning(f"[clip_video] 跳过时长不足的语义窗口 #{idx+1}: {duration:.1f}s")
+                continue
+            processed_segments.append(
+                {
+                    'start': clip_start,
+                    'end': clip_end,
+                    'score': float(seg.get('score', 0.0)),
+                    'text': seg.get('text', ''),
+                    'analysis_rank': idx + 1,
+                    'source_start': clip_start,
+                    'source_end': clip_end,
+                    'source_duration': max(0.0, duration),
+                    'selection_mode': "semantic_windows",
+                    'selection_reason': "semantic_similarity_window",
+                }
+            )
+            log_info(
+                f"[clip_video] 语义窗口 #{len(processed_segments)}: {clip_start:.1f}-{clip_end:.1f}s "
+                f"(≈{duration/60:.2f}min, score={seg.get('score', 0)})"
+            )
+    else:
+        for idx, seg in enumerate(segments):
+            if len(processed_segments) >= max_clips:
+                break
 
-        base_start = float(seg.get('start', 0.0))
-        base_end = float(seg.get('end', 0.0))
-        if base_end - base_start <= 0:
-            log_warning(f"[clip_video] 跳过长度异常的片段 #{idx+1}")
-            continue
+            base_start = float(seg.get('start', 0.0))
+            base_end = float(seg.get('end', 0.0))
+            if base_end - base_start <= 0:
+                log_warning(f"[clip_video] 跳过长度异常的片段 #{idx+1}")
+                continue
 
-        if _highlight_already_covered(base_start, base_end):
-            log_info(f"[clip_video] 片段 #{idx+1} 已包含在之前的窗口中，跳过重复")
-            continue
+            if _highlight_already_covered(base_start, base_end):
+                log_info(f"[clip_video] 片段 #{idx+1} 已包含在之前的窗口中，跳过重复")
+                continue
 
-        clip_start, clip_end = _build_window(base_start, base_end)
-        duration = clip_end - clip_start
-        if duration <= 1.0:
-            log_warning(f"[clip_video] 跳过时长不足的窗口 #{idx+1}: {duration:.1f}s")
-            continue
+            clip_start, clip_end = _build_window(base_start, base_end)
+            duration = clip_end - clip_start
+            if duration <= 1.0:
+                log_warning(f"[clip_video] 跳过时长不足的窗口 #{idx+1}: {duration:.1f}s")
+                continue
 
-        processed_segments.append({
-            'start': clip_start,
-            'end': clip_end,
-            'score': float(seg.get('score', 0.0)),
-            'text': seg.get('text', ''),
-            'analysis_rank': idx + 1,
-            'source_start': base_start,
-            'source_end': base_end,
-            'source_duration': max(0.0, base_end - base_start)
-        })
-        log_info(f"[clip_video] 生成窗口 #{len(processed_segments)} "
-                 f"来自排名#{idx+1}: {clip_start:.1f}-{clip_end:.1f}s "
-                 f"(≈{duration/60:.2f}min, score={seg.get('score', 0)})")
+            processed_segments.append({
+                'start': clip_start,
+                'end': clip_end,
+                'score': float(seg.get('score', 0.0)),
+                'text': seg.get('text', ''),
+                'analysis_rank': idx + 1,
+                'source_start': base_start,
+                'source_end': base_end,
+                'source_duration': max(0.0, base_end - base_start),
+                'selection_mode': "score_ranked_fixed",
+                'selection_reason': "top_score_ranked_window",
+            })
+            log_info(f"[clip_video] 生成窗口 #{len(processed_segments)} "
+                     f"来自排名#{idx+1}: {clip_start:.1f}-{clip_end:.1f}s "
+                     f"(≈{duration/60:.2f}min, score={seg.get('score', 0)})")
 
     if not processed_segments:
         log_error("[clip_video] ❌ 未能生成任何符合条件的切片窗口")
         return []
+
+    log_info(f"[clip_video] 计划切片总数: {len(processed_segments)} / 请求上限 {max_clips}")
+    for i, ps in enumerate(processed_segments, 1):
+        log_info(
+            f"[clip_video] 计划#{i:03d} window={ps['start']:.2f}-{ps['end']:.2f}s "
+            f"len={ps['end']-ps['start']:.2f}s score={ps.get('score',0):.4f} "
+            f"from src {ps['source_start']:.2f}-{ps['source_end']:.2f}s"
+        )
     
     # 保存处理计划
     plan_file = os.path.join(output_dir, "clip_plan.json")
     plan_data = {
-        "mode": "score_ranked_fixed",
+        "mode": "semantic_windows" if semantic_mode else "score_ranked_fixed",
         "min_sec": min_target,
         "preferred_sec": pref_target,
         "max_sec": max_target,
@@ -540,7 +649,15 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
     log_info(f"[clip_video] 切片计划已保存到: {plan_file}")
     
     # 直接进入切片生成阶段
-    return generate_clips_from_segments(video_path, processed_segments, output_dir, progress_callback, audio_source)
+    clip_files = generate_clips_from_segments(video_path, processed_segments, output_dir, progress_callback, audio_source)
+
+    # 汇总输出
+    log_info(f"[clip_video] 切片任务完成: 成功 {len(clip_files)} / 计划 {len(processed_segments)}")
+    for i, path in enumerate(clip_files, 1):
+        size_mb = os.path.getsize(path) / (1024 * 1024) if os.path.exists(path) else 0
+        log_info(f"[clip_video] 成品#{i:03d} {path} ({size_mb:.2f} MB)")
+
+    return clip_files
 
 
 def extend_segment(segment, context_extend, video_duration):

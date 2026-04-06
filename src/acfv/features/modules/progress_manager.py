@@ -26,6 +26,8 @@ class StageInfo:
     substage_progress: float = 0.0
     start_time: Optional[float] = None
     estimated_duration: float = 60  # 默认估计时间(秒)
+    elapsed: float = 0.0
+    completed_duration: Optional[float] = None
 
 
 class ProgressManager:
@@ -84,6 +86,8 @@ class ProgressManager:
             stage.current_substage = 0
             stage.substage_progress = 0.0
             stage.start_time = None
+            stage.elapsed = 0.0
+            stage.completed_duration = None
             
         # 根据历史数据调整预估时间
         self._update_estimates(video_duration, file_size)
@@ -104,8 +108,10 @@ class ProgressManager:
             
             # 记录每个阶段的完成时间
             for stage in self.stages:
-                if stage.start_time:
+                stage_duration = stage.completed_duration
+                if stage_duration is None and stage.start_time:
                     stage_duration = time.time() - stage.start_time
+                if stage_duration is not None:
                     session_record["stages"][stage.name] = {
                         "duration": stage_duration,
                         "substages": stage.substages,
@@ -132,6 +138,8 @@ class ProgressManager:
                 stage.current_substage = 0
                 stage.substage_progress = 0.0
                 stage.start_time = None
+                stage.elapsed = 0.0
+                stage.completed_duration = None
             
             logging.info("进度管理器已停止")
         except Exception as e:
@@ -141,12 +149,28 @@ class ProgressManager:
         """获取当前进度数据"""
         try:
             overall_progress, current_stage, eta = self.get_overall_progress()
+            total_elapsed = None
+            current_stage_elapsed = None
+            if self.total_start_time:
+                total_elapsed = time.time() - self.total_start_time
+            current_stage_info = None
+            if 0 <= self.current_stage_index < len(self.stages):
+                current_stage_info = self.stages[self.current_stage_index]
+            if current_stage_info:
+                if current_stage_info.start_time:
+                    current_stage_elapsed = time.time() - current_stage_info.start_time
+                else:
+                    current_stage_elapsed = current_stage_info.elapsed
             return {
                 "percentage": overall_progress,
                 "current_stage": current_stage,
                 "eta": eta,
                 "total_start_time": self.total_start_time,
-                "current_stage_index": self.current_stage_index
+                "current_stage_index": self.current_stage_index,
+                "total_elapsed": total_elapsed,
+                "current_stage_elapsed": current_stage_elapsed,
+                "total_elapsed_text": self._format_time(total_elapsed) if total_elapsed is not None else "0秒",
+                "current_stage_elapsed_text": self._format_time(current_stage_elapsed) if current_stage_elapsed is not None else "0秒",
             }
         except Exception as e:
             logging.error(f"获取进度数据失败: {e}")
@@ -155,7 +179,11 @@ class ProgressManager:
                 "current_stage": "未知",
                 "eta": "计算中...",
                 "total_start_time": None,
-                "current_stage_index": 0
+                "current_stage_index": 0,
+                "total_elapsed": None,
+                "current_stage_elapsed": None,
+                "total_elapsed_text": "0秒",
+                "current_stage_elapsed_text": "0秒",
             }
     
     def get_history_summary(self) -> List[Dict]:
@@ -211,6 +239,8 @@ class ProgressManager:
             stage.start_time = time.time()
             stage.current_substage = 0
             stage.substage_progress = 0.0
+            stage.elapsed = 0.0
+            stage.completed_duration = None
             logging.info(f"开始阶段: {stage_name}")
     
     def update_substage(self, stage_name: str, substage_index: int, progress: float = 0.0):
@@ -219,6 +249,8 @@ class ProgressManager:
         if stage:
             stage.current_substage = substage_index
             stage.substage_progress = max(0.0, min(1.0, progress))
+            if stage.start_time:
+                stage.elapsed = time.time() - stage.start_time
     
     def update_stage_progress(self, stage_name: str, substage_index: int, progress: float = 0.0):
         """更新阶段进度（别名方法，兼容不同的调用方式）"""
@@ -229,6 +261,9 @@ class ProgressManager:
         stage = self._get_stage(stage_name)
         if stage and stage.start_time:
             duration = time.time() - stage.start_time
+            stage.elapsed = duration
+            stage.completed_duration = duration
+            stage.start_time = None
             
             # 更新历史数据
             if "stage_averages" not in self.history_data:
@@ -367,15 +402,22 @@ class ProgressManager:
                 "substage_name": "处理完成",
                 "stage_progress": 1.0,
                 "substages": [],
-                "current_substage_index": 0
+                "current_substage_index": 0,
+                "stage_elapsed_text": "0秒",
+                "total_elapsed_text": "0秒",
             }
         
         current_stage = self.stages[self.current_stage_index]
+        if current_stage.start_time:
+            current_stage.elapsed = time.time() - current_stage.start_time
+        total_elapsed = time.time() - self.total_start_time if self.total_start_time else 0.0
         
         return {
             "stage_name": current_stage.name,
             "substage_name": current_stage.substages[current_stage.current_substage] if current_stage.current_substage < len(current_stage.substages) else "完成",
             "stage_progress": (current_stage.current_substage + current_stage.substage_progress) / len(current_stage.substages),
             "substages": current_stage.substages,
-            "current_substage_index": current_stage.current_substage
+            "current_substage_index": current_stage.current_substage,
+            "stage_elapsed_text": self._format_time(current_stage.elapsed),
+            "total_elapsed_text": self._format_time(total_elapsed),
         }

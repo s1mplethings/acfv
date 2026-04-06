@@ -1,0 +1,47 @@
+{
+  "clean": {
+    "fontname": "Arial",
+    "fontsize": 28,
+    "outline": 2,
+    "shadow": 1,
+    "bold": false,
+    "alignment": 2,
+    "marginv": 20
+  },
+  "bold": {
+    "fontname": "Arial",
+    "fontsize": 34,
+    "outline": 3,
+    "shadow": 2,
+    "bold": true,
+    "alignment": 2,
+    "marginv": 20
+  },
+  "anime_pop": {
+    "fontname": "Arial",
+    "fontsize": 32,
+    "outline": 4,
+    "shadow": 3,
+    "bold": true,
+    "alignment": 2,
+    "marginv": 18
+  },
+  "minimal": {
+    "fontname": "Arial",
+    "fontsize": 22,
+    "outline": 1,
+    "shadow": 0,
+    "bold": false,
+    "alignment": 2,
+    "marginv": 16
+  },
+  "top_caption": {
+    "fontname": "Arial",
+    "fontsize": 26,
+    "outline": 2,
+    "shadow": 1,
+    "bold": true,
+    "alignment": 8,
+    "marginv": 20
+  }
+}

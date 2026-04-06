@@ -9,7 +9,8 @@
 import warnings
 import os
 import logging
-from typing import Set
+from typing import Set, Optional
+import sys
 
 def setup_warning_filters():
     """设置警告过滤器"""
@@ -41,12 +42,17 @@ def setup_warning_filters():
     logging.debug("警告过滤器已设置")
 
 def suppress_torch_warnings():
-    """专门抑制torch相关警告"""
+    """
+    专门抑制 torch 相关警告。
+    仅在 torch 已被导入时执行，避免 GUI 冷启动时触发大体积依赖加载。
+    在需要的模块中显式调用以保持原有行为。
+    """
+    torch = sys.modules.get("torch")  # 避免冷启动强行 import torch
+    if torch is None:
+        return
     try:
-        import torch
-        # 设置torch的警告级别
         torch.set_warn_always(False)
-    except ImportError:
+    except Exception:
         pass
 
 def with_suppressed_warnings(func):
@@ -82,9 +88,8 @@ def ensure_hf_token_notice(token_present: bool) -> None:
         "⚠️ HuggingFace token 未配置。请设置环境变量 HUGGINGFACE_TOKEN 或在 secrets/config.json 中填写 huggingface_token。",
     )
 
-# 在模块导入时自动设置
+# 在模块导入时自动设置轻量级过滤器；torch 警告抑制需按需调用 suppress_torch_warnings()
 setup_warning_filters()
-suppress_torch_warnings()
 
 if __name__ == "__main__":
     print("警告管理模块 - 已设置警告过滤器")

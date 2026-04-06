@@ -319,11 +319,21 @@ class UltraFastExtractor:
         
         try:
             # 关键优化1：一次性加载完整音频文件到内存
-            log_info("🔄 [超快提取器] 预加载完整音频文件...")
-            self.full_audio, self.sr = librosa.load(video_path, sr=22050)
+            log_info("🔄 [超快提取器] 预加载完整音频文件 (优先 soundfile 后端)...")
+            try:
+                self.full_audio, self.sr = librosa.load(
+                    video_path, sr=22050, backend="soundfile", mono=True, dtype="float32"
+                )
+                backend_used = "soundfile"
+            except Exception as e:
+                log_warning(f"[超快提取器] soundfile 后端失败: {e}; 改用默认 audioread")
+                self.full_audio, self.sr = librosa.load(
+                    video_path, sr=22050, mono=True, dtype="float32"
+                )
+                backend_used = "audioread"
             self.duration = len(self.full_audio) / self.sr
             load_time = time.time() - start_time
-            log_info(f"✅ [超快提取器] 音频已预加载: {self.duration:.1f}s, 耗时: {load_time:.1f}s")
+            log_info(f"✅ [超快提取器] 音频已预加载: {self.duration:.1f}s, 耗时: {load_time:.1f}s, backend={backend_used}")
             
             # 关键优化2：预计算整个音频的频谱特征
             log_info("🔄 [超快提取器] 预计算全局音频特征...")
@@ -1757,10 +1767,12 @@ def analyze_data_with_checkpoint(chat_file, transcription_file, output_file,
         try:
             if rag_enable and rag_db and ratings_data:
                 base_dir = os.path.dirname(output_file)
+                from acfv.runtime.storage import resolve_run_clips_dir
                 # 将Top片段写入RAG库（使用ratings.json中的文本与评分）
                 for name, rec in ratings_data.items():
                     if float(rec.get('rating', 0.0)) > 0:
-                        clip_path = os.path.join(base_dir, "..", "output_clips", name)
+                        clips_dir = resolve_run_clips_dir(Path(base_dir))
+                        clip_path = os.path.join(str(clips_dir), name)
                         rag_db.add_liked_clip_vector(
                             clip_path=clip_path,
                             transcript_text=rec.get('text', ''),

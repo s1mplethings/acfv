@@ -7,11 +7,8 @@ os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(filename=os.path.join(LOG_DIR, "acfv.log"),
                     level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-# Hide console if present (dev runs or if built without -noconsole)
-try:
-    ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-except Exception:
-    pass
+# 保留控制台：便于实时查看 stdout/stderr 日志，排查启动/切片进度。
+# 如需静默，可在打包时显式传 --noconsole 或设置环境变量 ACFV_DISABLE_STDIO=1。
 
 _lock_fp = None
 
@@ -56,6 +53,14 @@ def main():
         sys.exit(0)
     try:
         logging.info("ACFV launcher start")
+        # 确保 stdout/stderr 指向控制台（若存在）
+        try:
+            if hasattr(sys, "stdout") and sys.stdout is None:
+                sys.stdout = sys.__stdout__
+            if hasattr(sys, "stderr") and sys.stderr is None:
+                sys.stderr = sys.__stderr__
+        except Exception:
+            pass
         _run_gui()
     except Exception as e:
         logging.exception("ACFV launcher error: %s", e)

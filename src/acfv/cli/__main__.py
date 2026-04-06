@@ -2,6 +2,7 @@ try:
     import typer
     from .gui import gui_app
     from .rag import rag_app
+    # from .audio_routing import audio_route_transcribe_cli  # Temporarily disabled
     
     app = typer.Typer(pretty_exceptions_enable=False, add_completion=False, no_args_is_help=True)
     
@@ -14,6 +15,7 @@ try:
     
     app.add_typer(gui_app, name="gui", help="Launch GUI")
     app.add_typer(rag_app, name="rag", help="Manage RAG database")
+    # app.command(name="audio_route")(audio_route_transcribe_cli)  # Temporarily disabled
     
 except ImportError:
     # Fallback if typer is not available

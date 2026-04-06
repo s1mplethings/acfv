@@ -22,13 +22,11 @@ from PyQt5.QtWidgets import (
     QListWidgetItem,
     QMessageBox,
     QPushButton,
-    QSpinBox,
-    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
 
-from acfv.runtime.storage import resolve_clips_base_dir, storage_root, processing_path
+from acfv.runtime.storage import resolve_clips_base_dir, resolve_run_clips_dir, storage_root, processing_path
 from acfv.ui import build_section_header, card_frame_style, wrap_in_card
 from acfv.utils import extract_time_from_clip_filename
 
@@ -136,10 +134,9 @@ class ClipsManager:
         self.run_combo: Optional[QComboBox] = None
         self.open_button: Optional[QPushButton] = None
         self.open_folder_button: Optional[QPushButton] = None
-
-        self.rate_button: Optional[QPushButton] = None
-        self.rating_spin: Optional[QSpinBox] = None
-        self.rating_notes: Optional[QTextEdit] = None
+        self.rate_button = None
+        self.rating_spin = None
+        self.rating_notes = None
 
         self._base_dir: Path = resolve_clips_base_dir(config_manager, ensure=True)
         self._inventory: List[VideoEntry] = []
@@ -162,12 +159,13 @@ class ClipsManager:
     # ------------------------------------------------------------------ UI assembly
 
     def init_ui(self, container: QWidget) -> None:
+        # 纯剪辑浏览布局（成片增强迁移到字幕/切片页面）
         layout = QVBoxLayout(container)
-        layout.setContentsMargins(12, 12, 12, 12)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(10)
 
         container.setStyleSheet(card_frame_style())
-        header = build_section_header("切片浏览", "浏览、打开并评分生成的剪辑")
+        header = build_section_header("切片浏览", "浏览并打开生成的剪辑")
         layout.addWidget(header)
 
         controls_row = QHBoxLayout()
@@ -226,34 +224,6 @@ class ClipsManager:
         status_widget.setLayout(status_row)
         layout.addWidget(wrap_in_card(status_widget))
 
-        rating_panel = QWidget()
-        rating_layout = QVBoxLayout(rating_panel)
-        rating_layout.setContentsMargins(0, 0, 0, 0)
-        rating_layout.setSpacing(4)
-
-        rating_controls = QHBoxLayout()
-        rating_controls.setSpacing(8)
-
-        rating_controls.addWidget(QLabel("评分 (1-5)"))
-        self.rating_spin = QSpinBox()
-        self.rating_spin.setRange(1, 5)
-        self.rating_spin.setValue(5)
-        rating_controls.addWidget(self.rating_spin)
-
-        self.rate_button = QPushButton("保存评分并写入 RAG")
-        self.rate_button.clicked.connect(self._rate_selected_clip)
-        self.rate_button.setEnabled(False)
-        rating_controls.addWidget(self.rate_button, 1)
-
-        rating_layout.addLayout(rating_controls)
-
-        self.rating_notes = QTextEdit()
-        self.rating_notes.setPlaceholderText("可选：记录亮点或重写文本（将写入评分记录/RAG）")
-        self.rating_notes.setFixedHeight(80)
-        rating_layout.addWidget(self.rating_notes)
-
-        layout.addWidget(wrap_in_card(rating_panel))
-
         QTimer.singleShot(0, self.refresh_clips)
 
     # ------------------------------------------------------------------ public API used by pipeline
@@ -273,7 +243,7 @@ class ClipsManager:
             meta_path.write_text(json.dumps(envelope, ensure_ascii=True, indent=2), encoding="utf-8")
         except Exception as exc:  # noqa: BLE001
             logging.debug("[clips_manager] failed to write run metadata: %s", exc)
-        self._current_run_output = run_dir / "output_clips"
+        self._current_run_output = resolve_run_clips_dir(run_dir)
         self._current_run_meta = meta_path
         return meta_path
 
@@ -313,10 +283,8 @@ class ClipsManager:
                         candidate = candidate.resolve()
                     except Exception:
                         candidate = candidate.absolute()
-                    if candidate.parent.name == "output_clips":
-                        target_run_dir = candidate.parent.parent
-                    else:
-                        target_run_dir = candidate.parent
+                    resolved = self._resolve_run_dir_for_clip(candidate)
+                    target_run_dir = resolved or candidate.parent
                 self._sync_flattened_clips(target_run_dir, clip_path_objs)
             except Exception as exc:
                 logging.debug("[clips_manager] failed to sync flattened clips: %s", exc)
@@ -356,7 +324,7 @@ class ClipsManager:
             runs_dir = video_dir / "runs"
             if runs_dir.is_dir():
                 for run_dir in sorted([p for p in runs_dir.iterdir() if p.is_dir()]):
-                    clips = self._gather_clips(run_dir / "output_clips")
+                    clips = self._gather_clips(resolve_run_clips_dir(run_dir))
                     status, started, finished = self._load_run_meta(run_dir / "run.json")
                     runs.append(
                         RunEntry(
@@ -391,6 +359,17 @@ class ClipsManager:
                 )
             )
         return clips
+
+    def _resolve_run_dir_for_clip(self, clip_path: Path) -> Optional[Path]:
+        try:
+            parent = clip_path.parent
+        except Exception:
+            return None
+        if parent.name == "output_clips":
+            return parent.parent
+        if parent.name.startswith("run_"):
+            return parent
+        return None
 
     # ------------------------------------------------------------------ navigation helpers
 
@@ -668,8 +647,6 @@ class ClipsManager:
             self.open_button.setEnabled(enabled)
         if self.open_folder_button is not None:
             self.open_folder_button.setEnabled(enabled)
-        if self.rate_button is not None:
-            self.rate_button.setEnabled(enabled)
 
     # ------------------------------------------------------------------ thumbnails & metadata
 
@@ -796,9 +773,12 @@ class ClipsManager:
             candidate = (storage_root().parent / candidate).resolve()
         if not candidate.exists():
             return
-        self._current_run_output = candidate
-        meta_path = candidate.parent / "run.json"
+        run_dir = candidate.parent if candidate.name == "output_clips" else candidate
+        if run_dir.name == "out" and run_dir.parent.name == "runs":
+            return
+        meta_path = run_dir / "run.json"
         if meta_path.exists():
+            self._current_run_output = resolve_run_clips_dir(run_dir)
             self._current_run_meta = meta_path
 
     def _sanitize(self, text: str) -> str:
@@ -925,10 +905,9 @@ class ClipsManager:
             info["end"] = end
 
         candidates = []
-        if run:
-            candidates.append(run.path / "data" / "ratings.json")
-        if clip.path.parent.name == "output_clips":
-            candidates.append(clip.path.parent.parent / "data" / "ratings.json")
+        run_dir = run.path if run else self._resolve_run_dir_for_clip(clip.path)
+        if run_dir:
+            candidates.append(run_dir / "data" / "ratings.json")
         if video:
             candidates.append(video.path / "data" / "ratings.json")
         candidates.extend(
@@ -965,10 +944,9 @@ class ClipsManager:
         run: Optional[RunEntry],
     ) -> None:
         log_dir = None
-        if run:
-            log_dir = run.path / "data"
-        elif clip.path.parent.name == "output_clips":
-            log_dir = clip.path.parent.parent / "data"
+        run_dir = run.path if run else self._resolve_run_dir_for_clip(clip.path)
+        if run_dir:
+            log_dir = run_dir / "data"
         else:
             log_dir = clip.path.parent
         if not log_dir:

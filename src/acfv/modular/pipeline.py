@@ -59,7 +59,10 @@ def _load_plugin_specs() -> list:
         "acfv.modular.plugins.transcribe_audio",
         "acfv.modular.plugins.video_emotion",
         "acfv.modular.plugins.speaker_separation",
+        "acfv.modular.plugins.streamer_subtitles",
+        "acfv.modular.plugins.subtitle_translate",
         "acfv.modular.plugins.analyze_segments",
+        "acfv.modular.plugins.semantic_merge",
         "acfv.modular.plugins.render_clips",
     ]
     specs = []
@@ -107,6 +110,7 @@ def run_pipeline(
 
     def _progress(stage: str, current: int, total: int, message: str = "") -> None:
         emitter.emit(stage, current, total, message)
+        logger.info("[progress] %s %s/%s %s", stage, current, total, message or "")
         if progress_callback:
             progress_callback(stage, current, total, message)
 
@@ -126,10 +130,32 @@ def run_pipeline(
     max_clips = _get_int(config_manager.get("MAX_CLIP_COUNT") if config_manager else None, 0)
     max_clips = max_clips if max_clips > 0 else None
 
+    min_seg_duration = _get_float(config_manager.get("MIN_CLIP_SEGMENT_SECONDS") if config_manager else None, 6.0)
+    if config_manager and config_manager.get("MIN_CLIP_SEGMENT_SECONDS") is None:
+        min_seg_duration = _get_float(config_manager.get("MIN_INTEREST_SEGMENT_DURATION"), min_seg_duration)
+    enable_enhance = _get_bool(config_manager.get("ENABLE_ENHANCE") if config_manager else None, False)
+    enable_asr = _get_bool(config_manager.get("ENHANCE_ASR") if config_manager else None, True)
+    subtitle_enabled = enable_enhance and enable_asr
+    enable_streamer_subtitles = _get_bool(
+        config_manager.get("ENABLE_STREAMER_SUBTITLES") if config_manager else None, False
+    )
+    enable_subtitle_translate = _get_bool(
+        config_manager.get("ENABLE_SUBTITLE_TRANSLATE") if config_manager else None, False
+    )
+    primary_speaker = None
+    if config_manager:
+        primary_speaker = config_manager.get("STREAMER_PRIMARY_SPEAKER")
+    language_cfg = str(config_manager.get("TRANSCRIPTION_LANGUAGE") if config_manager else "") if config_manager else ""
+    language_cfg = language_cfg.strip().lower()
+    language = None if language_cfg in {"", "auto", "detect", "default"} else language_cfg
+
     params_by_module = {
         "transcribe_audio": {
             "segment_length": _get_int(config_manager.get("SEGMENT_LENGTH") if config_manager else None, 300),
             "whisper_model": str(config_manager.get("WHISPER_MODEL") if config_manager else "medium"),
+            "whisper_engine": str(config_manager.get("WHISPER_ENGINE") if config_manager else "auto"),
+            "hf_whisper_model": str(config_manager.get("HF_WHISPER_MODEL") if config_manager else "openai/whisper-medium"),
+            "language": language,
         },
         "video_emotion": {
             "enabled": _get_bool(config_manager.get("ENABLE_VIDEO_EMOTION") if config_manager else None, False),
@@ -140,13 +166,44 @@ def run_pipeline(
         "speaker_separation": {
             "enabled": _get_bool(config_manager.get("ENABLE_SPEAKER_SEPARATION") if config_manager else None, False),
         },
+        "streamer_subtitles": {
+            "enabled": enable_streamer_subtitles,
+            "primary_speaker": primary_speaker,
+        },
+        "subtitle_translate": {
+            "enabled": enable_subtitle_translate,
+            "engine": config_manager.get("SUBTITLE_TRANSLATE_ENGINE") if config_manager else "llm_json",
+            "target_lang": config_manager.get("SUBTITLE_TRANSLATE_TARGET_LANG") if config_manager else "zh-Hans",
+            "source_lang": config_manager.get("SUBTITLE_TRANSLATE_SOURCE_LANG") if config_manager else "en",
+            "bilingual": _get_bool(config_manager.get("SUBTITLE_TRANSLATE_BILINGUAL") if config_manager else None, False),
+            "merge_mode": config_manager.get("SUBTITLE_TRANSLATE_MERGE_MODE") if config_manager else "lock_timeline",
+            "block_max_duration": _get_float(
+                config_manager.get("SUBTITLE_TRANSLATE_BLOCK_MAX_DURATION") if config_manager else None, 10.0
+            ),
+            "block_max_chars": _get_int(
+                config_manager.get("SUBTITLE_TRANSLATE_BLOCK_MAX_CHARS") if config_manager else None, 350
+            ),
+            "block_max_gap": _get_float(
+                config_manager.get("SUBTITLE_TRANSLATE_BLOCK_MAX_GAP") if config_manager else None, 0.6
+            ),
+            "block_min_items": _get_int(
+                config_manager.get("SUBTITLE_TRANSLATE_BLOCK_MIN_ITEMS") if config_manager else None, 2
+            ),
+            "llm_api_url": config_manager.get("SUBTITLE_TRANSLATE_LLM_API_URL") if config_manager else "",
+            "llm_api_key": config_manager.get("SUBTITLE_TRANSLATE_LLM_API_KEY") if config_manager else "",
+            "llm_model": config_manager.get("SUBTITLE_TRANSLATE_LLM_MODEL") if config_manager else "",
+            "llm_system_prompt": config_manager.get("SUBTITLE_TRANSLATE_LLM_SYSTEM_PROMPT") if config_manager else "",
+        },
         "analyze_segments": {
             "max_clips": max_clips,
             "video_emotion_weight": _get_float(config_manager.get("VIDEO_EMOTION_WEIGHT") if config_manager else None, 0.3),
             "enable_video_emotion": _get_bool(config_manager.get("ENABLE_VIDEO_EMOTION") if config_manager else None, False),
+            "min_duration_sec": min_seg_duration,
         },
         "render_clips": {
             "output_dir": output_clips_dir,
+            "subtitle_enabled": subtitle_enabled,
+            "subtitle_format": str(config_manager.get("SUBTITLE_FORMAT") if config_manager else "srt") or "srt",
         },
     }
 

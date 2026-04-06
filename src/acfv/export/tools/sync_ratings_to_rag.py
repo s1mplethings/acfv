@@ -87,7 +87,12 @@ def scan_ratings_json(root: str) -> List[Dict[str, Any]]:
                             results.append({
                                 'video_name': video_name,
                                 'clip_filename': clip_fn,
-                                'clip_path': os.path.join(data_dir, '..', 'output_clips', clip_fn).replace('..'+os.sep, ''),
+                                'clip_path': str(
+                                    __import__("acfv.runtime.storage", fromlist=["resolve_run_clips_dir"]).resolve_run_clips_dir(
+                                        Path(data_dir).parent
+                                    )
+                                    / clip_fn
+                                ),
                                 'start_sec': rec.get('start'),
                                 'end_sec': rec.get('end'),
                                 'score': rec.get('rating'),

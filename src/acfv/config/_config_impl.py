@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from typing import Any, Dict
 
-from acfv.runtime.storage import ensure_runtime_dirs, processing_path, settings_path
+from acfv.runtime.storage import ensure_runtime_dirs, processing_path, settings_path, runs_out_path
 
 class ConfigManager:
     """配置管理器 - 单例模式"""
@@ -82,10 +82,12 @@ class ConfigManager:
             "CHAT_OUTPUT": str(proc("chat_with_emotes.json")),
             "TRANSCRIPTION_OUTPUT": str(proc("transcription.json")),
             "ANALYSIS_OUTPUT": str(proc("high_interest_segments.json")),
-            "OUTPUT_CLIPS_DIR": str(proc("output_clips")),
+            "OUTPUT_CLIPS_DIR": str(runs_out_path()),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
-            "WHISPER_MODEL": "medium",
+            "WHISPER_MODEL": "large-v3-turbo",
+            "WHISPER_ENGINE": "auto",
+            "HF_WHISPER_MODEL": "openai/whisper-medium",
             "LLM_DEVICE": 0,
             "CHAT_DENSITY_WEIGHT": 0.2,
             "CHAT_SENTIMENT_WEIGHT": 0.3,
@@ -95,7 +97,7 @@ class ConfigManager:
             "INTEREST_SCORE_THRESHOLD": 0.1,
             # 片段合并/时长控制
             # 剪辑目标时长（保持 4–5 分钟窗口）
-            "MIN_TARGET_CLIP_DURATION": 240.0,
+            "MIN_TARGET_CLIP_DURATION": 180.0,
             "TARGET_CLIP_DURATION": 270.0,
             "MAX_TARGET_CLIP_DURATION": 300.0,
             "MIN_INTEREST_SEGMENT_DURATION": 5.0,
@@ -120,13 +122,21 @@ class ConfigManager:
             "GPU_DEVICE": "cuda:0",
             "ENABLE_GPU_ACCELERATION": True,
             "FORCE_SEMANTIC_SEGMENT": True,
-            "MIN_CLIP_DURATION": 60.0,
+            "MIN_CLIP_DURATION": 180.0,
+            "MAX_CLIP_DURATION": 600.0,
             "CLIP_CONTEXT_EXTEND": 15.0,
             "MERGE_NEARBY_CLIPS": True,
             "CLIP_MERGE_THRESHOLD": 10.0,
             "ENABLE_SEMANTIC_MERGE": True,
-            "SEMANTIC_SIMILARITY_THRESHOLD": 0.75,
+            "SEMANTIC_SIMILARITY_THRESHOLD": 0.85,
             "SEMANTIC_MAX_TIME_GAP": 60.0,
+            "SEMANTIC_STICKINESS_SEC": 60.0,
+            "SEMANTIC_MIN_TEXT_CHARS": 20.0,
+            "SEMANTIC_MIN_TEXT_PER_SEC": 0.2,
+            "SEMANTIC_SEGMENT_MODE": True,
+            "SEMANTIC_TARGET_DURATION": 300.0,
+            "SEMANTIC_DURATION_WEIGHT": 0.25,
+            "SEMANTIC_SCORE_WARN": 1000.0,
             "PARALLEL_TRANSCRIPTION": True,
             "MAX_TRANSCRIPTION_WORKERS": 12,
             "SEGMENT_LENGTH": 60,
@@ -165,6 +175,38 @@ class ConfigManager:
             "LOCAL_SUMMARY_TOP_P": 0.9,
             "LOCAL_SUMMARY_REPEAT_PENALTY": 1.15,
             "LOCAL_SUMMARY_MAX_INPUT_CHARS": 4000,
+            # Enhance成片增强配置（2026-02新增）
+            "ENABLE_ENHANCE": False,  # 总开关
+            "ENHANCE_ASR": True,  # 自动字幕
+            "ENHANCE_SUBTITLE_FX": True,  # 字幕特效
+            "ENHANCE_ROI": False,  # 视角切换
+            "ENHANCE_MEME": False,  # 梗贴图
+            "ENHANCE_RAG": False,  # 智能推荐
+            "SUBTITLE_STYLE_PROFILE": "clean",  # clean/bold_outline/meme_heavy
+            "MEME_DENSITY": 0.3,  # 梗密度 0.0-1.0
+            "ENABLE_STREAMER_SUBTITLES": False,  # 仅导出主播字幕
+            "STREAMER_PRIMARY_SPEAKER": "",  # 指定主播 speaker id
+            "STREAMER_SUB_MAX_CHARS": 16,
+            "STREAMER_SUB_MAX_LINES": 2,
+            "STREAMER_SUB_TARGET_DUR": 1.6,
+            "STREAMER_SUB_MIN_DUR": 0.7,
+            "STREAMER_SUB_MAX_DUR": 3.2,
+            "STREAMER_SUB_PAUSE_SPLIT": 0.28,
+            # 字幕翻译（上下文块）
+            "ENABLE_SUBTITLE_TRANSLATE": False,
+            "SUBTITLE_TRANSLATE_ENGINE": "llm_json",  # llm_json/argos/nllb/seamless
+            "SUBTITLE_TRANSLATE_TARGET_LANG": "zh-Hans",
+            "SUBTITLE_TRANSLATE_SOURCE_LANG": "en",
+            "SUBTITLE_TRANSLATE_BILINGUAL": False,
+            "SUBTITLE_TRANSLATE_MERGE_MODE": "lock_timeline",
+            "SUBTITLE_TRANSLATE_BLOCK_MAX_DURATION": 10.0,
+            "SUBTITLE_TRANSLATE_BLOCK_MAX_CHARS": 350,
+            "SUBTITLE_TRANSLATE_BLOCK_MAX_GAP": 0.6,
+            "SUBTITLE_TRANSLATE_BLOCK_MIN_ITEMS": 2,
+            "SUBTITLE_TRANSLATE_LLM_API_URL": "",
+            "SUBTITLE_TRANSLATE_LLM_API_KEY": "",
+            "SUBTITLE_TRANSLATE_LLM_MODEL": "",
+            "SUBTITLE_TRANSLATE_LLM_SYSTEM_PROMPT": "",
         }
     
     def save_config(self) -> bool:

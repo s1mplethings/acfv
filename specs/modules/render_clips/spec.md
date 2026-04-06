@@ -16,6 +16,7 @@
 - subtitles（srt/ass 等）
 - thumbnails（可选）
 - clips manifest：遵循 `specs/contract_output/clips_manifest.schema.json`
+- 每个切片生成同名 `.report.json`（分数/时长/文本/选中原因）
 
 ## Naming（必须固定）
 命名必须可预测且可回溯，建议：
@@ -33,13 +34,14 @@ manifest 必须记录：
 ## Process（建议）
 1) 读取 candidates 并选出渲染列表（按 rank 或阈值）
 2) 对每段调用 ffmpeg（或库）渲染
-3) 生成缩略图（可选）
-4) 写出 manifest（包含所有 clip 映射）
-5) 若某 clip 失败：记录命令与返回码；整体策略（fail-fast 或 partial）需在 config 中声明
+3) 若启用字幕：调用 Subtitle Generator 生成同名 `.srt/.ass`
+4) 生成缩略图（可选）
+5) 写出 manifest（包含所有 clip 映射）
+6) 若某 clip 失败：记录命令与返回码；整体策略（fail-fast 或 partial）需在 config 中声明
 
 ## Error Handling
-- ffmpeg 不存在/不可执行：立即失败（verify/CI 可提前检测）
-- 单个 clip 渲染失败：必须记录“命令+返回码+stderr 摘要”，并在 manifest 中标记（或不写入该 clip；策略需声明）
+- ffmpeg 不存在/不可执行：立即失败（verify/CI 可提前检测）；在日志中输出失败路径和具体错误。
+- 单个 clip 渲染失败：必须记录“命令+返回码+stderr 摘要”，并在 manifest 中标记（或不写入该 clip；策略需声明）；明确失败路径（失败 clip 的输出文件、命令、返回码、stderr 摘要）写入日志，便于排障。
 
 ## Acceptance Criteria (AC)
 - AC-1（manifest 可回溯）：Given 1 个候选段 When render_clips Then 输出至少包含 1 个 video 文件与 1 个 manifest；manifest 中能映射到该 video 的相对路径。

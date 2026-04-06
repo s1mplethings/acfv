@@ -6,10 +6,6 @@ import json
 import math
 from typing import List, Dict, Any, Tuple
 
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
 from acfv.processing.subtitle_contract import generate_subtitle
 
 
@@ -29,7 +25,14 @@ def _read_transcription(transcription_file: str) -> List[Dict[str, Any]]:
 
 
 def _parse_clip_time_from_name(filename: str) -> Tuple[float, float]:
-    # clip_001_123.4s-234.5s.mp4
+    # Current naming: clip_001_00h00m00s_0-270000.mp4 (ms)
+    m = re.search(r"clip_\d+_[^_]+_(\d+)-(\d+)\.mp4$", filename)
+    if m:
+        start_ms = float(m.group(1))
+        end_ms = float(m.group(2))
+        if end_ms > start_ms:
+            return start_ms / 1000.0, end_ms / 1000.0
+    # Legacy naming: clip_001_123.4s-234.5s.mp4
     m = re.search(r"clip_\d+_(\d+(?:\.\d+)?)s-(\d+(?:\.\d+)?)s\.mp4$", filename)
     if m:
         return float(m.group(1)), float(m.group(2))
@@ -74,6 +77,9 @@ def _semantic_merge(sentences: List[Dict[str, Any]], sim_threshold: float, max_g
         return sentences
     # Build TF-IDF vectors for similarity
     try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity
+
         vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2))
         X = vectorizer.fit_transform(texts)
         sim = cosine_similarity(X)
@@ -137,7 +143,13 @@ def _build_sentence_chunks(segments: List[Dict[str, Any]], clip_start: float, cl
     return chunks
 
 
-def generate_semantic_subtitles_for_clips(output_clips_dir: str, transcription_file: str, cfg_manager, clip_paths: List[str]) -> int:
+def generate_semantic_subtitles_for_clips(
+    output_clips_dir: str,
+    transcription_file: str,
+    cfg_manager,
+    clip_paths: List[str],
+    fmt: str = "srt",
+) -> int:
     """Generate SRT subtitles per clip based on semantic sentence splitting and light merging.
 
     Returns number of subtitle files written.
@@ -151,6 +163,9 @@ def generate_semantic_subtitles_for_clips(output_clips_dir: str, transcription_f
     max_gap = float(cfg_manager.get("SEMANTIC_MAX_TIME_GAP", 2.0) or 2.0)
     min_chars = int(cfg_manager.get("SUBTITLE_MIN_SENTENCE_CHARS", 6) or 6)
 
+    fmt = (fmt or "srt").lower()
+    if fmt not in ("srt", "ass"):
+        fmt = "srt"
     written = 0
     for clip_path in clip_paths:
         try:
@@ -172,7 +187,7 @@ def generate_semantic_subtitles_for_clips(output_clips_dir: str, transcription_f
             source_name = os.path.splitext(os.path.basename(clip_path))[0]
             payload = {
                 "segments": [{"start": c["start"] - s, "end": c["end"] - s, "text": c["text"]} for c in chunks],
-                "format": "srt",
+                "format": fmt,
                 "out_dir": out_dir,
                 "source_name": source_name,
                 "time_offset_sec": 0.0,

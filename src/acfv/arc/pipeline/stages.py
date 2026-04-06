@@ -10,12 +10,12 @@ from acfv.arc.services.scoring import (
     compute_relative_interest_score, score_segment
 )
 from acfv.processing.clip_video import cut_video_ffmpeg
-from acfv.runtime.storage import processing_path
+from acfv.runtime.storage import processing_path, runs_out_path
 
 # Defaults (can be overridden by providing Settings instance in StageContext under 'settings')
 DEFAULT_CHAT_OUTPUT = str(processing_path("chat_with_emotes.json"))
 DEFAULT_SEGMENTS_OUTPUT = str(processing_path("high_interest_segments.json"))
-DEFAULT_CLIPS_DIR = str(processing_path("output_clips"))
+DEFAULT_CLIPS_DIR = str(runs_out_path())
 
 class StageContext(dict):
     """Mutable dict passed between stages."""

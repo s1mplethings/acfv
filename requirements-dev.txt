@@ -1,2 +1,4 @@
-pytest>=8.0.0
-ruff>=0.6.0
+# Source of truth: pyproject.toml [project.optional-dependencies.dev]
+# Last synchronized: 2026-02-07
+-r requirements.txt
+.[dev]

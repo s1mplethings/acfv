@@ -66,6 +66,27 @@ def logs_path(*parts: str | PathLike[str]) -> Path:
     return base if not parts else base.joinpath(*parts)
 
 
+def runs_out_path(*parts: str | PathLike[str]) -> Path:
+    """Return a path inside runs/out (stable export location)."""
+    base = storage_root().parent / "runs" / "out"
+    base.mkdir(parents=True, exist_ok=True)
+    return base if not parts else base.joinpath(*parts)
+
+
+def resolve_run_clips_dir(run_dir: Path) -> Path:
+    """Return the directory that contains clip outputs for a run.
+
+    Prefer legacy `output_clips` subdir when present, otherwise use run root.
+    """
+    run_dir = Path(run_dir)
+    if run_dir.name == "work":
+        run_dir = run_dir.parent
+    legacy = run_dir / "output_clips"
+    if legacy.exists():
+        return legacy
+    return run_dir
+
+
 def resolve_clips_base_dir(config_manager, ensure: bool = False) -> Path:
     """Resolve the base directory used to store generated clips."""
     runtime_root = storage_root().parent

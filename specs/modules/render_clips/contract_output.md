@@ -7,6 +7,7 @@
 | clips | list[str] | 是 | 剪辑文件路径列表，文件存在 | ["runs/out/123/clip_001.mp4"] |
 | subtitles | list[str] | 否 | 与 clips 对齐的字幕路径 | ["runs/out/123/clip_001.srt"] |
 | thumbnails | list[str] | 否 | 缩略图路径 | ["runs/out/123/thumb_001.jpg"] |
+| clip_reports | list[str] | 否 | 切片报告路径（同名 .report.json） | ["runs/out/123/clip_001.report.json"] |
 | log_path | str | 否 | 渲染日志路径 | var/logs/render_123.log |
 
 ## 确定性要求

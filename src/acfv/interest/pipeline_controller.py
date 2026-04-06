@@ -21,13 +21,13 @@ from acfv.main_logging import log_info, log_error, log_warning
 
 from acfv.processing.extract_chat import extract_chat
 from acfv.processing.analyze_data import init_vader  # ensure sentiment runtime
-from acfv.runtime.storage import processing_path
+from acfv.runtime.storage import processing_path, runs_out_path
 
 ProgressCallback = Callable[[str, int, int, str], None]
 
 SEGMENTS_OUTPUT = str(processing_path("high_interest_segments.json"))
 CHAT_OUTPUT = str(processing_path("chat_with_emotes.json"))
-CLIPS_DIR = str(processing_path("output_clips"))
+CLIPS_DIR = str(runs_out_path())
 
 class PipelineController:
     def __init__(self, progress_callback: Optional[ProgressCallback] = None):

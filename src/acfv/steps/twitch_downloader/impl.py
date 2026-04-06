@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import (
 
 from acfv.utils import safe_slug
 from acfv.utils.twitch_downloader_setup import ensure_cli_on_path
-from acfv.runtime.storage import processing_path
+from acfv.runtime.storage import processing_path, runs_out_path
 
 SCHEMA_VERSION = "1.0.0"
 
@@ -1399,7 +1399,7 @@ class TwitchDownloadPage(QWidget):
             self.config.CHAT_OUTPUT = os.path.join(download_folder, "chat_with_emotes.json")
             self.config.TRANSCRIPTION_OUTPUT = os.path.join(download_folder, "transcription.json")
             self.config.ANALYSIS_OUTPUT = os.path.join(download_folder, "high_interest_segments.json")
-            self.config.OUTPUT_CLIPS_DIR = os.path.join(download_folder, "output_clips")
+            self.config.OUTPUT_CLIPS_DIR = str(runs_out_path())
 
         # 尝试调用主窗口的流水线
         main_window = self.parent()

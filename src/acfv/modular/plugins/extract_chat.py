@@ -7,8 +7,6 @@ from typing import Any, Dict
 
 from acfv.modular.contracts import ART_CHAT_LOG, ART_CHAT_SOURCE
 from acfv.modular.types import ModuleContext, ModuleSpec
-from acfv.processing.extract_chat import extract_chat
-
 SCHEMA_VERSION = "1.0.0"
 
 
@@ -40,6 +38,13 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     out_path = work_dir / "chat.json"
 
     try:
+        from acfv.processing.extract_chat import extract_chat
+    except Exception:
+        extract_chat = None
+
+    try:
+        if extract_chat is None:
+            raise RuntimeError("extract_chat unavailable")
         extract_chat(chat_path, str(out_path))
         records = _read_json(out_path)
         if isinstance(records, dict) and "records" in records:
@@ -66,7 +71,12 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
             "records": records,
         }
     except Exception:
-        chat_payload = {"schema_version": SCHEMA_VERSION, "chat_path": str(out_path), "messages": 0, "records": []}
+        chat_payload = {
+            "schema_version": SCHEMA_VERSION,
+            "chat_path": str(out_path),
+            "messages": 0,
+            "records": [],
+        }
 
     if ctx.progress:
         ctx.progress("chat_extract", 1, 1, "done")

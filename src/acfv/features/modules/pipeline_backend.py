@@ -148,6 +148,7 @@ import logging
 import pickle
 import subprocess
 from pathlib import Path
+from datetime import datetime
 import re
 
 def _ensure_extended_path(path: str) -> str:
@@ -173,7 +174,7 @@ except ImportError:
 
 from acfv import config
 from acfv.utils import safe_slug
-from acfv.runtime.storage import processing_path, settings_path, logs_path
+from acfv.runtime.storage import processing_path, settings_path, logs_path, storage_root
 import sys
 
 
@@ -311,10 +312,10 @@ class ConfigManager:
             "CHAT_OUTPUT": str(processing_path("chat_with_emotes.json")),
             "TRANSCRIPTION_OUTPUT": str(processing_path("transcription.json")),
             "ANALYSIS_OUTPUT": str(processing_path("high_interest_segments.json")),
-            "OUTPUT_CLIPS_DIR": str(processing_path("output_clips")),
+            "OUTPUT_CLIPS_DIR": str((storage_root().parent / "runs" / "out").resolve()),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
-            "WHISPER_MODEL": "medium",
+            "WHISPER_MODEL": "large-v3-turbo",
             "LLM_DEVICE": 0,
             "CHAT_DENSITY_WEIGHT": 0.2,
             "CHAT_SENTIMENT_WEIGHT": 0.3,
@@ -444,6 +445,27 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     
     # 清理之前的停止标志
     cleanup_stop_flag()
+
+    # 统一输出目录结构：runs/out/<job_id>
+    try:
+        base_out = (storage_root().parent / "runs" / "out").resolve()
+        out_candidate = None
+        if output_clips_dir:
+            out_candidate = Path(str(output_clips_dir)).expanduser()
+            if not out_candidate.is_absolute():
+                out_candidate = (storage_root().parent / out_candidate).resolve()
+        if (
+            (not output_clips_dir)
+            or str(output_clips_dir).endswith("output_clips")
+            or (out_candidate is not None and out_candidate == base_out)
+        ):
+            run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
+            output_clips_dir = str((base_out / run_id).resolve())
+        if not video_clips_dir:
+            video_clips_dir = output_clips_dir
+        Path(str(output_clips_dir)).mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        log_warning(f"[pipeline] 输出目录初始化失败，继续使用原路径: {e}")
     
     def emit_progress(stage, current, total, message=""):
         # 检查停止标志
@@ -453,6 +475,10 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
             
         if progress_callback:
             progress_callback(stage, current, total, message)
+        try:
+            logging.info(f"[progress] {stage} {current}/{total} {message}")
+        except Exception:
+            pass
         
         # 更新进度文件，包含更详细的信息
         try:
@@ -844,15 +870,21 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         # 转录任务（使用提取的音频）
         if not has_transcription or force_retranscription:
             log_info(f"[pipeline] 开始音频转录: {audio_save_path} -> {transcription_output}")
-            whisper_model_name = cfg_manager.get("WHISPER_MODEL", "medium")
-            emit_progress("音频转录", 1, 2, f"使用 {whisper_model_name} 模型进行转录...")
+            whisper_engine = cfg_manager.get("WHISPER_ENGINE", "auto")
+            hf_whisper_model = cfg_manager.get("HF_WHISPER_MODEL", "openai/whisper-medium")
+            if whisper_engine == "hf-whisper":
+                whisper_model_name = hf_whisper_model
+            else:
+                whisper_model_name = cfg_manager.get("WHISPER_MODEL", "medium")
+            emit_progress("音频转录", 1, 2, f"使用 {whisper_engine}/{whisper_model_name} 进行转录...")
             
             futures['transcription'] = executor.submit(
                 process_audio_segments,
                 audio_path=audio_cmd_path,  # 使用提取的音频文件
                 output_file=transcription_output,
                 segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
-                whisper_model_name=whisper_model_name
+                whisper_model_name=whisper_model_name,
+                engine=whisper_engine
             )
         
         # 情绪分析任务
@@ -948,11 +980,18 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
         if 'transcription' not in futures:
             log_info(f"[pipeline] 串行转录: {video} -> {transcription_output}")
             try:
+                whisper_engine = cfg_manager.get("WHISPER_ENGINE", "auto")
+                hf_whisper_model = cfg_manager.get("HF_WHISPER_MODEL", "openai/whisper-medium")
+                if whisper_engine == "hf-whisper":
+                    whisper_model_name = hf_whisper_model
+                else:
+                    whisper_model_name = cfg_manager.get("WHISPER_MODEL", "medium")
                 process_audio_segments(
                     audio_path=video,
                     output_file=transcription_output,
                     segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
-                    whisper_model_name="medium"
+                    whisper_model_name=whisper_model_name,
+                    engine=whisper_engine
                 )
                 
                 # 同时保存音频文件到clip目录

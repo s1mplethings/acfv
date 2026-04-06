@@ -18,6 +18,9 @@ import os
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'  # 解决OpenMP库冲突
 os.environ['OMP_NUM_THREADS'] = '1'  # 限制OpenMP线程数
 os.environ['PYTHONWARNINGS'] = 'ignore::FutureWarning,ignore::UserWarning'
+# 抑制 transformers 等管线的冗余提示，避免 GPU 顺序执行警告刷屏
+os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
+os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
 # 🔧 设置跳过重依赖检查以解决numpy兼容性问题
 os.environ['SKIP_HEAVY_CHECKS'] = '1'  # 跳过可能导致崩溃的重依赖检查
@@ -110,10 +113,10 @@ except ImportError:
 def setup_logging():
     """设置日志系统 - 支持环境变量控制"""
     from acfv.features.modules.core import LogManager
+    from acfv.runtime.storage import logs_path
     
-    # 创建logs目录
-    log_dir = os.path.join(current_dir, "logs")
-    os.makedirs(log_dir, exist_ok=True)
+    # 运行时日志目录（统一落 var/logs）
+    log_dir = str(logs_path())
     
     # 根据环境变量设置日志级别
     log_level = os.environ.get('LOG_LEVEL', 'INFO').upper()

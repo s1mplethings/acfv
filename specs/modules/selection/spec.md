@@ -25,7 +25,7 @@
 - `strategy`：`topk`（k）、`threshold`（min_score）。
 - `min_duration`/`max_duration`
 - `merge_overlap`（bool）
-- `topk`（默认 10）
+- `topk`（默认 10，可通过设置配置MAX_CLIP_COUNT）
 
 ## 6) Performance Budget
 - 时间复杂度线性于段落数；应在数万段内快速完成。

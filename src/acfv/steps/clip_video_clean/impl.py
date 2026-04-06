@@ -1,5 +1,6 @@
 import os
 import subprocess
+from pathlib import Path
 from acfv.main_logging import log_info, log_error, log_debug, log_warning
 import datetime
 import json
@@ -100,24 +101,40 @@ def generate_clips_from_segments(video_path, segments, output_dir, progress_call
             end_time = segment['end']
             duration = end_time - start_time
             
-            # 生成输出文件名
+            # 生成输出文件名（与渲染契约一致）
             segment_index = i + 1
-            clip_filename = f"clip_{segment_index:03d}_{start_time:.1f}s-{end_time:.1f}s.mp4"
+            start_ms = int(round(start_time * 1000))
+            end_ms = int(round(end_time * 1000))
+            hh = int(start_time // 3600)
+            mm = int((start_time % 3600) // 60)
+            ss = int(start_time % 60)
+            t_label = f"{hh:02d}h{mm:02d}m{ss:02d}s"
+            clip_filename = f"clip_{segment_index:03d}_{t_label}_{start_ms}-{end_ms}.mp4"
             output_path = os.path.join(output_dir, clip_filename)
+            tmp_output_path = os.path.join(output_dir, f"{Path(clip_filename).stem}.tmp{Path(clip_filename).suffix}")
             
             # 清理可能存在的旧文件
-            if os.path.exists(output_path):
-                try:
-                    os.remove(output_path)
-                    log_info(f"[clip_video] 清理旧文件: {output_path}")
-                except Exception as e:
-                    log_warning(f"[clip_video] 清理旧文件失败: {e}")
+            for stale in (output_path, tmp_output_path):
+                if os.path.exists(stale):
+                    try:
+                        os.remove(stale)
+                        log_info(f"[clip_video] 清理旧文件: {stale}")
+                    except Exception as e:
+                        log_warning(f"[clip_video] 清理旧文件失败: {e}")
             
             log_info(f"[clip_video] 生成切片 {i+1}/{len(segments)}: {clip_filename} ({duration:.1f}s)")
             
             # 使用快速切片函数
             try:
-                cut_video_ffmpeg(video_path, output_path, start_time, duration)
+                # 先写入临时文件，再原子替换
+                cut_video_ffmpeg(video_path, tmp_output_path, start_time, duration)
+                if os.path.exists(tmp_output_path):
+                    try:
+                        os.replace(tmp_output_path, output_path)
+                    except Exception:
+                        import shutil
+                        shutil.copy2(tmp_output_path, output_path)
+                        os.remove(tmp_output_path)
                 
                 if os.path.exists(output_path):
                     clip_files.append(output_path)

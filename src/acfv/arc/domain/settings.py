@@ -16,14 +16,14 @@ try:
 except ImportError:  # pragma: no cover
     _HAVE_PYDANTIC = False
 
-from acfv.runtime.storage import processing_path
+from acfv.runtime.storage import processing_path, runs_out_path
 
 DEFAULTS: Dict[str, Any] = {
     "VIDEO_FILE": "",
     "CHAT_FILE": "",
     "CHAT_OUTPUT": str(processing_path("chat_with_emotes.json")),
     "ANALYSIS_OUTPUT": str(processing_path("high_interest_segments.json")),
-    "OUTPUT_CLIPS_DIR": str(processing_path("output_clips")),
+    "OUTPUT_CLIPS_DIR": str(runs_out_path()),
     "MAX_CLIP_COUNT": 10,
     "CHAT_DENSITY_WEIGHT": 0.3,
     "CHAT_SENTIMENT_WEIGHT": 0.4,

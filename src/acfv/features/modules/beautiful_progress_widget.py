@@ -422,7 +422,11 @@ class BeautifulProgressWidget(QWidget):
             if total_stages > 0:
                 stage_progress = f"阶段进度: {completed_stages}/{total_stages}"
                 overall_progress = f"总进度: {progress*100:.1f}%"
-                self.stats_label.setText(f"📊 {stage_progress} | {overall_progress}")
+                stage_elapsed = stage_details.get("stage_elapsed_text", "0秒")
+                total_elapsed = stage_details.get("total_elapsed_text", "0秒")
+                self.stats_label.setText(
+                    f"📊 {stage_progress} | {overall_progress} | 阶段用时: {stage_elapsed} | 总用时: {total_elapsed}"
+                )
             else:
                 self.stats_label.setText("📊 准备统计中...")
                 
@@ -562,6 +566,18 @@ class SimpleBeautifulProgressBar(QWidget):
             }
         """)
         layout.addWidget(self.status_label)
+
+        # 耗时标签
+        self.timing_label = QLabel("阶段: 0秒 | 总计: 0秒")
+        self.timing_label.setAlignment(Qt.AlignCenter)
+        self.timing_label.setStyleSheet("""
+            QLabel {
+                font-size: 11px;
+                color: #888;
+                padding: 2px;
+            }
+        """)
+        layout.addWidget(self.timing_label)
         
         # 默认隐藏，只在有进度时显示
         self.setVisible(False)
@@ -608,6 +624,10 @@ class SimpleBeautifulProgressBar(QWidget):
                           or current_progress.get('status')
                           or '处理中...')
             self.status_label.setText(f"{stage_text} - {pct_float:.1f}%")
+
+            stage_elapsed = current_progress.get("current_stage_elapsed_text", "0秒")
+            total_elapsed = current_progress.get("total_elapsed_text", "0秒")
+            self.timing_label.setText(f"阶段: {stage_elapsed} | 总计: {total_elapsed}")
             
         except Exception as e:
             logging.debug(f"更新进度显示时忽略错误: {e}")

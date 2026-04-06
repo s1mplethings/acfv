@@ -7,11 +7,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
-from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS, ART_VIDEO
+from acfv import config as app_config
+from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT, ART_VIDEO
 from acfv.modular.types import ModuleContext, ModuleSpec
 from acfv.processing.clip_video import clip_video
 from acfv.selection.merge_segments import merge_segments
 from acfv.steps.render_clips.impl import NAMING_POLICY as CLIP_NAMING_POLICY
+from acfv.steps.subtitle_generator.impl import generate_semantic_subtitles_for_clips
 
 SCHEMA_VERSION = "1.0.0"
 UNITS = "ms"
@@ -20,12 +22,40 @@ SORT_POLICY = "score_desc_start_ms_asc_end_ms_asc"
 logger = logging.getLogger(__name__)
 
 
+def _get_min_clip_segment_seconds() -> float:
+    cm = getattr(app_config, "config_manager", None)
+    try:
+        if cm is None:
+            return 6.0
+        value = cm.get("MIN_CLIP_SEGMENT_SECONDS", None)
+        if value is None:
+            value = cm.get("MIN_INTEREST_SEGMENT_DURATION", None)
+        if value is None:
+            return 6.0
+        return float(value)
+    except (TypeError, ValueError):
+        return 6.0
+
+
 def _write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     with tmp.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=True, indent=2)
     tmp.replace(path)
+
+
+def _resolve_subtitle_settings(ctx: ModuleContext) -> tuple[bool, str]:
+    enabled = ctx.params.get("subtitle_enabled")
+    fmt = ctx.params.get("subtitle_format")
+    if enabled is None:
+        cm = getattr(app_config, "config_manager", None)
+        enable_enhance = bool(cm.get("ENABLE_ENHANCE", False)) if cm else False
+        enable_asr = bool(cm.get("ENHANCE_ASR", True)) if cm else False
+        enabled = enable_enhance and enable_asr
+    if not fmt:
+        fmt = "srt"
+    return bool(enabled), str(fmt)
 
 
 def _normalize_segments(payload: Any) -> List[Dict[str, Any]]:
@@ -59,15 +89,33 @@ def _normalize_segments(payload: Any) -> List[Dict[str, Any]]:
         if end <= start:
             continue
         reason_tags = seg.get("reason_tags") if isinstance(seg.get("reason_tags"), list) else []
-        normalized.append(
-            {"start": max(0.0, start), "end": max(0.0, end), "score": score, "rank": rank, "reason_tags": reason_tags}
-        )
+        item = {
+            "start": max(0.0, start),
+            "end": max(0.0, end),
+            "score": score,
+            "rank": rank,
+            "reason_tags": reason_tags,
+        }
+        if seg.get("score_base") is not None:
+            item["score_base"] = float(seg.get("score_base"))
+        if seg.get("score_scale") is not None:
+            item["score_scale"] = float(seg.get("score_scale"))
+        if seg.get("overlap_count") is not None:
+            try:
+                item["overlap_count"] = int(seg.get("overlap_count"))
+            except Exception:
+                item["overlap_count"] = seg.get("overlap_count")
+        normalized.append(item)
 
     normalized.sort(key=lambda s: (s["start"], s["end"]))
     return normalized
 
 
-def _segments_to_contract(segments_sec: List[Dict[str, Any]]) -> Dict[str, Any]:
+def _segments_to_contract(
+    segments_sec: List[Dict[str, Any]],
+    policy_override: Dict[str, Any] | None = None,
+) -> Dict[str, Any]:
+    min_duration_sec = _get_min_clip_segment_seconds()
     contract_segments: List[Dict[str, Any]] = []
     for rank, seg in enumerate(sorted(segments_sec, key=lambda s: (-s["score"], s["start"], s["end"])), start=1):
         start_ms = int(round(seg["start"] * 1000))
@@ -84,18 +132,30 @@ def _segments_to_contract(segments_sec: List[Dict[str, Any]]) -> Dict[str, Any]:
             item["reason_tags"] = seg["reason_tags"]
         contract_segments.append(item)
 
+    policy = {
+        "min_duration_ms": int(min_duration_sec * 1000),
+        "max_duration_ms": int(120000),  # aligned with merge max default 120s
+        "merge_gap_ms": int(1000 * 1.0),
+        "allow_overlap": False,
+        "clamp_to_duration": True,
+        "max_segments": len(contract_segments),
+    }
+    if policy_override:
+        for key in (
+            "target_duration_ms",
+            "min_duration_ms",
+            "max_duration_ms",
+            "similarity_threshold",
+            "max_gap_ms",
+        ):
+            if key in policy_override:
+                policy[key] = policy_override[key]
+
     return {
         "schema_version": SCHEMA_VERSION,
         "units": UNITS,
         "sort": SORT_POLICY,
-        "policy": {
-            "min_duration_ms": 6000,
-            "max_duration_ms": int(120000),  # aligned with merge max default 120s
-            "merge_gap_ms": int(1000 * 1.0),
-            "allow_overlap": False,
-            "clamp_to_duration": True,
-            "max_segments": len(contract_segments),
-        },
+        "policy": policy,
         "segments": contract_segments,
     }
 
@@ -188,31 +248,64 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         raise FileNotFoundError("video not found")
     logger.info("[render_clips] start | run_dir=%s video=%s", ctx.store.run_dir, video_path)
 
-    segments_payload = ctx.inputs[ART_SEGMENTS].payload or []
+    segments_payload = ctx.inputs[ART_SEGMENTS_SEMANTIC].payload or []
     segments_raw = _normalize_segments(segments_payload)
+    policy_in = segments_payload.get("policy") if isinstance(segments_payload, dict) else None
     logger.info("[render_clips] incoming segments=%d", len(segments_raw))
+    for idx, seg in enumerate(segments_raw, 1):
+        logger.info(
+            "[render_clips] seg#%03d %.2fs-%.2fs score=%.4f tags=%s",
+            idx,
+            seg.get("start", 0.0),
+            seg.get("end", 0.0),
+            float(seg.get("score", 0.0)),
+            ",".join(seg.get("reason_tags", [])) if seg.get("reason_tags") else "-",
+        )
 
-    merge_result = merge_segments(
-        {
-            "segments": segments_raw,
-            "merge_gap_sec": ctx.params.get("merge_gap_sec", 1.0),
-            "max_merged_duration": ctx.params.get("max_merged_duration", 120.0),
-        }
-    )
-    merged_segments = merge_result.get("merged_segments", [])
-    segments = sorted(merged_segments, key=lambda s: (-s.get("score", 0.0), s.get("start", 0.0), s.get("end", 0.0)))
-    logger.info("[render_clips] merged segments=%d gap=%.2f max_dur=%.2f", len(segments), merge_result.get("merge_gap_sec"), merge_result.get("max_merged_duration"))
+    semantic_mode = bool(isinstance(policy_in, dict) and policy_in.get("target_duration_ms") is not None)
+    merge_result = {
+        "merge_gap_sec": ctx.params.get("merge_gap_sec", 1.0),
+        "max_merged_duration": ctx.params.get("max_merged_duration", 120.0),
+    }
+    if semantic_mode:
+        segments = sorted(segments_raw, key=lambda s: (s.get("start", 0.0), s.get("end", 0.0)))
+        logger.info("[render_clips] semantic segments=%d (skip merge)", len(segments))
+    else:
+        merge_result = merge_segments(
+            {
+                "segments": segments_raw,
+                "merge_gap_sec": ctx.params.get("merge_gap_sec", 1.0),
+                "max_merged_duration": ctx.params.get("max_merged_duration", 120.0),
+            }
+        )
+        merged_segments = merge_result.get("merged_segments", [])
+        segments = sorted(merged_segments, key=lambda s: (-s.get("score", 0.0), s.get("start", 0.0), s.get("end", 0.0)))
+        logger.info(
+            "[render_clips] merged segments=%d gap=%.2f max_dur=%.2f",
+            len(segments),
+            merge_result.get("merge_gap_sec"),
+            merge_result.get("max_merged_duration"),
+        )
+        for idx, seg in enumerate(segments, 1):
+            logger.info(
+                "[render_clips] merged#%03d %.2fs-%.2fs score=%.4f tags=%s",
+                idx,
+                seg.get("start", 0.0),
+                seg.get("end", 0.0),
+                float(seg.get("score", 0.0)),
+                ",".join(seg.get("reason_tags", [])) if seg.get("reason_tags") else "-",
+            )
 
     output_dir = ctx.params.get("output_dir")
     if not output_dir:
-        output_dir = str(Path(ctx.store.run_dir) / "output_clips")
+        output_dir = str(Path(ctx.store.run_dir))
 
     output_dir_path = Path(output_dir)
     output_dir_path.mkdir(parents=True, exist_ok=True)
 
     work_dir = Path(ctx.store.run_dir) / "work"
     analysis_path = work_dir / "segments.json"
-    segments_contract = _segments_to_contract(segments)
+    segments_contract = _segments_to_contract(segments, policy_override=policy_in)
     _write_json(analysis_path, segments_contract)
     logger.info("[render_clips] write contract segments -> %s", analysis_path)
 
@@ -236,6 +329,25 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         audio_source=audio_source,
     )
     clip_paths = [Path(p) for p in clip_files]
+
+    subtitle_enabled, subtitle_format = _resolve_subtitle_settings(ctx)
+    if subtitle_enabled:
+        transcript_path = Path(ctx.store.run_dir) / "work" / "transcription.json"
+        if transcript_path.exists() and clip_paths:
+            written = generate_semantic_subtitles_for_clips(
+                output_clips_dir=str(output_dir_path),
+                transcription_file=str(transcript_path),
+                cfg_manager=getattr(app_config, "config_manager", None),
+                clip_paths=[str(p) for p in clip_paths],
+                fmt=subtitle_format,
+            )
+            logger.info("[render_clips] subtitles generated=%d format=%s", written, subtitle_format)
+        else:
+            logger.warning(
+                "[render_clips] subtitles skipped (transcription=%s clips=%d)",
+                transcript_path if transcript_path.exists() else None,
+                len(clip_paths),
+            )
 
     if ctx.progress:
         ctx.progress("clip", len(clip_paths), max(1, len(segments)), "done")
@@ -293,12 +405,18 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 spec = ModuleSpec(
     name="render_clips",
     version="1",
-    inputs=[ART_VIDEO, ART_SEGMENTS, ART_AUDIO_HOST],
+    inputs=[ART_VIDEO, ART_SEGMENTS_SEMANTIC, ART_AUDIO_HOST, ART_TRANSCRIPT],
     outputs=[ART_CLIPS],
     run=run,
     description="Render highlight clips from video and segments.",
     impl_path="src/acfv/processing/clip_video.py",
-    default_params={"output_dir": None, "merge_gap_sec": 1.0, "max_merged_duration": 120.0},
+    default_params={
+        "output_dir": None,
+        "merge_gap_sec": 1.0,
+        "max_merged_duration": 120.0,
+        "subtitle_enabled": None,
+        "subtitle_format": "srt",
+    },
 )
 
 __all__ = ["spec"]

@@ -6,7 +6,8 @@
 | source_path | str | 是 | 文件存在且可读，支持长路径；音频/视频容器需 ffprobe 可解析；可直接使用 extract_audio 的 `audio_path` | processing/input/sample.mp3 |
 | work_dir | str | 否 | 默认使用 processing_path，需可写；自动创建子目录 | processing/tmp |
 | language | str | 否 | ISO 639-1 代码；为空时自动检测 | en |
-| model_size | str | 否 | `tiny|base|small|medium|large-v2` | base |
+| engine | str | 否 | `auto|openai-whisper|faster-whisper|hf-whisper` | auto |
+| model_size | str | 否 | 非 HF 时 `tiny|base|small|medium|large-v2|large-v3|large-v3-turbo`；HF 时可用 HuggingFace 模型 ID | base |
 | device | str | 否 | `cuda` 或 `cpu`，默认自动选择 | cuda |
 | split_duration | int | 否 | 秒，>0；用于长音频分片 | 300 |
 | diarization | bool | 否 | 默认 False；True 时需可用 diarization 依赖 | false |
@@ -17,7 +18,7 @@
 - `source_path` 必须存在且为文件；当为视频时需可抽取音轨；若来自 extract_audio，请传其 `audio_path` 字段。
 - `work_dir` 不存在则创建，存在但不可写则报错。
 - `language` 提供时跳过自动检测；非法语言代码报错。
-- `model_size` 不在允许列表时报错。
+- `model_size` 不在允许列表时报错（HF 引擎允许使用模型 ID）。
 - `split_duration` 若提供必须为正整数；与 diarization 不冲突。
 - `output_format` 必须在允许集合内。
 

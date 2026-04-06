@@ -639,7 +639,7 @@ class LocalVideoManager:
                     current_run_dir = video_clips_dir
                 
                 # 将本次切片输出写到当前run目录
-                output_clips_dir = os.path.join(current_run_dir, "output_clips")
+                output_clips_dir = current_run_dir
                 os.makedirs(output_clips_dir, exist_ok=True)
                 # 记录运行元数据（供剪辑管理器统计）
                 try:

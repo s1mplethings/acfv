@@ -1,15 +1,29 @@
-# 关键词/规则文件（给 AI 先读）
-# 用于记录：常见坑、必读文件、禁止事项、项目约定等
+entrypoints:
+  gui: "python -m acfv.cli gui"
+  pipeline: "python -m acfv.cli.pipeline clip"
+  launcher: "python launcher.py"
+  verify: "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
 
-must_read:
-  - docs/00_overview.md
-  - docs/01_architecture.md
-  - docs/02_workflow.md
-  - docs/03_quality_gates.md
-  - specs/index.md
-  - ai_context/problem_registry.md
+invariants:
+  - schema_version is required in all generated JSON outputs
+  - segments sorted: score_desc_start_ms_asc_end_ms_asc
+  - outputs must live under runs/ or var/ (gitignored)
+  - logging must mirror to stdout and file
 
-rules:
-  - "任何 public API/输出契约变化：必须更新 specs/contracts/tests"
-  - "verify 必须用本机平台对应入口（sh/ps1）"
-  - "失败必记 problem_registry；豁免必记 decision_log"
+error_signatures:
+  - ffmpeg not found
+  - no segments to clip
+  - numpy/sklearn ABI mismatch
+  - soundfile backend failed
+
+hotspots:
+  - src/acfv/steps/render_clips/impl.py
+  - src/acfv/steps/analyze_segments/impl.py
+  - src/acfv/modular/plugins/render_clips.py
+  - src/acfv/runtime/stream_monitor.py
+
+tags:
+  - render
+  - analyze
+  - logging
+  - ingestion

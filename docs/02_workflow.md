@@ -80,3 +80,16 @@
 - 排序确定性：`score desc` → `start_ms asc` → `end_ms asc`。  
 - 边界策略：`min_duration_ms` / `max_duration_ms` / `merge_gap_ms` / `allow_overlap` / `clamp_to_duration` 必须在 spec + contract 明确。  
 - 空输入返回 `segments=[]` + 明确日志；不得产出不可诊断空文件。
+## 阶段8：成片增强（Enhance Pipeline）**新增 2026-02**
+- 目标：在剪辑后自动添加字幕、特效、视角切换、梗贴图，提升成片效果。
+- 输入：剪辑后的视频文件、用户偏好配置（可选）。
+- 输出：增强后的最终视频 `final.mp4`、时间轴 `timeline.json`、工作文件（words/segments/subtitles.ass）。
+- 实现：`acfv enhance` 命令或 GUI"增强"标签页。
+- 子模块：
+  1) **ASR**：WhisperX/stable-ts 输出词级时间戳 + 分句
+  2) **Subtitle FX**：pysubs2 生成带特效的 ASS 字幕（POP/COLOR）
+  3) **ROI**：识别电脑画面区（PC）与 V 区域（纯配置/自动跟踪/Grounded SAM 2）
+  4) **Policy**：视角切换策略（FULL/PC/V）+ 梗贴图/音效触发规则
+  5) **Render**：FFmpeg 编译器，将 timeline.json 渲染为 final.mp4
+  6) **RAG**（可选）：从用户偏好检索梗素材/字幕风格
+- 详见 `specs/modules/enhance/index.md`

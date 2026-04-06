@@ -12,7 +12,10 @@ ART_AUDIO_VIDEO_SPEECH = "Audio:video_speech.v1"
 ART_AUDIO_GAME = "Audio:game.v1"
 ART_AUDIO_LABELS = "AudioLabels:json.v1"
 ART_SEGMENTS = "Segments:analysis.v1"
+ART_SEGMENTS_SEMANTIC = "Segments:semantic_merge.v1"
 ART_CLIPS = "Clips:files.v1"
+ART_SUBTITLES_STREAMER = "Subtitles:streamer.v1"
+ART_SUBTITLES_TRANSLATED = "Subtitles:translated.v1"
 ART_PROGRESS = "Progress:stage.v1"
 ART_RUN_META = "Run:meta.v1"
 
@@ -29,7 +32,10 @@ __all__ = [
     "ART_AUDIO_GAME",
     "ART_AUDIO_LABELS",
     "ART_SEGMENTS",
+    "ART_SEGMENTS_SEMANTIC",
     "ART_CLIPS",
+    "ART_SUBTITLES_STREAMER",
+    "ART_SUBTITLES_TRANSLATED",
     "ART_PROGRESS",
     "ART_RUN_META",
 ]

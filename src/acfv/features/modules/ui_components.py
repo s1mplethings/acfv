@@ -778,19 +778,6 @@ class SettingsDialog(QDialog):
         tab_basic = QWidget()
         form_basic = QFormLayout(tab_basic)
         
-        # 输出切片数量
-        self.edit_max_clips = QLineEdit(str(self.config_manager.get("MAX_CLIP_COUNT")))
-        form_basic.addRow("输出切片数量:", self.edit_max_clips)
-        
-        # 切片基础目录
-        self.edit_clips_base_dir = QLineEdit(self.config_manager.get("CLIPS_BASE_DIR"))
-        clips_dir_layout = QHBoxLayout()
-        clips_dir_layout.addWidget(self.edit_clips_base_dir)
-        clips_dir_btn = QPushButton("选择")
-        clips_dir_btn.clicked.connect(self.choose_clips_dir)
-        clips_dir_layout.addWidget(clips_dir_btn)
-        form_basic.addRow("切片基础目录:", clips_dir_layout)
-        
         # 回放下载目录
         self.edit_replay_download_dir = QLineEdit(self.config_manager.get("replay_download_folder", "./data/twitch"))
         replay_dir_layout = QHBoxLayout()
@@ -803,6 +790,18 @@ class SettingsDialog(QDialog):
         # Whisper模型
         self.edit_whisper = QLineEdit(self.config_manager.get("WHISPER_MODEL"))
         form_basic.addRow("Whisper 模型:", self.edit_whisper)
+
+        # Whisper引擎
+        self.whisper_engine_combo = QComboBox()
+        self.whisper_engine_combo.addItems(["auto", "openai-whisper", "faster-whisper", "hf-whisper"])
+        self.whisper_engine_combo.setCurrentText(self.config_manager.get("WHISPER_ENGINE", "auto"))
+        form_basic.addRow("Whisper 引擎:", self.whisper_engine_combo)
+
+        # HF Whisper 模型
+        self.edit_hf_whisper_model = QLineEdit(self.config_manager.get("HF_WHISPER_MODEL", "openai/whisper-medium"))
+        self.edit_hf_whisper_model.setPlaceholderText("openai/whisper-medium")
+        self.edit_hf_whisper_model.setToolTip("仅在引擎选择 hf-whisper 时使用")
+        form_basic.addRow("HF Whisper 模型:", self.edit_hf_whisper_model)
 
         # HuggingFace Token（隐藏显示切换）
         hf_layout = QHBoxLayout()
@@ -847,25 +846,6 @@ class SettingsDialog(QDialog):
         self.edit_gpu_device = QLineEdit(str(self.config_manager.get("GPU_DEVICE", "cuda:0")))
         form_basic.addRow("GPU设备:", self.edit_gpu_device)
         
-        # 切片配置
-        self.edit_min_clip_duration = QLineEdit(str(self.config_manager.get("MIN_CLIP_DURATION", 60.0)))
-        form_basic.addRow("最小切片时长(秒):", self.edit_min_clip_duration)
-        
-        self.edit_clip_context_extend = QLineEdit(str(self.config_manager.get("CLIP_CONTEXT_EXTEND", 15.0)))
-        form_basic.addRow("前后文扩展时长(秒):", self.edit_clip_context_extend)
-        
-        self.edit_clip_merge_threshold = QLineEdit(str(self.config_manager.get("CLIP_MERGE_THRESHOLD", 10.0)))
-        form_basic.addRow("切片合并阈值(秒):", self.edit_clip_merge_threshold)
-        
-        # 语义合并配置
-        self.edit_semantic_similarity_threshold = QLineEdit(str(self.config_manager.get("SEMANTIC_SIMILARITY_THRESHOLD", 0.75)))
-        form_basic.addRow("语义相似度阈值(0-1):", self.edit_semantic_similarity_threshold)
-        
-        self.edit_semantic_max_time_gap = QLineEdit(str(self.config_manager.get("SEMANTIC_MAX_TIME_GAP", 60.0)))
-        form_basic.addRow("语义合并最大间隔(秒):", self.edit_semantic_max_time_gap)
-        
-
-        
         # 开关选项
         self.checkbox_enable_gpu = QCheckBox()
         self.checkbox_enable_gpu.setChecked(self.config_manager.get("ENABLE_GPU_ACCELERATION", True))
@@ -875,14 +855,6 @@ class SettingsDialog(QDialog):
         self.checkbox_enable_video_emotion.setChecked(self.config_manager.get("ENABLE_VIDEO_EMOTION"))
         self.checkbox_enable_video_emotion.toggled.connect(self.on_video_emotion_toggled)
         form_basic.addRow("启用视频情绪分析:", self.checkbox_enable_video_emotion)
-        
-        self.checkbox_merge_nearby_clips = QCheckBox()
-        self.checkbox_merge_nearby_clips.setChecked(self.config_manager.get("MERGE_NEARBY_CLIPS", True))
-        form_basic.addRow("合并相邻切片:", self.checkbox_merge_nearby_clips)
-        
-        self.checkbox_enable_semantic_merge = QCheckBox()
-        self.checkbox_enable_semantic_merge.setChecked(self.config_manager.get("ENABLE_SEMANTIC_MERGE", True))
-        form_basic.addRow("启用语义合并:", self.checkbox_enable_semantic_merge)
         
         # 检查点管理
         self.init_checkpoint_management(form_basic)
@@ -1062,10 +1034,10 @@ class SettingsDialog(QDialog):
     
     def on_save(self):
         # 保存所有设置
-        self.config_manager.set("MAX_CLIP_COUNT", int(self.edit_max_clips.text().strip() or 0))
-        self.config_manager.set("CLIPS_BASE_DIR", self.edit_clips_base_dir.text().strip())
         self.config_manager.set("replay_download_folder", self.edit_replay_download_dir.text().strip())
         self.config_manager.set("WHISPER_MODEL", self.edit_whisper.text().strip())
+        self.config_manager.set("WHISPER_ENGINE", self.whisper_engine_combo.currentText())
+        self.config_manager.set("HF_WHISPER_MODEL", self.edit_hf_whisper_model.text().strip() or "openai/whisper-medium")
         self.config_manager.set("HUGGINGFACE_TOKEN", self.edit_hf_token.text().strip())
         self.config_manager.set("LOCAL_EMOTION_MODEL_PATH", self.edit_local_emotion.text().strip())
         self.config_manager.set("VIDEO_EMOTION_MODEL_PATH", self.edit_video_emotion.text().strip())
@@ -1081,17 +1053,6 @@ class SettingsDialog(QDialog):
         self.config_manager.set("GPU_DEVICE", self.edit_gpu_device.text().strip())
         self.config_manager.set("ENABLE_GPU_ACCELERATION", self.checkbox_enable_gpu.isChecked())
         
-        # 保存切片配置
-        self.config_manager.set("MIN_CLIP_DURATION", float(self.edit_min_clip_duration.text().strip() or 60.0))
-        self.config_manager.set("CLIP_CONTEXT_EXTEND", float(self.edit_clip_context_extend.text().strip() or 15.0))
-        self.config_manager.set("CLIP_MERGE_THRESHOLD", float(self.edit_clip_merge_threshold.text().strip() or 10.0))
-        self.config_manager.set("MERGE_NEARBY_CLIPS", self.checkbox_merge_nearby_clips.isChecked())
-        
-        # 保存语义合并配置
-        self.config_manager.set("ENABLE_SEMANTIC_MERGE", self.checkbox_enable_semantic_merge.isChecked())
-        self.config_manager.set("SEMANTIC_SIMILARITY_THRESHOLD", float(self.edit_semantic_similarity_threshold.text().strip() or 0.75))
-        self.config_manager.set("SEMANTIC_MAX_TIME_GAP", float(self.edit_semantic_max_time_gap.text().strip() or 60.0))
-
         if self.monitor_runtime and self.monitor_config:
             self.monitor_config.ffmpeg_path = self.monitor_ffmpeg_edit.text().strip() or "ffmpeg"
             self.monitor_config.default_quality = self.monitor_quality_combo.currentText()
@@ -1256,7 +1217,7 @@ class ClipRatingDialog(QDialog):
             QMessageBox.warning(self, "错误", f"保存评分失败: {e}")
 
     def _infer_video_dir(self, clip_path: str):
-        """从切片路径推断视频目录与名称：.../clips/<video_name>/runs/run_xxx/output_clips/file.mp4"""
+        """从切片路径推断视频目录与名称：.../clips/<video_name>/runs/run_xxx/file.mp4"""
         p = os.path.abspath(clip_path)
         # 向上查找 'runs' 目录
         d = os.path.dirname(p)
@@ -1313,3 +1274,232 @@ class ClipRatingDialog(QDialog):
 # 兼容性别名，保持向后兼容
 VideoThumbnailLoader = SimpleThumbnailLoader
 ClipThumbnailLoader = SimpleClipThumbnailLoader
+
+
+class SettingsDialog(QDialog):
+    """设置对话框 - 完整版本，包含所有重要配置"""
+    def __init__(self, config_manager, parent=None):
+        super().__init__(parent)
+        self.config_manager = config_manager
+        self.init_ui()
+        
+    def init_ui(self):
+        self.setWindowTitle("设置")
+        self.setModal(True)
+        self.resize(600, 700)
+        
+        main_layout = QVBoxLayout()
+        
+        # 使用标签页组织配置
+        tabs = QTabWidget()
+        
+        # ===== 基本设置标签页 =====
+        basic_tab = QWidget()
+        basic_layout = QVBoxLayout(basic_tab)
+        
+        # 最大切片个数
+        max_clip_layout = QHBoxLayout()
+        max_clip_layout.addWidget(QLabel("最大切片个数:"))
+        self.max_clip_spin = QSpinBox()
+        self.max_clip_spin.setRange(1, 100)
+        self.max_clip_spin.setValue(self.config_manager.get('MAX_CLIP_COUNT', 10))
+        max_clip_layout.addWidget(self.max_clip_spin)
+        basic_layout.addLayout(max_clip_layout)
+        
+        # 目标剪辑时长
+        duration_layout = QHBoxLayout()
+        duration_layout.addWidget(QLabel("目标剪辑时长(秒):"))
+        self.duration_spin = QSpinBox()
+        self.duration_spin.setRange(60, 600)
+        self.duration_spin.setValue(int(self.config_manager.get('TARGET_CLIP_DURATION', 270)))
+        duration_layout.addWidget(self.duration_spin)
+        basic_layout.addLayout(duration_layout)
+        
+        # 最小剪辑时长
+        min_duration_layout = QHBoxLayout()
+        min_duration_layout.addWidget(QLabel("最小剪辑时长(秒):"))
+        self.min_duration_spin = QSpinBox()
+        self.min_duration_spin.setRange(30, 300)
+        self.min_duration_spin.setValue(int(self.config_manager.get('MIN_CLIP_DURATION', 60)))
+        min_duration_layout.addWidget(self.min_duration_spin)
+        basic_layout.addLayout(min_duration_layout)
+        
+        basic_layout.addStretch()
+        tabs.addTab(basic_tab, "基本设置")
+        
+        # ===== 模型设置标签页 =====
+        model_tab = QWidget()
+        model_layout = QVBoxLayout(model_tab)
+        
+        # Whisper模型
+        whisper_layout = QHBoxLayout()
+        whisper_layout.addWidget(QLabel("Whisper模型:"))
+        self.whisper_combo = QComboBox()
+        self.whisper_combo.addItems(["large-v3-turbo", "medium", "small", "base"])
+        self.whisper_combo.setCurrentText(self.config_manager.get('WHISPER_MODEL', 'large-v3-turbo'))
+        whisper_layout.addWidget(self.whisper_combo)
+        model_layout.addLayout(whisper_layout)
+
+        # Whisper引擎
+        whisper_engine_layout = QHBoxLayout()
+        whisper_engine_layout.addWidget(QLabel("Whisper引擎:"))
+        self.whisper_engine_combo = QComboBox()
+        self.whisper_engine_combo.addItems(["auto", "openai-whisper", "faster-whisper", "hf-whisper"])
+        self.whisper_engine_combo.setCurrentText(self.config_manager.get('WHISPER_ENGINE', 'auto'))
+        whisper_engine_layout.addWidget(self.whisper_engine_combo)
+        model_layout.addLayout(whisper_engine_layout)
+
+        # HF Whisper 模型
+        hf_whisper_layout = QHBoxLayout()
+        hf_whisper_layout.addWidget(QLabel("HF Whisper模型:"))
+        self.hf_whisper_model_edit = QLineEdit()
+        self.hf_whisper_model_edit.setPlaceholderText("openai/whisper-medium")
+        self.hf_whisper_model_edit.setText(self.config_manager.get('HF_WHISPER_MODEL', 'openai/whisper-medium'))
+        self.hf_whisper_model_edit.setToolTip("仅在引擎选择 hf-whisper 时使用")
+        hf_whisper_layout.addWidget(self.hf_whisper_model_edit)
+        model_layout.addLayout(hf_whisper_layout)
+        
+        # HuggingFace Token
+        hf_token_layout = QHBoxLayout()
+        hf_token_layout.addWidget(QLabel("HuggingFace Token:"))
+        self.hf_token_edit = QLineEdit()
+        self.hf_token_edit.setEchoMode(QLineEdit.Password)
+        self.hf_token_edit.setPlaceholderText("用于说话人分离和模型下载")
+        self.hf_token_edit.setText(self.config_manager.get('HUGGINGFACE_TOKEN', ''))
+        hf_token_layout.addWidget(self.hf_token_edit)
+        model_layout.addLayout(hf_token_layout)
+        
+        model_layout.addStretch()
+        tabs.addTab(model_tab, "模型设置")
+        
+        # ===== 性能设置标签页 =====
+        perf_tab = QWidget()
+        perf_layout = QVBoxLayout(perf_tab)
+        
+        # 启用GPU加速
+        self.gpu_check = QCheckBox("启用GPU加速")
+        self.gpu_check.setChecked(self.config_manager.get('ENABLE_GPU_ACCELERATION', True))
+        perf_layout.addWidget(self.gpu_check)
+        
+        # GPU设备
+        gpu_device_layout = QHBoxLayout()
+        gpu_device_layout.addWidget(QLabel("GPU设备:"))
+        self.gpu_device_edit = QLineEdit()
+        self.gpu_device_edit.setText(self.config_manager.get('GPU_DEVICE', 'cuda:0'))
+        gpu_device_layout.addWidget(self.gpu_device_edit)
+        perf_layout.addLayout(gpu_device_layout)
+        
+        # 最大工作线程
+        workers_layout = QHBoxLayout()
+        workers_layout.addWidget(QLabel("最大工作线程:"))
+        self.workers_spin = QSpinBox()
+        self.workers_spin.setRange(1, 32)
+        self.workers_spin.setValue(self.config_manager.get('MAX_WORKERS', 8))
+        workers_layout.addWidget(self.workers_spin)
+        perf_layout.addLayout(workers_layout)
+        
+        perf_layout.addStretch()
+        tabs.addTab(perf_tab, "性能设置")
+        
+        # ===== Twitch设置标签页 =====
+        twitch_tab = QWidget()
+        twitch_layout = QVBoxLayout(twitch_tab)
+        
+        # Client ID
+        client_id_layout = QHBoxLayout()
+        client_id_layout.addWidget(QLabel("Client ID:"))
+        self.client_id_edit = QLineEdit()
+        self.client_id_edit.setText(self.config_manager.get('twitch_client_id', ''))
+        client_id_layout.addWidget(self.client_id_edit)
+        twitch_layout.addLayout(client_id_layout)
+        
+        # OAuth Token
+        oauth_layout = QHBoxLayout()
+        oauth_layout.addWidget(QLabel("OAuth Token:"))
+        self.oauth_edit = QLineEdit()
+        self.oauth_edit.setEchoMode(QLineEdit.Password)
+        self.oauth_edit.setText(self.config_manager.get('twitch_oauth_token', ''))
+        oauth_layout.addWidget(self.oauth_edit)
+        twitch_layout.addLayout(oauth_layout)
+        
+        # 用户名
+        username_layout = QHBoxLayout()
+        username_layout.addWidget(QLabel("监控用户名:"))
+        self.username_edit = QLineEdit()
+        self.username_edit.setPlaceholderText("多个用户用逗号分隔")
+        self.username_edit.setText(self.config_manager.get('twitch_username', ''))
+        username_layout.addWidget(self.username_edit)
+        twitch_layout.addLayout(username_layout)
+        
+        # 下载目录
+        folder_layout = QHBoxLayout()
+        folder_layout.addWidget(QLabel("下载目录:"))
+        self.folder_edit = QLineEdit()
+        self.folder_edit.setText(self.config_manager.get('twitch_download_folder', './data/twitch'))
+        folder_layout.addWidget(self.folder_edit)
+        twitch_layout.addLayout(folder_layout)
+        
+        twitch_layout.addStretch()
+        tabs.addTab(twitch_tab, "Twitch设置")
+        
+        main_layout.addWidget(tabs)
+        
+        # 按钮
+        button_layout = QHBoxLayout()
+        save_btn = QPushButton("保存")
+        save_btn.clicked.connect(self.save_settings)
+        cancel_btn = QPushButton("取消")
+        cancel_btn.clicked.connect(self.reject)
+        button_layout.addWidget(save_btn)
+        button_layout.addWidget(cancel_btn)
+        main_layout.addLayout(button_layout)
+        
+        self.setLayout(main_layout)
+    
+    def save_settings(self):
+        """保存所有设置到配置文件"""
+        # 基本设置
+        self.config_manager.config['MAX_CLIP_COUNT'] = self.max_clip_spin.value()
+        self.config_manager.config['TARGET_CLIP_DURATION'] = self.duration_spin.value()
+        self.config_manager.config['MIN_CLIP_DURATION'] = self.min_duration_spin.value()
+        
+        # 模型设置
+        self.config_manager.config['WHISPER_MODEL'] = self.whisper_combo.currentText()
+        self.config_manager.config['WHISPER_ENGINE'] = self.whisper_engine_combo.currentText()
+        hf_whisper_model = self.hf_whisper_model_edit.text().strip() or "openai/whisper-medium"
+        self.config_manager.config['HF_WHISPER_MODEL'] = hf_whisper_model
+        hf_token = self.hf_token_edit.text().strip()
+        if hf_token:
+            self.config_manager.config['HUGGINGFACE_TOKEN'] = hf_token
+            # 同步到环境变量和secrets文件
+            try:
+                import os
+                os.environ['HUGGINGFACE_TOKEN'] = hf_token
+                from acfv.runtime.storage import secrets_path
+                secrets_config = secrets_path("config.json")
+                secrets_config.parent.mkdir(parents=True, exist_ok=True)
+                import json
+                secrets_data = {"huggingface_token": hf_token, "description": "HuggingFace token for speaker diarization and other features"}
+                with open(secrets_config, 'w', encoding='utf-8') as f:
+                    json.dump(secrets_data, f, indent=2, ensure_ascii=False)
+                logging.info("HuggingFace token已保存到secrets/config.json")
+            except Exception as e:
+                logging.warning(f"保存HuggingFace token到secrets失败: {e}")
+        
+        # 性能设置
+        self.config_manager.config['ENABLE_GPU_ACCELERATION'] = self.gpu_check.isChecked()
+        self.config_manager.config['GPU_DEVICE'] = self.gpu_device_edit.text().strip()
+        self.config_manager.config['MAX_WORKERS'] = self.workers_spin.value()
+        
+        # Twitch设置
+        self.config_manager.config['twitch_client_id'] = self.client_id_edit.text().strip()
+        self.config_manager.config['twitch_oauth_token'] = self.oauth_edit.text().strip()
+        self.config_manager.config['twitch_username'] = self.username_edit.text().strip()
+        self.config_manager.config['twitch_download_folder'] = self.folder_edit.text().strip()
+        
+        # 保存配置文件
+        self.config_manager.save_config()
+        
+        # 显示成功消息
+        QMessageBox.information(self, "成功", "设置已保存")
+        self.accept()

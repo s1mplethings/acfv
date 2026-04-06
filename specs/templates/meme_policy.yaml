@@ -1,0 +1,38 @@
+# Meme Policy - 梗贴图与音效策略配置
+
+# 密度控制
+density: 0.3  # 0.0-1.0，0.3=稀疏，0.7=密集
+
+# 冷却时间
+cooldown:
+  meme: 5.0  # 同一梗最小间隔（秒）
+  sfx: 3.0  # 同一音效最小间隔（秒）
+
+# 关键词触发规则
+triggers:
+  - regex: "哈哈|haha|笑死"
+    meme_asset: "assets/memes/laugh.png"
+    sfx_asset: "assets/memes/laugh.mp3"
+    priority: 1.0
+  
+  - regex: "\\?\\?|？？|what"
+    meme_asset: "assets/memes/question.png"
+    sfx_asset: null
+    priority: 0.8
+  
+  - regex: "离谱|outrageous"
+    meme_asset: "assets/memes/shocked.gif"
+    sfx_asset: "assets/memes/shocked.mp3"
+    priority: 0.9
+  
+  - regex: "卧槽|woc|wtf"
+    meme_asset: "assets/memes/wtf.png"
+    sfx_asset: null
+    priority: 1.0
+
+# 默认配置
+defaults:
+  meme_duration: 2.0  # 默认显示时长（秒）
+  meme_position: [10, 10]  # 默认位置(x,y)
+  meme_scale: 1.0  # 默认缩放
+  sfx_gain_db: 0.0  # 默认音量增益

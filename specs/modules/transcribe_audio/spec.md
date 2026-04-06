@@ -25,7 +25,8 @@
 
 ## 5) Configuration
 - `language`（str，可选，默认 auto）：显式语言可跳过自动检测。
-- `model_size`（str，默认 `base`）：`tiny|base|small|medium|large-v2`；影响性能与精度。
+- `engine`（str，默认 `auto`）：`auto|openai-whisper|faster-whisper|hf-whisper`。
+- `model_size`（str，默认 `base`）：`tiny|base|small|medium|large-v2|large-v3|large-v3-turbo`；HF 引擎可用 HuggingFace 模型 ID（例如 `openai/whisper-medium`）。
 - `device`（str，默认 auto）：`cuda` or `cpu`，自动回退到可用设备。
 - `split_duration`（int，可选）：>0 时按秒切片处理以降低内存。
 - `prompt`（str，可选）：前置提示词。

@@ -33,7 +33,13 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     out_path = work_dir / "transcription.json"
 
     segment_length = int(ctx.params.get("segment_length", 300))
-    whisper_model = str(ctx.params.get("whisper_model", "medium"))
+    whisper_engine = str(ctx.params.get("whisper_engine", "auto"))
+    hf_whisper_model = str(ctx.params.get("hf_whisper_model", "openai/whisper-medium"))
+    if whisper_engine == "hf-whisper":
+        whisper_model = hf_whisper_model
+    else:
+        whisper_model = str(ctx.params.get("whisper_model", "medium"))
+    language = ctx.params.get("language")
 
     if ctx.progress:
         ctx.progress("transcribe", 0, 1, "start")
@@ -43,6 +49,8 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         output_file=str(out_path),
         segment_length=segment_length,
         whisper_model_name=whisper_model,
+        language=language,
+        engine=whisper_engine,
     )
 
     transcript = _read_json(out_path)
@@ -66,7 +74,12 @@ spec = ModuleSpec(
     run=run,
     description="Transcribe audio into timestamped text segments (Whisper).",
     impl_path="src/acfv/processing/transcribe_audio.py",
-    default_params={"segment_length": 300, "whisper_model": "medium"},
+    default_params={
+        "segment_length": 300,
+        "whisper_model": "large-v3-turbo",
+        "whisper_engine": "auto",
+        "hf_whisper_model": "openai/whisper-medium",
+    },
 )
 
 __all__ = ["spec"]
