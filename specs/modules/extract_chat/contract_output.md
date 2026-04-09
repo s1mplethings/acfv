@@ -8,6 +8,7 @@
 | messages | int | 否 | >=0，总条数 | 1200 |
 | start_time | str | 否 | ISO8601，首条时间戳 | 2024-01-01T12:00:00Z |
 | end_time | str | 否 | ISO8601 | 2024-01-01T13:00:00Z |
+| records[].sentiment | object | 否 | 逐条情感分析关闭时允许为 neutral 占位 | {"label":"neutral","score":0} |
 
 ## 确定性要求
 - 消息按时间戳升序；时间戳精度到秒或毫秒，需注明。

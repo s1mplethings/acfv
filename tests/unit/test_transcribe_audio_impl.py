@@ -38,7 +38,7 @@ def test_diagnostics_checkpoint_throttles_non_critical_events(monkeypatch, tmp_p
 def test_process_audio_segments_fallback_path(monkeypatch, tmp_path: Path):
     calls = {"count": 0}
 
-    def fake_run(payload, work_dir):
+    def fake_run(payload, work_dir, progress_callback=None):
         calls["count"] += 1
         if calls["count"] == 1:
             raise RuntimeError("primary failed")
@@ -56,3 +56,40 @@ def test_process_audio_segments_fallback_path(monkeypatch, tmp_path: Path):
     )
     assert len(segments) == 1
     assert calls["count"] == 2
+
+
+def test_resolve_transcribe_python_prefers_better_env(monkeypatch):
+    monkeypatch.setattr(impl, "_TRANSCRIBE_PYTHON_CACHE", None)
+    monkeypatch.setattr(impl.sys, "executable", r"D:\anaconda\python.exe")
+    monkeypatch.setattr(impl, "TORCH_AVAILABLE", True)
+    monkeypatch.setattr(impl, "FASTER_WHISPER_AVAILABLE", False)
+    monkeypatch.setattr(
+        impl,
+        "torch",
+        SimpleNamespace(cuda=SimpleNamespace(is_available=lambda: False)),
+        raising=False,
+    )
+    monkeypatch.setattr(
+        impl,
+        "_candidate_python_paths",
+        lambda current_python: [Path(r"D:\anaconda\envs\clip\python.exe")],
+    )
+    monkeypatch.setattr(
+        impl,
+        "_probe_python_for_transcribe",
+        lambda path: {"torch": True, "faster_whisper": True, "cuda": True},
+    )
+
+    resolved = impl._resolve_transcribe_python()
+    assert resolved == r"D:\anaconda\envs\clip\python.exe"
+
+
+def test_build_transcribe_subprocess_env_prepends_src_root(monkeypatch):
+    monkeypatch.setattr(impl, "_src_root", lambda: Path(r"E:\Cliper\acfv\src"))
+    monkeypatch.setenv("PYTHONPATH", r"C:\existing")
+    monkeypatch.delenv("KMP_DUPLICATE_LIB_OK", raising=False)
+
+    env = impl._build_transcribe_subprocess_env()
+
+    assert env["PYTHONPATH"] == r"E:\Cliper\acfv\src" + impl.os.pathsep + r"C:\existing"
+    assert env["KMP_DUPLICATE_LIB_OK"] == "TRUE"

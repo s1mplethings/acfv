@@ -5,9 +5,10 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List
 
-from acfv.modular.contracts import ART_CHAT_LOG, ART_SEGMENTS, ART_TRANSCRIPT, ART_VIDEO_EMOTION
+from acfv.modular.contracts import ART_CHAT_LOG, ART_SEGMENTS, ART_TRANSCRIPT, ART_VIDEO, ART_VIDEO_EMOTION
 from acfv.modular.types import ModuleContext, ModuleSpec
 from acfv.processing.analyze_data import analyze_data
+from acfv.runtime.storage import processing_path
 
 SCHEMA_VERSION = "1.0.0"
 UNITS = "ms"
@@ -134,6 +135,16 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     _write_json(chat_path, chat_payload)
     _write_json(transcript_path, transcript_payload)
 
+    video_payload = ctx.inputs[ART_VIDEO].payload if ART_VIDEO in ctx.inputs else {}
+    if isinstance(video_payload, dict):
+        video_path = video_payload.get("path") or video_payload.get("video_path")
+    else:
+        video_path = str(video_payload or "").strip()
+    if video_path:
+        selected_video_path = processing_path("selected_video.txt")
+        selected_video_path.parent.mkdir(parents=True, exist_ok=True)
+        selected_video_path.write_text(str(video_path), encoding="utf-8")
+
     video_emotion_path = None
     video_emotion_payload = ctx.inputs[ART_VIDEO_EMOTION].payload if ART_VIDEO_EMOTION in ctx.inputs else None
     if video_emotion_payload:
@@ -185,7 +196,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 spec = ModuleSpec(
     name="analyze_segments",
     version="1",
-    inputs=[ART_CHAT_LOG, ART_TRANSCRIPT, ART_VIDEO_EMOTION],
+    inputs=[ART_CHAT_LOG, ART_TRANSCRIPT, ART_VIDEO, ART_VIDEO_EMOTION],
     outputs=[ART_SEGMENTS],
     run=run,
     description="Fuse chat, transcript, and emotion into highlight segments.",

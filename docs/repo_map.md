@@ -10,19 +10,26 @@
 - 应用代码（Python）  
   - `src/acfv/`：核心包。  
     - `main.py` / `launcher.py`：GUI/入口汇总。  
-    - `cli/`：命令行入口（如 `acfv.cli.pipeline`、`acfv.cli.stream_monitor`、`acfv.cli.enhance`）。  
-    - `modular/`：模块化管线插件（`plugins/`）与调度（`pipeline.py`、`contracts`）。  
+    - `cli/`：命令行入口（如 `acfv.cli.pipeline`、`acfv.cli.stream_monitor`、`acfv.cli.enhance`、`acfv.cli.gui`；GUI 入口会优先尝试切换到更适合的 conda/python 环境）。  
+    - `modular/`：模块化管线插件（`plugins/`）与调度（`pipeline.py`、`contracts`）。
+      - `modular/plugins/screen_detect.py`：机械式电脑画面定位/关键帧提取，不调用 LLM。
+      - `modular/plugins/screen_understanding.py`：电脑画面理解插件，输出关键帧与 screen context timeline。
+      - `modular/plugins/llm_highlight.py`：LLM 精排插件，在规则粗召回之后输出最终高光段。
       - `modular/plugins/semantic_merge.py`：语义合并模块（按文本相似度生成目标时长片段）。  
       - `modular/plugins/render_clips.py`：剪辑导出，若启用 ASR 字幕则调用 `steps/subtitle_generator` 生成 `.srt`。  
       - `modular/plugins/streamer_subtitles.py`：主播字幕导出模块。  
+    - `llm/`：统一 OpenAI 客户端封装（Responses API 优先，Chat Completions fallback，JSON 校验与重试）。
     - `processing/`：音视频处理实现（剪辑、转写、情绪等）。  
       - `processing/subtitle_render.py`：字幕样式/预览/烧录入口。  
       - `processing/ffmpeg_runner.py`：统一 ffmpeg 调用封装。  
-    - `ui/tabs/subtitle_render_tab.py`：字幕预览/烧录 + 切片设置（GUI 单页合并）。  
+    - `ui/tabs/subtitle_render_tab.py`：字幕预览/烧录 + 切片设置（GUI 单页合并，含候选放大倍数、本地/远端模型、兴趣 prompt）。  
     - `steps/`：逐步实现（clip、transcribe、render 等具体 impl）。  
       - `steps/subtitle_generator/impl.py`：按转写生成 clip 级字幕（SRT/ASS）。  
       - `steps/subtitle_generator/streamer_subtitles.py`：仅导出主播字幕（work/subtitles_streamer.*）。  
       - `steps/subtitle_translate/step.py`：主播字幕翻译（上下文块 + 时间轴稳定）。  
+      - `steps/screen_detect/impl.py`：定时抽帧、相似帧去重、bbox/全屏录屏启发式检测。  
+      - `steps/screen_understanding/impl.py`：稀疏抽帧、可选 OCR、VLM/启发式结构化画面理解。  
+      - `steps/llm_highlight/impl.py`：聚合 transcript/chat/screen/emotion 后，默认先走本地 Ollama 蒸馏，再调用统一 LLM/API 做高光精排。  
       - `steps/transcribe_audio/impl.py`：ASR 转写与切分；运行时会写入 `var/processing/working/transcribe_diagnostic.jsonl` 和 `transcribe_checkpoint.json` 供排障；支持子进程保护（`ACFV_TRANSCRIBE_GUARD=1`，可回退到 CPU）。  
     - `selection/`：高光段筛选与合并。  
     - `runtime/`：运行期配置、守护逻辑。  
@@ -40,6 +47,7 @@
   - `tools/selftest_cli.py`：输入驱动的 Adapter/Oracle 自测入口。  
   - `selftest/`：自测框架（adapters/oracles/cases/goldens）。  
   - `scripts/verify.sh` / `scripts/verify.ps1`：统一验收入口（compile → pytest → contract checks）。  
+  - `scripts/start_gpu_gui.ps1`：Windows 下固定用指定 conda Python 启动 GUI，并预设 `ACFV_GUI_PREFERRED_PYTHON` / `ACFV_TRANSCRIBE_PYTHON` 指向 GPU 环境。  
   - `scripts/contract_checks.py`：契约质量门。  
 - 规格与文档  
   - `docs/`：工作流、质量门、架构等说明。  
@@ -54,6 +62,7 @@
   - `config.txt`、`.env.example`、`var/settings/*.yaml`（运行配置）。  
   - `secrets/`：凭证模板（已忽略真实内容）。  
   - 关键配置：`WHISPER_ENGINE`（auto/openai-whisper/faster-whisper/hf-whisper）、`HF_WHISPER_MODEL`（默认 `openai/whisper-medium`）。  
+  - GUI 入口：主窗口“设置”对话框和“字幕预览/渲染 + 切片设置”页都能调 `MAX_CLIP_COUNT`、`LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER`、`LLM_LOCAL_MODEL`、`LLM_HIGHLIGHT_MODEL`、`LLM_VISION_MODEL`、`LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT`。  
 - 运行输出（应忽略提交）  
   - `var/`、`runs/`、`clips/`、`logs/`、`dist/`：落盘输出、日志、构建结果；保持在 `.gitignore` 中。  
   - `var/problem_registry.jsonl`：selftest 失败记录（JSONL）。  

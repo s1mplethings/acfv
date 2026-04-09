@@ -24,6 +24,7 @@
 - `out_dir`（默认与视频同目录）
 - `clean.enabled`（默认 True）：去重/排序。
 - `retries`（默认 2）
+- `ENABLE_CHAT_SENTIMENT_ANALYSIS`（默认 False）：是否对每条 chat 做本地情感分析。关闭时只提取聊天文本与元数据，窗口级语义交给后续 `llm_highlight`/本地 Ollama。
 
 ## 6) Performance Budget
 - 文本下载应随视频长度线性；大直播需注意磁盘空间。

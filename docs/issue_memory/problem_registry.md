@@ -56,3 +56,24 @@
 - 原因判断：该目录中的 `.git/` 只是普通文件夹（仅含 `workflows/`），缺少正常仓库元数据，可能是复制/打包后的残留目录结构。
 - 解决方案：不要依赖 Git 状态做清理判断；如需版本管理能力，应重新从真实仓库检出，或恢复完整 `.git` 元数据后再操作。
 - 验证：在恢复后的工作副本执行 `git status --short`，应正常返回状态而非 fatal。
+
+### 2026-04-08 GUI 从错误 Python 环境启动，导致转录始终走 CPU
+- 现象：GUI 能打开，但转录非常慢；日志显示 `openai-whisper + cpu`，长视频 60 秒音频块要转 90~400 秒。
+- 触发：直接用 `D:\\anaconda\\python.exe` 启动 GUI；该 base 环境缺少 CUDA 版 torch 和 `faster-whisper`。
+- 原因判断：base 环境是 `torch 2.8.0+cpu`，`torch.cuda.is_available() == False`；而 `D:\\anaconda\\envs\\clip\\python.exe` 同时具备 `PyQt5 + faster-whisper + torch 2.5.1+cu121 + CUDA`。
+- 解决方案：在 `acfv.cli.gui` 增加启动自检；若当前 Python 不适合 GUI/转录，则自动重启到更优的 conda 环境（优先 `envs\\clip\\python.exe`），并透传当前 `PYTHONPATH`/临时 API 环境变量。
+- 验证：`python -m pytest tests/unit/test_gui_env_selection.py -q` 通过；从 base 环境执行 `python -m acfv.cli gui run` 时，GUI 自动切到 `clip` 环境启动。
+
+### 2026-04-09 转录子进程继承了错误的 `sys.executable`
+- 现象：即使 GUI 已尝试切到更好的环境，实际运行中的 `transcribe` 子进程仍显示为 `D:\\anaconda\\python.exe`，GPU 完全没有参与，日志中 chunk 转写耗时仍然很高。
+- 触发：主进程或历史运行仍留在 base 环境时，`_run_transcribe_subprocess()` 直接使用 `sys.executable` 启动子进程。
+- 原因判断：转录子进程没有独立做 Python 环境选择，导致 GUI 启动修复没有完全覆盖到转录保护子进程。
+- 解决方案：在 `steps/transcribe_audio/impl.py` 中增加 `_resolve_transcribe_python()`；优先选择具备 `faster-whisper + CUDA` 的 Python（当前机器上是 `D:\\anaconda\\envs\\clip\\python.exe`），再启动转录子进程。
+- 验证：`python -m pytest tests/unit/test_transcribe_audio_impl.py -q` 中新增环境选择单测通过；后续转录日志会额外输出 `[transcribe] subprocess python=...` 用于确认实际使用的解释器。
+
+### 2026-04-09 转录诊断缺少 Python 可执行文件路径，导致慢路径难以确认
+- 现象：日志里只能看到 `chunk N` 和重复的进度心跳，难以直接判断当前实际运行的是 `clip` CUDA 环境还是 `base` CPU 环境；用户容易把 15 秒一次的心跳误认为“卡住不动”。
+- 触发：查看 `transcribe_diagnostic.jsonl` / GUI 日志排查慢转录时。
+- 原因判断：诊断事件只记录 Python 版本，不记录 `sys.executable`；转录子进程切换环境时也没有显式补 `PYTHONPATH` 到仓库 `src`。
+- 解决方案：在 `steps/transcribe_audio/impl.py` 的 `start` 诊断事件追加 `python_executable`，并在子进程启动时显式构造环境，补齐 `PYTHONPATH` 与 `KMP_DUPLICATE_LIB_OK`。
+- 验证：`python -m pytest tests/unit/test_transcribe_audio_impl.py -q` 通过；新的 `transcribe_diagnostic.jsonl` 可直接看到 `python_executable`，并能确认子进程环境是否切到了 `D:\\anaconda\\envs\\clip\\python.exe`。

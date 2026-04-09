@@ -1371,6 +1371,70 @@ class SettingsDialog(QDialog):
         
         model_layout.addStretch()
         tabs.addTab(model_tab, "模型设置")
+
+        # ===== AI高光设置标签页 =====
+        ai_tab = QWidget()
+        ai_layout = QVBoxLayout(ai_tab)
+
+        self.llm_highlight_check = QCheckBox("启用 LLM 最终高光精排")
+        self.llm_highlight_check.setChecked(self.config_manager.get('ENABLE_LLM_HIGHLIGHT', True))
+        ai_layout.addWidget(self.llm_highlight_check)
+
+        self.local_distill_check = QCheckBox("启用本地 Ollama 蒸馏")
+        self.local_distill_check.setChecked(self.config_manager.get('ENABLE_LLM_LOCAL_DISTILL', True))
+        ai_layout.addWidget(self.local_distill_check)
+
+        candidate_multiplier_layout = QHBoxLayout()
+        candidate_multiplier_layout.addWidget(QLabel("候选放大倍数:"))
+        self.candidate_multiplier_spin = QSpinBox()
+        self.candidate_multiplier_spin.setRange(1, 20)
+        self.candidate_multiplier_spin.setValue(self.config_manager.get('LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER', 5))
+        self.candidate_multiplier_spin.setToolTip("先从规则粗召回里抓更多候选，再让 LLM 选出最终想要的切片个数。")
+        candidate_multiplier_layout.addWidget(self.candidate_multiplier_spin)
+        ai_layout.addLayout(candidate_multiplier_layout)
+
+        local_model_layout = QHBoxLayout()
+        local_model_layout.addWidget(QLabel("本地Ollama模型:"))
+        self.local_model_edit = QLineEdit()
+        self.local_model_edit.setText(self.config_manager.get('LLM_LOCAL_MODEL', 'qwen2.5:7b-instruct'))
+        self.local_model_edit.setPlaceholderText("qwen2.5:7b-instruct")
+        local_model_layout.addWidget(self.local_model_edit)
+        ai_layout.addLayout(local_model_layout)
+
+        remote_model_layout = QHBoxLayout()
+        remote_model_layout.addWidget(QLabel("远端API模型:"))
+        self.remote_model_edit = QLineEdit()
+        self.remote_model_edit.setText(
+            self.config_manager.get('LLM_HIGHLIGHT_MODEL', self.config_manager.get('LLM_MODEL', ''))
+        )
+        self.remote_model_edit.setPlaceholderText("gpt-4.1-mini")
+        remote_model_layout.addWidget(self.remote_model_edit)
+        ai_layout.addLayout(remote_model_layout)
+
+        vision_model_layout = QHBoxLayout()
+        vision_model_layout.addWidget(QLabel("视觉模型:"))
+        self.vision_model_edit = QLineEdit()
+        self.vision_model_edit.setText(
+            self.config_manager.get('LLM_VISION_MODEL', self.config_manager.get('SCREEN_UNDERSTANDING_MODEL', ''))
+        )
+        self.vision_model_edit.setPlaceholderText("gpt-4.1-mini")
+        vision_model_layout.addWidget(self.vision_model_edit)
+        ai_layout.addLayout(vision_model_layout)
+
+        ai_layout.addWidget(QLabel("用户兴趣偏好提示:"))
+        self.user_preference_edit = QTextEdit()
+        self.user_preference_edit.setPlaceholderText("例如：优先代码修改、问题定位、软件操作、创作过程。")
+        self.user_preference_edit.setPlainText(self.config_manager.get('LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT', ''))
+        self.user_preference_edit.setMinimumHeight(120)
+        ai_layout.addWidget(self.user_preference_edit)
+
+        llm_note = QLabel("API key / base_url 建议只在当前启动终端临时设置，不写入全局环境。")
+        llm_note.setWordWrap(True)
+        llm_note.setStyleSheet("color: #666;")
+        ai_layout.addWidget(llm_note)
+
+        ai_layout.addStretch()
+        tabs.addTab(ai_tab, "AI高光")
         
         # ===== 性能设置标签页 =====
         perf_tab = QWidget()
@@ -1485,6 +1549,15 @@ class SettingsDialog(QDialog):
                 logging.info("HuggingFace token已保存到secrets/config.json")
             except Exception as e:
                 logging.warning(f"保存HuggingFace token到secrets失败: {e}")
+
+        # AI高光设置
+        self.config_manager.config['ENABLE_LLM_HIGHLIGHT'] = self.llm_highlight_check.isChecked()
+        self.config_manager.config['ENABLE_LLM_LOCAL_DISTILL'] = self.local_distill_check.isChecked()
+        self.config_manager.config['LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER'] = self.candidate_multiplier_spin.value()
+        self.config_manager.config['LLM_LOCAL_MODEL'] = self.local_model_edit.text().strip()
+        self.config_manager.config['LLM_HIGHLIGHT_MODEL'] = self.remote_model_edit.text().strip()
+        self.config_manager.config['LLM_VISION_MODEL'] = self.vision_model_edit.text().strip()
+        self.config_manager.config['LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT'] = self.user_preference_edit.toPlainText().strip()
         
         # 性能设置
         self.config_manager.config['ENABLE_GPU_ACCELERATION'] = self.gpu_check.isChecked()

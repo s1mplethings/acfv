@@ -56,6 +56,11 @@ ALLOWED_MODEL_SIZES = {"tiny", "base", "small", "medium", "large", "large-v2", "
 ALLOWED_OUTPUT_FORMATS = {"json", "srt", "ass", "all"}
 ALLOWED_ENGINES = {"auto", "openai-whisper", "faster-whisper", "hf-whisper"}
 _FFMPEG_AVAILABLE_CACHE: Optional[bool] = None
+_TRANSCRIBE_PYTHON_CACHE: Optional[str] = None
+
+
+def _src_root() -> Path:
+    return Path(__file__).resolve().parents[3]
 
 
 def _ensure_extended_path(path: str | os.PathLike) -> str:
@@ -87,6 +92,126 @@ def check_ffmpeg_availability(refresh: bool = False) -> bool:
     except Exception:
         _FFMPEG_AVAILABLE_CACHE = False
     return bool(_FFMPEG_AVAILABLE_CACHE)
+
+
+def _derive_conda_root(current_python: str) -> Optional[Path]:
+    path = Path(current_python).resolve()
+    for parent in [path.parent, *path.parents]:
+        if (parent / "envs").is_dir():
+            return parent
+    return None
+
+
+def _candidate_python_paths(current_python: str) -> List[Path]:
+    candidates: List[Path] = []
+    explicit = os.environ.get("ACFV_TRANSCRIBE_PYTHON", "").strip()
+    if explicit:
+        candidates.append(Path(explicit))
+
+    conda_root = _derive_conda_root(current_python)
+    if conda_root is None:
+        return candidates
+
+    envs_dir = conda_root / "envs"
+    for name in ("clip", "acfv", "subtitle", "sunomi"):
+        candidates.append(envs_dir / name / "python.exe")
+    return candidates
+
+
+def _probe_python_for_transcribe(python_path: Path) -> Optional[Dict[str, Any]]:
+    if not python_path.exists():
+        return None
+    script = (
+        "import importlib.util, json\n"
+        "out={'faster_whisper': importlib.util.find_spec('faster_whisper') is not None,"
+        "'torch': importlib.util.find_spec('torch') is not None,"
+        "'cuda': False}\n"
+        "try:\n"
+        " import torch\n"
+        " out['cuda']=bool(torch.cuda.is_available())\n"
+        "except Exception as exc:\n"
+        " out['torch_error']=str(exc)\n"
+        "print(json.dumps(out, ensure_ascii=False))\n"
+    )
+    env = os.environ.copy()
+    env.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+    try:
+        result = subprocess.run(
+            [str(python_path), "-c", script],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=10,
+            env=env,
+        )
+    except Exception:
+        return None
+    if result.returncode != 0:
+        return None
+    lines = (result.stdout or "").strip().splitlines()
+    if not lines:
+        return None
+    try:
+        return json.loads(lines[-1])
+    except Exception:
+        return None
+
+
+def _score_python_for_transcribe(info: Dict[str, Any]) -> int:
+    score = 0
+    if info.get("faster_whisper"):
+        score += 20
+    if info.get("cuda"):
+        score += 40
+    if info.get("torch"):
+        score += 5
+    return score
+
+
+def _resolve_transcribe_python() -> str:
+    global _TRANSCRIBE_PYTHON_CACHE
+    if _TRANSCRIBE_PYTHON_CACHE:
+        return _TRANSCRIBE_PYTHON_CACHE
+
+    current_python = sys.executable
+    best_python = current_python
+    current_info = {
+        "torch": TORCH_AVAILABLE,
+        "faster_whisper": FASTER_WHISPER_AVAILABLE,
+        "cuda": bool(TORCH_AVAILABLE and torch.cuda.is_available()) if TORCH_AVAILABLE else False,
+    }
+    best_score = _score_python_for_transcribe(current_info)
+
+    seen = {str(Path(current_python).resolve()).lower()}
+    for candidate in _candidate_python_paths(current_python):
+        try:
+            key = str(candidate.resolve()).lower()
+        except Exception:
+            key = str(candidate).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        info = _probe_python_for_transcribe(candidate)
+        if not info:
+            continue
+        score = _score_python_for_transcribe(info)
+        if score > best_score:
+            best_score = score
+            best_python = str(candidate)
+            break
+
+    _TRANSCRIBE_PYTHON_CACHE = best_python
+    return best_python
+
+
+def _build_transcribe_subprocess_env() -> Dict[str, str]:
+    env = os.environ.copy()
+    env.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+    src_root = str(_src_root())
+    existing = env.get("PYTHONPATH", "").strip()
+    env["PYTHONPATH"] = src_root if not existing else f"{src_root}{os.pathsep}{existing}"
+    return env
 
 
 def get_audio_info_ffprobe(audio_path: str | os.PathLike) -> Optional[Dict[str, Any]]:
@@ -665,6 +790,7 @@ def _transcribe_with_splitting(
                     chunk_index=idx,
                     start_time=round(start_time, 3),
                     end_time=round(end_time, 3),
+                    total_duration=round(duration, 3),
                     chunk_path=str(chunk_path),
                 )
             if not extract_audio_segment_safe(audio_path, start_time, end_time, chunk_path):
@@ -675,6 +801,7 @@ def _transcribe_with_splitting(
                         chunk_index=idx,
                         start_time=round(start_time, 3),
                         end_time=round(end_time, 3),
+                        total_duration=round(duration, 3),
                         chunk_path=str(chunk_path),
                     )
                 start_time = end_time
@@ -688,6 +815,7 @@ def _transcribe_with_splitting(
                         chunk_index=idx,
                         start_time=round(start_time, 3),
                         end_time=round(end_time, 3),
+                        total_duration=round(duration, 3),
                         chunk_path=str(chunk_path),
                     )
                 start_time = end_time
@@ -699,6 +827,7 @@ def _transcribe_with_splitting(
                     chunk_index=idx,
                     start_time=round(start_time, 3),
                     end_time=round(end_time, 3),
+                    total_duration=round(duration, 3),
                     chunk_path=str(chunk_path),
                     chunk_bytes=int(chunk_path.stat().st_size),
                 )
@@ -715,6 +844,7 @@ def _transcribe_with_splitting(
                         chunk_index=idx,
                         start_time=round(start_time, 3),
                         end_time=round(end_time, 3),
+                        total_duration=round(duration, 3),
                         chunk_path=str(chunk_path),
                         elapsed_sec=round(time.monotonic() - start_monotonic, 3),
                         error=str(exc),
@@ -728,6 +858,7 @@ def _transcribe_with_splitting(
                     chunk_index=idx,
                     start_time=round(start_time, 3),
                     end_time=round(end_time, 3),
+                    total_duration=round(duration, 3),
                     chunk_path=str(chunk_path),
                     elapsed_sec=round(time.monotonic() - start_monotonic, 3),
                     segments=len(segs),
@@ -805,13 +936,92 @@ def _write_empty_transcript(
     return empty_payload
 
 
-def _run_transcribe_subprocess(payload: Dict[str, Any], work_dir: Path) -> Dict[str, Any]:
+def _read_checkpoint_payload(path: Path) -> Dict[str, Any]:
+    try:
+        with path.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _progress_from_checkpoint(checkpoint: Dict[str, Any]) -> Tuple[int, int, str]:
+    stage = str(checkpoint.get("stage", "")).strip()
+    total = 100
+    current = 1
+    elapsed_sec = float(checkpoint.get("monotonic_sec", 0.0) or 0.0)
+    msg = stage or "working"
+
+    if stage in {"start", "faulthandler_enabled", "prepare_audio_start"}:
+        current = 1
+    elif stage == "prepare_audio_done":
+        current = 8
+        audio_info = checkpoint.get("audio_info")
+        if isinstance(audio_info, dict):
+            duration = float(audio_info.get("duration", 0.0) or 0.0)
+            msg = f"audio ready, duration={duration/3600:.2f}h"
+        else:
+            msg = "audio ready"
+    elif stage == "model_loaded":
+        current = 15
+        engine = str(checkpoint.get("engine", "")).strip()
+        model_size = str(checkpoint.get("model_size", "")).strip()
+        msg = f"model loaded: {engine or 'whisper'} {model_size}".strip()
+    elif stage == "single_transcribe_start":
+        current = 20
+        msg = f"single pass transcription, elapsed={elapsed_sec:.0f}s"
+    elif stage == "single_transcribe_ok":
+        current = 95
+        msg = f"single pass done, segments={int(checkpoint.get('segments', 0) or 0)}"
+    elif stage in {"chunk_extract_start", "chunk_transcribe_start", "chunk_transcribe_ok", "chunk_transcribe_error"}:
+        audio_info = checkpoint.get("audio_info")
+        total_duration = 0.0
+        if isinstance(audio_info, dict):
+            total_duration = float(audio_info.get("duration", 0.0) or 0.0)
+        if total_duration <= 0:
+            total_duration = float(checkpoint.get("total_duration", 0.0) or 0.0)
+        end_time = float(checkpoint.get("end_time", 0.0) or 0.0)
+        chunk_index = int(checkpoint.get("chunk_index", 0) or 0) + 1
+        if total_duration > 0:
+            ratio = max(0.0, min(end_time / total_duration, 1.0))
+            current = min(94, max(20, 20 + int(ratio * 70)))
+            msg = f"chunk {chunk_index}, {end_time/60:.1f}/{total_duration/60:.1f} min"
+        else:
+            current = 25
+            msg = f"chunk {chunk_index}"
+        if stage == "chunk_transcribe_ok":
+            msg += f", segs={int(checkpoint.get('segments', 0) or 0)}"
+        if stage == "chunk_transcribe_error":
+            msg += ", retry/error"
+    elif stage == "complete":
+        current = 100
+        msg = f"done, segments={int(checkpoint.get('segments', 0) or 0)}"
+    elif stage == "complete_empty":
+        current = 100
+        msg = "done, empty transcript"
+    elif stage == "transcribe_error":
+        current = max(1, min(99, int(checkpoint.get("progress", 50) or 50)))
+        msg = str(checkpoint.get("error", "transcribe error")).strip() or "transcribe error"
+    else:
+        current = 10
+        msg = f"{stage or 'working'}, elapsed={elapsed_sec:.0f}s"
+
+    return current, total, msg
+
+
+def _run_transcribe_subprocess(
+    payload: Dict[str, Any],
+    work_dir: Path,
+    progress_callback=None,
+) -> Dict[str, Any]:
     work_dir.mkdir(parents=True, exist_ok=True)
     payload_path = work_dir / "transcribe_payload.json"
+    checkpoint_path = work_dir / "transcribe_checkpoint.json"
     _atomic_write_json(payload_path, payload)
 
+    python_executable = _resolve_transcribe_python()
     cmd = [
-        sys.executable,
+        python_executable,
         "-c",
         (
             "import json,sys;"
@@ -821,18 +1031,56 @@ def _run_transcribe_subprocess(payload: Dict[str, Any], work_dir: Path) -> Dict[
         ),
         str(payload_path),
     ]
-    result = subprocess.run(
+    log_info(f"[transcribe] subprocess python={python_executable}")
+    env = _build_transcribe_subprocess_env()
+    proc = subprocess.Popen(
         cmd,
-        capture_output=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True,
         encoding="utf-8",
         errors="ignore",
+        env=env,
     )
-    if result.returncode != 0:
-        stderr = (result.stderr or "").strip()
-        stdout = (result.stdout or "").strip()
-        detail = stderr or stdout or f"exit code {result.returncode}"
+    last_checkpoint_key = ""
+    last_emit_sec = 0.0
+    started = time.monotonic()
+    while proc.poll() is None:
+        now = time.monotonic()
+        checkpoint = _read_checkpoint_payload(checkpoint_path)
+        if checkpoint:
+            checkpoint_key = json.dumps(checkpoint, ensure_ascii=False, sort_keys=True)
+            if checkpoint_key != last_checkpoint_key or (now - last_emit_sec) >= 15.0:
+                current, total, message = _progress_from_checkpoint(checkpoint)
+                if progress_callback:
+                    progress_callback("transcribe", current, total, message)
+                else:
+                    log_info(f"[transcribe] progress {current}/{total} {message}")
+                last_checkpoint_key = checkpoint_key
+                last_emit_sec = now
+        elif (now - last_emit_sec) >= 30.0:
+            heartbeat = f"working, elapsed={int(now - started)}s"
+            if progress_callback:
+                progress_callback("transcribe", 1, 100, heartbeat)
+            else:
+                log_info(f"[transcribe] {heartbeat}")
+            last_emit_sec = now
+        time.sleep(2.0)
+
+    stdout, stderr = proc.communicate()
+    if proc.returncode != 0:
+        stderr = (stderr or "").strip()
+        stdout = (stdout or "").strip()
+        detail = stderr or stdout or f"exit code {proc.returncode}"
         raise RuntimeError(f"transcribe subprocess failed: {detail}")
+
+    checkpoint = _read_checkpoint_payload(checkpoint_path)
+    if checkpoint:
+        current, total, message = _progress_from_checkpoint(checkpoint)
+        if progress_callback:
+            progress_callback("transcribe", current, total, message)
+        else:
+            log_info(f"[transcribe] progress {current}/{total} {message}")
 
     transcript_path = payload.get("transcript_path")
     if not transcript_path:
@@ -1012,6 +1260,7 @@ def transcribe_audio(payload: Dict[str, Any]) -> Dict[str, Any]:
         output_format=options.output_format,
         diarization=options.diarization,
         python=sys.version.split()[0],
+        python_executable=sys.executable,
         platform=platform.platform(),
         whisper_available=WHISPER_AVAILABLE,
         faster_whisper_available=FASTER_WHISPER_AVAILABLE,
@@ -1165,7 +1414,7 @@ def process_audio_segments(
     if _guard_enabled():
         work_dir = Path(str(payload.get("work_dir") or processing_path("working")))
         try:
-            result = _run_transcribe_subprocess(payload, work_dir)
+            result = _run_transcribe_subprocess(payload, work_dir, progress_callback=kwargs.get("progress_callback"))
         except Exception as exc:
             log_error(f"[transcribe] subprocess failed: {exc}")
             if _fallback_enabled():
@@ -1177,7 +1426,11 @@ def process_audio_segments(
                     fallback_payload.get("model_size"),
                 )
                 try:
-                    result = _run_transcribe_subprocess(fallback_payload, work_dir)
+                    result = _run_transcribe_subprocess(
+                        fallback_payload,
+                        work_dir,
+                        progress_callback=kwargs.get("progress_callback"),
+                    )
                 except Exception as fallback_exc:
                     log_error(f"[transcribe] fallback subprocess failed: {fallback_exc}")
                     result = _write_empty_transcript(payload, reason=str(fallback_exc))

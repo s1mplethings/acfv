@@ -5,6 +5,9 @@
 ## 模块 specs
 - `specs/modules/analyze_segments/spec.md`：分段/评分/选段（切片）规则（边界/排序/空输入策略）
 - `specs/modules/semantic_merge/spec.md`：语义合并（文本相似度拼接为目标时长片段）
+- `specs/modules/screen_detect/spec.md`：机械式电脑画面检测（关键帧、bbox、窗口）
+- `specs/modules/screen_understanding/spec.md`：电脑画面理解（关键帧 + 结构化时间轴）
+- `specs/modules/llm_highlight/spec.md`：LLM 语义高光精排（结构化 JSON）
 - `specs/modules/render_clips/spec.md`：剪辑渲染与导出（命名/原子写/manifest）
 - `specs/modules/subtitle_generator/spec.md`：字幕生成（SRT/ASS）
 - `specs/modules/streamer_subtitles/spec.md`：主播字幕导出（仅主播）

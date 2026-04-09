@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from acfv import config as app_config
-from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT, ART_VIDEO
+from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS_LLM, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT, ART_VIDEO
 from acfv.modular.types import ModuleContext, ModuleSpec
 from acfv.processing.clip_video import clip_video
 from acfv.selection.merge_segments import merge_segments
@@ -96,6 +96,16 @@ def _normalize_segments(payload: Any) -> List[Dict[str, Any]]:
             "rank": rank,
             "reason_tags": reason_tags,
         }
+        if seg.get("summary"):
+            item["text"] = str(seg.get("summary"))
+        elif seg.get("text"):
+            item["text"] = str(seg.get("text"))
+        if seg.get("highlight_type") is not None:
+            item["highlight_type"] = str(seg.get("highlight_type"))
+        if seg.get("why_highlight") is not None:
+            item["why_highlight"] = str(seg.get("why_highlight"))
+        if seg.get("confidence") is not None:
+            item["confidence"] = float(seg.get("confidence"))
         if seg.get("score_base") is not None:
             item["score_base"] = float(seg.get("score_base"))
         if seg.get("score_scale") is not None:
@@ -248,7 +258,12 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         raise FileNotFoundError("video not found")
     logger.info("[render_clips] start | run_dir=%s video=%s", ctx.store.run_dir, video_path)
 
-    segments_payload = ctx.inputs[ART_SEGMENTS_SEMANTIC].payload or []
+    llm_env = ctx.inputs.get(ART_SEGMENTS_LLM)
+    segments_payload = llm_env.payload if llm_env is not None else []
+    if not segments_payload:
+        fallback_env = ctx.store.get_latest_by_type(ART_SEGMENTS_SEMANTIC)
+        if fallback_env is not None:
+            segments_payload = fallback_env.payload or []
     segments_raw = _normalize_segments(segments_payload)
     policy_in = segments_payload.get("policy") if isinstance(segments_payload, dict) else None
     logger.info("[render_clips] incoming segments=%d", len(segments_raw))
@@ -405,7 +420,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 spec = ModuleSpec(
     name="render_clips",
     version="1",
-    inputs=[ART_VIDEO, ART_SEGMENTS_SEMANTIC, ART_AUDIO_HOST, ART_TRANSCRIPT],
+    inputs=[ART_VIDEO, ART_SEGMENTS_LLM, ART_AUDIO_HOST, ART_TRANSCRIPT],
     outputs=[ART_CLIPS],
     run=run,
     description="Render highlight clips from video and segments.",

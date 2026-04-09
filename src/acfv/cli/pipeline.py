@@ -2,12 +2,31 @@ import typer
 from rich import print
 from pathlib import Path
 from datetime import datetime
+import yaml
 from acfv.configs.settings import Settings
 from acfv.utils.logging import setup_logging
 from acfv.ingest.twitch import fetch_vod
 from acfv.modular.pipeline import run_pipeline
 
 pipeline_app = typer.Typer(no_args_is_help=True)
+
+
+class _YamlConfigAdapter:
+    def __init__(self, payload: dict | None):
+        self.payload = payload or {}
+
+    def get(self, key: str, default=None):
+        return self.payload.get(key, default)
+
+
+def _load_cfg_adapter(path: str | None):
+    if not path:
+        return None
+    try:
+        payload = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    return _YamlConfigAdapter(payload if isinstance(payload, dict) else {})
 
 @pipeline_app.command("clip")
 def clip(
@@ -16,6 +35,7 @@ def clip(
     cfg: str = typer.Option(None, help="Path to YAML config"),
 ):
     settings = Settings.from_yaml(cfg) if cfg else Settings()
+    cfg_adapter = _load_cfg_adapter(cfg)
     setup_logging(settings)
     print("[bold]ACFV[/] pipeline start")
 
@@ -35,7 +55,7 @@ def clip(
     result = run_pipeline(
         video_path=str(media_path),
         chat_path=None,
-        config_manager=None,
+        config_manager=cfg_adapter,
         run_dir=run_dir,
         output_clips_dir=str(run_dir),
     )

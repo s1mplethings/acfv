@@ -42,7 +42,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     language = ctx.params.get("language")
 
     if ctx.progress:
-        ctx.progress("transcribe", 0, 1, "start")
+        ctx.progress("transcribe", 0, 100, "start")
 
     process_audio_segments(
         audio_path=audio_path,
@@ -51,6 +51,8 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         whisper_model_name=whisper_model,
         language=language,
         engine=whisper_engine,
+        work_dir=str(work_dir),
+        progress_callback=ctx.progress,
     )
 
     transcript = _read_json(out_path)
@@ -61,7 +63,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     if "segments" not in transcript:
         transcript["segments"] = []
     if ctx.progress:
-        ctx.progress("transcribe", 1, 1, "done")
+        ctx.progress("transcribe", 100, 100, "done")
 
     return {ART_TRANSCRIPT: transcript}
 

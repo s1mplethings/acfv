@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 from pathlib import Path
 from bs4 import BeautifulSoup
 from transformers import pipeline
@@ -56,6 +57,49 @@ def _is_explicit_cpu_device(value):
     if isinstance(value, str):
         return value.strip().lower() in {"cpu", "-1"}
     return False
+
+
+def _config_get(name, default=None):
+    try:
+        value = getattr(config, name, None)
+        if value not in (None, ""):
+            return value
+    except Exception:
+        pass
+    try:
+        from acfv.config import config_manager
+
+        return config_manager.get(name, default)
+    except Exception:
+        return default
+
+
+def _bool_config(name, default=False):
+    value = _config_get(name, default)
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    text = str(value).strip().lower()
+    if text in {"1", "true", "yes", "on"}:
+        return True
+    if text in {"0", "false", "no", "off"}:
+        return False
+    return default
+
+
+def _summarize_messages(chat_rows):
+    texts = [str(item.get("message") or "").strip() for item in chat_rows if str(item.get("message") or "").strip()]
+    top_messages = [
+        {"text": text, "count": count}
+        for text, count in Counter(texts).most_common(5)
+        if text
+    ]
+    return {
+        "message_count": len(chat_rows),
+        "non_empty_messages": len(texts),
+        "top_messages": top_messages,
+    }
 
 def _build_sentiment_pipeline(model_path, device_id):
     model_id = _maybe_hf_model_id(model_path)
@@ -165,72 +209,44 @@ def extract_chat(input_file, output_file):
     try:
         with open(input_file, 'r', encoding='utf-8') as file:
             soup = BeautifulSoup(file, 'html.parser')
+        sentiment_enabled = _bool_config("ENABLE_CHAT_SENTIMENT_ANALYSIS", False)
         # 安全获取本地模型路径 & 设备，缺失时使用默认模型 (distilbert-base-uncased-finetuned-sst-2-english)
-        try:
-            local_model_path = getattr(config, 'LOCAL_EMOTION_MODEL_PATH', None)
-        except Exception:
-            local_model_path = None
-        # 某些版本 config 是一个包，实际值在 config.config_manager
-        if not local_model_path:
-            try:
-                from acfv.config import config_manager
-                local_model_path = config_manager.get('LOCAL_EMOTION_MODEL_PATH', '').strip()
-            except Exception:
-                local_model_path = None
+        local_model_path = _config_get("LOCAL_EMOTION_MODEL_PATH", None)
         if isinstance(local_model_path, str):
             local_model_path = local_model_path.strip()
         if not local_model_path:
             # 使用 huggingface 默认模型；避免直接抛出 attribute error
             local_model_path = "distilbert-base-uncased-finetuned-sst-2-english"
-            log_info(f"[chat] LOCAL_EMOTION_MODEL_PATH 未设置，使用默认模型: {local_model_path}")
+            if sentiment_enabled:
+                log_info(f"[chat] LOCAL_EMOTION_MODEL_PATH 未设置，使用默认模型: {local_model_path}")
         # 设备获取（优先 config.LLM_DEVICE，再使用 config_manager 或 0）
-        device_setting = None
-        try:
-            device_setting = getattr(config, 'LLM_DEVICE', None)
-        except Exception:
-            try:
-                from acfv.config import config_manager
-                device_setting = config_manager.get('LLM_DEVICE', None)
-            except Exception:
-                device_setting = None
+        device_setting = _config_get("LLM_DEVICE", None)
         if device_setting is None:
             device_setting = 0
         device_id = _resolve_device_id(device_setting)
 
-        enable_gpu = None
-        use_gpu = None
-        gpu_device_setting = None
-        try:
-            enable_gpu = getattr(config, 'ENABLE_GPU_ACCELERATION', None)
-            use_gpu = getattr(config, 'USE_GPU', None)
-            gpu_device_setting = getattr(config, 'GPU_DEVICE', None)
-        except Exception:
-            pass
-        try:
-            from acfv.config import config_manager
-            if enable_gpu is None:
-                enable_gpu = config_manager.get('ENABLE_GPU_ACCELERATION', True)
-            if use_gpu is None:
-                use_gpu = config_manager.get('USE_GPU', True)
-            if not gpu_device_setting:
-                gpu_device_setting = config_manager.get('GPU_DEVICE', None)
-        except Exception:
-            pass
+        enable_gpu = _config_get("ENABLE_GPU_ACCELERATION", True)
+        use_gpu = _config_get("USE_GPU", True)
+        gpu_device_setting = _config_get("GPU_DEVICE", None)
         if enable_gpu is None:
             enable_gpu = True
         if use_gpu is None:
             use_gpu = True
 
-        if not enable_gpu or not use_gpu:
-            device_id = -1
-        elif device_id < 0 and not _is_explicit_cpu_device(device_setting):
-            fallback_device = gpu_device_setting or "cuda:0"
-            device_id = _resolve_device_id(fallback_device)
-            if device_id < 0:
-                log_warning("[chat] GPU 不可用，情感分析将使用 CPU")
-        sentiment_pipeline = _build_sentiment_pipeline(local_model_path, device_id)
-        if sentiment_pipeline is None:
-            log_error("[chat] 情感模型不可用，回退到伪 neutral 评分")
+        sentiment_pipeline = None
+        if sentiment_enabled:
+            if not enable_gpu or not use_gpu:
+                device_id = -1
+            elif device_id < 0 and not _is_explicit_cpu_device(device_setting):
+                fallback_device = gpu_device_setting or "cuda:0"
+                device_id = _resolve_device_id(fallback_device)
+                if device_id < 0:
+                    log_warning("[chat] GPU 不可用，情感分析将使用 CPU")
+            sentiment_pipeline = _build_sentiment_pipeline(local_model_path, device_id)
+            if sentiment_pipeline is None:
+                log_error("[chat] 情感模型不可用，回退到伪 neutral 评分")
+        else:
+            log_info("[chat] 已关闭逐条情感分析，后续交由候选窗口级 LLM/Ollama 处理聊天语义")
 
         chat_data = []
         for comment in soup.find_all('pre', class_='comment-root'):
@@ -259,9 +275,12 @@ def extract_chat(input_file, output_file):
             })
 
         log_info(f"Extracted {len(chat_data)} chat messages")
+        summary = _summarize_messages(chat_data)
         with open(output_file, 'w', encoding='utf-8') as outfile:
             json.dump(chat_data, outfile, ensure_ascii=False, indent=4)
         log_info(f"Chat data saved to {output_file}")
+        if summary["top_messages"]:
+            log_info(f"[chat] top messages: {summary['top_messages'][:3]}")
 
     except Exception as e:
         # 之前直接 raise 导致并行阶段整体标记失败；改为写出一个空文件保证后续流程继续
@@ -274,3 +293,9 @@ def extract_chat(input_file, output_file):
             pass
         # 不再向上抛出，让管道使用 has_chat_json=False 分支
         return []
+
+
+__all__ = [
+    "extract_chat",
+    "_summarize_messages",
+]

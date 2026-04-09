@@ -6,12 +6,17 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from acfv import config as app_config
 from acfv.modular.contracts import (
     ART_AUDIO_HOST,
     ART_CHAT_LOG,
     ART_CHAT_SOURCE,
     ART_CLIPS,
+    ART_SCREEN_CONTEXT,
+    ART_SCREEN_FRAMES,
+    ART_SCREEN_WINDOWS,
     ART_SEGMENTS,
+    ART_SEGMENTS_LLM,
     ART_TRANSCRIPT,
     ART_VIDEO,
     ART_VIDEO_EMOTION,
@@ -57,12 +62,15 @@ def _load_plugin_specs() -> list:
         "acfv.modular.plugins.extract_chat",
         "acfv.modular.plugins.extract_audio",
         "acfv.modular.plugins.transcribe_audio",
+        "acfv.modular.plugins.screen_detect",
+        "acfv.modular.plugins.screen_understanding",
         "acfv.modular.plugins.video_emotion",
         "acfv.modular.plugins.speaker_separation",
         "acfv.modular.plugins.streamer_subtitles",
         "acfv.modular.plugins.subtitle_translate",
         "acfv.modular.plugins.analyze_segments",
         "acfv.modular.plugins.semantic_merge",
+        "acfv.modular.plugins.llm_highlight",
         "acfv.modular.plugins.render_clips",
     ]
     specs = []
@@ -101,6 +109,10 @@ def run_pipeline(
         chat_path,
         output_clips_dir or "<default>",
     )
+    if config_manager is not None:
+        # Modular plugins still consult the global config object; mirror the
+        # caller-supplied config source so CLI YAML overrides are actually used.
+        app_config.config_manager = config_manager
     run_dir = Path(run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("ACFV_DISABLE_PROGRESS_FILE", "1")
@@ -129,6 +141,13 @@ def run_pipeline(
 
     max_clips = _get_int(config_manager.get("MAX_CLIP_COUNT") if config_manager else None, 0)
     max_clips = max_clips if max_clips > 0 else None
+    llm_candidate_multiplier = _get_int(
+        config_manager.get("LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER") if config_manager else None,
+        5,
+    )
+    if llm_candidate_multiplier <= 0:
+        llm_candidate_multiplier = 5
+    rough_candidate_count = max_clips * llm_candidate_multiplier if max_clips else None
 
     min_seg_duration = _get_float(config_manager.get("MIN_CLIP_SEGMENT_SECONDS") if config_manager else None, 6.0)
     if config_manager and config_manager.get("MIN_CLIP_SEGMENT_SECONDS") is None:
@@ -145,8 +164,8 @@ def run_pipeline(
     primary_speaker = None
     if config_manager:
         primary_speaker = config_manager.get("STREAMER_PRIMARY_SPEAKER")
-    language_cfg = str(config_manager.get("TRANSCRIPTION_LANGUAGE") if config_manager else "") if config_manager else ""
-    language_cfg = language_cfg.strip().lower()
+    language_value = config_manager.get("TRANSCRIPTION_LANGUAGE") if config_manager else ""
+    language_cfg = str(language_value or "").strip().lower()
     language = None if language_cfg in {"", "auto", "detect", "default"} else language_cfg
 
     params_by_module = {
@@ -162,6 +181,20 @@ def run_pipeline(
             "segment_length": _get_float(config_manager.get("VIDEO_EMOTION_SEGMENT_LENGTH") if config_manager else None, 4.0),
             "model_path": str(config_manager.get("VIDEO_EMOTION_MODEL_PATH") if config_manager else ""),
             "device": config_manager.get("LLM_DEVICE") if config_manager else 0,
+        },
+        "screen_detect": {
+            "enabled": _get_bool(config_manager.get("ENABLE_SCREEN_DETECT") if config_manager else None, False),
+            "interval_sec": _get_float(config_manager.get("SCREEN_DETECT_INTERVAL_SEC") if config_manager else None, 30.0),
+            "max_frames_per_window": _get_int(
+                config_manager.get("SCREEN_MAX_FRAMES_PER_WINDOW") if config_manager else None, 12
+            ),
+            "enable_ocr": _get_bool(config_manager.get("SCREEN_ENABLE_OCR") if config_manager else None, True),
+            "dedupe_hash_distance": _get_int(
+                config_manager.get("SCREEN_DETECT_DEDUPE_HASH_DISTANCE") if config_manager else None, 6
+            ),
+        },
+        "screen_understanding": {
+            "enabled": _get_bool(config_manager.get("ENABLE_SCREEN_UNDERSTANDING") if config_manager else None, False),
         },
         "speaker_separation": {
             "enabled": _get_bool(config_manager.get("ENABLE_SPEAKER_SEPARATION") if config_manager else None, False),
@@ -195,7 +228,7 @@ def run_pipeline(
             "llm_system_prompt": config_manager.get("SUBTITLE_TRANSLATE_LLM_SYSTEM_PROMPT") if config_manager else "",
         },
         "analyze_segments": {
-            "max_clips": max_clips,
+            "max_clips": rough_candidate_count,
             "video_emotion_weight": _get_float(config_manager.get("VIDEO_EMOTION_WEIGHT") if config_manager else None, 0.3),
             "enable_video_emotion": _get_bool(config_manager.get("ENABLE_VIDEO_EMOTION") if config_manager else None, False),
             "min_duration_sec": min_seg_duration,
@@ -204,6 +237,14 @@ def run_pipeline(
             "output_dir": output_clips_dir,
             "subtitle_enabled": subtitle_enabled,
             "subtitle_format": str(config_manager.get("SUBTITLE_FORMAT") if config_manager else "srt") or "srt",
+        },
+        "llm_highlight": {
+            "enabled": _get_bool(config_manager.get("ENABLE_LLM_HIGHLIGHT") if config_manager else None, False),
+            "max_candidates": _get_int(
+                config_manager.get("LLM_HIGHLIGHT_MAX_CANDIDATES") if config_manager else None,
+                rough_candidate_count or 8,
+            ),
+            "target_segments": max_clips,
         },
     }
 
@@ -223,6 +264,8 @@ def run_pipeline(
     segments_out = None
     manifest_path = None
     thumbnails = []
+    screen_context_path = None
+    llm_segments_path = None
     if isinstance(clips_payload, dict):
         clips_list = clips_payload.get("clips") or []
         subtitles = clips_payload.get("subtitles") or []
@@ -233,6 +276,13 @@ def run_pipeline(
         manifest_path = clips_payload.get("manifest_path")
     elif isinstance(clips_payload, list):
         clips_list = clips_payload
+
+    screen_context_env = results.get(ART_SCREEN_CONTEXT)
+    if screen_context_env is not None:
+        screen_context_path = str((Path(run_dir) / "work" / "screen_context.json"))
+    llm_segments_env = results.get(ART_SEGMENTS_LLM)
+    if llm_segments_env is not None:
+        llm_segments_path = str((Path(run_dir) / "work" / "segments_llm.json"))
 
     _progress("run", 1, 1, "done")
     logger.info("[pipeline] run finished; clips=%d", len(clips_list))
@@ -262,6 +312,8 @@ def run_pipeline(
         "run_dir": str(run_dir),
         "merge_gap_sec": merge_gap,
         "max_merged_duration": max_merge,
+        "screen_context_json": screen_context_path,
+        "segments_llm_json": llm_segments_path,
     }
     if segments_out:
         contract_output["segments"] = segments_out

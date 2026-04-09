@@ -150,6 +150,12 @@ class SubtitleRenderWidget(QWidget):
         self.edit_max_clips = QLineEdit(str(self.config_manager.get("MAX_CLIP_COUNT", 10)))
         clip_layout.addRow("最大切片个数:", self.edit_max_clips)
 
+        self.edit_candidate_multiplier = QLineEdit(
+            str(self.config_manager.get("LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER", 5))
+        )
+        self.edit_candidate_multiplier.setToolTip("粗召回先放大几倍候选池，再交给本地 Ollama/API 精排。")
+        clip_layout.addRow("候选放大倍数:", self.edit_candidate_multiplier)
+
         self.edit_clips_base_dir = QLineEdit(self.config_manager.get("CLIPS_BASE_DIR", "clips"))
         clips_dir_row = QWidget()
         clips_dir_layout = QHBoxLayout(clips_dir_row)
@@ -172,6 +178,34 @@ class SubtitleRenderWidget(QWidget):
         self.checkbox_merge_nearby_clips = QCheckBox()
         self.checkbox_merge_nearby_clips.setChecked(self.config_manager.get("MERGE_NEARBY_CLIPS", True))
         clip_layout.addRow("合并相邻切片:", self.checkbox_merge_nearby_clips)
+
+        self.checkbox_enable_local_distill = QCheckBox()
+        self.checkbox_enable_local_distill.setChecked(self.config_manager.get("ENABLE_LLM_LOCAL_DISTILL", True))
+        clip_layout.addRow("启用本地Ollama蒸馏:", self.checkbox_enable_local_distill)
+
+        self.edit_local_llm_model = QLineEdit(self.config_manager.get("LLM_LOCAL_MODEL", "qwen2.5:7b-instruct"))
+        self.edit_local_llm_model.setToolTip("本地 Ollama/OpenAI-compatible 模型名。")
+        clip_layout.addRow("本地Ollama模型:", self.edit_local_llm_model)
+
+        self.edit_remote_llm_model = QLineEdit(
+            self.config_manager.get("LLM_HIGHLIGHT_MODEL", self.config_manager.get("LLM_MODEL", ""))
+        )
+        self.edit_remote_llm_model.setToolTip("最终高光精排使用的远端 API 文本模型。")
+        clip_layout.addRow("远端API模型:", self.edit_remote_llm_model)
+
+        self.edit_remote_vision_model = QLineEdit(
+            self.config_manager.get("LLM_VISION_MODEL", self.config_manager.get("SCREEN_UNDERSTANDING_MODEL", ""))
+        )
+        self.edit_remote_vision_model.setToolTip("电脑画面理解使用的远端视觉模型。")
+        clip_layout.addRow("视觉模型:", self.edit_remote_vision_model)
+
+        self.edit_user_preference_prompt = QTextEdit()
+        self.edit_user_preference_prompt.setPlaceholderText("例如：优先代码修改、问题定位、软件操作、创作过程。")
+        self.edit_user_preference_prompt.setPlainText(
+            self.config_manager.get("LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT", "")
+        )
+        self.edit_user_preference_prompt.setMaximumHeight(96)
+        clip_layout.addRow("用户兴趣偏好:", self.edit_user_preference_prompt)
 
         layout.addWidget(wrap_in_card(clip_card))
 
@@ -435,11 +469,23 @@ class SubtitleRenderWidget(QWidget):
 
     def _save_clip_settings(self) -> None:
         self.config_manager.set("MAX_CLIP_COUNT", int(self.edit_max_clips.text().strip() or 0))
+        self.config_manager.set(
+            "LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER",
+            int(self.edit_candidate_multiplier.text().strip() or 5),
+        )
         self.config_manager.set("CLIPS_BASE_DIR", self.edit_clips_base_dir.text().strip())
         self.config_manager.set("MIN_CLIP_DURATION", float(self.edit_min_clip_duration.text().strip() or 60.0))
         self.config_manager.set("CLIP_CONTEXT_EXTEND", float(self.edit_clip_context_extend.text().strip() or 15.0))
         self.config_manager.set("CLIP_MERGE_THRESHOLD", float(self.edit_clip_merge_threshold.text().strip() or 10.0))
         self.config_manager.set("MERGE_NEARBY_CLIPS", self.checkbox_merge_nearby_clips.isChecked())
+        self.config_manager.set("ENABLE_LLM_LOCAL_DISTILL", self.checkbox_enable_local_distill.isChecked())
+        self.config_manager.set("LLM_LOCAL_MODEL", self.edit_local_llm_model.text().strip())
+        self.config_manager.set("LLM_HIGHLIGHT_MODEL", self.edit_remote_llm_model.text().strip())
+        self.config_manager.set("LLM_VISION_MODEL", self.edit_remote_vision_model.text().strip())
+        self.config_manager.set(
+            "LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT",
+            self.edit_user_preference_prompt.toPlainText().strip(),
+        )
         self.config_manager.save_config()
         self.status_label.setText("切片设置已保存")
 
