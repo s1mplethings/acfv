@@ -28,6 +28,10 @@ def setup_logging(settings, *, level: str = "INFO", structured_path: Optional[Pa
     - 采集友好：JSONL 文件
     """
     Path(settings.workdir).mkdir(parents=True, exist_ok=True)
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except Exception:
+        pass
     text_formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
     console_handler = logging.StreamHandler(sys.stdout)

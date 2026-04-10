@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 import logging
@@ -10,9 +11,9 @@ from typing import Any, Dict, List
 from acfv import config as app_config
 from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS_LLM, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT, ART_VIDEO
 from acfv.modular.types import ModuleContext, ModuleSpec
-from acfv.processing.clip_video import clip_video
+from acfv.pipeline.runtime import finalize_runtime, init_render_runtime, read_runtime, update_runtime_item
 from acfv.selection.merge_segments import merge_segments
-from acfv.steps.render_clips.impl import NAMING_POLICY as CLIP_NAMING_POLICY
+from acfv.steps.render_clips.impl import NAMING_POLICY as CLIP_NAMING_POLICY, cut_video_ffmpeg
 from acfv.steps.subtitle_generator.impl import generate_semantic_subtitles_for_clips
 
 SCHEMA_VERSION = "1.0.0"
@@ -43,6 +44,14 @@ def _write_json(path: Path, data: Any) -> None:
     with tmp.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=True, indent=2)
     tmp.replace(path)
+
+
+def _read_json(path: Path) -> Any:
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
 
 def _resolve_subtitle_settings(ctx: ModuleContext) -> tuple[bool, str]:
@@ -179,6 +188,7 @@ def _build_manifest(
     thumbnails: List[str],
     source_media: str,
     naming_policy: str,
+    planned: bool = False,
 ) -> Dict[str, Any]:
     subtitles_map = {Path(p).stem: Path(p) for p in subtitles}
     thumbs_map = {Path(p).stem: Path(p) for p in thumbnails}
@@ -198,7 +208,9 @@ def _build_manifest(
         stem = Path(expected_name).stem
         clip_path = clip_file_map.get(stem)
         output_obj: Dict[str, Any] = {}
-        if clip_path:
+        if planned:
+            output_obj["video"] = expected_name
+        elif clip_path:
             output_obj["video"] = str(clip_path.relative_to(output_dir) if clip_path.is_absolute() else clip_path)
         else:
             # 即便失败也写入预期路径，便于排障
@@ -220,7 +232,7 @@ def _build_manifest(
             "end_ms": end_ms,
             "duration_ms": duration_ms,
             "output": output_obj,
-            "status": "ok" if clip_path else "failed",
+            "status": "planned" if planned else ("ok" if clip_path else "failed"),
         }
         if label_val:
             clip_entry["label"] = label_val
@@ -230,11 +242,14 @@ def _build_manifest(
 
     manifest = {
         "schema_version": SCHEMA_VERSION,
+        "stage": "build_clip_manifest",
         "units": UNITS,
         "run_id": run_dir.name,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "source_media": source_media,
+        "selected_segments_path": str(run_dir / "work" / "selected_segments.json"),
         "naming_policy": naming_policy,
+        "clip_count": len(manifest_clips),
         "clips": manifest_clips,
     }
     return manifest
@@ -320,9 +335,9 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 
     work_dir = Path(ctx.store.run_dir) / "work"
     analysis_path = work_dir / "segments.json"
-    segments_contract = _segments_to_contract(segments, policy_override=policy_in)
-    _write_json(analysis_path, segments_contract)
-    logger.info("[render_clips] write contract segments -> %s", analysis_path)
+    selected_segments_path = work_dir / "selected_segments.json"
+    clip_manifest_plan_path = work_dir / "clip_manifest.json"
+    export_summary_path = work_dir / "export_results.json"
 
     audio_source = None
     audio_env = ctx.inputs.get(ART_AUDIO_HOST)
@@ -331,19 +346,163 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
 
     def _progress(current: int, total: int, message: str = "") -> None:
         if ctx.progress:
-            ctx.progress("clip", current, total, message or "progress")
+            ctx.progress("render_clips_batch", current, total, message or "progress")
 
+    plan_segments = segments
+    plan_path = output_dir_path / "clip_plan.json"
+    if plan_path.exists():
+        try:
+            with plan_path.open("r", encoding="utf-8") as f:
+                plan_payload = json.load(f)
+            plan_segments = plan_payload.get("segments", plan_segments)
+        except Exception:
+            logger.warning("[render_clips] failed to read clip_plan.json, fallback to merged segments")
+    if not isinstance(plan_segments, list):
+        plan_segments = segments
+    plan_segments = sorted(plan_segments, key=lambda s: (-float(s.get("score", 0.0)), float(s.get("start", 0.0)), float(s.get("end", 0.0))))
+
+    segments_contract = _segments_to_contract(plan_segments, policy_override=policy_in)
     if ctx.progress:
-        ctx.progress("clip", 0, max(1, len(segments)), "start")
+        ctx.progress("select_segments", 0, 1, "start")
+    _write_json(selected_segments_path, segments_contract)
+    if ctx.progress:
+        ctx.progress("select_segments", 1, 1, "done")
+    _write_json(analysis_path, segments_contract)
+    logger.info("[render_clips] write contract segments -> %s", analysis_path)
 
-    clip_files = clip_video(
-        video_path=video_path,
-        analysis_file=str(analysis_path),
-        output_dir=str(output_dir_path),
-        progress_callback=_progress,
-        audio_source=audio_source,
+    planned_manifest = _build_manifest(
+        Path(ctx.store.run_dir),
+        output_dir_path,
+        plan_segments,
+        [],
+        [],
+        [],
+        source_media=str(video_path),
+        naming_policy=CLIP_NAMING_POLICY,
+        planned=True,
     )
-    clip_paths = [Path(p) for p in clip_files]
+    if ctx.progress:
+        ctx.progress("build_clip_manifest", 0, 1, "start")
+    _write_json(clip_manifest_plan_path, planned_manifest)
+    if ctx.progress:
+        ctx.progress("build_clip_manifest", 1, 1, "done")
+    runtime_path = init_render_runtime(
+        run_dir=ctx.store.run_dir,
+        job_id=ctx.run_id,
+        manifest_path=clip_manifest_plan_path,
+        pool="render_pool",
+        max_workers=max(1, int(ctx.params.get("render_pool_max_workers", 2) or 2)),
+    )
+    render_workers = max(1, int(ctx.params.get("render_pool_max_workers", 2) or 2))
+    if ctx.progress:
+        ctx.progress("render_clips_batch", 0, max(1, len(segments)), "start")
+
+    def _emit_render_progress(message: str) -> None:
+        if not ctx.progress:
+            return
+        runtime_payload = read_runtime(runtime_path)
+        done = int(runtime_payload.get("completed_clips", 0) or 0) + int(runtime_payload.get("failed_clips", 0) or 0)
+        ctx.progress("render_clips_batch", done, len(planned_manifest.get("clips", [])), message)
+
+    segment_by_clip_id = {
+        str(clip["clip_id"]): plan_segments[idx]
+        for idx, clip in enumerate(planned_manifest.get("clips", []))
+    }
+
+    def _render_single_clip(clip_item: Dict[str, Any]) -> str:
+        clip_id = str(clip_item["clip_id"])
+        segment = segment_by_clip_id[clip_id]
+        relative_output = str(clip_item.get("output", {}).get("video") or "")
+        output_path = output_dir_path / relative_output
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_output_path = output_path.with_name(f"{output_path.stem}.tmp{output_path.suffix}")
+        for stale in (output_path, tmp_output_path):
+            if stale.exists():
+                stale.unlink()
+        update_runtime_item(
+            runtime_path,
+            items_key="clips",
+            item_id_key="clip_id",
+            item_id=clip_id,
+            status="running",
+            worker_id="render_pool",
+        )
+        _emit_render_progress(f"{clip_id} started")
+        cut_video_ffmpeg(str(video_path), str(tmp_output_path), float(segment["start"]), float(segment["end"] - segment["start"]))
+        if tmp_output_path.exists():
+            os.replace(tmp_output_path, output_path)
+        if not output_path.exists():
+            raise RuntimeError(f"{clip_id} output missing")
+        update_runtime_item(
+            runtime_path,
+            items_key="clips",
+            item_id_key="clip_id",
+            item_id=clip_id,
+            status="succeeded",
+            worker_id="render_pool",
+            output_video=relative_output,
+        )
+        _emit_render_progress(f"{clip_id} done")
+        return str(output_path)
+
+    clip_results: dict[str, Path] = {}
+    clip_failures: list[str] = []
+    cancelled = False
+    with ThreadPoolExecutor(max_workers=render_workers, thread_name_prefix="render_pool") as executor:
+        future_to_clip = {
+            executor.submit(_render_single_clip, clip_item): clip_item
+            for clip_item in planned_manifest.get("clips", [])
+        }
+        for future in as_completed(future_to_clip):
+            clip_item = future_to_clip[future]
+            clip_id = str(clip_item["clip_id"])
+            try:
+                clip_results[clip_id] = Path(future.result())
+            except Exception as exc:
+                terminal_status = "cancelled" if "cancel" in str(exc).lower() else "failed"
+                update_runtime_item(
+                    runtime_path,
+                    items_key="clips",
+                    item_id_key="clip_id",
+                    item_id=clip_id,
+                    status=terminal_status,
+                    error_summary=str(exc),
+                )
+                _emit_render_progress(f"{clip_id} {terminal_status}")
+                if terminal_status == "cancelled":
+                    cancelled = True
+                    for pending_future in future_to_clip:
+                        if pending_future is not future:
+                            pending_future.cancel()
+                    break
+                else:
+                    clip_failures.append(f"{clip_id}: {exc}")
+
+    if cancelled:
+        for clip_item in planned_manifest.get("clips", []):
+            current_state = read_runtime(runtime_path).get("clips", [])
+            current = next((item for item in current_state if item.get("clip_id") == clip_item["clip_id"]), None)
+            if current and current.get("status") not in {"succeeded", "failed", "cancelled"}:
+                update_runtime_item(
+                    runtime_path,
+                    items_key="clips",
+                    item_id_key="clip_id",
+                    item_id=str(clip_item["clip_id"]),
+                    status="cancelled",
+                    error_summary="Job cancelled",
+                )
+        finalize_runtime(runtime_path, status="cancelled")
+        raise RuntimeError("render cancelled")
+
+    if clip_failures:
+        finalize_runtime(runtime_path, status="failed")
+        raise RuntimeError("; ".join(clip_failures))
+
+    clip_paths = [
+        clip_results[str(clip["clip_id"])]
+        for clip in planned_manifest.get("clips", [])
+        if str(clip["clip_id"]) in clip_results
+    ]
 
     subtitle_enabled, subtitle_format = _resolve_subtitle_settings(ctx)
     if subtitle_enabled:
@@ -365,7 +524,7 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
             )
 
     if ctx.progress:
-        ctx.progress("clip", len(clip_paths), max(1, len(segments)), "done")
+        ctx.progress("render_clips_batch", len(clip_paths), max(1, len(segments)), "done")
 
     subtitles: List[str] = []
     for path in output_dir_path.glob("*.srt"):
@@ -374,18 +533,6 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
     thumbnails: List[str] = []
     for path in output_dir_path.glob("*.jpg"):
         thumbnails.append(str(path))
-
-    plan_segments = segments
-    plan_path = output_dir_path / "clip_plan.json"
-    if plan_path.exists():
-        try:
-            with plan_path.open("r", encoding="utf-8") as f:
-                plan_payload = json.load(f)
-            plan_segments = plan_payload.get("segments", plan_segments)
-        except Exception:
-            logger.warning("[render_clips] failed to read clip_plan.json, fallback to merged segments")
-    if not isinstance(plan_segments, list):
-        plan_segments = segments
 
     manifest = _build_manifest(
         Path(ctx.store.run_dir),
@@ -397,10 +544,47 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         source_media=str(video_path),
         naming_policy=CLIP_NAMING_POLICY,
     )
+    for clip in manifest.get("clips", []):
+        update_runtime_item(
+            runtime_path,
+            items_key="clips",
+            item_id_key="clip_id",
+            item_id=str(clip["clip_id"]),
+            status="succeeded" if clip.get("status") == "ok" else "failed",
+            worker_id="render_pool" if clip.get("status") == "ok" else None,
+            output_video=str(clip.get("output", {}).get("video") or ""),
+            subtitle_path=clip.get("output", {}).get("subtitle"),
+            thumbnail_path=clip.get("output", {}).get("thumbnail"),
+            error_summary=None if clip.get("status") == "ok" else "clip output missing",
+        )
     manifest_path = work_dir / "clips_manifest.json"
+    if ctx.progress:
+        ctx.progress("export_results", 0, 1, "start")
     _write_json(manifest_path, manifest)
     # keep a copy next to outputs for convenience
     _write_json(output_dir_path / "clips_manifest.json", manifest)
+    export_summary = {
+        "schema_version": SCHEMA_VERSION,
+        "stage": "export_results",
+        "run_id": Path(ctx.store.run_dir).name,
+        "clip_count": len(clip_paths),
+        "planned_clip_count": len(manifest.get("clips", [])),
+        "selected_segment_count": len(segments_contract.get("segments", [])),
+        "subtitle_count": len(subtitles),
+        "thumbnail_count": len(thumbnails),
+        "clips_manifest_path": str(manifest_path),
+        "artifact_refs": {
+            "stage_plan": str(work_dir / "stage_plan.json"),
+            "audio_chunk_manifest": str(work_dir / "audio_chunk_manifest.json"),
+            "transcript_merged": str(work_dir / "transcript_merged.json"),
+            "selected_segments": str(selected_segments_path),
+            "clip_manifest": str(clip_manifest_plan_path),
+        },
+    }
+    _write_json(export_summary_path, export_summary)
+    if ctx.progress:
+        ctx.progress("export_results", 1, 1, "done")
+    finalize_runtime(runtime_path, status="succeeded")
     logger.info("[render_clips] clips=%d subtitles=%d thumbnails=%d manifest=%s", len(clip_paths), len(subtitles), len(thumbnails), manifest_path)
 
     payload = {

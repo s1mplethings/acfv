@@ -59,6 +59,47 @@ _FFMPEG_AVAILABLE_CACHE: Optional[bool] = None
 _TRANSCRIBE_PYTHON_CACHE: Optional[str] = None
 
 
+def _transcribe_runtime_path_entries(python_executable: Optional[str] = None) -> List[str]:
+    """Return DLL search paths needed by CUDA ASR backends on Windows."""
+    if os.name != "nt":
+        return []
+    if python_executable:
+        prefix = Path(python_executable).resolve().parent.parent
+    else:
+        prefix = Path(sys.prefix).resolve()
+    candidates = [
+        prefix / "Library" / "bin",
+        prefix / "bin",
+        prefix / "DLLs",
+        prefix / "Lib" / "site-packages" / "torch" / "lib",
+        prefix / "Lib" / "site-packages" / "ctranslate2",
+    ]
+    return [str(path) for path in candidates if path.exists()]
+
+
+def _prepend_env_path(env: Dict[str, str], entries: List[str]) -> None:
+    if not entries:
+        return
+    existing_parts = [part for part in env.get("PATH", "").split(os.pathsep) if part]
+    seen = {part.lower() for part in existing_parts}
+    prepend: List[str] = []
+    for entry in entries:
+        key = entry.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        prepend.append(entry)
+    if prepend:
+        env["PATH"] = os.pathsep.join(prepend + existing_parts)
+
+
+def _ensure_transcribe_runtime_path() -> None:
+    env = {"PATH": os.environ.get("PATH", "")}
+    _prepend_env_path(env, _transcribe_runtime_path_entries())
+    if env["PATH"] != os.environ.get("PATH", ""):
+        os.environ["PATH"] = env["PATH"]
+
+
 def _src_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
@@ -205,9 +246,10 @@ def _resolve_transcribe_python() -> str:
     return best_python
 
 
-def _build_transcribe_subprocess_env() -> Dict[str, str]:
+def _build_transcribe_subprocess_env(python_executable: Optional[str] = None) -> Dict[str, str]:
     env = os.environ.copy()
     env.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+    _prepend_env_path(env, _transcribe_runtime_path_entries(python_executable))
     src_root = str(_src_root())
     existing = env.get("PYTHONPATH", "").strip()
     env["PYTHONPATH"] = src_root if not existing else f"{src_root}{os.pathsep}{existing}"
@@ -624,6 +666,7 @@ class _HFWhisperAdapter:
 def _load_faster_whisper_model(model_size: str, device: Optional[str]) -> _FasterWhisperAdapter:
     if not FASTER_WHISPER_AVAILABLE:
         raise RuntimeError("faster-whisper is not installed")
+    _ensure_transcribe_runtime_path()
     desired_device = device or ("cuda" if TORCH_AVAILABLE and torch.cuda.is_available() else "cpu")
     compute_type = "float16" if desired_device.startswith("cuda") else "int8"
     log_info(f"[transcribe] loading faster-whisper model {model_size} on {desired_device} ({compute_type})")
@@ -1013,6 +1056,7 @@ def _run_transcribe_subprocess(
     payload: Dict[str, Any],
     work_dir: Path,
     progress_callback=None,
+    checkpoint_callback=None,
 ) -> Dict[str, Any]:
     work_dir.mkdir(parents=True, exist_ok=True)
     payload_path = work_dir / "transcribe_payload.json"
@@ -1032,7 +1076,7 @@ def _run_transcribe_subprocess(
         str(payload_path),
     ]
     log_info(f"[transcribe] subprocess python={python_executable}")
-    env = _build_transcribe_subprocess_env()
+    env = _build_transcribe_subprocess_env(python_executable)
     proc = subprocess.Popen(
         cmd,
         stdout=subprocess.PIPE,
@@ -1045,12 +1089,28 @@ def _run_transcribe_subprocess(
     last_checkpoint_key = ""
     last_emit_sec = 0.0
     started = time.monotonic()
+    stage_first_seen: Dict[str, float] = {}
+    model_load_timeout_sec = float(os.environ.get("ACFV_TRANSCRIBE_MODEL_LOAD_TIMEOUT_SEC", "600") or 600)
     while proc.poll() is None:
         now = time.monotonic()
         checkpoint = _read_checkpoint_payload(checkpoint_path)
         if checkpoint:
+            stage = str(checkpoint.get("stage", "")).strip()
+            if stage:
+                stage_first_seen.setdefault(stage, now)
+            if stage == "prepare_audio_done" and (now - stage_first_seen.get(stage, now)) >= model_load_timeout_sec:
+                proc.kill()
+                stdout, stderr = proc.communicate()
+                detail = (stderr or stdout or "").strip()
+                raise RuntimeError(
+                    "transcribe subprocess stalled after audio ready "
+                    f"for {int(model_load_timeout_sec)}s"
+                    + (f": {detail}" if detail else "")
+                )
             checkpoint_key = json.dumps(checkpoint, ensure_ascii=False, sort_keys=True)
             if checkpoint_key != last_checkpoint_key or (now - last_emit_sec) >= 15.0:
+                if checkpoint_callback:
+                    checkpoint_callback(checkpoint)
                 current, total, message = _progress_from_checkpoint(checkpoint)
                 if progress_callback:
                     progress_callback("transcribe", current, total, message)
@@ -1076,6 +1136,8 @@ def _run_transcribe_subprocess(
 
     checkpoint = _read_checkpoint_payload(checkpoint_path)
     if checkpoint:
+        if checkpoint_callback:
+            checkpoint_callback(checkpoint)
         current, total, message = _progress_from_checkpoint(checkpoint)
         if progress_callback:
             progress_callback("transcribe", current, total, message)
@@ -1094,11 +1156,44 @@ def _run_transcribe_subprocess(
 def _build_fallback_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
     fallback = dict(payload)
     fallback["engine"] = "openai-whisper"
-    fallback["device"] = "cpu"
+    use_cuda = bool(TORCH_AVAILABLE and torch.cuda.is_available())
+    fallback["device"] = "cuda" if use_cuda else "cpu"
     model_size = str(fallback.get("model_size") or "").lower()
     if model_size not in {"tiny", "base", "small"}:
         fallback["model_size"] = "small"
     return fallback
+
+
+def run_transcribe_subprocess_guarded(
+    payload: Dict[str, Any],
+    work_dir: Path,
+    progress_callback=None,
+    checkpoint_callback=None,
+) -> Dict[str, Any]:
+    try:
+        return _run_transcribe_subprocess(
+            payload,
+            work_dir,
+            progress_callback=progress_callback,
+            checkpoint_callback=checkpoint_callback,
+        )
+    except Exception as exc:
+        log_error(f"[transcribe] subprocess failed: {exc}")
+        if not _fallback_enabled():
+            raise
+        fallback_payload = _build_fallback_payload(payload)
+        log_warning(
+            "[transcribe] retrying with fallback engine=%s device=%s model=%s",
+            fallback_payload.get("engine"),
+            fallback_payload.get("device"),
+            fallback_payload.get("model_size"),
+        )
+        return _run_transcribe_subprocess(
+            fallback_payload,
+            work_dir,
+            progress_callback=progress_callback,
+            checkpoint_callback=checkpoint_callback,
+        )
 
 
 def _validate_language(lang: Optional[str]) -> Optional[str]:

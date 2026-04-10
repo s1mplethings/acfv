@@ -88,6 +88,8 @@ class ConfigManager:
             "WHISPER_MODEL": "large-v3-turbo",
             "WHISPER_ENGINE": "auto",
             "HF_WHISPER_MODEL": "openai/whisper-medium",
+            "gpu_asr_pool.max_workers": 1,
+            "render_pool.max_workers": 2,
             "LLM_DEVICE": 0,
             "CHAT_DENSITY_WEIGHT": 0.2,
             "CHAT_SENTIMENT_WEIGHT": 0.3,

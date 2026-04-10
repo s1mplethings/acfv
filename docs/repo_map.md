@@ -1,93 +1,259 @@
 # Repo Map (ACFV)
 
-简要索引常用目录/入口，供 AI 修改时快速定位。
+Phase 2 版本，记录当前真实结构，并标出已经落地的统一 backend 边界与显式单主线 stage source。
 
-- 根目录  
-  - `README.md`：使用说明（GUI/CLI/守护）。  
-  - `AGENTS.md`：AI 协作规则（本文件）。  
-  - `pyproject.toml`：依赖事实源（`requirements*.txt` 仅作安装入口包装）。  
-  - 其余一次性报告/迁移说明已归档到 `docs/legacy/root_cleanup/`；根目录不再放 `*_REPORT.md`、`*_PLAN.md`、日志、zip、备份等杂项。  
-- 应用代码（Python）  
-  - `src/acfv/`：核心包。  
-    - `main.py` / `launcher.py`：GUI/入口汇总。  
-    - `cli/`：命令行入口（如 `acfv.cli.pipeline`、`acfv.cli.stream_monitor`、`acfv.cli.enhance`、`acfv.cli.gui`；GUI 入口会优先尝试切换到更适合的 conda/python 环境）。  
-    - `modular/`：模块化管线插件（`plugins/`）与调度（`pipeline.py`、`contracts`）。
-      - `modular/plugins/screen_detect.py`：机械式电脑画面定位/关键帧提取，不调用 LLM。
-      - `modular/plugins/screen_understanding.py`：电脑画面理解插件，输出关键帧与 screen context timeline。
-      - `modular/plugins/llm_highlight.py`：LLM 精排插件，在规则粗召回之后输出最终高光段。
-      - `modular/plugins/semantic_merge.py`：语义合并模块（按文本相似度生成目标时长片段）。  
-      - `modular/plugins/render_clips.py`：剪辑导出，若启用 ASR 字幕则调用 `steps/subtitle_generator` 生成 `.srt`。  
-      - `modular/plugins/streamer_subtitles.py`：主播字幕导出模块。  
-    - `llm/`：统一 OpenAI 客户端封装（Responses API 优先，Chat Completions fallback，JSON 校验与重试）。
-    - `processing/`：音视频处理实现（剪辑、转写、情绪等）。  
-      - `processing/subtitle_render.py`：字幕样式/预览/烧录入口。  
-      - `processing/ffmpeg_runner.py`：统一 ffmpeg 调用封装。  
-    - `ui/tabs/subtitle_render_tab.py`：字幕预览/烧录 + 切片设置（GUI 单页合并，含候选放大倍数、本地/远端模型、兴趣 prompt）。  
-    - `steps/`：逐步实现（clip、transcribe、render 等具体 impl）。  
-      - `steps/subtitle_generator/impl.py`：按转写生成 clip 级字幕（SRT/ASS）。  
-      - `steps/subtitle_generator/streamer_subtitles.py`：仅导出主播字幕（work/subtitles_streamer.*）。  
-      - `steps/subtitle_translate/step.py`：主播字幕翻译（上下文块 + 时间轴稳定）。  
-      - `steps/screen_detect/impl.py`：定时抽帧、相似帧去重、bbox/全屏录屏启发式检测。  
-      - `steps/screen_understanding/impl.py`：稀疏抽帧、可选 OCR、VLM/启发式结构化画面理解。  
-      - `steps/llm_highlight/impl.py`：聚合 transcript/chat/screen/emotion 后，默认先走本地 Ollama 蒸馏，再调用统一 LLM/API 做高光精排。  
-      - `steps/transcribe_audio/impl.py`：ASR 转写与切分；运行时会写入 `var/processing/working/transcribe_diagnostic.jsonl` 和 `transcribe_checkpoint.json` 供排障；支持子进程保护（`ACFV_TRANSCRIBE_GUARD=1`，可回退到 CPU）。  
-    - `selection/`：高光段筛选与合并。  
-    - `runtime/`：运行期配置、守护逻辑。  
-    - `utils/`：日志、安全工具等。  
-    - `enhance/`：**新增** 成片增强模块（ASR/Subtitle FX/ROI/Policy/RAG/Render）。  
-      - `rag/ai_skeleton.py`：**AI骨架** 智能推荐生成框架（自动库检查、多后端支持）。  
-      - `rag/__init__.py`：AI骨架导出接口。  
-    - `audio_routing/`：**新增** 音频分流和标注转录模块（Step1-7完整流程）。
-      - `pipeline.py`：音频分流管道编排器。
-      - `schemas.py`：数据结构定义（VAD/Diarization/LabeledSegment等）。
-      - `step1_extract.py` ~ `step7_game_non_speech.py`：7个处理步骤实现。
-- 测试与校验  
-  - `tests/`：测试（若存在）。  
-  - `tools/contract_selftest.py`：轻量契约自检。  
-  - `tools/selftest_cli.py`：输入驱动的 Adapter/Oracle 自测入口。  
-  - `selftest/`：自测框架（adapters/oracles/cases/goldens）。  
-  - `scripts/verify.sh` / `scripts/verify.ps1`：统一验收入口（compile → pytest → contract checks）。  
-  - `scripts/start_gpu_gui.ps1`：Windows 下固定用指定 conda Python 启动 GUI，并预设 `ACFV_GUI_PREFERRED_PYTHON` / `ACFV_TRANSCRIBE_PYTHON` 指向 GPU 环境。  
-  - `scripts/contract_checks.py`：契约质量门。  
-- 规格与文档  
-  - `docs/`：工作流、质量门、架构等说明。  
-    - `docs/legacy/root_cleanup/`：从根目录归档的一次性报告、迁移说明与备份，避免污染入口层。  
-    - `docs/patch_guides/`：Patch 指导文件（面向可回滚改动的执行清单）。  
-      - `docs/patch_guides/streamer_subtitles_export.md`：Streamer-only 字幕导出 patch 指南。  
-      - `docs/patch_guides/PATCH-02_gui_subtitle_render_preview_and_clip_page.md`：字幕预览/烧录 + 切片设置页 patch 指南。  
-  - `specs/`：模块 spec 与输出契约 schema（含 `enhance/` 子模块）。  
-  - `assets/subtitle_styles/presets.json`：字幕样式预设。  
-  - `ai_context/`：task card、decision/problem 记录模板。  
-- 配置与样例  
-  - `config.txt`、`.env.example`、`var/settings/*.yaml`（运行配置）。  
-  - `secrets/`：凭证模板（已忽略真实内容）。  
-  - 关键配置：`WHISPER_ENGINE`（auto/openai-whisper/faster-whisper/hf-whisper）、`HF_WHISPER_MODEL`（默认 `openai/whisper-medium`）。  
-  - GUI 入口：主窗口“设置”对话框和“字幕预览/渲染 + 切片设置”页都能调 `MAX_CLIP_COUNT`、`LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER`、`LLM_LOCAL_MODEL`、`LLM_HIGHLIGHT_MODEL`、`LLM_VISION_MODEL`、`LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT`。  
-- 运行输出（应忽略提交）  
-  - `var/`、`runs/`、`clips/`、`logs/`、`dist/`：落盘输出、日志、构建结果；保持在 `.gitignore` 中。  
-  - `var/problem_registry.jsonl`：selftest 失败记录（JSONL）。  
-  - `var/processing/working/transcribe_diagnostic.jsonl`：转写诊断日志（默认启用，可用 `ACFV_TRANSCRIBE_DIAGNOSTIC=0` 关闭）。  
-  - `var/processing/working/transcribe_checkpoint.json`：转写最后进度快照（按关键阶段或时间间隔写入，可用 `ACFV_TRANSCRIBE_CHECKPOINT_INTERVAL_SEC` 调整）。  
-  - `var/processing/working/transcribe_payload.json`：转写子进程输入载荷（用于保护模式）。  
+## 1. Entry Points
+- `acfv` console script -> `src/acfv/cli/_entry.py` -> `src/acfv/cli/__main__.py`
+- CLI clip 入口 -> `src/acfv/cli/pipeline.py`
+  - `clip(...)` 支持 `--dry-run-plan` 输出统一 stage plan
+  - 实际执行进入 `src/acfv/backend/service.py`
+  - 再到 `src/acfv/pipeline/orchestrator.py::run_clip_pipeline`
+  - 最后调用 `src/acfv/modular/pipeline.py::run_pipeline`
+- GUI 入口 -> `src/acfv/cli/gui.py` / `src/acfv/gui.py`
+  - `_launch()` -> `src/acfv/app/gui.py::launch_gui`
+  - `launch_gui()` -> `src/acfv/app/interest_adapter.py::create_interest_main_window`
+  - 当前实际主窗口仍是 `src/acfv/main_window.py::MainWindow`
+- Stream monitor 入口
+  - CLI: `src/acfv/cli/stream_monitor.py`
+  - GUI: `src/acfv/cli/stream_monitor_ui.py` / `src/acfv/ui/stream_monitor_editor.py`
 
-验收入口（默认）  
-```bash
-# Linux/macOS
-bash scripts/verify.sh
+## 2. Current Layer Map
 
-# Windows
-powershell -ExecutionPolicy Bypass -File scripts/verify.ps1
-```
+### GUI / UI
+- `src/acfv/main_window.py`
+  - 当前主 GUI 容器，负责标签页、状态栏、错误弹窗、进度组件、部分线程清理
+- `src/acfv/ui/`
+  - 标签页与 GUI 组件
+  - `tabs/` 下包含本地视频、Twitch、字幕渲染、RAG 偏好等页面
+- `src/acfv/features/modules/`
+  - GUI 辅助组件、进度 UI、缩略图加载、旧 backend 工具
+- `src/acfv/steps/local_video_manager/impl.py`
+  - 当前 GUI 本地视频处理的关键桥接层
+  - 现在只在 `ThreadSafeWorker` 中做轻量 job 提交准备
+  - 通过 `GuiJobController` 轮询 `backend.service` 的 job state 与 runtime state
+  - 负责把 backend/job/runtime 摘要映射回 GUI 进度、错误与结果入口
+- `src/acfv/app/gui_job_controller.py`
+  - Phase 4 新增的 GUI 薄控制层
+  - 统一读取 `backend.service.create_job/get_job_status/cancel_job/get_logs/get_runtime_state`
+  - 为 GUI 提供当前 job、runtime 摘要、错误摘要、结果目录入口
 
-CLI 快速入口（当前）  
-```bash
-python -m acfv.cli --help
-python -m acfv.cli pipe clip --help
-python -m acfv.cli gui --help
-```
+### Backend / Pipeline Core
+- `src/acfv/backend/`
+  - Phase 1 新增的统一 backend 边界。
+  - `service.py`：提供 `create_job`、`get_job_status`、`cancel_job`、`list_artifacts`、`get_logs`、`wait_for_job`。
+  - `job_manager.py`：统一管理 job 创建、后台执行、状态流转与取消请求。
+  - `job_state.py`：定义 job 状态、阶段、进度摘要、错误摘要、artifact 引用。
+- `src/acfv/pipeline/`
+  - Phase 2 新增的单主线薄层。
+  - `stages.py`：唯一 stage source，定义固定主线、stage 名称、输入/输出、optional 标记与 legacy/raw stage 映射。
+  - `orchestrator.py`：统一 clip 主线入口，负责 `ingest_video` 与 `stage_plan.json` 落盘，再调用 `modular.pipeline`。
+  - `contracts.py`：Phase 2 hardening 新增的 contract 校验器，用于验证 6 个主线 artifact 的存在性和前后对齐关系。
+  - `runtime.py`：Phase 3 新增的 runtime state 写盘工具；负责 `work/runtime/*.json` 的原子写盘与阶段内 dispatcher 状态更新，不改 contract artifact 语义。
+- `src/acfv/modular/`
+  - 当前正式的模块化 pipeline 核心
+  - `pipeline.py`: 组装 registry / store / progress emitter，并执行 end-to-end run
+  - `runner.py`: 依据 artifact 依赖执行 module plan
+  - `planner.py`: 根据 goal artifact 和可用 artifact 推导执行计划
+  - `store.py`: `run_dir/artifacts/` artifact store，维护 `index.json` 与 `producer_index.json`
+  - `progress.py`: 把阶段进度写成 `Progress:stage.v1` artifact
+  - `contracts.py`: artifact type 常量
+- `src/acfv/modular/plugins/`
+  - 现有 step/plugin 注册点
+  - 当前 clip 主线涉及：`extract_audio`、`transcribe_audio`、`video_emotion`、`speaker_separation`、`analyze_segments`、`semantic_merge`、`llm_highlight`、`render_clips`
+  - 可选屏幕语义相关插件：`screen_detect`、`screen_understanding`
+  - 字幕相关插件：`streamer_subtitles`、`subtitle_translate`
 
-如需仅做轻量检查，可运行：
-```bash
-python -m compileall -q src
-python tools/contract_selftest.py
-```
+### Step Implementations
+- `src/acfv/steps/`
+  - 每个 plugin 的具体实现
+  - 典型文件：
+    - `steps/transcribe_audio/impl.py`
+    - `steps/render_clips/impl.py`
+    - `steps/llm_highlight/impl.py`
+    - `steps/screen_detect/impl.py`
+    - `steps/screen_understanding/impl.py`
+- `src/acfv/selection/`
+  - 片段合并 / 选段契约实现
+
+### Legacy / Transitional Paths
+- `src/acfv/features/modules/pipeline_backend.py`
+  - 仍保留旧模块名，但 `run_pipeline(...)` 已在 Phase 1 降为兼容转发壳。
+  - 核心执行统一转发到 `acfv.backend.service`，避免新旧 backend 双轨。
+  - `generate_content_indexes(...)` 等辅助函数仍保留在该模块。
+- `src/acfv/interest/`
+  - 当前基本是兼容导出层
+  - `interest/main_window.py` 直接转发到 `acfv.main_window.MainWindow`
+  - `interest/modules/pipeline_backend.py` 转发到旧 `features.modules.pipeline_backend`
+
+## 3. Current Dependency Direction
+- GUI 本地视频处理:
+  - `MainWindow`
+  - -> `LocalVideoManager`
+  - -> `GuiJobController`
+  - -> `backend.service.create_job / get_job_status / cancel_job / get_runtime_state / get_logs`
+  - -> `pipeline.orchestrator.run_clip_pipeline`
+  - -> `modular.pipeline.run_pipeline`
+  - -> `modular.plugins.*`
+  - -> `steps/*`
+- CLI clip:
+  - `acfv.cli.pipeline`
+  - -> `backend.service.create_job / wait_for_job`
+  - -> `pipeline.orchestrator.run_clip_pipeline`
+  - -> `modular.pipeline.run_pipeline`
+  - -> `modular.plugins.*`
+  - -> `steps/*`
+- 现状结论:
+  - GUI 和 CLI 已开始共享 `modular.pipeline`
+  - Phase 1 起二者已统一通过 `backend.service` 发起和管理 job
+  - job 创建、状态查询、取消、日志和 artifact 列表现在有统一边界
+
+## 4. Current Workflow Shape
+- CLI 与 GUI 当前主线都显式收敛到 `run_clip_pipeline(...)`
+- GUI 当前主线是:
+  - 用户选择本地视频
+  - `LocalVideoManager` 创建 `clips/<video>/runs/run_xxx`
+  - 后台 `ThreadSafeWorker` 只提交 job，不等待主线执行
+  - `GuiJobController` 定时轮询 job state 与 `work/runtime/*.json`
+  - GUI 直接显示 canonical stage、错误摘要、runtime 摘要与结果目录入口
+- `pipeline/stages.py` 当前固定主线：
+  - `ingest_video`
+  - `extract_audio`
+  - `build_audio_chunk_manifest`
+  - `transcribe_chunks`
+  - `merge_transcript`
+  - `optional_analysis`
+  - `select_segments`
+  - `build_clip_manifest`
+  - `render_clips_batch`
+  - `export_results`
+- `modular.pipeline` 当前 goal 是 `ART_CLIPS`
+  - 起始 artifact: `ART_VIDEO`，可选 `ART_CHAT_SOURCE`
+  - Stage 与现有 module 的映射:
+    - `extract_audio` -> `extract_audio`
+    - `build_audio_chunk_manifest` + `transcribe_chunks` + `merge_transcript` -> `transcribe_audio`
+    - `optional_analysis` -> `screen_detect` / `screen_understanding` / `video_emotion` / `speaker_separation` / `streamer_subtitles` / `subtitle_translate` / `analyze_segments` / `semantic_merge` / `llm_highlight`
+    - `select_segments` + `build_clip_manifest` + `render_clips_batch` + `export_results` -> `render_clips`
+- 当前问题:
+  - `audio_chunk_manifest` 与 `clip_manifest` 已固定为 plan input，但复杂 retry、更强取消、多 GPU ASR 仍未进入本轮
+  - GUI 仍保留兼容适配层，但主线已不再由 GUI 自己等待或猜阶段
+
+## 5. Config Entry Points
+- 事实源:
+  - `pyproject.toml`
+- 运行配置:
+  - `src/acfv/config/config.py::ConfigManager`
+  - `src/acfv/configs/settings.py`
+  - `src/acfv/config/default.yaml`
+  - `config.txt`
+  - `var/settings/*.yaml`
+- CLI clip:
+  - `--cfg` YAML 经 `src/acfv/cli/pipeline.py::_YamlConfigAdapter` 注入 `modular.pipeline`
+- GUI:
+  - 主要通过 `ConfigManager` 读写，并传入 `LocalVideoManager` / `MainWindow`
+
+## 6. Output / Artifact Paths
+- 稳定运行目录:
+  - `var/processing/`
+  - `var/logs/`
+  - `var/settings/`
+  - `var/tools/`
+- CLI 默认输出:
+  - `runs/out/run_<timestamp>/`
+- GUI 本地视频输出:
+  - `clips/<video_slug>/runs/run_<nnn>/`
+- modular run 目录内部:
+  - `artifacts/`
+  - `index.json`
+  - `producer_index.json`
+  - `work/stage_plan.json`
+  - `work/audio_chunk_manifest.json`
+  - `work/transcription.json`
+  - `work/transcript_merged.json`
+  - `work/segments.json`
+  - `work/selected_segments.json`
+  - `work/clip_manifest.json`
+  - `work/clips_manifest.json`
+  - `work/export_results.json`
+  - `work/runtime/transcribe_runtime.json`
+  - `work/runtime/render_runtime.json`
+- 兼容输出:
+  - `clips_manifest.json` 也会复制到 run 根目录，方便 GUI / 用户浏览
+
+## 7. Thread / Worker Hotspots
+- `src/acfv/main_window.py`
+  - `SimpleWorker`
+  - `VideoProcessWorker`
+  - `DownloadWorker`
+  - `ProgressUpdateWorker` 的生命周期管理
+- `src/acfv/features/modules/ui_components.py`
+  - 通用 `Worker`
+  - 缩略图加载 QThread
+- `src/acfv/steps/local_video_manager/impl.py`
+  - `ThreadSafeWorker`
+  - GUI 当前真正的 pipeline 后台执行点
+- `src/acfv/ui/stream_monitor_worker.py`
+  - 独立 stream monitor worker
+- `src/acfv/steps/twitch_downloader/impl.py`
+  - 下载 / 拉取 VOD 列表相关 worker
+
+## 8. Current GUI / Backend / Modular Relation
+- 当前关系
+  - GUI 负责输入、状态显示、错误弹窗、日志入口与结果目录入口
+  - `LocalVideoManager` 当前作为 GUI 兼容适配层，调用 `GuiJobController`
+  - `GuiJobController` 再统一读取 `backend.service`
+  - `modular.pipeline` 负责 plugin 编排、artifact store、contract output
+  - 旧 `features.modules.pipeline_backend` 只保留兼容入口，不再拥有独立 job backend 主路径
+- 目标关系
+  - GUI 只保留输入、任务提交、进度展示、错误展示、结果打开
+  - backend service 统一提供 `create_job/get_job_status/cancel_job/list_artifacts/get_logs/get_runtime_state`
+  - orchestrator 显式维护长视频单主线
+  - worker/executor 层负责阶段内并发与资源池
+
+## 9. Phase 2 Summary
+- 已共享:
+  - GUI 本地视频主处理路径与 CLI `pipe clip` 都能走 `modular.pipeline`
+  - GUI / CLI / legacy compat path 都通过 `backend.service` 管理 job
+- 已显式化:
+  - clip pipeline 固定主线与 stage vocabulary 统一来自 `src/acfv/pipeline/stages.py`
+  - `job_state.current_stage` 通过同一份 stage 映射反映当前主线阶段
+  - `stage_plan.json`、`audio_chunk_manifest.json`、`transcript_merged.json`、`selected_segments.json`、`clip_manifest.json`、`export_results.json` 已纳入主线摘要产物
+- 已新增执行态:
+  - `audio_chunk_manifest.json` 作为 `transcribe_chunks` plan input
+  - `clip_manifest.json` 作为 `render_clips_batch` plan input
+  - 运行态单独写入 `work/runtime/*.json`
+- 已落地的阶段内执行器:
+  - `transcribe_audio` 现在按 chunk 读取 `audio_chunk_manifest.json` 并用 `gpu_asr_pool` dispatcher 执行
+  - `render_clips` 现在按 clip 读取 `clip_manifest.json` 并用 `render_pool` dispatcher 执行
+  - 配置项统一走现有配置体系：
+    - `gpu_asr_pool.max_workers`
+    - `render_pool.max_workers`
+- 本阶段未解决:
+  - 复杂 retry
+  - 更强取消
+  - 多 GPU ASR 扩展
+- Phase 4 GUI 已落地:
+  - GUI 当前阶段显示直接来自 `job_state.current_stage`
+  - GUI 当前任务摘要直接来自 `backend.service.get_job_status(...)`
+  - GUI 细粒度摘要直接来自 `backend.service.get_runtime_state(...)`
+  - GUI 通过按钮提供取消、查看日志、打开结果目录
+- 后续改造原则:
+  - 保留现有入口
+  - 不删兼容层
+  - 继续在已显式化主线上补阶段内并发，而不是另起一套新 pipeline
+
+## 10. Phase 5 Regression Closure
+- 已回归确认:
+  - GUI / CLI / legacy compat 都继续经由 `backend.service`
+  - canonical 10-stage 主线、`orchestrator.py`、contract artifact 语义未被回归破坏
+  - `audio_chunk_manifest.json` / `clip_manifest.json` 仍保持 plan input 身份
+  - `work/runtime/transcribe_runtime.json` / `work/runtime/render_runtime.json` 仍保持独立执行态
+- 已验证入口:
+  - `python -m acfv.cli --help`
+  - `python -m acfv.cli gui --help`
+  - `python -m acfv.cli pipe clip --help`
+  - `python -m acfv.cli pipe clip --url demo --dry-run-plan`
+- 仍保留的限制:
+  - `cancel_job(...)` 仍是 best-effort
+  - `attempt` 仅为预留字段，未实现复杂 retry
+  - `io_pool` / `cpu_pool` 仍是边界约束而非完整执行器
+  - GUI 的 chunk / clip 展示仍以摘要为主

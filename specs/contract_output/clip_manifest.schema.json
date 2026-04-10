@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acfv/clip_manifest.schema.json",
+  "title": "ACFV Clip Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stage",
+    "units",
+    "run_id",
+    "source_media",
+    "selected_segments_path",
+    "naming_policy",
+    "clip_count",
+    "clips"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "const": "build_clip_manifest"
+    },
+    "units": {
+      "const": "ms"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_media": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selected_segments_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "naming_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clip_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "clip_id",
+          "rank",
+          "score",
+          "start_ms",
+          "end_ms",
+          "duration_ms",
+          "output",
+          "status"
+        ],
+        "properties": {
+          "clip_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "score": {
+            "type": "number"
+          },
+          "start_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "duration_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "ok",
+              "failed"
+            ]
+          },
+          "output": {
+            "type": "object",
+            "required": [
+              "video"
+            ],
+            "properties": {
+              "video": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "thumbnail": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

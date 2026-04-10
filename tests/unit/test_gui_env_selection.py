@@ -45,3 +45,31 @@ def test_pick_better_python_prefers_cuda_and_faster_whisper(monkeypatch):
 
     monkeypatch.setattr(gui, "_probe_python_env", _fake_probe)
     assert gui._pick_better_python(current_python, current_info) == clip_python
+
+
+def test_gui_launch_disables_start_in_tray(monkeypatch):
+    monkeypatch.delenv(gui._DISABLE_START_IN_TRAY, raising=False)
+    monkeypatch.setattr(gui, "_maybe_relaunch_in_better_env", lambda: False)
+
+    called = {}
+
+    def _fake_launch_gui():
+        called["launched"] = True
+
+    import builtins
+
+    real_import = builtins.__import__
+
+    def _fake_import(name, globals=None, locals=None, fromlist=(), level=0):
+        if name == "acfv.app.gui":
+            class _Module:
+                launch_gui = staticmethod(_fake_launch_gui)
+            return _Module()
+        return real_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", _fake_import)
+
+    gui._launch()
+
+    assert called["launched"] is True
+    assert gui.os.environ[gui._DISABLE_START_IN_TRAY] == "1"

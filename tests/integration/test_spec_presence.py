@@ -20,6 +20,22 @@ def test_clip_pipeline_failure_paths_documented():
     assert "非零" in spec or "返回码" in spec, "failure should return non-zero"
 
 
+def test_unified_pipeline_contracts_documented():
+    spec = _read("specs/modules/unified_pipeline/spec.md")
+    contract_out = _read("specs/modules/unified_pipeline/contract_output.md")
+    for key in ["build_audio_chunk_manifest", "optional_analysis", "build_clip_manifest", "best-effort"]:
+        assert key in spec or key in contract_out, f"{key} must be documented for unified_pipeline"
+    for key in [
+        "audio_chunk_manifest.json",
+        "transcript_merged.json",
+        "selected_segments.json",
+        "clip_manifest.json",
+        "export_results.json",
+        "Cancellation Note",
+    ]:
+        assert key in contract_out, f"{key} must be in unified_pipeline output contract"
+
+
 def test_stream_monitor_inputs_outputs():
     text_in = _read("specs/modules/stream_monitor/contract_input.md")
     text_out = _read("specs/modules/stream_monitor/contract_output.md")

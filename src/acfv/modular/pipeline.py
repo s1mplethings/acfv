@@ -175,6 +175,10 @@ def run_pipeline(
             "whisper_engine": str(config_manager.get("WHISPER_ENGINE") if config_manager else "auto"),
             "hf_whisper_model": str(config_manager.get("HF_WHISPER_MODEL") if config_manager else "openai/whisper-medium"),
             "language": language,
+            "gpu_asr_pool_max_workers": _get_int(
+                config_manager.get("gpu_asr_pool.max_workers") if config_manager else None,
+                1,
+            ),
         },
         "video_emotion": {
             "enabled": _get_bool(config_manager.get("ENABLE_VIDEO_EMOTION") if config_manager else None, False),
@@ -237,6 +241,10 @@ def run_pipeline(
             "output_dir": output_clips_dir,
             "subtitle_enabled": subtitle_enabled,
             "subtitle_format": str(config_manager.get("SUBTITLE_FORMAT") if config_manager else "srt") or "srt",
+            "render_pool_max_workers": _get_int(
+                config_manager.get("render_pool.max_workers") if config_manager else None,
+                2,
+            ),
         },
         "llm_highlight": {
             "enabled": _get_bool(config_manager.get("ENABLE_LLM_HIGHLIGHT") if config_manager else None, False),
@@ -289,6 +297,12 @@ def run_pipeline(
 
     work_dir = Path(run_dir) / "work"
     segments_path = work_dir / "segments.json"
+    stage_plan_path = work_dir / "stage_plan.json"
+    audio_chunk_manifest_path = work_dir / "audio_chunk_manifest.json"
+    merged_transcript_path = work_dir / "transcript_merged.json"
+    selected_segments_path = work_dir / "selected_segments.json"
+    clip_manifest_plan_path = work_dir / "clip_manifest.json"
+    export_summary_path = work_dir / "export_results.json"
     chat_json_path = work_dir / "chat.json"
     manifest_json_path = work_dir / "clips_manifest.json"
     if not manifest_path and manifest_json_path.exists():
@@ -304,9 +318,15 @@ def run_pipeline(
         "schema_version": "1.0.0",
         "clips": [str(c) for c in clips_list],
         "subtitles": [str(s) for s in subtitles],
+        "stage_plan_json": str(stage_plan_path) if stage_plan_path.exists() else None,
+        "audio_chunk_manifest_json": str(audio_chunk_manifest_path) if audio_chunk_manifest_path.exists() else None,
+        "transcript_merged_json": str(merged_transcript_path) if merged_transcript_path.exists() else None,
         "segments_json": str(segments_path) if segments_path.exists() else None,
+        "selected_segments_json": str(selected_segments_path) if selected_segments_path.exists() else None,
+        "clip_manifest_json": str(clip_manifest_plan_path) if clip_manifest_plan_path.exists() else None,
         "chat_json": str(chat_json_path) if chat_json_path.exists() else None,
         "clips_manifest_json": str(manifest_path) if manifest_path else None,
+        "export_results_json": str(export_summary_path) if export_summary_path.exists() else None,
         "thumbnails": [str(t) for t in thumbnails],
         "logs": [],
         "run_dir": str(run_dir),

@@ -58,6 +58,38 @@ def test_process_audio_segments_fallback_path(monkeypatch, tmp_path: Path):
     assert calls["count"] == 2
 
 
+def test_run_transcribe_subprocess_guarded_retries_with_cuda_openai_whisper(monkeypatch, tmp_path: Path):
+    calls = {"count": 0}
+    payloads: list[dict] = []
+
+    def fake_run(payload, work_dir, progress_callback=None, checkpoint_callback=None):
+        payloads.append(dict(payload))
+        calls["count"] += 1
+        if calls["count"] == 1:
+            raise RuntimeError("Could not locate cudnn_ops_infer64_8.dll")
+        return {"segments": [{"start": 0.0, "end": 1.0, "text": "ok"}], "engine": payload["engine"], "language": "en"}
+
+    monkeypatch.setattr(impl, "_run_transcribe_subprocess", fake_run)
+    monkeypatch.setattr(impl, "_fallback_enabled", lambda: True)
+    monkeypatch.setattr(impl, "TORCH_AVAILABLE", True)
+    monkeypatch.setattr(
+        impl,
+        "torch",
+        SimpleNamespace(cuda=SimpleNamespace(is_available=lambda: True)),
+        raising=False,
+    )
+
+    result = impl.run_transcribe_subprocess_guarded(
+        {"engine": "faster-whisper", "device": "cuda", "model_size": "large-v3-turbo"},
+        tmp_path,
+    )
+
+    assert calls["count"] == 2
+    assert result["engine"] == "openai-whisper"
+    assert payloads[1]["device"] == "cuda"
+    assert payloads[1]["model_size"] == "small"
+
+
 def test_resolve_transcribe_python_prefers_better_env(monkeypatch):
     monkeypatch.setattr(impl, "_TRANSCRIBE_PYTHON_CACHE", None)
     monkeypatch.setattr(impl.sys, "executable", r"D:\anaconda\python.exe")
@@ -93,3 +125,24 @@ def test_build_transcribe_subprocess_env_prepends_src_root(monkeypatch):
 
     assert env["PYTHONPATH"] == r"E:\Cliper\acfv\src" + impl.os.pathsep + r"C:\existing"
     assert env["KMP_DUPLICATE_LIB_OK"] == "TRUE"
+
+
+def test_build_transcribe_subprocess_env_prepends_selected_env_dll_paths(monkeypatch):
+    monkeypatch.setattr(impl, "_src_root", lambda: Path(r"E:\Cliper\acfv\src"))
+    monkeypatch.setattr(
+        impl,
+        "_transcribe_runtime_path_entries",
+        lambda python_executable=None: [
+            r"D:\anaconda\envs\clip\Library\bin",
+            r"D:\anaconda\envs\clip\Lib\site-packages\torch\lib",
+        ],
+    )
+    monkeypatch.setenv("PATH", r"D:\anaconda;C:\Windows")
+
+    env = impl._build_transcribe_subprocess_env(r"D:\anaconda\envs\clip\python.exe")
+
+    path_parts = env["PATH"].split(impl.os.pathsep)
+    assert path_parts[:2] == [
+        r"D:\anaconda\envs\clip\Library\bin",
+        r"D:\anaconda\envs\clip\Lib\site-packages\torch\lib",
+    ]

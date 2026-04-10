@@ -2478,6 +2478,44 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
     return output_clips_dir, clip_files, has_chat
 
 
+_legacy_run_pipeline_impl = run_pipeline
+
+
+def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_output,
+                 video_emotion_output, analysis_output, output_clips_dir,
+                 video_clips_dir, progress_callback=None):
+    """Deprecated compatibility wrapper.
+
+    Keep the legacy import path available, but route execution through the
+    unified backend service so the repository no longer owns two job backends.
+    """
+    from datetime import datetime
+    from acfv.backend import service as backend_service
+
+    log_warning("[pipeline_backend] deprecated path, forwarding to acfv.backend.service")
+
+    requested_run_dir = output_clips_dir or video_clips_dir
+    if not requested_run_dir:
+        requested_run_dir = str(Path("runs") / "out" / datetime.now().strftime("run_%Y%m%d_%H%M%S"))
+    run_dir = Path(str(requested_run_dir))
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    job = backend_service.create_job(
+        video_path=video,
+        chat_path=chat if has_chat else None,
+        config_manager=cfg_manager,
+        run_dir=run_dir,
+        output_clips_dir=str(run_dir),
+        metadata={"source": "legacy", "entrypoint": "features.modules.pipeline_backend.run_pipeline"},
+        progress_callback=progress_callback,
+    )
+    final_status = backend_service.wait_for_job(job["job_id"])
+    if final_status.get("status") != "succeeded":
+        return None, None, False
+    result = final_status.get("result") or {}
+    return str(run_dir), list(result.get("clips", [])), bool(chat and has_chat)
+
+
 def generate_content_indexes(cfg_manager):
     """Generate semantic indexes for rated clips.
     使用切片文本与评分构建RAG索引，优先使用最近一次运行（runs/latest）。

@@ -1141,6 +1141,15 @@ class MainWindow(QMainWindow):
     def start_processing_progress(self, video_duration: float = 0, file_size: float = 0):
         """开始处理进度显示"""
         try:
+            if self.progress_worker and self.progress_worker.isRunning():
+                if video_duration or file_size:
+                    try:
+                        self.progress_manager._update_estimates(video_duration, file_size)
+                    except Exception:
+                        pass
+                log_info("进度显示系统已在运行，跳过重复启动")
+                return
+
             # 初始化进度管理器
             self.progress_manager.start_processing(video_duration, file_size)
             
@@ -1554,11 +1563,6 @@ class MainWindow(QMainWindow):
     def process_selected_video(self):
         """处理选中的视频 - 后台线程版本"""
         if self.local_manager:
-            # 获取选中的视频路径
-            video_path = self._get_selected_video_path()
-            
-            # 启动智能进度预测
-            self.start_smart_progress(video_path)
             # 在后台线程中处理视频
             self.local_manager.process_selected_video_background()
         else:

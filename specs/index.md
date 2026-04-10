@@ -3,6 +3,8 @@
 > 模块 specs 与 input/output 契约的索引（SDDAI / ACFV）
 
 ## 模块 specs
+- `specs/modules/unified_pipeline/spec.md`：本轮改造顶层 spec（单主线 pipeline + GUI/backend 分离 + 阶段内并发）
+- `specs/modules/unified_pipeline/contract_output.md`：Phase 2 hardening 后的主线 contract 输出、stage->plugin 映射与取消边界
 - `specs/modules/analyze_segments/spec.md`：分段/评分/选段（切片）规则（边界/排序/空输入策略）
 - `specs/modules/semantic_merge/spec.md`：语义合并（文本相似度拼接为目标时长片段）
 - `specs/modules/screen_detect/spec.md`：机械式电脑画面检测（关键帧、bbox、窗口）
@@ -14,6 +16,8 @@
 - `specs/modules/subtitle_translate/spec.md`：字幕翻译（上下文块 + 时间轴稳定）
 
 ## 输出契约（contract_output）
+- `specs/contract_output/audio_chunk_manifest.schema.json`：音频 chunk manifest JSON Schema
+- `specs/contract_output/clip_manifest.schema.json`：clip manifest JSON Schema
 - `specs/contract_output/segments.schema.json`：候选段列表（segments）JSON Schema
 - `specs/contract_output/clips_manifest.schema.json`：剪辑清单（manifest）JSON Schema
 

@@ -14,6 +14,7 @@ from rich import print
 gui_app = typer.Typer(no_args_is_help=False, invoke_without_command=True)
 _RELAUNCH_GUARD = "ACFV_SKIP_ENV_RELAUNCH"
 _PREFERRED_PYTHON_ENV = "ACFV_GUI_PREFERRED_PYTHON"
+_DISABLE_START_IN_TRAY = "ACFV_DISABLE_START_IN_TRAY"
 
 
 @gui_app.callback()
@@ -177,6 +178,7 @@ def _maybe_relaunch_in_better_env() -> bool:
 
     env = os.environ.copy()
     env[_RELAUNCH_GUARD] = "1"
+    env[_DISABLE_START_IN_TRAY] = "1"
     env.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
     src_root = str(_src_root())
     existing = env.get("PYTHONPATH", "").strip()
@@ -192,6 +194,7 @@ def _maybe_relaunch_in_better_env() -> bool:
 
 
 def _launch():
+    os.environ.setdefault(_DISABLE_START_IN_TRAY, "1")
     if _maybe_relaunch_in_better_env():
         raise typer.Exit(code=0)
     try:
@@ -207,6 +210,7 @@ __all__ = [
     "gui_app",
     "_candidate_python_paths",
     "_derive_conda_root",
+    "_DISABLE_START_IN_TRAY",
     "_env_score",
     "_pick_better_python",
 ]

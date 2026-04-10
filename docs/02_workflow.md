@@ -1,95 +1,290 @@
-# 工作流（Spec-first，端到端，含现成实现选型）
+# 工作流
 
-## 阶段总览（输入/输出/首选实现）
-1) **入口（GUI / CLI / 守护）**  
-   - 输入：CLI 参数或 GUI 表单（URL/本地路径/out-dir/cfg），守护配置 `var/settings/stream_monitor.yaml`。  
-   - 输出：启动命令、参数解析结果，写入日志；必须校验路径可写/令牌存在。  
-   - 日志与可观测性：无论 GUI 还是 CLI，所有用户可见进度/结果必须镜像到终端 stdout（便于采集），同时写入结构化日志（JSONL）。  
-   - 建议：CLI 解析用 `typer`/`click`，配置落盘 `config.txt`，日志用 `structlog`；GUI 事件同样调用同一 logging pipeline（避免“GUI-only”消息）。
-2) **Ingest（下载 / 本地定位 / 录制）**  
-   - 目标：把远端/直播流变成本地可复现的媒体 + 弹幕/聊天原始数据。  
-   - 首选实现：  
-     - VOD/点播：`yt-dlp >=2025.11.12`（修复 YouTube 403；需外部 JS runtime，如 Deno；Python ≥3.10）。  
-     - 直播拉流：`streamlink >=8.0.0`（2025-11-11 发布，Kick/Twitch 支持；低延迟可用 `--twitch-low-latency`）。  
-     - Twitch API：Helix `clips` 下载；Highlights/Uploads 自 2025-04-19 起总容量限 100 小时，需本地归档。  
-   - 输入：URL 列表、凭证（OAuth token）、输出目录。  
-   - 输出：本地媒体文件（`processing/` 或指定目录）、chat JSON（若平台可抓取）、原始清单。  
-   - 契约：长路径处理、重试策略（指数退避）、断点续传、鉴权失败回退（提示 scope 或 cookie）。  
-3) **预处理（抽取 / 重采样 / 探测）**  
-   - 目标：产出统一格式音频 + 元数据。  
-   - 首选实现：`ffmpeg 7.1.3`（2025-11-21 最新稳定，7.1 LTS 分支；避免 7.0 API 变更）。  
-   - 输入：媒体文件路径。  
-   - 处理：转 WAV PCM 16kHz mono（或配置），可选 VAD 先切音频块（Silero/WebRTC）。  
-   - 输出：`audio.wav`、`media_meta.json`（时长/采样率/声道/bitrate）。  
-4) **转写（Transcribe Audio）**  
-   - 目标：高精度、可重现转写 JSON。  
-   - 首选实现：  
-     - 模型：OpenAI Whisper `large-v3-turbo`（2024-10-01 公布，4 解码层，≈8× large-v3 速度，WER 接近 large-v2/v3）。  
-     - 引擎：`faster-whisper` + `CTranslate2` INT8 量化；可选 `whisper.cpp` 做 CPU fallback。  
-     - 语种检测开启；长音频使用分块 + 重叠并做分段对齐。  
-   - 输入：音频路径、设备/模型配置、语言 hint（可空）。  
-   - 输出：`transcript.json`（schema_version，按开始时间排序的 segments），可选 SRT/ASS。  
-   - 性能参考：LibriSpeech clean WER ≈2.7%（large-v3），实景混音 WER ≈7.8%；Turbo 在混合场景 ≈7.7%。  
-5) **说话人分离 / 合并（可选）**  
-   - 目标：给转写加 speaker 标签、支持多说话人剪辑。  
-   - 首选实现：`pyannote.audio 4.0.3`（2025-12-07 发布，Python ≥3.10）+ 预训练管线 `speaker-diarization-community-1`（2025-09-29 发布，VBx 聚类）。  
-   - 输入：音频 wav；可复用转写的时间戳。  
-   - 输出：`diarization.rttm` / JSON（speaker, start_ms, end_ms, confidence）。  
-6) **分段 / 评分 / 选段（Highlight Detection）**  
-   - 目标：生成稳定、可排序的候选片段。  
-   - 方法库：  
-     - 视觉语义：HL-CLIP（CVPRW 2024，QVHighlights mAP≈41.9 / Hit@1≈70.6；代码 `github.com/dhk1349/HL-CLIP`）。  
-     - 多模态 Transformer：MCT-VHD（JVCIR 2024，视频+音频+文本对齐）；SPOT（Electronics 2025，CNN+TimeSformer）。  
-     - 规则/信号：音量峰值、笑声检测、chat 峰值、表情/语气高亢检测。  
-   - 输入：转写、情绪特征、弹幕时间线、可选视频帧特征。  
-   - 输出：`segments.json`（schema_version，score，start_ms，end_ms，labels，feature_debug），排序规则固定：`score desc` → `start_ms asc` → `end_ms asc`。  
-   - 边界策略：`min_duration_ms` / `max_duration_ms` / `merge_gap_ms` / `allow_overlap=false` / `clamp_to_duration=true`。  
-   - 空输入处理：返回 `segments=[]` + 可诊断日志。  
-7) **渲染 / 导出**  
-   - 目标：生成可分发的剪辑/清单。  
-   - 实现：`ffmpeg 7.1.x` 裁剪拼接；字幕烧录可选 `ass`；缩略图用 `-ss` 抽帧；模板配置参见 `specs/modules/render_clips/spec.md`。  
-   - 输出：`runs/out/<job_id>/clip_*.mp4`、`thumb_*.jpg`、`captions.srt/ass`、`clips_manifest.json`（契约文件）。  
-   - 日志要求：渲染进度、帧抽取、失败/重试等必须实时写 stdout，并附带 job_id/segment_id，便于终端监控；GUI 进度条仅为镜像展示，不可成为唯一输出。
-8) **守护循环（Stream Monitor）**  
-   - 目标：按计划拉流、落盘、触发后续 pipeline。  
-   - 实现：`streamlink` 轮询 + `Twitch EventSub`（如有）触发；支持多目标并发；健康检查写 `logs/monitor.log`。  
-   - 输入：`var/settings/stream_monitor.yaml`（targets，interval_ms，retry）。  
-   - 输出：持续落盘媒体/聊天，触发 ingest→预处理→后续流水线。
+Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前不应越界的部分”。
 
-## 模块 Spec 必填字段
-- Purpose / Inputs / Outputs / Process / Config / Performance / Error / Edge / AC / Trace Links。  
-- AC 用 Given/When/Then，需给出样例输入输出及关联测试用例 ID。  
-- 输入/输出契约用表格列字段/类型/必填/约束/示例，并声明错误处理与降级策略。
+## 1. 当前 Workflow
 
-## Tasks 拆解与 DoD
-- 每条 task 写明 DoD（完成定义）+ 验证命令。  
-- 流程：更新 spec → 更新/新增测试 → 实现 → 运行 verify（Win: `powershell -ExecutionPolicy Bypass -File scripts/verify.ps1`；*nix: `bash scripts/verify.sh`）→ 记录 decision/problem。
+### 1.1 CLI 当前 workflow
+1. `acfv pipe clip --url ... --out-dir ...`
+2. `acfv.cli.pipeline.clip` 解析 YAML / CLI 参数
+3. 如指定 `--dry-run-plan`，直接输出 `pipeline/stages.py` 中的统一 stage plan
+4. 否则创建 `run_dir`
+5. 调用 `backend.service.create_job(...)`
+6. `backend.job_manager` 在统一 job backend 中执行任务
+7. `pipeline.orchestrator.run_clip_pipeline(...)` 先执行 `ingest_video`
+8. 然后调用 `modular.pipeline.run_pipeline(...)`
+9. `modular` 内部基于 goal artifact `ART_CLIPS` 推导执行计划
+10. 产出 clips / manifest / segments / transcript 等结果
 
-## 实现循环
-1) 选定 task，确认相关 spec/contract 最新。  
-2) 先写/更新测试（unit/integration/e2e/golden）覆盖 AC。  
-3) 实现或修复，保持与 spec 一致。  
-4) 运行 verify；失败记录 `ai_context/problem_registry.md`（症状→根因→修复→预防）。
+### 1.2 GUI 当前 workflow
+1. 用户在 GUI 选择本地回放或下载结果
+2. `MainWindow` / `LocalVideoManager` 创建输出目录
+   - 通常是 `clips/<video>/runs/run_<nnn>/`
+3. GUI 用 `ThreadSafeWorker` 只做轻量 job 提交准备
+4. `LocalVideoManager` 通过 `GuiJobController` 调 `backend.service.create_job(...)`
+5. `backend.job_manager` 内部调用 `pipeline.orchestrator.run_clip_pipeline(...)`
+6. orchestrator 写出 `work/stage_plan.json`，并完成 `ingest_video`
+7. GUI 定时轮询 `get_job_status(...)` 与 `get_runtime_state(...)`
+8. GUI 直接显示 canonical stage、runtime 摘要、错误摘要、日志入口和结果目录入口
 
-## Drift 处理
-- 发现实现≠spec：先改 spec + tests，再改实现；临时偏离需 `decision_log`。  
-- 输出契约变更：同步更新 contract_output + golden + tests。
+### 1.3 当前正式单主线
+当前 clip pipeline 已显式收敛为固定 stages：
+1. `ingest_video`
+2. `extract_audio`
+3. `build_audio_chunk_manifest`
+4. `transcribe_chunks`
+5. `merge_transcript`
+6. `optional_analysis`
+7. `select_segments`
+8. `build_clip_manifest`
+9. `render_clips_batch`
+10. `export_results`
 
-## 切片（分段/评分/选段）硬性规则
-- 时间单位统一 ms；输出含 `schema_version`。  
-- 排序确定性：`score desc` → `start_ms asc` → `end_ms asc`。  
-- 边界策略：`min_duration_ms` / `max_duration_ms` / `merge_gap_ms` / `allow_overlap` / `clamp_to_duration` 必须在 spec + contract 明确。  
-- 空输入返回 `segments=[]` + 明确日志；不得产出不可诊断空文件。
-## 阶段8：成片增强（Enhance Pipeline）**新增 2026-02**
-- 目标：在剪辑后自动添加字幕、特效、视角切换、梗贴图，提升成片效果。
-- 输入：剪辑后的视频文件、用户偏好配置（可选）。
-- 输出：增强后的最终视频 `final.mp4`、时间轴 `timeline.json`、工作文件（words/segments/subtitles.ass）。
-- 实现：`acfv enhance` 命令或 GUI"增强"标签页。
-- 子模块：
-  1) **ASR**：WhisperX/stable-ts 输出词级时间戳 + 分句
-  2) **Subtitle FX**：pysubs2 生成带特效的 ASS 字幕（POP/COLOR）
-  3) **ROI**：识别电脑画面区（PC）与 V 区域（纯配置/自动跟踪/Grounded SAM 2）
-  4) **Policy**：视角切换策略（FULL/PC/V）+ 梗贴图/音效触发规则
-  5) **Render**：FFmpeg 编译器，将 timeline.json 渲染为 final.mp4
-  6) **RAG**（可选）：从用户偏好检索梗素材/字幕风格
-- 详见 `specs/modules/enhance/index.md`
+如果有 chat source，`extract_chat` 会先补出 `ART_CHAT_LOG`；如果没有，则 pipeline 直接种入空 chat log payload。
+
+### 1.4 Stage -> Step(s) 映射
+1. `ingest_video`
+   - `pipeline.orchestrator.run_clip_pipeline`
+   - 负责 `fetch_vod(...)` / 本地路径解析
+2. `extract_audio`
+   - `modular.plugins.extract_audio`
+3. `build_audio_chunk_manifest`
+   - `modular.plugins.transcribe_audio`
+   - 当前输出 `work/audio_chunk_manifest.json`
+4. `transcribe_chunks`
+   - `modular.plugins.transcribe_audio`
+   - 当前已按 chunk 作为独立执行单元调度
+   - 通过 `gpu_asr_pool` 执行；单 GPU 默认 `max_workers=1`
+5. `merge_transcript`
+   - `modular.plugins.transcribe_audio`
+   - 当前输出 `work/transcript_merged.json`
+6. `optional_analysis`
+   - `screen_detect`
+   - `screen_understanding`
+   - `video_emotion`
+   - `speaker_separation`
+   - `streamer_subtitles`
+   - `subtitle_translate`
+   - `analyze_segments`
+   - `semantic_merge`
+   - `llm_highlight`
+7. `select_segments`
+   - `modular.plugins.render_clips`
+   - 当前输出 `work/selected_segments.json`
+8. `build_clip_manifest`
+   - `modular.plugins.render_clips`
+   - 当前输出 `work/clip_manifest.json`
+9. `render_clips_batch`
+   - `modular.plugins.render_clips`
+   - 当前已按 clip 作为独立执行单元调度
+   - 通过 `render_pool` 执行；并发度由 `render_pool.max_workers` 控制
+   - 当前 runtime state 输出 `work/runtime/render_runtime.json`
+10. `export_results`
+   - `modular.plugins.render_clips`
+   - 当前输出 `work/export_results.json` 与最终 `clips_manifest.json`
+
+## 2. 当前 Workflow 的问题
+- GUI 和 CLI 已共享统一 job API 与统一 stage source
+- `audio_chunk_manifest` 与 `clip_manifest` 已固定为 plan input，且不再承载执行态
+- Phase 3 已将执行态分离到 `work/runtime/`
+- 现在已有 chunk 级 / clip 级 runtime 状态对象
+- 已有阶段内并发配置入口：
+  - `gpu_asr_pool.max_workers`
+  - `render_pool.max_workers`
+- `cancel_job(...)` 当前仍是 best-effort，只能作为统一 job API 的兼容能力，不能视为 Phase 3 chunk/clip 级取消语义的既成基础
+
+## 3. 目标 Workflow
+
+当前正式主线已经统一为：
+
+1. `ingest_video`
+2. `extract_audio`
+3. `build_audio_chunk_manifest`
+4. `transcribe_chunks`
+5. `merge_transcript`
+6. `optional_analysis`
+7. `select_segments`
+8. `build_clip_manifest`
+9. `render_clips_batch`
+10. `export_results`
+
+## 4. 目标阶段说明
+
+### 4.1 `ingest_video`
+- 输入:
+  - URL 或本地视频路径
+- 输出 artifact:
+  - video source
+  - optional chat source/log
+- 兼容要求:
+  - 保留现有 Twitch / 本地文件入口
+
+### 4.2 `extract_audio`
+- 输入:
+  - ingest 后的视频 artifact
+- 输出 artifact:
+  - extracted audio
+  - media meta
+- 兼容要求:
+  - 保留现有 ffmpeg 抽音频策略和输出风格
+
+### 4.3 `build_audio_chunk_manifest`
+- 输入:
+  - extracted audio
+- 输出 artifact:
+  - `audio_chunk_manifest`
+- 说明:
+  - Phase 2 当前最小输出为 `work/audio_chunk_manifest.json`
+  - 当前先描述 chunk 顺序、时间范围、状态
+  - Phase 3 再让它真正承担并发执行输入
+
+### 4.4 `transcribe_chunks`
+- 输入:
+  - `audio_chunk_manifest`
+- 输出 artifact:
+  - chunk transcript results
+- 说明:
+  - 当前语义已经固定
+  - `work/runtime/transcribe_runtime.json` 现在既是执行态落盘，也是 chunk dispatcher 的状态来源之一
+  - 每个 chunk 都会经历 queued/running/succeeded/failed/cancelled 的真实流转
+  - 单 GPU 默认仍保守串行，不允许多个 ASR 任务粗暴抢同一 GPU
+
+### 4.5 `merge_transcript`
+- 输入:
+  - chunk transcript results
+- 输出 artifact:
+  - merged transcript contract
+- 兼容要求:
+  - 保持现有 transcript / subtitle 相关下游可继续消费
+  - 当前最小输出为 `work/transcript_merged.json`
+
+### 4.6 `optional_analysis`
+- 输入:
+  - transcript
+  - chat
+  - optional screen context
+  - optional video emotion
+- 输出 artifact:
+  - candidate segments / semantic segments / llm reranked segments
+- 说明:
+  - 这一层内部继续沿用现有 modular plugins
+  - 对 job_state 先只暴露一个总阶段，避免 GUI/CLI 再维护一套子阶段表
+  - 其中 `screen_detect` / `screen_understanding` / `video_emotion` / `speaker_separation` / `subtitle_translate` / `llm_highlight` / `analyze_segments` 都属于 optional_analysis 边界
+
+### 4.7 `select_segments`
+- 输入:
+  - optional analysis outputs
+- 输出 artifact:
+  - selected highlight segments
+- 兼容要求:
+  - 保持当前 segments contract、排序与命名策略
+  - 当前最小输出为 `work/selected_segments.json`
+
+### 4.8 `build_clip_manifest`
+- 输入:
+  - selected segments
+  - source media
+- 输出 artifact:
+  - `clip_manifest`
+- 说明:
+  - 当前最小输出为 `work/clip_manifest.json`
+  - Phase 3 Step 1 起它正式作为 `render_clips_batch` 的 plan input
+
+### 4.9 `render_clips_batch`
+- 输入:
+  - `clip_manifest`
+- 输出 artifact:
+  - rendered clip files
+  - subtitles
+  - thumbnails
+  - per-clip render status
+- 说明:
+  - `work/runtime/render_runtime.json` 现在既是执行态落盘，也是 clip dispatcher 的状态来源之一
+  - 每个 clip 都会经历 queued/running/succeeded/failed/cancelled 的真实流转
+  - `render_pool` 已支持最小可用的 clip 级并发
+
+### 4.10 `export_results`
+- 输入:
+  - render batch outputs
+  - run metadata
+- 输出 artifact:
+  - final manifest
+  - result summary
+  - stable run directory view
+  - 当前最小输出为 `work/export_results.json`
+
+## 5. 当前到目标的映射关系
+
+| 当前模块/步骤 | 目标阶段 | 备注 |
+| --- | --- | --- |
+| `fetch_vod` / 本地文件解析 | `ingest_video` | 继续保留 |
+| `modular.plugins.extract_audio` | `extract_audio` | 已存在 |
+| `steps/transcribe_audio/impl.py` | `build_audio_chunk_manifest` + `transcribe_chunks` + `merge_transcript` | 需要拆 stage，不一定拆入口 |
+| `analyze_segments` / `semantic_merge` / `llm_highlight` / `screen_*` / `video_emotion` | `optional_analysis` | 保持 modular plugins 思路 |
+| `render_clips` | `build_clip_manifest` + `render_clips_batch` | 先显式化 manifest，再做阶段内并发 |
+| contract output 汇总 | `export_results` | 维持现有输出契约 |
+
+## 6. 并发策略
+
+### 当前
+- 主要是 GUI worker 级后台执行
+- step 内部可能各自开线程
+- 没有稳定资源池 contract
+
+### 目标
+- 只做阶段内并发，不重写成全局 DAG scheduler
+- 第一优先级:
+  - 音频 chunk 化转录
+  - clip manifest 化渲染
+  - 资源池拆分
+- 资源池目标:
+  - `io_pool`
+  - `gpu_asr_pool`
+  - `cpu_pool`
+  - `render_pool`
+
+## 7. GUI / CLI 的共同 workflow 约束
+- GUI 和 CLI 已经走同一 backend service
+- backend service 再去调用同一套 pipeline/orchestrator
+- GUI / CLI / legacy compat 看到的 stage 语义统一来自 `src/acfv/pipeline/stages.py`
+- GUI 不再直接等待或编排核心业务主线
+- CLI 不再直接拼接独立 orchestration 逻辑
+- runtime state 只允许新增到 `work/runtime/`，不得回写污染现有 6 个 contract artifact
+
+## 8. Phase 1 兼容策略
+- `acfv.cli.pipeline` 保留为 CLI 兼容适配层
+- `LocalVideoManager` 保留为 GUI 兼容适配层
+- `features.modules.pipeline_backend.run_pipeline(...)` 保留为 deprecated compat wrapper，但其核心执行已统一转发到 `backend.service`
+
+## 9. Phase 2 结论
+- Phase 2 解决的是“主线阶段定义隐式”这个问题
+- 当前已经有统一主线、统一 stage 语义、统一最小 artifact contract
+- Phase 2 hardening 又补上了 6 个 contract artifact 的一致性验证与 stage->plugin 映射说明
+- 后续 Phase 3 必须只在这条显式主线上补阶段内并发，不得跳回去做第二套 orchestration
+
+## 10. Phase 3 Step 2 结论
+- 当前已经把 chunk / clip 作为真实阶段内执行单元接入调度
+- canonical 10-stage 主线、orchestrator 入口、contract artifact 语义都保持不变
+- 下一子步只应继续增强 retry / cancel / 多 GPU 等局部能力，不应回头改主线定义
+
+## 11. Phase 4 结论
+- GUI 当前已经作为 backend 的控制台与观察面板工作
+- 当前阶段来自 `job_state.current_stage`
+- transcribe/render 细粒度摘要来自 `get_runtime_state(...)`
+- GUI 不再通过 progress callback 或本地 stage 表去猜当前主线阶段
+
+## 12. Phase 5 结论
+- verify / regression / compatibility 回归已完成
+- CLI 正式入口仍可用:
+  - `python -m acfv.cli --help`
+  - `python -m acfv.cli gui --help`
+  - `python -m acfv.cli pipe clip --help`
+  - `python -m acfv.cli pipe clip --url demo --dry-run-plan`
+- GUI 入口链路仍成立:
+  - GUI 创建任务 -> `backend.service.create_job(...)`
+  - GUI 轮询 -> `get_job_status(...)` + `get_runtime_state(...)`
+  - GUI 取消 -> `cancel_job(...)`
+  - GUI 日志 / 结果目录入口继续可用
+- contract / runtime 边界仍成立:
+  - `stage_plan.json`、`audio_chunk_manifest.json`、`transcript_merged.json`、`selected_segments.json`、`clip_manifest.json`、`export_results.json` 保持契约/摘要职责
+  - `work/runtime/transcribe_runtime.json`、`work/runtime/render_runtime.json` 保持执行态职责

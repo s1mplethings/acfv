@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acfv/audio_chunk_manifest.schema.json",
+  "title": "ACFV Audio Chunk Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stage",
+    "audio_path",
+    "segment_length_sec",
+    "chunk_count",
+    "chunks"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "const": "build_audio_chunk_manifest"
+    },
+    "audio_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "segment_length_sec": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "chunk_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "chunks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "chunk_id",
+          "index",
+          "start_sec",
+          "end_sec",
+          "status"
+        ],
+        "properties": {
+          "chunk_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "start_sec": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end_sec": {
+            "type": "number",
+            "minimum": 0
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "transcribed",
+              "failed"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

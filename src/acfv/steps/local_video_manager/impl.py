@@ -11,12 +11,14 @@ import subprocess
 import logging
 from pathlib import Path
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QPushButton, QListWidget, 
-    QListWidgetItem, QMessageBox, QTabWidget, QFileDialog
+    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget,
+    QListWidgetItem, QMessageBox, QTabWidget, QFileDialog, QLabel, QTextEdit, QDialog
 )
-from PyQt5.QtCore import QSize, Qt, QObject, pyqtSignal, QThread
+from PyQt5.QtCore import QSize, Qt, QObject, pyqtSignal, QThread, QTimer
 from PyQt5.QtGui import QIcon, QImage, QPixmap
 from typing import List, Optional
+from acfv.backend import service as backend_service
+from acfv.app.gui_job_controller import GuiJobController
 from acfv.features.modules.ui_components import VideoThumbnailLoader
 from acfv.utils import safe_slug
 from acfv import config
@@ -144,6 +146,17 @@ class LocalVideoManager:
         # 当前运行的剪辑元数据路径，用于刷新统计
         self.current_run_meta_path = None
         self.current_run_video_base = None
+        self.current_job_id = None
+        self.current_processing_dir = None
+        self.current_job_view = None
+        self.recent_job_views = []
+        self.gui_controller = GuiJobController()
+        self.status_timer = QTimer(self.main_window)
+        self.status_timer.setInterval(750)
+        self.status_timer.timeout.connect(self._poll_current_job)
+        self.job_status_label = None
+        self.job_summary_view = None
+        self._progress_started = False
         
         # 初始化说话人分离集成
         if SpeakerSeparationIntegration:
@@ -155,6 +168,19 @@ class LocalVideoManager:
         """清理本地视频管理器中可能存在的后台线程/Worker"""
         try:
             logging.info("[LocalVideoManager] 开始清理工作线程和加载器…")
+            try:
+                if self.current_job_id:
+                    backend_service.cancel_job(self.current_job_id)
+                    logging.info(f"[LocalVideoManager] 已请求取消 job: {self.current_job_id}")
+            except Exception as e:
+                logging.debug(f"取消后端任务时忽略错误: {e}")
+            finally:
+                self.current_job_id = None
+                self.current_processing_dir = None
+                self.current_job_view = None
+                if self.status_timer.isActive():
+                    self.status_timer.stop()
+                self._progress_started = False
             # 停止视频缩略图加载线程
             try:
                 if getattr(self, 'video_thumbnail_loader', None):
@@ -261,6 +287,176 @@ class LocalVideoManager:
         btn_process = QPushButton("处理选中回放")
         btn_process.clicked.connect(self.process_selected_video)
         layout.addWidget(btn_process)
+
+        actions = QHBoxLayout()
+        btn_cancel = QPushButton("取消当前任务")
+        btn_cancel.clicked.connect(self.cancel_current_job)
+        actions.addWidget(btn_cancel)
+        btn_open = QPushButton("打开结果目录")
+        btn_open.clicked.connect(self.open_current_result_dir)
+        actions.addWidget(btn_open)
+        btn_logs = QPushButton("查看日志")
+        btn_logs.clicked.connect(self.show_current_job_logs)
+        actions.addWidget(btn_logs)
+        layout.addLayout(actions)
+
+        self.job_status_label = QLabel("当前任务：无")
+        self.job_status_label.setWordWrap(True)
+        layout.addWidget(self.job_status_label)
+
+        self.job_summary_view = QTextEdit()
+        self.job_summary_view.setReadOnly(True)
+        self.job_summary_view.setMinimumHeight(160)
+        self.job_summary_view.setPlaceholderText("任务创建后，这里会显示当前 job、阶段、runtime 摘要、错误与结果目录。")
+        layout.addWidget(self.job_summary_view)
+
+    def _append_recent_job(self, job_view):
+        if not job_view:
+            return
+        job_id = job_view.get("job", {}).get("job_id")
+        self.recent_job_views = [
+            existing for existing in self.recent_job_views
+            if existing.get("job", {}).get("job_id") != job_id
+        ]
+        self.recent_job_views.insert(0, job_view)
+        self.recent_job_views = self.recent_job_views[:5]
+
+    def _format_runtime_summary(self, name, summary):
+        if not summary or not summary.get("present"):
+            return f"{name}: 未生成"
+        active = "活跃" if summary.get("is_active") else "静止"
+        return (
+            f"{name}: status={summary.get('status')} "
+            f"completed={summary.get('completed')}/{summary.get('total')} "
+            f"failed={summary.get('failed')} running={summary.get('running')} "
+            f"updated_at={summary.get('updated_at') or '-'} {active}"
+        )
+
+    def _render_job_summary(self, job_view):
+        if not self.job_status_label or not self.job_summary_view:
+            return
+        if not job_view:
+            self.job_status_label.setText("当前任务：无")
+            self.job_summary_view.setPlainText("暂无运行中的任务。")
+            return
+        job = job_view.get("job", {})
+        stage = job.get("current_stage") or "queued"
+        status = job.get("status") or "unknown"
+        progress = job.get("progress", {}) or {}
+        percent = progress.get("percent")
+        message = progress.get("message") or ""
+        percent_text = f"{percent:.1f}%" if isinstance(percent, (int, float)) else "--"
+        self.job_status_label.setText(f"当前任务：{job.get('job_id')} | {status} | {stage} | {percent_text}")
+        lines = [
+            f"Job: {job.get('job_id')}",
+            f"状态: {status}",
+            f"阶段: {stage}",
+            f"进度: {progress.get('current', 0)}/{progress.get('total', 0)} ({percent_text})",
+            f"消息: {message or '-'}",
+            f"结果目录: {job_view.get('result_dir') or '-'}",
+            self._format_runtime_summary("Transcribe", job_view.get("runtime", {}).get("transcribe")),
+            self._format_runtime_summary("Render", job_view.get("runtime", {}).get("render")),
+        ]
+        error_display = job_view.get("error_display") or ""
+        if error_display:
+            lines.extend(["", "错误摘要:", error_display])
+        if self.recent_job_views:
+            lines.append("")
+            lines.append("最近任务:")
+            for recent in self.recent_job_views[:5]:
+                recent_job = recent.get("job", {})
+                lines.append(
+                    f"- {recent_job.get('job_id')} | {recent_job.get('status')} | "
+                    f"{recent_job.get('current_stage')} | {recent_job.get('run_dir') or '-'}"
+                )
+        self.job_summary_view.setPlainText("\n".join(lines))
+
+    def _update_main_window_from_job(self, job_view):
+        job = job_view.get("job", {})
+        progress = job.get("progress", {}) or {}
+        stage = job.get("current_stage") or "queued"
+        status = job.get("status") or "unknown"
+        message = progress.get("message") or ""
+        percent = progress.get("percent")
+        if isinstance(percent, (int, float)):
+            self.main_window.update_progress_percent(int(percent))
+        detail = f"{stage} | {status}"
+        if message:
+            detail = f"{detail} | {message}"
+        current_runtime = job_view.get("current_runtime")
+        if current_runtime and current_runtime.get("present"):
+            detail = (
+                f"{detail} | completed={current_runtime.get('completed')}/{current_runtime.get('total')} "
+                f"failed={current_runtime.get('failed')} running={current_runtime.get('running')}"
+            )
+        self.main_window.update_detailed_progress(detail)
+        self.main_window.update_status(f"{status}: {stage}")
+
+    def _show_terminal_message(self, job_view):
+        job = job_view.get("job", {})
+        status = job.get("status")
+        if status == "succeeded":
+            return
+        title = "任务已取消" if status == "cancelled" else "处理错误"
+        details = job_view.get("error_display") or f"状态: {status}\n阶段: {job.get('current_stage')}"
+        try:
+            QMessageBox.warning(self.main_window, title, details)
+        except Exception:
+            pass
+
+    def cancel_current_job(self):
+        if not self.current_job_id:
+            QMessageBox.information(self.main_window, "提示", "当前没有运行中的任务。")
+            return
+        try:
+            self.gui_controller.cancel_job(self.current_job_id)
+            self.main_window.update_status("已请求取消任务")
+        except Exception as e:
+            QMessageBox.warning(self.main_window, "取消失败", str(e))
+
+    def open_current_result_dir(self):
+        job_view = self.current_job_view or (self.recent_job_views[0] if self.recent_job_views else None)
+        result_dir = job_view.get("result_dir") if job_view else None
+        try:
+            self.gui_controller.open_result_dir(result_dir)
+        except Exception as e:
+            QMessageBox.warning(self.main_window, "打开目录失败", str(e))
+
+    def show_current_job_logs(self):
+        job_view = self.current_job_view or (self.recent_job_views[0] if self.recent_job_views else None)
+        job_id = job_view.get("job", {}).get("job_id") if job_view else None
+        if not job_id:
+            QMessageBox.information(self.main_window, "提示", "当前没有可查看日志的任务。")
+            return
+        logs = self.gui_controller.get_logs(job_id)
+        dialog = QDialog(self.main_window)
+        dialog.setWindowTitle(f"任务日志 - {job_id}")
+        dialog.resize(720, 420)
+        dlg_layout = QVBoxLayout(dialog)
+        text = QTextEdit(dialog)
+        text.setReadOnly(True)
+        text.setPlainText("\n".join(logs) if logs else "暂无日志")
+        dlg_layout.addWidget(text)
+        dialog.exec_()
+
+    def _poll_current_job(self):
+        if not self.current_job_id:
+            if self.status_timer.isActive():
+                self.status_timer.stop()
+            return
+        try:
+            job_view = self.gui_controller.get_job_view(self.current_job_id)
+            self.current_job_view = job_view
+            self._append_recent_job(job_view)
+            self._render_job_summary(job_view)
+            self._update_main_window_from_job(job_view)
+            status = job_view.get("job", {}).get("status")
+            if status in {"succeeded", "failed", "cancelled"}:
+                if self.status_timer.isActive():
+                    self.status_timer.stop()
+                self._finalize_job(job_view)
+        except Exception as e:
+            logging.error(f"[LocalVideoManager] 轮询 job 状态失败: {e}")
     
     def refresh_local_videos(self):
         """刷新本地视频列表（使用后台线程）"""
@@ -497,14 +693,6 @@ class LocalVideoManager:
             import time
             video_clips_dir = None  # 初始化为None，确保finally块可以访问
             try:
-                # 🆕 启动进度系统
-                # 改为通过信号在主线程启动，避免在工作线程中创建/启动QTimer
-                try:
-                    self.progress_emitter.start_progress.emit(1800, 500*1024*1024)
-                    logging.info("🎯 进度系统启动信号已发出")
-                except Exception as e:
-                    logging.warning(f"启动进度系统失败: {e}")
-                
                 # 获取选中的视频信息
                 idx = self.list_local.currentRow()
                 if idx < 0:
@@ -536,29 +724,6 @@ class LocalVideoManager:
                     logging.info(f'[pipeline] 已写入视频路径指示文件: {selected_path} -> {video_path}')
                 except Exception as w_err:
                     logging.warning(f"[pipeline] 写入 selected_video.txt 失败: {w_err}")
-                
-                # 🆕 更新进度系统的实际视频信息
-                if hasattr(self, 'parent') and hasattr(self.parent, 'progress_manager'):
-                    try:
-                        # 获取实际视频信息
-                        file_size = os.path.getsize(video_path)
-                        
-                        # 尝试获取视频时长（可选，如果失败使用默认值）
-                        try:
-                            result = subprocess.run([
-                                'ffprobe', '-v', 'quiet', '-show_entries', 
-                                'format=duration', '-of', 'csv=p=0', video_path
-                            ], capture_output=True, text=True, timeout=10)
-                            
-                            if result.returncode == 0 and result.stdout.strip():
-                                duration = float(result.stdout.strip())
-                                self.parent.progress_manager.start_processing(duration, file_size)
-                                logging.info(f"🎯 更新进度系统 - 时长: {duration:.1f}s, 大小: {file_size/1024/1024:.1f}MB")
-                        except Exception as e:
-                            logging.info(f"获取视频时长失败，使用默认值: {e}")
-                            
-                    except Exception as e:
-                        logging.warning(f"更新进度系统信息失败: {e}")
                 
                 # 设置配置参数
                 self.config_manager.set("VIDEO_FILE", video_path)
@@ -616,6 +781,7 @@ class LocalVideoManager:
                 # 🆕 标记文件夹为正在处理，防止被空文件夹清理功能误删
                 if hasattr(self, 'parent') and hasattr(self.parent, 'add_processing_folder'):
                     self.parent.add_processing_folder(video_clips_dir)
+                    self.current_processing_dir = video_clips_dir
                     logging.info(f"[pipeline] 已标记文件夹为正在处理: {video_clips_dir}")
 
 
@@ -667,142 +833,20 @@ class LocalVideoManager:
                 logging.info(f"  - 当前运行目录: {current_run_dir}")
                 
                 
-                # 🆕 创建新进度回调函数
-                def new_progress_callback(stage, current, total, message=None):
-                    try:
-                        # 🆕 与新的进度管理器联动 (修正总进度显示不正确)
-                        raw_stage_name = stage if isinstance(stage, str) else str(stage)
-                        # 将流水线阶段名映射到 ProgressManager 预定义阶段
-                        stage_name_map = {
-                            "并行数据准备": "音频提取",      # 前期准备归到音频提取阶段权重
-                            "音频提取": "音频提取",
-                            "说话人分离": "说话人分离",
-                            "音频转录": "语音转录",
-                            "语音转录": "语音转录",
-                            "数据准备": "语音转录",        # 数据准备更多与转录/加载相关
-                            "视频情绪分析": "情感分析",
-                            "情感分析": "情感分析",
-                            "智能分析": "内容分析",
-                            "内容分析": "内容分析",
-                            "并行视频切片": "切片生成",
-                            "串行视频切片": "切片生成",
-                            "切片生成": "切片生成",
-                            "完成": "切片生成",  # 结束阶段也归入切片生成最终推进到100%
-                            "chat_extract": "音频提取",
-                            "audio_extract": "音频提取",
-                            "speaker_separation": "说话人分离",
-                            "transcribe": "语音转录",
-                            "video_emotion": "情感分析",
-                            "analysis": "内容分析",
-                            "clip": "切片生成",
-                            "run": "切片生成",
-                        }
-                        stage_name = stage_name_map.get(raw_stage_name, raw_stage_name)
-
-                        pm = getattr(self.parent, 'progress_manager', None)
-                        if not pm:
-                            return
-
-                        # 如果阶段名不在预定义列表，尝试使用当前阶段名称兜底
-                        if not any(s.name == stage_name for s in pm.stages):
-                            try:
-                                stage_name = pm.stages[pm.current_stage_index].name
-                            except Exception:
-                                stage_name = "音频提取"
-
-                        # 确保阶段只启动一次
-                        started_flag = f'_stage_{stage_name}_started'
-                        if not hasattr(pm, started_flag):
-                            pm.start_stage(stage_name)
-                            setattr(pm, started_flag, True)
-
-                        # —— 进度换算逻辑 ——
-                        # 来自流水线的 progress = current/total (阶段整体百分比 0~1)
-                        overall_progress = (current / total) if (isinstance(total, (int, float)) and total > 0) else 0.0
-                        overall_progress = max(0.0, min(1.0, overall_progress))
-
-                        # 将整体阶段进度拆分为 (completed_substages + substage_progress)/len(substages)
-                        try:
-                            stage_obj = next(s for s in pm.stages if s.name == stage_name)
-                            substages_cnt = max(1, len(stage_obj.substages))
-                        except StopIteration:
-                            substages_cnt = 1
-                        virtual_progress_units = overall_progress * substages_cnt
-                        completed_substages = int(virtual_progress_units)
-                        fractional = virtual_progress_units - completed_substages
-
-                        # 修正边界：如果整体进度达到1，强制定位最后一个子阶段
-                        if overall_progress >= 0.999:
-                            completed_substages = substages_cnt - 1
-                            fractional = 1.0
-
-                        # 应用更新
-                        pm.update_substage(stage_name, completed_substages, fractional)
-                        # 触发 UI 刷新（通过信号回到主线程）
-                        try:
-                            self.progress_emitter.stage_progress.emit(
-                                stage_name,
-                                completed_substages,
-                                float(fractional),
-                            )
-                        except Exception:
-                            pass
-
-                        # 阶段完成：推进到下一个阶段
-                        if overall_progress >= 0.999:
-                            try:
-                                self.progress_emitter.stage_finished.emit(stage_name)
-                            except Exception:
-                                pass
-
-                        # 🆕 同步到 SmartProgressPredictor：启动/更新/完成阶段
-                        if hasattr(self.parent, 'smart_predictor') and self.parent.smart_predictor:
-                            sp = self.parent.smart_predictor
-                            # 阶段启动（仅一次）
-                            smart_started_flag = f'_smart_stage_{stage_name}_started'
-                            if not getattr(self.parent, smart_started_flag, False):
-                                try:
-                                    estimated_items = int(total) if isinstance(total, (int, float)) and total else 1
-                                    if hasattr(sp, 'start_stage'):
-                                        sp.start_stage(stage_name, estimated_items)
-                                    setattr(self.parent, smart_started_flag, True)
-                                except Exception:
-                                    pass
-                            
-                            # 进度更新（0-1）
-                            try:
-                                if hasattr(sp, 'update_stage_progress'):
-                                    sp.update_stage_progress(stage_name, float(overall_progress))
-                            except Exception:
-                                pass
-                            
-                            # 阶段完成
-                            if overall_progress >= 0.999:
-                                try:
-                                    if hasattr(sp, 'finish_stage'):
-                                        sp.finish_stage(stage_name)
-                                except Exception:
-                                    pass
-                        
-                        # 也调用旧的回调（如果存在）
-                        if hasattr(self, 'update_progress'):
-                            self.update_progress(raw_stage_name, current, total, message)
-                        
-                    except Exception as e:
-                        logging.warning(f"新进度回调失败: {e}")
-                
-                # 调用模块化 pipeline
-                from acfv.modular.pipeline import run_pipeline
-                result = run_pipeline(
+                job = self.gui_controller.create_job(
                     video_path=video_path,
                     chat_path=chat_path,
                     config_manager=self.config_manager,
                     run_dir=Path(current_run_dir),
                     output_clips_dir=output_clips_dir,
-                    progress_callback=new_progress_callback,
+                    metadata={"source": "gui", "entrypoint": "LocalVideoManager"},
                 )
-                
-                return result
+                return {
+                    "job": job,
+                    "run_dir": current_run_dir,
+                    "video_base": safe_basename,
+                    "meta_path": self.current_run_meta_path,
+                }
             
             except Exception as e:
                 logging.error(f"[DEBUG] pipeline_worker 执行异常: {e}")
@@ -821,8 +865,10 @@ class LocalVideoManager:
                 # 🆕 移除文件夹保护标记
                 try:
                     if video_clips_dir and hasattr(self, 'parent') and hasattr(self.parent, 'remove_processing_folder'):
-                        self.parent.remove_processing_folder(video_clips_dir)
-                        logging.info(f"[pipeline] 已移除文件夹保护标记: {video_clips_dir}")
+                        job_payload = locals().get("job", {})
+                        if not isinstance(job_payload, dict) or not job_payload.get("job_id"):
+                            self.parent.remove_processing_folder(video_clips_dir)
+                            logging.info(f"[pipeline] 已移除文件夹保护标记: {video_clips_dir}")
                 except Exception as e:
                     logging.warning(f"移除文件夹保护标记失败: {e}")
                 
@@ -832,9 +878,8 @@ class LocalVideoManager:
         
         # 启动后台线程
         worker = ThreadSafeWorker(pipeline_worker)
-        worker.finished.connect(lambda result: self.on_pipeline_done(result, worker))
+        worker.finished.connect(lambda result: self.on_job_created(result, worker))
         worker.error.connect(lambda msg: self.on_pipeline_err(msg, worker))
-        worker.progress_update.connect(self._handle_progress_update)
         
         # 添加到当前工作线程列表
         self.current_workers.append(worker)
@@ -844,70 +889,89 @@ class LocalVideoManager:
         
         logging.info("[DEBUG] 后台处理线程已启动")
 
-    def on_pipeline_done(self, result, worker):
-        """流水线完成回调（成功）"""
+    def on_job_created(self, result, worker):
+        """任务创建完成回调（主线程）。"""
         try:
-            logging.info("[pipeline] 处理完成，进入完成回调")
-            # 从当前工作集合移除
             try:
                 if worker in self.current_workers:
                     self.current_workers.remove(worker)
             except Exception:
                 pass
-
-            # 成功结束智能预测会话，写入历史
-            try:
-                if hasattr(self.parent, 'smart_predictor') and self.parent.smart_predictor:
-                    sp = self.parent.smart_predictor
-                    if hasattr(sp, 'end_session'):
-                        sp.end_session(success=True)
-                        logging.info("📊 已记录成功会话到历史")
-            except Exception as e:
-                logging.debug(f"结束智能预测会话失败: {e}")
-
-            # 停止进度显示（在主线程执行，避免跨线程Qt警告）
-            try:
-                if hasattr(self.parent, 'stop_processing_progress'):
-                    self.parent.stop_processing_progress(success=True)
-                    logging.info("🏁 进度系统已停止")
-            except Exception:
-                pass
-
-            # 更新运行元数据状态
-            try:
-                meta_path = getattr(self, "current_run_meta_path", None)
-                if meta_path and hasattr(self.parent, "clips_manager") and self.parent.clips_manager:
-                    finalize_fn = getattr(self.parent.clips_manager, "finalize_run", None)
-                    if callable(finalize_fn):
-                        clip_list: List[str] = []
-                        if isinstance(result, dict):
-                            clip_list = [str(Path(p)) for p in result.get("clips", []) if p]
-                        elif isinstance(result, (list, tuple)) and len(result) >= 2:
-                            clip_list = [str(Path(p)) for p in result[1] if p]
-                        finalize_fn(meta_path, success=True, clip_paths=clip_list)
-            except Exception as meta_err:
-                logging.debug(f"完成运行元数据失败: {meta_err}")
-            finally:
-                self.current_run_meta_path = None
-                self.current_run_video_base = None
-
-            # 刷新剪辑页（若主窗体提供方法）
-            try:
-                refreshed = False
-                if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
-                    refresh_fn = getattr(self.parent.clips_manager, "refresh_clips", None)
-                    if callable(refresh_fn):
-                        refresh_fn()
-                        refreshed = True
-                if not refreshed and hasattr(self.parent, 'optimized_clips_manager') and self.parent.optimized_clips_manager:
-                    refresh_fn = getattr(self.parent.optimized_clips_manager, "refresh_clips", None)
-                    if callable(refresh_fn):
-                        refresh_fn()
-            except Exception as refresh_err:
-                logging.debug(f"刷新剪辑列表失败: {refresh_err}")
-
+            job = result.get("job", {}) if isinstance(result, dict) else {}
+            job_id = job.get("job_id")
+            if not job_id:
+                raise RuntimeError("GUI job creation did not return job_id")
+            self.current_job_id = job_id
+            self.current_job_view = self.gui_controller.get_job_view(job_id)
+            self._append_recent_job(self.current_job_view)
+            self._render_job_summary(self.current_job_view)
+            self._update_main_window_from_job(self.current_job_view)
+            if not self._progress_started and hasattr(self.parent, 'start_processing_progress'):
+                self.parent.start_processing_progress(0, 0)
+                self._progress_started = True
+            if not self.status_timer.isActive():
+                self.status_timer.start()
+            logging.info(f"[LocalVideoManager] job created: {job_id}")
         except Exception as e:
-            logging.error(f"on_pipeline_done 处理异常: {e}")
+            logging.error(f"on_job_created 处理异常: {e}")
+            self.on_pipeline_err(str(e), worker)
+
+    def _finalize_job(self, job_view):
+        job = job_view.get("job", {})
+        status = job.get("status")
+        success = status == "succeeded"
+        try:
+            if hasattr(self.parent, 'stop_processing_progress'):
+                self.parent.stop_processing_progress(success=success)
+        except Exception:
+            pass
+        try:
+            if hasattr(self.parent, 'smart_predictor') and self.parent.smart_predictor:
+                sp = self.parent.smart_predictor
+                if hasattr(sp, 'end_session'):
+                    sp.end_session(success=success)
+        except Exception as e:
+            logging.debug(f"结束智能预测会话失败: {e}")
+        try:
+            meta_path = getattr(self, "current_run_meta_path", None)
+            if meta_path and hasattr(self.parent, "clips_manager") and self.parent.clips_manager:
+                finalize_fn = getattr(self.parent.clips_manager, "finalize_run", None)
+                if callable(finalize_fn):
+                    clip_list: List[str] = []
+                    result_payload = job.get("result", {}) if isinstance(job.get("result"), dict) else {}
+                    for path in result_payload.get("clips", []) or []:
+                        if path:
+                            clip_list.append(str(Path(path)))
+                    finalize_fn(meta_path, success=success, clip_paths=clip_list if success else None)
+        except Exception as meta_err:
+            logging.debug(f"运行元数据更新失败: {meta_err}")
+        finally:
+            self.current_run_meta_path = None
+            self.current_run_video_base = None
+        try:
+            refreshed = False
+            if hasattr(self.parent, 'clips_manager') and self.parent.clips_manager:
+                refresh_fn = getattr(self.parent.clips_manager, "refresh_clips", None)
+                if callable(refresh_fn):
+                    refresh_fn()
+                    refreshed = True
+            if not refreshed and hasattr(self.parent, 'optimized_clips_manager') and self.parent.optimized_clips_manager:
+                refresh_fn = getattr(self.parent.optimized_clips_manager, "refresh_clips", None)
+                if callable(refresh_fn):
+                    refresh_fn()
+        except Exception as refresh_err:
+            logging.debug(f"刷新剪辑列表失败: {refresh_err}")
+        try:
+            if self.current_processing_dir and hasattr(self.parent, 'remove_processing_folder'):
+                self.parent.remove_processing_folder(self.current_processing_dir)
+        except Exception as e:
+            logging.debug(f"移除处理目录标记失败: {e}")
+        finally:
+            self.current_processing_dir = None
+        if not success:
+            self._show_terminal_message(job_view)
+        self.current_job_id = None
+        self._progress_started = False
 
     def on_pipeline_err(self, msg, worker):
         """流水线异常回调（失败）"""
@@ -950,6 +1014,15 @@ class LocalVideoManager:
             finally:
                 self.current_run_meta_path = None
                 self.current_run_video_base = None
+                self.current_job_id = None
+                self._progress_started = False
+                try:
+                    if self.current_processing_dir and hasattr(self.parent, 'remove_processing_folder'):
+                        self.parent.remove_processing_folder(self.current_processing_dir)
+                except Exception as e:
+                    logging.debug(f"移除处理目录标记失败: {e}")
+                finally:
+                    self.current_processing_dir = None
 
             # 刷新剪辑页，确保失败后仍能看到已有结果
             try:
@@ -968,7 +1041,25 @@ class LocalVideoManager:
 
             # 弹窗提示
             try:
-                QMessageBox.critical(self.main_window, "处理错误", str(msg))
+                error_view = {
+                    "job": {
+                        "job_id": self.current_job_id or "setup_failed",
+                        "status": "failed",
+                        "current_stage": "gui_submit",
+                        "progress": {},
+                        "error_summary": str(msg),
+                        "run_dir": None,
+                    },
+                    "runtime": {},
+                    "current_runtime": None,
+                    "active_runtime": False,
+                    "result_dir": None,
+                    "error_display": f"状态: failed\n阶段: gui_submit\n摘要: {msg}",
+                }
+                self.current_job_view = error_view
+                self._append_recent_job(error_view)
+                self._render_job_summary(error_view)
+                QMessageBox.critical(self.main_window, "处理错误", error_view["error_display"])
             except Exception:
                 pass
         except Exception as e:

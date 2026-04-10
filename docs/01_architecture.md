@@ -1,30 +1,340 @@
 # 架构与数据流
 
-## 模块表（含输入/输出）
-| 模块 | 输入来自 | 输出给谁 | 边界 | 依赖 | 运行方式 |
-| --- | --- | --- | --- | --- | --- |
-| CLI Pipeline (`acfv.cli.pipeline`) | CLI 参数、YAML、媒体路径 | 导出目录、剪辑/字幕 JSON、评分结果 | 编排下载→转写→选段→渲染 | Python, ffmpeg, TwitchDownloaderCLI | `python -m acfv.cli.pipeline clip ...` |
-| GUI (`acfv.gui` / `acfv.main_window`) | UI 表单、配置文件 | 同 CLI + UI 状态 | 封装 CLI 调用与后台线程 | PyQt, processing | `python -m acfv.cli gui` / `acfv gui` |
-| Stream Monitor (`acfv.runtime.stream_monitor`) | `var/settings/stream_monitor.yaml` | 录制视频、chat JSON、日志 | 轮询/录制/抓弹幕 | ffmpeg, TwitchDownloaderCLI | `acfv stream-monitor [-c cfg]` |
-| Twitch Downloader (`steps/twitch_downloader`) | VOD URL、凭证、输出目录 | 本地视频与 chat JSON | 仅负责下载/落盘，不做转写 | TwitchDownloaderCLI, ffmpeg | 被 pipeline/守护调用 |
-| Transcribe Audio (`steps/transcribe_audio`) | 音频路径、模型/语言配置 | 转写 JSON、SRT/ASS | 转写与时间戳校准 | whisper, ffmpeg, numpy | 被 pipeline/processing 调用 |
-| Selection/Scoring (`steps/selection`, `steps/analyze_segments`) | 转写/情绪/弹幕数据 | 段落列表与评分 JSON | 选段与排序，不渲染 | numpy/pandas（视实现） | 被 pipeline 调用 |
-| Render Clips (`steps/render_clips`) | 选段、媒体资源、模板配置 | 剪辑文件、字幕、缩略图 | 渲染与命名，输出到 out_dir | ffmpeg | 被 pipeline 调用 |
-| Export & Storage (`processing_path`等) | 处理后的片段/字幕/评分 | 文件系统、thumbnails | 管理输出命名与落盘位置 | pathlib, json | 内部调用 |
+Phase 2 目标：在不重写 `modular.pipeline` 的前提下，把 clip 主线显式收敛为统一 stage list，并继续保持 GUI/CLI/legacy backend 共用同一 backend service。
 
-## 数据流（入口→输出）
-1) 入口（GUI/CLI/stream-monitor）收集 URL 或本地媒体 + 配置。
-2) Ingest：下载或定位本地视频（可能生成 chat JSON）。
-3) Processing：抽取音频 → 预处理 → 转写 → 分段 → 评分 → 渲染/导出。
-4) Export：写入 clips/thumbnails/subtitles/golden JSON 等至 `runs/out` 或配置路径。
-5) 日志：`var/logs/*.log`，后台守护有独立日志文件。
+## 1. 当前架构现状
 
-## 稳定边界
+### 1.1 真实入口结构
+- GUI:
+  - `acfv gui`
+  - -> `acfv.cli.gui`
+  - -> `acfv.app.gui.launch_gui`
+  - -> `acfv.app.interest_adapter.create_interest_main_window`
+  - -> `acfv.main_window.MainWindow`
+- CLI:
+  - `acfv pipe clip`
+  - -> `acfv.cli.pipeline.clip`
+  - -> `acfv.ingest.twitch.fetch_vod`
+  - -> `acfv.modular.pipeline.run_pipeline`
 
-- 关键契约文件：
-  - 候选段（切片输出）：`specs/contract_output/segments.schema.json`
-  - 剪辑清单（渲染输出）：`specs/contract_output/clips_manifest.schema.json`
+### 1.2 当前真正的 pipeline 核心
+- 当前 end-to-end clip 处理的正式核心已经是 `src/acfv/modular/`
+  - `pipeline.py` 负责组装 registries、artifact store、progress emitter
+  - `runner.py` 负责根据 artifact 依赖执行 plugins
+  - `plugins/` 负责接入 `steps/*` 具体实现
+- `run_pipeline(...)` 当前 goal artifact 是 `ART_CLIPS`
+- pipeline 结果会写出:
+  - run 级 artifact store
+  - `work/segments.json`
+  - `work/transcription.json`
+  - `work/clips_manifest.json`
+  - contract output summary
 
-- 输入契约：CLI/守护/GUI 接收的配置字段；媒体文件路径与可访问性检查。
-- 输出契约：导出目录结构、字幕/评分 JSON schema（含 schema_version）、渲染文件命名。
-- 外部依赖：ffmpeg/TwitchDownloaderCLI 版本与调用参数需在 specs 中固定或注明兼容范围。
+### 1.3 Phase 2 已新增的单主线薄层
+- `src/acfv/pipeline/stages.py`
+  - 作为 clip pipeline 的单一 stage source
+  - 定义固定主线 stages、输入/输出 artifact contract 摘要、`optional` 标记、以及 raw progress 到 canonical stage 的映射
+- `src/acfv/pipeline/orchestrator.py`
+  - 作为统一 orchestrator 入口
+  - 负责 `ingest_video`
+  - 负责写出 `work/stage_plan.json`
+  - 之后继续调用 `modular.pipeline.run_pipeline(...)`
+- `backend.job_manager`
+  - 现在直接依赖 `pipeline/stages.py`
+  - `job_state.current_stage` 由同一份 canonical stage 语义驱动，而不是 GUI/CLI 各自维护一套阶段表
+
+### 1.3a Phase 3 Step 1 新增的执行态层
+- `src/acfv/pipeline/runtime.py`
+  - 负责 `work/runtime/transcribe_runtime.json`
+  - 负责 `work/runtime/render_runtime.json`
+  - 只做阶段内 item 生命周期写盘，不改变 canonical stage，也不替代 backend/job manager
+- 设计边界：
+  - plan input 继续留在 `work/audio_chunk_manifest.json` 与 `work/clip_manifest.json`
+  - runtime state 固定分离到 `work/runtime/`
+  - `export_results.json` 仍是摘要，不充当执行态文件
+
+### 1.4 GUI 当前与 backend 的关系
+- GUI 已开始收敛为前端控制层
+- `MainWindow`、`LocalVideoManager`、若干 `QThread` helper 目前仍承担:
+  - 任务提交前的轻量准备
+  - GUI 适配层级别的轮询/刷新
+  - 错误弹窗、日志入口、结果目录入口
+  - 部分 run 目录创建
+- 现状中最关键的桥接点是 `steps/local_video_manager/impl.py`
+  - Phase 1 前它直接调用 `modular.pipeline.run_pipeline`
+  - Phase 1 后它改为通过 `acfv.backend.service` 创建 job
+  - Phase 4 后它不再等待 job 完成，而是通过 `acfv.app.gui_job_controller.GuiJobController` 轮询统一 job state / runtime state
+  - GUI 不再直接拥有 pipeline 调用边界，但仍暂时保留兼容适配线程
+
+### 1.5 仍然存在的遗留 backend
+- `src/acfv/features/modules/pipeline_backend.py` 仍保留一套旧式 monolithic backend
+- 该文件仍承载历史逻辑:
+  - 串行切片
+  - 旧进度估算
+  - 自动索引辅助能力
+- 当前审计结论:
+  - 它不是 CLI `pipe clip` 的主线
+  - GUI 本地视频主路径也不再通过它执行 job 主线
+  - Phase 1 后其 `run_pipeline(...)` 已被降为兼容转发壳，统一转发到 `acfv.backend.service`
+
+## 2. 当前主要耦合问题
+
+### 2.1 Phase 1 已落地的 backend service 边界
+- 已新增:
+  - `acfv.backend.service`
+  - `acfv.backend.job_manager`
+  - `acfv.backend.job_state`
+- 当前统一接口:
+  - `create_job`
+  - `get_job_status`
+  - `cancel_job`
+  - `list_artifacts`
+  - `get_logs`
+- 结果:
+  - GUI 与 CLI 现在共用同一 job/service 边界
+  - `modular.pipeline` 继续作为唯一正式 pipeline 核心
+  - 仓库内不再保留两套并行 job backend 主路径
+
+### 2.2 Phase 2 后的主线阶段定义
+- 当前 `modular.pipeline` 仍是“artifact goal + plugin 依赖”驱动
+- 但 Phase 2 已在其上补出一层显式主线定义，固定为：
+  - `ingest_video`
+  - `extract_audio`
+  - `build_audio_chunk_manifest`
+  - `transcribe_chunks`
+  - `merge_transcript`
+  - `optional_analysis`
+  - `select_segments`
+  - `build_clip_manifest`
+  - `render_clips_batch`
+  - `export_results`
+- 这份阶段语义现在是 backend / CLI / GUI compat adapter 的单一来源
+- 现状限制:
+  - 现有 `transcribe_audio` 与 `render_clips` 仍然是一对多 stage 映射，不是已经拆开的并发执行器
+  - optional analysis 仍在 modular 内部展开，但对 job_state 只暴露一个总阶段
+
+### 2.3 GUI 仍有兼容线程，但已经不再承载核心业务主线
+- 当前 `QThread` / worker 分散在:
+  - `main_window.py`
+  - `features/modules/ui_components.py`
+  - `steps/local_video_manager/impl.py`
+  - `ui/stream_monitor_worker.py`
+  - `steps/twitch_downloader/impl.py`
+- Phase 4 后 GUI 已不再自己等待 pipeline 完成，也不再维护独立 stage vocabulary
+- 仍待后续继续收敛的点:
+  - 兼容 QThread 适配层仍存在
+  - MainWindow 仍保留较重的历史进度组件
+
+### 2.4 Phase 3 已引入最小阶段内调度，但仍不是全局资源编排
+- 当前转录和渲染已经在各自 stage 内使用显式 dispatcher
+- 已经有显式的:
+  - `gpu_asr_pool`
+  - `render_pool`
+  - chunk / clip 级状态模型
+- Phase 2 已补出的最小契约:
+  - `work/audio_chunk_manifest.json`
+  - `work/transcript_merged.json`
+  - `work/selected_segments.json`
+  - `work/clip_manifest.json`
+  - `work/export_results.json`
+- Phase 3 Step 1 已补出的最小执行态:
+  - `work/runtime/transcribe_runtime.json`
+  - `work/runtime/render_runtime.json`
+- Phase 3 第二子步后，这些执行态文件已经成为 stage-local dispatcher 的真实执行态来源之一
+- 仍未引入的能力:
+  - 全局 DAG/跨阶段调度
+  - 复杂 retry
+  - 更强取消
+  - 多 GPU 扩展
+
+## 3. 当前到目标的约束
+- 保留现有入口:
+  - `acfv gui`
+  - `acfv pipe clip`
+- 不删除旧导入路径
+- 不改输出目录契约
+- 不推倒 `modular.pipeline` / registry / artifact store
+- GUI 继续优先，但 GUI 不再继续扩展为业务线程容器
+
+## 4. 目标架构草图
+
+### A. GUI Layer
+- 负责:
+  - 参数输入
+  - 任务创建
+  - 任务列表 / 当前阶段 / chunk 级进度展示
+  - 取消任务
+  - 打开结果目录
+  - 查看结果摘要 / 错误摘要
+- 不负责:
+  - 直接跑转录
+  - 直接跑渲染
+  - 直接编排 pipeline
+  - 直接维护核心 worker 生命周期
+
+### B. Backend Service Layer
+- 新的统一边界
+- 对 GUI / CLI 暴露统一接口:
+  - `create_job(...)`
+  - `get_job_status(...)`
+  - `cancel_job(...)`
+  - `list_artifacts(...)`
+  - `get_logs(...)`
+  - `resume_job(...)`（如适配现有 run 目录）
+- 该层负责:
+  - job 元数据
+  - 生命周期状态机
+  - 进度快照
+  - 错误汇总
+  - 结果查询
+
+### C. Pipeline / Orchestrator Layer
+- 继续建立在 `modular.pipeline` 之上
+- 但现在已经显式维护单主线 stage 定义:
+  - `ingest_video`
+  - `extract_audio`
+  - `build_audio_chunk_manifest`
+  - `transcribe_chunks`
+  - `merge_transcript`
+  - `optional_analysis`
+  - `select_segments`
+  - `build_clip_manifest`
+  - `render_clips_batch`
+  - `export_results`
+- 该层负责 stage contract、artifact 传递、对 job manager 发状态
+- 当前 stage 到 module 的映射:
+  - `ingest_video` -> `pipeline/orchestrator.py`
+  - `extract_audio` -> `modular.plugins.extract_audio`
+  - `build_audio_chunk_manifest` / `transcribe_chunks` / `merge_transcript` -> `modular.plugins.transcribe_audio`
+  - `optional_analysis` -> `screen_detect` / `screen_understanding` / `video_emotion` / `speaker_separation` / `streamer_subtitles` / `subtitle_translate` / `analyze_segments` / `semantic_merge` / `llm_highlight`
+  - `select_segments` / `build_clip_manifest` / `render_clips_batch` / `export_results` -> `modular.plugins.render_clips`
+
+### D. Worker / Executor Layer
+- 不再按 GUI thread 命名职责
+- 改为按资源职责划分:
+  - `io_pool`
+  - `gpu_asr_pool`
+  - `cpu_pool`
+  - `render_pool`
+- 第一阶段只做“阶段内并发”
+  - ASR: chunk 级
+  - render: clip 级
+  - 不做全局 DAG scheduler
+- Phase 3 Step 1 当前只落地执行模型边界：
+  - `io_pool`：轻量文件准备、结果搬运、manifest 补写
+  - `gpu_asr_pool`：chunk ASR，单 GPU 默认 `max_workers=1`
+  - `cpu_pool`：merge / 轻量 CPU 小任务
+  - `render_pool`：clip render
+- 当前已落地的最小调度器：
+  - `gpu_asr_pool`：`transcribe_chunks` 内部按 chunk 调度；当前为单 GPU 保守模式，`max_workers` 默认且实际上保持 `1`
+  - `render_pool`：`render_clips_batch` 内部按 clip 调度；并发度由 `render_pool.max_workers` 控制
+- 这些 pool 仍只在单阶段内部生效，不改变 orchestrator / backend service 的外层主线职责
+
+### E. Artifact / Output Layer
+- 保留现有 `ArtifactStore`、`clips_manifest.json`、`segments.json`、run/work 结构
+- 新增的 manifest 应优先作为 artifact，而不是临时 UI 数据
+
+## 5. 目标分离边界
+- GUI -> backend service
+- backend service -> orchestrator
+- orchestrator -> modular plugins / steps
+- executor -> stage-internal concurrency
+- artifact/output -> run_dir / work / manifest / logs
+
+这条边界必须做到:
+- GUI 不直接触达 step 实现
+- CLI 也通过同一 backend service，而不是自己拼一套 orchestration
+- `modular.pipeline` 继续保留为核心执行能力，而不是被新 service 替换掉
+
+## 6. Phase 1 当前状态
+- 已完成:
+  - CLI `acfv.cli.pipeline` -> `backend.service`
+  - GUI `LocalVideoManager` -> `backend.service`
+  - 旧 `features.modules.pipeline_backend.run_pipeline` -> `backend.service` compat wrapper
+- 仍保留的兼容层:
+  - `LocalVideoManager` 的 QThread 适配层
+  - `features.modules.pipeline_backend` 的辅助函数与旧导入路径
+- 仍待后续 phase 解决:
+  - chunk / clip manifest
+  - 阶段内并发和资源池
+
+## 6.1 Phase 2 当前状态
+- 已完成:
+  - 单一 stage source
+  - `job_state.current_stage` 绑定 canonical stages
+  - `ingest_video` 从 CLI 中抽离回 orchestrator
+  - 最小 stage contract 文件写入 `work/`
+- 尚未完成:
+  - chunk/clip 级执行器
+  - resource pool
+  - GUI 纯前端化
+
+## 6.2 Phase 3 当前状态
+- 已完成:
+  - `transcribe_chunks` 按 chunk 建立 runtime item
+  - `render_clips_batch` 按 clip 建立 runtime item
+  - queued/running/succeeded/failed/cancelled 最小状态流转落盘
+  - plan input 与 runtime state 彻底分离
+  - `transcribe_chunks` 现在真实按 chunk 调度执行
+  - `render_clips_batch` 现在真实按 clip 调度执行
+  - `gpu_asr_pool.max_workers` / `render_pool.max_workers` 已进入现有配置体系
+- 尚未完成:
+  - 多 attempt/retry 策略
+  - 更可靠的取消语义
+  - 多 GPU / 更复杂资源池编排
+
+## 6.3 Phase 4 当前状态
+- 已完成:
+  - GUI 任务提交统一经由 `GuiJobController -> backend.service`
+  - GUI 当前阶段直接读取 `job_state.current_stage`
+  - GUI 在 `transcribe_chunks` / `render_clips_batch` 阶段直接读取 `work/runtime/*.json` 的摘要
+  - GUI 已提供取消、查看日志、打开结果目录等入口
+- 仍未完成:
+  - 更强取消
+  - 更丰富的 chunk/clip 级可视化
+  - 将剩余兼容线程进一步收敛为更薄的 watcher
+
+## 7. 分阶段收敛路径
+
+### Phase 1
+- 抽出 backend service 和 job manager
+- GUI / CLI 都通过同一 service 创建任务
+- 保留兼容层
+
+### Phase 2
+- 在 `modular.pipeline` 基础上，把 clip 主线显式化为统一 stage list
+- 已落地，不再依赖 GUI/CLI 分散维护阶段表
+
+### Phase 3
+- 引入音频 chunk manifest、clip manifest、资源池和阶段内并发
+
+### Phase 4
+- GUI 收敛为真正前端
+- 只看 job 状态与 artifact，不再直接承载业务线程模型
+
+### Phase 5
+- verify / regression / compatibility / output contract 回归
+
+## 6.4 Phase 5 当前状态
+- 已确认稳定:
+  - `orchestrator.py` 仍是统一主线入口
+  - `backend.service / job_manager` 仍是唯一 job 外层驱动
+  - GUI / CLI / legacy compat 未重新分叉出第二条 backend 主线
+  - contract artifact 与 runtime state 分离仍成立
+- 已确认入口:
+  - CLI help / GUI help / `pipe clip --dry-run-plan` 均可用
+  - GUI 代码路径继续通过 `GuiJobController -> backend.service`
+  - GUI 当前阶段仍来自 `job_state.current_stage`
+  - GUI transcribe/render 摘要仍来自 `get_runtime_state(...)`
+- 仍未纳入本轮:
+  - 更强取消
+  - 有限 retry
+  - 多 GPU ASR
+  - `io_pool` / `cpu_pool` 完整执行器
+  - 更丰富的 GUI 细粒度可视化
+
+## 8. Phase 2 结论
+- 当前项目已经同时具备：
+  - 统一 backend service 边界
+  - 显式单主线 stage 定义
+- 下一步应基于这层显式主线继续做 Phase 3 的阶段内并发，而不是回头重造 backend 或改写全局 DAG

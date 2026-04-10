@@ -723,6 +723,11 @@ def main():
             start_in_tray = _is_truthy(config_manager.get("START_IN_TRAY", False))
         except Exception:
             start_in_tray = False
+        try:
+            if _is_truthy(os.environ.get("ACFV_DISABLE_START_IN_TRAY", False)):
+                start_in_tray = False
+        except Exception:
+            pass
         if start_in_tray:
             if main_window.tray_manager:
                 main_window.hide()
