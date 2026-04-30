@@ -16,7 +16,30 @@ class _YamlConfigAdapter:
         self.payload = payload or {}
 
     def get(self, key: str, default=None):
-        return self.payload.get(key, default)
+        if key in self.payload:
+            return self.payload.get(key, default)
+        aliases = {
+            "MAX_CLIP_COUNT": ("pipeline", "max_clip_count"),
+            "MIN_CLIP_SEGMENT_SECONDS": ("pipeline", "min_clip_segment_seconds"),
+            "TARGET_CLIP_DURATION": ("pipeline", "target_clip_duration"),
+            "ENABLE_SCREEN_DETECT": ("features", "enable_screen_detect"),
+            "ENABLE_SCREEN_UNDERSTANDING": ("features", "enable_screen_understanding"),
+            "ENABLE_LLM_HIGHLIGHT": ("features", "enable_llm_highlight"),
+            "ENABLE_SPEAKER_SEPARATION": ("features", "enable_speaker_separation"),
+            "ENABLE_STREAMER_SUBTITLES": ("features", "enable_streamer_subtitles"),
+            "ENABLE_SUBTITLE_TRANSLATE": ("features", "enable_subtitle_translate"),
+            "RAG_ENABLE": ("features", "enable_rag"),
+        }
+        path = aliases.get(key)
+        if path:
+            cursor = self.payload
+            for part in path:
+                if not isinstance(cursor, dict) or part not in cursor:
+                    cursor = default
+                    break
+                cursor = cursor[part]
+            return cursor
+        return default
 
 
 def _load_cfg_adapter(path: str | None):
@@ -30,10 +53,10 @@ def _load_cfg_adapter(path: str | None):
 
 @pipeline_app.command("clip")
 def clip(
-    url: str = typer.Option(..., help="Twitch VOD URL / VOD ID / local video path"),
+    url: str = typer.Option(..., help="Twitch VOD URL / local video path / stream URL"),
     out_dir: str = typer.Option("runs/out", help="Output root directory"),
-    cfg: str = typer.Option(None, help="Path to YAML config"),
-    dry_run_plan: bool = typer.Option(False, "--dry-run-plan", help="Print the canonical stage plan and exit"),
+    cfg: str = typer.Option(None, help="Path to YAML config with providers.* overrides"),
+    dry_run_plan: bool = typer.Option(False, "--dry-run-plan", help="Print the clip-workflow stage plan and exit"),
 ):
     if isinstance(dry_run_plan, typer.models.OptionInfo):
         dry_run_plan = bool(dry_run_plan.default)

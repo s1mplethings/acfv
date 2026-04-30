@@ -6,13 +6,6 @@ import json
 import logging
 import time
 
-# 可选依赖
-try:
-    import faiss
-    FAISS_AVAILABLE = True
-except ImportError:
-    FAISS_AVAILABLE = False
-    
 try:
     import pickle
     PICKLE_AVAILABLE = True
@@ -38,7 +31,6 @@ from acfv.ui.tabs import (
     create_twitch_tab,
     create_rag_pref_tab,
 )
-from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
 from acfv.lifecycle.tray_manager import TrayManager
 from acfv.runtime.storage import processing_path
 
@@ -231,6 +223,11 @@ def build_content_index(segments):
     try:
         from sklearn.feature_extraction.text import TfidfVectorizer
         import numpy as np
+        try:
+            import faiss
+        except ImportError:
+            logging.warning("FAISS 不可用，跳过内容索引构建")
+            return None, None, []
         
         if not segments:
             return None, None, []
@@ -286,6 +283,9 @@ class MainWindow(QMainWindow):
         self.tray_manager = None
         self._force_exit = False
         self._monitor_autostarted = False
+        self.stream_monitor_widget = None
+        self._stream_monitor_tab_index = -1
+        self._stream_monitor_placeholder = None
         
         # 初始化新的进度系统
         self.progress_manager = ProgressManager()
@@ -337,7 +337,7 @@ class MainWindow(QMainWindow):
         self.checkpoint_manager = None
         try:
             # 修正导入路径: 原 modules.analyze_data 实际位于 processing 包
-            from acfv.processing.analyze_data import CheckpointManager
+            from acfv.processing.checkpoint_manager import CheckpointManager
             self.checkpoint_manager = CheckpointManager()
             log_info("[GUI] 断点续传模块加载成功")
         except ImportError as e:
@@ -476,10 +476,40 @@ class MainWindow(QMainWindow):
         self.rag_pref_widget = rag_pref_handle.controller
         self.tabs.addTab(rag_pref_handle.widget, rag_pref_handle.title)
 
-        # Stream monitor tab
-        self.stream_monitor_widget = StreamMonitorEditorWidget()
-        self.tabs.addTab(self.stream_monitor_widget, "直播监控")
-        QTimer.singleShot(0, self._auto_launch_stream_monitor)
+        self._stream_monitor_placeholder = QWidget()
+        placeholder_layout = QVBoxLayout(self._stream_monitor_placeholder)
+        placeholder_layout.setContentsMargins(12, 12, 12, 12)
+        placeholder_layout.addWidget(QLabel("直播监控页面按需加载。首次打开时会初始化监控组件。"))
+        placeholder_layout.addStretch(1)
+        self._stream_monitor_tab_index = self.tabs.addTab(self._stream_monitor_placeholder, "直播监控")
+        self.tabs.currentChanged.connect(self._on_tab_changed)
+        QTimer.singleShot(1500, self._auto_launch_stream_monitor)
+
+    def _on_tab_changed(self, index):
+        if index == self._stream_monitor_tab_index:
+            self._ensure_stream_monitor_widget()
+
+    def _ensure_stream_monitor_widget(self):
+        if self.stream_monitor_widget is not None:
+            return self.stream_monitor_widget
+        try:
+            from acfv.ui.stream_monitor_editor import StreamMonitorEditorWidget
+        except Exception as exc:
+            logging.error(f"直播监控页面初始化失败: {exc}")
+            if self._stream_monitor_placeholder is not None:
+                layout = self._stream_monitor_placeholder.layout()
+                if layout and layout.count() > 0:
+                    item = layout.itemAt(0)
+                    widget = item.widget() if item else None
+                    if isinstance(widget, QLabel):
+                        widget.setText(f"直播监控组件加载失败: {exc}")
+            return None
+
+        widget = StreamMonitorEditorWidget()
+        self.stream_monitor_widget = widget
+        self.tabs.removeTab(self._stream_monitor_tab_index)
+        self.tabs.insertTab(self._stream_monitor_tab_index, widget, "直播监控")
+        return widget
 
     def _init_tray_icon(self):
         try:
@@ -496,11 +526,12 @@ class MainWindow(QMainWindow):
         if self._monitor_autostarted:
             return
         self._monitor_autostarted = True
-        if hasattr(self, "stream_monitor_widget"):
-            self.stream_monitor_widget.refresh_from_disk()
-            if self.stream_monitor_widget.has_enabled_targets():
-                self.tabs.setCurrentWidget(self.stream_monitor_widget)
-                self.stream_monitor_widget.start_monitor()
+        widget = self._ensure_stream_monitor_widget()
+        if widget is not None:
+            widget.refresh_from_disk()
+            if widget.has_enabled_targets():
+                self.tabs.setCurrentWidget(widget)
+                widget.start_monitor()
 
     def set_window_icon(self):
         """设置窗口图标"""
@@ -1076,9 +1107,9 @@ class MainWindow(QMainWindow):
             self.show_error_message("进度系统启动失败", str(e))
             
     def on_progress_updated(self, task_id: str, progress: int, eta: str):
-        """处理进度更新 - 使用简洁进度条"""
+        """处理旧进度更新；主进度条由 backend job view 统一驱动。"""
         if hasattr(self, 'simple_progress') and self.simple_progress:
-            self.simple_progress.set_progress(progress)
+            self.simple_progress.update_status(str(task_id), f"stage {progress}%")
         # ETA 现在通过 simple_progress 自动显示，无需独立更新
         
     def on_status_updated(self, task_id: str, status: str):

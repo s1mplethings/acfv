@@ -534,6 +534,7 @@ class SimpleBeautifulProgressBar(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.progress_manager = None
+        self._manual_progress_mode = False
         self.setup_ui()
         
         # 更新定时器
@@ -588,6 +589,8 @@ class SimpleBeautifulProgressBar(QWidget):
         
     def update_display(self):
         """更新进度显示"""
+        if self._manual_progress_mode:
+            return
         if not self.progress_manager:
             return
             
@@ -675,6 +678,7 @@ class SimpleBeautifulProgressBar(QWidget):
     def start_progress(self, title: str = "处理中..."):
         """开始一次新的进度显示（与 main_window 兼容）"""
         try:
+            self._manual_progress_mode = False
             self.progress_bar.setValue(0)
             self.status_label.setText(title)
             self.setVisible(True)
@@ -697,6 +701,7 @@ class SimpleBeautifulProgressBar(QWidget):
     def update_progress(self, value: float | int, status: str | None = None, detail: str | None = None):
         """更新进度值以及可选状态（与 main_window 兼容）"""
         try:
+            self._manual_progress_mode = True
             ivalue = int(value) if value is not None else 0
             if ivalue < 0:
                 ivalue = 0

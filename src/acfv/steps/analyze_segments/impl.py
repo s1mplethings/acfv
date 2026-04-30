@@ -15,6 +15,7 @@ except ImportError:
     pass
 
 import json
+import sys
 from pathlib import Path
 from acfv import config
 from acfv.main_logging import log_debug, log_info, log_error, log_warning
@@ -117,6 +118,52 @@ except ImportError as e:
     log_error(f"[analyze_data] GPU库导入失败: {e}")
     GPU_AVAILABLE = False
     torch = None
+
+
+def _safe_console_text(text: str, stream=None) -> str:
+    raw = str(text or "")
+    target = stream if stream is not None else sys.stderr
+    encoding = str(getattr(target, "encoding", "") or "").strip() or "utf-8"
+    try:
+        return raw.encode(encoding, errors="replace").decode(encoding, errors="replace")
+    except Exception:
+        return raw.encode("utf-8", errors="replace").decode("utf-8", errors="replace")
+
+
+class _NullProgressBar:
+    def update(self, _count):
+        return None
+
+    def close(self):
+        return None
+
+
+def _build_progress_bar(*, total: int, desc: str, unit: str = "seg"):
+    if not TQDM_AVAILABLE:
+        return None
+    try:
+        return tqdm(total=total, desc=_safe_console_text(desc), unit=unit)
+    except Exception as exc:
+        log_warning(f"[进度条] tqdm 初始化失败，已禁用本次进度条: {exc}")
+        return _NullProgressBar()
+
+
+def _safe_progress_bar_update(progress_bar, count: int) -> None:
+    if progress_bar is None:
+        return
+    try:
+        progress_bar.update(count)
+    except Exception as exc:
+        log_warning(f"[进度条] update 失败，已忽略: {exc}")
+
+
+def _safe_progress_bar_close(progress_bar) -> None:
+    if progress_bar is None:
+        return
+    try:
+        progress_bar.close()
+    except Exception as exc:
+        log_warning(f"[进度条] close 失败，已忽略: {exc}")
 
 # 延迟初始化VADER词库
 sid = None
@@ -522,8 +569,11 @@ def ultra_fast_parallel_extraction(feature_extractor, all_segments, max_workers=
         all_features = []
         processed_count = 0
         
-        if TQDM_AVAILABLE:
-            progress_bar = tqdm(total=len(all_segments), desc="⚡超快特征提取", unit="seg")
+        progress_bar = _build_progress_bar(
+            total=len(all_segments),
+            desc="⚡超快特征提取",
+            unit="seg",
+        )
         
         for i in range(0, len(all_segments), batch_size):
             batch = all_segments[i:i + batch_size]
@@ -531,19 +581,17 @@ def ultra_fast_parallel_extraction(feature_extractor, all_segments, max_workers=
             all_features.extend(batch_features)
             processed_count += len(batch)
             
-            if TQDM_AVAILABLE:
-                progress_bar.update(len(batch))
+            _safe_progress_bar_update(progress_bar, len(batch))
             
             # 发送进度回调
             if progress_callback:
                 try:
-                    progress_callback("⚡超快特征计算", processed_count, len(all_segments), 
+                    progress_callback(_safe_console_text("⚡超快特征计算"), processed_count, len(all_segments), 
                                     f"已处理 {processed_count}/{len(all_segments)} 个片段")
                 except:
                     pass
         
-        if TQDM_AVAILABLE:
-            progress_bar.close()
+        _safe_progress_bar_close(progress_bar)
         
         elapsed = time.time() - start_time
         speed = len(all_segments) / elapsed if elapsed > 0 else float('inf')
@@ -570,8 +618,11 @@ def parallel_feature_extraction_with_checkpoint_original(feature_extractor, all_
     all_features = []
     processed_count = 0
     
-    if TQDM_AVAILABLE:
-        progress_bar = tqdm(total=len(all_segments), desc="标准特征提取", unit="seg")
+    progress_bar = _build_progress_bar(
+        total=len(all_segments),
+        desc="标准特征提取",
+        unit="seg",
+    )
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_batch = {
@@ -586,8 +637,7 @@ def parallel_feature_extraction_with_checkpoint_original(feature_extractor, all_
                 all_features.extend(batch_features)
                 processed_count += len(batch)
                 
-                if TQDM_AVAILABLE:
-                    progress_bar.update(len(batch))
+                _safe_progress_bar_update(progress_bar, len(batch))
                 
                 # 发送进度回调
                 if progress_callback:
@@ -604,11 +654,9 @@ def parallel_feature_extraction_with_checkpoint_original(feature_extractor, all_
                     for _ in batch
                 ])
                 
-                if TQDM_AVAILABLE:
-                    progress_bar.update(len(batch))
+                _safe_progress_bar_update(progress_bar, len(batch))
     
-    if TQDM_AVAILABLE:
-        progress_bar.close()
+    _safe_progress_bar_close(progress_bar)
     
     log_info(f"[标准并行] 标准并行特征提取完成，处理了 {len(all_features)} 个片段")
     return all_features

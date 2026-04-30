@@ -75,7 +75,7 @@ def test_llm_highlight_raises_when_api_required_but_missing_key(monkeypatch):
         "policy": {"target_duration_ms": 4000},
     }
     with TemporaryDirectory() as tmp:
-        with pytest.raises(RuntimeError, match="requires API LLM"):
+        with pytest.raises(RuntimeError, match="requires an enabled LLM provider"):
             run_llm_highlight(
                 semantic_segments_payload=semantic_payload,
                 candidate_segments_payload={},

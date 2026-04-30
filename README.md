@@ -22,7 +22,7 @@
 
 
 
-  Twitch Clip & Chat Toolkit<br>
+  Open-Source Video Clip Workflow Orchestrator<br>
 
 
 
@@ -94,11 +94,11 @@
 
 
 
-  python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out
+  python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out --cfg src/acfv/config/default.yaml
 
 
 
-  # 处理本地文件：--url path/to/video.mp4
+  # 处理本地文件或流：--url path/to/video.mp4 / --url https://example.com/live.m3u8
 
 
 
@@ -106,7 +106,7 @@
 
 
 
-  `--url` 支持 Twitch VOD 链接或本地路径，`--out-dir` 为导出目录，可用 `--cfg` 指向自定义 YAML。
+  `--url` 支持 Twitch VOD、本地视频和可选的 Streamlink URL；`--cfg` 优先读取 `providers.*` 风格 YAML，并默认走本地开源能力链。
 
 
 
@@ -148,6 +148,10 @@
 
 - 需预装 `ffmpeg`、Python 3.9+，以及 `pip install -r requirements.txt`。
 
+- 默认主链不依赖 OpenAI 在线 API；推荐能力组合为 `TwitchDownloader` / `Streamlink`、`faster-whisper` 或 `WhisperX`、`PySceneDetect`、`RapidVideOCR`、`Ollama` 或 `vLLM`。
+
+- 重依赖已拆到 extras：`pip install .[asr,llm-local]` 可启用本地 ASR 与本地 OpenAI-compatible LLM 服务。
+
 
 
 - 首次运行时会自动下载 [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader) 到 `var/tools/`，若失败可手动放入 PATH 或程序目录。
@@ -166,7 +170,33 @@
 
 
 
-- **Hugging Face Token**：打开 <https://huggingface.co/settings/tokens>，点击 “New token”，选择 `Read` 权限，将令牌写入 `secrets/huggingface_token.txt`（或在 GUI 的 Secrets 页填写）。
+- **Hugging Face Token**：仅当你显式切换到 `hf-whisper` 等 Hugging Face 拉模能力时才需要；默认 `faster-whisper` / `WhisperX` + 本地缓存不依赖在线 token。
+
+- **示例 YAML（开源本地优先）**：
+
+  ```yaml
+  providers:
+    download:
+      default: twitch-downloader
+    asr:
+      default: faster-whisper
+      faster-whisper:
+        model: medium
+    scene:
+      default: pyscenedetect
+    ocr:
+      default: rapidvideocr
+    llm:
+      default: ollama
+      ollama:
+        base_url: http://127.0.0.1:11434/v1
+        api_key: ollama
+        model: qwen2.5:7b-instruct
+  features:
+    enable_screen_detect: false
+    enable_llm_highlight: false
+    enable_rag: false
+  ```
 
 
 
@@ -306,11 +336,11 @@
 
 
 
-  python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out
+  python -m acfv.cli.pipeline clip --url https://www.twitch.tv/videos/<VOD_ID> --out-dir runs/out --cfg src/acfv/config/default.yaml
 
 
 
-  # Local media: --url path/to/video.mp4
+  # Local media or stream URL: --url path/to/video.mp4 / --url https://example.com/live.m3u8
 
 
 
@@ -318,7 +348,7 @@
 
 
 
-  `--url` accepts a Twitch VOD link or local path; `--out-dir` chooses the export folder; `--cfg` can point to a custom YAML overrides file.
+  `--url` accepts Twitch VODs, local media, and optional Streamlink URLs; `--cfg` now prefers `providers.*` YAML and defaults to an open-source local toolchain.
 
 
 
@@ -358,6 +388,10 @@ Prefer a GUI? Run `acfv stream-monitor-ui` or switch to the new “Stream Monito
 
 - Install `ffmpeg`, Python 3.9+, and run `pip install -r requirements.txt`.
 
+- The default clip workflow avoids OpenAI-hosted APIs. Recommended local providers are `TwitchDownloader` / `Streamlink`, `faster-whisper` or `WhisperX`, `PySceneDetect`, `RapidVideOCR`, and `Ollama` or `vLLM`.
+
+- Heavy modules now live in extras: `pip install .[asr,llm-local]` for ASR + local LLM services, `pip install .[rag]` for optional retrieval tooling.
+
 - On first launch ACFV will download [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader) into `var/tools/`; if that fails, place the binary manually on your PATH or beside the app.
 
 - Twitch Helix endpoints (`https://api.twitch.tv/helix/users`, `https://api.twitch.tv/helix/videos`) power user and VOD discovery.
@@ -366,7 +400,7 @@ Prefer a GUI? Run `acfv stream-monitor-ui` or switch to the new “Stream Monito
 
 ### Token & VOD Guide
 
-- **Hugging Face Token**: Visit <https://huggingface.co/settings/tokens>, create a “New token” with `Read` scope, then store it in `secrets/huggingface_token.txt` or via the GUI Secrets tab.
+- **Hugging Face Token**: only needed when you explicitly switch the ASR provider to `hf-whisper` or another Hugging Face-backed backend.
 
 - **Twitch Client ID & OAuth Token**:
 

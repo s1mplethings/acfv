@@ -2,7 +2,6 @@ import json
 from collections import Counter
 from pathlib import Path
 from bs4 import BeautifulSoup
-from transformers import pipeline
 from acfv import config
 import re
 from acfv.main_logging import log_info, log_error, log_warning
@@ -102,6 +101,12 @@ def _summarize_messages(chat_rows):
     }
 
 def _build_sentiment_pipeline(model_path, device_id):
+    try:
+        from transformers import pipeline
+    except Exception as import_err:
+        log_warning(f"[chat] transformers 不可用，跳过逐条情感分析: {import_err}")
+        return None
+
     model_id = _maybe_hf_model_id(model_path)
     if model_id:
         try:

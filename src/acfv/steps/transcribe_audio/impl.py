@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import faulthandler
+import gc
 import math
 import os
 import platform
@@ -12,6 +13,8 @@ import tempfile
 import threading
 import time
 import traceback
+from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,10 +31,18 @@ except ImportError:
 
 try:
     from faster_whisper import WhisperModel as FasterWhisperModel
+    from faster_whisper.utils import download_model as faster_whisper_download_model
 
     FASTER_WHISPER_AVAILABLE = True
 except ImportError:
     FASTER_WHISPER_AVAILABLE = False
+
+try:
+    import whisperx
+
+    WHISPERX_AVAILABLE = True
+except ImportError:
+    WHISPERX_AVAILABLE = False
 
 try:
     from transformers import pipeline as hf_pipeline
@@ -54,9 +65,97 @@ SCHEMA_VERSION = "1.0.0"
 DEFAULT_SAMPLE_RATE = 16000
 ALLOWED_MODEL_SIZES = {"tiny", "base", "small", "medium", "large", "large-v2", "large-v3", "large-v3-turbo"}
 ALLOWED_OUTPUT_FORMATS = {"json", "srt", "ass", "all"}
-ALLOWED_ENGINES = {"auto", "openai-whisper", "faster-whisper", "hf-whisper"}
+ALLOWED_ENGINES = {"auto", "openai-whisper", "faster-whisper", "hf-whisper", "whisperx"}
+LARGE_V3_MODELS = {"large-v3", "large-v3-turbo"}
+LARGE_V3_SAFE_SPLIT_DURATION = 60
+CHUNK_START_STAGES = {"chunk_transcribe_start", "single_transcribe_start"}
 _FFMPEG_AVAILABLE_CACHE: Optional[bool] = None
 _TRANSCRIBE_PYTHON_CACHE: Optional[str] = None
+_TRANSCRIBER_CACHE: "OrderedDict[Tuple[str, str, str], Tuple[str, Any]]" = OrderedDict()
+_TRANSCRIBER_CACHE_LOCK = threading.Lock()
+_TRANSCRIBER_CACHE_MAX = 2
+
+
+class _RecycleRequested(RuntimeError):
+    pass
+
+
+def _faster_whisper_cache_dir() -> Optional[str]:
+    for key in ("HF_HUB_CACHE", "HUGGINGFACE_HUB_CACHE"):
+        value = str(os.environ.get(key, "")).strip()
+        if value:
+            return value
+    home = str(os.environ.get("HF_HOME", "")).strip()
+    if home:
+        return str(Path(home) / "hub")
+    return None
+
+
+def _resolve_local_faster_whisper_model_path(model_size: str) -> Optional[str]:
+    if not FASTER_WHISPER_AVAILABLE:
+        return None
+    try:
+        return faster_whisper_download_model(
+            model_size,
+            local_files_only=True,
+            cache_dir=_faster_whisper_cache_dir(),
+        )
+    except Exception:
+        return None
+
+
+def _is_huggingface_connectivity_error(exc: Exception) -> bool:
+    text = str(exc or "").lower()
+    return "huggingface.co" in text or "snapshot_download" in text or "ssl" in text or "maxretryerror" in text
+
+
+def _format_faster_whisper_load_error(model_size: str, exc: Exception) -> RuntimeError:
+    if _is_huggingface_connectivity_error(exc):
+        return RuntimeError(
+            "faster-whisper model load failed: unable to access Hugging Face and no usable local cache was found "
+            f"for model '{model_size}'. Reconnect the network or pre-download the model, then retry. Original error: {exc}"
+        )
+    return RuntimeError(f"faster-whisper model load failed for '{model_size}': {exc}")
+
+
+def _recycle_chunk_limit(engine: str, device_hint: Optional[str]) -> int:
+    raw = str(os.environ.get("ACFV_TRANSCRIBE_RECYCLE_EVERY_CHUNKS", "")).strip()
+    if raw:
+        try:
+            return max(0, int(raw))
+        except Exception:
+            return 0
+    engine_text = str(engine or "").strip().lower()
+    device_text = str(device_hint or "").strip().lower()
+    if engine_text == "faster-whisper" and device_text in {"cuda", "cpu"}:
+        return 60
+    return 0
+
+
+def _resolve_transcriber_device(device: Optional[str]) -> str:
+    return str(device or ("cuda" if TORCH_AVAILABLE and torch.cuda.is_available() else "cpu")).strip().lower()
+
+
+def _get_cached_transcriber(cache_key: Tuple[str, str, str]) -> Optional[Tuple[str, Any]]:
+    with _TRANSCRIBER_CACHE_LOCK:
+        cached = _TRANSCRIBER_CACHE.get(cache_key)
+        if cached is not None:
+            _TRANSCRIBER_CACHE.move_to_end(cache_key)
+        return cached
+
+
+def _store_cached_transcriber(cache_key: Tuple[str, str, str], value: Tuple[str, Any]) -> Tuple[str, Any]:
+    with _TRANSCRIBER_CACHE_LOCK:
+        _TRANSCRIBER_CACHE[cache_key] = value
+        _TRANSCRIBER_CACHE.move_to_end(cache_key)
+        while len(_TRANSCRIBER_CACHE) > _TRANSCRIBER_CACHE_MAX:
+            _TRANSCRIBER_CACHE.popitem(last=False)
+    return value
+
+
+def _clear_transcriber_cache() -> None:
+    with _TRANSCRIBER_CACHE_LOCK:
+        _TRANSCRIBER_CACHE.clear()
 
 
 def _transcribe_runtime_path_entries(python_executable: Optional[str] = None) -> List[str]:
@@ -372,6 +471,11 @@ def _atomic_write_json(path: Path, payload: Any) -> None:
     tmp.replace(path)
 
 
+def _read_json_payload(path: Path) -> Dict[str, Any]:
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
 def _atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -434,8 +538,10 @@ class _TranscribeDiagnostics:
             "start",
             "prepare_audio_done",
             "model_loaded",
+            "chunk_transcribe_start",
             "chunk_transcribe_ok",
             "chunk_transcribe_error",
+            "single_transcribe_start",
             "single_transcribe_ok",
             "single_transcribe_error",
             "complete",
@@ -594,6 +700,10 @@ def _normalize_model_name(model_size: str, engine: str) -> str:
         if text == "large-v3-turbo":
             return "large-v3"
         return text
+    if engine == "whisperx":
+        if text == "large-v3-turbo":
+            return "large-v3"
+        return text
     if text in {"large-v3-turbo", "large-v3"}:
         log_warning(f"[transcribe] {text} not available in openai-whisper; using 'large' instead")
         return "large"
@@ -663,6 +773,34 @@ class _HFWhisperAdapter:
         return {"segments": items, "language": language_out or language}
 
 
+class _WhisperXAdapter:
+    """Adapter to provide whisper-like transcribe() output using whisperx."""
+
+    def __init__(self, model: Any, device: str, model_id: str) -> None:
+        self._model = model
+        self.device = device
+        self.model_id = model_id
+
+    def transcribe(self, audio_path: str, language=None, initial_prompt="", word_timestamps=False, fp16=False):
+        audio = whisperx.load_audio(str(audio_path))
+        kwargs: Dict[str, Any] = {"batch_size": 4}
+        if language:
+            kwargs["language"] = language
+        result = self._model.transcribe(audio, **kwargs)
+        items = []
+        for seg in result.get("segments", []) or []:
+            items.append(
+                {
+                    "start": float(seg.get("start", 0.0) or 0.0),
+                    "end": float(seg.get("end", 0.0) or 0.0),
+                    "text": str(seg.get("text") or ""),
+                    "avg_logprob": seg.get("avg_logprob"),
+                    "no_speech_prob": seg.get("no_speech_prob"),
+                }
+            )
+        return {"segments": items, "language": result.get("language") or language}
+
+
 def _load_faster_whisper_model(model_size: str, device: Optional[str]) -> _FasterWhisperAdapter:
     if not FASTER_WHISPER_AVAILABLE:
         raise RuntimeError("faster-whisper is not installed")
@@ -670,7 +808,16 @@ def _load_faster_whisper_model(model_size: str, device: Optional[str]) -> _Faste
     desired_device = device or ("cuda" if TORCH_AVAILABLE and torch.cuda.is_available() else "cpu")
     compute_type = "float16" if desired_device.startswith("cuda") else "int8"
     log_info(f"[transcribe] loading faster-whisper model {model_size} on {desired_device} ({compute_type})")
-    model = FasterWhisperModel(model_size, device=desired_device, compute_type=compute_type)
+    model_source = _resolve_local_faster_whisper_model_path(model_size) or model_size
+    try:
+        model = FasterWhisperModel(
+            model_source,
+            device=desired_device,
+            compute_type=compute_type,
+            local_files_only=model_source != model_size,
+        )
+    except Exception as exc:
+        raise _format_faster_whisper_load_error(model_size, exc) from exc
     return _FasterWhisperAdapter(model, desired_device)
 
 
@@ -692,6 +839,20 @@ def _load_hf_whisper_model(model_size: str, device: Optional[str]) -> _HFWhisper
         model_kwargs=model_kwargs or None,
     )
     return _HFWhisperAdapter(pipe, desired_device, model_id)
+
+
+def _load_whisperx_model(model_size: str, device: Optional[str]) -> _WhisperXAdapter:
+    if not WHISPERX_AVAILABLE:
+        raise RuntimeError("whisperx is not installed")
+    desired_device = device or ("cuda" if TORCH_AVAILABLE and torch.cuda.is_available() else "cpu")
+    compute_type = "float16" if desired_device.startswith("cuda") else "int8"
+    model_id = _normalize_model_name(model_size, "whisperx")
+    log_info(f"[transcribe] loading whisperx model {model_id} on {desired_device} ({compute_type})")
+    try:
+        model = whisperx.load_model(model_id, desired_device, compute_type=compute_type)
+    except TypeError:
+        model = whisperx.load_model(model_id, desired_device)
+    return _WhisperXAdapter(model, desired_device, model_id)
 
 
 def _load_whisper_model(model_size: str, device: Optional[str]) -> whisper.Whisper:
@@ -718,21 +879,48 @@ def _load_transcriber(model_size: str, device: Optional[str], engine: str) -> tu
         raise ValueError(f"engine must be one of {sorted(ALLOWED_ENGINES)}")
     if engine == "auto":
         engine = "faster-whisper" if FASTER_WHISPER_AVAILABLE else "openai-whisper"
+    resolved_device = _resolve_transcriber_device(device)
 
     if engine == "hf-whisper":
         model_name = _normalize_model_name(model_size, engine)
-        return engine, _load_hf_whisper_model(model_name, device)
+        cache_key = (engine, model_name, resolved_device)
+        cached = _get_cached_transcriber(cache_key)
+        if cached is not None:
+            return cached
+        return _store_cached_transcriber(cache_key, (engine, _load_hf_whisper_model(model_name, resolved_device)))
+
+    if engine == "whisperx":
+        model_name = _normalize_model_name(model_size, engine)
+        cache_key = (engine, model_name, resolved_device)
+        cached = _get_cached_transcriber(cache_key)
+        if cached is not None:
+            return cached
+        return _store_cached_transcriber(cache_key, (engine, _load_whisperx_model(model_name, resolved_device)))
 
     if engine == "faster-whisper" and FASTER_WHISPER_AVAILABLE:
         model_name = _normalize_model_name(model_size, engine)
-        return engine, _load_faster_whisper_model(model_name, device)
+        cache_key = (engine, model_name, resolved_device)
+        cached = _get_cached_transcriber(cache_key)
+        if cached is not None:
+            return cached
+        return _store_cached_transcriber(
+            cache_key,
+            (engine, _load_faster_whisper_model(model_name, resolved_device)),
+        )
 
     if not WHISPER_AVAILABLE:
         raise RuntimeError("whisper is not installed")
     model_name = _normalize_model_name(model_size, "openai-whisper")
     if engine == "faster-whisper":
         log_warning("[transcribe] faster-whisper unavailable; falling back to openai-whisper")
-    return "openai-whisper", _load_whisper_model(model_name, device)
+    cache_key = ("openai-whisper", model_name, resolved_device)
+    cached = _get_cached_transcriber(cache_key)
+    if cached is not None:
+        return cached
+    return _store_cached_transcriber(
+        cache_key,
+        ("openai-whisper", _load_whisper_model(model_name, resolved_device)),
+    )
 
 
 def _transcribe_file(
@@ -776,6 +964,37 @@ def _transcribe_file(
     return segments, detected_lang
 
 
+def _cleanup_after_chunk(
+    chunk_path: Optional[Path],
+    device_hint: Optional[str] = None,
+) -> None:
+    if chunk_path is not None:
+        try:
+            chunk_path.unlink(missing_ok=True)
+        except Exception:
+            pass
+
+    try:
+        gc.collect()
+    except Exception:
+        pass
+
+    try:
+        if not TORCH_AVAILABLE or torch is None:
+            return
+        device_name = str(device_hint or "").strip().lower()
+        if not device_name.startswith("cuda"):
+            return
+        if not torch.cuda.is_available():
+            return
+        torch.cuda.empty_cache()
+        ipc_collect = getattr(torch.cuda, "ipc_collect", None)
+        if callable(ipc_collect):
+            ipc_collect()
+    except Exception:
+        pass
+
+
 def _transcribe_with_splitting(
     whisper_model: Any,
     audio_path: Path,
@@ -784,6 +1003,7 @@ def _transcribe_with_splitting(
     prompt: Optional[str],
     split_duration: Optional[int],
     diagnostics: Optional[_TranscribeDiagnostics] = None,
+    chunk_result_dir: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], Optional[str]]:
     if not split_duration or split_duration <= 0 or duration <= split_duration:
         if diagnostics:
@@ -819,99 +1039,244 @@ def _transcribe_with_splitting(
         return segments, detected_language
 
     work_dir = audio_path.parent
+    if chunk_result_dir:
+        chunk_result_dir.mkdir(parents=True, exist_ok=True)
     collected: List[Dict[str, Any]] = []
     detected_language: Optional[str] = None
-    start_time = 0.0
-    idx = 0
+    total_chunks = max(1, int(math.ceil(duration / float(split_duration))))
+    recycle_limit = 0
+    if isinstance(whisper_model, _FasterWhisperAdapter):
+        recycle_limit = _recycle_chunk_limit("faster-whisper", getattr(whisper_model, "device", None))
+    processed_in_process = 0
     try:
-        while start_time < duration:
-            end_time = min(start_time + split_duration, duration)
-            chunk_path = work_dir / f"chunk_{idx}.wav"
+        io_workers = max(1, int(os.environ.get("ACFV_TRANSCRIBE_IO_WORKERS", "2") or 2))
+    except Exception:
+        io_workers = 2
+    try:
+        prefetch = max(1, int(os.environ.get("ACFV_TRANSCRIBE_PREFETCH_CHUNKS", "2") or 2))
+    except Exception:
+        prefetch = 2
+
+    def _chunk_result_path(chunk_index: int) -> Optional[Path]:
+        if not chunk_result_dir:
+            return None
+        return chunk_result_dir / f"chunk_{chunk_index:04d}" / "transcript.json"
+
+    def _load_existing_chunk_result(chunk_index: int) -> Optional[Dict[str, Any]]:
+        result_path = _chunk_result_path(chunk_index)
+        if not result_path or not result_path.exists():
+            return None
+        try:
+            payload = _read_json_payload(result_path)
+        except Exception as exc:
+            log_warning(f"[transcribe] failed reading cached chunk result {result_path}: {exc}")
+            return None
+        segments = payload.get("segments")
+        if not isinstance(segments, list):
+            return None
+        return {
+            "result_path": result_path,
+            "segments": segments,
+            "language": payload.get("language"),
+        }
+
+    def _write_chunk_result(
+        *,
+        chunk_index: int,
+        start_sec: float,
+        end_sec: float,
+        language_out: Optional[str],
+        segments: List[Dict[str, Any]],
+    ) -> Optional[Path]:
+        if not chunk_result_dir:
+            return None
+        chunk_dir = chunk_result_dir / f"chunk_{chunk_index:04d}"
+        chunk_dir.mkdir(parents=True, exist_ok=True)
+        result_path = chunk_dir / "transcript.json"
+        _atomic_write_json(
+            result_path,
+            {
+                "schema_version": SCHEMA_VERSION,
+                "chunk_id": f"chunk_{chunk_index:04d}",
+                "index": chunk_index,
+                "start_sec": round(start_sec, 3),
+                "end_sec": round(end_sec, 3),
+                "language": language_out or language or "auto",
+                "engine": "whisper",
+                "segments": segments,
+            },
+        )
+        return result_path
+
+    def _extract_chunk(chunk_index: int) -> Dict[str, Any]:
+        start_sec = float(chunk_index * split_duration)
+        end_sec = min(start_sec + float(split_duration), duration)
+        cached = _load_existing_chunk_result(chunk_index)
+        if cached is not None:
+            return {
+                "index": chunk_index,
+                "start": start_sec,
+                "end": end_sec,
+                "reuse": True,
+                "result_path": cached["result_path"],
+                "segments": cached["segments"],
+                "language": cached.get("language"),
+            }
+        chunk_path = work_dir / f"chunk_{chunk_index}.wav"
+        if diagnostics:
+            diagnostics.event(
+                "chunk_extract_start",
+                chunk_index=chunk_index,
+                start_time=round(start_sec, 3),
+                end_time=round(end_sec, 3),
+                total_duration=round(duration, 3),
+                chunk_path=str(chunk_path),
+                pool="io_pool",
+            )
+        ok = extract_audio_segment_safe(audio_path, start_sec, end_sec, chunk_path)
+        if not ok or not chunk_path.exists() or chunk_path.stat().st_size == 0:
             if diagnostics:
                 diagnostics.event(
-                    "chunk_extract_start",
-                    chunk_index=idx,
-                    start_time=round(start_time, 3),
-                    end_time=round(end_time, 3),
+                    "chunk_extract_failed",
+                    chunk_index=chunk_index,
+                    start_time=round(start_sec, 3),
+                    end_time=round(end_sec, 3),
                     total_duration=round(duration, 3),
                     chunk_path=str(chunk_path),
+                    pool="io_pool",
                 )
-            if not extract_audio_segment_safe(audio_path, start_time, end_time, chunk_path):
-                log_error(f"[transcribe] failed to extract chunk {start_time}-{end_time}")
+            return {"index": chunk_index, "start": start_sec, "end": end_sec, "path": chunk_path, "ok": False}
+        return {
+            "index": chunk_index,
+            "start": start_sec,
+            "end": end_sec,
+            "path": chunk_path,
+            "ok": True,
+            "bytes": int(chunk_path.stat().st_size),
+        }
+
+    try:
+        next_index = 0
+        inflight: List[Any] = []
+        with ThreadPoolExecutor(max_workers=io_workers, thread_name_prefix="io_pool") as io_pool:
+            while next_index < total_chunks and len(inflight) < prefetch:
+                inflight.append(io_pool.submit(_extract_chunk, next_index))
+                next_index += 1
+
+            while inflight:
+                future = inflight.pop(0)
+                chunk = future.result()
+                while next_index < total_chunks and len(inflight) < prefetch:
+                    inflight.append(io_pool.submit(_extract_chunk, next_index))
+                    next_index += 1
+
+                idx = int(chunk["index"])
+                start_time = float(chunk["start"])
+                end_time = float(chunk["end"])
+                if chunk.get("reuse"):
+                    segs = [dict(seg) for seg in chunk.get("segments", [])]
+                    lang = chunk.get("language")
+                    if lang and not detected_language:
+                        detected_language = str(lang)
+                    if diagnostics:
+                        diagnostics.event(
+                            "chunk_transcribe_ok",
+                            chunk_index=idx,
+                            start_time=round(start_time, 3),
+                            end_time=round(end_time, 3),
+                            total_duration=round(duration, 3),
+                            chunk_path=None,
+                            result_path=str(chunk.get("result_path") or ""),
+                            elapsed_sec=0.0,
+                            segments=len(segs),
+                            language=lang,
+                            worker_id="gpu_asr_pool:0",
+                            reused=True,
+                        )
+                    collected.extend(segs)
+                    continue
+                chunk_path = Path(chunk["path"])
+                if not chunk.get("ok"):
+                    log_error(f"[transcribe] failed to extract chunk {start_time}-{end_time}")
+                    continue
                 if diagnostics:
                     diagnostics.event(
-                        "chunk_extract_failed",
+                        "chunk_transcribe_start",
                         chunk_index=idx,
                         start_time=round(start_time, 3),
                         end_time=round(end_time, 3),
                         total_duration=round(duration, 3),
                         chunk_path=str(chunk_path),
+                        chunk_bytes=int(chunk.get("bytes") or 0),
+                        worker_id="gpu_asr_pool:0",
                     )
-                start_time = end_time
-                idx += 1
-                continue
-            if not chunk_path.exists() or chunk_path.stat().st_size == 0:
-                log_error(f"[transcribe] empty chunk file: {chunk_path}")
-                if diagnostics:
-                    diagnostics.event(
-                        "chunk_empty",
-                        chunk_index=idx,
-                        start_time=round(start_time, 3),
-                        end_time=round(end_time, 3),
-                        total_duration=round(duration, 3),
-                        chunk_path=str(chunk_path),
+                start_monotonic = time.monotonic()
+                try:
+                    model_device = str(getattr(whisper_model, "device", "cpu"))
+                except Exception:
+                    model_device = "cpu"
+                try:
+                    segs, lang = _transcribe_file(whisper_model, chunk_path, language, prompt, offset=start_time)
+                except Exception as exc:
+                    log_error(
+                        f"[transcribe] chunk failed idx={idx} range={start_time}-{end_time} path={chunk_path}: {exc}"
                     )
-                start_time = end_time
-                idx += 1
-                continue
-            if diagnostics:
-                diagnostics.event(
-                    "chunk_transcribe_start",
+                    if diagnostics:
+                        diagnostics.event(
+                            "chunk_transcribe_error",
+                            chunk_index=idx,
+                            start_time=round(start_time, 3),
+                            end_time=round(end_time, 3),
+                            total_duration=round(duration, 3),
+                            chunk_path=str(chunk_path),
+                            elapsed_sec=round(time.monotonic() - start_monotonic, 3),
+                            error=str(exc),
+                            error_type=type(exc).__name__,
+                            traceback=traceback.format_exc(limit=12),
+                            worker_id="gpu_asr_pool:0",
+                        )
+                    raise
+                finally:
+                    _cleanup_after_chunk(chunk_path, device_hint=model_device)
+                if lang and not detected_language:
+                    detected_language = lang
+                result_path = _write_chunk_result(
                     chunk_index=idx,
-                    start_time=round(start_time, 3),
-                    end_time=round(end_time, 3),
-                    total_duration=round(duration, 3),
-                    chunk_path=str(chunk_path),
-                    chunk_bytes=int(chunk_path.stat().st_size),
-                )
-            start_monotonic = time.monotonic()
-            try:
-                segs, lang = _transcribe_file(whisper_model, chunk_path, language, prompt, offset=start_time)
-            except Exception as exc:
-                log_error(
-                    f"[transcribe] chunk failed idx={idx} range={start_time}-{end_time} path={chunk_path}: {exc}"
+                    start_sec=start_time,
+                    end_sec=end_time,
+                    language_out=lang or detected_language,
+                    segments=segs,
                 )
                 if diagnostics:
                     diagnostics.event(
-                        "chunk_transcribe_error",
+                        "chunk_transcribe_ok",
                         chunk_index=idx,
                         start_time=round(start_time, 3),
                         end_time=round(end_time, 3),
                         total_duration=round(duration, 3),
                         chunk_path=str(chunk_path),
+                        result_path=str(result_path) if result_path else None,
                         elapsed_sec=round(time.monotonic() - start_monotonic, 3),
-                        error=str(exc),
-                        error_type=type(exc).__name__,
-                        traceback=traceback.format_exc(limit=12),
+                        segments=len(segs),
+                        language=lang,
+                        worker_id="gpu_asr_pool:0",
                     )
-                raise
-            if diagnostics:
-                diagnostics.event(
-                    "chunk_transcribe_ok",
-                    chunk_index=idx,
-                    start_time=round(start_time, 3),
-                    end_time=round(end_time, 3),
-                    total_duration=round(duration, 3),
-                    chunk_path=str(chunk_path),
-                    elapsed_sec=round(time.monotonic() - start_monotonic, 3),
-                    segments=len(segs),
-                    language=lang,
-                )
-            if lang and not detected_language:
-                detected_language = lang
-            collected.extend(segs)
-            start_time = end_time
-            idx += 1
+                collected.extend(segs)
+                processed_in_process += 1
+                if recycle_limit > 0 and processed_in_process >= recycle_limit and idx < (total_chunks - 1):
+                    if diagnostics:
+                        diagnostics.event(
+                            "recycle_requested",
+                            reason="chunk_limit",
+                            recycle_limit=recycle_limit,
+                            processed_in_process=processed_in_process,
+                            next_chunk_index=idx + 1,
+                            total_chunks=total_chunks,
+                            device=model_device,
+                        )
+                    raise _RecycleRequested(
+                        f"transcribe subprocess recycle requested after {processed_in_process} chunks"
+                    )
     finally:
         for file in work_dir.glob("chunk_*.wav"):
             try:
@@ -1036,6 +1401,11 @@ def _progress_from_checkpoint(checkpoint: Dict[str, Any]) -> Tuple[int, int, str
             msg += f", segs={int(checkpoint.get('segments', 0) or 0)}"
         if stage == "chunk_transcribe_error":
             msg += ", retry/error"
+    elif stage == "recycle_requested":
+        current = 90
+        next_chunk = int(checkpoint.get("next_chunk_index", 0) or 0)
+        recycle_limit = int(checkpoint.get("recycle_limit", 0) or 0)
+        msg = f"restarting worker after {recycle_limit} chunks, next={next_chunk}"
     elif stage == "complete":
         current = 100
         msg = f"done, segments={int(checkpoint.get('segments', 0) or 0)}"
@@ -1061,6 +1431,10 @@ def _run_transcribe_subprocess(
     work_dir.mkdir(parents=True, exist_ok=True)
     payload_path = work_dir / "transcribe_payload.json"
     checkpoint_path = work_dir / "transcribe_checkpoint.json"
+    try:
+        checkpoint_path.unlink()
+    except FileNotFoundError:
+        pass
     _atomic_write_json(payload_path, payload)
 
     python_executable = _resolve_transcribe_python()
@@ -1089,16 +1463,22 @@ def _run_transcribe_subprocess(
     last_checkpoint_key = ""
     last_emit_sec = 0.0
     started = time.monotonic()
-    stage_first_seen: Dict[str, float] = {}
     model_load_timeout_sec = float(os.environ.get("ACFV_TRANSCRIBE_MODEL_LOAD_TIMEOUT_SEC", "600") or 600)
+    chunk_timeout_sec = float(os.environ.get("ACFV_TRANSCRIBE_CHUNK_TIMEOUT_SEC", "180") or 180)
+    active_stage_key = ""
+    active_stage_started_at = started
     while proc.poll() is None:
         now = time.monotonic()
         checkpoint = _read_checkpoint_payload(checkpoint_path)
         if checkpoint:
             stage = str(checkpoint.get("stage", "")).strip()
-            if stage:
-                stage_first_seen.setdefault(stage, now)
-            if stage == "prepare_audio_done" and (now - stage_first_seen.get(stage, now)) >= model_load_timeout_sec:
+            stage_key = stage
+            if stage in CHUNK_START_STAGES:
+                stage_key = f"{stage}:{int(checkpoint.get('chunk_index', 0) or 0)}"
+            if stage_key and stage_key != active_stage_key:
+                active_stage_key = stage_key
+                active_stage_started_at = now
+            if stage == "prepare_audio_done" and (now - active_stage_started_at) >= model_load_timeout_sec:
                 proc.kill()
                 stdout, stderr = proc.communicate()
                 detail = (stderr or stdout or "").strip()
@@ -1107,8 +1487,19 @@ def _run_transcribe_subprocess(
                     f"for {int(model_load_timeout_sec)}s"
                     + (f": {detail}" if detail else "")
                 )
+            if stage in CHUNK_START_STAGES and (now - active_stage_started_at) >= chunk_timeout_sec:
+                proc.kill()
+                stdout, stderr = proc.communicate()
+                detail = (stderr or stdout or "").strip()
+                chunk_index = int(checkpoint.get("chunk_index", 0) or 0)
+                raise RuntimeError(
+                    "transcribe subprocess stalled during "
+                    f"chunk {chunk_index} for {int(chunk_timeout_sec)}s"
+                    + (f": {detail}" if detail else "")
+                )
             checkpoint_key = json.dumps(checkpoint, ensure_ascii=False, sort_keys=True)
-            if checkpoint_key != last_checkpoint_key or (now - last_emit_sec) >= 15.0:
+            is_new_checkpoint = checkpoint_key != last_checkpoint_key
+            if is_new_checkpoint:
                 if checkpoint_callback:
                     checkpoint_callback(checkpoint)
                 current, total, message = _progress_from_checkpoint(checkpoint)
@@ -1117,6 +1508,33 @@ def _run_transcribe_subprocess(
                 else:
                     log_info(f"[transcribe] progress {current}/{total} {message}")
                 last_checkpoint_key = checkpoint_key
+                last_emit_sec = now
+                if stage == "recycle_requested":
+                    proc.kill()
+                    proc.communicate()
+                    raise RuntimeError(
+                        f"transcribe subprocess recycle requested after {int(checkpoint.get('processed_in_process', 0) or 0)} chunks"
+                    )
+                if stage == "transcribe_error":
+                    proc.kill()
+                    proc.communicate()
+                    raise RuntimeError(message)
+            elif (now - last_emit_sec) >= 15.0:
+                if stage == "recycle_requested":
+                    proc.kill()
+                    proc.communicate()
+                    raise RuntimeError(
+                        f"transcribe subprocess recycle requested after {int(checkpoint.get('processed_in_process', 0) or 0)} chunks"
+                    )
+                if stage == "transcribe_error":
+                    proc.kill()
+                    proc.communicate()
+                    raise RuntimeError(str(checkpoint.get("error", "transcribe error")).strip() or "transcribe error")
+                current, total, message = _progress_from_checkpoint(checkpoint)
+                if progress_callback:
+                    progress_callback("transcribe", current, total, message)
+                else:
+                    log_info(f"[transcribe] progress {current}/{total} {message}")
                 last_emit_sec = now
         elif (now - last_emit_sec) >= 30.0:
             heartbeat = f"working, elapsed={int(now - started)}s"
@@ -1155,10 +1573,32 @@ def _run_transcribe_subprocess(
 
 def _build_fallback_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
     fallback = dict(payload)
-    fallback["engine"] = "openai-whisper"
-    use_cuda = bool(TORCH_AVAILABLE and torch.cuda.is_available())
-    fallback["device"] = "cuda" if use_cuda else "cpu"
     model_size = str(fallback.get("model_size") or "").lower()
+    original_engine = str(fallback.get("engine") or "").strip().lower()
+
+    if WHISPERX_AVAILABLE and original_engine == "whisperx":
+        fallback["engine"] = "whisperx"
+        fallback["device"] = "cpu"
+        if model_size not in ALLOWED_MODEL_SIZES:
+            fallback["model_size"] = "small"
+        elif model_size in LARGE_V3_MODELS:
+            fallback["model_size"] = "medium"
+        return fallback
+
+    # Prefer staying on faster-whisper and only dropping to CPU so we can
+    # reuse already available model weights instead of falling into a fresh
+    # openai-whisper download path on GUI machines.
+    if FASTER_WHISPER_AVAILABLE and original_engine in {"", "auto", "faster-whisper"}:
+        fallback["engine"] = "faster-whisper"
+        fallback["device"] = "cpu"
+        if model_size not in ALLOWED_MODEL_SIZES:
+            fallback["model_size"] = "small"
+        elif model_size in LARGE_V3_MODELS:
+            fallback["model_size"] = "medium"
+        return fallback
+
+    fallback["engine"] = "openai-whisper"
+    fallback["device"] = "cpu"
     if model_size not in {"tiny", "base", "small"}:
         fallback["model_size"] = "small"
     return fallback
@@ -1171,29 +1611,42 @@ def run_transcribe_subprocess_guarded(
     checkpoint_callback=None,
 ) -> Dict[str, Any]:
     try:
-        return _run_transcribe_subprocess(
-            payload,
-            work_dir,
-            progress_callback=progress_callback,
-            checkpoint_callback=checkpoint_callback,
-        )
-    except Exception as exc:
-        log_error(f"[transcribe] subprocess failed: {exc}")
-        if not _fallback_enabled():
-            raise
-        fallback_payload = _build_fallback_payload(payload)
-        log_warning(
-            "[transcribe] retrying with fallback engine=%s device=%s model=%s",
-            fallback_payload.get("engine"),
-            fallback_payload.get("device"),
-            fallback_payload.get("model_size"),
-        )
-        return _run_transcribe_subprocess(
-            fallback_payload,
-            work_dir,
-            progress_callback=progress_callback,
-            checkpoint_callback=checkpoint_callback,
-        )
+        stall_restarts = max(0, int(os.environ.get("ACFV_TRANSCRIBE_STALL_RESTARTS", "1") or 1))
+    except Exception:
+        stall_restarts = 1
+    attempts = 0
+    while True:
+        try:
+            return _run_transcribe_subprocess(
+                payload,
+                work_dir,
+                progress_callback=progress_callback,
+                checkpoint_callback=checkpoint_callback,
+            )
+        except Exception as exc:
+            if "recycle requested" in str(exc).lower():
+                log_warning("[transcribe] recycling subprocess and resuming from cached chunks")
+                continue
+            log_error(f"[transcribe] subprocess failed: {exc}")
+            if "stalled" in str(exc).lower() and attempts < stall_restarts:
+                attempts += 1
+                log_warning("[transcribe] restarting stalled subprocess attempt %s/%s", attempts, stall_restarts)
+                continue
+            if not _fallback_enabled():
+                raise
+            fallback_payload = _build_fallback_payload(payload)
+            log_warning(
+                "[transcribe] retrying with fallback engine=%s device=%s model=%s",
+                fallback_payload.get("engine"),
+                fallback_payload.get("device"),
+                fallback_payload.get("model_size"),
+            )
+            return _run_transcribe_subprocess(
+                fallback_payload,
+                work_dir,
+                progress_callback=progress_callback,
+                checkpoint_callback=checkpoint_callback,
+            )
 
 
 def _validate_language(lang: Optional[str]) -> Optional[str]:
@@ -1205,6 +1658,18 @@ def _validate_language(lang: Optional[str]) -> Optional[str]:
     if len(text) != 2 or not text.isalpha():
         raise ValueError(f"invalid language code: {lang}")
     return text
+
+
+def _stabilize_split_duration(model_size: str, engine: str, split_duration: Optional[int]) -> Optional[int]:
+    effective_engine = (engine or "auto").strip().lower()
+    if effective_engine == "auto":
+        effective_engine = "faster-whisper" if FASTER_WHISPER_AVAILABLE else "openai-whisper"
+    normalized_model = str(model_size or "").strip().lower()
+    if effective_engine != "faster-whisper" or normalized_model not in LARGE_V3_MODELS:
+        return split_duration
+    if split_duration is None:
+        return LARGE_V3_SAFE_SPLIT_DURATION
+    return min(split_duration, LARGE_V3_SAFE_SPLIT_DURATION)
 
 
 @dataclass
@@ -1220,6 +1685,7 @@ class TranscribeOptions:
     prompt: Optional[str]
     output_format: str
     transcript_path_override: Optional[Path] = None
+    chunk_result_dir: Optional[Path] = None
 
 
 def _parse_payload(payload: Dict[str, Any], transcript_path_override: Optional[str] = None) -> TranscribeOptions:
@@ -1245,7 +1711,7 @@ def _parse_payload(payload: Dict[str, Any], transcript_path_override: Optional[s
     if engine not in ALLOWED_ENGINES:
         raise ValueError(f"engine must be one of {sorted(ALLOWED_ENGINES)}")
 
-    model_size_raw = str(payload.get("model_size", "large-v3-turbo")).strip()
+    model_size_raw = str(payload.get("model_size", "medium")).strip()
     if engine == "hf-whisper":
         if not model_size_raw:
             raise ValueError("model_size is required for hf-whisper")
@@ -1269,6 +1735,16 @@ def _parse_payload(payload: Dict[str, Any], transcript_path_override: Optional[s
             raise ValueError("split_duration must be an integer")
         if split_duration <= 0:
             raise ValueError("split_duration must be > 0")
+    stabilized_split_duration = _stabilize_split_duration(model_size_raw, engine, split_duration)
+    if stabilized_split_duration != split_duration:
+        log_info(
+            "[transcribe] adjusted split_duration from %s to %s for %s/%s",
+            split_duration,
+            stabilized_split_duration,
+            engine,
+            model_size_raw,
+        )
+        split_duration = stabilized_split_duration
 
     diarization = bool(payload.get("diarization", False))
 
@@ -1293,6 +1769,7 @@ def _parse_payload(payload: Dict[str, Any], transcript_path_override: Optional[s
         prompt=prompt,
         output_format=output_format,
         transcript_path_override=override_path,
+        chunk_result_dir=Path(str(payload["chunk_result_dir"])) if payload.get("chunk_result_dir") else None,
     )
 
 
@@ -1359,6 +1836,7 @@ def transcribe_audio(payload: Dict[str, Any]) -> Dict[str, Any]:
         platform=platform.platform(),
         whisper_available=WHISPER_AVAILABLE,
         faster_whisper_available=FASTER_WHISPER_AVAILABLE,
+        whisperx_available=WHISPERX_AVAILABLE,
         torch=_collect_torch_stats(),
     )
     try:
@@ -1412,7 +1890,10 @@ def transcribe_audio(payload: Dict[str, Any]) -> Dict[str, Any]:
             options.prompt,
             options.split_duration,
             diagnostics=diagnostics,
+            chunk_result_dir=options.chunk_result_dir,
         )
+    except _RecycleRequested:
+        raise
     except Exception as exc:
         diagnostics.event(
             "transcribe_error",
@@ -1481,7 +1962,7 @@ def process_audio_segments(
     audio_path: str,
     output_file: Optional[str] = None,
     segment_length: int = 300,
-    whisper_model_name: str = "large-v3-turbo",
+    whisper_model_name: str = "medium",
     host_transcription_file: Optional[str] = None,
     **kwargs: Any,
 ) -> List[Dict[str, Any]]:
@@ -1555,6 +2036,8 @@ def install_dependencies() -> bool:
         missing.append("whisper (pip install openai-whisper)")
     if os.environ.get("ACFV_WHISPER_ENGINE", "").lower() == "faster-whisper" and not FASTER_WHISPER_AVAILABLE:
         missing.append("faster-whisper (pip install faster-whisper)")
+    if os.environ.get("ACFV_WHISPER_ENGINE", "").lower() == "whisperx" and not WHISPERX_AVAILABLE:
+        missing.append("whisperx (pip install whisperx)")
     if missing:
         log_info("missing dependencies: " + ", ".join(missing))
         return False

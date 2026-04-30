@@ -585,12 +585,26 @@ def run_llm_highlight(
         reason = client.availability_error() or "llm_client_unavailable"
         if require_api:
             raise RuntimeError(
-                f"llm_highlight requires API LLM, but client is unavailable: {reason}. "
-                "Set LLM_API_KEY/OPENAI_API_KEY and optional LLM_BASE_URL/LLM_MODEL."
+                f"llm_highlight requires an enabled LLM provider, but client is unavailable: {reason}. "
+                "Set providers.llm or LLM_PROVIDER/LLM_BASE_URL/LLM_MODEL."
             )
         payload = _passthrough_segments(chosen, policy, reason)
         (work_dir / "segments_llm.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         return payload
+    client_config = getattr(client, "config", None)
+    provider_name = _safe_text(getattr(client_config, "provider", "")).lower()
+    base_url = _safe_text(getattr(client_config, "base_url", ""))
+    if provider_name in {"ollama", "vllm", "openai-compatible", "local-openai"} and base_url:
+        if not _is_quickly_reachable(base_url):
+            reason = f"llm_endpoint_unreachable:{base_url}"
+            if require_api:
+                raise RuntimeError(
+                    "llm_highlight requires a reachable local LLM endpoint, "
+                    f"but {base_url} is unavailable."
+                )
+            payload = _passthrough_segments(chosen, policy, reason)
+            (work_dir / "segments_llm.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+            return payload
 
     if progress_callback:
         progress_callback("llm_highlight", 0, 1, "start")
@@ -626,7 +640,7 @@ def run_llm_highlight(
     except Exception as exc:
         logger.warning("[llm_highlight] llm rerank failed: %s", exc)
         if require_api:
-            raise RuntimeError(f"llm_highlight requires API LLM and rerank failed: {exc}") from exc
+            raise RuntimeError(f"llm_highlight requires an enabled LLM provider and rerank failed: {exc}") from exc
         payload = _passthrough_segments(chosen, policy, f"llm_failed:{exc}")
         (work_dir / "segments_llm.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         if progress_callback:

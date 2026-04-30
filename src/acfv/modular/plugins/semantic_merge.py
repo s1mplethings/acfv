@@ -165,6 +165,85 @@ def _score_from_analysis(
     return None, overlap_count
 
 
+def _trim_to_highlight_core(
+    analysis_segments: List[Dict[str, Any]],
+    start: float,
+    end: float,
+    *,
+    min_sec: float,
+    pad_sec: float,
+    cluster_gap_sec: float,
+    relative_score_floor: float = 0.75,
+) -> tuple[float, float, int]:
+    overlaps: List[Dict[str, float]] = []
+    for seg in analysis_segments:
+        overlap_start = max(start, float(seg.get("start", 0.0)))
+        overlap_end = min(end, float(seg.get("end", 0.0)))
+        if overlap_end <= overlap_start:
+            continue
+        overlaps.append(
+            {
+                "start": overlap_start,
+                "end": overlap_end,
+                "score": float(seg.get("score", 0.0) or 0.0),
+            }
+        )
+    if not overlaps:
+        return start, end, 0
+
+    overlaps.sort(key=lambda item: (item["start"], item["end"]))
+    peak_score = max(item["score"] for item in overlaps)
+    score_floor = max(0.0, peak_score * max(0.0, min(relative_score_floor, 1.0)))
+    anchor = max(overlaps, key=lambda item: (item["score"], item["end"] - item["start"]))
+    anchor_idx = overlaps.index(anchor)
+
+    cluster_start = anchor["start"]
+    cluster_end = anchor["end"]
+    cluster_count = 1
+
+    for idx in range(anchor_idx - 1, -1, -1):
+        item = overlaps[idx]
+        gap = cluster_start - item["end"]
+        if gap > cluster_gap_sec or item["score"] < score_floor:
+            break
+        cluster_start = min(cluster_start, item["start"])
+        cluster_end = max(cluster_end, item["end"])
+        cluster_count += 1
+
+    for idx in range(anchor_idx + 1, len(overlaps)):
+        item = overlaps[idx]
+        gap = item["start"] - cluster_end
+        if gap > cluster_gap_sec or item["score"] < score_floor:
+            break
+        cluster_start = min(cluster_start, item["start"])
+        cluster_end = max(cluster_end, item["end"])
+        cluster_count += 1
+
+    trimmed_start = max(start, cluster_start - max(0.0, pad_sec))
+    trimmed_end = min(end, cluster_end + max(0.0, pad_sec))
+    original_duration = max(end - start, 0.0)
+    target_min = min(max(0.0, min_sec), original_duration)
+    if target_min > 0 and (trimmed_end - trimmed_start) < target_min:
+        center = (trimmed_start + trimmed_end) / 2.0
+        half = target_min / 2.0
+        trimmed_start = max(start, center - half)
+        trimmed_end = min(end, center + half)
+        current_duration = trimmed_end - trimmed_start
+        if current_duration < target_min:
+            deficit = target_min - current_duration
+            extend_before = min(deficit / 2.0, trimmed_start - start)
+            trimmed_start -= extend_before
+            deficit -= extend_before
+            extend_after = min(deficit, end - trimmed_end)
+            trimmed_end += extend_after
+            deficit -= extend_after
+            if deficit > 0:
+                extra_before = min(deficit, trimmed_start - start)
+                trimmed_start -= extra_before
+
+    return round(trimmed_start, 3), round(trimmed_end, 3), cluster_count
+
+
 def _segments_to_contract(
     segments_sec: List[Dict[str, Any]],
     target_sec: float,
@@ -233,30 +312,32 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
             )
         contract = _segments_to_contract(
             segments,
-            target_sec=_get_config_float("SEMANTIC_TARGET_DURATION", 240.0),
-            min_sec=_get_config_float("MIN_CLIP_DURATION", 60.0),
-            max_sec=_get_config_float("MAX_CLIP_DURATION", 600.0),
+            target_sec=_get_config_float("SEMANTIC_TARGET_DURATION", 90.0),
+            min_sec=_get_config_float("MIN_CLIP_DURATION", 45.0),
+            max_sec=_get_config_float("MAX_CLIP_DURATION", 180.0),
             sim_threshold=_get_config_float("SEMANTIC_SIMILARITY_THRESHOLD", 0.75),
-            max_gap=_get_config_float("SEMANTIC_MAX_TIME_GAP", 60.0),
+            max_gap=_get_config_float("SEMANTIC_MAX_TIME_GAP", 8.0),
         )
         work_dir = Path(ctx.store.run_dir) / "work"
         _write_json(work_dir / "segments_semantic.json", contract)
         return {ART_SEGMENTS_SEMANTIC: contract}
 
-    target_sec = _get_config_float("SEMANTIC_TARGET_DURATION", 300.0)
-    min_sec = _get_config_float("MIN_CLIP_DURATION", max(120.0, target_sec * 0.6))
-    floor_min = _get_config_float("MIN_TARGET_CLIP_DURATION", 180.0)
+    target_sec = _get_config_float("SEMANTIC_TARGET_DURATION", 90.0)
+    min_sec = _get_config_float("MIN_CLIP_DURATION", max(30.0, target_sec * 0.5))
+    floor_min = _get_config_float("MIN_TARGET_CLIP_DURATION", 45.0)
     min_sec = max(min_sec, floor_min)
-    min_sec = max(min_sec, 180.0)
-    max_sec = _get_config_float("MAX_CLIP_DURATION", 600.0)
+    min_sec = max(min_sec, 30.0)
+    max_sec = _get_config_float("MAX_CLIP_DURATION", 180.0)
     max_sec = max(max_sec, min_sec)
-    duration_weight = _get_config_float("SEMANTIC_DURATION_WEIGHT", 0.25)
+    duration_weight = _get_config_float("SEMANTIC_DURATION_WEIGHT", 0.08)
     score_warn = _get_config_float("SEMANTIC_SCORE_WARN", 1000.0)
     sim_threshold = _get_config_float("SEMANTIC_SIMILARITY_THRESHOLD", 0.85)
-    max_gap = _get_config_float("SEMANTIC_MAX_TIME_GAP", 60.0)
-    stickiness_sec = _get_config_float("SEMANTIC_STICKINESS_SEC", 60.0)
+    max_gap = _get_config_float("SEMANTIC_MAX_TIME_GAP", 8.0)
+    stickiness_sec = _get_config_float("SEMANTIC_STICKINESS_SEC", 15.0)
     min_text_chars = int(_get_config_float("SEMANTIC_MIN_TEXT_CHARS", 20.0))
     min_text_per_sec = _get_config_float("SEMANTIC_MIN_TEXT_PER_SEC", 0.2)
+    trim_pad_sec = _get_config_float("CLIP_SEMANTIC_TAIL_SECONDS", 1.5)
+    trim_cluster_gap_sec = max(1.0, min(8.0, max_gap))
 
     texts = [seg["text"] for seg in transcript_segments]
     cosine = _build_similarity_fn(texts)
@@ -316,6 +397,25 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
                 required_chars,
             )
             continue
+        trimmed_start, trimmed_end, cluster_count = _trim_to_highlight_core(
+            analysis_segments,
+            seg["start"],
+            seg["end"],
+            min_sec=min_sec,
+            pad_sec=trim_pad_sec,
+            cluster_gap_sec=trim_cluster_gap_sec,
+        )
+        if trimmed_end > trimmed_start and ((trimmed_start != seg["start"]) or (trimmed_end != seg["end"])):
+            logger.info(
+                "[semantic_merge] trim seg %.2fs-%.2fs -> %.2fs-%.2fs using %d overlap(s)",
+                seg["start"],
+                seg["end"],
+                trimmed_start,
+                trimmed_end,
+                cluster_count,
+            )
+            seg["start"] = trimmed_start
+            seg["end"] = trimmed_end
         filtered_segments.append(seg)
 
     if not filtered_segments and semantic_segments:

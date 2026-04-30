@@ -22,12 +22,23 @@ except ImportError:
     PYTQT5_AVAILABLE = False
     print("PyQt5 模块未安装，将跳过相关功能")
 
-try:
-    import cv2
-    CV2_AVAILABLE = True
-except ImportError:
-    CV2_AVAILABLE = False
-    print("OpenCV 模块未安装，将使用FFmpeg替代")
+_CV2_MODULE = None
+_CV2_ATTEMPTED = False
+
+
+def _get_cv2():
+    global _CV2_MODULE, _CV2_ATTEMPTED
+    if _CV2_ATTEMPTED:
+        return _CV2_MODULE
+    _CV2_ATTEMPTED = True
+    try:
+        import cv2  # type: ignore
+
+        _CV2_MODULE = cv2
+    except ImportError:
+        _CV2_MODULE = None
+        print("OpenCV 模块未安装，将使用FFmpeg替代")
+    return _CV2_MODULE
 
 # 安全导入numpy，处理兼容性问题
 try:
@@ -211,7 +222,7 @@ class SimpleThumbnailLoader(QThread):
     def extract_thumbnail(self, filepath):
         """提取缩略图（只使用OpenCV，更稳定）"""
         # 只使用OpenCV方法
-        if CV2_AVAILABLE:
+        if _get_cv2() is not None:
             image = self.extract_thumbnail_opencv(filepath)
             if image is not None:
                 return image
@@ -270,6 +281,9 @@ class SimpleThumbnailLoader(QThread):
     
     def extract_thumbnail_opencv(self, filepath):
         """使用OpenCV提取中间帧 - 简化稳定版本"""
+        cv2 = _get_cv2()
+        if cv2 is None:
+            return None
         try:
             cap = cv2.VideoCapture(filepath)
             if not cap.isOpened():
@@ -352,7 +366,7 @@ class SimpleThumbnailLoader(QThread):
                 
                 # 只使用OpenCV生成新缩略图
                 image = None
-                if CV2_AVAILABLE:
+                if _get_cv2() is not None:
                     try:
                         image = self.extract_thumbnail_opencv(filepath)
                     except Exception as e:
@@ -427,6 +441,9 @@ class OptimizedClipThumbnailLoader(QThread):
 
     def extract_thumbnail_opencv(self, filepath):
         """使用OpenCV提取中间帧 - 简化版本"""
+        cv2 = _get_cv2()
+        if cv2 is None:
+            return None
         try:
             cap = cv2.VideoCapture(filepath)
             if not cap.isOpened():
@@ -461,7 +478,8 @@ class OptimizedClipThumbnailLoader(QThread):
 
     def extract_thumbnail_opencv(self, filepath, use_middle_frame=True, use_random_middle=False):
         """使用OpenCV提取缩略图 - 简化版本"""
-        if not CV2_AVAILABLE:
+        cv2 = _get_cv2()
+        if cv2 is None:
             return None
         
         try:
@@ -513,7 +531,7 @@ class OptimizedClipThumbnailLoader(QThread):
             
             # 只使用OpenCV提取缩略图
             image = None
-            if CV2_AVAILABLE:
+            if _get_cv2() is not None:
                 image = self.extract_thumbnail_opencv(clip_path)
             
             # 如果失败了，返回占位符
@@ -633,7 +651,7 @@ class SimpleClipThumbnailLoader(QThread):
     def extract_thumbnail(self, filepath):
         """提取缩略图（只使用OpenCV）"""
         # 只使用OpenCV方法
-        if CV2_AVAILABLE:
+        if _get_cv2() is not None:
             image = self.extract_thumbnail_opencv(filepath)
             if image is not None:
                 return image
@@ -642,6 +660,9 @@ class SimpleClipThumbnailLoader(QThread):
 
     def extract_thumbnail_opencv(self, filepath):
         """使用OpenCV提取中间帧 - 优化版本，重点使用中间帧"""
+        cv2 = _get_cv2()
+        if cv2 is None:
+            return None
         try:
             cap = cv2.VideoCapture(filepath)
             if not cap.isOpened():
@@ -788,7 +809,8 @@ class SettingsDialog(QDialog):
         form_basic.addRow("回放下载目录:", replay_dir_layout)
         
         # Whisper模型
-        self.edit_whisper = QLineEdit(self.config_manager.get("WHISPER_MODEL"))
+        self.edit_whisper = QLineEdit(self.config_manager.get("WHISPER_MODEL", "medium"))
+        self.edit_whisper.setPlaceholderText("medium")
         form_basic.addRow("Whisper 模型:", self.edit_whisper)
 
         # Whisper引擎
@@ -802,6 +824,10 @@ class SettingsDialog(QDialog):
         self.edit_hf_whisper_model.setPlaceholderText("openai/whisper-medium")
         self.edit_hf_whisper_model.setToolTip("仅在引擎选择 hf-whisper 时使用")
         form_basic.addRow("HF Whisper 模型:", self.edit_hf_whisper_model)
+
+        self.edit_transcribe_segment_length = QLineEdit(str(self.config_manager.get("SEGMENT_LENGTH", 120)))
+        self.edit_transcribe_segment_length.setToolTip("长回放默认建议 120 秒；large-v3 / large-v3-turbo 会自动压到 60 秒以降低显存风险。")
+        form_basic.addRow("转录切块长度(秒):", self.edit_transcribe_segment_length)
 
         # HuggingFace Token（隐藏显示切换）
         hf_layout = QHBoxLayout()
@@ -979,8 +1005,7 @@ class SettingsDialog(QDialog):
     
     def view_checkpoint_info(self):
         try:
-            # analyze_data 位于 processing 包下，不能使用当前包的相对导入
-            from acfv.processing.analyze_data import CheckpointManager
+            from acfv.processing.checkpoint_manager import CheckpointManager
             checkpoint_manager = CheckpointManager()
             
             if not checkpoint_manager.has_checkpoint():
@@ -1009,7 +1034,7 @@ class SettingsDialog(QDialog):
     
     def clear_checkpoint_confirm(self):
         try:
-            from acfv.processing.analyze_data import CheckpointManager
+            from acfv.processing.checkpoint_manager import CheckpointManager
             checkpoint_manager = CheckpointManager()
             
             if not checkpoint_manager.has_checkpoint():
@@ -1038,6 +1063,7 @@ class SettingsDialog(QDialog):
         self.config_manager.set("WHISPER_MODEL", self.edit_whisper.text().strip())
         self.config_manager.set("WHISPER_ENGINE", self.whisper_engine_combo.currentText())
         self.config_manager.set("HF_WHISPER_MODEL", self.edit_hf_whisper_model.text().strip() or "openai/whisper-medium")
+        self.config_manager.set("SEGMENT_LENGTH", int(self.edit_transcribe_segment_length.text().strip() or 120))
         self.config_manager.set("HUGGINGFACE_TOKEN", self.edit_hf_token.text().strip())
         self.config_manager.set("LOCAL_EMOTION_MODEL_PATH", self.edit_local_emotion.text().strip())
         self.config_manager.set("VIDEO_EMOTION_MODEL_PATH", self.edit_video_emotion.text().strip())
@@ -1109,6 +1135,9 @@ class ClipRatingDialog(QDialog):
         self.init_buttons(layout)
     
     def load_video_preview(self):
+        cv2 = _get_cv2()
+        if cv2 is None:
+            return
         cap = cv2.VideoCapture(self.clip_path)
         ret, frame = cap.read()
         if ret:
@@ -1335,8 +1364,9 @@ class SettingsDialog(QDialog):
         whisper_layout = QHBoxLayout()
         whisper_layout.addWidget(QLabel("Whisper模型:"))
         self.whisper_combo = QComboBox()
-        self.whisper_combo.addItems(["large-v3-turbo", "medium", "small", "base"])
-        self.whisper_combo.setCurrentText(self.config_manager.get('WHISPER_MODEL', 'large-v3-turbo'))
+        self.whisper_combo.addItems(["medium", "large-v3", "large-v3-turbo", "small", "base"])
+        self.whisper_combo.setCurrentText(self.config_manager.get('WHISPER_MODEL', 'medium'))
+        self.whisper_combo.setToolTip("日常长回放推荐 medium；large-v3 适合重点片段复核。")
         whisper_layout.addWidget(self.whisper_combo)
         model_layout.addLayout(whisper_layout)
 
@@ -1358,6 +1388,15 @@ class SettingsDialog(QDialog):
         self.hf_whisper_model_edit.setToolTip("仅在引擎选择 hf-whisper 时使用")
         hf_whisper_layout.addWidget(self.hf_whisper_model_edit)
         model_layout.addLayout(hf_whisper_layout)
+
+        transcribe_segment_layout = QHBoxLayout()
+        transcribe_segment_layout.addWidget(QLabel("转录切块长度(秒):"))
+        self.transcribe_segment_spin = QSpinBox()
+        self.transcribe_segment_spin.setRange(30, 600)
+        self.transcribe_segment_spin.setValue(int(self.config_manager.get('SEGMENT_LENGTH', 120) or 120))
+        self.transcribe_segment_spin.setToolTip("默认 120 秒。large-v3 / large-v3-turbo 长段会自动压到 60 秒。")
+        transcribe_segment_layout.addWidget(self.transcribe_segment_spin)
+        model_layout.addLayout(transcribe_segment_layout)
         
         # HuggingFace Token
         hf_token_layout = QHBoxLayout()
@@ -1393,33 +1432,15 @@ class SettingsDialog(QDialog):
         candidate_multiplier_layout.addWidget(self.candidate_multiplier_spin)
         ai_layout.addLayout(candidate_multiplier_layout)
 
-        local_model_layout = QHBoxLayout()
-        local_model_layout.addWidget(QLabel("本地Ollama模型:"))
-        self.local_model_edit = QLineEdit()
-        self.local_model_edit.setText(self.config_manager.get('LLM_LOCAL_MODEL', 'qwen2.5:7b-instruct'))
-        self.local_model_edit.setPlaceholderText("qwen2.5:7b-instruct")
-        local_model_layout.addWidget(self.local_model_edit)
-        ai_layout.addLayout(local_model_layout)
-
         remote_model_layout = QHBoxLayout()
-        remote_model_layout.addWidget(QLabel("远端API模型:"))
+        remote_model_layout.addWidget(QLabel("LLM模型:"))
         self.remote_model_edit = QLineEdit()
         self.remote_model_edit.setText(
             self.config_manager.get('LLM_HIGHLIGHT_MODEL', self.config_manager.get('LLM_MODEL', ''))
         )
-        self.remote_model_edit.setPlaceholderText("gpt-4.1-mini")
+        self.remote_model_edit.setPlaceholderText("gemini-2.5-flash")
         remote_model_layout.addWidget(self.remote_model_edit)
         ai_layout.addLayout(remote_model_layout)
-
-        vision_model_layout = QHBoxLayout()
-        vision_model_layout.addWidget(QLabel("视觉模型:"))
-        self.vision_model_edit = QLineEdit()
-        self.vision_model_edit.setText(
-            self.config_manager.get('LLM_VISION_MODEL', self.config_manager.get('SCREEN_UNDERSTANDING_MODEL', ''))
-        )
-        self.vision_model_edit.setPlaceholderText("gpt-4.1-mini")
-        vision_model_layout.addWidget(self.vision_model_edit)
-        ai_layout.addLayout(vision_model_layout)
 
         ai_layout.addWidget(QLabel("用户兴趣偏好提示:"))
         self.user_preference_edit = QTextEdit()
@@ -1428,7 +1449,7 @@ class SettingsDialog(QDialog):
         self.user_preference_edit.setMinimumHeight(120)
         ai_layout.addWidget(self.user_preference_edit)
 
-        llm_note = QLabel("API key / base_url 建议只在当前启动终端临时设置，不写入全局环境。")
+        llm_note = QLabel("界面只保留一个统一 LLM 模型入口。本地蒸馏和视觉模型继续走默认配置。API key / base_url 建议只在当前启动终端临时设置，不写入全局环境。")
         llm_note.setWordWrap(True)
         llm_note.setStyleSheet("color: #666;")
         ai_layout.addWidget(llm_note)
@@ -1530,6 +1551,7 @@ class SettingsDialog(QDialog):
         # 模型设置
         self.config_manager.config['WHISPER_MODEL'] = self.whisper_combo.currentText()
         self.config_manager.config['WHISPER_ENGINE'] = self.whisper_engine_combo.currentText()
+        self.config_manager.config['SEGMENT_LENGTH'] = self.transcribe_segment_spin.value()
         hf_whisper_model = self.hf_whisper_model_edit.text().strip() or "openai/whisper-medium"
         self.config_manager.config['HF_WHISPER_MODEL'] = hf_whisper_model
         hf_token = self.hf_token_edit.text().strip()
@@ -1554,9 +1576,7 @@ class SettingsDialog(QDialog):
         self.config_manager.config['ENABLE_LLM_HIGHLIGHT'] = self.llm_highlight_check.isChecked()
         self.config_manager.config['ENABLE_LLM_LOCAL_DISTILL'] = self.local_distill_check.isChecked()
         self.config_manager.config['LLM_HIGHLIGHT_CANDIDATE_MULTIPLIER'] = self.candidate_multiplier_spin.value()
-        self.config_manager.config['LLM_LOCAL_MODEL'] = self.local_model_edit.text().strip()
         self.config_manager.config['LLM_HIGHLIGHT_MODEL'] = self.remote_model_edit.text().strip()
-        self.config_manager.config['LLM_VISION_MODEL'] = self.vision_model_edit.text().strip()
         self.config_manager.config['LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT'] = self.user_preference_edit.toPlainText().strip()
         
         # 性能设置

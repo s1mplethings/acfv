@@ -24,6 +24,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
+from acfv.enhance.tts import compare_tts
 from acfv.features.modules.ui_components import Worker
 from acfv.processing.subtitle_render import apply_style_preset, burn_in, make_preview_ass, render_preview
 from acfv.runtime.storage import processing_path, resolve_clips_base_dir, runs_out_path
@@ -183,21 +184,12 @@ class SubtitleRenderWidget(QWidget):
         self.checkbox_enable_local_distill.setChecked(self.config_manager.get("ENABLE_LLM_LOCAL_DISTILL", True))
         clip_layout.addRow("启用本地Ollama蒸馏:", self.checkbox_enable_local_distill)
 
-        self.edit_local_llm_model = QLineEdit(self.config_manager.get("LLM_LOCAL_MODEL", "qwen2.5:7b-instruct"))
-        self.edit_local_llm_model.setToolTip("本地 Ollama/OpenAI-compatible 模型名。")
-        clip_layout.addRow("本地Ollama模型:", self.edit_local_llm_model)
-
         self.edit_remote_llm_model = QLineEdit(
             self.config_manager.get("LLM_HIGHLIGHT_MODEL", self.config_manager.get("LLM_MODEL", ""))
         )
-        self.edit_remote_llm_model.setToolTip("最终高光精排使用的远端 API 文本模型。")
-        clip_layout.addRow("远端API模型:", self.edit_remote_llm_model)
-
-        self.edit_remote_vision_model = QLineEdit(
-            self.config_manager.get("LLM_VISION_MODEL", self.config_manager.get("SCREEN_UNDERSTANDING_MODEL", ""))
-        )
-        self.edit_remote_vision_model.setToolTip("电脑画面理解使用的远端视觉模型。")
-        clip_layout.addRow("视觉模型:", self.edit_remote_vision_model)
+        self.edit_remote_llm_model.setToolTip("统一的 LLM 模型入口，优先用于高光精排。")
+        self.edit_remote_llm_model.setPlaceholderText("gemini-2.5-flash")
+        clip_layout.addRow("LLM模型:", self.edit_remote_llm_model)
 
         self.edit_user_preference_prompt = QTextEdit()
         self.edit_user_preference_prompt.setPlaceholderText("例如：优先代码修改、问题定位、软件操作、创作过程。")
@@ -207,7 +199,51 @@ class SubtitleRenderWidget(QWidget):
         self.edit_user_preference_prompt.setMaximumHeight(96)
         clip_layout.addRow("用户兴趣偏好:", self.edit_user_preference_prompt)
 
+        llm_note = QLabel("界面已隐藏本地模型和视觉模型入口，继续使用当前默认配置。")
+        llm_note.setWordWrap(True)
+        llm_note.setStyleSheet("color: #666;")
+        clip_layout.addRow("", llm_note)
+
         layout.addWidget(wrap_in_card(clip_card))
+
+        tts_card = QWidget()
+        tts_layout = QFormLayout(tts_card)
+        tts_layout.setLabelAlignment(Qt.AlignLeft)
+
+        self.tts_text_edit = QTextEdit()
+        self.tts_text_edit.setPlaceholderText("输入要测试的文本，建议 1~3 句。")
+        self.tts_text_edit.setMaximumHeight(88)
+        default_tts_text = self.config_manager.get(
+            "TTS_AB_TEST_TEXT",
+            "这是一段用于 A/B 对比的测试语音，检查清晰度、自然度和情绪表现。",
+        )
+        self.tts_text_edit.setPlainText(default_tts_text)
+        tts_layout.addRow("测试文本:", self.tts_text_edit)
+
+        self.tts_current_voice_edit = QLineEdit(self.config_manager.get("TTS_CURRENT_VOICE", "zh-CN-XiaoxiaoNeural"))
+        tts_layout.addRow("当前 Voice:", self.tts_current_voice_edit)
+
+        self.tts_vibe_base_url_edit = QLineEdit(
+            self.config_manager.get("TTS_VIBEVOICE_BASE_URL", "http://127.0.0.1:8000/v1")
+        )
+        tts_layout.addRow("VibeVoice URL:", self.tts_vibe_base_url_edit)
+
+        self.tts_vibe_model_edit = QLineEdit(self.config_manager.get("TTS_VIBEVOICE_MODEL", "vibevoice"))
+        tts_layout.addRow("VibeVoice Model:", self.tts_vibe_model_edit)
+
+        self.tts_vibe_voice_edit = QLineEdit(self.config_manager.get("TTS_VIBEVOICE_VOICE", "alloy"))
+        tts_layout.addRow("VibeVoice Voice:", self.tts_vibe_voice_edit)
+
+        self.tts_vibe_api_key_edit = QLineEdit(self.config_manager.get("TTS_VIBEVOICE_API_KEY", "local"))
+        self.tts_vibe_api_key_edit.setEchoMode(QLineEdit.Password)
+        tts_layout.addRow("VibeVoice API Key:", self.tts_vibe_api_key_edit)
+
+        tts_note = QLabel("会输出 current(edge-tts) 与 vibevoice 两个音频，手动听感对比。")
+        tts_note.setWordWrap(True)
+        tts_note.setStyleSheet("color: #666;")
+        tts_layout.addRow("", tts_note)
+
+        layout.addWidget(wrap_in_card(tts_card))
 
         btn_row = QHBoxLayout()
         self.btn_preview = QPushButton("生成预览")
@@ -221,6 +257,10 @@ class SubtitleRenderWidget(QWidget):
         self.btn_render = QPushButton("渲染全片")
         self.btn_render.clicked.connect(self._on_render_full)
         btn_row.addWidget(self.btn_render)
+
+        self.btn_tts_compare = QPushButton("TTS对比：当前 vs VibeVoice")
+        self.btn_tts_compare.clicked.connect(self._on_tts_compare)
+        btn_row.addWidget(self.btn_tts_compare)
 
         self.btn_save_clips = QPushButton("保存切片设置")
         self.btn_save_clips.clicked.connect(self._save_clip_settings)
@@ -381,6 +421,32 @@ class SubtitleRenderWidget(QWidget):
             "work_dir": work_dir,
         }
 
+    def _prepare_tts_payload(self) -> Optional[dict]:
+        text = self.tts_text_edit.toPlainText().strip()
+        if not text:
+            self.status_label.setText("请先填写 TTS 测试文本")
+            return None
+        video_candidate = Path(self.video_path_edit.text().strip()) if self.video_path_edit.text().strip() else None
+        subtitle_candidate = Path(self.sub_path_edit.text().strip()) if self.sub_path_edit.text().strip() else None
+        work_dir = (
+            self._infer_work_dir(video_candidate or processing_path("working"), subtitle_candidate or processing_path("working"))
+            if video_candidate or subtitle_candidate
+            else processing_path("working")
+        )
+        out_dir = Path(work_dir) / "tts_compare"
+        cfg = {
+            "TTS_CURRENT_VOICE": self.tts_current_voice_edit.text().strip() or "zh-CN-XiaoxiaoNeural",
+            "TTS_CURRENT_RATE": self.config_manager.get("TTS_CURRENT_RATE", "+0%"),
+            "TTS_CURRENT_PITCH": self.config_manager.get("TTS_CURRENT_PITCH", "+0%"),
+            "TTS_VIBEVOICE_BASE_URL": self.tts_vibe_base_url_edit.text().strip(),
+            "TTS_VIBEVOICE_API_KEY": self.tts_vibe_api_key_edit.text().strip(),
+            "TTS_VIBEVOICE_MODEL": self.tts_vibe_model_edit.text().strip() or "vibevoice",
+            "TTS_VIBEVOICE_VOICE": self.tts_vibe_voice_edit.text().strip() or "alloy",
+            "TTS_VIBEVOICE_FORMAT": self.config_manager.get("TTS_VIBEVOICE_FORMAT", "mp3"),
+            "TTS_VIBEVOICE_TIMEOUT_SEC": self.config_manager.get("TTS_VIBEVOICE_TIMEOUT_SEC", 60),
+        }
+        return {"text": text, "out_dir": out_dir, "config": cfg}
+
     def _on_generate_preview(self) -> None:
         payload = self._prepare_paths()
         if not payload:
@@ -392,6 +458,12 @@ class SubtitleRenderWidget(QWidget):
         if not payload:
             return
         self._run_worker(self._render_full_task, payload)
+
+    def _on_tts_compare(self) -> None:
+        payload = self._prepare_tts_payload()
+        if not payload:
+            return
+        self._run_worker(self._tts_compare_task, payload)
 
     def _run_worker(self, func, payload) -> None:
         if self._worker and self._worker.isRunning():
@@ -438,6 +510,13 @@ class SubtitleRenderWidget(QWidget):
         out_mp4 = burn_in(payload["video"], styled, payload["out_mp4"])
         return f"全片已渲染: {out_mp4}"
 
+    def _tts_compare_task(self, payload: dict) -> str:
+        result = compare_tts(text=payload["text"], out_dir=Path(payload["out_dir"]), config=payload["config"])
+        report_path = result.get("report_path", "")
+        current_ok = bool(result.get("current", {}).get("ok"))
+        vibe_ok = bool(result.get("vibevoice", {}).get("ok"))
+        return f"TTS对比完成 current={current_ok} vibe={vibe_ok} 报告: {report_path}"
+
     def _on_worker_finished(self, message: str) -> None:
         self.status_label.setText(message)
 
@@ -479,13 +558,17 @@ class SubtitleRenderWidget(QWidget):
         self.config_manager.set("CLIP_MERGE_THRESHOLD", float(self.edit_clip_merge_threshold.text().strip() or 10.0))
         self.config_manager.set("MERGE_NEARBY_CLIPS", self.checkbox_merge_nearby_clips.isChecked())
         self.config_manager.set("ENABLE_LLM_LOCAL_DISTILL", self.checkbox_enable_local_distill.isChecked())
-        self.config_manager.set("LLM_LOCAL_MODEL", self.edit_local_llm_model.text().strip())
         self.config_manager.set("LLM_HIGHLIGHT_MODEL", self.edit_remote_llm_model.text().strip())
-        self.config_manager.set("LLM_VISION_MODEL", self.edit_remote_vision_model.text().strip())
         self.config_manager.set(
             "LLM_HIGHLIGHT_USER_PREFERENCE_PROMPT",
             self.edit_user_preference_prompt.toPlainText().strip(),
         )
+        self.config_manager.set("TTS_AB_TEST_TEXT", self.tts_text_edit.toPlainText().strip())
+        self.config_manager.set("TTS_CURRENT_VOICE", self.tts_current_voice_edit.text().strip())
+        self.config_manager.set("TTS_VIBEVOICE_BASE_URL", self.tts_vibe_base_url_edit.text().strip())
+        self.config_manager.set("TTS_VIBEVOICE_API_KEY", self.tts_vibe_api_key_edit.text().strip())
+        self.config_manager.set("TTS_VIBEVOICE_MODEL", self.tts_vibe_model_edit.text().strip())
+        self.config_manager.set("TTS_VIBEVOICE_VOICE", self.tts_vibe_voice_edit.text().strip())
         self.config_manager.save_config()
         self.status_label.setText("切片设置已保存")
 

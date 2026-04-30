@@ -28,6 +28,8 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         interval_sec=ctx.params.get("interval_sec"),
         max_frames_per_window=ctx.params.get("max_frames_per_window"),
         enable_ocr=ctx.params.get("enable_ocr"),
+        scene_provider=ctx.params.get("scene_provider"),
+        ocr_provider=ctx.params.get("ocr_provider"),
         dedupe_hash_distance=ctx.params.get("dedupe_hash_distance"),
         progress_callback=ctx.progress,
     )
@@ -54,6 +56,8 @@ spec = ModuleSpec(
         "interval_sec": 30.0,
         "max_frames_per_window": 12,
         "enable_ocr": True,
+        "scene_provider": "pyscenedetect",
+        "ocr_provider": "rapidvideocr",
         "dedupe_hash_distance": 6,
     },
 )

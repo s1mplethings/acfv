@@ -1,6 +1,60 @@
-download:
-  save_dir: "data/downloads"
-  concurrency: 2
-process:
-  work_dir: "outputs"
-  log_dir: "logs"
+workdir: runs
+
+pipeline:
+  mode: clip-workflow
+  max_clip_count: 10
+  min_clip_segment_seconds: 6
+  target_clip_duration: 90
+
+providers:
+  download:
+    default: twitch-downloader
+    twitch-downloader:
+      auto_install: true
+    streamlink:
+      quality: best
+
+  asr:
+    default: faster-whisper
+    common:
+      device: auto
+      language: en
+      segment_length: 120
+    faster-whisper:
+      model: medium
+    whisperx:
+      model: medium
+    hf-whisper:
+      hf_model: openai/whisper-medium
+
+  scene:
+    default: pyscenedetect
+    common:
+      enabled: false
+      interval_sec: 30
+      max_frames_per_window: 12
+
+  ocr:
+    default: rapidvideocr
+    common:
+      enabled: true
+
+  llm:
+    default: ollama
+    ollama:
+      base_url: http://127.0.0.1:11434/v1
+      api_key: ollama
+      model: qwen2.5:7b-instruct
+    vllm:
+      base_url: http://127.0.0.1:8000/v1
+      api_key: local
+      model: mistral-small
+
+features:
+  enable_screen_detect: false
+  enable_screen_understanding: false
+  enable_llm_highlight: false
+  enable_speaker_separation: false
+  enable_streamer_subtitles: false
+  enable_subtitle_translate: false
+  enable_rag: false

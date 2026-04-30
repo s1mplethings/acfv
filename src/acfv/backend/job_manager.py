@@ -130,6 +130,7 @@ class JobManager:
         return {
             "transcribe_runtime": self._read_json(runtime_dir / "transcribe_runtime.json"),
             "render_runtime": self._read_json(runtime_dir / "render_runtime.json"),
+            "events_jsonl": str(runtime_dir / "events.jsonl") if (runtime_dir / "events.jsonl").exists() else None,
         }
 
     def _run_job(

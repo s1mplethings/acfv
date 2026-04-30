@@ -11,7 +11,7 @@ from typing import Any, Dict, List
 from acfv import config as app_config
 from acfv.modular.contracts import ART_AUDIO_HOST, ART_CLIPS, ART_SEGMENTS_LLM, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT, ART_VIDEO
 from acfv.modular.types import ModuleContext, ModuleSpec
-from acfv.pipeline.runtime import finalize_runtime, init_render_runtime, read_runtime, update_runtime_item
+from acfv.pipeline.runtime import append_runtime_event, finalize_runtime, init_render_runtime, read_runtime, update_runtime_item
 from acfv.selection.merge_segments import merge_segments
 from acfv.steps.render_clips.impl import NAMING_POLICY as CLIP_NAMING_POLICY, cut_video_ffmpeg
 from acfv.steps.subtitle_generator.impl import generate_semantic_subtitles_for_clips
@@ -416,9 +416,8 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
         output_path = output_dir_path / relative_output
         output_path.parent.mkdir(parents=True, exist_ok=True)
         tmp_output_path = output_path.with_name(f"{output_path.stem}.tmp{output_path.suffix}")
-        for stale in (output_path, tmp_output_path):
-            if stale.exists():
-                stale.unlink()
+        if tmp_output_path.exists():
+            tmp_output_path.unlink()
         update_runtime_item(
             runtime_path,
             items_key="clips",
@@ -428,9 +427,20 @@ def run(ctx: ModuleContext) -> Dict[str, Any]:
             worker_id="render_pool",
         )
         _emit_render_progress(f"{clip_id} started")
-        cut_video_ffmpeg(str(video_path), str(tmp_output_path), float(segment["start"]), float(segment["end"] - segment["start"]))
-        if tmp_output_path.exists():
-            os.replace(tmp_output_path, output_path)
+        if not output_path.exists() or output_path.stat().st_size <= 0:
+            cut_video_ffmpeg(str(video_path), str(tmp_output_path), float(segment["start"]), float(segment["end"] - segment["start"]))
+            if tmp_output_path.exists():
+                os.replace(tmp_output_path, output_path)
+        else:
+            append_runtime_event(
+                ctx.store.run_dir,
+                {
+                    "event": "render_reuse_existing_output",
+                    "stage": "render_clips_batch",
+                    "clip_id": clip_id,
+                    "output_video": relative_output,
+                },
+            )
         if not output_path.exists():
             raise RuntimeError(f"{clip_id} output missing")
         update_runtime_item(

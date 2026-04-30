@@ -8,20 +8,23 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict
 
-_LOCKS: dict[str, threading.Lock] = {}
+_LOCKS: dict[str, threading.RLock] = {}
 _LOCKS_GUARD = threading.Lock()
+_STATE_CACHE: dict[str, Dict[str, Any]] = {}
+_LAST_FLUSH: dict[str, float] = {}
+_SUMMARY_FLUSH_INTERVAL_SEC = 1.0
 
 
 def _utcnow() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def _path_lock(path: Path) -> threading.Lock:
+def _path_lock(path: Path) -> threading.RLock:
     key = str(path.resolve())
     with _LOCKS_GUARD:
         lock = _LOCKS.get(key)
         if lock is None:
-            lock = threading.Lock()
+            lock = threading.RLock()
             _LOCKS[key] = lock
         return lock
 
@@ -39,6 +42,47 @@ def _write_json(path: Path, payload: Dict[str, Any]) -> None:
             last_error = exc
             time.sleep(0.02)
     raise last_error if last_error is not None else RuntimeError(f"failed to replace runtime file: {path}")
+
+
+def _events_path(runtime_path: Path) -> Path:
+    return runtime_path.parent / "events.jsonl"
+
+
+def _cache_key(path: Path) -> str:
+    return str(path.resolve())
+
+
+def _append_event(runtime_path: Path, event: Dict[str, Any]) -> None:
+    event_path = _events_path(runtime_path)
+    event_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"schema_version": "1.0.0", "ts": _utcnow(), **event}
+    with _path_lock(event_path):
+        with event_path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def _cache_payload(path: Path, payload: Dict[str, Any]) -> None:
+    _STATE_CACHE[_cache_key(path)] = payload
+
+
+def _load_payload(path: Path) -> Dict[str, Any]:
+    key = _cache_key(path)
+    cached = _STATE_CACHE.get(key)
+    if cached is not None:
+        return cached
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    _STATE_CACHE[key] = payload
+    return payload
+
+
+def _flush_summary(path: Path, payload: Dict[str, Any], *, force: bool = False) -> None:
+    key = _cache_key(path)
+    now = time.monotonic()
+    last = _LAST_FLUSH.get(key, 0.0)
+    if not force and now - last < _SUMMARY_FLUSH_INTERVAL_SEC:
+        return
+    _write_json(path, payload)
+    _LAST_FLUSH[key] = now
 
 
 def init_transcribe_runtime(
@@ -86,6 +130,18 @@ def init_transcribe_runtime(
     }
     with _path_lock(runtime_path):
         _write_json(runtime_path, payload)
+        _cache_payload(runtime_path, payload)
+        _append_event(
+            runtime_path,
+            {
+                "event": "runtime_initialized",
+                "stage": "transcribe_chunks",
+                "job_id": job_id,
+                "total": len(chunks),
+                "pool": pool,
+                "max_workers": int(max_workers),
+            },
+        )
     return runtime_path
 
 
@@ -135,6 +191,18 @@ def init_render_runtime(
     }
     with _path_lock(runtime_path):
         _write_json(runtime_path, payload)
+        _cache_payload(runtime_path, payload)
+        _append_event(
+            runtime_path,
+            {
+                "event": "runtime_initialized",
+                "stage": "render_clips_batch",
+                "job_id": job_id,
+                "total": len(clips),
+                "pool": pool,
+                "max_workers": int(max_workers),
+            },
+        )
     return runtime_path
 
 
@@ -155,11 +223,27 @@ def update_runtime_item(
 ) -> Dict[str, Any]:
     path = Path(runtime_path)
     with _path_lock(path):
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload = _load_payload(path)
         items = payload.get(items_key, [])
+        found_item: Dict[str, Any] | None = None
         for item in items:
             if item.get(item_id_key) != item_id:
                 continue
+            found_item = item
+            expected_worker_id = worker_id or item.get("worker_id")
+            expected_error_summary = error_summary if status in {"running", "succeeded", "failed", "cancelled"} else item.get("error_summary")
+            noop = (
+                item.get("status") == status
+                and item.get("worker_id") == expected_worker_id
+                and item.get("error_summary") == expected_error_summary
+                and (result_path is None or item.get("result_path") == result_path)
+                and (segment_count is None or item.get("segment_count") == int(segment_count))
+                and (output_video is None or item.get("output_video") == output_video)
+                and (subtitle_path is None or item.get("subtitle_path") == subtitle_path)
+                and (thumbnail_path is None or item.get("thumbnail_path") == thumbnail_path)
+            )
+            if noop:
+                return payload
             if status == "running":
                 item["started_at"] = item.get("started_at") or _utcnow()
                 item["worker_id"] = worker_id or item.get("worker_id")
@@ -183,26 +267,108 @@ def update_runtime_item(
             if thumbnail_path is not None and "thumbnail_path" in item:
                 item["thumbnail_path"] = thumbnail_path
             break
+        if found_item is None:
+            found_item = {item_id_key: item_id, "status": "queued", "attempt": 1}
+            if items_key == "clips":
+                found_item.update(
+                    {
+                        "rank": None,
+                        "start_ms": None,
+                        "end_ms": None,
+                        "worker_id": None,
+                        "error_summary": None,
+                        "started_at": None,
+                        "finished_at": None,
+                        "output_video": None,
+                        "subtitle_path": None,
+                        "thumbnail_path": None,
+                    }
+                )
+            else:
+                found_item.update(
+                    {
+                        "index": None,
+                        "start_sec": None,
+                        "end_sec": None,
+                        "worker_id": None,
+                        "error_summary": None,
+                        "started_at": None,
+                        "finished_at": None,
+                        "result_path": None,
+                        "segment_count": None,
+                    }
+                )
+            items.append(found_item)
+            payload[items_key] = items
+            return update_runtime_item(
+                path,
+                items_key=items_key,
+                item_id_key=item_id_key,
+                item_id=item_id,
+                status=status,
+                worker_id=worker_id,
+                error_summary=error_summary,
+                result_path=result_path,
+                segment_count=segment_count,
+                output_video=output_video,
+                subtitle_path=subtitle_path,
+                thumbnail_path=thumbnail_path,
+            )
         _refresh_summary(payload)
-        _write_json(path, payload)
+        _append_event(
+            path,
+            {
+                "event": "item_state_changed",
+                "stage": payload.get("stage"),
+                "job_id": payload.get("job_id"),
+                "item_key": item_id_key,
+                "item_id": item_id,
+                "status": status,
+                "worker_id": worker_id,
+                "error_summary": error_summary,
+                "result_path": result_path,
+                "output_video": output_video,
+                "found": found_item is not None,
+            },
+        )
+        _flush_summary(path, payload)
         return payload
 
 
 def finalize_runtime(runtime_path: Path | str, *, status: str) -> Dict[str, Any]:
     path = Path(runtime_path)
     with _path_lock(path):
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload = _load_payload(path)
         payload["status"] = status
         payload["updated_at"] = _utcnow()
         _refresh_summary(payload)
-        _write_json(path, payload)
+        _append_event(
+            path,
+            {
+                "event": "runtime_finalized",
+                "stage": payload.get("stage"),
+                "job_id": payload.get("job_id"),
+                "status": status,
+            },
+        )
+        _flush_summary(path, payload, force=True)
         return payload
 
 
 def read_runtime(runtime_path: Path | str) -> Dict[str, Any]:
     path = Path(runtime_path)
     with _path_lock(path):
-        return json.loads(path.read_text(encoding="utf-8"))
+        return dict(_load_payload(path))
+
+
+def append_runtime_event(run_dir: Path | str, event: Dict[str, Any]) -> Path:
+    event_path = Path(run_dir) / "work" / "runtime" / "events.jsonl"
+    with _path_lock(event_path):
+        event_path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {"schema_version": "1.0.0", "ts": _utcnow(), **dict(event)}
+        with event_path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n")
+    return event_path
 
 
 def _refresh_summary(payload: Dict[str, Any]) -> None:
@@ -225,6 +391,7 @@ def _refresh_summary(payload: Dict[str, Any]) -> None:
 
 
 __all__ = [
+    "append_runtime_event",
     "finalize_runtime",
     "init_render_runtime",
     "init_transcribe_runtime",

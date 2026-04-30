@@ -5,10 +5,15 @@ Param(
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $srcPath = Join-Path $repoRoot "src"
+$contractRunDir = Join-Path $repoRoot "var\\verify_contract_run"
 if ($env:PYTHONPATH) {
   $env:PYTHONPATH = "$srcPath;$env:PYTHONPATH"
 } else {
   $env:PYTHONPATH = $srcPath
+}
+$env:ACFV_CONTRACT_RUN_DIR = $contractRunDir
+if (Test-Path $contractRunDir) {
+  Remove-Item -LiteralPath $contractRunDir -Recurse -Force
 }
 
 Write-Host "[verify] OS: Windows"
@@ -69,7 +74,7 @@ try {
 }
 
 if (-not $SkipContractChecks) {
-  python scripts/contract_checks.py | Out-Host
+  python scripts/contract_checks.py --run-dir $contractRunDir --require-artifacts | Out-Host
   $exitCode = $LASTEXITCODE
   if ($exitCode -ne 0) {
     Write-Error "[verify] contract_checks failed with exit code $exitCode"

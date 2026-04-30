@@ -8,9 +8,9 @@ from acfv import config
 from typing import List, Dict, Any
 
 MIN_CLIP_SEGMENT_SECONDS = 6.0
-MIN_CLIP_DURATION_SEC = 240.0  # 4 分钟
-PREF_CLIP_DURATION_SEC = 270.0  # 4.5 分钟
-MAX_CLIP_DURATION_SEC = 300.0  # 5 分钟
+MIN_CLIP_DURATION_SEC = 45.0
+PREF_CLIP_DURATION_SEC = 90.0
+MAX_CLIP_DURATION_SEC = 150.0
 NAMING_POLICY = "clip_{rank:03d}_{HHhMMmSSs}_{start_ms}-{end_ms}.mp4"
 
 
@@ -431,7 +431,7 @@ def clip_video(video_path, analysis_file, output_dir, progress_callback=None, au
         pref_target = max(PREF_CLIP_DURATION_SEC, pref_target_cfg, min_target)
         max_target = max(MAX_CLIP_DURATION_SEC, max_target_cfg, pref_target)
     except Exception as e:
-        log_warning(f"[clip_video] 读取剪辑目标时长配置失败，使用默认 240/270/300s: {e}")
+        log_warning(f"[clip_video] 读取剪辑目标时长配置失败，使用默认 45/90/150s: {e}")
 
     if semantic_mode:
         log_info("[clip_video] 使用语义合并窗口（保留原始时长，非固定窗口）")

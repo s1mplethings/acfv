@@ -9,6 +9,7 @@
 4. [Policy](policy/spec.md) - 视角切换与梗贴图策略
 5. [Render](render/spec.md) - FFmpeg渲染编译器
 6. [RAG](rag/spec.md) - 用户偏好检索与风格推荐
+7. [TTS](tts/spec.md) - 当前语音引擎与 VibeVoice A/B 对比
 
 ## 核心产物
 - `timeline.json` - 统一时间轴事件（所有模块输出汇总）

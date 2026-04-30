@@ -235,7 +235,8 @@ def create_default_config():
     default_config = {
         "CLIPS_BASE_DIR": "clips",
         "MAX_CLIP_COUNT": 10,
-        "WHISPER_MODEL": "base",  # 使用更小的模型
+        "WHISPER_MODEL": "medium",
+        "SEGMENT_LENGTH": 120,
         "ENABLE_VIDEO_EMOTION": False,
         "MAX_WORKERS": 2  # 减少工作线程数
     }

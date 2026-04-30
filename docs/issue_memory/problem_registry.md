@@ -169,3 +169,154 @@
 - 验证：
   - 直接转录 `runs\\probe\\faster_whisper_replay\\sample_20s.wav`，关闭 fallback，返回 `engine=faster-whisper`、`segments=1`。
   - 短回放视频完整 CLI pipeline：`WHISPER_ENGINE=faster-whisper`、`WHISPER_MODEL=large-v3-turbo`、`ACFV_TRANSCRIBE_FALLBACK=0`，成功导出 1 个 clip；`transcribe_runtime.json` 为 2/2 chunks succeeded；contract 校验返回空错误。
+
+### 2026-04-10 长视频仍受 stage barrier / 高频 runtime 重写影响，局部并发不能形成端到端流水
+- 现象：`gpu_asr_pool.max_workers` 与 `render_pool.max_workers` 已存在，但长视频仍表现为转录整体完成后才进入后续选择/渲染；runtime item 更新频繁重写 `transcribe_runtime.json` / `render_runtime.json`，Windows 并发渲染时可能放大 IO 与锁竞争。
+- 触发：2.1.0 长视频主线执行，尤其是多 chunk ASR + 多 clip render。
+- 原因判断：
+  - `modular.runner` 按 module artifact 串行执行，形成外层强 stage barrier。
+  - `transcribe_audio` 插件过去等整段 transcript 返回后才拆 chunk transcript，无法让下游消费局部结果。
+  - ASR 子进程内 chunk loop 是 `extract -> transcribe -> next`，音频切片和 GPU 转写没有重叠。
+  - runtime summary JSON 每次 item 状态变化都全量重写。
+- 解决方案：
+  - 保留 canonical 10-stage 语义，在 `transcribe_audio` stage-local dispatcher 上增加 streaming window fast path：chunk 成功后写 `work/chunks/<chunk_id>/transcript.json`，记录 incremental merge / clip work item 事件，并投喂 `render_pool`。
+  - `steps/transcribe_audio/impl.py` 使用 `io_pool` 预取 audio chunk，单 GPU worker 连续消费准备好的 chunk。
+  - `render_clips` 最终阶段复用 streaming fast path 已产出的目标文件，仍由完整 `clip_manifest.json` / `export_results.json` 做最终汇总。
+  - `runtime.py` 增加 `work/runtime/events.jsonl`，summary JSON 改为周期刷新 + finalize 强制刷新。
+- 验证：
+  - `python -m pytest -q tests\\integration\\test_phase3_runtime_state.py tests\\integration\\test_unified_pipeline_contract.py tests\\integration\\test_render_clips_priority.py` 通过。
+  - 新增测试确认 chunk0 完成后 render 可在 chunk1 完成前启动，`events.jsonl` 含 `incremental_merge_done` / `clip_work_item_queued`，且 `audio_chunk_manifest.json` 不含执行态字段。
+
+### 2026-04-10 verify 通过但无法证明 streaming 更快或流程更对
+- 现象：`verify.ps1`、pytest、contract checks 都能通过，但这些质量门不能直接回答 TTFCk、TTFC、首个 clip 是否早于完整 transcribe、early render 是否被最终阶段复用、runtime 目录是否被辅助文件污染等问题。
+- 触发：2.1.0 streaming execution 改造完成后，需要证明真实长视频流程更合理。
+- 原因判断：原有测试偏单元/contract 回归，缺少统一 benchmark meta、事件时间线分析、artifact/runtime 分离复检、资源采样和 JSON/MD 报告。
+- 解决方案：
+  - 新增 `scripts/benchmark_streaming.py`，支持 `run` 和 `collect` 两种模式。
+  - 统一输出 `var/benchmarks/<run_id>/meta.json`、`results.json`、`timeline.json`、`report.md`。
+  - 自动分析 `events.jsonl` 得到 TTFCk / TTFC / TAT / TTR / E2E 和 `first_clip_before_all_transcribe_done`。
+  - 自动校验 contract artifact 不含 runtime-only 字段，且 `work/runtime/` 只包含 `transcribe_runtime.json`、`render_runtime.json`、`events.jsonl`。
+  - 把 streaming fast path 的临时 render seed manifest 移到 `work/streaming/`，避免污染 runtime 目录。
+- 验证：
+  - `python -m pytest -q tests\\integration\\test_benchmark_streaming.py` 通过。
+  - `python scripts\\benchmark_streaming.py collect --case-id ... --run-dir ...` 可对已有 run 生成 benchmark 报告。
+
+### 2026-04-11 streaming fast path 重复窗口会制造假并发并浪费 render/CPU/IO
+- 现象：真实长视频运行中，同一时间窗反复出现 `incremental_merge_done`、`clip_work_item_queued`，并生成多个不同 `clip_id` 指向同一 `(start,end)` 范围，导致 render 重复做工、runtime/event 变脏、GUI 观察面更乱。
+- 触发：`transcribe_audio` fast path 收到重复 chunk 成功回调，或同一逻辑窗口被多次 merge 扫描命中。
+- 原因判断：streaming fast path 之前只靠递增 `clip_id/rank` 标识临时 work item，没有稳定窗口 identity，也没有“已生成/已入队/已完成”检查；`runtime.py` 对相同 item 的重复更新也会反复写 `item_state_changed`。
+- 解决方案：
+  - `transcribe_audio` fast path 基于归一化 `(start_ms,end_ms)` 建立稳定窗口 identity。
+  - 第一层在 work-item 生成处去重：重复 chunk result / 重复窗口只记 dedup 事件，不再创建新 clip work item。
+  - 第二层在 render submit 前再检查窗口状态，命中时写 `render_enqueue_skipped_duplicate`，拒绝重复进入 render queue。
+  - `runtime.py` 对相同 item 的重复状态更新按幂等处理，避免 event/runtime summary 被重复成功事件撑脏。
+- 验证：
+  - `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONPATH='src'; python -m pytest tests\\integration\\test_phase3_runtime_state.py -q`
+  - 用例覆盖重复窗口只渲染一次、render enqueue guard 生效、`render_reuse_existing_output` 仍可观测。
+
+### 2026-04-10 直接运行 pytest 可能被本机 pytest-qt 插件抢先加载失败
+- 现象：未设置仓库 verify 环境时直接执行 `python -m pytest ...`，本机 `pytestqt` 插件自动加载 `PyQt5.QtCore`，可能报 `ImportError: DLL load failed while importing QtCore`。
+- 触发：PowerShell 中直接运行 pytest，且当前 Python 环境存在 pytest-qt 但 Qt DLL 搜索路径不完整。
+- 原因判断：这是本机测试插件自动加载问题，不是 ACFV 测试本身失败；仓库 `scripts/verify.ps1` 已设置 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`。
+- 解决方案：按 verify 方式运行测试：`$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONPATH='src'; python -m pytest ...`。
+- 验证：`$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONPATH='src'; python -m pytest tests\\unit\\test_gui_job_controller.py -q` 通过。
+
+### 2026-04-12 本机 `openai-whisper` 的 `small.pt` 缓存损坏会拖慢转录并回退到 tiny
+- 现象：直接运行 `transcribe_audio(...)` 且指定 `model_size='small'` 时，`whisper` 警告 `small.pt exists, but the SHA256 checksum does not match`，随后重新下载失败并触发代码内 tiny 回退。
+- 触发：CPU 环境下用 `engine='openai-whisper'` 转录 `var\\bench\\chunk0_15s.wav`。
+- 原因判断：本机 `C:\\Users\\sunom\\.cache\\whisper\\small.pt` 已损坏；当前实现会在模型加载失败时降级到 `tiny`，所以会同时出现“等待更久”和“效果没变好”。
+- 解决方案：删除损坏的 `small.pt` 后重新下载，或改装/切换到 `faster-whisper` / `hf-whisper`；测速时若只想验证链路，可显式指定 `model_size='tiny'` 避免误判。
+- 验证：
+  - `transcribe_audio(...)` 指定 `small` 时日志出现 checksum mismatch，并最终返回 `engine='openai-whisper'` 但文本效果接近 tiny。
+  - `transcribe_audio(...)` 指定 `tiny` 时 15 秒样本可稳定完成，耗时约 `3.8s`（冷）/ `2.5s`（同进程热）。
+
+### 2026-04-12 长回放 `faster-whisper + medium + cuda` 可能在单个 chunk 上卡死，GUI 只会重复打印最后 checkpoint
+- 现象：真实回放 run 中，日志长时间重复 `transcribe_chunks 45/172 chunk_0044 done`，但进度不再前进；`transcribe_runtime.json` 停在 `completed_chunks=45`，最后诊断事件是 `chunk_transcribe_start`，没有后续 `ok/error`。
+- 触发：GUI 处理 `E:\\boardcasts\\DARKWOOD_-_SARUEI_FOR_10_OFF_gg_-_CHECK_OUT_BEYOND_TH_c20396_2025-11-02_13-06-31_26078238.mp4`，使用 `faster-whisper / medium / cuda / split=120`。
+- 原因判断：
+  - 单独抽取的 `chunk_45.wav` 用新进程可在约 `11s` 内正常转完，说明音频 chunk 本身不是坏文件。
+  - 根因更像是长时间复用同一个 `faster-whisper/CUDA` 子进程后，native 推理在某个 chunk 上挂死；父进程只轮询 checkpoint，所以会反复打印最后一条已知状态。
+- 解决方案：
+  - 在父进程 `_run_transcribe_subprocess(...)` 增加 `ACFV_TRANSCRIBE_CHUNK_TIMEOUT_SEC` watchdog；默认单 chunk 超时 `180s`。
+  - `run_transcribe_subprocess_guarded(...)` 遇到 `stalled` 先重启同配置子进程，再考虑 fallback；默认 `ACFV_TRANSCRIBE_STALL_RESTARTS=1`。
+  - `transcribe_audio` 子进程支持从 `chunk_result_dir/chunk_XXXX/transcript.json` 断点续跑，重启后跳过已完成 chunk，不从头开始。
+- 验证：
+  - 单独转录 `run_004\\work\\chunks\\_stage\\chunk_45.wav`：`11.0s` 完成，`segments=12`。
+  - 单测覆盖 `stalled` 时先重启同 payload、以及已存在 chunk result 时复用缓存结果。
+
+### 2026-04-13 弹幕 HTML 存在但 GUI 分析显示“弹幕文件不存在”
+- 现象：分析阶段日志显示 `📺 弹幕文件: ❌ 不存在`，但视频同目录下实际存在 `<video>_chat.html`；`run/work/chat.json` 只有空值，后续分析退化为只看转录。
+- 触发：GUI 处理本地回放，`ENABLE_CHAT_SENTIMENT_ANALYSIS=False`，同时本机 `transformers -> PIL` 链路里的 `PIL._imaging` DLL 缺失。
+- 原因判断：
+  - `steps/extract_chat/impl.py` 之前在模块顶层直接 `from transformers import pipeline`。
+  - 即使聊天情感分析已关闭，导入 `extract_chat` 时仍会触发 `transformers` 导入；而 `transformers` 又会连带导入 `PIL.Image`。
+  - 当 `PIL._imaging` 缺失时，`extract_chat` 模块整体导入失败，modular `extract_chat` plugin 只能回退成空聊天结果。
+- 解决方案：
+  - 把 `transformers` 改成 `_build_sentiment_pipeline(...)` 内按需导入。
+  - 关闭逐条聊天情感分析时，不再依赖 `transformers/PIL`，仅用 `BeautifulSoup` 解析 HTML 并写出 `work/chat.json`。
+- 验证：
+  - 真实文件 `E:\\boardcasts\\DARKWOOD_-_SARUEI_FOR_10_OFF_gg_-_CHECK_OUT_BEYOND_TH_c20396_2025-11-02_13-06-31_26078238_chat.html` 可提取 `7612` 条聊天。
+  - 单测 `tests\\unit\\test_extract_chat_impl.py` 通过，覆盖“禁用情感分析时仍可解析 HTML”。
+
+### 2026-04-13 长回放在固定 chunk 上反复卡住时，单进程 chunk 间显存/内存累积可能放大 `ctranslate2/CUDA` 挂死概率
+- 现象：转录能连续完成几十到上百个 chunk，但在某个固定 chunk（如 `chunk_0090`）进入 `chunk_transcribe_start` 后长时间无返回，最终被 watchdog 以 `stalled during chunk ... for 180s` 杀掉。
+- 触发：GUI 长回放转录，`faster-whisper + medium + cuda + split=120`。
+- 原因判断：
+  - 根因仍在 native 推理层，但长时间复用同一个子进程会让临时 chunk wav、Python 对象和 CUDA cache 持续累积。
+  - 即使单个坏 chunk 不致命，累计的显存碎片/缓存压力也会提高后续挂死概率。
+- 解决方案：
+  - 在 `steps/transcribe_audio/impl.py` 的 chunk 循环内，每个 chunk 完成后立即删除临时 wav。
+  - 同时执行 `gc.collect()`，CUDA 路径再执行 `torch.cuda.empty_cache()` 和 `torch.cuda.ipc_collect()`。
+  - 进一步在 `faster-whisper` 长回放中增加“分批子进程回收”：默认每 `60` 个新 chunk 主动结束当前子进程，父进程立即用同 payload 重启，并复用 `work/chunks/chunk_XXXX/transcript.json` 继续后续 chunk，避免单个 native 进程长期存活到 `chunk_0090` 左右再退化。
+- 验证：
+  - 单测覆盖 `_transcribe_with_splitting(...)` 会对每个 chunk 调用统一清理钩子。
+  - 真实文件 `chunk_0090.wav` 单独在新进程中 GPU/CPU 均可在约 `10s` 内完成，说明卡点不在 chunk 文件本身，而在长寿命转录子进程。
+
+### 2026-04-13 `faster-whisper` 模型未缓存且 Hugging Face 访问异常时，GUI 会长时间重复显示 50% 进度
+- 现象：终端或日志持续重复 `progress 50/100 (MaxRetryError(... huggingface.co ... SSLEOFError ...))`，看起来像任务一直在跑，但实际上还没开始转录第一个 chunk。
+- 触发：GUI 重新开始处理本地回放，网络曾中断或当前环境无法稳定访问 `huggingface.co`，而 `faster-whisper-medium` 本地缓存又不可用。
+- 原因判断：
+  - `FasterWhisperModel(...)` 会在模型未缓存时调用 `huggingface_hub.snapshot_download(...)`。
+  - 子进程已把 `transcribe_error` 写入 checkpoint，但父进程还在轮询同一个 checkpoint，并每隔 15 秒重复打印旧的 50% 进度信息。
+- 解决方案：
+  - `steps/transcribe_audio/impl.py` 现在先尝试 `download_model(..., local_files_only=True)` 查本地缓存；如果缓存存在，直接从本地路径加载，不访问 Hugging Face。
+  - 若模型未缓存且 Hugging Face 访问失败，会把错误改写成明确的“模型未缓存/网络不可用”提示。
+  - 父进程一旦读到 `transcribe_error` checkpoint，会立即终止子进程并抛出错误，不再反复打印同一条 50% 日志。
+- 验证：
+  - 单测覆盖“优先使用本地 faster-whisper 缓存”和“读到 `transcribe_error` checkpoint 后立即失败”。
+
+### 2026-04-14 `optional_analysis` 在 Windows GBK 终端上可能被 emoji 进度文本直接打死
+- 现象：分析阶段已经完成大部分工作，但一进入超快特征提取就报 `gbk codec can't encode character '\u26a1'`，GUI 弹出 `optional_analysis failed`。
+- 触发：Windows 控制台编码为 GBK/CP936，`steps/analyze_segments/impl.py` 启用 `tqdm`，并使用 `⚡超快特征提取`、`⚡超快特征计算` 这类带 emoji 的进度文本。
+- 原因判断：
+  - 常规日志通过 `main_logging` 可容错，但 `tqdm` 会直接向控制台流写文本。
+  - 当控制台编码不支持 emoji 时，`tqdm`/阶段名写入触发 `UnicodeEncodeError`，导致分析流程被异常打断。
+- 解决方案：
+  - 在 `steps/analyze_segments/impl.py` 增加控制台文本降级函数，先按当前流编码把不可写字符替换掉，再喂给 `tqdm` 和阶段进度回调。
+  - 不改文件输出和业务逻辑，只修控制台/进度显示通道。
+- 补充：
+  - 项目里还有旧 `features/modules/core.LogManager` 会重置 root logger；如果它继续挂普通 `logging.StreamHandler(sys.stdout)`，后续任意 `✅/❌` 日志仍可能再次触发 GBK 编码错误。
+  - 现已统一改为复用安全 stream handler，并在 `main_logging` 底层直接处理 `UnicodeEncodeError`。
+- 验证：
+  - 单测覆盖 GBK 流下会把 `⚡` 安全替换，并确认 `ultra_fast_parallel_extraction(...)` 给 `tqdm`/回调的文本不再含原始 emoji。
+
+### 2026-04-16 GUI/重定向控制台下 `tqdm` 仍可能抛 `OSError: [Errno 22] Invalid argument`，导致 `optional_analysis` 失败
+- 现象：GUI 处理长回放时，`screen_detect / screen_understanding / speaker / subtitle` 已经完成，但任务在 `optional_analysis` 阶段直接失败；弹窗摘要只有 `[Errno 22] Invalid argument`。
+- 触发：Windows GUI 或 stdout/stderr 被重定向的环境里，`steps/analyze_segments/impl.py` 的 `ultra_fast_parallel_extraction(...)` / `parallel_feature_extraction_with_checkpoint_original(...)` 继续使用 `tqdm` 更新控制台进度条。
+- 原因判断：
+  - `main_logging` 已能兜住普通 `logging` 输出，但 `tqdm` 的 `update()/close()` 仍会直接写控制台流。
+  - 当流处于无效状态、伪终端、被 GUI 接管或底层句柄异常时，Windows 可能直接抛 `OSError(22, "Invalid argument")`。
+  - 这类异常会中断分析主链，进而表现为 `optional_analysis failed`，但实际不是业务分析本身失败。
+- 解决方案：
+  - 给 `tqdm` 初始化、`update()`、`close()` 全部加 best-effort 包装，异常时只记 warning，不允许再打断 clip 主链。
+  - 维持原有进度回调；仅在控制台进度条不可用时自动降级为空实现。
+- 验证：
+  - `tests\unit\test_analyze_segments_logging.py` 新增 `test_ultra_fast_parallel_extraction_tolerates_broken_tqdm_stream`，模拟 `OSError(22)` 后仍能正常返回特征结果。
+  - `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q tests\unit\test_analyze_segments_logging.py tests\unit\test_main_logging.py` 通过。
+
+### 2026-04-28 环境变量 `OPENAI_BASE_URL` 会污染 `provider=disabled` 合同测试
+- 现象：执行 `powershell -ExecutionPolicy Bypass -File scripts/verify.ps1` 时，`tests/integration/test_provider_contracts.py::test_llm_provider_contract_normalizes_config[payload2-disabled-]` 失败，断言 `resolved.base_url == ''`，实际拿到 `https://api.gptsapi.net/v1`。
+- 触发：当前 shell/环境中存在全局 `OPENAI_BASE_URL`（或等价 API 基址变量）时运行 pytest。
+- 原因判断：测试用例输入是 `providers.llm.default=disabled`，但配置解析仍从环境变量回填了 base_url，导致 disabled 分支断言被外部环境污染。
+- 解决方案：运行 verify 前清空该变量，或在隔离环境执行。示例（PowerShell）：`Remove-Item Env:OPENAI_BASE_URL -ErrorAction Ignore`。
+- 验证：清空变量后重跑 `python -m pytest -q tests/integration/test_provider_contracts.py`，`provider=disabled` 用例应恢复通过。

@@ -24,22 +24,6 @@ from acfv.utils import safe_slug
 from acfv import config
 from acfv.runtime.storage import processing_path, resolve_clips_base_dir
 
-# 导入说话人分离集成模块
-try:
-    from acfv.steps.speaker_separation.impl import SpeakerSeparationIntegration
-except ImportError as e:
-    logging.warning(f"说话人分离模块导入失败: {e}")
-    SpeakerSeparationIntegration = None
-
-# 导入说话人识别模块（改为包内显式导入，兼容打包）
-try:
-    # 旧代码使用裸模块名，导致运行时在不同工作目录下失败
-    from acfv.processing.speaker_diarization_module import SpeakerDiarizationProcessor  # type: ignore
-    SPEAKER_DIARIZATION_AVAILABLE = True
-except Exception as e:  # noqa: BLE001
-    logging.warning(f"说话人识别模块导入失败: {e}")
-    SPEAKER_DIARIZATION_AVAILABLE = False
-
 class ProgressEmitter(QObject):
     """线程安全的进度信号发射器"""
 
@@ -131,7 +115,7 @@ class LocalVideoManager:
             self.main_window.update_detailed_progress
         )
         self.progress_emitter.percent_updated.connect(
-            self.main_window.update_progress_percent
+            self._handle_legacy_percent_update
         )
         # 🆕 通过信号在主线程启动/停止进度显示，避免跨线程启动QTimer
         if hasattr(self.main_window, 'start_processing_progress'):
@@ -139,7 +123,7 @@ class LocalVideoManager:
         if hasattr(self.main_window, 'stop_processing_progress'):
             self.progress_emitter.stop_progress.connect(self.main_window.stop_processing_progress)
         if hasattr(self.main_window, 'update_processing_progress'):
-            self.progress_emitter.stage_progress.connect(self.main_window.update_processing_progress)
+            self.progress_emitter.stage_progress.connect(self._handle_legacy_stage_progress)
         if hasattr(self.main_window, 'finish_processing_stage'):
             self.progress_emitter.stage_finished.connect(self.main_window.finish_processing_stage)
 
@@ -158,11 +142,8 @@ class LocalVideoManager:
         self.job_summary_view = None
         self._progress_started = False
         
-        # 初始化说话人分离集成
-        if SpeakerSeparationIntegration:
-            self.speaker_separation = SpeakerSeparationIntegration(config_manager)
-        else:
-            self.speaker_separation = None
+        # 该管理器本身不在 GUI 启动阶段使用说话人分离能力，避免冷启动时导入整条转录/分离依赖链。
+        self.speaker_separation = None
     
     def cleanup_workers(self):
         """清理本地视频管理器中可能存在的后台线程/Worker"""
@@ -237,10 +218,10 @@ class LocalVideoManager:
             detail_msg = f"{stage}: {message}" if message else stage
             self.main_window.update_detailed_progress(detail_msg)
             
-            # 更新百分比
             if total > 0:
                 percent = int((current / total) * 100)
-                self.main_window.update_progress_percent(percent)
+                detail_msg = f"{detail_msg} ({current}/{total}, stage {percent}%)"
+                self.main_window.update_detailed_progress(detail_msg)
                 
         except Exception as e:
             logging.error(f"[PROGRESS_UI] UI更新失败: {e}")
@@ -267,10 +248,138 @@ class LocalVideoManager:
             
             if total > 0:
                 percent = int((current / total) * 100)
-                self.main_window.update_progress_percent(percent)
+                self.main_window.update_detailed_progress(
+                    f"{detail_msg} ({current}/{total}, stage {percent}%)"
+                )
                 
         except Exception as e:
             logging.error(f"[PROGRESS_SIGNAL] 处理进度信号失败: {e}")
+
+    def _handle_legacy_percent_update(self, percent):
+        """Keep legacy percent callbacks out of the main job progress bar."""
+        logging.info(f"[LEGACY_PROGRESS] ignored stage-local percent for main progress: {percent}")
+
+    def _handle_legacy_stage_progress(self, stage_name, substage_index, progress):
+        """Legacy stage progress is text-only; backend job view owns the main bar."""
+        try:
+            percent = int(float(progress) * 100) if float(progress) <= 1.0 else int(float(progress))
+        except Exception:
+            percent = 0
+        detail = f"{stage_name}: substage={substage_index} stage {percent}%"
+        try:
+            self.main_window.update_detailed_progress(detail)
+        except Exception:
+            pass
+        logging.info(f"[LEGACY_STAGE_PROGRESS] {detail}")
+
+    def _resolve_local_replay_output_base(self, replay_folder):
+        """Store local replay outputs under the replay download folder."""
+        try:
+            replay_base = Path(str(replay_folder)).expanduser()
+            if replay_base:
+                replay_base.mkdir(parents=True, exist_ok=True)
+                return replay_base.resolve()
+        except Exception as err:
+            logging.warning(f"[pipeline] 回放目录不可用，回退到切片基础目录: {err}")
+        return resolve_clips_base_dir(self.config_manager, ensure=True)
+
+    def _read_run_json(self, path: Path) -> dict:
+        try:
+            if not path.exists():
+                return {}
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+
+    def _list_video_run_dirs(self, video_clips_dir) -> List[Path]:
+        runs_dir = Path(str(video_clips_dir)) / "runs"
+        if not runs_dir.exists():
+            return []
+        indexed_runs: List[tuple[int, Path]] = []
+        for child in runs_dir.iterdir():
+            if not child.is_dir():
+                continue
+            match = re.match(r"^run_(\d{3})$", child.name)
+            if not match:
+                continue
+            indexed_runs.append((int(match.group(1)), child))
+        indexed_runs.sort(key=lambda item: item[0])
+        return [path for _, path in indexed_runs]
+
+    def _run_has_partial_state(self, run_dir: Path) -> bool:
+        work_dir = run_dir / "work"
+        candidate_files = [
+            run_dir / "index.json",
+            run_dir / "producer_index.json",
+            run_dir / "run.json",
+            work_dir / "stage_plan.json",
+            work_dir / "audio_chunk_manifest.json",
+            work_dir / "transcript_merged.json",
+            work_dir / "selected_segments.json",
+            work_dir / "clips_manifest.json",
+            work_dir / "runtime" / "transcribe_runtime.json",
+            work_dir / "runtime" / "render_runtime.json",
+        ]
+        for path in candidate_files:
+            try:
+                if path.exists() and path.stat().st_size > 0:
+                    return True
+            except Exception:
+                continue
+        candidate_dirs = [
+            run_dir / "artifacts",
+            work_dir / "audio",
+            work_dir / "chunks",
+            work_dir / "streaming",
+        ]
+        for path in candidate_dirs:
+            try:
+                if path.exists() and any(path.iterdir()):
+                    return True
+            except Exception:
+                continue
+        return False
+
+    def _run_is_complete(self, run_dir: Path) -> bool:
+        work_dir = run_dir / "work"
+        render_runtime = self._read_run_json(work_dir / "runtime" / "render_runtime.json")
+        if render_runtime.get("status") == "succeeded":
+            return True
+        final_markers = [
+            work_dir / "export_results.json",
+            work_dir / "clips_manifest.json",
+        ]
+        for path in final_markers:
+            try:
+                if path.exists() and path.stat().st_size > 10:
+                    return True
+            except Exception:
+                continue
+        return False
+
+    def _find_resumable_run_dir(self, video_clips_dir) -> Optional[Path]:
+        for run_dir in reversed(self._list_video_run_dirs(video_clips_dir)):
+            if self._run_is_complete(run_dir):
+                continue
+            if self._run_has_partial_state(run_dir):
+                return run_dir
+        return None
+
+    def _allocate_video_run_dir(self, video_clips_dir, resume_mode) -> tuple[str, bool]:
+        runs_dir = Path(str(video_clips_dir)) / "runs"
+        runs_dir.mkdir(parents=True, exist_ok=True)
+
+        resumable_run = self._find_resumable_run_dir(video_clips_dir)
+        if resume_mode is not False and resumable_run is not None:
+            return str(resumable_run), True
+
+        run_dirs = self._list_video_run_dirs(video_clips_dir)
+        next_run_idx = 1
+        if run_dirs:
+            next_run_idx = max(int(path.name.split("_")[1]) for path in run_dirs) + 1
+        current_run_dir = runs_dir / f"run_{next_run_idx:03d}"
+        current_run_dir.mkdir(parents=True, exist_ok=True)
+        return str(current_run_dir), False
     
     def init_ui(self, tab_widget):
         """初始化本地回放标签页UI"""
@@ -344,14 +453,18 @@ class LocalVideoManager:
         status = job.get("status") or "unknown"
         progress = job.get("progress", {}) or {}
         percent = progress.get("percent")
+        overall = job_view.get("overall_progress", {}) or {}
+        overall_percent = overall.get("percent")
         message = progress.get("message") or ""
         percent_text = f"{percent:.1f}%" if isinstance(percent, (int, float)) else "--"
-        self.job_status_label.setText(f"当前任务：{job.get('job_id')} | {status} | {stage} | {percent_text}")
+        overall_text = f"{overall_percent:.1f}%" if isinstance(overall_percent, (int, float)) else "--"
+        self.job_status_label.setText(f"当前任务：{job.get('job_id')} | {status} | {stage} | overall {overall_text}")
         lines = [
             f"Job: {job.get('job_id')}",
             f"状态: {status}",
             f"阶段: {stage}",
-            f"进度: {progress.get('current', 0)}/{progress.get('total', 0)} ({percent_text})",
+            f"总体进度: {overall_text}",
+            f"阶段进度: {progress.get('current', 0)}/{progress.get('total', 0)} ({percent_text})",
             f"消息: {message or '-'}",
             f"结果目录: {job_view.get('result_dir') or '-'}",
             self._format_runtime_summary("Transcribe", job_view.get("runtime", {}).get("transcribe")),
@@ -371,15 +484,19 @@ class LocalVideoManager:
                 )
         self.job_summary_view.setPlainText("\n".join(lines))
 
+    def apply_job_view_progress(self, job_view):
+        overall = job_view.get("overall_progress", {}) or {}
+        percent = overall.get("percent")
+        if isinstance(percent, (int, float)):
+            self.main_window.update_progress_percent(int(percent))
+
     def _update_main_window_from_job(self, job_view):
         job = job_view.get("job", {})
         progress = job.get("progress", {}) or {}
         stage = job.get("current_stage") or "queued"
         status = job.get("status") or "unknown"
         message = progress.get("message") or ""
-        percent = progress.get("percent")
-        if isinstance(percent, (int, float)):
-            self.main_window.update_progress_percent(int(percent))
+        self.apply_job_view_progress(job_view)
         detail = f"{stage} | {status}"
         if message:
             detail = f"{detail} | {message}"
@@ -744,7 +861,7 @@ class LocalVideoManager:
                 logging.info(f"[pipeline] 原始文件名: {video_basename}")
                 logging.info(f"[pipeline] 清理后文件名: {safe_basename}")
                 
-                clips_base_dir_path = resolve_clips_base_dir(self.config_manager, ensure=True)
+                clips_base_dir_path = self._resolve_local_replay_output_base(twitch_folder)
                 clips_base_dir = str(clips_base_dir_path)
                 try:
                     self.config_manager.set("CLIPS_BASE_DIR", clips_base_dir)
@@ -785,21 +902,17 @@ class LocalVideoManager:
                     logging.info(f"[pipeline] 已标记文件夹为正在处理: {video_clips_dir}")
 
 
-                # === 每次运行独立run目录，保存ratings与clips ===
+                # === 默认复用同视频最新未完成 run，只有显式重新开始才创建新 run ===
                 try:
-                    runs_dir = os.path.join(video_clips_dir, "runs")
-                    os.makedirs(runs_dir, exist_ok=True)
-                    # 找到现有 run_XXX 目录的最大编号
-                    existing_runs = []
-                    for d in os.listdir(runs_dir):
-                        if re.match(r"^run_\d{3}$", d):
-                            try:
-                                existing_runs.append(int(d.split("_")[1]))
-                            except Exception:
-                                pass
-                    next_run_idx = (max(existing_runs) + 1) if existing_runs else 1
-                    current_run_dir = os.path.join(runs_dir, f"run_{next_run_idx:03d}")
-                    os.makedirs(current_run_dir, exist_ok=True)
+                    current_run_dir, reused_existing_run = self._allocate_video_run_dir(
+                        video_clips_dir,
+                        resume_mode,
+                    )
+                    logging.info(
+                        "[pipeline] %s运行目录: %s",
+                        "复用" if reused_existing_run else "创建新",
+                        current_run_dir,
+                    )
                 except Exception as e:
                     logging.warning(f"[pipeline] 创建run目录失败，回退到根目录: {e}")
                     current_run_dir = video_clips_dir
@@ -905,10 +1018,10 @@ class LocalVideoManager:
             self.current_job_view = self.gui_controller.get_job_view(job_id)
             self._append_recent_job(self.current_job_view)
             self._render_job_summary(self.current_job_view)
-            self._update_main_window_from_job(self.current_job_view)
             if not self._progress_started and hasattr(self.parent, 'start_processing_progress'):
                 self.parent.start_processing_progress(0, 0)
                 self._progress_started = True
+            self._update_main_window_from_job(self.current_job_view)
             if not self.status_timer.isActive():
                 self.status_timer.start()
             logging.info(f"[LocalVideoManager] job created: {job_id}")

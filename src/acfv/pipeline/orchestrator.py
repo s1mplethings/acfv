@@ -25,7 +25,7 @@ def run_clip_pipeline(
     if progress_callback:
         progress_callback("ingest_video", 0, 1, "start")
     workdir = metadata.get("ingest_workdir") or str(run_dir / "work" / "ingest")
-    resolved_video_path = fetch_vod(input_source, workdir=workdir)
+    resolved_video_path = fetch_vod(input_source, workdir=workdir, config_manager=config_manager)
     if progress_callback:
         progress_callback("ingest_video", 1, 1, "done")
 

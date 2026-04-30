@@ -7,6 +7,8 @@ import time
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence
 
+from acfv.providers import provider_settings
+
 logger = logging.getLogger(__name__)
 
 
@@ -16,6 +18,7 @@ class JsonSchemaValidationError(ValueError):
 
 @dataclass
 class OpenAIClientConfig:
+    provider: str = "disabled"
     api_key: str = ""
     base_url: str = ""
     model: str = ""
@@ -62,23 +65,63 @@ class OpenAIClientConfig:
         common_model_keys = ["LLM_MODEL", "OPENAI_MODEL"]
         common_api_keys = ["LLM_API_KEY", "OPENAI_API_KEY"]
         common_base_url_keys = ["LLM_BASE_URL", "OPENAI_BASE_URL"]
+        provider_profile = provider_settings(
+            config_manager,
+            "llm",
+            default_provider="disabled",
+            legacy={
+                "LLM_PROVIDER": "provider",
+                "LLM_API_KEY": "api_key",
+                "LLM_BASE_URL": "base_url",
+                "LLM_MODEL": "model",
+                "OPENAI_API_KEY": "api_key",
+                "OPENAI_BASE_URL": "base_url",
+                "OPENAI_MODEL": "model",
+            },
+        )
+        provider = str(provider_profile.get("provider") or "disabled").strip().lower()
+        provider_model = str(provider_profile.get("model") or "").strip()
+        provider_base_url = str(provider_profile.get("base_url") or "").strip()
+        provider_api_key = str(provider_profile.get("api_key") or "").strip()
+
+        if prefix_key:
+            prefix_profile = provider_settings(
+                config_manager,
+                "llm",
+                default_provider=provider or "disabled",
+                legacy={
+                    f"{prefix_key}_PROVIDER": "provider",
+                    f"{prefix_key}_API_KEY": "api_key",
+                    f"{prefix_key}_BASE_URL": "base_url",
+                    f"{prefix_key}_MODEL": "model",
+                },
+            )
+            prefix_provider = str(prefix_profile.get("provider") or "").strip().lower()
+            if prefix_provider:
+                provider = prefix_provider
+            provider_model = str(prefix_profile.get("model") or provider_model).strip()
+            provider_base_url = str(prefix_profile.get("base_url") or provider_base_url).strip()
+            provider_api_key = str(prefix_profile.get("api_key") or provider_api_key).strip()
 
         return cls(
+            provider=provider or "disabled",
             api_key=_pick(
-                None,
+                provider_api_key or None,
                 api_key_keys + common_api_keys,
                 common_api_keys,
+                default="ollama" if provider in {"ollama", "vllm", "openai-compatible", "local-openai"} else "",
             ),
             base_url=_pick(
-                None,
+                provider_base_url or None,
                 base_url_keys + common_base_url_keys,
                 common_base_url_keys,
+                default="http://127.0.0.1:11434/v1" if provider == "ollama" else "",
             ),
             model=_pick(
-                model,
+                model or provider_model or None,
                 model_keys + common_model_keys,
                 common_model_keys,
-                default="gpt-4.1-mini",
+                default="qwen2.5:7b-instruct" if provider == "ollama" else "",
             ),
             timeout=float(_pick(None, ["OPENAI_TIMEOUT_SEC"], ["OPENAI_TIMEOUT_SEC"], default="60") or 60.0),
             max_retries=int(_pick(None, ["OPENAI_MAX_RETRIES"], ["OPENAI_MAX_RETRIES"], default="2") or 2),
@@ -132,10 +175,14 @@ class OpenAIJsonClient:
     def _lazy_init(self) -> None:
         if self._client is not None or self._client_error is not None:
             return
+        if self.config.provider in {"", "disabled", "none", "off"}:
+            self._client_error = RuntimeError("LLM provider disabled")
+            return
         try:
             from openai import OpenAI
 
-            kwargs: Dict[str, Any] = {"api_key": self.config.api_key}
+            api_key = self.config.api_key or "ollama"
+            kwargs: Dict[str, Any] = {"api_key": api_key}
             if self.config.base_url:
                 kwargs["base_url"] = self.config.base_url
             if self.config.max_retries >= 0:
@@ -148,9 +195,23 @@ class OpenAIJsonClient:
 
     @property
     def available(self) -> bool:
-        return bool(self.config.api_key and self._client is not None)
+        if self._client is None:
+            return False
+        if not self.config.model:
+            return False
+        if self.config.provider in {"ollama", "vllm", "openai-compatible", "local-openai"}:
+            return bool(self.config.base_url)
+        return bool(self.config.api_key)
 
     def availability_error(self) -> str | None:
+        if self.config.provider in {"", "disabled", "none", "off"}:
+            return "LLM provider disabled"
+        if self.config.provider in {"ollama", "vllm", "openai-compatible", "local-openai"}:
+            if not self.config.base_url:
+                return "missing LLM base_url for local provider"
+            if not self.config.model:
+                return "missing LLM model for local provider"
+            return str(self._client_error) if self._client_error else None
         if self.config.api_key:
             return str(self._client_error) if self._client_error else None
         return "missing LLM_API_KEY/OPENAI_API_KEY"

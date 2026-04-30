@@ -19,8 +19,61 @@ except Exception:
 log_file = logs_path("processing.log")
 jsonl_file = logs_path(f"processing_{datetime.now().strftime('%Y%m%d')}.log.jsonl")
 
+
+class _SafeStreamHandler(logging.StreamHandler):
+    """Downgrade to devnull when GUI launches without a valid console stream."""
+
+    def __init__(self, stream=None):
+        super().__init__(stream)
+        self._devnull_stream = None
+
+    def emit(self, record):
+        stream = self.stream
+        if stream is None:
+            return
+        try:
+            msg = self.format(record)
+            terminator = getattr(self, "terminator", "\n")
+            stream.write(msg + terminator)
+            self.flush()
+        except UnicodeError:
+            if not self._emit_with_replacement(record):
+                self._disable_broken_stream()
+        except (OSError, ValueError):
+            self._disable_broken_stream()
+
+    def flush(self):
+        try:
+            super().flush()
+        except (OSError, ValueError, UnicodeError):
+            self._disable_broken_stream()
+
+    def _emit_with_replacement(self, record) -> bool:
+        stream = self.stream
+        if stream is None:
+            return False
+        try:
+            msg = self.format(record)
+            terminator = getattr(self, "terminator", "\n")
+            encoding = str(getattr(stream, "encoding", "") or "").strip() or "utf-8"
+            safe_msg = msg.encode(encoding, errors="replace").decode(encoding, errors="replace")
+            stream.write(safe_msg + terminator)
+            self.flush()
+            return True
+        except Exception:
+            return False
+
+    def _disable_broken_stream(self):
+        self.acquire()
+        try:
+            if self._devnull_stream is None:
+                self._devnull_stream = open(os.devnull, "w", encoding="utf-8", errors="replace")
+            self.stream = self._devnull_stream
+        finally:
+            self.release()
+
 # 配置日志：stdout 镜像 + 文件
-console_handler = logging.StreamHandler(sys.stdout)
+console_handler = _SafeStreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)
 
 file_handler = logging.FileHandler(str(log_file), encoding='utf-8', mode='a')

@@ -102,3 +102,44 @@ def test_semantic_merge_similarity_break():
             result = semantic_spec.run(ctx)
         payload = result[ART_SEGMENTS_SEMANTIC]
         assert len(payload["segments"]) >= 2, "should split when similarity is low"
+
+
+def test_semantic_merge_trims_long_semantic_window_to_highlight_core():
+    transcript_segments = []
+    for idx in range(100):
+        start = float(idx * 2)
+        transcript_segments.append({"start": start, "end": start + 2.0, "text": "same topic same topic"})
+    transcript = {"segments": transcript_segments}
+    analysis = {
+        "units": "ms",
+        "segments": [
+            {"start_ms": 80000, "end_ms": 94000, "score": 0.9},
+            {"start_ms": 95000, "end_ms": 108000, "score": 1.0},
+            {"start_ms": 109000, "end_ms": 118000, "score": 0.82},
+            {"start_ms": 150000, "end_ms": 165000, "score": 0.2},
+        ],
+    }
+    with TemporaryDirectory() as tmp:
+        run_dir = Path(tmp)
+        ctx = _ctx(run_dir, transcript, analysis)
+        with _with_config(
+            {
+                "SEMANTIC_SEGMENT_MODE": True,
+                "SEMANTIC_TARGET_DURATION": 90.0,
+                "MIN_CLIP_DURATION": 45.0,
+                "MAX_CLIP_DURATION": 180.0,
+                "MIN_TARGET_CLIP_DURATION": 45.0,
+                "SEMANTIC_SIMILARITY_THRESHOLD": 0.1,
+                "SEMANTIC_MAX_TIME_GAP": 8.0,
+                "SEMANTIC_STICKINESS_SEC": 15.0,
+                "CLIP_SEMANTIC_TAIL_SECONDS": 1.5,
+            }
+        ):
+            result = semantic_spec.run(ctx)
+        payload = result[ART_SEGMENTS_SEMANTIC]
+        assert payload["segments"], "should produce semantic segments"
+        first = payload["segments"][0]
+        duration = (first["end_ms"] - first["start_ms"]) / 1000.0
+        assert duration < 80.0, "semantic window should be trimmed to the highlight core instead of staying near fixed target"
+        assert 70000 <= first["start_ms"] <= 90000
+        assert 112000 <= first["end_ms"] <= 126000

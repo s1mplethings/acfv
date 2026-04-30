@@ -26,6 +26,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
+from acfv.processing.clip_name_parser import duration_from_clip_name
 from acfv.runtime.storage import resolve_clips_base_dir, resolve_run_clips_dir, storage_root, processing_path
 from acfv.ui import build_section_header, card_frame_style, wrap_in_card
 from acfv.utils import extract_time_from_clip_filename
@@ -35,8 +36,6 @@ __all__ = ["create_clips_manager"]
 SUPPORTED_EXTS = {".mp4", ".mkv", ".mov", ".avi", ".webm"}
 ALL_VIDEOS = "__ALL_VIDEOS__"
 RUN_META_TYPE = "Run:meta.v1"
-
-
 def _wrap_run_meta(payload: dict) -> dict:
     return {
         "artifact_id": payload.get("run_id", ""),
@@ -153,6 +152,7 @@ class ClipsManager:
         self._selected_run_name: Optional[str] = None
         self._rag_db = None
         self._rag_db_disabled = False
+        self._fast_preview_mode = False
 
         self._hydrate_recent_run()
 
@@ -224,7 +224,9 @@ class ClipsManager:
         status_widget.setLayout(status_row)
         layout.addWidget(wrap_in_card(status_widget))
 
-        QTimer.singleShot(0, self.refresh_clips)
+    def _lazy_load_data(self) -> None:
+        """Startup path: load the clip list without blocking on ffprobe/ffmpeg."""
+        self.refresh_clips(fast=True)
 
     # ------------------------------------------------------------------ public API used by pipeline
 
@@ -303,7 +305,7 @@ class ClipsManager:
 
     # ------------------------------------------------------------------ refresh / data collection
 
-    def refresh_clips(self) -> None:
+    def refresh_clips(self, fast: bool = False) -> None:
         previous_video = self._selected_video_name
         previous_run = self._selected_run_name
         previous_clip_path = None
@@ -311,11 +313,14 @@ class ClipsManager:
         if payload and payload.get("clip"):
             previous_clip_path = str(payload["clip"].path)
 
+        self._fast_preview_mode = fast
         self._base_dir = resolve_clips_base_dir(self.config_manager, ensure=True)
-        self._inventory = self._collect_inventory(self._base_dir)
+        self._inventory = self._collect_inventory(self._base_dir, probe_duration=not fast)
         self._rebuild_selectors(previous_video, previous_run, previous_clip_path)
+        if fast and self.status_label is not None:
+            self.status_label.setText("已快速加载切片列表；点击“刷新”可补全时长和缩略图。")
 
-    def _collect_inventory(self, base_dir: Path) -> List[VideoEntry]:
+    def _collect_inventory(self, base_dir: Path, probe_duration: bool = True) -> List[VideoEntry]:
         videos: List[VideoEntry] = []
         if not base_dir.exists():
             return videos
@@ -324,7 +329,7 @@ class ClipsManager:
             runs_dir = video_dir / "runs"
             if runs_dir.is_dir():
                 for run_dir in sorted([p for p in runs_dir.iterdir() if p.is_dir()]):
-                    clips = self._gather_clips(resolve_run_clips_dir(run_dir))
+                    clips = self._gather_clips(resolve_run_clips_dir(run_dir), probe_duration=probe_duration)
                     status, started, finished = self._load_run_meta(run_dir / "run.json")
                     runs.append(
                         RunEntry(
@@ -336,11 +341,11 @@ class ClipsManager:
                             finished_at=finished,
                         )
                     )
-            flat_clips = self._gather_clips(video_dir)
+            flat_clips = self._gather_clips(video_dir, probe_duration=probe_duration)
             videos.append(VideoEntry(name=video_dir.name, path=video_dir, runs=runs, flat_clips=flat_clips))
         return videos
 
-    def _gather_clips(self, directory: Path) -> List[ClipEntry]:
+    def _gather_clips(self, directory: Path, probe_duration: bool = True) -> List[ClipEntry]:
         clips: List[ClipEntry] = []
         if not directory.is_dir():
             return clips
@@ -355,7 +360,7 @@ class ClipsManager:
                 ClipEntry(
                     path=clip_path,
                     size_bytes=stat.st_size,
-                    duration=self._probe_duration(clip_path),
+                    duration=self._probe_duration(clip_path) if probe_duration else None,
                 )
             )
         return clips
@@ -505,7 +510,7 @@ class ClipsManager:
         self.run_combo.blockSignals(False)
 
     def _make_clip_item(self, video: VideoEntry, run: Optional[RunEntry], clip: ClipEntry) -> QListWidgetItem:
-        icon = self._icon_for_clip(video, run, clip)
+        icon = self._file_icon if self._fast_preview_mode else self._icon_for_clip(video, run, clip)
         owner = run.name if run else "视频根目录"
         label = (
             f"{clip.name}\n"
@@ -710,6 +715,9 @@ class ClipsManager:
         return None
 
     def _probe_duration(self, clip_path: Path) -> Optional[float]:
+        parsed = duration_from_clip_name(clip_path.name)
+        if parsed is not None:
+            return parsed
         try:
             result = subprocess.run(
                 [

@@ -9,12 +9,12 @@ try:
     # Only add pipeline if dependencies are available
     try:
         from .pipeline import pipeline_app
-        app.add_typer(pipeline_app, name="pipe", help="Run end-to-end pipeline")
+        app.add_typer(pipeline_app, name="pipe", help="Run the open-source clip workflow")
     except ImportError:
         print("Warning: Pipeline functionality not available (missing dependencies)")
     
     app.add_typer(gui_app, name="gui", help="Launch GUI")
-    app.add_typer(rag_app, name="rag", help="Manage RAG database")
+    app.add_typer(rag_app, name="rag", help="Manage optional RAG database")
     # app.command(name="audio_route")(audio_route_transcribe_cli)  # Temporarily disabled
     
 except ImportError:

@@ -315,7 +315,8 @@ class ConfigManager:
             "OUTPUT_CLIPS_DIR": str((storage_root().parent / "runs" / "out").resolve()),
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
-            "WHISPER_MODEL": "large-v3-turbo",
+            "WHISPER_MODEL": "medium",
+            "SEGMENT_LENGTH": 120,
             "LLM_DEVICE": 0,
             "CHAT_DENSITY_WEIGHT": 0.2,
             "CHAT_SENTIMENT_WEIGHT": 0.3,
@@ -882,7 +883,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 process_audio_segments,
                 audio_path=audio_cmd_path,  # 使用提取的音频文件
                 output_file=transcription_output,
-                segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
+                segment_length=cfg_manager.get("SEGMENT_LENGTH", 120),
                 whisper_model_name=whisper_model_name,
                 engine=whisper_engine
             )
@@ -989,7 +990,7 @@ def run_pipeline(cfg_manager, video, chat, has_chat, chat_output, transcription_
                 process_audio_segments(
                     audio_path=video,
                     output_file=transcription_output,
-                    segment_length=cfg_manager.get("SEGMENT_LENGTH", 300),
+                    segment_length=cfg_manager.get("SEGMENT_LENGTH", 120),
                     whisper_model_name=whisper_model_name,
                     engine=whisper_engine
                 )

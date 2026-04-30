@@ -55,6 +55,16 @@
 - `gpu_asr_pool.max_workers` 与 `render_pool.max_workers` 进入现有配置体系。
 - 外层阶段切换仍由 `orchestrator` / `backend service` / `job_manager` 驱动，不得引入第二套主线或全局 DAG。
 
+## 2.1.0 Streaming Window Baseline
+- canonical 10-stage 名称、顺序和最终 contract 语义不变。
+- 执行模型允许在阶段内部滑动窗口推进：chunk 完成后可先做局部 transcript merge、粗选 segment、clip work item 入队和 render 消费。
+- `optional_analysis` 是 enrich path，不得重新成为 fast path 的关键阻塞点。
+- 单 GPU 默认仍只允许一个 ASR worker；吞吐提升来自 `io_pool` 预取/切片、GPU 连续消费、CPU 轻量整理，而不是粗暴多开 ASR 抢同一 GPU。
+- runtime state 采用事件流 + 周期摘要：
+  - `work/runtime/events.jsonl` 记录细粒度 item lifecycle / streaming window / clip work item 事件
+  - `work/runtime/transcribe_runtime.json` 与 `work/runtime/render_runtime.json` 保持 GUI/backend 可轮询摘要
+  - finalize 必须强制刷新 summary JSON
+
 ## Phase 4 Baseline
 - GUI 任务创建继续统一走 `backend.service.create_job(...)`。
 - GUI 当前阶段必须直接显示 `job_state.current_stage`，不得维护第二套 stage 表。
@@ -116,7 +126,11 @@
   - `gpu_asr_pool`
   - `cpu_pool`
   - `render_pool`
-- 当前只要求 `gpu_asr_pool` 与 `render_pool` 具备最小可用 dispatcher；`io_pool` / `cpu_pool` 仍是边界约束而非完整调度器
+- 2.1.0 当前要求：
+  - `io_pool` 真实承担 audio chunk 预取/切片
+  - `gpu_asr_pool` 单 GPU worker 连续消费 chunk queue
+  - `cpu_pool` 以插件层 incremental merge / coarse selection / 结果整理表达，后续可抽象为独立执行器
+  - `render_pool` 可消费 streaming work item，并在最终 render stage 复用已存在输出
 
 ## Artifact Contract
 - 保留现有 `ArtifactStore`、`work/`、`clips_manifest.json`、`segments.json`、`transcription.json` 风格。
@@ -149,8 +163,9 @@
   - `transcribe_runtime.json` / `render_runtime.json` 只描述阶段内 item 生命周期，不新增 canonical stage
 - Phase 3 Step 2 说明：
   - runtime state 不只是被动记录，而是阶段内 dispatcher 的执行态来源之一
-  - `transcribe_chunks` 必须等所有 chunk 进入终态后，才进入 `merge_transcript`
-  - `render_clips_batch` 必须等所有 clip 进入终态后，才进入 `export_results`
+  - `transcribe_chunks` 不再要求所有 chunk 完成后才允许局部 `merge_transcript` 语义工作；最终完整 `transcript_merged.json` 仍必须等所有 chunk 汇总后写出
+  - `render_clips_batch` 可提前消费 streaming work item；最终 `clips_manifest.json` / `export_results.json` 仍必须等完整 render plan 汇总后写出
+  - `clip_manifest.json` 不得写入 running/worker/attempt 等执行态字段
 
 ## Compatibility
 - 兼容现有入口：
@@ -208,6 +223,16 @@
   - Given 长视频转录和多片段渲染
   - When Phase 3 完成
   - Then 后端使用显式 chunk/clip manifest 与资源池执行阶段内并发，而不是全局 DAG 重写
+- AC-3a Streaming Window
+  - Given 长视频 ASR chunk 逐个完成
+  - When 任一窗口达到 chunk/时间阈值
+  - Then 系统可以先写局部 transcript、记录 incremental merge 事件、生成 coarse clip work item，并让 `render_pool` 消费，不必等待全部 chunks 完成
+  - And streaming clip work item 必须基于归一化窗口 identity 去重；同一逻辑窗口重复扫描时最多只允许一个 render work item 存活
+- AC-3b Runtime Event Stream
+  - Given chunk/clip item 生命周期发生变化
+  - When dispatcher 更新执行态
+  - Then 先追加 `work/runtime/events.jsonl`，summary JSON 周期刷新且 finalize 强制刷新；contract artifact 不包含执行态字段
+  - And 对相同 item 的重复成功/运行更新按幂等处理，不重复膨胀 event/runtime summary
 - AC-4 GUI Separation
   - Given GUI 发起任务
   - When Phase 4 完成
@@ -237,8 +262,41 @@
   - 更强取消
   - 有限 retry
   - 多 GPU ASR
-  - `io_pool` / `cpu_pool` 执行器
+  - `cpu_pool` 独立配置化执行器
   - GUI 更丰富的 chunk / clip 可视化
+
+## 2.1.0 Streaming Notes
+- 已确认:
+  - `transcribe_audio` 子进程内部按 `split_duration` 使用 `io_pool` 预取 chunk，单 GPU worker 连续转写。
+  - chunk 成功后立即写 `work/chunks/<chunk_id>/transcript.json`，父插件可基于 result path 做 streaming window。
+  - streaming fast path 的 clip work item 只进入 runtime event / render runtime，不污染 `clip_manifest.json`。
+  - streaming fast path 先在 work-item 生成处基于归一化 `(start_ms,end_ms)` 去重，再在 render submit 前做第二层保护；重复候选写 `clip_work_item_deduplicated` / `render_enqueue_skipped_duplicate` 事件。
+  - 最终 `render_clips` stage 会复用已存在 clip 输出并补渲染缺失项，再写完整 `clips_manifest.json` 与 `export_results.json`。
+- 已知未完成项:
+  - 多 GPU 分片调度
+  - 有限 retry / backoff 策略
+  - 更强取消与 render queue drain 语义
+  - GUI 消费 `events.jsonl` 的细粒度可视化
+
+## 2.1.0 Validation / Benchmark Baseline
+- 必须提供可重复 benchmark harness，而不是只依赖人工读日志。
+- 标准输出目录：
+  - `var/benchmarks/<run_id>/meta.json`
+  - `var/benchmarks/<run_id>/results.json`
+  - `var/benchmarks/<run_id>/timeline.json`
+  - `var/benchmarks/<run_id>/report.md`
+- `meta.json` 至少记录：
+  - commit、Python、OS、CUDA/GPU、ffmpeg、输入视频、输入时长、cfg、输出目录、`gpu_asr_pool.max_workers`、`render_pool.max_workers`
+- `results.json` 至少记录：
+  - case id、TTFCk、TTFC、TAT、TTR、E2E、contract_clean、runtime_separate、first_clip_before_all_transcribe_done、cancel_ok、render_reuse_ok、notes
+- AC-6 Benchmark Harness
+  - Given 已有 run_dir 或指定输入视频
+  - When 执行 `scripts/benchmark_streaming.py collect/run`
+  - Then 生成稳定 JSON/MD 报告，并可自动判断 streaming fast path 是否真实生效
+- AC-7 Structure Validation
+  - Given 任意 benchmark run_dir
+  - When harness 校验 artifact
+  - Then `audio_chunk_manifest.json` / `clip_manifest.json` / `export_results.json` 不得出现 runtime-only 字段，`work/runtime/` 不得出现非 runtime 文件
 
 ## Replay Regression Hardening Notes
 - 回放库真实视频回归确认 `audio_chunk_manifest.json` / `clip_manifest.json` 仍是 plan/contract artifact，执行态继续只写入 `work/runtime/`。

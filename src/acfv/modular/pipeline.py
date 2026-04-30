@@ -26,6 +26,7 @@ from acfv.modular.registry import AdapterRegistry, ModuleRegistry
 from acfv.modular.runner import PipelineRunner
 from acfv.modular.store import ArtifactStore
 from acfv.modular.types import ProgressCallback
+from acfv.providers import resolve_asr_profile, resolve_ocr_profile, resolve_scene_profile
 
 logger = logging.getLogger(__name__)
 
@@ -167,18 +168,43 @@ def run_pipeline(
     language_value = config_manager.get("TRANSCRIPTION_LANGUAGE") if config_manager else ""
     language_cfg = str(language_value or "").strip().lower()
     language = None if language_cfg in {"", "auto", "detect", "default"} else language_cfg
+    asr_profile = resolve_asr_profile(config_manager)
+    scene_profile = resolve_scene_profile(config_manager)
+    ocr_profile = resolve_ocr_profile(config_manager)
+    asr_provider = str(asr_profile.get("provider") or "faster-whisper").strip().lower()
+    asr_model = str(asr_profile.get("model") or "medium")
+    asr_hf_model = str(asr_profile.get("hf_model") or "openai/whisper-medium")
+    asr_language = asr_profile.get("language") or language
+    asr_segment_length = _get_int(asr_profile.get("segment_length"), 120)
 
     params_by_module = {
         "transcribe_audio": {
-            "segment_length": _get_int(config_manager.get("SEGMENT_LENGTH") if config_manager else None, 300),
-            "whisper_model": str(config_manager.get("WHISPER_MODEL") if config_manager else "medium"),
-            "whisper_engine": str(config_manager.get("WHISPER_ENGINE") if config_manager else "auto"),
-            "hf_whisper_model": str(config_manager.get("HF_WHISPER_MODEL") if config_manager else "openai/whisper-medium"),
-            "language": language,
+            "segment_length": asr_segment_length,
+            "whisper_model": asr_model,
+            "whisper_engine": asr_provider,
+            "hf_whisper_model": asr_hf_model,
+            "language": asr_language,
+            "asr_provider": asr_provider,
+            "device": str(asr_profile.get("device") or "auto"),
             "gpu_asr_pool_max_workers": _get_int(
                 config_manager.get("gpu_asr_pool.max_workers") if config_manager else None,
                 1,
             ),
+            "streaming_fast_path": _get_bool(
+                config_manager.get("streaming_window.enabled") if config_manager else None,
+                True,
+            ),
+            "streaming_window_chunks": _get_int(
+                config_manager.get("streaming_window.chunk_count") if config_manager else None,
+                1,
+            ),
+            "video_path": video_path,
+            "output_dir": output_clips_dir,
+            "render_pool_max_workers": _get_int(
+                config_manager.get("render_pool.max_workers") if config_manager else None,
+                2,
+            ),
+            "min_clip_segment_seconds": min_seg_duration,
         },
         "video_emotion": {
             "enabled": _get_bool(config_manager.get("ENABLE_VIDEO_EMOTION") if config_manager else None, False),
@@ -187,14 +213,16 @@ def run_pipeline(
             "device": config_manager.get("LLM_DEVICE") if config_manager else 0,
         },
         "screen_detect": {
-            "enabled": _get_bool(config_manager.get("ENABLE_SCREEN_DETECT") if config_manager else None, False),
-            "interval_sec": _get_float(config_manager.get("SCREEN_DETECT_INTERVAL_SEC") if config_manager else None, 30.0),
+            "enabled": _get_bool(scene_profile.get("enabled"), False),
+            "interval_sec": _get_float(scene_profile.get("interval_sec"), 30.0),
             "max_frames_per_window": _get_int(
-                config_manager.get("SCREEN_MAX_FRAMES_PER_WINDOW") if config_manager else None, 12
+                scene_profile.get("max_frames_per_window"), 12
             ),
-            "enable_ocr": _get_bool(config_manager.get("SCREEN_ENABLE_OCR") if config_manager else None, True),
+            "enable_ocr": _get_bool(ocr_profile.get("enabled"), True),
+            "scene_provider": str(scene_profile.get("provider") or "pyscenedetect"),
+            "ocr_provider": str(ocr_profile.get("provider") or "rapidvideocr"),
             "dedupe_hash_distance": _get_int(
-                config_manager.get("SCREEN_DETECT_DEDUPE_HASH_DISTANCE") if config_manager else None, 6
+                scene_profile.get("dedupe_hash_distance"), 6
             ),
         },
         "screen_understanding": {

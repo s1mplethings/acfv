@@ -146,8 +146,8 @@ class TwitchDownloader:
         self._cancel_requested = False
         self._detail_progress_cb = None  # 细粒度进度回调
         self._current_vod_context = None  # (idx, total, safe_filename)
-        # 记录已解析的 CLI 路径，避免后续找不到可执行文件导致 WinError 2
-        self.cli_path = ensure_cli_on_path(auto_install=True)
+        # 延迟解析 CLI，避免 GUI 冷启动时同步联网升级/下载导致主线程卡死。
+        self.cli_path = None
     
     def fetch_vods(self, client_id, oauth_token, usernames):
         """获取指定用户的VOD列表"""

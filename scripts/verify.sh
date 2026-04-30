@@ -3,7 +3,10 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 src_path="$repo_root/src"
+contract_run_dir="$repo_root/var/verify_contract_run"
 export PYTHONPATH="${src_path}${PYTHONPATH:+:${PYTHONPATH}}"
+export ACFV_CONTRACT_RUN_DIR="$contract_run_dir"
+rm -rf "$contract_run_dir"
 
 echo "[verify] OS: $(uname -s)"
 echo "[verify] Running: compile + smoke + pytest + contract checks"
@@ -59,7 +62,7 @@ else
   echo "[verify] WARN: pytest not found, skipping tests"
 fi
 
-python scripts/contract_checks.py
+python scripts/contract_checks.py --run-dir "$contract_run_dir" --require-artifacts
 exit_code=$?
 if [ $exit_code -ne 0 ]; then
   echo "[verify] contract_checks failed with exit code $exit_code" >&2

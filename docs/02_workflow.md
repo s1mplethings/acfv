@@ -55,9 +55,11 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
    - `modular.plugins.transcribe_audio`
    - 当前已按 chunk 作为独立执行单元调度
    - 通过 `gpu_asr_pool` 执行；单 GPU 默认 `max_workers=1`
+   - 2.1.0 起 `io_pool` 会预取/切片下一批 chunk，单 GPU ASR worker 连续消费已准备好的 chunk
 5. `merge_transcript`
    - `modular.plugins.transcribe_audio`
    - 当前输出 `work/transcript_merged.json`
+   - chunk 完成后允许先写局部 transcript 并记录 incremental merge 事件；最终完整 `transcript_merged.json` 仍在汇总阶段产出
 6. `optional_analysis`
    - `screen_detect`
    - `screen_understanding`
@@ -79,6 +81,7 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
    - 当前已按 clip 作为独立执行单元调度
    - 通过 `render_pool` 执行；并发度由 `render_pool.max_workers` 控制
    - 当前 runtime state 输出 `work/runtime/render_runtime.json`
+   - 2.1.0 起可消费 streaming fast path 已准备好的 clip work item；最终 stage 会复用已存在输出并完成完整 manifest/export 汇总
 10. `export_results`
    - `modular.plugins.render_clips`
    - 当前输出 `work/export_results.json` 与最终 `clips_manifest.json`
@@ -92,6 +95,12 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
   - `gpu_asr_pool.max_workers`
   - `render_pool.max_workers`
 - `cancel_job(...)` 当前仍是 best-effort，只能作为统一 job API 的兼容能力，不能视为 Phase 3 chunk/clip 级取消语义的既成基础
+- 2.1.0 已将执行顺序从纯 stage barrier 改为 streaming window：
+  - canonical stage 名称与最终 contract 输出不变
+  - fast path 可以在 chunk 完成窗口后提前推进到 coarse selection 与 render
+  - enrich path 不再阻塞早期 clip work item 入队
+  - `work/runtime/events.jsonl` 记录细粒度事件，summary JSON 周期刷新
+  - fast path 生成的 clip work item 现在按归一化时间窗建立稳定 identity；重复 chunk callback 或重复窗口扫描只记录 dedup 事件，不再重复入队 render
 
 ## 3. 目标 Workflow
 
@@ -148,6 +157,7 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
   - `work/runtime/transcribe_runtime.json` 现在既是执行态落盘，也是 chunk dispatcher 的状态来源之一
   - 每个 chunk 都会经历 queued/running/succeeded/failed/cancelled 的真实流转
   - 单 GPU 默认仍保守串行，不允许多个 ASR 任务粗暴抢同一 GPU
+  - 单 GPU worker 应持续消费队列；音频切片、结果落盘和局部整理由 IO/CPU 轻任务协同，避免 GPU 被非 ASR 工作频繁阻塞
 
 ### 4.5 `merge_transcript`
 - 输入:
@@ -170,6 +180,7 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
   - 这一层内部继续沿用现有 modular plugins
   - 对 job_state 先只暴露一个总阶段，避免 GUI/CLI 再维护一套子阶段表
   - 其中 `screen_detect` / `screen_understanding` / `video_emotion` / `speaker_separation` / `subtitle_translate` / `llm_highlight` / `analyze_segments` 都属于 optional_analysis 边界
+  - 2.1.0 起 optional analysis 是 enrich path；fast path 只依赖局部 transcript 生成粗选和早期 render work item
 
 ### 4.7 `select_segments`
 - 输入:
@@ -189,6 +200,7 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
 - 说明:
   - 当前最小输出为 `work/clip_manifest.json`
   - Phase 3 Step 1 起它正式作为 `render_clips_batch` 的 plan input
+  - streaming fast path 只通过 runtime event 表达临时 clip work item，不把这些执行态写入最终 `clip_manifest.json`
 
 ### 4.9 `render_clips_batch`
 - 输入:
@@ -202,6 +214,7 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
   - `work/runtime/render_runtime.json` 现在既是执行态落盘，也是 clip dispatcher 的状态来源之一
   - 每个 clip 都会经历 queued/running/succeeded/failed/cancelled 的真实流转
   - `render_pool` 已支持最小可用的 clip 级并发
+  - render worker 可以在最终 `clip_manifest.json` 完成前消费 streaming work item；最终阶段仍以完整 plan 为准，复用已存在输出或补渲染缺失项
 
 ### 4.10 `export_results`
 - 输入:
@@ -242,6 +255,16 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
   - `gpu_asr_pool`
   - `cpu_pool`
   - `render_pool`
+
+### 2.1.0 streaming window
+- fast path:
+  - `extract_audio -> build_audio_chunk_manifest -> transcribe_chunks -> incremental merge -> coarse segment -> clip work item -> render_pool`
+- enrich path:
+  - screen / emotion / speaker / subtitle / LLM 等增强分析继续归入 `optional_analysis`，可补充最终排序或元数据，但不阻塞 fast path。
+- runtime:
+  - item 生命周期先进入 `work/runtime/events.jsonl`
+  - `transcribe_runtime.json` / `render_runtime.json` 是周期摘要，finalize 时强制刷新，供 GUI/backend 稳定读取
+  - 同一逻辑窗口再次出现时写 `clip_work_item_deduplicated` / `render_enqueue_skipped_duplicate`，而不是创建新的 clip_id 去重复渲染
 
 ## 7. GUI / CLI 的共同 workflow 约束
 - GUI 和 CLI 已经走同一 backend service
@@ -288,3 +311,22 @@ Phase 2 版本同时记录“当前正式 workflow”与“后续 Phase 3 之前
 - contract / runtime 边界仍成立:
   - `stage_plan.json`、`audio_chunk_manifest.json`、`transcript_merged.json`、`selected_segments.json`、`clip_manifest.json`、`export_results.json` 保持契约/摘要职责
   - `work/runtime/transcribe_runtime.json`、`work/runtime/render_runtime.json` 保持执行态职责
+
+## 13. Benchmark / Regression Workflow
+1. 先跑基础回归：
+   - `powershell -ExecutionPolicy Bypass -File scripts\verify.ps1`
+2. 准备 short / medium / long 输入集，记录固定视频路径和 cfg。
+3. 跑 benchmark：
+   - `python scripts\benchmark_streaming.py run --case-id short_smoke --input-video <video> --config <cfg> --repeat 1 --preflight smoke`
+4. 查看输出：
+   - `var/benchmarks/<run_id>/results.json`
+   - `var/benchmarks/<run_id>/timeline.json`
+   - `var/benchmarks/<run_id>/report.md`
+5. 判断 streaming 是否生效：
+   - `first_clip_before_all_transcribe_done == true`
+   - `incremental_merge_done` 与 `clip_work_item_queued` 出现在 timeline
+   - `contract_clean == true`
+   - `runtime_separate == true`
+6. GUI smoke：
+   - `python -m pytest -q tests\unit\test_gui_job_controller.py`
+   - GUI 专项以 controller/adapter 层验证为主，不要求引入沉重 GUI 自动化框架。

@@ -62,8 +62,10 @@ class JobState:
     output_dir: Optional[str] = None
     created_at: str = field(default_factory=_utcnow)
     updated_at: str = field(default_factory=_utcnow)
+    progress_seq: int = 0
 
     def touch(self) -> None:
+        self.progress_seq += 1
         self.updated_at = _utcnow()
 
     def append_log(self, message: str) -> None:
@@ -86,4 +88,5 @@ class JobState:
             "output_dir": self.output_dir,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
+            "progress_seq": self.progress_seq,
         }

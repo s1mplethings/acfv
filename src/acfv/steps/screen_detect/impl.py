@@ -5,6 +5,8 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from acfv.providers import ocr_provider_name, run_rapidvideocr, scene_provider_name
+
 logger = logging.getLogger(__name__)
 
 SCHEMA_VERSION = "1.0.0"
@@ -34,7 +36,11 @@ def _hash_distance(a: str, b: str) -> int:
     return sum(ch1 != ch2 for ch1, ch2 in zip(a, b))
 
 
-def _extract_ocr(frame) -> str:
+def _extract_ocr(frame, frame_path: Path, provider: str) -> str:
+    if provider in {"rapidvideocr", "rapid-video-ocr", "rapid_video_ocr"}:
+        text = run_rapidvideocr(frame_path)
+        if text:
+            return text
     try:
         import cv2
         import pytesseract
@@ -47,6 +53,32 @@ def _extract_ocr(frame) -> str:
         return " ".join(text.split())[:400]
     except Exception:
         return ""
+
+
+def _detect_scene_windows_with_pyscenedetect(video_path: str, max_windows: int) -> List[Tuple[float, float]]:
+    try:
+        from scenedetect import SceneManager, open_video
+        from scenedetect.detectors import ContentDetector
+    except Exception:
+        return []
+    try:
+        video = open_video(video_path)
+        manager = SceneManager()
+        manager.add_detector(ContentDetector())
+        manager.detect_scenes(video=video)
+        windows: List[Tuple[float, float]] = []
+        for start_tc, end_tc in manager.get_scene_list():
+            start_sec = round(start_tc.get_seconds(), 3)
+            end_sec = round(end_tc.get_seconds(), 3)
+            if end_sec <= start_sec:
+                continue
+            windows.append((start_sec, end_sec))
+            if len(windows) >= max_windows:
+                break
+        return windows
+    except Exception as exc:
+        logger.info("[screen_detect] pyscenedetect unavailable, fallback to interval scan: %s", exc)
+        return []
 
 
 def _detect_screen_bbox(frame) -> Tuple[List[int], bool, float]:
@@ -89,6 +121,8 @@ def run_screen_detect(
     interval_sec: Optional[float] = None,
     max_frames_per_window: Optional[int] = None,
     enable_ocr: Optional[bool] = None,
+    scene_provider: Optional[str] = None,
+    ocr_provider: Optional[str] = None,
     dedupe_hash_distance: Optional[int] = None,
     progress_callback=None,
 ) -> Dict[str, Any]:
@@ -106,6 +140,8 @@ def run_screen_detect(
         enabled = False
     if not enabled:
         return {"schema_version": SCHEMA_VERSION, "status": "disabled", "windows": [], "frames": []}
+    scene_provider_value = str(scene_provider or scene_provider_name(config_manager)).strip().lower()
+    ocr_provider_value = str(ocr_provider or ocr_provider_name(config_manager)).strip().lower()
 
     frame_interval = max(5.0, _safe_float(interval_sec, 30.0))
     max_windows = max(1, int(max_frames_per_window or 12))
@@ -139,13 +175,22 @@ def run_screen_detect(
     duration = frame_count / fps if frame_count > 0 else 0.0
 
     timestamps: List[float] = []
+    scene_windows: List[Tuple[float, float]] = []
+    if scene_provider_value in {"pyscenedetect", "py-scene-detect", "scenedetect"}:
+        scene_windows = _detect_scene_windows_with_pyscenedetect(video_path, max_windows)
     if duration > 0:
-        current = 0.0
-        while current < duration and len(timestamps) < max_windows:
-            timestamps.append(round(current, 3))
-            current += frame_interval
-        if len(timestamps) < max_windows and (not timestamps or abs(duration - timestamps[-1]) > 2.0):
-            timestamps.append(round(max(0.0, duration - min(frame_interval, duration)), 3))
+        if scene_windows:
+            for start_sec, _end_sec in scene_windows:
+                timestamps.append(round(start_sec, 3))
+                if len(timestamps) >= max_windows:
+                    break
+        else:
+            current = 0.0
+            while current < duration and len(timestamps) < max_windows:
+                timestamps.append(round(current, 3))
+                current += frame_interval
+            if len(timestamps) < max_windows and (not timestamps or abs(duration - timestamps[-1]) > 2.0):
+                timestamps.append(round(max(0.0, duration - min(frame_interval, duration)), 3))
 
     frames: List[Dict[str, Any]] = []
     windows: List[Dict[str, Any]] = []
@@ -164,9 +209,9 @@ def run_screen_detect(
         last_hash = frame_hash
 
         bbox, is_fullscreen, confidence = _detect_screen_bbox(frame)
-        ocr_text = _extract_ocr(frame) if ocr_enabled else ""
         frame_path = frames_dir / f"detect_{idx + 1:03d}_{int(round(ts * 1000)):08d}.jpg"
         cv2.imwrite(str(frame_path), frame)
+        ocr_text = _extract_ocr(frame, frame_path, ocr_provider_value) if ocr_enabled else ""
         frame_record = {
             "timestamp_sec": ts,
             "frame_path": str(frame_path),
@@ -177,7 +222,10 @@ def run_screen_detect(
             "hash": frame_hash,
         }
         frames.append(frame_record)
-        next_ts = timestamps[idx + 1] if idx + 1 < len(timestamps) else min(duration, ts + frame_interval) if duration > 0 else ts + frame_interval
+        if scene_windows and idx < len(scene_windows):
+            next_ts = scene_windows[idx][1]
+        else:
+            next_ts = timestamps[idx + 1] if idx + 1 < len(timestamps) else min(duration, ts + frame_interval) if duration > 0 else ts + frame_interval
         windows.append(
             {
                 "start": round(ts, 3),
@@ -195,6 +243,8 @@ def run_screen_detect(
         "schema_version": SCHEMA_VERSION,
         "status": "ok",
         "duration_sec": round(duration, 3) if duration else 0.0,
+        "scene_provider": scene_provider_value,
+        "ocr_provider": ocr_provider_value if ocr_enabled else "disabled",
         "windows": windows,
         "frames": frames,
     }

@@ -10,6 +10,7 @@ import psutil
 import json
 from typing import Dict, List, Any, Optional
 from PyQt5.QtCore import QThread, QObject, pyqtSignal
+from acfv.main_logging import _SafeStreamHandler
 
 # ==================== 线程管理 ====================
 
@@ -330,7 +331,7 @@ class LogManager:
         text_file.setFormatter(text_fmt)
         text_file.setLevel(logging.DEBUG)
 
-        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler = _SafeStreamHandler(sys.stdout)
         console_handler.setFormatter(text_fmt)
         console_handler.setLevel(logging.INFO)
 

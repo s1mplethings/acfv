@@ -27,6 +27,8 @@ import traceback
 import threading
 from typing import Callable, List, Optional, Dict, Any, Iterable
 
+from acfv.runtime.storage import settings_path
+
 # ---------------------------------------------------------------------------
 # Constants & Globals
 # ---------------------------------------------------------------------------
@@ -368,7 +370,8 @@ class BackgroundRuntime:
         default_cfg = {
             "CLIPS_BASE_DIR": "clips",
             "MAX_CLIP_COUNT": 10,
-            "WHISPER_MODEL": "base",
+            "WHISPER_MODEL": "medium",
+            "SEGMENT_LENGTH": 120,
             "ENABLE_VIDEO_EMOTION": False,
             "MAX_WORKERS": 2,
         }

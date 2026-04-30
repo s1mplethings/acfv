@@ -24,9 +24,10 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         self.config_manager = config_manager
         self.db_path = self._resolve_db_path()
         self.db: RAGVectorDatabase | None = None
+        self._startup_refresh_mode = True
         self._build_ui()
-        self._init_db()
-        self.refresh_summary()
+        self.summary_box.setPlainText("正在加载 RAG 偏好总结...")
+        QtCore.QTimer.singleShot(0, self._initialize_after_show)
 
     # ---- setup ------------------------------------------------------- #
 
@@ -45,6 +46,10 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         except Exception as exc:  # noqa: BLE001
             self.db = None
             self._set_status(f"RAG 数据库加载失败: {exc}")
+
+    def _initialize_after_show(self) -> None:
+        self._init_db()
+        self.refresh_summary()
 
     def _build_ui(self) -> None:
         layout = QtWidgets.QVBoxLayout(self)
@@ -111,7 +116,13 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         self._set_status(f"生成/补全向量 {created} 条。")
         self.refresh_summary()
 
-    def refresh_summary(self) -> None:
+    def refresh_summary(self, include_topics: bool | None = None, allow_llm: bool | None = None) -> None:
+        startup_mode = self._startup_refresh_mode
+        if include_topics is None:
+            include_topics = not startup_mode
+        if allow_llm is None:
+            allow_llm = not startup_mode
+        self._startup_refresh_mode = False
         if not self.db:
             self.summary_box.setPlainText("数据库未加载，无法生成偏好总结。")
             return
@@ -119,13 +130,18 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         if not clips:
             self.summary_box.setPlainText("数据库为空，先导入或添加剪辑。")
             return
-        summary_lines = self._build_summary(clips)
+        summary_lines = self._build_summary(clips, include_topics=include_topics, allow_llm=allow_llm)
         self.summary_box.setPlainText("\n".join(summary_lines))
         self._set_status(f"已分析 {len(clips)} 条剪辑。")
 
     # ---- summary logic ------------------------------------------------ #
 
-    def _build_summary(self, clips: List[Dict[str, object]]) -> List[str]:
+    def _build_summary(
+        self,
+        clips: List[Dict[str, object]],
+        include_topics: bool = True,
+        allow_llm: bool = True,
+    ) -> List[str]:
         ratings = [c.get("user_rating") for c in clips if isinstance(c.get("user_rating"), (int, float))]
         durations = []
         videos = Counter()
@@ -165,7 +181,10 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         if videos:
             top_videos = ", ".join(f"{name}({cnt})" for name, cnt in videos.most_common(3))
             lines.append(f"常见视频/主播: {top_videos}")
-        lines.extend(self._build_topic_summary(topic_items))
+        if include_topics:
+            lines.extend(self._build_topic_summary(topic_items, allow_llm=allow_llm))
+        else:
+            lines.append("主题模型: 启动阶段已跳过，点击“刷新总结”生成完整主题摘要。")
         if vectors:
             pct = (vector_ready / max(1, len(clips))) * 100
             lines.append(f"向量覆盖率: {pct:.0f}%（用于个性化相似度）")
@@ -181,7 +200,7 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
                 lines.append("偏好倾向：评分分散，建议补充更多明确的高分样本。")
         return lines
 
-    def _build_topic_summary(self, items: List[Dict[str, object]]) -> List[str]:
+    def _build_topic_summary(self, items: List[Dict[str, object]], allow_llm: bool = True) -> List[str]:
         texts_all = [str(item.get("text") or "").strip() for item in items if str(item.get("text") or "").strip()]
         if len(texts_all) < 2:
             return ["主题模型: 样本不足（至少需要 2 条文本）"]
@@ -268,7 +287,7 @@ class RAGPreferenceWidget(QtWidgets.QWidget):
         if not n_topics:
             return ["主题模型: 聚类失败，无法生成主题"]
 
-        llm, model_name = self._get_topic_llm()
+        llm, model_name = self._get_topic_llm() if allow_llm else (None, "disabled")
         llm_note = f" · LLM: {model_name}" if llm else " · LLM 不可用"
         lines = [f"主题模型: {n_topics} 个主题（基于 {n_docs} 段文本{llm_note}）"]
 
