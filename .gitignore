@@ -46,10 +46,29 @@ tmp_*.txt
 
 # Local secrets and env files
 secrets/
+private/
+.agent_private/
 .env
 .env.*
 !.env.example
+config.txt
+config.local.*
+openai.env
 /huggingface_token.txt
+*_token.txt
+*.token
+*.key
+*.pem
+*.p12
+*.pfx
+*.secret
+*.credentials
+.npmrc
+.pypirc
+.netrc
+id_rsa*
+known_hosts
+ssh_config
 
 # Local tooling
 .codex/
@@ -59,6 +78,7 @@ secrets/
 .vscode/
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Guard against accidental source-tree runtime dumps
 src/acfv/data/logs/*.log
