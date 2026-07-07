@@ -1,0 +1,6 @@
+{
+  "twitch_client_id": "",
+  "twitch_oauth_token": "",
+  "twitch_username": "",
+  "twitch_download_folder": "./data/twitch"
+}
