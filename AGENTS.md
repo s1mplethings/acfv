@@ -57,9 +57,9 @@
 - **文档同步**：spec变更同步更新 `docs/repo_map.md` 或相关文档；无新增无关文档。
 - **验证硬标准**：必须通过verify；若失败，提供根因+修复计划，不得交付broken代码。
 - **任务边界**：严格按"影响范围"执行；不允许改的内容绝对不改；若发现drift，先更新spec再实现。
-- **新模块规范（2026-02新增）**：新增enhance等大模块需先创建spec（Purpose/Inputs/Outputs/Process/Config/AC完整），再创建目录结构/init文件/schema定义，最后实现逻辑。每个子模块必须有独立spec和smoke测试。
+- **新模块规范**：新增核心模块前先创建 spec（Purpose/Inputs/Outputs/Process/Config/AC），再实现目录、schema、逻辑与 smoke 测试。
 - **GUI优先原则（2026-02新增）**：本项目GUI是主要开发方向，CLI仅作接口备用。新功能必须先实现GUI版本（PyQt5组件+交互），CLI可延后。所有用户可见功能必须有GUI入口，错误提示用对话框而非控制台。详见 `docs/GUI_PRIORITY.md`。
-- **AI骨架使用（2026-02新增）**：新增AI功能时必须使用 `src/acfv/enhance/rag/ai_skeleton.py` 框架，确保自动库检查、多后端支持和错误处理。详见 `docs/ai_skeleton_guide.md`。
+- **MVP边界**：当前只围绕 Twitch 本地录播、流式理解、Moment、Creator Library、基于证据的检索/对话、Clip Review 与显式反馈推进。不要重新引入自动成片增强、TTS、Dify、独立 RAG 管理器、自动发布或完整剪辑器。
 
 ## 9. 默认模板（给用户或自己套用）
 ```
