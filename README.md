@@ -43,9 +43,23 @@ acfv gui
 
 Other available entry points are defined in `pyproject.toml`, including GUI and development utilities.
 
+## MVP direction
+
+The current MVP is intentionally narrow:
+
+- Detect and locally record configured Twitch creators.
+- Analyze recordings while the stream is still live.
+- Build provisional semantic moments that are searchable during the live session.
+- Finalize/merge/split moments after the stream ends.
+- Preserve recordings and derived artifacts in a persistent creator library.
+- Answer library questions only when grounded in retrievable video evidence.
+- Turn a selected moment into a clip, allow basic subtitle/boundary edits, and store explicit feedback.
+
+Out of scope for the MVP: automatic publishing, multi-clip compilation, TTS, meme/effect enhancement, Dify integration, a standalone RAG manager, and a full nonlinear editor.
+
 ## Project direction
 
-ACFV focuses on making creator clipping workflows more structured, inspectable, and reusable. The project is designed around explicit stages, runtime state, and visible outputs rather than a single black-box edit command.
+ACFV is moving from a one-shot clipping workflow toward a local-first creator library and grounded clip workflow. The existing pipeline remains the processing engine; persistent library, moment retrieval, review, and feedback are product layers built on top of it.
 
 ## Status
 

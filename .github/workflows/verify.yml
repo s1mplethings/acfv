@@ -38,4 +38,4 @@ jobs:
       - name: Verify
         shell: pwsh
         run: |
-          powershell -ExecutionPolicy Bypass -File scripts/verify.ps1 -SkipInstall
+          powershell -ExecutionPolicy Bypass -File scripts/verify.ps1

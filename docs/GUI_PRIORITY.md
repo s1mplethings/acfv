@@ -35,78 +35,6 @@
 - 所有耗时操作必须在后台线程执行（QThread/Worker）
 - 提供实时进度反馈（ProgressBar/StatusLabel）
 
-## Enhance模块开发示例
-
-### ✅ 正确做法（GUI优先）
-```python
-# 1. 先创建GUI面板
-class EnhancePanel(QWidget):
-    def __init__(self, config_manager):
-        # UI组件：复选框、下拉框、滑块
-        self.enable_asr = QCheckBox("自动字幕")
-        self.style_combo = QComboBox()
-        # ...
-
-# 2. 在clips_tab中集成
-def init_ui(self, container):
-    main_layout = QHBoxLayout()
-    main_layout.addWidget(clips_widget, 3)
-    main_layout.addWidget(enhance_panel, 1)  # 侧边栏
-
-# 3. CLI作为调用接口（可延后）
-@app.command()
-def enhance_video(...):
-    # 复用GUI逻辑，只是换个入口
-    pass
-```
-
-### ❌ 错误做法（CLI优先）
-```python
-# ❌ 不要先实现复杂的CLI参数解析
-@app.command()
-def enhance_video(
-    input_video: Path,
-    roi_config: Path,
-    style: str,
-    # ... 一堆参数
-):
-    # 然后再想怎么做GUI
-    pass
-```
-
-## 当前Enhance模块状态
-
-### 已完成（GUI）
-- ✅ EnhancePanel侧边栏（切片页面右侧）
-- ✅ 功能模块复选框（ASR/字幕特效/ROI/梗贴图/RAG）
-- ✅ 字幕风格选择（下拉框）
-- ✅ 梗密度控制（滑块）
-- ✅ 配置保存到ConfigManager
-
-### 待实现（按GUI优先顺序）
-1. **GUI后台任务集成**（优先级：高）
-   - [ ] 在pipeline中读取enhance_panel配置
-   - [ ] 根据勾选项决定是否执行ASR/字幕特效
-   - [ ] 进度条显示enhance各阶段
-
-2. **ASR字幕生成**（优先级：高）
-   - [ ] GUI：在enhance_panel添加"测试字幕"按钮
-   - [ ] 后台：调用WhisperX生成segments.json
-   - [ ] 反馈：显示字幕预览对话框
-
-3. **字幕特效预览**（优先级：高）
-   - [ ] GUI：字幕风格实时预览窗口
-   - [ ] 交互：拖拽调整关键词特效
-
-4. **ROI配置界面**（优先级：中）
-   - [ ] GUI：可视化ROI框选工具（在视频上画框）
-   - [ ] 保存：per-channel预设管理
-
-5. **CLI接口补全**（优先级：低）
-   - [ ] 完善`acfv enhance run`命令
-   - [ ] 批量处理支持
-   - [ ] 日志输出规范
-
 ## AI实施建议
 
 ### 收到新需求时的判断流程
@@ -149,5 +77,5 @@ def enhance_video(
 
 ---
 
-**最后更新**：2026-02-02  
-**适用模块**：Enhance（成片增强）及所有新功能
+**最后更新**：2026-10-06  
+**适用模块**：当前 ACFV MVP 核心 GUI
