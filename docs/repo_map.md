@@ -27,7 +27,6 @@ Phase 2 版本，记录当前真实结构，并标出已经落地的统一 backe
 - `src/acfv/ui/`
   - 标签页与 GUI 组件
   - `tabs/` 下包含本地视频、Twitch、字幕渲染、RAG 偏好等页面
-  - `tabs/subtitle_render_tab.py` 新增 TTS A/B 卡片：同页生成 `edge-tts` 与 `VibeVoice(OpenAI-compatible)` 音频，并写 `work/tts_compare/tts_compare_report_*.json`
   - 2026-04 起，字幕渲染页和设置页的 AI 高光配置改成精简模式：界面只保留统一 `LLM模型`、候选倍数和偏好提示，不再单独暴露本地模型/视觉模型输入框
 - `src/acfv/features/modules/`
   - GUI 辅助组件、进度 UI、缩略图加载、旧 backend 工具
@@ -179,7 +178,6 @@ Phase 2 版本，记录当前真实结构，并标出已经落地的统一 backe
   - 2026-04 当前转录默认值：`WHISPER_MODEL=medium`、`SEGMENT_LENGTH=120`
   - 2026-04 当前高光时长默认值：`MIN_TARGET_CLIP_DURATION=45`、`TARGET_CLIP_DURATION=90`、`MAX_TARGET_CLIP_DURATION=150`；语义高光默认 `SEMANTIC_TARGET_DURATION=90`
   - 若使用 `faster-whisper + large-v3/large-v3-turbo`，长段切块会自动压到 `60s` 以降低 CUDA OOM 风险
-  - 2026-04 新增 TTS 对比配置：`TTS_CURRENT_*` 与 `TTS_VIBEVOICE_*`（用于 GUI 一键 A/B 试听）
 
 ## 6. Output / Artifact Paths
 - 稳定运行目录:
@@ -207,9 +205,6 @@ Phase 2 版本，记录当前真实结构，并标出已经落地的统一 backe
   - `work/runtime/transcribe_runtime.json`
   - `work/runtime/render_runtime.json`
   - `work/runtime/events.jsonl`
-  - `work/tts_compare/tts_current_edge_*.mp3`
-  - `work/tts_compare/tts_vibevoice_*.*`
-  - `work/tts_compare/tts_compare_report_*.json`
 - 兼容输出:
   - `clips_manifest.json` 也会复制到 run 根目录，方便 GUI / 用户浏览
 
