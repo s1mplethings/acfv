@@ -208,26 +208,6 @@ class ConfigManager:
             "LOCAL_SUMMARY_TOP_P": 0.9,
             "LOCAL_SUMMARY_REPEAT_PENALTY": 1.15,
             "LOCAL_SUMMARY_MAX_INPUT_CHARS": 4000,
-            # Enhance成片增强配置（2026-02新增）
-            "ENABLE_ENHANCE": False,  # 总开关
-            "ENHANCE_ASR": True,  # 自动字幕
-            "ENHANCE_SUBTITLE_FX": True,  # 字幕特效
-            "ENHANCE_ROI": False,  # 视角切换
-            "ENHANCE_MEME": False,  # 梗贴图
-            "ENHANCE_RAG": False,  # 智能推荐
-            "SUBTITLE_STYLE_PROFILE": "clean",  # clean/bold_outline/meme_heavy
-            "MEME_DENSITY": 0.3,  # 梗密度 0.0-1.0
-            "ENABLE_STREAMER_SUBTITLES": False,  # 仅导出主播字幕
-            # TTS 对比（当前 edge-tts vs VibeVoice）
-            "TTS_CURRENT_VOICE": "zh-CN-XiaoxiaoNeural",
-            "TTS_CURRENT_RATE": "+0%",
-            "TTS_CURRENT_PITCH": "+0%",
-            "TTS_VIBEVOICE_BASE_URL": "http://127.0.0.1:8000/v1",
-            "TTS_VIBEVOICE_API_KEY": "local",
-            "TTS_VIBEVOICE_MODEL": "vibevoice",
-            "TTS_VIBEVOICE_VOICE": "alloy",
-            "TTS_VIBEVOICE_FORMAT": "mp3",
-            "TTS_VIBEVOICE_TIMEOUT_SEC": 60,
             "STREAMER_PRIMARY_SPEAKER": "",  # 指定主播 speaker id
             "STREAMER_SUB_MAX_CHARS": 16,
             "STREAMER_SUB_MAX_LINES": 2,
