@@ -4,16 +4,15 @@ def main(argv=None):
     """
     Console entrypoint for `acfv`.
     Usage:
-        acfv [gui|pipe|rag|stream-monitor|stream-monitor-ui|--help|--version]
+        acfv [gui|pipe|stream-monitor|stream-monitor-ui|--help|--version]
     """
     argv = sys.argv[1:] if argv is None else argv
     
     if not argv or argv[0] in {"-h", "--help", "help"}:
-        print("Usage: acfv [gui|pipe|rag|stream-monitor|stream-monitor-ui|--help|--version]")
+        print("Usage: acfv [gui|pipe|stream-monitor|stream-monitor-ui|--help|--version]")
         print("Commands:")
         print("  gui        Launch the GUI interface")
         print("  pipe       Run the open-source clip workflow")
-        print("  rag        Open the optional RAG manager GUI")
         print("  stream-monitor  Run the background StreamGet recorder")
         print("  stream-monitor-ui  Edit the recorder config in a PyQt UI")
         print("  --version  Show version information")
@@ -53,18 +52,6 @@ def main(argv=None):
             return int(exc.code or 0)
         except Exception as e:
             print(f"Error running pipeline CLI: {e}")
-            return 1
-
-    if cmd == "rag":
-        try:
-            from acfv.app.rag_gui import launch_rag_gui
-            return launch_rag_gui()
-        except ImportError as e:
-            print(f"Error: Unable to launch RAG GUI: {e}")
-            print("Make sure PyQt5 is installed: pip install PyQt5")
-            return 1
-        except Exception as e:
-            print(f"Error launching RAG GUI: {e}")
             return 1
 
     if cmd in {"stream-monitor", "streamcap-service", "monitor"}:
