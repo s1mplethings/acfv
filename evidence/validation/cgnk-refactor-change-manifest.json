@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "change_id": "cgnk-refactor-2026-10-07",
+  "summary": "Add behavior-preserving CGNK navigation, capability, skill, evidence, and guard layers.",
+  "capabilities": [
+    "twitch_capture", "video_processing", "creator_library", "moment_lifecycle",
+    "retrieval", "grounded_conversation", "clip_rendering", "clip_review", "feedback"
+  ],
+  "files_changed": [
+    ".cgnk/project.yaml", ".agents/skills/", "AGENTS.md", "docs/context/",
+    "docs/repo_map.md", "knowledge/", "evidence/", "specs/capabilities/",
+    "specs/contracts/", "tests/integration/test_cgnk_repository_guards.py"
+  ],
+  "behavior_change": false,
+  "contract_change": false,
+  "migration_required": false,
+  "compatibility": "All imported legacy source paths are preserved; no runtime source was moved.",
+  "risks": ["POSIX gate not evaluated because the installed WSL distribution cannot mount its virtual disk."]
+}

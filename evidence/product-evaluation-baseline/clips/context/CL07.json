@@ -1,0 +1,58 @@
+{
+  "case_id": "CL07",
+  "file": "media/clip_07.mp4",
+  "source_recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+  "source_recording_title": "anny 的xp rating",
+  "moment_id": "3c0a9b62-a66b-4091-a91b-fa3a6977179f",
+  "query": "",
+  "group": "RANDOM_FINAL",
+  "selection_reason": "fixed-seed random FINAL Moment",
+  "moment_start_ms": 8848600,
+  "moment_end_ms": 8857400,
+  "proposed_start_ms": 8840600,
+  "proposed_end_ms": 8869400,
+  "final_start_ms": 8840600,
+  "final_end_ms": 8869400,
+  "proposal_duration_ms": 28800,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "I'm surprised I was like... I don't know... I don't know...",
+    "inside": "Builder of Tetris houses... Listener of the Sacred Five Songs... Protector of OSU... Farmer of Urms... Viola of the Almighty Hex... This is kinda hard to even, like, rate all these...",
+    "after": "This is kinda hard to even, like, rate all these... I mean, put them in the order... I feel like everything that is after the first line is kind of out of order... I don't really care... I guess... So whatever"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 4000,
+    "pause_after_ms": 1200,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 8835600,
+      "end_ms": 8836600,
+      "text": "I don't know..."
+    },
+    "next_segment": {
+      "start_ms": 8870600,
+      "end_ms": 8872400,
+      "text": "I mean, put them in the order..."
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 28.8,
+      "size_bytes": 3188178,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "ends_mid_transcript_segment"
+  ]
+}

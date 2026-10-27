@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-10",
+  "base": "4e76caede74e65b4a02b22a77b40c3ed5f35ecd9",
+  "implementation_head": "20e3bbfecb76eedca8e3ef47d5a66329de1d9e30",
+  "commits": [
+    "90751d3e070308f5b33208933de2eef7a7150837",
+    "20e3bbfecb76eedca8e3ef47d5a66329de1d9e30"
+  ],
+  "scope": {
+    "capabilities": ["bilingual_subtitle", "clip_duration_profile"],
+    "new_modules": [
+      "src/acfv/clips/subtitles.py",
+      "src/acfv/clips/duration.py",
+      "src/acfv/clips/variants.py"
+    ],
+    "adapted_modules": [
+      "src/acfv/backend/service.py",
+      "src/acfv/cli/clips.py",
+      "src/acfv/clips/service.py",
+      "src/acfv/ui/tabs/review_tab.py"
+    ],
+    "tests": [
+      "tests/unit/test_bilingual_subtitles.py",
+      "tests/unit/test_clip_duration_profiles.py",
+      "tests/unit/test_clip_service.py",
+      "tests/unit/test_product_gui_contract.py",
+      "tests/integration/test_query_to_clip_render.py",
+      "tests/integration/test_cgnk_repository_guards.py"
+    ]
+  },
+  "preserved_boundaries": {
+    "canonical_renderer_reused": true,
+    "asr_unchanged": true,
+    "moment_builder_unchanged": true,
+    "retrieval_ranking_unchanged": true,
+    "watchability_ranking_unchanged": true,
+    "no_enhance_tts_dify": true
+  }
+}

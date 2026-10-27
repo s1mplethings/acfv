@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "stage": "build_clip_manifest",
+  "units": "ms",
+  "source_media": "F:\\.work\\[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge \ud83c\udf4a !tts.mp4",
+  "clip_count": 1,
+  "clips": [
+    {
+      "clip_id": "clip_001",
+      "rank": 1,
+      "start_ms": 10824760,
+      "end_ms": 10846000,
+      "output": {
+        "video": "clip.mp4"
+      },
+      "status": "planned"
+    }
+  ]
+}

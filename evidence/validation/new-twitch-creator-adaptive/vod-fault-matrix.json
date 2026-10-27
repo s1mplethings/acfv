@@ -1,0 +1,15 @@
+{
+  "deleted_vod": "PASS: 404 creates no dirty Library rows",
+  "forbidden": "PASS: 403 creates no dirty Library rows",
+  "network_failure": "PASS: bounded retry and retained partial",
+  "interruption": "PASS: durable INTERRUPTED and safe restart",
+  "partial": "PASS: never promoted/processed",
+  "duplicate": "PASS: concurrent submissions produce one job",
+  "disk_full": "PASS: ENOSPC durable FAILED, partial retained, no promotion",
+  "ffprobe_failure": "PASS: durable FAILED, no pipeline handoff",
+  "real_faults": [
+    "implicit temp drive on low-space G caused fragment/FileStream failures; fixed with same-drive temp path",
+    "Safe trim exceeded exact duration contract; Exact trim restored",
+    "anny 70-130m contained corrupt H264 packets; split revised before training to clean 10-60m range"
+  ]
+}

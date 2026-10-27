@@ -1,0 +1,126 @@
+/* Premiere Pro 风格样式表 */
+QWidget {
+    background-color: #232136;
+    color: #e0def4;
+    font-family: "Fira Code", "Consolas", "Microsoft YaHei";
+    font-size: 15px;
+    selection-background-color: #524f67;
+}
+
+QMainWindow {
+    background-color: #232136;
+    border: none;
+}
+
+QPushButton {
+    background-color: #393552;
+    color: #e0def4;
+    border: 1px solid #ea9a97;
+    border-radius: 6px;
+    padding: 8px 16px;
+    min-height: 24px;
+}
+
+QPushButton:hover {
+    background-color: #ea9a97;
+    color: #232136;
+}
+
+QPushButton:pressed {
+    background-color: #d87873;
+    color: #232136;
+}
+
+QLineEdit, QTextEdit {
+    background-color: #2a273f;
+    color: #e0def4;
+    border: 1px solid #393552;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #ea9a97;
+}
+
+QComboBox {
+    background-color: #2a273f;
+    color: #e0def4;
+    border: 1px solid #393552;
+    border-radius: 6px;
+    padding: 6px 10px;
+    min-width: 120px;
+}
+
+QComboBox:hover {
+    border: 1px solid #ea9a97;
+}
+
+QComboBox::drop-down {
+    border: none;
+    background-color: transparent;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #e0def4;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2a273f;
+    color: #e0def4;
+    border: 1px solid #393552;
+    selection-background-color: #ea9a97;
+    selection-color: #232136;
+}
+
+QTabWidget {
+    background-color: #232136;
+}
+
+QTabWidget::pane {
+    background-color: #232136;
+    border: 1px solid #393552;
+}
+
+QTabBar::tab {
+    background-color: #393552;
+    color: #e0def4;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin-right: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #ea9a97;
+    color: #232136;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #524f67;
+}
+
+QLabel {
+    color: #e0def4;
+    background-color: transparent;
+    padding: 4px;
+}
+
+QScrollBar:vertical {
+    background-color: #393552;
+    width: 16px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #524f67;
+    border-radius: 8px;
+    min-height: 24px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #6e6a86;
+}

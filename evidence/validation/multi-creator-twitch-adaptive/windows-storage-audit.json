@@ -1,0 +1,365 @@
+{
+  "captured_at": "2026-10-14T03:57:24.1668211Z",
+  "volumes": [
+    {
+      "DriveLetter": "C",
+      "FileSystemLabel": "OS",
+      "FileSystem": "NTFS",
+      "Size": 484665790464,
+      "SizeRemaining": 14386122752,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": "E",
+      "FileSystemLabel": "WCY",
+      "FileSystem": "NTFS",
+      "Size": 2000363188224,
+      "SizeRemaining": 96490627072,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": "F",
+      "FileSystemLabel": "G",
+      "FileSystem": "NTFS",
+      "Size": 2000381014016,
+      "SizeRemaining": 241972154368,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": null,
+      "FileSystemLabel": "",
+      "FileSystem": "NTFS",
+      "Size": 1109389312,
+      "SizeRemaining": 85377024,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": null,
+      "FileSystemLabel": "MYASUS",
+      "FileSystem": "FAT32",
+      "Size": 268435456,
+      "SizeRemaining": 185856000,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": null,
+      "FileSystemLabel": "RESTORE",
+      "FileSystem": "NTFS",
+      "Size": 25769799680,
+      "SizeRemaining": 7191736320,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": "Q",
+      "FileSystemLabel": "新加卷",
+      "FileSystem": "NTFS",
+      "Size": 256059109376,
+      "SizeRemaining": 49457393664,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": "D",
+      "FileSystemLabel": "",
+      "FileSystem": "NTFS",
+      "Size": 512107737088,
+      "SizeRemaining": 14061924352,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK",
+      "DriveType": "Fixed"
+    },
+    {
+      "DriveLetter": "G",
+      "FileSystemLabel": "work",
+      "FileSystem": "exFAT",
+      "Size": 1000152236032,
+      "SizeRemaining": 4635754496,
+      "HealthStatus": "Warning",
+      "OperationalStatus": "Full Repair Needed",
+      "DriveType": "Fixed"
+    }
+  ],
+  "partitions": [
+    {
+      "DiskNumber": 3,
+      "PartitionNumber": 1,
+      "DriveLetter": "Q",
+      "Type": "Basic",
+      "Size": 256059113472,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 1,
+      "PartitionNumber": 1,
+      "DriveLetter": "D",
+      "Type": "IFS",
+      "Size": 512107741184,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 1,
+      "DriveLetter": null,
+      "Type": "System",
+      "Size": 272629760,
+      "IsBoot": false,
+      "IsSystem": true,
+      "IsReadOnly": null,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 2,
+      "DriveLetter": null,
+      "Type": "Reserved",
+      "Size": 16777216,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": null,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 3,
+      "DriveLetter": "C",
+      "Type": "Basic",
+      "Size": 484665794048,
+      "IsBoot": true,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 4,
+      "DriveLetter": null,
+      "Type": "Recovery",
+      "Size": 1109393408,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": null,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 5,
+      "DriveLetter": null,
+      "Type": "Basic",
+      "Size": 25769803776,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 0,
+      "PartitionNumber": 6,
+      "DriveLetter": null,
+      "Type": "Recovery",
+      "Size": 272629760,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": null,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 4,
+      "PartitionNumber": 1,
+      "DriveLetter": "G",
+      "Type": "Basic",
+      "Size": 1000169226752,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 2,
+      "PartitionNumber": 1,
+      "DriveLetter": null,
+      "Type": "Reserved",
+      "Size": 16759808,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": null,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 2,
+      "PartitionNumber": 2,
+      "DriveLetter": "F",
+      "Type": "Basic",
+      "Size": 2000381018112,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    },
+    {
+      "DiskNumber": 5,
+      "PartitionNumber": 1,
+      "DriveLetter": "E",
+      "Type": "Basic",
+      "Size": 2000363192320,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsReadOnly": false,
+      "IsOffline": false
+    }
+  ],
+  "disks": [
+    {
+      "Number": 3,
+      "FriendlyName": "MTFDHBA2 56TCK-1AS1AABHA",
+      "BusType": "USB",
+      "PartitionStyle": "GPT",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 256060514304,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsOffline": false,
+      "IsReadOnly": false
+    },
+    {
+      "Number": 1,
+      "FriendlyName": "NVMe MAIGUANG V800 512GB",
+      "BusType": "NVMe",
+      "PartitionStyle": "MBR",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 512110190592,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsOffline": false,
+      "IsReadOnly": false
+    },
+    {
+      "Number": 0,
+      "FriendlyName": "NVMe WD PC SN740 SDDPNQD-512G-1002",
+      "BusType": "NVMe",
+      "PartitionStyle": "GPT",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 512110190592,
+      "IsBoot": true,
+      "IsSystem": true,
+      "IsOffline": false,
+      "IsReadOnly": false
+    },
+    {
+      "Number": 4,
+      "FriendlyName": "SanDisk Extreme Pro 55AF",
+      "BusType": "USB",
+      "PartitionStyle": "GPT",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 1000171323904,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsOffline": false,
+      "IsReadOnly": false
+    },
+    {
+      "Number": 2,
+      "FriendlyName": "WDC WD20 EZBX-00AYRA0",
+      "BusType": "USB",
+      "PartitionStyle": "GPT",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 2000398934016,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsOffline": false,
+      "IsReadOnly": false
+    },
+    {
+      "Number": 5,
+      "FriendlyName": "WD Elements SE 2622",
+      "BusType": "USB",
+      "PartitionStyle": "GPT",
+      "OperationalStatus": "Online",
+      "HealthStatus": "Healthy",
+      "Size": 2000365289472,
+      "IsBoot": false,
+      "IsSystem": false,
+      "IsOffline": false,
+      "IsReadOnly": false
+    }
+  ],
+  "physical_disks": [
+    {
+      "DeviceId": "0",
+      "FriendlyName": "NVMe WD PC SN740 SDDPNQD-512G-1002",
+      "MediaType": "SSD",
+      "BusType": "NVMe",
+      "Size": 512110190592,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    },
+    {
+      "DeviceId": "1",
+      "FriendlyName": "NVMe MAIGUANG V800 512GB",
+      "MediaType": "SSD",
+      "BusType": "NVMe",
+      "Size": 512110190592,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    },
+    {
+      "DeviceId": "3",
+      "FriendlyName": "MTFDHBA2 56TCK-1AS1AABHA",
+      "MediaType": "SSD",
+      "BusType": "USB",
+      "Size": 256060514304,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    },
+    {
+      "DeviceId": "4",
+      "FriendlyName": "SanDisk Extreme Pro 55AF",
+      "MediaType": "SSD",
+      "BusType": "USB",
+      "Size": 1000171323904,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    },
+    {
+      "DeviceId": "2",
+      "FriendlyName": "WDC WD20 EZBX-00AYRA0",
+      "MediaType": "SSD",
+      "BusType": "USB",
+      "Size": 2000398934016,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    },
+    {
+      "DeviceId": "5",
+      "FriendlyName": "WD Elements SE 2622",
+      "MediaType": "HDD",
+      "BusType": "USB",
+      "Size": 2000365289472,
+      "HealthStatus": "Healthy",
+      "OperationalStatus": "OK"
+    }
+  ]
+}

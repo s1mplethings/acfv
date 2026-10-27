@@ -1,0 +1,139 @@
+{
+  "seed": 20261009,
+  "retrieval": [
+    {
+      "moment_id": "82c847d8-ab6f-49d4-a900-6a79adb2a698",
+      "query": "Oh, hostel These are the first words you learn in Japanese In",
+      "rank": 1
+    },
+    {
+      "moment_id": "59b66e22-d3ab-455b-9da8-6df7e62b2726",
+      "query": "My social life that I could have had was ruined by COVID.",
+      "rank": 1
+    },
+    {
+      "moment_id": "434143a6-f16f-46e4-a662-4aeeb0b795a2",
+      "query": "No, like as in like in the fiction and shit Where did",
+      "rank": 1
+    },
+    {
+      "moment_id": "3773a83e-25a3-484b-87f5-bd2f593afe21",
+      "query": "We ain't in these old shit",
+      "rank": 1
+    },
+    {
+      "moment_id": "223b1739-1c42-4706-9876-2292b9b73224",
+      "query": "What's here? Megalool Okay, can I... Wait, can I actually use this",
+      "rank": 1
+    },
+    {
+      "moment_id": "52b7c0ed-1e21-4cef-873d-82320b5c6e20",
+      "query": "Sad. No, he's crying. Don't cry. There's always YouTube, right? Maybe I",
+      "rank": 1
+    },
+    {
+      "moment_id": "bfb955f3-4fc3-4a4d-83df-a20f1d9ad4d4",
+      "query": "Birthday, thank you Any existing flush Thank you, Titu Thank you, hello",
+      "rank": 1
+    },
+    {
+      "moment_id": "b0b200c6-4c6a-44e0-b639-bc9b13c58e83",
+      "query": "No, it's not. I just can't type. Oh my god. Type? I",
+      "rank": 1
+    },
+    {
+      "moment_id": "8ab97ffa-629c-4ea3-90f6-f1b08b09028a",
+      "query": "i have the light what should i do Huh? The door is",
+      "rank": 1
+    },
+    {
+      "moment_id": "4a1284c2-97f4-4071-b03f-9d118ff47096",
+      "query": "He's not real. Holy korpa. Half the debt again. Then I'm only",
+      "rank": 2
+    }
+  ],
+  "moments": [
+    {
+      "moment_id": "6060a1fe-2708-4af4-878c-51a011fa6a50",
+      "duration_ms": 21000,
+      "summary": "Die die die die die die die die die die die die die die! Ma'am, can you erase this?"
+    },
+    {
+      "moment_id": "6b10ef31-37e7-4df7-9547-6b8ad40ec8bf",
+      "duration_ms": 26000,
+      "summary": "Never really been to a meat place. Like a separate dedicated meat shop."
+    },
+    {
+      "moment_id": "9535d79f-c306-47d6-887c-906e22157514",
+      "duration_ms": 70000,
+      "summary": "Thanks for the ten gifted subs free wind is your name free wind because you had really bad flatulence Ha ha yeah, I uh have that too ha ha Thanks for the sub exhalibur She's sounding more human like every every time like thanks for coming…"
+    },
+    {
+      "moment_id": "d219fa18-4a5f-403f-814e-96caddde099c",
+      "duration_ms": 56440,
+      "summary": "But it have like five million views it must be good, right So paper, please loot game wetness is not the loot game of pepper, please Don't watch it. 26 minutes one six hours is a short version of the zombie lore Can we watch a bit and we…"
+    },
+    {
+      "moment_id": "6f1ba446-56aa-49e5-abd2-1b55f5e8f5aa",
+      "duration_ms": 16000,
+      "summary": "Suspicious. I've got enough to keep me occupied here."
+    },
+    {
+      "moment_id": "8a94175e-c1e3-488c-b10c-ad7a8b9dce25",
+      "duration_ms": 13440,
+      "summary": "Dude I messaged him about the model and he was like, oh, I forgot about it. I'm like the fucking man."
+    },
+    {
+      "moment_id": "0f439919-05b6-4eac-9971-fe1040a37acf",
+      "duration_ms": 33800,
+      "summary": "It's potato trying to find my canoe dirt. Oh, I fucking hate this."
+    },
+    {
+      "moment_id": "f2146b1d-762d-43ed-a3a1-816ef0017fd2",
+      "duration_ms": 11000,
+      "summary": "I see. It's cool that I own it, right?"
+    },
+    {
+      "moment_id": "4457bde2-8fef-401c-9a0e-e572170253ca",
+      "duration_ms": 8000,
+      "summary": "Or doesn't... At least I didn't see that I didn't see that"
+    },
+    {
+      "moment_id": "f5f3a1e4-ea1d-4e90-be61-59d008932e17",
+      "duration_ms": 27000,
+      "summary": "Thank you Any voice wake up I am waking up I'm flushing Ah, because I sound bad, right? KSAN, thank you so f***ing much I'm happy Happy Christmas Uh, I don't drink."
+    }
+  ],
+  "clips": [
+    {
+      "moment_id": "6060a1fe-2708-4af4-878c-51a011fa6a50",
+      "eligible": true,
+      "start_ms": 13727480,
+      "end_ms": 13748480
+    },
+    {
+      "moment_id": "6b10ef31-37e7-4df7-9547-6b8ad40ec8bf",
+      "eligible": true,
+      "start_ms": 7724000,
+      "end_ms": 7750000
+    },
+    {
+      "moment_id": "9535d79f-c306-47d6-887c-906e22157514",
+      "eligible": true,
+      "start_ms": 7800000,
+      "end_ms": 7870000
+    },
+    {
+      "moment_id": "d219fa18-4a5f-403f-814e-96caddde099c",
+      "eligible": true,
+      "start_ms": 10171420,
+      "end_ms": 10227860
+    },
+    {
+      "moment_id": "6f1ba446-56aa-49e5-abd2-1b55f5e8f5aa",
+      "eligible": true,
+      "start_ms": 8933000,
+      "end_ms": 8949000
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "case_id": "R17",
+  "category": "DIFFICULT_AMBIGUOUS",
+  "language_style": "vague",
+  "query": "Did she find a usable shotgun after running out of ammo?",
+  "ground_truth": {
+    "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+    "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+    "moment_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff",
+    "start_ms": 2630480,
+    "end_ms": 2659000,
+    "timestamp": "00:43:50.480–00:44:19.000",
+    "transcript_excerpt": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe? Nice. Good. Oh wait, this one has no ammo so I'd rather take this one instead.",
+    "old_moment_id": "298ebe56-7cb6-42a4-a2a1-4fa2d9e1e148",
+    "acceptable_child_ids": [
+      "841e5fad-d910-4f29-ba7f-21e0bdfe39ff",
+      "881182a5-9f41-4279-830b-a069bfe175bb"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 3093.968,
+  "target_diagnostics": {
+    "dense_rank": 6,
+    "dense_score": 0.8614903688430786,
+    "fts_rank": 1,
+    "fusion_score": 0.031544957774465976,
+    "reranker_score": -0.4694155752658844,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2630480,
+      "end_ms": 2648000,
+      "score": -0.4694155752658844,
+      "summary": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+      "transcript_excerpt": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+      "debug": {
+        "dense_rank": 6,
+        "dense_score": 0.8614903688430786,
+        "fts_rank": 1,
+        "fusion_score": 0.031544957774465976,
+        "reranker_score": -0.4694155752658844,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "881182a5-9f41-4279-830b-a069bfe175bb",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2653000,
+      "end_ms": 2659000,
+      "score": -1.3582091331481934,
+      "summary": "Nice. Good.",
+      "transcript_excerpt": "Nice. Good. Oh wait, this one has no ammo so I'd rather take this one instead.",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.8510583639144897,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -1.3582091331481934,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "e2616df3-6e82-4d6b-8601-b49770b40c2e",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2603280,
+      "end_ms": 2621700,
+      "score": -1.4974167346954346,
+      "summary": "Oh finally, okay, let's see what do they have there's no shotgun here, right No, just some ammo here You pu-pistol I kind of find like you know those shotguns you're talking about",
+      "transcript_excerpt": "Oh finally, okay, let's see what do they have there's no shotgun here, right No, just some ammo here You pu-pistol I kind of find like you know those shotguns you're talking about",
+      "debug": {
+        "dense_rank": 3,
+        "dense_score": 0.869351863861084,
+        "fts_rank": 3,
+        "fusion_score": 0.031746031746031744,
+        "reranker_score": -1.4974167346954346,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "24457ccb-2576-4c38-838e-3aa76af78ff9",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11749500,
+      "end_ms": 11759000,
+      "score": -1.7446821928024292,
+      "summary": "Excuse me! Huh?",
+      "transcript_excerpt": "Excuse me! Huh? Huh? Huh?",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8471685647964478,
+        "fts_rank": 12,
+        "fusion_score": 0.0260840108401084,
+        "reranker_score": -1.7446821928024292,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "f31578e6-c809-45fe-84c0-ac11e67d0db5",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11716000,
+      "end_ms": 11738000,
+      "score": -1.8866829872131348,
+      "summary": "Got it. Okay, got it.",
+      "transcript_excerpt": "Got it. Okay, got it. I'm scratching my chin. Okay. So we got the shotgun, we saved. There's like some medicine here. We need to remember if we are running out of medicine.",
+      "debug": {
+        "dense_rank": 26,
+        "dense_score": 0.8454599380493164,
+        "fts_rank": 8,
+        "fusion_score": 0.026333789329685362,
+        "reranker_score": -1.8866829872131348,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "c3e9b3d7-b866-4a9f-85c6-30f02de2a174",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8190000,
+      "end_ms": 8261520,
+      "score": -2.110901355743408,
+      "summary": "oh no ammo left is it like a shotgun you have here my shotgun where's my shotgun run three more oh okay where's the big guy i hear him oh that sounded like shotgun okay i was almost sure like you know i dropped like a shotgun no i have…",
+      "transcript_excerpt": "oh no ammo left is it like a shotgun you have here my shotgun where's my shotgun run three more oh okay where's the big guy i hear him oh that sounded like shotgun okay i was almost sure like you know i dropped like a shotgun no i have nothing left oh",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -2.110901355743408,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "7615a25c-03a6-45bc-a147-148a6f8c7f67",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 19402000,
+      "end_ms": 19407000,
+      "score": -2.3066704273223877,
+      "summary": "You know what, we're going to use a shotgun ammo because I'm already full of ammo anyway.",
+      "transcript_excerpt": "You know what, we're going to use a shotgun ammo because I'm already full of ammo anyway.",
+      "debug": {
+        "dense_rank": 50,
+        "dense_score": 0.8402986526489258,
+        "fts_rank": 9,
+        "fusion_score": 0.023583662714097495,
+        "reranker_score": -2.3066704273223877,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "006eb8a5-4914-47fe-8dd0-5c5efd48753e",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10162000,
+      "end_ms": 10183000,
+      "score": -2.3763463497161865,
+      "summary": "Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat.",
+      "transcript_excerpt": "Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat. No, it's a submarine. Shotgun? I still haven't found a shotgun just yet.",
+      "debug": {
+        "fts_rank": 14,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -2.3763463497161865,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "46c7ce67-c1da-4abf-a5a4-627b2256317d",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11693000,
+      "end_ms": 11695500,
+      "score": -2.671036958694458,
+      "summary": "Oh! Huh?",
+      "transcript_excerpt": "Oh! Huh?",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8461608290672302,
+        "fts_rank": 10,
+        "fusion_score": 0.026190476190476188,
+        "reranker_score": -2.671036958694458,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "8dedfb6e-a0d4-4f12-99ec-316d6d40fe7b",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3960000,
+      "end_ms": 4079960,
+      "score": -2.756284713745117,
+      "summary": "Hey, Domani are coming There's so many Domani are coming for real Look at the pile of body No, I like my shotgun too much, I don't have much ammo left I knew I had something behind me I should have kept back in the other gun I'm whittling…",
+      "transcript_excerpt": "Hey, Domani are coming There's so many Domani are coming for real Look at the pile of body No, I like my shotgun too much, I don't have much ammo left I knew I had something behind me I should have kept back in the other gun I'm whittling those ones It's the big ones that trade for me I'm going to wait a little bit more to see if I can get a little bit of ammo I'm going to wait a little bit more to see if I can get a little bit of ammo",
+      "debug": {
+        "fts_rank": 15,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -2.756284713745117,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "58e8589e-8213-4688-8a40-743072fb7f6f",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10145000,
+      "end_ms": 10161000,
+      "score": -2.8140642642974854,
+      "summary": "We are deep in the sea. Give me ammo or meds.",
+      "transcript_excerpt": "We are deep in the sea. Give me ammo or meds. Okay, well, that's good too. What is this? Storage stuff only. And that is broken. Fuck you. I can't find of any way to open it.",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -2.8140642642974854,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "e318f2cc-5d4f-4e5d-af62-d5df2b4552e5",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8274480,
+      "end_ms": 8298680,
+      "score": -3.0710253715515137,
+      "summary": "oh fuck that's not what i wanted to do That's so annoying Fuck you Yeah Jesus Christ, oh my god, there's a lot here",
+      "transcript_excerpt": "oh fuck that's not what i wanted to do That's so annoying Fuck you Yeah Jesus Christ, oh my god, there's a lot here",
+      "debug": {
+        "dense_rank": 28,
+        "dense_score": 0.845042884349823,
+        "fts_rank": 16,
+        "fusion_score": 0.02452153110047847,
+        "reranker_score": -3.0710253715515137,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "da9c299f-a289-40b3-9291-86928dfcbe08",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11420000,
+      "end_ms": 11437000,
+      "score": -3.094738245010376,
+      "summary": "What is this? Okay, that's tips.",
+      "transcript_excerpt": "What is this? Okay, that's tips. Medkit. Handgun ammo. Memo. What about this?",
+      "debug": {
+        "dense_rank": 42,
+        "dense_score": 0.8418580293655396,
+        "fts_rank": 5,
+        "fusion_score": 0.025188536953242836,
+        "reranker_score": -3.094738245010376,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "6f4629ef-2064-4d1c-bf9e-da14af7bf7ef",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 19373000,
+      "end_ms": 19399000,
+      "score": -3.1624667644500732,
+      "summary": "Okay, there's all of them here. Okay, fuck, fuck, fuck, fuck.",
+      "transcript_excerpt": "Okay, there's all of them here. Okay, fuck, fuck, fuck, fuck. Come this way. There we go, I guess I did some damage here. There we go, I guess I did some damage here.",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -3.1624667644500732,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "5b56677b-a701-4d23-9dfc-8961d8140ebb",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 19416000,
+      "end_ms": 19432000,
+      "score": -3.250614643096924,
+      "summary": "Okay, this big fella over there, hello. Oh.",
+      "transcript_excerpt": "Okay, this big fella over there, hello. Oh. Um, here.",
+      "debug": {
+        "fts_rank": 7,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -3.250614643096924,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "31e82dc4-ad43-4a45-a4ef-d5d5993d4d2b",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8520000,
+      "end_ms": 8556280,
+      "score": -3.3842222690582275,
+      "summary": "Oh shit, oh shit, oh shit, oh shit! Oh shit, oh shit, oh shit, oh shit!",
+      "transcript_excerpt": "Oh shit, oh shit, oh shit, oh shit! Oh shit, oh shit, oh shit, oh shit! I have a shotgun, I need it.",
+      "debug": {
+        "dense_rank": 15,
+        "dense_score": 0.8534305095672607,
+        "fts_rank": 36,
+        "fusion_score": 0.02375,
+        "reranker_score": -3.3842222690582275,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "a97f82d4-ffec-4340-be05-faf73e27fed9",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8457120,
+      "end_ms": 8510520,
+      "score": -3.44384503364563,
+      "summary": "See no shotgun Okay, where are you? What do you have to say, huh fuck I don't know if I should give this I Just more wait, no, I don't have as much ammo Nice shot, ah He was he was really close and I also hurt myself I lost my shield when…",
+      "transcript_excerpt": "See no shotgun Okay, where are you? What do you have to say, huh fuck I don't know if I should give this I Just more wait, no, I don't have as much ammo Nice shot, ah He was he was really close and I also hurt myself I lost my shield when shooting the ship so I",
+      "debug": {
+        "dense_rank": 40,
+        "dense_score": 0.8428725004196167,
+        "fts_rank": 22,
+        "fusion_score": 0.02219512195121951,
+        "reranker_score": -3.44384503364563,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "7fa297f6-a28b-47fb-ab45-a885674985d6",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 4766880,
+      "end_ms": 4813000,
+      "score": -3.724100351333618,
+      "summary": "so hmm is this maybe something i should be doing with my gun here oh wait it stopped is it limitana oh Hmm. I don't like the idea of using my ammo for this shit, but maybe I could?",
+      "transcript_excerpt": "so hmm is this maybe something i should be doing with my gun here oh wait it stopped is it limitana oh Hmm. I don't like the idea of using my ammo for this shit, but maybe I could? It's kind of dumb I have to guess by shooting shit around and use my ammo, you know?",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.8606870174407959,
+        "fts_rank": 45,
+        "fusion_score": 0.0242296918767507,
+        "reranker_score": -3.724100351333618,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "70114eff-a2eb-4dca-95c9-4070776028fb",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2560960,
+      "end_ms": 2587120,
+      "score": -3.724493980407715,
+      "summary": "Fuck Fucking head Oh Leave me alone leave me alone",
+      "transcript_excerpt": "Fuck Fucking head Oh Leave me alone leave me alone",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.8591943979263306,
+        "fts_rank": 6,
+        "fusion_score": 0.02964426877470356,
+        "reranker_score": -3.724493980407715,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "057e1d6d-44b5-44ce-85bd-d55340913221",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8145000,
+      "end_ms": 8179760,
+      "score": -3.7726848125457764,
+      "summary": "よし うわー うわー ああ ああ、この方 この方? いや、この方から来たのか?",
+      "transcript_excerpt": "よし うわー うわー ああ ああ、この方 この方? いや、この方から来たのか? because now i need to throw like the arrows back word oh hi he shot his friend that's funny oh they are fighting here",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -3.7726848125457764,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "30f2f942-2b71-4701-874c-7f72c1128ff2",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 24575200,
+      "end_ms": 24687720,
+      "score": -4.004236698150635,
+      "summary": "so right then how do i shake it off to turn it off so i just i can get the ammo here no isn't there a way to like no oh i need seven anyway seven i have a three four five six one is this one? And last one, this one here.",
+      "transcript_excerpt": "so right then how do i shake it off to turn it off so i just i can get the ammo here no isn't there a way to like no oh i need seven anyway seven i have a three four five six one is this one? And last one, this one here. I don't want to shoot, I can't bonk them dude. Oh, gunman? I can't let you. Listen, Harrison is dead. Harrison James, the police detected- I know who he is. I'm sorry Mara. You shouldn't have come here. It was only a matter of time before one of those creatures, he was shot with",
+      "debug": {
+        "dense_rank": 23,
+        "dense_score": 0.8469351530075073,
+        "fts_rank": 42,
+        "fusion_score": 0.02185211433971179,
+        "reranker_score": -4.004236698150635,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "055b7cd0-d082-4f4b-b41d-8bf6ef1c33f1",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 11638000,
+      "end_ms": 11661000,
+      "score": -4.023362636566162,
+      "summary": "Yep, I'm an idiot. I'm not going to play with my fucking shotgun.",
+      "transcript_excerpt": "Yep, I'm an idiot. I'm not going to play with my fucking shotgun. Let's sit here.",
+      "debug": {
+        "dense_rank": 37,
+        "dense_score": 0.8433582782745361,
+        "fts_rank": 33,
+        "fusion_score": 0.021061966522558477,
+        "reranker_score": -4.023362636566162,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "6a336f38-69fe-45dd-b706-8140f2a6023a",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11400000,
+      "end_ms": 11419000,
+      "score": -4.031445026397705,
+      "summary": "It's broken. Oh, it's meat-sike.",
+      "transcript_excerpt": "It's broken. Oh, it's meat-sike. Nothing. Shotgun! Okay, so I can have the shotgun. I need to find how.",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.8503472208976746,
+        "fts_rank": 2,
+        "fusion_score": 0.028629032258064516,
+        "reranker_score": -4.031445026397705,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "4776db73-f3e3-4366-8a63-1833f0befa78",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8430000,
+      "end_ms": 8435640,
+      "score": -4.100255489349365,
+      "summary": "Oh god dude, I was so close",
+      "transcript_excerpt": "Oh god dude, I was so close",
+      "debug": {
+        "dense_rank": 47,
+        "dense_score": 0.8409684300422668,
+        "fts_rank": 37,
+        "fusion_score": 0.019655072743038828,
+        "reranker_score": -4.100255489349365,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "7d61cea7-c7a9-4486-acdb-6c3a589dcd39",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3001000,
+      "end_ms": 3008000,
+      "score": -4.1009087562561035,
+      "summary": "I guess there's one here with a shotgun. I wonder where they come from behind.",
+      "transcript_excerpt": "I guess there's one here with a shotgun. I wonder where they come from behind.",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.8451704382896423,
+        "fusion_score": 0.011494252873563218,
+        "reranker_score": -4.1009087562561035,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "c632d237-31a6-4e67-9a85-3832ed4f716b",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8575240,
+      "end_ms": 8582840,
+      "score": -4.198081016540527,
+      "summary": "Okay, now where's the way? Because runch it might not be good to use this.",
+      "transcript_excerpt": "Okay, now where's the way? Because runch it might not be good to use this.",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8543315529823303,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -4.198081016540527,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "8b576074-b598-46db-93a3-ceaa86a8ab1c",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11260000,
+      "end_ms": 11261000,
+      "score": -4.435022830963135,
+      "summary": "Is the note here?",
+      "transcript_excerpt": "Is the note here?",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -4.435022830963135,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "3f7f445f-f487-4d24-b2bb-020c31964280",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 4814000,
+      "end_ms": 4833000,
+      "score": -4.8113694190979,
+      "summary": "Ah. Fuck.",
+      "transcript_excerpt": "Ah. Fuck. She's arding a key. Fuck! I can't believe it! Bromsky, got it. Wait, what's a Bromsky 4 again? I don't think there's a key hole in here in this room, but let's just check it out.",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.862467885017395,
+        "fts_rank": 50,
+        "fusion_score": 0.024475524475524476,
+        "reranker_score": -4.8113694190979,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "ba2d620d-7707-48f1-8bbd-187695f3fc57",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3911520,
+      "end_ms": 3950280,
+      "score": -5.290907382965088,
+      "summary": "What do you mean she ducked irl Where is it So Yeah, I need this Uh, uh, you I should actually keep it Oh Well, you're not really good at like, you know keeping the flood threat inside your own fucking building",
+      "transcript_excerpt": "What do you mean she ducked irl Where is it So Yeah, I need this Uh, uh, you I should actually keep it Oh Well, you're not really good at like, you know keeping the flood threat inside your own fucking building",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.8609113693237305,
+        "fts_rank": 19,
+        "fusion_score": 0.027583600982429624,
+        "reranker_score": -5.290907382965088,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "65707275-0b4c-4335-9f10-c928b0377fb6",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 18451000,
+      "end_ms": 18463000,
+      "score": -5.335824489593506,
+      "summary": "Down behind. Oh, God, fuck you.",
+      "transcript_excerpt": "Down behind. Oh, God, fuck you.",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -5.335824489593506,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "change_id": "cgnk-refactor-2026-10-07",
+  "commit": "83dfd7db536be342f096af0aab3759201c873271",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m pytest -q",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov-report=term:skip-covered",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {"check": "compileall", "status": "PASS"},
+    {"check": "cli_smoke", "status": "PASS", "count": 3},
+    {"check": "pytest", "status": "PASS", "passed": 209, "skipped": 0},
+    {"check": "product_layer_coverage", "status": "PASS", "percent": 83},
+    {"check": "contract_checks", "status": "PASS"},
+    {"check": "verify.ps1", "status": "PASS"},
+    {"check": "verify.sh", "status": "NOT_EVALUATED", "reason": "WSL MountDisk/HCS/ERROR_FILE_NOT_FOUND before script start"}
+  ],
+  "passed": true,
+  "environment": {"os": "Windows 11", "python": "3.12.3"},
+  "limitations": [
+    "WSL POSIX gate was not evaluated.",
+    "Live segmented capture and 20+ hour dogfooding are outside this refactor."
+  ]
+}

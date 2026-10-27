@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "frozen_at": "2026-10-10T11:11:10+08:00",
+  "source": "existing_creator_library",
+  "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "creator": "Saruei",
+  "title": "[11-19-23] Saruei - PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM",
+  "content_type": "vtuber_game_reaction",
+  "language": "en",
+  "duration_ms": 14593237,
+  "authorization_status": "USER_EXISTING_LIBRARY",
+  "time_anchors": {
+    "setup_start_ms": 2601000,
+    "event_start_ms": 2632000,
+    "reaction_start_ms": 2638000,
+    "payoff_start_ms": 2668360,
+    "natural_end_ms": 2688360
+  },
+  "expected_events": [
+    "streamer hears or senses something behind her",
+    "streamer gasps or screams while trying to leave",
+    "game displays YOU SCREAMED",
+    "streamer disputes the loss and asks about sensitivity"
+  ],
+  "expected_moment_ids": [
+    "2f3e284b-d6b1-4291-9b50-f8687ca4da4d",
+    "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"
+  ],
+  "candidate_ids": ["candidate_01", "candidate_02", "candidate_03"],
+  "selected_candidate_id": "candidate_02",
+  "retrieval_queries": [
+    {"id": "event_01", "type": "specific_event", "query": "There is something behind me, did Saruei scream?", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "event_02", "type": "specific_event", "query": "What did the streamer say when she thought something was behind her?", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "event_03", "type": "specific_event", "query": "When did the game decide that she screamed?", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d", "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "event_04", "type": "specific_event", "query": "How did she react after the noise behind her?", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d", "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "event_05", "type": "specific_event", "query": "Why did she ask whether the gasp was enough?", "expected": ["9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "paraphrase_01", "type": "paraphrase", "query": "Find the moment where a scare from behind makes her abandon the challenge.", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "paraphrase_02", "type": "paraphrase", "query": "Show the failed no-scream attempt followed by her denial.", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d", "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "paraphrase_03", "type": "paraphrase", "query": "She panics because a presence seems to be following her.", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "paraphrase_04", "type": "paraphrase", "query": "The streamer insists that her gasp should not count as a scream.", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d", "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "paraphrase_05", "type": "paraphrase", "query": "After being frightened, she debates changing the microphone sensitivity.", "expected": ["9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "fuzzy_01", "type": "fuzzy", "query": "that scary thing behind her", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "fuzzy_02", "type": "fuzzy", "query": "the gasp counted", "expected": ["9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "fuzzy_03", "type": "fuzzy", "query": "leaving the forest after a scare", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "cross_01", "type": "cross_language", "query": "她觉得身后有东西时发生了什么，她尖叫了吗？", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d", "9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "cross_02", "type": "cross_language", "query": "她为什么想调整麦克风灵敏度？", "expected": ["9a0f0c19-c77a-4173-b493-a94c2fe6cdfb"]},
+    {"id": "cross_03", "type": "cross_language", "query": "後ろに何かいると思って叫んだ場面", "expected": ["2f3e284b-d6b1-4291-9b50-f8687ca4da4d"]},
+    {"id": "negative_01", "type": "no_evidence", "query": "When did she bake a chocolate birthday cake for chat?", "expected": []},
+    {"id": "negative_02", "type": "no_evidence", "query": "Which teammate scored the winning football goal?", "expected": []},
+    {"id": "negative_03", "type": "no_evidence", "query": "Why did she announce a trip to Mars tomorrow?", "expected": []}
+  ],
+  "conversation_queries": [
+    {"id": "conv_event_01", "type": "event", "query": "What was behind her and what happened next?", "expect_evidence": true},
+    {"id": "conv_event_02", "type": "event", "query": "Did she say she was leaving?", "expect_evidence": true},
+    {"id": "conv_event_03", "type": "event", "query": "Did she deny screaming?", "expect_evidence": true},
+    {"id": "conv_event_04", "type": "event", "query": "What did the game show after the scare?", "expect_evidence": true},
+    {"id": "conv_event_05", "type": "event", "query": "What setting did she consider changing?", "expect_evidence": true},
+    {"id": "conv_cause_01", "type": "cause_reaction", "query": "Why did she run away and how did she react?", "expect_evidence": true},
+    {"id": "conv_cause_02", "type": "cause_reaction", "query": "Why did she dispute the result?", "expect_evidence": true},
+    {"id": "conv_cause_03", "type": "cause_reaction", "query": "How did the perceived threat lead to the challenge ending?", "expect_evidence": true},
+    {"id": "conv_multi_01", "type": "multi_evidence", "query": "Describe the setup, scare, result, and aftermath.", "expect_evidence": true},
+    {"id": "conv_multi_02", "type": "multi_evidence", "query": "How did her behavior change from trying to leave to discussing sensitivity?", "expect_evidence": true},
+    {"id": "conv_multi_03", "type": "multi_evidence", "query": "What evidence shows both panic and denial?", "expect_evidence": true},
+    {"id": "conv_negative_01", "type": "no_evidence", "query": "Did she bake a chocolate birthday cake during this event?", "expect_evidence": false},
+    {"id": "conv_negative_02", "type": "no_evidence", "query": "Did a teammate score a football goal?", "expect_evidence": false},
+    {"id": "conv_negative_03", "type": "no_evidence", "query": "Did she announce a Mars trip tomorrow?", "expect_evidence": false},
+    {"id": "conv_negative_04", "type": "no_evidence", "query": "Was the scare caused by a blue submarine?", "expect_evidence": false},
+    {"id": "conv_negative_05", "type": "no_evidence", "query": "Did she win a chess tournament in this moment?", "expect_evidence": false}
+  ]
+}

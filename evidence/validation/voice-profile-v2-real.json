@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED_NO_VISUAL_STRONG_CREATOR_IDENTITY",
+  "creators": {"saruei": {"candidates": 0, "retained": 0, "duration_s": 0}, "anny": {"candidates": 0, "retained": 0, "duration_s": 0}},
+  "holdout": "NOT_RUN",
+  "FAR": "NOT_EVALUATED",
+  "FRR": "NOT_EVALUATED",
+  "strong_threshold": "UNCHANGED",
+  "gate_lowered": false
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "contact_sheets": {
+    "atelieranoko": "var\\multi-creator-twitch-v1\\probe-analysis\\contact-sheets\\atelieranoko-probe.jpg",
+    "snuffy": "var\\multi-creator-twitch-v1\\probe-analysis\\contact-sheets\\snuffy-probe.jpg",
+    "laphipi": "var\\multi-creator-twitch-v1\\probe-analysis\\contact-sheets\\laphipi-probe.jpg"
+  },
+  "asr_rows": 3,
+  "human_ground_truth": "PENDING"
+}

@@ -1,0 +1,154 @@
+{
+  "case_id": "R20",
+  "category": "DIFFICULT_AMBIGUOUS",
+  "language_style": "vague",
+  "query": "有没有哪次她解释为什么经常碰到同一个词会更容易记住？",
+  "ground_truth": {
+    "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+    "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+    "moment_id": "994d5c34-89dc-4797-8071-8a2c47347b9f",
+    "start_ms": 13404000,
+    "end_ms": 13458920,
+    "timestamp": "03:43:24.000–03:44:18.920",
+    "transcript_excerpt": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize. If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono But I remember... There was like a ramen there"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "c5196453-61da-40c9-a543-4322d3a24b6d",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 23963920,
+      "end_ms": 23994320,
+      "timestamp": "06:39:23.920–06:39:54.320",
+      "score": 0.01639344262295082,
+      "summary": "Oh god, I got so scared Oh Everything's fine. Everything wasn't a control I wasn't scared. So I was like my am I full of cash? Okay, no Wait, what is this?",
+      "transcript_excerpt": "Oh god, I got so scared Oh Everything's fine. Everything wasn't a control I wasn't scared. So I was like my am I full of cash? Okay, no Wait, what is this?"
+    },
+    {
+      "rank": 2,
+      "moment_id": "8ccc599a-346c-4741-ac50-94babed3da0f",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 5040000,
+      "end_ms": 5097000,
+      "timestamp": "01:24:00.000–01:24:57.000",
+      "score": 0.016129032258064516,
+      "summary": "Now I'm done Does something bad, people are angry at him and they act like they're surprised that actions have consequences? Yeah exactly, he's like trying to play dumb or something Oh god If you haven't seen what he's done in Japan, you can see videos on YouTube about him The problem is people believe him Yeah because until people see the VODs and everything is extreme, of course they're gonna fucking... They can't really do anything right? Only after they see what is recorded is when they can take action",
+      "transcript_excerpt": "Now I'm done Does something bad, people are angry at him and they act like they're surprised that actions have consequences? Yeah exactly, he's like trying to play dumb or something Oh god If you haven't seen what he's done in Japan, you can see videos on YouTube about him The problem is people believe him Yeah because until people see the VODs and everything is extreme, of course they're gonna fucking... They can't really do anything right? Only after they see what is recorded is when they can "
+    },
+    {
+      "rank": 3,
+      "moment_id": "59efbc50-3cd2-48b1-aafc-6fa38a680cc2",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 10657000,
+      "end_ms": 10670000,
+      "timestamp": "02:57:37.000–02:57:50.000",
+      "score": 0.015873015873015872,
+      "summary": "Oh my god, what is this gameplay? Wait... You use your flashlight to kill them? What is it? Is it good? Did you play the game or you watch people playing at it?",
+      "transcript_excerpt": "Oh my god, what is this gameplay? Wait... You use your flashlight to kill them? What is it? Is it good? Did you play the game or you watch people playing at it?"
+    },
+    {
+      "rank": 4,
+      "moment_id": "a0a75242-fc99-4dc4-8734-a6ee0a8f4d79",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 10680000,
+      "end_ms": 10706000,
+      "timestamp": "02:58:00.000–02:58:26.000",
+      "score": 0.015625,
+      "summary": "oh i hear them this way towards the ship's gravity lift oh my god they were behind me i fucking hate that noise they make it's gross",
+      "transcript_excerpt": "oh i hear them this way towards the ship's gravity lift oh my god they were behind me i fucking hate that noise they make it's gross"
+    },
+    {
+      "rank": 5,
+      "moment_id": "3fd30651-0ebb-4978-a4e6-a08b5a13c591",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 5117280,
+      "end_ms": 5174000,
+      "timestamp": "01:25:17.280–01:26:14.000",
+      "score": 0.015384615384615385,
+      "summary": "Oceans, damn Oh, guys VEGAS ARE HOLDING LESS I did another sip Oh, god Chat, I'm so fine I'm so f- I'm not drunk I'm not passing out yet I'm fine Near-Sama prepares to be an astronaut F**k, I couldn't once that I was on a subathon The same as Oceans, damn I missed so many Sip more No I think I... I'm getting close to sip for all the subs that- I'm almost there First Evil Karaoke Wait, that was on July? Cave stream, pirate stream Pirate stream I like how there's like arts representing it too So cute",
+      "transcript_excerpt": "Oceans, damn Oh, guys VEGAS ARE HOLDING LESS I did another sip Oh, god Chat, I'm so fine I'm so f- I'm not drunk I'm not passing out yet I'm fine Near-Sama prepares to be an astronaut F**k, I couldn't once that I was on a subathon The same as Oceans, damn I missed so many Sip more No I think I... I'm getting close to sip for all the subs that- I'm almost there First Evil Karaoke Wait, that was on July? Cave stream, pirate stream Pirate stream I like how there's like arts representing it too So c"
+    },
+    {
+      "rank": 6,
+      "moment_id": "a33b6402-6ef6-405d-8198-eb77073b6099",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13372560,
+      "end_ms": 13429280,
+      "timestamp": "03:42:52.560–03:43:49.280",
+      "score": 0.015151515151515152,
+      "summary": "I do remember that and but most of her body is already like just not really human anymore More of a gray area considering the fact that her ex-lover did go behind her back to try to put her in that secure Your soul program that Johnny was in which is fucked up But regardless he was afraid of her after her Transformation and she ended up losing control trying to push him and ended up crushing his spine killing him Which we see in the second side she went cyber psychosis Professional one. He just has a complete hatred for people which is that irritation of human interaction part of the symptoms There are no in-game texts or articles that prove they have cyber psychosis, but they do have similar symptoms So it's something interesting to think about in terms of in-game missions We see a person from the Badlands who has his house completely full of automated defenses This resident has had a troubled past and some mad paranoia He ordered tons of technology from all the defense systems and you know, sometimes I have like, you know short time memories So if I play again at the game like a year later to do the DSC I might forget most of them runner chair this caused the power outage and when the family came by to check to see what was",
+      "transcript_excerpt": "I do remember that and but most of her body is already like just not really human anymore More of a gray area considering the fact that her ex-lover did go behind her back to try to put her in that secure Your soul program that Johnny was in which is fucked up But regardless he was afraid of her after her Transformation and she ended up losing control trying to push him and ended up crushing his spine killing him Which we see in the second side she went cyber psychosis Professional one. He just "
+    },
+    {
+      "rank": 7,
+      "moment_id": "9351e61a-06dc-4932-a450-2fc5bf39087f",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 25994000,
+      "end_ms": 26045120,
+      "timestamp": "07:13:14.000–07:14:05.120",
+      "score": 0.014925373134328358,
+      "summary": "I I I I I I I I I I I I I I I I I I I I I I I Okay, that would be very very interesting",
+      "transcript_excerpt": "I I I I I I I I I I I I I I I I I I I I I I I Okay, that would be very very interesting"
+    },
+    {
+      "rank": 8,
+      "moment_id": "c2467dae-53ad-40e6-9b3a-4b94a904c879",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 10754200,
+      "end_ms": 10805000,
+      "timestamp": "02:59:14.200–03:00:05.000",
+      "score": 0.014705882352941176,
+      "summary": "I do like the ambience. But I'm not a fan of like third-person POV. It's a good game with mediocre gameplay, but great story and almost your second game is even better. Okay, let me see what like the second one looks like. I think it was released like last year, Alan Wake 2? Oh, I remember like Hoot sent me like a video of Alan Wake 2 and there was like some dancing and some singing and he's like, That's true masterpiece and I was like, yeah, I guess so. Oh my god, what is this? Like, skip!",
+      "transcript_excerpt": "I do like the ambience. But I'm not a fan of like third-person POV. It's a good game with mediocre gameplay, but great story and almost your second game is even better. Okay, let me see what like the second one looks like. I think it was released like last year, Alan Wake 2? Oh, I remember like Hoot sent me like a video of Alan Wake 2 and there was like some dancing and some singing and he's like, That's true masterpiece and I was like, yeah, I guess so. Oh my god, what is this? Like, skip!"
+    },
+    {
+      "rank": 9,
+      "moment_id": "ada3f132-a74f-4b52-8845-cca40ad8e972",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7860400,
+      "end_ms": 7870000,
+      "timestamp": "02:11:00.400–02:11:10.000",
+      "score": 0.014492753623188406,
+      "summary": "Uh-oh Decode I",
+      "transcript_excerpt": "Uh-oh Decode I"
+    },
+    {
+      "rank": 10,
+      "moment_id": "8915ac7c-6de1-450e-953b-d0d9260d5f9b",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 5289000,
+      "end_ms": 5345000,
+      "timestamp": "01:28:09.000–01:29:05.000",
+      "score": 0.014285714285714285,
+      "summary": "But I'm just so passionate, you know? I'm like, I want to create and I want to try to touch a bit of everything before I die, you know? Like, don't you think, like, life is so short and you're afraid that you're going to die? I'm just so passionate, you know? I'm like, I want to create and I want to try to touch a bit of everything before I die, you know? Like, don't you think, like, life is so short and you're afraid that you will just, you know, go away and fade into the world without being able to experience what it is to do, like, you know, so many things? Wait, why my fucking car door is open? I closed it before. What's in here? The bathroom door was strangely jammed. I cannot open it. Wait, what? Is there somebody in here? Wait, what? Yo, anybody in here? Get out! Get out!",
+      "transcript_excerpt": "But I'm just so passionate, you know? I'm like, I want to create and I want to try to touch a bit of everything before I die, you know? Like, don't you think, like, life is so short and you're afraid that you're going to die? I'm just so passionate, you know? I'm like, I want to create and I want to try to touch a bit of everything before I die, you know? Like, don't you think, like, life is so short and you're afraid that you will just, you know, go away and fade into the world without being ab"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

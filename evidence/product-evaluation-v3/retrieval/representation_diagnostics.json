@@ -1,0 +1,1392 @@
+[
+  {
+    "case_id": "R01",
+    "query": "哪一段把某个恐怖游戏描述成会用人的思想和实体沟通？",
+    "target_moment_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a",
+    "ground_truth_transcript": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+    "parent_transcript": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+    "representations": [
+      {
+        "representation_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 12309800,
+        "end_ms": 12339800,
+        "text": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+        "dense_rank": 15,
+        "dense_score": 0.8149510622024536,
+        "reranker_score": 1.1604394912719727
+      },
+      {
+        "representation_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 12309800,
+        "end_ms": 12339800,
+        "text": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+        "dense_rank": 14,
+        "dense_score": 0.8149510622024536,
+        "reranker_score": 1.1604394912719727
+      },
+      {
+        "representation_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 12309800,
+        "end_ms": 12339800,
+        "text": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+        "dense_rank": 13,
+        "dense_score": 0.8149510622024536,
+        "reranker_score": 1.1604394912719727
+      },
+      {
+        "representation_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 12309800,
+        "end_ms": 12339800,
+        "text": "There's nothing, ok fine. I can end this for 20 months. I wanted to see like scary shit because I actually clicked on that video because it had like this thing I think in the thumbnail. I don't know what that is but I want to see it. Oh! What the fuck is that? It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities. Oh yeah, Pools, I heard about this game and I saw some gameplay, it looks fine. It looks like... Is it an SCP game? Or is it inspired by SCP?",
+        "dense_rank": 239,
+        "dense_score": 0.8003265857696533,
+        "reranker_score": 1.5782368183135986
+      }
+    ],
+    "target_passage_dense_rank": 14,
+    "target_parent_dense_rank": 12,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 34,
+    "model_max_length": 512,
+    "actual_model_token_count": 34,
+    "truncated": false
+  },
+  {
+    "case_id": "R02",
+    "query": "她饿了却为什么还是不愿意走出房间？",
+    "target_moment_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8",
+    "ground_truth_transcript": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater.",
+    "parent_transcript": "I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room.",
+    "representations": [
+      {
+        "representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "text": "I can hear her in the corridor. But I'm hungry.",
+        "dense_rank": 111,
+        "dense_score": 0.8062540292739868,
+        "reranker_score": -6.253869533538818
+      },
+      {
+        "representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "text": "I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room.",
+        "dense_rank": 9,
+        "dense_score": 0.8206822872161865,
+        "reranker_score": -4.608130931854248
+      },
+      {
+        "representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "text": "I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room.",
+        "dense_rank": 8,
+        "dense_score": 0.8206822872161865,
+        "reranker_score": -4.608130931854248
+      },
+      {
+        "representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "text": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater.",
+        "dense_rank": 4,
+        "dense_score": 0.8346021771430969,
+        "reranker_score": 1.5305918455123901
+      }
+    ],
+    "target_passage_dense_rank": 8,
+    "target_parent_dense_rank": 2,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 43,
+    "model_max_length": 512,
+    "actual_model_token_count": 43,
+    "truncated": false
+  },
+  {
+    "case_id": "R03",
+    "query": "结局附近她认出 Rebecca 时说了什么？",
+    "target_moment_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53",
+    "ground_truth_transcript": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. Man!",
+    "parent_transcript": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA!",
+    "representations": [
+      {
+        "representation_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 13950000,
+        "end_ms": 13968640,
+        "text": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs.",
+        "dense_rank": 7580,
+        "dense_score": 0.7708442211151123,
+        "reranker_score": -7.249056339263916
+      },
+      {
+        "representation_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 13950000,
+        "end_ms": 13968640,
+        "text": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA!",
+        "dense_rank": 7,
+        "dense_score": 0.8310523629188538,
+        "reranker_score": -2.1823174953460693
+      },
+      {
+        "representation_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 13950000,
+        "end_ms": 13968640,
+        "text": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA!",
+        "dense_rank": 6,
+        "dense_score": 0.8310523629188538,
+        "reranker_score": -2.1823174953460693
+      },
+      {
+        "representation_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 13950000,
+        "end_ms": 13968640,
+        "text": "Fold one, this one. Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had.",
+        "dense_rank": 8,
+        "dense_score": 0.8302632570266724,
+        "reranker_score": -4.157577991485596
+      }
+    ],
+    "target_passage_dense_rank": 6,
+    "target_parent_dense_rank": 5,
+    "target_fts_representation_rank": 8,
+    "target_fts_parent_rank": 4,
+    "transcript_token_length": 46,
+    "model_max_length": 512,
+    "actual_model_token_count": 46,
+    "truncated": false
+  },
+  {
+    "case_id": "R04",
+    "query": "哪段像在做天气播报，先说外面很晴朗后来又说多云？",
+    "target_moment_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36",
+    "ground_truth_transcript": "See say do and it was me five zero Jack I need to look outside. It looks clear to me, right? It looks clear. I'm with you. Yeah, I'm a good reporter That's clear Okay, no, it's not what I meant to do Clear and Hmm Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy",
+    "parent_transcript": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go. I knew it Okay This is where I'm going to get the jumpscare, there's no fucking way. I'm going to get the jumpscare somewhere and I don't know when.",
+    "representations": [
+      {
+        "representation_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 9201800,
+        "end_ms": 9235320,
+        "text": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now",
+        "dense_rank": 1181,
+        "dense_score": 0.7870423793792725,
+        "reranker_score": -5.799746990203857
+      },
+      {
+        "representation_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 9201800,
+        "end_ms": 9246000,
+        "text": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go.",
+        "dense_rank": 1752,
+        "dense_score": 0.7828906774520874,
+        "reranker_score": -4.80405855178833
+      },
+      {
+        "representation_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 9230400,
+        "end_ms": 9246000,
+        "text": "Okay, fine, whatever I'm going to get my fucking wood now There you go. I knew it Okay This is where I'm going to get the jumpscare, there's no fucking way. I'm going to get the jumpscare somewhere and I don't know when.",
+        "dense_rank": 3921,
+        "dense_score": 0.7745197415351868,
+        "reranker_score": -9.79067325592041
+      },
+      {
+        "representation_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 9201800,
+        "end_ms": 9246000,
+        "text": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go. I knew it Okay This is where I'm going to get the jumpscare, there's no fucking way. I'm going to get the jumpscare somewhere and I don't know when.",
+        "dense_rank": 1086,
+        "dense_score": 0.7878384590148926,
+        "reranker_score": -4.473938465118408
+      },
+      {
+        "representation_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 9201800,
+        "end_ms": 9246000,
+        "text": "fuck Don't you dare attacking me. Oh fuck I hate to do report Okay, fuck all my need dog dicks 25 and 56 the second sister second sister second sister second sister second second See say do and it was me five zero Jack I need to look outside. It looks clear to me, right? It looks clear. I'm with you. Yeah, I'm a good reporter That's clear Okay, no, it's not what I meant to do Clear and Hmm Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go. So I will be talking non-stop. Wait, wait, wait. Okay, nobody in here? Wait, wait, wait. No one hiding in there? Okay, cool. DON'T YOU FUCKING APPROACH ME, OKAY? I'M DANGEROUS! I'M FUCKING CRAZY! YOU DON'T WANT TO GO ANYBODY WHO'S CRAZY LIKE ME! Okay, now they shouldn't come.",
+        "dense_rank": 314,
+        "dense_score": 0.8000659346580505,
+        "reranker_score": -2.0857179164886475
+      }
+    ],
+    "target_passage_dense_rank": 1181,
+    "target_parent_dense_rank": 155,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 102,
+    "model_max_length": 512,
+    "actual_model_token_count": 102,
+    "truncated": false
+  },
+  {
+    "case_id": "R05",
+    "query": "她什么时候反思自己可能把一些分类看得太轻了？",
+    "target_moment_id": "67b82873-1181-489a-a008-ac9f33253af6",
+    "ground_truth_transcript": "I need to like, put something... Like, in between or... Yeah, like that. Jeans... It's so fucking dumb! When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly. Not necessarily, just sometimes. Whatever it is. But what... Glasses? Uh... On irons. I guess. No, I don't really feel anything for it. Glorious hole.",
+    "parent_transcript": "When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly.",
+    "representations": [
+      {
+        "representation_id": "67b82873-1181-489a-a008-ac9f33253af6:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 3370720,
+        "end_ms": 3392280,
+        "text": "When they say giant, they mean... Giant, like taller, like a middle thing?",
+        "dense_rank": 22786,
+        "dense_score": 0.7024341821670532,
+        "reranker_score": -10.367825508117676
+      },
+      {
+        "representation_id": "67b82873-1181-489a-a008-ac9f33253af6:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 3380000,
+        "end_ms": 3392280,
+        "text": "Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly.",
+        "dense_rank": 7137,
+        "dense_score": 0.7473480105400085,
+        "reranker_score": -9.9099760055542
+      },
+      {
+        "representation_id": "67b82873-1181-489a-a008-ac9f33253af6:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 3370720,
+        "end_ms": 3383000,
+        "text": "When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing.",
+        "dense_rank": 22010,
+        "dense_score": 0.7078315019607544,
+        "reranker_score": -8.09932804107666
+      },
+      {
+        "representation_id": "67b82873-1181-489a-a008-ac9f33253af6:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 3370720,
+        "end_ms": 3392280,
+        "text": "When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly.",
+        "dense_rank": 16487,
+        "dense_score": 0.7273820042610168,
+        "reranker_score": -7.052189350128174
+      },
+      {
+        "representation_id": "67b82873-1181-489a-a008-ac9f33253af6:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 3370720,
+        "end_ms": 3392280,
+        "text": "This is like... Freckles and death I need to like, put something... Like, in between or... Yeah, like that. Jeans... It's so fucking dumb! When they say giant, they mean... Giant, like taller, like a middle thing? Not necessarily, just sometimes. Whatever it is. But what... Glasses? Uh... On irons. I guess. No, I don't really feel anything for it.",
+        "dense_rank": 5749,
+        "dense_score": 0.7504616975784302,
+        "reranker_score": -9.810431480407715
+      }
+    ],
+    "target_passage_dense_rank": 7137,
+    "target_parent_dense_rank": 2636,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 103,
+    "model_max_length": 512,
+    "actual_model_token_count": 103,
+    "truncated": false
+  },
+  {
+    "case_id": "R06",
+    "query": "What items made her realize the list was about BDSM?",
+    "target_moment_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c",
+    "ground_truth_transcript": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What? Those paddles. Ah, this is all BDSM? I... Then I can't really read it, I'm fucking not... Well... Okay, let me see... Again... I can sort these, but... I mean... Reference, I guess? I'm fucking not...",
+    "parent_transcript": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What?",
+    "representations": [
+      {
+        "representation_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 8737000,
+        "end_ms": 8755000,
+        "text": "Crops? What's a crop?",
+        "dense_rank": 19815,
+        "dense_score": 0.7130711078643799,
+        "reranker_score": -10.421402931213379
+      },
+      {
+        "representation_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 8749000,
+        "end_ms": 8755000,
+        "text": "Riding crop? Huh? No. What?",
+        "dense_rank": 15835,
+        "dense_score": 0.7231435179710388,
+        "reranker_score": -10.525727272033691
+      },
+      {
+        "representation_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 8737000,
+        "end_ms": 8751000,
+        "text": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop?",
+        "dense_rank": 12575,
+        "dense_score": 0.7296801805496216,
+        "reranker_score": -10.537678718566895
+      },
+      {
+        "representation_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 8737000,
+        "end_ms": 8755000,
+        "text": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What?",
+        "dense_rank": 10013,
+        "dense_score": 0.7347152233123779,
+        "reranker_score": -10.514659881591797
+      },
+      {
+        "representation_id": "b8fc58be-ec68-42d3-8b0c-8c6a728d7c7c:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 8737000,
+        "end_ms": 8755000,
+        "text": "Listen, that's also important, okay? Rough, I mean... Anyway... Both at the same time, please! Crops? What's a crop? Those paddles. Ah, this is all BDSM? I... Then I can't really read it, I'm fucking not... Well... Okay, let me see... Again... I can sort these, but... I mean... Reference, I guess? I'm fucking not...",
+        "dense_rank": 20,
+        "dense_score": 0.7956275343894958,
+        "reranker_score": -7.532399654388428
+      }
+    ],
+    "target_passage_dense_rank": 12575,
+    "target_parent_dense_rank": 12,
+    "target_fts_representation_rank": 202,
+    "target_fts_parent_rank": 123,
+    "transcript_token_length": 42,
+    "model_max_length": 512,
+    "actual_model_token_count": 42,
+    "truncated": false
+  },
+  {
+    "case_id": "R07",
+    "query": "What was she changing before asking where the music went?",
+    "target_moment_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+    "ground_truth_transcript": "And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+    "parent_transcript": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+    "representations": [
+      {
+        "representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 13784140,
+        "end_ms": 13816000,
+        "text": "Where's the music? We're chillin'.",
+        "dense_rank": 108,
+        "dense_score": 0.7924784421920776,
+        "reranker_score": -5.316642761230469
+      },
+      {
+        "representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 13802000,
+        "end_ms": 13816000,
+        "text": "I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+        "dense_rank": 16004,
+        "dense_score": 0.7338641881942749,
+        "reranker_score": -9.116667747497559
+      },
+      {
+        "representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 13784140,
+        "end_ms": 13804000,
+        "text": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man",
+        "dense_rank": 197,
+        "dense_score": 0.7876163721084595,
+        "reranker_score": -6.009115219116211
+      },
+      {
+        "representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 13784140,
+        "end_ms": 13816000,
+        "text": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+        "dense_rank": 118,
+        "dense_score": 0.7920140027999878,
+        "reranker_score": -5.818567752838135
+      },
+      {
+        "representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 13784140,
+        "end_ms": 13816000,
+        "text": "I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. It's Asmunsama You guys missed Asmunsama Wait, I'll do it again You missed Asmunsama What's happening What's happening Hahaha What's happening What's happening What's happening What's happening What's happening What's happening Oh god ok Enough fooling around I need to keep drawing Or else Or else We're dead I think you missed There is some...",
+        "dense_rank": 284,
+        "dense_score": 0.7845646739006042,
+        "reranker_score": -5.819734573364258
+      }
+    ],
+    "target_passage_dense_rank": 197,
+    "target_parent_dense_rank": 74,
+    "target_fts_representation_rank": 29,
+    "target_fts_parent_rank": 19,
+    "transcript_token_length": 49,
+    "model_max_length": 512,
+    "actual_model_token_count": 49,
+    "truncated": false
+  },
+  {
+    "case_id": "R08",
+    "query": "Which moment has Japanese lyrics repeatedly asking someone to turn this way again?",
+    "target_moment_id": "fedb9574-8fbe-4c3c-a366-46077629ee26",
+    "ground_truth_transcript": "切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+    "parent_transcript": "本当に素晴らしい クリスタル クリスタル もう一度こっち向いて 言いたいことがもっとあるから もう一度こっち向いて 本当に素晴らしい 見つけたらいい もう一度こっち向いて もう一回 こっち向いて 本気な揺れる愛のフューチャー だから こっち向いて まわれ地球 恋を乗せば だから こっち向いて 偶然じゃない フォートフューチャー 私から誘う勇気を くでさえと 次に願うの 切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+    "representations": [
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 8454900,
+        "end_ms": 8473680,
+        "text": "本当に素晴らしい クリスタル クリスタル もう一度こっち向いて 言いたいことがもっとあるから もう一度こっち向いて",
+        "dense_rank": 300,
+        "dense_score": 0.7807121872901917,
+        "reranker_score": -2.6736929416656494
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:3",
+        "type": "PASSAGE",
+        "start_ms": 8504480,
+        "end_ms": 8532000,
+        "text": "私から誘う勇気を くでさえと 次に願うの 切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ",
+        "dense_rank": 1676,
+        "dense_score": 0.7685840725898743,
+        "reranker_score": -4.896800994873047
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:4",
+        "type": "PASSAGE",
+        "start_ms": 8529000,
+        "end_ms": 8550000,
+        "text": "君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて",
+        "dense_rank": 19,
+        "dense_score": 0.7934343814849854,
+        "reranker_score": -2.9576807022094727
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 8471180,
+        "end_ms": 8487180,
+        "text": "もう一度こっち向いて 本当に素晴らしい 見つけたらいい もう一度こっち向いて もう一回 こっち向いて 本気な揺れる愛のフューチャー",
+        "dense_rank": 612,
+        "dense_score": 0.7765704989433289,
+        "reranker_score": -3.3066108226776123
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:5",
+        "type": "PASSAGE",
+        "start_ms": 8547000,
+        "end_ms": 8564000,
+        "text": "もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+        "dense_rank": 30,
+        "dense_score": 0.7917507886886597,
+        "reranker_score": -3.6287648677825928
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 8484380,
+        "end_ms": 8508280,
+        "text": "本気な揺れる愛のフューチャー だから こっち向いて まわれ地球 恋を乗せば だから こっち向いて 偶然じゃない フォートフューチャー 私から誘う勇気を",
+        "dense_rank": 2316,
+        "dense_score": 0.7658299207687378,
+        "reranker_score": -5.690612316131592
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 8454900,
+        "end_ms": 8564000,
+        "text": "本当に素晴らしい クリスタル クリスタル もう一度こっち向いて 言いたいことがもっとあるから もう一度こっち向いて 本当に素晴らしい 見つけたらいい もう一度こっち向いて もう一回 こっち向いて 本気な揺れる愛のフューチャー だから こっち向いて まわれ地球 恋を乗せば だから こっち向いて 偶然じゃない フォートフューチャー 私から誘う勇気を くでさえと 次に願うの 切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ…",
+        "dense_rank": 1274,
+        "dense_score": 0.7709596753120422,
+        "reranker_score": -2.5044052600860596
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 8454900,
+        "end_ms": 8564000,
+        "text": "本当に素晴らしい クリスタル クリスタル もう一度こっち向いて 言いたいことがもっとあるから もう一度こっち向いて 本当に素晴らしい 見つけたらいい もう一度こっち向いて もう一回 こっち向いて 本気な揺れる愛のフューチャー だから こっち向いて まわれ地球 恋を乗せば だから こっち向いて 偶然じゃない フォートフューチャー 私から誘う勇気を くでさえと 次に願うの 切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+        "dense_rank": 655,
+        "dense_score": 0.776111900806427,
+        "reranker_score": -2.0969741344451904
+      },
+      {
+        "representation_id": "fedb9574-8fbe-4c3c-a366-46077629ee26:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 8454900,
+        "end_ms": 8564000,
+        "text": "🐯 Sound Hodori 사운드 호돌이 サウンドゥ ホドリ - 音楽- はぁっ! -音楽- 本当に素晴らしい クリスタル クリスタル もう一度こっち向いて 言いたいことがもっとあるから もう一度こっち向いて 本当に素晴らしい 見つけたらいい もう一度こっち向いて もう一回 こっち向いて 本気な揺れる愛のフューチャー だから こっち向いて まわれ地球 恋を乗せば だから こっち向いて 偶然じゃない フォートフューチャー 私から誘う勇気を くでさえと 次に願うの 切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ… 涙に抜けや 鬼も抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 鬼も抜けや 涙に抜けや 涙に抜けや 鬼も抜けや ああああああ me me me me me me me me me me me me 今日のご飯は",
+        "dense_rank": 735,
+        "dense_score": 0.7753164768218994,
+        "reranker_score": -3.1225404739379883
+      }
+    ],
+    "target_passage_dense_rank": 19,
+    "target_parent_dense_rank": 19,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 206,
+    "model_max_length": 512,
+    "actual_model_token_count": 206,
+    "truncated": false
+  },
+  {
+    "case_id": "R09",
+    "query": "When did she reminisce about not having played PUBG for a long time?",
+    "target_moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+    "ground_truth_transcript": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still. Did you ask me that? I mean, you must have, right? I asked you. I would have been a good one, but... Yeah. Fanboy Simulator M? I haven't played Fanboy Simulator. Is there a game like that? Probably, I don't know Probably I thought you would know Why would I know? I don't need to simulate them True",
+    "parent_transcript": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+    "representations": [
+      {
+        "representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "text": "PUBG? I haven't played PUBG in a very long time.",
+        "dense_rank": 1,
+        "dense_score": 0.8291345834732056,
+        "reranker_score": -3.4475951194763184
+      },
+      {
+        "representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "text": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+        "dense_rank": 6,
+        "dense_score": 0.8178365230560303,
+        "reranker_score": -1.5808857679367065
+      },
+      {
+        "representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "text": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+        "dense_rank": 5,
+        "dense_score": 0.8178365230560303,
+        "reranker_score": -1.5808857679367065
+      },
+      {
+        "representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "text": "No, I don't. I love me! But, you don't? No, I don't. But, I mean, I would be down to try it, but I don't think I'd be able to. I don't know. I never enjoyed it that much. What games do you enjoy? PUBG? I haven't played PUBG in a very long time. Did you ask me that? I mean, you must have, right? I asked you. I would have been a good one, but... Yeah. Fanboy Simulator M? I haven't played Fanboy Simulator.",
+        "dense_rank": 7,
+        "dense_score": 0.8116837739944458,
+        "reranker_score": -2.493098497390747
+      }
+    ],
+    "target_passage_dense_rank": 5,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 1,
+    "target_fts_parent_rank": 1,
+    "transcript_token_length": 36,
+    "model_max_length": 512,
+    "actual_model_token_count": 36,
+    "truncated": false
+  },
+  {
+    "case_id": "R10",
+    "query": "How did streaming from a boat turn into an argument about satellites and an antenna?",
+    "target_moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+    "ground_truth_transcript": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a... A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink",
+    "parent_transcript": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink Sorry, I kind of forgot this satellite goes into the sky Yeah, you know they they do indeed go in space that's that's true Neuralink It's a four stroke engine. Four stroke? Yes Is that good enough for you? Yeah uh I know nothing about it so",
+    "representations": [
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 12091000,
+        "end_ms": 12114000,
+        "text": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word",
+        "dense_rank": 5,
+        "dense_score": 0.8592853546142578,
+        "reranker_score": -4.656045436859131
+      },
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 12091000,
+        "end_ms": 12173440,
+        "text": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the…",
+        "dense_rank": 9,
+        "dense_score": 0.850655198097229,
+        "reranker_score": -4.393482685089111
+      },
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 12111000,
+        "end_ms": 12133840,
+        "text": "The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink",
+        "dense_rank": 13,
+        "dense_score": 0.8429299592971802,
+        "reranker_score": -6.166460990905762
+      },
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 12131280,
+        "end_ms": 12173440,
+        "text": "Neuralink, that'd be pretty sick. Neuralink Sorry, I kind of forgot this satellite goes into the sky Yeah, you know they they do indeed go in space that's that's true Neuralink It's a four stroke engine. Four stroke? Yes Is that good enough for you? Yeah uh I know nothing about it so",
+        "dense_rank": 595,
+        "dense_score": 0.8097637891769409,
+        "reranker_score": -9.716180801391602
+      },
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 12091000,
+        "end_ms": 12173440,
+        "text": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink Sorry, I kind of forgot this satellite goes into the sky Yeah, you know they they do indeed go in space that's that's true Neuralink It's a four stroke engine. Four stroke? Yes Is that good enough for you? Yeah uh I know nothing about it so",
+        "dense_rank": 14,
+        "dense_score": 0.842805027961731,
+        "reranker_score": -3.891247272491455
+      },
+      {
+        "representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 12091000,
+        "end_ms": 12173440,
+        "text": "True Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a... A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the… Okay, okay it's also it's made of fiberglass fiberglass high tech What was that? What why did you say that? Wow What? That's like wow Oh like wow yeah yeah sorry I was just out of nowhere it was a little confusing Anyway point is five horsepower it'll be good. Dumbass Horsepower? Yeah five five entire horsepowers. Boats have horsepower but there's no horses Cars have horsepower but there are no are the horses hiding in the cars? Yeah yeah",
+        "dense_rank": 4,
+        "dense_score": 0.8633893132209778,
+        "reranker_score": -2.9270501136779785
+      }
+    ],
+    "target_passage_dense_rank": 5,
+    "target_parent_dense_rank": 2,
+    "target_fts_representation_rank": 3,
+    "target_fts_parent_rank": 2,
+    "transcript_token_length": 200,
+    "model_max_length": 512,
+    "actual_model_token_count": 200,
+    "truncated": false
+  },
+  {
+    "case_id": "R11",
+    "query": "手を描けない but keeps saying she can do it — where was that?",
+    "target_moment_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a",
+    "ground_truth_transcript": "私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+    "parent_transcript": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+    "representations": [
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 5812000,
+        "end_ms": 5831000,
+        "text": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる",
+        "dense_rank": 8,
+        "dense_score": 0.8344675302505493,
+        "reranker_score": -5.384092330932617
+      },
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 5856000,
+        "end_ms": 5867000,
+        "text": "私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+        "dense_rank": 59,
+        "dense_score": 0.8214248418807983,
+        "reranker_score": -4.743353366851807
+      },
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 5829000,
+        "end_ms": 5857000,
+        "text": "僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる",
+        "dense_rank": 1,
+        "dense_score": 0.8483145236968994,
+        "reranker_score": -4.7816596031188965
+      },
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 5812000,
+        "end_ms": 5867000,
+        "text": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello…",
+        "dense_rank": 4,
+        "dense_score": 0.8439877033233643,
+        "reranker_score": -3.1393215656280518
+      },
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 5812000,
+        "end_ms": 5867000,
+        "text": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+        "dense_rank": 5,
+        "dense_score": 0.8416163921356201,
+        "reranker_score": -3.178654432296753
+      },
+      {
+        "representation_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 5812000,
+        "end_ms": 5867000,
+        "text": "who are you? Hey, newro, I was in your dream when I was a kid The continuation of that dream is like this What do you think about being connected to the future? I am always by your side Ah, I'm still confused Under this dark sky I felt that your hand and distance were shaking Hello, hello, anyuro, who are you? Hello, hello, anyuro, who are you? Hello, hello あなたは誰かを笑い飛ばさなきゃ 自分を許さないような くだらない僕たちのこと 君はどうも ああ、僕はまだ期待してる ボロボロでも見影もないけれど 君がいるこの星を忘れたくはないんだよ ああ、僕はまだ信じてる 眠らない君に問いかけたのは 君の手が本当よりも温かかったからさ 私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello… I'm so fucking cute",
+        "dense_rank": 11,
+        "dense_score": 0.8320683836936951,
+        "reranker_score": -3.933905839920044
+      }
+    ],
+    "target_passage_dense_rank": 1,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 5861,
+    "target_fts_parent_rank": 2743,
+    "transcript_token_length": 117,
+    "model_max_length": 512,
+    "actual_model_token_count": 117,
+    "truncated": false
+  },
+  {
+    "case_id": "R12",
+    "query": "Where's the praise-the-sun bit where the armor makes her look suddenly thicc?",
+    "target_moment_id": "877e635c-552d-40d8-bab8-cd8fa4756eff",
+    "ground_truth_transcript": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my... Okay What else can I drop? Is Sato here? Am I fucking blind? Oh, or is it a different Sato? What? Try bone? Bone shine? Bone?",
+    "parent_transcript": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my...",
+    "representations": [
+      {
+        "representation_id": "877e635c-552d-40d8-bab8-cd8fa4756eff:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 13902000,
+        "end_ms": 13933000,
+        "text": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now?",
+        "dense_rank": 2,
+        "dense_score": 0.8687467575073242,
+        "reranker_score": -6.321554660797119
+      },
+      {
+        "representation_id": "877e635c-552d-40d8-bab8-cd8fa4756eff:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 13926000,
+        "end_ms": 13933000,
+        "text": "Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my...",
+        "dense_rank": 602,
+        "dense_score": 0.8111221790313721,
+        "reranker_score": -10.510979652404785
+      },
+      {
+        "representation_id": "877e635c-552d-40d8-bab8-cd8fa4756eff:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 13902000,
+        "end_ms": 13929000,
+        "text": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now",
+        "dense_rank": 1,
+        "dense_score": 0.8688910007476807,
+        "reranker_score": -6.719550609588623
+      },
+      {
+        "representation_id": "877e635c-552d-40d8-bab8-cd8fa4756eff:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 13902000,
+        "end_ms": 13933000,
+        "text": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my...",
+        "dense_rank": 3,
+        "dense_score": 0.8660383224487305,
+        "reranker_score": -7.0865631103515625
+      },
+      {
+        "representation_id": "877e635c-552d-40d8-bab8-cd8fa4756eff:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 13902000,
+        "end_ms": 13933000,
+        "text": "Firebomb? I don't think I have one What if I drop that? Oh no Wait, what do I do? What's wrong? Sigbrell So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? Okay What else can I drop? Is Sato here? Am I fucking blind? Oh, or is it a different Sato? What? Try bone? Bone shine? Bone?",
+        "dense_rank": 49,
+        "dense_score": 0.8252208232879639,
+        "reranker_score": -8.653226852416992
+      }
+    ],
+    "target_passage_dense_rank": 1,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 1,
+    "target_fts_parent_rank": 1,
+    "transcript_token_length": 45,
+    "model_max_length": 512,
+    "actual_model_token_count": 45,
+    "truncated": false
+  },
+  {
+    "case_id": "R13",
+    "query": "bugged into the floor + sniffa spam, which moment?",
+    "target_moment_id": "1e138ffb-418b-44c6-b942-201f069731b5",
+    "ground_truth_transcript": "I'm inside the floor, great You wanna sniff it? Sniff it Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue? Alright My legs are still bugging, by the way Check the sound Already? I'm sorry for my bugging Why are you gifting subs? Are you gifting subs because you already lost? What the f***? What the...",
+    "parent_transcript": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it? Sniff it Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue?",
+    "representations": [
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 698000,
+        "end_ms": 714000,
+        "text": "Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no",
+        "dense_rank": 9,
+        "dense_score": 0.8327648639678955,
+        "reranker_score": -7.033730506896973
+      },
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 686000,
+        "end_ms": 721440,
+        "text": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it?",
+        "dense_rank": 8,
+        "dense_score": 0.8327795267105103,
+        "reranker_score": -4.515714168548584
+      },
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 712000,
+        "end_ms": 721440,
+        "text": "Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue?",
+        "dense_rank": 3,
+        "dense_score": 0.8520277142524719,
+        "reranker_score": -2.677865743637085
+      },
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 686000,
+        "end_ms": 700000,
+        "text": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it? Sniff it Sniffa",
+        "dense_rank": 4,
+        "dense_score": 0.8486337661743164,
+        "reranker_score": -2.9773337841033936
+      },
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 686000,
+        "end_ms": 721440,
+        "text": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it? Sniff it Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue?",
+        "dense_rank": 1,
+        "dense_score": 0.8633207082748413,
+        "reranker_score": -1.0532219409942627
+      },
+      {
+        "representation_id": "1e138ffb-418b-44c6-b942-201f069731b5:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 686000,
+        "end_ms": 721440,
+        "text": "Linked! What? What? What? What? Oh my god, okay Let's start Wait, how do I do this? Ah! How do Vtubers start their debuts? From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it? Alright My legs are still bugging, by the way Check the sound Already? I'm sorry for my bugging Why are you gifting subs? Are you gifting subs because you already lost?",
+        "dense_rank": 35,
+        "dense_score": 0.819877564907074,
+        "reranker_score": -6.990830421447754
+      }
+    ],
+    "target_passage_dense_rank": 3,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 1,
+    "target_fts_parent_rank": 1,
+    "transcript_token_length": 75,
+    "model_max_length": 512,
+    "actual_model_token_count": 75,
+    "truncated": false
+  },
+  {
+    "case_id": "R14",
+    "query": "哪段是 chat 狂送 subs，她一边道谢一边说饿了？",
+    "target_moment_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d",
+    "ground_truth_transcript": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted! Thank you so fucking much! I am writing the entire name! I am writing the entire name! Did I forget someone? I'm hungry! Damn, my playlist decided to play all Ayose's songs for some fucking reason! I don't know why!",
+    "parent_transcript": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted!",
+    "representations": [
+      {
+        "representation_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 14206000,
+        "end_ms": 14226000,
+        "text": "Look at my eyes! What the fuck?",
+        "dense_rank": 13836,
+        "dense_score": 0.7647817134857178,
+        "reranker_score": -8.710050582885742
+      },
+      {
+        "representation_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 14206000,
+        "end_ms": 14226000,
+        "text": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted!",
+        "dense_rank": 4509,
+        "dense_score": 0.7858052849769592,
+        "reranker_score": -7.410785675048828
+      },
+      {
+        "representation_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 14206000,
+        "end_ms": 14226000,
+        "text": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted!",
+        "dense_rank": 4508,
+        "dense_score": 0.7858052849769592,
+        "reranker_score": -7.410785675048828
+      },
+      {
+        "representation_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 14206000,
+        "end_ms": 14226000,
+        "text": "I'm hungry! Oh my god! You won't believe it! You know when your tracking goes off and you get a flashbang in your face? Have you had that happen? I literally had that happen when you hit me with the chair just now! Look at my eyes! What the fuck? Thank you so fucking much! I am writing the entire name! I am writing the entire name! Did I forget someone?",
+        "dense_rank": 752,
+        "dense_score": 0.8048517107963562,
+        "reranker_score": -7.768056392669678
+      }
+    ],
+    "target_passage_dense_rank": 4508,
+    "target_parent_dense_rank": 486,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 39,
+    "model_max_length": 512,
+    "actual_model_token_count": 39,
+    "truncated": false
+  },
+  {
+    "case_id": "R15",
+    "query": "Crow Country 里她搞混 RB/RT controls 是哪一段？",
+    "target_moment_id": "895c760a-98df-4909-be18-225ba7764772",
+    "ground_truth_transcript": "Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger",
+    "parent_transcript": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again Quick turn oh, it's with B. Okay, so if I do this, okay, cool What's that it's a bottle containing an antidote Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt",
+    "representations": [
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 2930520,
+        "end_ms": 3030480,
+        "text": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth.",
+        "dense_rank": 9806,
+        "dense_score": 0.7644482851028442,
+        "reranker_score": -8.728503227233887
+      },
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 2964960,
+        "end_ms": 2992160,
+        "text": "Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again Quick turn oh, it's with B. Okay, so if I do this, okay, cool What's that it's a bottle containing an antidote Oh",
+        "dense_rank": 15371,
+        "dense_score": 0.7544228434562683,
+        "reranker_score": -8.1786527633667
+      },
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 2990160,
+        "end_ms": 3030480,
+        "text": "Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt",
+        "dense_rank": 110,
+        "dense_score": 0.8040344715118408,
+        "reranker_score": -5.383999824523926
+      },
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 2930520,
+        "end_ms": 2972160,
+        "text": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay",
+        "dense_rank": 3441,
+        "dense_score": 0.7776813507080078,
+        "reranker_score": -7.928714752197266
+      },
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 2930520,
+        "end_ms": 3030480,
+        "text": "Reported to Officer Detective Harrison James. Wait, 05061? Harrison James Okay, cool, but with James and compared to me It's seven meter high man, okay, sorry, okay, I'm not really bright sometime. Oh Yes, okay, so that's good I'm going to train myself by using my gun here Okay, it's here Wow, it's really old-school. You actually need to aim with a controller. It's really shit And I'm actually moving a tiny bit. Oh I reloaded Whoa, that's so cool Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash oh med kits it's actually like rewarding to uh explore and look everywhere trash hey a large med kit what's this okay it's a bathroom here does it mean i can actually",
+        "dense_rank": 1134,
+        "dense_score": 0.7876828908920288,
+        "reranker_score": -7.041143417358398
+      },
+      {
+        "representation_id": "895c760a-98df-4909-be18-225ba7764772:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 2930520,
+        "end_ms": 3030480,
+        "text": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again Quick turn oh, it's with B. Okay, so if I do this, okay, cool What's that it's a bottle containing an antidote Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt",
+        "dense_rank": 265,
+        "dense_score": 0.7977780699729919,
+        "reranker_score": -2.5387656688690186
+      }
+    ],
+    "target_passage_dense_rank": 110,
+    "target_parent_dense_rank": 68,
+    "target_fts_representation_rank": 1,
+    "target_fts_parent_rank": 1,
+    "transcript_token_length": 271,
+    "model_max_length": 512,
+    "actual_model_token_count": 271,
+    "truncated": false
+  },
+  {
+    "case_id": "R16",
+    "query": "Where was she trying to remember how to save and wondering whether an apple worked for a goose?",
+    "target_moment_id": "031189ac-bd28-49dd-a758-7366161c9eea",
+    "ground_truth_transcript": "Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now? Injured so it means it's pretty bad. I'm okay. Let's save Oh can you use the apple for the goose? No it's not in my inventory I think like it just recognizes it as trash but it doesn't like I don't have it stored I think maybe the goose puzzle would be for later",
+    "parent_transcript": "Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now? Injured so it means it's pretty bad. I'm okay. Let's save Oh can you use the apple for the goose? No it's not in my inventory I think like it just recognizes it as trash but it doesn't like I don't have it stored I think maybe the goose puzzle would be for later We still need to explore a bit first anyway Oh my god I fucking hate when I don't see the enemies I'm not going to oh shit not this way I'm not going to kill this dude because",
+    "representations": [
+      {
+        "representation_id": "031189ac-bd28-49dd-a758-7366161c9eea:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 10710080,
+        "end_ms": 10794640,
+        "text": "Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now?",
+        "dense_rank": 333,
+        "dense_score": 0.7892522215843201,
+        "reranker_score": -10.484715461730957
+      },
+      {
+        "representation_id": "031189ac-bd28-49dd-a758-7366161c9eea:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 10757760,
+        "end_ms": 10794640,
+        "text": "it just recognizes it as trash but it doesn't like I don't have it stored I think maybe the goose puzzle would be for later We still need to explore a bit first anyway Oh my god I fucking hate when I don't see the enemies I'm not going to oh shit not this way I'm not going to kill this dude because",
+        "dense_rank": 45,
+        "dense_score": 0.804065465927124,
+        "reranker_score": -9.88782024383545
+      },
+      {
+        "representation_id": "031189ac-bd28-49dd-a758-7366161c9eea:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 10710080,
+        "end_ms": 10761760,
+        "text": "Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now? Injured so it means it's pretty bad. I'm okay. Let's save Oh can you use the apple for the goose? No it's not in my inventory I think like it just recognizes it as trash but it doesn't like I don't have it stored",
+        "dense_rank": 1,
+        "dense_score": 0.8440196514129639,
+        "reranker_score": -3.257603406906128
+      },
+      {
+        "representation_id": "031189ac-bd28-49dd-a758-7366161c9eea:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 10710080,
+        "end_ms": 10794640,
+        "text": "She doesn't even describe it. Map. I don't like this door. Oh, silver key. I don't have a silver key. I'm not sure if I want to open this thing Maybe it won't work but best would be to go back and save Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now? they keep reappearing in this room it seems like Right here Here we go this way Oh my god!",
+        "dense_rank": 15,
+        "dense_score": 0.8109878301620483,
+        "reranker_score": -9.396302223205566
+      },
+      {
+        "representation_id": "031189ac-bd28-49dd-a758-7366161c9eea:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 10710080,
+        "end_ms": 10794640,
+        "text": "Where can I save again? There's a train and around here it's like really far on the other side I wish there's a shoulder way Here we go All right so how am I feeling right now? Injured so it means it's pretty bad. I'm okay. Let's save Oh can you use the apple for the goose? No it's not in my inventory I think like it just recognizes it as trash but it doesn't like I don't have it stored I think maybe the goose puzzle would be for later We still need to explore a bit first anyway Oh my god I fucking hate when I don't see the enemies I'm not going to oh shit not this way I'm not going to kill this dude because",
+        "dense_rank": 3,
+        "dense_score": 0.84192955493927,
+        "reranker_score": -2.598973274230957
+      }
+    ],
+    "target_passage_dense_rank": 1,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 2,
+    "target_fts_parent_rank": 2,
+    "transcript_token_length": 172,
+    "model_max_length": 512,
+    "actual_model_token_count": 172,
+    "truncated": false
+  },
+  {
+    "case_id": "R17",
+    "query": "Did she find a usable shotgun after running out of ammo?",
+    "target_moment_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff",
+    "ground_truth_transcript": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe? Nice. Good. Oh wait, this one has no ammo so I'd rather take this one instead.",
+    "parent_transcript": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+    "representations": [
+      {
+        "representation_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 2630480,
+        "end_ms": 2648000,
+        "text": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+        "dense_rank": 9,
+        "dense_score": 0.8510512113571167,
+        "reranker_score": -3.9779534339904785
+      },
+      {
+        "representation_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 2630480,
+        "end_ms": 2648000,
+        "text": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+        "dense_rank": 8,
+        "dense_score": 0.8510512113571167,
+        "reranker_score": -3.9779534339904785
+      },
+      {
+        "representation_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 2630480,
+        "end_ms": 2648000,
+        "text": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe?",
+        "dense_rank": 7,
+        "dense_score": 0.8510512113571167,
+        "reranker_score": -3.9779534339904785
+      },
+      {
+        "representation_id": "841e5fad-d910-4f29-ba7f-21e0bdfe39ff:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 2630480,
+        "end_ms": 2648000,
+        "text": "Oh finally, okay, let's see what do they have there's no shotgun here, right No, just some ammo here You pu-pistol I kind of find like you know those shotguns you're talking about There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe? Nice. Good. Oh wait, this one has no ammo so I'd rather take this one instead.",
+        "dense_rank": 5,
+        "dense_score": 0.8547886610031128,
+        "reranker_score": -0.44777345657348633
+      }
+    ],
+    "target_passage_dense_rank": 8,
+    "target_parent_dense_rank": 3,
+    "target_fts_representation_rank": 9,
+    "target_fts_parent_rank": 5,
+    "transcript_token_length": 29,
+    "model_max_length": 512,
+    "actual_model_token_count": 29,
+    "truncated": false
+  },
+  {
+    "case_id": "R18",
+    "query": "Which bit had two numbers and then a request to go upward even though she had nothing to fly?",
+    "target_moment_id": "9aaa781a-be80-41e7-b2b9-cf74e088b8e7",
+    "ground_truth_transcript": "Oh yeah, yeah, yeah. Oh yeah, that number! Oh no, there were two. Okay. Oh, you want me to go up here? I have nothing to fly.",
+    "parent_transcript": "Okay. Oh, you want me to go up here? I have nothing to fly.",
+    "representations": [
+      {
+        "representation_id": "9aaa781a-be80-41e7-b2b9-cf74e088b8e7:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 9982360,
+        "end_ms": 10011840,
+        "text": "Okay. Oh, you want me to go up here?",
+        "dense_rank": 166,
+        "dense_score": 0.7757765054702759,
+        "reranker_score": -9.028225898742676
+      },
+      {
+        "representation_id": "9aaa781a-be80-41e7-b2b9-cf74e088b8e7:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 9982360,
+        "end_ms": 10011840,
+        "text": "Okay. Oh, you want me to go up here? I have nothing to fly.",
+        "dense_rank": 2,
+        "dense_score": 0.8271381855010986,
+        "reranker_score": -8.283707618713379
+      },
+      {
+        "representation_id": "9aaa781a-be80-41e7-b2b9-cf74e088b8e7:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 9982360,
+        "end_ms": 10011840,
+        "text": "Okay. Oh, you want me to go up here? I have nothing to fly.",
+        "dense_rank": 1,
+        "dense_score": 0.8271381855010986,
+        "reranker_score": -8.283707618713379
+      },
+      {
+        "representation_id": "9aaa781a-be80-41e7-b2b9-cf74e088b8e7:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 9982360,
+        "end_ms": 10011840,
+        "text": "Oh yeah, yeah, yeah. Oh yeah, that number! Oh no, there were two. Okay. Oh, you want me to go up here? Grenade jump, this is not Team Fortress.",
+        "dense_rank": 9,
+        "dense_score": 0.7913249135017395,
+        "reranker_score": -3.70963978767395
+      }
+    ],
+    "target_passage_dense_rank": 1,
+    "target_parent_dense_rank": 1,
+    "target_fts_representation_rank": 3,
+    "target_fts_parent_rank": 3,
+    "transcript_token_length": 20,
+    "model_max_length": 512,
+    "actual_model_token_count": 20,
+    "truncated": false
+  },
+  {
+    "case_id": "R19",
+    "query": "之前看图的时候，她拿一个腿很长的女人跟某款游戏角色作比较，是哪段？",
+    "target_moment_id": "3225452d-0180-4488-8415-7cf19f575eec",
+    "ground_truth_transcript": "Oh yeah! Look at these fan art! I mean not fan art so I have to skip these But the artist did not bother to put like the yellow details. These outfits look off Holy shit Bella is so like... Why is she so big? She looks like the fucking... What's the name of the game? Bayonetta? Whatever the fuck... The woman with long legs Holy shit No, this is not the accurate size I look tall if anything Like Bella should be this height I'm like smaller Her model is large? Yeah, I know But she wanted to reduce her legs Sorry Also, this one is fucking funny Pain Hub I think... Dude, Pasta Did you take that idea from one of my fucking sketches?",
+    "parent_transcript": "Oh yeah! Look at these fan art! I mean not fan art so I have to skip these But the artist did not bother to put like the yellow details. These outfits look off Holy shit Bella is so like... Why is she so big? She looks like the fucking... What's the name of the game? Bayonetta? Whatever the fuck... The woman with long legs Holy shit No, this is not the accurate size I look tall if anything Like Bella should be this height I'm like smaller Her model is large? Yeah, I know But she wanted to reduce her legs Sorry Also, this one is fucking funny Pain Hub I think... Dude, Pasta Did you take that idea from one of my fucking sketches? That I did long time ago Pain Hub Yeah, you stole it from me, girl I was saving the idea for myself But it's funny It looks so... It looks so depressing I love this art Pain Hub Pain Hub Also, I did not... The artist drew this",
+    "representations": [
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 2622000,
+        "end_ms": 2710000,
+        "text": "Oh yeah! Look at these fan art!",
+        "dense_rank": 5470,
+        "dense_score": 0.7746690511703491,
+        "reranker_score": -7.117504596710205
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:5",
+        "type": "PASSAGE",
+        "start_ms": 2694000,
+        "end_ms": 2710000,
+        "text": "But it's funny It looks so... It looks so depressing I love this art Pain Hub Pain Hub Also, I did not... The artist drew this",
+        "dense_rank": 3699,
+        "dense_score": 0.7797271013259888,
+        "reranker_score": -8.913640022277832
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 2640000,
+        "end_ms": 2654000,
+        "text": "She looks like the fucking... What's the name of the game? Bayonetta? Whatever the fuck... The woman with long legs Holy shit No, this is not the accurate size",
+        "dense_rank": 3,
+        "dense_score": 0.8296056985855103,
+        "reranker_score": -2.945720672607422
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:3",
+        "type": "PASSAGE",
+        "start_ms": 2666000,
+        "end_ms": 2681000,
+        "text": "But she wanted to reduce her legs Sorry Also, this one is fucking funny Pain Hub I think... Dude, Pasta Did you take that idea from one of my fucking sketches?",
+        "dense_rank": 187,
+        "dense_score": 0.8052160143852234,
+        "reranker_score": -5.862525463104248
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:4",
+        "type": "PASSAGE",
+        "start_ms": 2678000,
+        "end_ms": 2696000,
+        "text": "Did you take that idea from one of my fucking sketches? That I did long time ago Pain Hub Yeah, you stole it from me, girl I was saving the idea for myself But it's funny",
+        "dense_rank": 2972,
+        "dense_score": 0.7822418212890625,
+        "reranker_score": -7.374678134918213
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:2",
+        "type": "PASSAGE",
+        "start_ms": 2652000,
+        "end_ms": 2668000,
+        "text": "No, this is not the accurate size I look tall if anything Like Bella should be this height I'm like smaller Her model is large? Yeah, I know But she wanted to reduce her legs",
+        "dense_rank": 107,
+        "dense_score": 0.8083003163337708,
+        "reranker_score": -6.565429210662842
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 2622000,
+        "end_ms": 2642000,
+        "text": "Oh yeah! Look at these fan art! I mean not fan art so I have to skip these But the artist did not bother to put like the yellow details. These outfits look off Holy shit Bella is so like... Why is she so big? She looks like the fucking...",
+        "dense_rank": 1818,
+        "dense_score": 0.7875879406929016,
+        "reranker_score": -6.474752426147461
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 2622000,
+        "end_ms": 2710000,
+        "text": "I'm here for Annie maxing? XD I'm small maxing Arm maxing Fox maxing? Goon maxing? That's you Let's spend the night together Arm arm arm arm I wanna go arm arm Together in my arm Hello? What is that? What am I looking at? Oh yeah! Look at these fan art! Also, I love... Wait! I just... Wait! I just fucking realized! I was like, what is this outfit? And what... Oh my god This is my Animal Crossing character And the house And the... I looked at the socks And I was like, wait These socks remind me of my Animal Crossing character And I was about to say that And then I realized that everything Is literally my fucking Animal Crossing shit What? I literally just realized Oh my",
+        "dense_rank": 185,
+        "dense_score": 0.8052675724029541,
+        "reranker_score": -5.583013534545898
+      },
+      {
+        "representation_id": "3225452d-0180-4488-8415-7cf19f575eec:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 2622000,
+        "end_ms": 2710000,
+        "text": "Oh yeah! Look at these fan art! I mean not fan art so I have to skip these But the artist did not bother to put like the yellow details. These outfits look off Holy shit Bella is so like... Why is she so big? She looks like the fucking... What's the name of the game? Bayonetta? Whatever the fuck... The woman with long legs Holy shit No, this is not the accurate size I look tall if anything Like Bella should be this height I'm like smaller Her model is large? Yeah, I know But she wanted to reduce her legs Sorry Also, this one is fucking funny Pain Hub I think... Dude, Pasta Did you take that idea from one of my fucking sketches? That I did long time ago Pain Hub Yeah, you stole it from me, girl I was saving the idea for myself But it's funny It looks so... It looks so depressing I love this art Pain Hub Pain Hub Also, I did not... The artist drew this",
+        "dense_rank": 34,
+        "dense_score": 0.8151054382324219,
+        "reranker_score": 0.22850151360034943
+      }
+    ],
+    "target_passage_dense_rank": 3,
+    "target_parent_dense_rank": 3,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 215,
+    "model_max_length": 512,
+    "actual_model_token_count": 215,
+    "truncated": false
+  },
+  {
+    "case_id": "R20",
+    "query": "有没有哪次她解释为什么经常碰到同一个词会更容易记住？",
+    "target_moment_id": "c168fe62-7c79-4079-a669-0f8a9b59b455",
+    "ground_truth_transcript": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize. If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono But I remember... There was like a ramen there",
+    "parent_transcript": "If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono But I remember... There was like a ramen there",
+    "representations": [
+      {
+        "representation_id": "c168fe62-7c79-4079-a669-0f8a9b59b455:passage:1",
+        "type": "PASSAGE",
+        "start_ms": 13447600,
+        "end_ms": 13458920,
+        "text": "Well, there's a lot of fucking tabemono But I remember... There was like a ramen there",
+        "dense_rank": 16527,
+        "dense_score": 0.7796939611434937,
+        "reranker_score": -9.987824440002441
+      },
+      {
+        "representation_id": "c168fe62-7c79-4079-a669-0f8a9b59b455:summary:0",
+        "type": "SUMMARY",
+        "start_ms": 13426000,
+        "end_ms": 13458920,
+        "text": "If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget.",
+        "dense_rank": 4116,
+        "dense_score": 0.8045110702514648,
+        "reranker_score": -6.5801472663879395
+      },
+      {
+        "representation_id": "c168fe62-7c79-4079-a669-0f8a9b59b455:passage:0",
+        "type": "PASSAGE",
+        "start_ms": 13426000,
+        "end_ms": 13449840,
+        "text": "If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono",
+        "dense_rank": 316,
+        "dense_score": 0.8235929608345032,
+        "reranker_score": -5.110128402709961
+      },
+      {
+        "representation_id": "c168fe62-7c79-4079-a669-0f8a9b59b455:full_transcript:0",
+        "type": "FULL_TRANSCRIPT",
+        "start_ms": 13426000,
+        "end_ms": 13458920,
+        "text": "If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono But I remember... There was like a ramen there",
+        "dense_rank": 85,
+        "dense_score": 0.8316730260848999,
+        "reranker_score": -4.655882358551025
+      },
+      {
+        "representation_id": "c168fe62-7c79-4079-a669-0f8a9b59b455:neighbor_context:0",
+        "type": "NEIGHBOR_CONTEXT",
+        "start_ms": 13426000,
+        "end_ms": 13458920,
+        "text": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize. If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. I don't know what that means I don't know what that means",
+        "dense_rank": 70,
+        "dense_score": 0.8331340551376343,
+        "reranker_score": 0.2416127771139145
+      }
+    ],
+    "target_passage_dense_rank": 316,
+    "target_parent_dense_rank": 42,
+    "target_fts_representation_rank": null,
+    "target_fts_parent_rank": null,
+    "transcript_token_length": 80,
+    "model_max_length": 512,
+    "actual_model_token_count": 80,
+    "truncated": false
+  }
+]

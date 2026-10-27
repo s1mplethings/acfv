@@ -1,0 +1,119 @@
+{
+  "dataset_version": "creator_visual_identity_v2_new_twitch",
+  "manifest": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\new-twitch-validation\\visual-dataset\\visual-dataset-manifest.jsonl",
+  "manifest_sha256": "bdb2e8f0a31c1c0d53616322f147588f65e613000cc767b0176bf6c7e49d9eda",
+  "samples": 7211,
+  "counts": {
+    "saruei:holdout": 1000,
+    "saruei:validation": 1000,
+    "saruei:train": 3000,
+    "anny:holdout": 1000,
+    "UNKNOWN:unknown": 1211
+  },
+  "recordings": 9,
+  "rejections": {
+    "no_single_dominant_avatar": 1672,
+    "near_duplicate": 1749,
+    "invalid_bbox_or_quality": 13
+  },
+  "source_reports": [
+    {
+      "creator_id": "saruei",
+      "recording_id": "2897884895",
+      "split": "holdout",
+      "accepted": 1000,
+      "rejections": {
+        "no_single_dominant_avatar": 123,
+        "near_duplicate": 162
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "2896930589",
+      "split": "validation",
+      "accepted": 1000,
+      "rejections": {
+        "near_duplicate": 91,
+        "no_single_dominant_avatar": 44
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "2895982534",
+      "split": "train",
+      "accepted": 1000,
+      "rejections": {
+        "near_duplicate": 240,
+        "no_single_dominant_avatar": 131
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "2895222160",
+      "split": "train",
+      "accepted": 1000,
+      "rejections": {
+        "no_single_dominant_avatar": 132,
+        "near_duplicate": 229
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "2894283807",
+      "split": "train",
+      "accepted": 1000,
+      "rejections": {
+        "near_duplicate": 625,
+        "no_single_dominant_avatar": 40,
+        "invalid_bbox_or_quality": 1
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "2853235966",
+      "split": "holdout",
+      "accepted": 1000,
+      "rejections": {
+        "near_duplicate": 114,
+        "no_single_dominant_avatar": 13
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "2898966148",
+      "split": "unknown",
+      "accepted": 555,
+      "rejections": {
+        "no_single_dominant_avatar": 92,
+        "near_duplicate": 252,
+        "invalid_bbox_or_quality": 1
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "2899063581",
+      "split": "unknown",
+      "accepted": 538,
+      "rejections": {
+        "near_duplicate": 26,
+        "no_single_dominant_avatar": 326,
+        "invalid_bbox_or_quality": 10
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "2899332592",
+      "split": "unknown",
+      "accepted": 118,
+      "rejections": {
+        "no_single_dominant_avatar": 771,
+        "near_duplicate": 10,
+        "invalid_bbox_or_quality": 1
+      }
+    }
+  ],
+  "split_unit": "recording_id",
+  "recording_leakage": false,
+  "detector_model_version": "pytorch-234aeae28706",
+  "auto_label_policy": "explicit single-creator + one dominant high-quality avatar bbox"
+}

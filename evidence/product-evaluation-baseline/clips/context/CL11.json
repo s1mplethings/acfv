@@ -1,0 +1,58 @@
+{
+  "case_id": "CL11",
+  "file": "media/clip_11.mp4",
+  "source_recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+  "source_recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+  "moment_id": "1326bb73-757f-44f6-b407-3a8f9f504935",
+  "query": "",
+  "group": "DIFFICULT_BOUNDARY",
+  "selection_reason": "boundary difficulty score 12.0: short_moment, starts_lowercase, end_splits_transcript_segment, silence_before_candidate, silence_after_candidate",
+  "moment_start_ms": 18838720,
+  "moment_end_ms": 18842000,
+  "proposed_start_ms": 18830720,
+  "proposed_end_ms": 18854000,
+  "final_start_ms": 18830720,
+  "final_end_ms": 18854000,
+  "proposal_duration_ms": 23280,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "oh okay it makes me travel from here to left gotcha wait so why is it selected in red again what does it mean um and solve the puzzle oh so there's definitely a puzzle here",
+    "inside": "and solve the puzzle oh so there's definitely a puzzle here here No, there's a break room here.",
+    "after": "Yeah, but I can eat something here."
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 5040,
+    "pause_after_ms": 17000,
+    "start_splits_transcript_segment": true,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 18823840,
+      "end_ms": 18825680,
+      "text": "um"
+    },
+    "next_segment": {
+      "start_ms": 18871000,
+      "end_ms": 18873000,
+      "text": "Yeah, but I can eat something here."
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 23.317,
+      "size_bytes": 4454175,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.069411,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "starts_mid_transcript_segment"
+  ]
+}

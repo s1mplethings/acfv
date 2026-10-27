@@ -1,0 +1,9 @@
+{
+  "config": "config\\creator_visual_identity.json",
+  "config_sha256": "ca957b6bb6b1b1e3b5de9c95f0ce42f56366593af59c4ccab8dc297aeaee35a6",
+  "classifier": "resources\\creator_visual_identity_v1\\identity-model.joblib",
+  "classifier_sha256": "fcbea84149a5ea16f71bce2b4c3d80583cfcb327b20aca85941897c076fa8969",
+  "classifier_bytes": 9556,
+  "large_encoder_weight_bundled": false,
+  "presence_weight_bundled": false
+}

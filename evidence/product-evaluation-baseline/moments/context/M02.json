@@ -1,0 +1,45 @@
+{
+  "case_id": "M02",
+  "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+  "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+  "moment_id": "1980bd27-957d-4a05-9936-1ee1f2f60e2b",
+  "start_ms": 420000,
+  "end_ms": 480000,
+  "timestamp": "00:07:00.000–00:08:00.000",
+  "duration_ms": 60000,
+  "length_bucket": "medium",
+  "summary": "అండిక మిలుమిక నిషి విచరి కిదాలి మాన్లి తాలు లాడికిక నిషి ఇది నిక మానిక కేటిక నిఇక విపుండిలి టైరిక్ కేటిక ప్రు వాడిటాలునా I like the way you kiss me, I can tell you miss me, I can tell it is, is, is, is You're trying to be romantic",
+  "moment_transcript": "అండిక మిలుమిక నిషి విచరి కిదాలి మాన్లి తాలు లాడికిక నిషి ఇది నిక మానిక కేటిక నిఇక విపుండిలి టైరిక్ కేటిక ప్రు వాడిటాలునా I like the way you kiss me, I can tell you miss me, I can tell it is, is, is, is You're trying to be romantic",
+  "context_30s": {
+    "before": "",
+    "inside": "అండిక మిలుమిక నిషి విచరి కిదాలి మాన్లి తాలు లాడికిక నిషి ఇది నిక మానిక కేటిక నిఇక విపుండిలి టైరిక్ కేటిక ప్రు వాడిటాలునా I like the way you kiss me, I can tell you miss me, I can tell it is, is, is, is You're trying to be romantic",
+    "after": "Take a hitter from the back, just you don't get a test I like the way you kiss him, I can tell you're missing I can tell you this, this, this, this Now try to be romantic, take a hitter from the back Just you don't get a test You bite my lip, just for the taste You're all you need, I'm on the case You take the heat, you research grace You say you're done before you stay I said you're scared, I'll let you down"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 60000,
+    "pause_after_ms": 0,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 352000,
+      "end_ms": 360000,
+      "text": "I'm in love with you, in love with you"
+    },
+    "next_segment": {
+      "start_ms": 480000,
+      "end_ms": 483000,
+      "text": "Take a hitter from the back, just you don't get a test"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

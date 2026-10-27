@@ -1,0 +1,154 @@
+{
+  "case_id": "R02",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "她饿了却为什么还是不愿意走出房间？",
+  "ground_truth": {
+    "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+    "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+    "moment_id": "31a59b79-1566-4dd0-a2cb-0c36201b2cd7",
+    "start_ms": 8083000,
+    "end_ms": 8140000,
+    "timestamp": "02:14:43.000–02:15:40.000",
+    "transcript_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater."
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "9c268fc4-4b31-48f4-ad67-7911c58599a3",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 11265000,
+      "end_ms": 11316600,
+      "timestamp": "03:07:45.000–03:08:36.600",
+      "score": 0.01639344262295082,
+      "summary": "I'm at the last boss, but there's so much that I missed. Are you guys fine with watching me explore? Oh, hell no He's fighting on me, please stop I'm poisoned Yeah, come here make it real dark Don't drop that, what is that? What's happening? I don't think I've been here. Oh",
+      "transcript_excerpt": "I'm at the last boss, but there's so much that I missed. Are you guys fine with watching me explore? Oh, hell no He's fighting on me, please stop I'm poisoned Yeah, come here make it real dark Don't drop that, what is that? What's happening? I don't think I've been here. Oh"
+    },
+    {
+      "rank": 2,
+      "moment_id": "c86e61ce-5e36-4042-826c-d8846c5de17b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 1242680,
+      "end_ms": 1298680,
+      "timestamp": "00:20:42.680–00:21:38.680",
+      "score": 0.016129032258064516,
+      "summary": "that wouldn't be the expression one would it be oh maybe it doesn't have like a calibration tool i don't think so interesting oh it's maybe reset position my bad that's much better here we go i'm showing myself again there you go is any better so um um yeah i'm not really expressive which is actually kind of normal because that's just how it was like in old video games but i do i do have toggles yes so let me show you uh i'm sure this one will be your favorite so that's why i'm going to keep it for the end um 64 oh yeah i would say maybe like",
+      "transcript_excerpt": "that wouldn't be the expression one would it be oh maybe it doesn't have like a calibration tool i don't think so interesting oh it's maybe reset position my bad that's much better here we go i'm showing myself again there you go is any better so um um yeah i'm not really expressive which is actually kind of normal because that's just how it was like in old video games but i do i do have toggles yes so let me show you uh i'm sure this one will be your favorite so that's why i'm going to keep it "
+    },
+    {
+      "rank": 3,
+      "moment_id": "ae7e9414-3cf7-4ae8-9a18-b4c498860e6d",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 8598000,
+      "end_ms": 8613000,
+      "timestamp": "02:23:18.000–02:23:33.000",
+      "score": 0.015873015873015872,
+      "summary": "Unless you go to some fucking big station like Shibuya There's gonna be people showing off But... yeah I like these cars",
+      "transcript_excerpt": "Unless you go to some fucking big station like Shibuya There's gonna be people showing off But... yeah I like these cars"
+    },
+    {
+      "rank": 4,
+      "moment_id": "9b5c921d-7094-4d86-9160-3036410433c4",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 7243000,
+      "end_ms": 7272000,
+      "timestamp": "02:00:43.000–02:01:12.000",
+      "score": 0.015625,
+      "summary": "You know... Did Vito ever tell anything about this song to you guys? It would be cool to have an animation with Nero with this song. I hope that happens, like a very good tier animation.",
+      "transcript_excerpt": "You know... Did Vito ever tell anything about this song to you guys? It would be cool to have an animation with Nero with this song. I hope that happens, like a very good tier animation."
+    },
+    {
+      "rank": 5,
+      "moment_id": "be0abe2d-b4cd-47de-8a18-b7a13bc88d74",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9466520,
+      "end_ms": 9468520,
+      "timestamp": "02:37:46.520–02:37:48.520",
+      "score": 0.015384615384615385,
+      "summary": "This is what I want to do",
+      "transcript_excerpt": "This is what I want to do"
+    },
+    {
+      "rank": 6,
+      "moment_id": "8c94863f-1f9b-4392-b24d-0ff92980ee83",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7254900,
+      "end_ms": 7314700,
+      "timestamp": "02:00:54.900–02:01:54.700",
+      "score": 0.015151515151515152,
+      "summary": "Annie, evil should have a completely different attitude than you are. Like, evil is not just a copycat. Okay, tell that to Veedo. Veedo literally told me to not over-complicate things. Why are you like this? I'm mommy! Thank you, mommy. It's Veedo's out. You think I didn't ask him to, like, about different things? I- I- Whenever I ask him something, Oh, what about we do this and this and this? And he's like, don't over-complicate it. Boom, that's it. I'm not. Okay? Questions? Like, why are you attacking me? I don't know. I don't know. I don't know. I don't know. I don't know. I don't know.",
+      "transcript_excerpt": "Annie, evil should have a completely different attitude than you are. Like, evil is not just a copycat. Okay, tell that to Veedo. Veedo literally told me to not over-complicate things. Why are you like this? I'm mommy! Thank you, mommy. It's Veedo's out. You think I didn't ask him to, like, about different things? I- I- Whenever I ask him something, Oh, what about we do this and this and this? And he's like, don't over-complicate it. Boom, that's it. I'm not. Okay? Questions? Like, why are you a"
+    },
+    {
+      "rank": 7,
+      "moment_id": "62c118e2-5f99-4d37-94ba-02ce1770df79",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 8160000,
+      "end_ms": 8162000,
+      "timestamp": "02:16:00.000–02:16:02.000",
+      "score": 0.014925373134328358,
+      "summary": "172",
+      "transcript_excerpt": "172"
+    },
+    {
+      "rank": 8,
+      "moment_id": "0bbc97d1-f489-43f1-9023-fbb2b7c54398",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 11799000,
+      "end_ms": 11858000,
+      "timestamp": "03:16:39.000–03:17:38.000",
+      "score": 0.014705882352941176,
+      "summary": "As it says in garbage tiers... Well, there's no garbage tier There's what tier because I don't fucking know what I feel about it Like, I didn't know where to put these Like, Twin Tales was like so out of nowhere Like, why is there a ponytail in Twin Tales But like, no other hairstyles, you know? But also, I don't feel anything about these sexually or whatever I agree with most of the rest, but... What the fuck? Wait, man! Wait, what happened? Which one? Humiliation is an F? Okay, the way I think about it Is that I wouldn't want someone to humiliate me in a way that makes me fucking... Feel bad? Like, I like degradation, I guess Okay, I don't want to admit that But it is in my SSS-list tier But humiliation feels like something that would probably hurt me mentally",
+      "transcript_excerpt": "As it says in garbage tiers... Well, there's no garbage tier There's what tier because I don't fucking know what I feel about it Like, I didn't know where to put these Like, Twin Tales was like so out of nowhere Like, why is there a ponytail in Twin Tales But like, no other hairstyles, you know? But also, I don't feel anything about these sexually or whatever I agree with most of the rest, but... What the fuck? Wait, man! Wait, what happened? Which one? Humiliation is an F? Okay, the way I think"
+    },
+    {
+      "rank": 9,
+      "moment_id": "1787d9d5-4007-400e-9221-fd57293fc89e",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 11988000,
+      "end_ms": 12040000,
+      "timestamp": "03:19:48.000–03:20:40.000",
+      "score": 0.014492753623188406,
+      "summary": "Please don't put enemies to sit on my face Please This is scary Worm? Right! Right! I forgot about this shit Wait Where do I even go? Oh, there's an item here Surely it's not gonna reach me here, right? What's that? Depression Why? What? Summoning Darkspawn? Chat, I summoned Depression",
+      "transcript_excerpt": "Please don't put enemies to sit on my face Please This is scary Worm? Right! Right! I forgot about this shit Wait Where do I even go? Oh, there's an item here Surely it's not gonna reach me here, right? What's that? Depression Why? What? Summoning Darkspawn? Chat, I summoned Depression"
+    },
+    {
+      "rank": 10,
+      "moment_id": "6a39b607-b7b9-4d1e-8f75-f2d34fcb41a3",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 18204000,
+      "end_ms": 18245866,
+      "timestamp": "05:03:24.000–05:04:05.866",
+      "score": 0.014285714285714285,
+      "summary": "It's so fucking big. Oh my god. Alright, guys. And it's like... Apparently it's not made for VR yet. So I guess we'll have to wait with that. Man. Okay, guys. Goodbye. See you next time. Why do I feel so emotional? Fuck. Must not cry. Must not cry. wah mwah mwah",
+      "transcript_excerpt": "It's so fucking big. Oh my god. Alright, guys. And it's like... Apparently it's not made for VR yet. So I guess we'll have to wait with that. Man. Okay, guys. Goodbye. See you next time. Why do I feel so emotional? Fuck. Must not cry. Must not cry. wah mwah mwah"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

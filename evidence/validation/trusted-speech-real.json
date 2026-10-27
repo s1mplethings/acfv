@@ -1,0 +1,7 @@
+{
+  "status": "BLOCKED_NO_CREATOR_IDENTITY_OR_VOICE_PROFILE_V2",
+  "creators": {"saruei": {"candidates": 0, "pseudo_trusted": 0, "human_confirmed": 0, "duration_s": 0}, "anny": {"candidates": 0, "pseudo_trusted": 0, "human_confirmed": 0, "duration_s": 0}},
+  "rejection_reasons": {"visual_identity_not_creator_specific": 1000},
+  "official_transcript_mutations": 0,
+  "strict_gate_lowered": false
+}

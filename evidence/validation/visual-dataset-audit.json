@@ -1,0 +1,155 @@
+{
+  "dataset_version": "creator-visual-v1",
+  "manifest": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-visual-identity-v1\\visual-dataset-manifest.jsonl",
+  "manifest_sha256": "524738ad39c9625d533fb80974e457ab1eed3aa1257dd05ff2a697f4762f4cf8",
+  "samples": 1445,
+  "counts": {
+    "saruei:train": 97,
+    "saruei:validation": 187,
+    "saruei:holdout": 214,
+    "anny:train": 503,
+    "anny:validation": 122,
+    "anny:holdout": 271,
+    "UNKNOWN:unknown": 51
+  },
+  "recordings": 12,
+  "rejections": {
+    "near_duplicate": 2891,
+    "no_single_dominant_avatar": 551,
+    "invalid_bbox_or_quality": 8
+  },
+  "source_reports": [
+    {
+      "creator_id": "saruei",
+      "recording_id": "saruei-clean-01",
+      "split": "train",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\Saruei\\01-8d310288\\standard\\clip_clean.mp4",
+      "accepted": 97,
+      "rejections": {
+        "near_duplicate": 144
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "saruei-clean-02",
+      "split": "validation",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\Saruei\\02-0c6e3e2a\\standard\\clip_clean.mp4",
+      "accepted": 187,
+      "rejections": {
+        "near_duplicate": 408,
+        "no_single_dominant_avatar": 262
+      }
+    },
+    {
+      "creator_id": "saruei",
+      "recording_id": "saruei-clean-03",
+      "split": "holdout",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\Saruei\\03-0e04994c\\standard\\clip_clean.mp4",
+      "accepted": 214,
+      "rejections": {
+        "near_duplicate": 589,
+        "no_single_dominant_avatar": 1
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "anny-clean-01",
+      "split": "train",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\anny\\01-5a9caed4\\standard\\clip_clean.mp4",
+      "accepted": 112,
+      "rejections": {
+        "near_duplicate": 156,
+        "no_single_dominant_avatar": 5
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "anny-clean-02",
+      "split": "train",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\anny\\02-0861efd7\\standard\\clip_clean.mp4",
+      "accepted": 229,
+      "rejections": {
+        "no_single_dominant_avatar": 152,
+        "near_duplicate": 127,
+        "invalid_bbox_or_quality": 3
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "anny-clean-03",
+      "split": "train",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\anny\\03-5f5dd861\\standard\\clip_clean.mp4",
+      "accepted": 162,
+      "rejections": {
+        "no_single_dominant_avatar": 107,
+        "near_duplicate": 238,
+        "invalid_bbox_or_quality": 5
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "anny-clean-04",
+      "split": "validation",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\anny\\04-3ad97744\\standard\\clip_clean.mp4",
+      "accepted": 122,
+      "rejections": {
+        "near_duplicate": 693
+      }
+    },
+    {
+      "creator_id": "anny",
+      "recording_id": "anny-clean-05",
+      "split": "holdout",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\final_language_quality\\final-clips-v4\\anny\\05-877e635c\\standard\\clip_clean.mp4",
+      "accepted": 271,
+      "rejections": {
+        "near_duplicate": 297,
+        "no_single_dominant_avatar": 24
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "unknown-q8pilot-a",
+      "split": "unknown",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\deliverables\\cross-library-evaluation-bundle\\videos\\Q8Pilot\\a44ae0f8.mp4",
+      "accepted": 5,
+      "rejections": {
+        "near_duplicate": 116
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "unknown-q8pilot-b",
+      "split": "unknown",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\deliverables\\cross-library-evaluation-bundle\\videos\\Q8Pilot\\ee4ae953.mp4",
+      "accepted": 5,
+      "rejections": {
+        "near_duplicate": 116
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "unknown-tpp-a",
+      "split": "unknown",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\deliverables\\cross-library-evaluation-bundle\\videos\\twitchplayspokemon\\646fc49d.mp4",
+      "accepted": 21,
+      "rejections": {
+        "near_duplicate": 3
+      }
+    },
+    {
+      "creator_id": null,
+      "recording_id": "unknown-tpp-b",
+      "split": "unknown",
+      "source_path": "G:\\Cliper\\acfv-mvp-product\\var\\deliverables\\cross-library-evaluation-bundle\\videos\\twitchplayspokemon\\1f0cef20.mp4",
+      "accepted": 20,
+      "rejections": {
+        "near_duplicate": 4
+      }
+    }
+  ],
+  "split_unit": "recording_id",
+  "recording_leakage": false,
+  "detector_model_version": "pytorch-234aeae28706",
+  "auto_label_policy": "explicit single-creator + one dominant high-quality avatar bbox"
+}

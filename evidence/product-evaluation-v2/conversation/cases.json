@@ -1,0 +1,739 @@
+[
+  {
+    "case_id": "C01",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say about not having played PUBG for a long time?",
+    "assistant_answer": "Evidence-only mode: found 4 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3643.685,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "score": 4.547928333282471,
+        "summary": "PUBG? I haven't played PUBG in a very long time.",
+        "transcript_excerpt": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+        "debug": {
+          "dense_rank": 2,
+          "dense_score": 0.8704808354377747,
+          "fts_rank": 1,
+          "fusion_score": 0.03252247488101534,
+          "reranker_score": 4.547928333282471,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "f780da88-a307-49d0-8f64-04c241b2a460",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 13420000,
+        "end_ms": 13440000,
+        "score": 2.3467929363250732,
+        "summary": "Did you ask me that? I mean, you must have, right?",
+        "transcript_excerpt": "Did you ask me that? I mean, you must have, right? I asked you. I would have been a good one, but... Yeah. Fanboy Simulator M? I haven't played Fanboy Simulator.",
+        "debug": {
+          "dense_rank": 6,
+          "dense_score": 0.849196195602417,
+          "fts_rank": 2,
+          "fusion_score": 0.03128054740957967,
+          "reranker_score": 2.3467929363250732,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13894480,
+        "end_ms": 13979120,
+        "score": -3.951892852783203,
+        "summary": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is…",
+        "transcript_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is like always with Oni bro. I'm literally on my fucking own all the time Monka Monka I like this game. It's cozy and I learned the words I might need to write them down. I actually have like a Notebook where I write down the words. I don't fucking know when I watc",
+        "debug": {
+          "fts_rank": 26,
+          "fusion_score": 0.011627906976744186,
+          "reranker_score": -3.951892852783203,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 4,
+        "moment_id": "d55475b7-1fea-4b2e-84fc-a5175541ab0f",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 1380300,
+        "end_ms": 1397400,
+        "score": -4.579392910003662,
+        "summary": "I... Uhhh...",
+        "transcript_excerpt": "I... Uhhh... It's not really like... Yeah... I don't know, I feel like I'm not going to get scared. No, I didn't forgot, I just simply didn't like plan to use a hard monitor because it's been like over a year since the last time I used it. It's not a long game at all, yeah.",
+        "debug": {
+          "dense_rank": 9,
+          "dense_score": 0.8457400798797607,
+          "fusion_score": 0.014492753623188406,
+          "reranker_score": -4.579392910003662,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C02",
+    "evaluation_type": "SUPPORTED",
+    "question": "Why didn't she want to leave her room even though she was hungry?",
+    "assistant_answer": "Evidence-only mode: found 4 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 4026.582,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "score": -1.268622636795044,
+        "summary": "I can hear her in the corridor. But I'm hungry.",
+        "transcript_excerpt": "I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room.",
+        "debug": {
+          "dense_rank": 6,
+          "dense_score": 0.8725628852844238,
+          "fts_rank": 1,
+          "fusion_score": 0.031544957774465976,
+          "reranker_score": -1.268622636795044,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8083000,
+        "end_ms": 8099000,
+        "score": -4.012181282043457,
+        "summary": "But I don't want to go out. But I'm hungry.",
+        "transcript_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy!",
+        "debug": {
+          "dense_rank": 1,
+          "dense_score": 0.8881452679634094,
+          "fts_rank": 5,
+          "fusion_score": 0.03177805800756621,
+          "reranker_score": -4.012181282043457,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "eb73d400-121a-4dfd-82f2-8130a6bf8363",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8122000,
+        "end_ms": 8140000,
+        "score": -4.267423629760742,
+        "summary": "She's here. She don't care yet but I care!",
+        "transcript_excerpt": "She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater.",
+        "debug": {
+          "dense_rank": 3,
+          "dense_score": 0.8769026398658752,
+          "fts_rank": 2,
+          "fusion_score": 0.03200204813108039,
+          "reranker_score": -4.267423629760742,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 4,
+        "moment_id": "57e3b289-b6d9-47c0-9022-c6b29a120b91",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 14455000,
+        "end_ms": 14557100,
+        "score": -4.621144771575928,
+        "summary": "Before the boat had hit the water, the whale still came up and caught her. All hands to the side, harpooned and fought her when she dived down low.",
+        "transcript_excerpt": "Before the boat had hit the water, the whale still came up and caught her. All hands to the side, harpooned and fought her when she dived down low. Soon may the wellerman come, they'll bring us sugar and tea and rum. One day when the tolling is done, we'll take or leave and go. No line was cut, no whale was freed, the captain's mind was not of grief. Soon may the wellerman come, they'll bring us sugar and tea and rum. One day when the tolling is done, we'll take or leave and go. Da da da da da d",
+        "debug": {
+          "fts_rank": 7,
+          "fusion_score": 0.014925373134328358,
+          "reranker_score": -4.621144771575928,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C03",
+    "evaluation_type": "SUPPORTED",
+    "question": "What control did she identify as the right trigger in Crow Country?",
+    "assistant_answer": "Evidence-only mode: found 1 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3545.797,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "80351bee-89cd-4bfd-bdbe-946028bcb1ec",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 3714000,
+        "end_ms": 3755000,
+        "score": -5.070765018463135,
+        "summary": "Newspaper. ATLANTIC GLOBE, MAY 1986 CROW COUNTRY TEAM PARK OPENING SOON Cancel your weekend plans with the in-law and grab your sunglasses.",
+        "transcript_excerpt": "Newspaper. ATLANTIC GLOBE, MAY 1986 CROW COUNTRY TEAM PARK OPENING SOON Cancel your weekend plans with the in-law and grab your sunglasses. A brand new theme park is opening just a few miles southeast of Atlanta. Explore Furytale Town, Houghton Hilltop, and Ocean Kingdom at Crowe Country, which promises a day full of fun and adventure for the whole family. The park is owned by one Mr. Edward Crowe, a lifelong Atlanta local and landowner. Yes, that's right, it appears he named the park after hims",
+        "debug": {
+          "dense_rank": 20,
+          "dense_score": 0.7921168208122253,
+          "fts_rank": 2,
+          "fusion_score": 0.028629032258064516,
+          "reranker_score": -5.070765018463135,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C04",
+    "evaluation_type": "SUPPORTED",
+    "question": "What internet solution came up for streaming from a boat?",
+    "assistant_answer": "Evidence-only mode: found 4 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3618.319,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "3ad97744-96b8-4c21-bb0b-5448114308dd",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 12067000,
+        "end_ms": 12090000,
+        "score": 1.1631783246994019,
+        "summary": "True Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection?",
+        "transcript_excerpt": "True Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a...",
+        "debug": {
+          "dense_rank": 7,
+          "dense_score": 0.8122318983078003,
+          "fts_rank": 1,
+          "fusion_score": 0.03131881575727918,
+          "reranker_score": 1.1631783246994019,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 12091000,
+        "end_ms": 12173440,
+        "score": -1.566523790359497,
+        "summary": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the…",
+        "transcript_excerpt": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink Sorry, I kind ",
+        "debug": {
+          "fts_rank": 4,
+          "fusion_score": 0.015625,
+          "reranker_score": -1.566523790359497,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "502e8e08-1b96-45c3-ad96-21745cb33be0",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 12027000,
+        "end_ms": 12067000,
+        "score": -4.151455879211426,
+        "summary": "What the f*** Em Would that be called the SS Corp or the SS Nuera? Is this Nuera?",
+        "transcript_excerpt": "What the f*** Em Would that be called the SS Corp or the SS Nuera? Is this Nuera? F*** What if someone walks by and recognizes it though? And they're like, oh my god, that's the Nuera boat Well, we literally showed that boat on stream so they would do that anyway Oh, you're saying we can't buy it? But then you said that if you're in the ocean, nobody's gonna see you there or dox you or... Yeah, yeah, while you're out there, but you have to like park it somewhere Yeah...",
+        "debug": {
+          "dense_rank": 4,
+          "dense_score": 0.8156622052192688,
+          "fts_rank": 2,
+          "fusion_score": 0.031754032258064516,
+          "reranker_score": -4.151455879211426,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 4,
+        "moment_id": "f8d1da31-6fe3-4937-b8f3-cf784a602a56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 4320000,
+        "end_ms": 4348280,
+        "score": -6.593877792358398,
+        "summary": "I cut that there for obvious reasons, but Johnny was then missing for a few hours and the internet was genuinely wondering what happened here. But then a couple hours later, he suddenly updated the world that he was fine but went to the…",
+        "transcript_excerpt": "I cut that there for obvious reasons, but Johnny was then missing for a few hours and the internet was genuinely wondering what happened here. But then a couple hours later, he suddenly updated the world that he was fine but went to the hospital for some stitches. So did he learn his lesson, stop IRL streaming and leave the country?",
+        "debug": {
+          "fts_rank": 8,
+          "fusion_score": 0.014705882352941176,
+          "reranker_score": -6.593877792358398,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C05",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say helps memorize words?",
+    "assistant_answer": "Evidence-only mode: found 1 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3099.908,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "7970974f-f888-47f6-9e79-2c0540b20474",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13404000,
+        "end_ms": 13424000,
+        "score": -3.8061869144439697,
+        "summary": "You could do it, thank you. He believed in me.",
+        "transcript_excerpt": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize.",
+        "debug": {
+          "dense_rank": 1,
+          "dense_score": 0.84621661901474,
+          "fts_rank": 2,
+          "fusion_score": 0.03252247488101534,
+          "reranker_score": -3.8061869144439697,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C06",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What game-related moments mention weapons or ammo?",
+    "assistant_answer": "Evidence-only mode: found 3 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3787.799,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "e68d6957-4016-475f-9cc1-bdb6f0524ebd",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 3131200,
+        "end_ms": 3216400,
+        "score": -3.294422149658203,
+        "summary": "wait oh okay it's automatic okay wait there's a bag here ufo tower 1988 it's empty did somebody lose it when shooting your bullets so we do more damage if you're closer to the enemy so attempting to shoot enemies from far away will use up…",
+        "transcript_excerpt": "wait oh okay it's automatic okay wait there's a bag here ufo tower 1988 it's empty did somebody lose it when shooting your bullets so we do more damage if you're closer to the enemy so attempting to shoot enemies from far away will use up your ammo supplies more quickly oh okay that's actually good to know but like what is this okay cool then i guess we can uh the gift shop oh it's locked okay got it and what about here it's out there's a bronze keyhole use id card yeah of course it doesn't work",
+        "debug": {
+          "dense_rank": 17,
+          "dense_score": 0.8247708678245544,
+          "fusion_score": 0.012987012987012988,
+          "reranker_score": -3.294422149658203,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "f103faaa-bd0d-4496-895b-e0485cc3027b",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 3033840,
+        "end_ms": 3129280,
+        "score": -3.4063398838043213,
+        "summary": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash…",
+        "transcript_excerpt": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash oh med kits it's actually like rewarding to uh explore and look everywhere trash hey a large med kit what's this okay it's a bathroom here does it mean i can actually enter or no wait oh handgun ammo okay cool the scrow here what is i eating that animal i can ",
+        "debug": {
+          "dense_rank": 8,
+          "dense_score": 0.8279255032539368,
+          "fusion_score": 0.014705882352941176,
+          "reranker_score": -3.4063398838043213,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "90e8d191-5be3-49c3-a1b8-a097c12ca053",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 14359800,
+        "end_ms": 14404000,
+        "score": -4.136525630950928,
+        "summary": "your conversation with falcon he's going to give you the coordinates to finish off the quest and pick up your gift which is overlooking all of santa domingo which i think is really cool and inside of this case is this jacket you'll notice…",
+        "transcript_excerpt": "your conversation with falcon he's going to give you the coordinates to finish off the quest and pick up your gift which is overlooking all of santa domingo which i think is really cool and inside of this case is this jacket you'll notice when i picked up the jacket originally it suddenly had five armor but once it goes into your inventory it's going to scale up to your level and it looks beautiful i really really oh man i don't know i think like you know it's not fair for you to wear this jacke",
+        "debug": {
+          "fts_rank": 21,
+          "fusion_score": 0.012345679012345678,
+          "reranker_score": -4.136525630950928,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C07",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she talks about being hungry or food.",
+    "assistant_answer": "Evidence-only mode: found 4 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 4185.8,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "12292d66-b0ce-4c90-81c6-c11ed4675524",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 3491240,
+        "end_ms": 3577920,
+        "score": -1.424787998199463,
+        "summary": "Doing the Ramadan is actually pretty healthy mentally so you know you're doing like you're eating less shit and So at the same time you're fapping this because apparently I didn't knew this but you cannot fap during that time it's only…",
+        "transcript_excerpt": "Doing the Ramadan is actually pretty healthy mentally so you know you're doing like you're eating less shit and So at the same time you're fapping this because apparently I didn't knew this but you cannot fap during that time it's only when the Sun is down is the same as eating drinking and So he told me that fasting helped you to be less horny because you want to eat and drink more than anything and actually, you know fapping and He explained to me that it kind of like, you know cleans a bit, y",
+        "debug": {
+          "fts_rank": 10,
+          "fusion_score": 0.014285714285714285,
+          "reranker_score": -1.424787998199463,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8083000,
+        "end_ms": 8099000,
+        "score": -4.006309986114502,
+        "summary": "But I don't want to go out. But I'm hungry.",
+        "transcript_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy!",
+        "debug": {
+          "dense_rank": 3,
+          "dense_score": 0.8711971044540405,
+          "fusion_score": 0.015873015873015872,
+          "reranker_score": -4.006309986114502,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "6678a673-edb2-4a93-a972-5422b7f3dd48",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 9068000,
+        "end_ms": 9085000,
+        "score": -4.085009574890137,
+        "summary": "Yum, yum, yum. The food was cold.",
+        "transcript_excerpt": "Yum, yum, yum. The food was cold. Oh my God. What a fucking whiny baby. 420! 420! 420! I'm drinking.",
+        "debug": {
+          "dense_rank": 5,
+          "dense_score": 0.8692164421081543,
+          "fts_rank": 15,
+          "fusion_score": 0.02871794871794872,
+          "reranker_score": -4.085009574890137,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 4,
+        "moment_id": "d986409e-b60f-4109-b8cc-6c8e827f7176",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 5714000,
+        "end_ms": 5760000,
+        "score": -4.2107157707214355,
+        "summary": "I'm hungry! Thank you, Smurfy.",
+        "transcript_excerpt": "I'm hungry! Thank you, Smurfy. I need some brown jam. I need some brown jam. I say, don't you know, but you say you don't know. I say, take me out. I say, you don't show, don't move, time is low. I say, take me out. I say, don't you know, but you say you don't know.",
+        "debug": {
+          "dense_rank": 26,
+          "dense_score": 0.8538833856582642,
+          "fusion_score": 0.011627906976744186,
+          "reranker_score": -4.2107157707214355,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C08",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What moments mention music or songs?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 2987.251,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C09",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Where does she talk about streaming or chat?",
+    "assistant_answer": "Evidence-only mode: found 3 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3758.496,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "1b6e45c0-f7d5-4c77-a0a6-4931c7141c7d",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 1884000,
+        "end_ms": 1901000,
+        "score": -2.181905508041382,
+        "summary": "Chat, as a streamer, I hate anything that makes water. I'm sorry, Bobonis.",
+        "transcript_excerpt": "Chat, as a streamer, I hate anything that makes water. I'm sorry, Bobonis. I can't do that. What did he ask her? Huh? Bobonis! We know that guy.",
+        "debug": {
+          "dense_rank": 3,
+          "dense_score": 0.8593772053718567,
+          "fusion_score": 0.015873015873015872,
+          "reranker_score": -2.181905508041382,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13894480,
+        "end_ms": 13979120,
+        "score": -3.7203145027160645,
+        "summary": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is…",
+        "transcript_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is like always with Oni bro. I'm literally on my fucking own all the time Monka Monka I like this game. It's cozy and I learned the words I might need to write them down. I actually have like a Notebook where I write down the words. I don't fucking know when I watc",
+        "debug": {
+          "fts_rank": 20,
+          "fusion_score": 0.0125,
+          "reranker_score": -3.7203145027160645,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "be57f2aa-fae3-4c91-a1e2-cbe7dabec1e5",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 30455000,
+        "end_ms": 30476000,
+        "score": -3.8628337383270264,
+        "summary": "It's reserved for when someone says something so insanely ridiculous. Well, there you go.",
+        "transcript_excerpt": "It's reserved for when someone says something so insanely ridiculous. Well, there you go. I'm not going to then. I'm not going to. Okay. I'll just like... He can laugh. The whole chat is just talking about your laugh now.",
+        "debug": {
+          "dense_rank": 19,
+          "dense_score": 0.8481084108352661,
+          "fusion_score": 0.012658227848101266,
+          "reranker_score": -3.8628337383270264,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C10",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she sounds scared or talks about fear.",
+    "assistant_answer": "Evidence-only mode: found 4 potentially relevant video excerpts.",
+    "grounded": false,
+    "confidence": "evidence_only",
+    "runtime_mode": "EVIDENCE_ONLY",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3597.954,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13894480,
+        "end_ms": 13979120,
+        "score": -1.723355770111084,
+        "summary": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is…",
+        "transcript_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is like always with Oni bro. I'm literally on my fucking own all the time Monka Monka I like this game. It's cozy and I learned the words I might need to write them down. I actually have like a Notebook where I write down the words. I don't fucking know when I watc",
+        "debug": {
+          "fts_rank": 8,
+          "fusion_score": 0.014705882352941176,
+          "reranker_score": -1.723355770111084,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "89d42561-cedc-4f44-b74b-eb3c72cc89c5",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 4217000,
+        "end_ms": 4235000,
+        "score": -3.7090260982513428,
+        "summary": "That's what makes me really fucking upset. But where I'm like, oh, if a monster jumps on my face, as long as I don't scream I don't have game overs and it's less scary.",
+        "transcript_excerpt": "That's what makes me really fucking upset. But where I'm like, oh, if a monster jumps on my face, as long as I don't scream I don't have game overs and it's less scary. Okay, let me start Fear of Adam now and I'm going to change the game category. Fear to Fathom.",
+        "debug": {
+          "fts_rank": 6,
+          "fusion_score": 0.015151515151515152,
+          "reranker_score": -3.7090260982513428,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "7bd9dcca-999f-40d3-9f18-89416b062351",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 13440000,
+        "end_ms": 13478960,
+        "score": -3.7169206142425537,
+        "summary": "Are you gonna tell me don't be scared already scared me out, of course, I'm gonna be scared All right, let's check cameras one more time. Oh hi Okay, perfect timing excellent mark 2009 I'll find password Nobody trying to find no damn…",
+        "transcript_excerpt": "Are you gonna tell me don't be scared already scared me out, of course, I'm gonna be scared All right, let's check cameras one more time. Oh hi Okay, perfect timing excellent mark 2009 I'll find password Nobody trying to find no damn password. Let me just like numbers and shit everywhere like to our cave is what is it?",
+        "debug": {
+          "dense_rank": 13,
+          "dense_score": 0.8524200916290283,
+          "fts_rank": 1,
+          "fusion_score": 0.03009207275993712,
+          "reranker_score": -3.7169206142425537,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 4,
+        "moment_id": "8d50060b-fa97-4be2-8c41-b20e4f64c2f9",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 13482160,
+        "end_ms": 13526800,
+        "score": -3.768958330154419,
+        "summary": "Okay This is a really interesting concept for a video game. Like honestly the fact that you can talk to her and like This is so cool I don't fucking do that Uh, this button gets scared.",
+        "transcript_excerpt": "Okay This is a really interesting concept for a video game. Like honestly the fact that you can talk to her and like This is so cool I don't fucking do that Uh, this button gets scared. Yeah, there are still humans after all Are you here Oh, no She's waiting at you in the corner She's downstairs. Oh",
+        "debug": {
+          "fts_rank": 4,
+          "fusion_score": 0.015625,
+          "reranker_score": -3.768958330154419,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C11",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she was planning to stop streaming next month?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3845.645,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C12",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce that she was moving permanently to Berlin?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 4016.002,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C13",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce a weekly cooking podcast?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3182.874,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C14",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she signed a sponsorship with Logitech?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3748.65,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C15",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she cancel an upcoming convention because of a passport problem?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3563.8,
+    "retrieved_evidence": []
+  }
+]

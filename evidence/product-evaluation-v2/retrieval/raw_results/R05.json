@@ -1,0 +1,597 @@
+{
+  "case_id": "R05",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "她什么时候反思自己可能把一些分类看得太轻了？",
+  "ground_truth": {
+    "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+    "recording_title": "anny 的xp rating",
+    "moment_id": "67b82873-1181-489a-a008-ac9f33253af6",
+    "start_ms": 3357000,
+    "end_ms": 3416120,
+    "timestamp": "00:55:57.000–00:56:56.120",
+    "transcript_excerpt": "I need to like, put something... Like, in between or... Yeah, like that. Jeans... It's so fucking dumb! When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly. Not necessarily, just sometimes. Whatever it is. But what... Glasses? Uh... On irons. I guess. No, I don't really feel anything for it. Glorious hole.",
+    "old_moment_id": "59e38287-210a-4d8f-8f99-b90b6e2eed30",
+    "acceptable_child_ids": [
+      "4ed40638-d6d3-4dd2-96d1-82a8c0bf06e8",
+      "67b82873-1181-489a-a008-ac9f33253af6",
+      "8a56ab25-9e6e-493f-9bba-fba5d71ed4b0",
+      "a615bdbd-1131-4680-a9aa-7b499f99effb"
+    ]
+  },
+  "target_rank": null,
+  "latency_ms": 3017.984,
+  "target_diagnostics": {},
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "25e860a9-8c99-4908-8ed4-3aaf994ec385",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28810000,
+      "end_ms": 28838000,
+      "score": -3.3564469814300537,
+      "summary": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know.",
+      "transcript_excerpt": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know. 嗯 And then I would ask them. 嗯 Oh my god. 嗯 I wanna see that so bad. 嗯 That must have been so funny. 嗯 I don't think. 嗯 I don't think you do. 嗯 Oh. 嗯 Um 嗯 That's just a thought of her being 嗯 I know this one. 嗯 That's just the worst thing ever.",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8454248309135437,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -3.3564469814300537,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "57e20ca6-ae72-4482-aedc-0ce21a34f005",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28838000,
+      "end_ms": 28856000,
+      "score": -3.596757650375366,
+      "summary": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny.",
+      "transcript_excerpt": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny. 嗯 It be funny. 嗯 Won't be funny. 嗯 Filtered. 嗯 Um.",
+      "debug": {
+        "dense_rank": 6,
+        "dense_score": 0.8370838165283203,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -3.596757650375366,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "9438991a-169b-4605-8bb2-82973617b139",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28790000,
+      "end_ms": 28810000,
+      "score": -5.31545877456665,
+      "summary": "What kind of slurs do you know Vido? I know so many You do?",
+      "transcript_excerpt": "What kind of slurs do you know Vido? I know so many You do? Can you teach me some? 嗯 Yeah. 嗯 Um. 嗯 Yeah. 嗯 Yeah. 嗯 She told me.",
+      "debug": {
+        "dense_rank": 4,
+        "dense_score": 0.8380823135375977,
+        "fusion_score": 0.015625,
+        "reranker_score": -5.31545877456665,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "46b6b40f-a301-4b82-b82e-dd429e224212",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6190000,
+      "end_ms": 6208000,
+      "score": -5.322813510894775,
+      "summary": "Nowadays, there's so much improvement. And...",
+      "transcript_excerpt": "Nowadays, there's so much improvement. And... And all these improvements happened, like, very gradually, too. Like, people did not realize until you look back and see, like, how different it was. Yeah.",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.8191691040992737,
+        "fusion_score": 0.0125,
+        "reranker_score": -5.322813510894775,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "cfb8c449-a68e-42d0-80b4-ddf218e08b9c",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6210000,
+      "end_ms": 6226000,
+      "score": -5.39306116104126,
+      "summary": "So cute. Thank you, Vidoe.",
+      "transcript_excerpt": "So cute. Thank you, Vidoe. Thank you, Vidoe. Gonna get Collapse for Vidoe. Tutto cooking. That...",
+      "debug": {
+        "dense_rank": 31,
+        "dense_score": 0.8154723644256592,
+        "fusion_score": 0.01098901098901099,
+        "reranker_score": -5.39306116104126,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "007cad9f-ce49-4c1a-90a2-0e4e0d374a66",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 21806000,
+      "end_ms": 21808000,
+      "score": -6.094490051269531,
+      "summary": "Thanks for watching!",
+      "transcript_excerpt": "Thanks for watching!",
+      "debug": {
+        "dense_rank": 41,
+        "dense_score": 0.8123641014099121,
+        "fusion_score": 0.009900990099009901,
+        "reranker_score": -6.094490051269531,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "d5768e86-d371-42d1-8bd9-46d8725c4c83",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14940000,
+      "end_ms": 14941760,
+      "score": -7.337051868438721,
+      "summary": "Kasanatte ita",
+      "transcript_excerpt": "Kasanatte ita",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8168235421180725,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -7.337051868438721,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "7cc957a1-58c0-43f9-97d8-77afcbafbddd",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 1578040,
+      "end_ms": 1591220,
+      "score": -8.180814743041992,
+      "summary": "You would be the cutest Hunchback ever, oh no. Now you just like, you know, put me like Hunchback loli version, you know, in my head.",
+      "transcript_excerpt": "You would be the cutest Hunchback ever, oh no. Now you just like, you know, put me like Hunchback loli version, you know, in my head. And it's not cute. It's like, it's small, but like it's not cute.",
+      "debug": {
+        "dense_rank": 42,
+        "dense_score": 0.8123070597648621,
+        "fusion_score": 0.00980392156862745,
+        "reranker_score": -8.180814743041992,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "a9318e4f-bdce-42f8-8385-c83c8b0fe6ae",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11722040,
+      "end_ms": 11736320,
+      "score": -8.215437889099121,
+      "summary": "Of course, they're going to see me. And I'll be like, oh, my God, so I'm going to run away.",
+      "transcript_excerpt": "Of course, they're going to see me. And I'll be like, oh, my God, so I'm going to run away. And oh, my God, there's someone down there. I didn't stop, dude. Well, I'm going to leave the door open and go underneath the bed.",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.818922221660614,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -8.215437889099121,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "70631692-494b-4153-9e1b-6e00a9c747ba",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2413000,
+      "end_ms": 2433000,
+      "score": -8.344390869140625,
+      "summary": "Is it cute? Oh f**k!",
+      "transcript_excerpt": "Is it cute? Oh f**k! F**k! I taught her the really late s**t, Suri F**k! Oh my gosh, speaking of Annie... Speaking of Annie...",
+      "debug": {
+        "dense_rank": 34,
+        "dense_score": 0.8148325085639954,
+        "fusion_score": 0.010638297872340425,
+        "reranker_score": -8.344390869140625,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "185b9288-bff7-4d8e-b7ac-3c9db791f859",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 1599220,
+      "end_ms": 1636820,
+      "score": -8.538074493408203,
+      "summary": "What am I going to do? The booboo?",
+      "transcript_excerpt": "What am I going to do? The booboo? Yeah, but I don't know if it's like related to the bone, because they didn't say anything related to the bone, buddy. They said, like, you know, it was a fat tissue. That's what I said. Anyway, let's like, you know, skip this talk and just wait until I go and see you then I'll be a dentist on Monday and I still need to take a fucking appointment with like a dermatologist. I just, you know, with all the doctor I would be seeing this early in the year, I won't ne",
+      "debug": {
+        "dense_rank": 29,
+        "dense_score": 0.8156604766845703,
+        "fusion_score": 0.011235955056179775,
+        "reranker_score": -8.538074493408203,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "d52d52a3-c064-4047-a48c-3a34de7f330c",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 3480000,
+      "end_ms": 3501360,
+      "score": -8.617447853088379,
+      "summary": "ilian gotta me グループ うーん Saudi あ、ギャル?",
+      "transcript_excerpt": "ilian gotta me グループ うーん Saudi あ、ギャル?",
+      "debug": {
+        "dense_rank": 38,
+        "dense_score": 0.8127842545509338,
+        "fusion_score": 0.01020408163265306,
+        "reranker_score": -8.617447853088379,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "f05d2bd5-df44-421e-9323-37957ef8de16",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 1636820,
+      "end_ms": 1675020,
+      "score": -8.640960693359375,
+      "summary": "Hmm. So what else did you do?",
+      "transcript_excerpt": "Hmm. So what else did you do? Oh yeah, right. So I came back home and I did like, what's called a M-A-S-T-U-R-B-I-N-G and then, and then I started drawing and then the day after I did this again twice and then I was drawing and then like the day after I was like doing it again and then I was drawing. So that's what I've been doing. Just like, you know, I'm a coomer. Yeah, it was very, very... How do you call this?",
+      "debug": {
+        "dense_rank": 43,
+        "dense_score": 0.8122601509094238,
+        "fusion_score": 0.009708737864077669,
+        "reranker_score": -8.640960693359375,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "d0285840-6b39-4985-bc78-50c5179ef2b9",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16266300,
+      "end_ms": 16270300,
+      "score": -8.822924613952637,
+      "summary": "ああああああ ああ",
+      "transcript_excerpt": "ああああああ ああ",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8166170120239258,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -8.822924613952637,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "03c1c960-d584-4c90-b837-274d560bc467",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 18741920,
+      "end_ms": 18758080,
+      "score": -8.997385025024414,
+      "summary": "And also this day that- that you showed me though, the minor separations You were zooming through a model too? Spongebob's question mark",
+      "transcript_excerpt": "And also this day that- that you showed me though, the minor separations You were zooming through a model too? Spongebob's question mark",
+      "debug": {
+        "dense_rank": 30,
+        "dense_score": 0.815552830696106,
+        "fusion_score": 0.011111111111111112,
+        "reranker_score": -8.997385025024414,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "0a5c7423-cd7c-41d2-be7d-a68aaad18964",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6230000,
+      "end_ms": 6250000,
+      "score": -9.119989395141602,
+      "summary": "I'm so sad I couldn't be there, man. I feel like I was, like, not invited.",
+      "transcript_excerpt": "I'm so sad I couldn't be there, man. I feel like I was, like, not invited. That's... This is the feeling that, like, not like, that it was real, it's just because I was banned. This is the worst timing ever.",
+      "debug": {
+        "dense_rank": 33,
+        "dense_score": 0.8148705959320068,
+        "fusion_score": 0.010752688172043012,
+        "reranker_score": -9.119989395141602,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "e70962ff-3697-4180-9a1d-388cd3abfbab",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8100000,
+      "end_ms": 8102000,
+      "score": -9.193818092346191,
+      "summary": "いらっしゃいませ",
+      "transcript_excerpt": "いらっしゃいませ",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.82606041431427,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -9.193818092346191,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "533473d5-ebed-4ee7-8fc7-62ce739fefcc",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16230000,
+      "end_ms": 16241300,
+      "score": -9.321551322937012,
+      "summary": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "transcript_excerpt": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "debug": {
+        "dense_rank": 23,
+        "dense_score": 0.8177402019500732,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -9.321551322937012,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "bed5d12f-ffea-4ab5-b69a-0df49941fd35",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 4033920,
+      "end_ms": 4057920,
+      "score": -9.333096504211426,
+      "summary": "I lost the count. Shit!",
+      "transcript_excerpt": "I lost the count. Shit! Was it three or four? I think I did five or six just now for GC. Oh my god. Okay, can I get some water?",
+      "debug": {
+        "dense_rank": 50,
+        "dense_score": 0.8105026483535767,
+        "fusion_score": 0.00909090909090909,
+        "reranker_score": -9.333096504211426,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "a0663226-69fe-4e87-848a-90151e578e53",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16251300,
+      "end_ms": 16257300,
+      "score": -9.423521041870117,
+      "summary": "ああああああ 私はそれを忘れた 悪い",
+      "transcript_excerpt": "ああああああ 私はそれを忘れた 悪い",
+      "debug": {
+        "dense_rank": 35,
+        "dense_score": 0.8135040998458862,
+        "fusion_score": 0.010526315789473684,
+        "reranker_score": -9.423521041870117,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "f39c3092-75e0-4504-ac0c-96434be90600",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 17423000,
+      "end_ms": 17442000,
+      "score": -9.679837226867676,
+      "summary": "What the heck? これは違うバージョン?",
+      "transcript_excerpt": "What the heck? これは違うバージョン? なぜこれをしているの?",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.8193519115447998,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -9.679837226867676,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "ee501aa1-a7cb-4b71-84b9-25e34af95b27",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2295000,
+      "end_ms": 2297000,
+      "score": -9.78746509552002,
+      "summary": "Oh, but before...",
+      "transcript_excerpt": "Oh, but before...",
+      "debug": {
+        "dense_rank": 46,
+        "dense_score": 0.8114346861839294,
+        "fusion_score": 0.009433962264150943,
+        "reranker_score": -9.78746509552002,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "44411010-7409-4f3e-b027-0a1a576d5284",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 210000,
+      "end_ms": 212000,
+      "score": -9.89811897277832,
+      "summary": "アイスハウスニー",
+      "transcript_excerpt": "アイスハウスニー",
+      "debug": {
+        "dense_rank": 28,
+        "dense_score": 0.8159381747245789,
+        "fusion_score": 0.011363636363636364,
+        "reranker_score": -9.89811897277832,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "c22ee71f-8f4d-4813-9b63-0ba81535ba9c",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3330000,
+      "end_ms": 3332000,
+      "score": -9.969082832336426,
+      "summary": "Thank you for watching!",
+      "transcript_excerpt": "Thank you for watching!",
+      "debug": {
+        "dense_rank": 37,
+        "dense_score": 0.8128337264060974,
+        "fusion_score": 0.010309278350515464,
+        "reranker_score": -9.969082832336426,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "159998cc-8e19-45b3-8ab2-64c5616e5763",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 1777100,
+      "end_ms": 1799100,
+      "score": -9.985098838806152,
+      "summary": "Is he gonna post any reacting to... Any reacting to...",
+      "transcript_excerpt": "Is he gonna post any reacting to... Any reacting to... Any reacting... Any reacting to... Any reacting to my video Wait, how the fuck do you say? Any reacting to a video of her reacting to my video Eww! Delete that!",
+      "debug": {
+        "dense_rank": 49,
+        "dense_score": 0.8105231523513794,
+        "fusion_score": 0.009174311926605505,
+        "reranker_score": -9.985098838806152,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "893c4d25-01ac-464e-a17b-23b4711bc556",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3475000,
+      "end_ms": 3593000,
+      "score": -10.000312805175781,
+      "summary": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 26,
+        "dense_score": 0.8163710236549377,
+        "fusion_score": 0.011627906976744186,
+        "reranker_score": -10.000312805175781,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "dcd4c3d4-f490-4a2f-bd2b-97e9654bdbfa",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 19552160,
+      "end_ms": 19671000,
+      "score": -10.087007522583008,
+      "summary": "Ich mag keine Musik, wenn man Sags macht. me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": "Ich mag keine Musik, wenn man Sags macht. me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 47,
+        "dense_score": 0.8112163543701172,
+        "fusion_score": 0.009345794392523364,
+        "reranker_score": -10.087007522583008,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "21a449bb-68e8-4040-8870-39d7262a181b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 9077320,
+      "end_ms": 9078920,
+      "score": -10.146573066711426,
+      "summary": "I'm pretty, pretty neat there.",
+      "transcript_excerpt": "I'm pretty, pretty neat there.",
+      "debug": {
+        "dense_rank": 45,
+        "dense_score": 0.8117979764938354,
+        "fusion_score": 0.009523809523809525,
+        "reranker_score": -10.146573066711426,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "9adb69bc-eb98-4774-91b6-f58b4b03e33f",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 231320,
+      "end_ms": 247000,
+      "score": -10.163342475891113,
+      "summary": "按個鈴鐺,才能收到最新消息喔! You thought it was done, now it's not a game You thought it was done, now it's not a game",
+      "transcript_excerpt": "按個鈴鐺,才能收到最新消息喔! You thought it was done, now it's not a game You thought it was done, now it's not a game",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.8360761404037476,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -10.163342475891113,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "72a67ec4-b465-4ea4-bac3-6ff9137d23b6",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 594000,
+      "end_ms": 602000,
+      "score": -10.232674598693848,
+      "summary": "Thanks for watching! You",
+      "transcript_excerpt": "Thanks for watching! You",
+      "debug": {
+        "dense_rank": 44,
+        "dense_score": 0.8118327260017395,
+        "fusion_score": 0.009615384615384616,
+        "reranker_score": -10.232674598693848,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

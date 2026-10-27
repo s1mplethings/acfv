@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "frozen_at": "2026-10-10",
+  "immutable_after_first_run": true,
+  "creators": [
+    {"name": "Saruei", "creator_id": "f9f9a1b1-9778-4332-b8c9-36f945c4683c", "case_ids": ["R01", "R02", "R03", "R04", "R15", "R16", "R17", "R18"]},
+    {"name": "anny", "creator_id": "88b18261-5a6b-4de2-8c5b-adc4c3588849", "case_ids": ["R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R14", "R19", "R20"]},
+    {"name": "Q8Pilot", "creator_id": "4ae0ea54-45d0-4961-98b0-561e0190007d", "case_ids": ["Q01", "Q02", "Q03", "Q04", "Q05"]},
+    {"name": "twitchplayspokemon", "creator_id": "85129cb2-5672-4b0d-8c51-51347074fba1", "case_ids": ["T01", "T02", "T03", "T04", "T05"], "role": "HOLDOUT_LIBRARY"}
+  ],
+  "retrieval_case_count": 30,
+  "no_evidence_case_count": 12,
+  "expected_evidence_and_time_anchors": {
+    "R01-R20": "var/vod_download_e2e/452b2d8b-5db8-414f-aba7-26b3de70e3f0/fixed_set/retrieval/cases.json",
+    "Q01-Q05,T01-T05": "var/cross_library_generalization/limited-libraries-retrieval.json"
+  },
+  "moment_samples": "stratified from all 5259 FINAL moments; metrics receipt var/cross_library_generalization/moment-quality-metrics.json",
+  "clip_event_anchors": "existing accepted Clip rows; 2 decoded outputs per Creator in clip-media-validation.json",
+  "subtitle_samples": "existing bilingual Saruei variants only; other Creators explicitly NOT_EVALUATED",
+  "duration_profile_events": "existing Saruei four-profile artifact; no cross-Creator substitution",
+  "notes": [
+    "The 20-query set was not replaced after fixes.",
+    "Q8Pilot and twitchplayspokemon are below the two-hour product-library threshold.",
+    "No machine-translated fixture is treated as Japanese source media."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "mobilenetv3-linear",
+  "samples": 200,
+  "conditions": {
+    "tight_avatar_crop": {
+      "samples": 200,
+      "known": 100,
+      "unknown": 100,
+      "strong": 25,
+      "strong_precision": 1.0,
+      "strong_known_coverage": 0.25,
+      "unknown_rejection": 1.0,
+      "per_creator": {
+        "saruei": {
+          "samples": 50,
+          "strong_correct": 25
+        },
+        "anny": {
+          "samples": 50
+        }
+      }
+    },
+    "wide_context": {
+      "samples": 200,
+      "known": 100,
+      "unknown": 100,
+      "strong": 0,
+      "strong_precision": 1.0,
+      "strong_known_coverage": 0.0,
+      "unknown_rejection": 1.0,
+      "per_creator": {
+        "saruei": {
+          "samples": 50
+        },
+        "anny": {
+          "samples": 50
+        }
+      }
+    },
+    "background_masked": {
+      "samples": 200,
+      "known": 100,
+      "unknown": 100,
+      "strong": 1,
+      "strong_precision": 1.0,
+      "strong_known_coverage": 0.01,
+      "unknown_rejection": 1.0,
+      "per_creator": {
+        "saruei": {
+          "samples": 50,
+          "strong_correct": 1
+        },
+        "anny": {
+          "samples": 50
+        }
+      }
+    }
+  },
+  "conclusion": {
+    "background_leakage_flag": false,
+    "precision_delta_masked_minus_tight": 0.0,
+    "coverage_delta_masked_minus_tight": -0.24,
+    "scale_context_sensitivity": true,
+    "interpretation": "Precision does not show false-strong background leakage, but coverage loss under wide/masked context is reported separately as crop-scale sensitivity; human frame truth remains pending."
+  }
+}

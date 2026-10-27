@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "change_id": "new-twitch-creator-adaptive-validation",
+  "commit": "aa1486c998b91fb455bfb25ae31d79ed4b08b5ec",
+  "commands": [
+    "python -m compileall -q src scripts (x2)",
+    "eight CLI --help smokes (x2)",
+    "pytest -q (x2)",
+    "scripts/verify.ps1 (x2)",
+    "contract_checks.py --require-artifacts (x2)",
+    "CGKN doctor + repository guards"
+  ],
+  "results": [
+    {
+      "name": "pytest1",
+      "result": "577 passed, 9 warnings"
+    },
+    {
+      "name": "pytest2",
+      "result": "577 passed, 9 warnings"
+    },
+    {
+      "name": "verify1",
+      "result": "PASS; 577 tests; contracts PASS"
+    },
+    {
+      "name": "verify2",
+      "result": "PASS; 577 tests; contracts PASS"
+    },
+    {
+      "name": "real_download",
+      "result": "9/9 ranges; 10.01 GiB; full decode PASS"
+    }
+  ],
+  "passed": true,
+  "environment": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.11"
+  },
+  "limitations": [
+    "Human frame truth and WER/CER pending",
+    "anny has only one current public VOD",
+    "production gates remain closed"
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "case_id": "R15",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "Crow Country 里她搞混 RB/RT controls 是哪一段？",
+  "ground_truth": {
+    "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+    "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+    "moment_id": "895c760a-98df-4909-be18-225ba7764772",
+    "start_ms": 2990160,
+    "end_ms": 3049280,
+    "timestamp": "00:49:50.160–00:50:49.280",
+    "transcript_excerpt": "Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger",
+    "old_moment_id": "b6237bc5-1be2-44e2-9345-7d9c576ac5cf",
+    "acceptable_child_ids": [
+      "895c760a-98df-4909-be18-225ba7764772",
+      "f103faaa-bd0d-4496-895b-e0485cc3027b"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 3713.559,
+  "target_diagnostics": {
+    "fts_rank": 1,
+    "fusion_score": 0.01639344262295082,
+    "reranker_score": -0.42931491136550903,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "895c760a-98df-4909-be18-225ba7764772",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 2930520,
+      "end_ms": 3030480,
+      "score": -0.42931491136550903,
+      "summary": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth.",
+      "transcript_excerpt": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again ",
+      "debug": {
+        "fts_rank": 1,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -0.42931491136550903,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "4bec712f-900c-4911-91ea-b50eee7fd592",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 21215480,
+      "end_ms": 21254240,
+      "score": -2.2113142013549805,
+      "summary": "Guys what is it? Wait rebel rule Fairytale town action finger Classic crowd country rebel What does this one know it's 10 actually the first one is 10 Okay, 10.",
+      "transcript_excerpt": "Guys what is it? Wait rebel rule Fairytale town action finger Classic crowd country rebel What does this one know it's 10 actually the first one is 10 Okay, 10. Rubber crow, crow, doll. It's 10. It's a second one. I say crow, okay. Fairy You Tale town figure. Fairy tale town figure.",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -2.2113142013549805,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "375ac950-21c6-462c-8706-212ac0836998",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 25943000,
+      "end_ms": 25963000,
+      "score": -2.6340105533599854,
+      "summary": "Evangelion stands for the 14 month. Oh, I didn't die, yeah.",
+      "transcript_excerpt": "Evangelion stands for the 14 month. Oh, I didn't die, yeah. Crow quest. Crystal crows hiding around crow country. Can you find and shoot them all? Yeah, it's like extra stuff. That's nice.",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -2.6340105533599854,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "075ce12d-9184-405d-aa32-a91eb0c7a678",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 21261120,
+      "end_ms": 21265120,
+      "score": -2.973118543624878,
+      "summary": "There's any crows everywhere. I",
+      "transcript_excerpt": "There's any crows everywhere. I",
+      "debug": {
+        "fts_rank": 9,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -2.973118543624878,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "6dddc232-daf9-4fce-9c4a-84df64696f93",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 25966000,
+      "end_ms": 25993000,
+      "score": -3.5858261585235596,
+      "summary": "Okay, well, that was really fun. I enjoyed this game.",
+      "transcript_excerpt": "Okay, well, that was really fun. I enjoyed this game. That's pretty nice. Tomorrow, we'll be having like, you know, my regular like, you know, body. And we will be playing Modern Warfare. And this time, this time I'm going to stay. I'm going to stay and we're going to finish the game. Okay? In a single stream. Alright? And on Sunday, Modern Warfare 2. Got it?",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -3.5858261585235596,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "488ec9cc-ba9d-497a-afbf-3b2d68f743fc",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5460000,
+      "end_ms": 5513000,
+      "score": -3.5941967964172363,
+      "summary": "It looks like a really old Japanese game because the old low-poly Japanese game, they usually had the character a bit roundish like this and cutesy, like chibi style. I wonder what it talks about.",
+      "transcript_excerpt": "It looks like a really old Japanese game because the old low-poly Japanese game, they usually had the character a bit roundish like this and cutesy, like chibi style. I wonder what it talks about. Yeah, it's like PlayStation 1. It also looks like, yeah, inspired by Resident Evil. Or the controls look like shit. But I guess it's normal, it's like old games, you know, for aiming. And so far it actually has a lot of really good reviews on Steam. It's like 1,000 good reviews, like, wait, Crow, Count",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -3.5941967964172363,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "232d807a-7e25-4406-9e5b-43a4c5735b8a",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 25914000,
+      "end_ms": 25943000,
+      "score": -3.6087613105773926,
+      "summary": "Is this a multiple landing? I wonder.",
+      "transcript_excerpt": "Is this a multiple landing? I wonder. Our results, of course. Heal used 22. Hints spent, 5. Secret found, 5 on 15. Leaves used. Wait, what is leaves? Final rank? B. Like, bravo!",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -3.6087613105773926,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "80351bee-89cd-4bfd-bdbe-946028bcb1ec",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 3714000,
+      "end_ms": 3755000,
+      "score": -3.7082109451293945,
+      "summary": "Newspaper. ATLANTIC GLOBE, MAY 1986 CROW COUNTRY TEAM PARK OPENING SOON Cancel your weekend plans with the in-law and grab your sunglasses.",
+      "transcript_excerpt": "Newspaper. ATLANTIC GLOBE, MAY 1986 CROW COUNTRY TEAM PARK OPENING SOON Cancel your weekend plans with the in-law and grab your sunglasses. A brand new theme park is opening just a few miles southeast of Atlanta. Explore Furytale Town, Houghton Hilltop, and Ocean Kingdom at Crowe Country, which promises a day full of fun and adventure for the whole family. The park is owned by one Mr. Edward Crowe, a lifelong Atlanta local and landowner. Yes, that's right, it appears he named the park after hims",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -3.7082109451293945,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "f103faaa-bd0d-4496-895b-e0485cc3027b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 3033840,
+      "end_ms": 3129280,
+      "score": -3.7979238033294678,
+      "summary": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash…",
+      "transcript_excerpt": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash oh med kits it's actually like rewarding to uh explore and look everywhere trash hey a large med kit what's this okay it's a bathroom here does it mean i can actually enter or no wait oh handgun ammo okay cool the scrow here what is i eating that animal i can ",
+      "debug": {
+        "fts_rank": 2,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -3.7979238033294678,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "4b6dc7c5-352b-4bf1-a743-810ac46a2d79",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 3692000,
+      "end_ms": 3714000,
+      "score": -3.846449375152588,
+      "summary": "So the eggs are going missing. I think the kids are stealing them.",
+      "transcript_excerpt": "So the eggs are going missing. I think the kids are stealing them. Luckily, it turns out you can use anything as long as it's about the right size and shape. It's weird. I assumed that the eggs were magnetic or something, but apparently not. Oh, shotgun shells! Oh, fuck yeah. Every survival game needs a shotgun.",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -3.846449375152588,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "c8318616-0bf3-4daf-9aff-1caaae1a2994",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5513000,
+      "end_ms": 5595200,
+      "score": -3.951599359512329,
+      "summary": "So it says, it's overwhelming me, overwhelmingly. 3 positive and over 1571 reviews it has been released on 9 May and let me see the reviews summary no most helpful a cross country plushie cost $10 in 90 due to inflation it would cost $24…",
+      "transcript_excerpt": "So it says, it's overwhelming me, overwhelmingly. 3 positive and over 1571 reviews it has been released on 9 May and let me see the reviews summary no most helpful a cross country plushie cost $10 in 90 due to inflation it would cost $24 in 2024 I hate it here huh wait what what what is it why are you like cute huh strong contender for the best game cube game of 2024 short but worth it I built the game in 5.3 hours in my first casual playthrough it's a fantastic game and one of the best survival",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -3.951599359512329,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "4380ec18-84c9-4632-9f84-988ebed9e7c4",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 887360,
+      "end_ms": 961000,
+      "score": -4.049437999725342,
+      "summary": "What is this It's a bear. Oh my god It's it's a gray bear.",
+      "transcript_excerpt": "What is this It's a bear. Oh my god It's it's a gray bear. What do you do in this kind of situation? Huh? Brown you lay down White rim, but what about this one? What do you do? Uh It's a pookie bear shoot it no don't shoot it Wait, we have to come up with something like what do you do if you see like you know this bear There Hug it tightly. Yeah, that's the answer. You got it. You have to hug it If you don't he will Bite you and rip your head off Wait, maybe I should start like, you know from fr",
+      "debug": {
+        "fts_rank": 25,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -4.049437999725342,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "7507dbee-7bbe-4379-995c-d8d832c961e4",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 750000,
+      "end_ms": 837480,
+      "score": -4.2268781661987305,
+      "summary": "~~ Hello Hello How is it going? Hi Hi Praise me more Say how great I am How my tastes are just incredibly good that you rely on me to get better to have charisma to flex on your friends when At the end of the day, I'm the one who gave you…",
+      "transcript_excerpt": "~~ Hello Hello How is it going? Hi Hi Praise me more Say how great I am How my tastes are just incredibly good that you rely on me to get better to have charisma to flex on your friends when At the end of the day, I'm the one who gave you all of those links and all of those like, you know base a take Yes, yes praise me more Oh Okay, okay fine fine I stop I stop all right So, yeah today I have a brand new model to show you Hello Polly Yeah, sorry, I just had a coffee hello Polly treaty",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -4.2268781661987305,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "9a6f1e14-2b18-4b98-89ac-278b19679be6",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 0,
+      "end_ms": 120000,
+      "score": -4.409560203552246,
+      "summary": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "transcript_excerpt": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8301368951797485,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -4.409560203552246,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "c5f8c6fd-099f-405a-8957-7dbf6565aab5",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5324280,
+      "end_ms": 5350720,
+      "score": -4.418904781341553,
+      "summary": "So where did me go? On Moist Channel and the game I had in my mind was one of the, yeah it's an indie game that is called Crow Country.",
+      "transcript_excerpt": "So where did me go? On Moist Channel and the game I had in my mind was one of the, yeah it's an indie game that is called Crow Country. But I don't know is it actually good, I don't know if you heard about it, Crow Country.",
+      "debug": {
+        "fts_rank": 8,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -4.418904781341553,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "0dfc356c-67fc-4977-bf70-a6ddaf97db2c",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 23486220,
+      "end_ms": 23530000,
+      "score": -4.449686527252197,
+      "summary": "Okay, switch reader the lumber Embrace your number number number number Number Goblin spindle number And the greener Okay, so I got each of them screen-shotted.",
+      "transcript_excerpt": "Okay, switch reader the lumber Embrace your number number number number Number Goblin spindle number And the greener Okay, so I got each of them screen-shotted.",
+      "debug": {
+        "fts_rank": 18,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -4.449686527252197,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "315cff23-d973-464a-98eb-b31786ae645d",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5280000,
+      "end_ms": 5324280,
+      "score": -4.583299160003662,
+      "summary": "Hmm, okay good. Uh, pain to continue Terraria and I think I got like, how can I say this, I got an overdose of Terraria so not for now.",
+      "transcript_excerpt": "Hmm, okay good. Uh, pain to continue Terraria and I think I got like, how can I say this, I got an overdose of Terraria so not for now. So okay basically I saw like a video game that looked really interesting and I even saw like recently Most Critical playing at this game and I was thinking maybe I should give it a try. I don't know if it's actually like scary but I don't know if it's actually good as well.",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -4.583299160003662,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "5c0a3612-c0b5-4cc0-9b2a-5941dc4d2842",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 21175960,
+      "end_ms": 21206720,
+      "score": -4.631702899932861,
+      "summary": "I Tried to find like what is the other like stuff a toy they want What is your top that would be like the one who's a pumpkin maybe No, I Don't see any of a fucking night. Oh Oh my god, I got it forgot about this fucking shit",
+      "transcript_excerpt": "I Tried to find like what is the other like stuff a toy they want What is your top that would be like the one who's a pumpkin maybe No, I Don't see any of a fucking night. Oh Oh my god, I got it forgot about this fucking shit",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -4.631702899932861,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "2d7fb6be-5703-4fac-af91-c9318284e868",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 17449000,
+      "end_ms": 17472000,
+      "score": -4.659067630767822,
+      "summary": "Hmm. Let's start with Titanic.",
+      "transcript_excerpt": "Hmm. Let's start with Titanic. How is Edie Man's greatest ambition are undone, eh?",
+      "debug": {
+        "fts_rank": 21,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -4.659067630767822,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "17fc3434-086e-4ecd-87d9-560bcf2cca72",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 840000,
+      "end_ms": 872960,
+      "score": -4.752353191375732,
+      "summary": "Jesus fuck, wait, let me drink some water here And then We can play a Crow, crow Crow country Okay um Over 9000 powers thanks for the 53 month the french dude. Thank you very much for the 11 and uh corvus Ludivicus, thank you so much for…",
+      "transcript_excerpt": "Jesus fuck, wait, let me drink some water here And then We can play a Crow, crow Crow country Okay um Over 9000 powers thanks for the 53 month the french dude. Thank you very much for the 11 and uh corvus Ludivicus, thank you so much for the 3 month All right Um",
+      "debug": {
+        "fts_rank": 15,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -4.752353191375732,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "e34eab1a-7904-48bd-b2fb-32c5ea217129",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11850000,
+      "end_ms": 11855160,
+      "score": -4.850449562072754,
+      "summary": "What's wrong? R.I.P.",
+      "transcript_excerpt": "What's wrong? R.I.P.",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.841211199760437,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -4.850449562072754,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "2a942797-bf52-4c9d-80d3-4274e1e9e9b4",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 79480,
+      "end_ms": 123000,
+      "score": -5.987890243530273,
+      "summary": "秘密の 宙を 捕らえて ベピーコーラー 歩球 回るままの 卓球 歩球 さよなら 二人の秘密 アウトは コンピネージの ベルが 聞こえたの 秘密の 魔法をかけるの ベピーコーラー 壊れた道を止めて ラップを止める アイスハウスニー",
+      "transcript_excerpt": "秘密の 宙を 捕らえて ベピーコーラー 歩球 回るままの 卓球 歩球 さよなら 二人の秘密 アウトは コンピネージの ベルが 聞こえたの 秘密の 魔法をかけるの ベピーコーラー 壊れた道を止めて ラップを止める アイスハウスニー",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8319594860076904,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -5.987890243530273,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "a946340a-3a73-4d44-a1dd-965cadea48ee",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5350720,
+      "end_ms": 5370440,
+      "score": -6.125429630279541,
+      "summary": "I won't be able to play Fallout 2, I tried, I tried it guys. Wait, it's good you played it?",
+      "transcript_excerpt": "I won't be able to play Fallout 2, I tried, I tried it guys. Wait, it's good you played it? I read it's fun. So okay wait don't don't look everyone, we're going to, I'm going to show you anyway.",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -6.125429630279541,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "738a0111-8fd2-4abc-9deb-001544f73558",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 2724100,
+      "end_ms": 2743200,
+      "score": -6.430800914764404,
+      "summary": "Don't mess it up. Wow, wow.",
+      "transcript_excerpt": "Don't mess it up. Wow, wow.",
+      "debug": {
+        "fts_rank": 24,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -6.430800914764404,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "50b975a1-28ce-44a5-a1e8-08be5d98fcb5",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 0,
+      "end_ms": 69480,
+      "score": -6.7915167808532715,
+      "summary": "ん ん ん ん ん ん ん ん 一回仕掛けの アウトは 絡まる糸ほどいて 動き出す あなたを映す 青色 バランスの 瞳の軋む足で 踊りましょう 秘密の 宙を 捕らえて ベピーコーラー 歯車 回るままの 卓球 歩球 アイズ・ハルニー",
+      "transcript_excerpt": "ん ん ん ん ん ん ん ん 一回仕掛けの アウトは 絡まる糸ほどいて 動き出す あなたを映す 青色 バランスの 瞳の軋む足で 踊りましょう 秘密の 宙を 捕らえて ベピーコーラー 歯車 回るままの 卓球 歩球 アイズ・ハルニー",
+      "debug": {
+        "dense_rank": 17,
+        "dense_score": 0.8321502208709717,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -6.7915167808532715,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "24959f24-87be-4782-ae41-a552e274e421",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 150000,
+      "end_ms": 152000,
+      "score": -7.1939778327941895,
+      "summary": "アイスハウスニー",
+      "transcript_excerpt": "アイスハウスニー",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.839283287525177,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -7.1939778327941895,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "33ae3a22-4b6b-4e07-8b53-1ae8dfe8c853",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5443000,
+      "end_ms": 5445000,
+      "score": -7.2025980949401855,
+      "summary": "So it's this game.",
+      "transcript_excerpt": "So it's this game.",
+      "debug": {
+        "fts_rank": 14,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -7.2025980949401855,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "533473d5-ebed-4ee7-8fc7-62ce739fefcc",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16230000,
+      "end_ms": 16241300,
+      "score": -7.551384449005127,
+      "summary": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "transcript_excerpt": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8276597261428833,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -7.551384449005127,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "893c4d25-01ac-464e-a17b-23b4711bc556",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3475000,
+      "end_ms": 3593000,
+      "score": -7.656792163848877,
+      "summary": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8282766342163086,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -7.656792163848877,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "a0647cbd-7212-4bec-ae2d-a8b6a74f2fcb",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 21351000,
+      "end_ms": 21364000,
+      "score": -7.72401237487793,
+      "summary": "不 I feel it all on him",
+      "transcript_excerpt": "不 I feel it all on him",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.83476722240448,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -7.72401237487793,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

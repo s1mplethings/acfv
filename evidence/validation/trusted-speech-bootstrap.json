@@ -1,0 +1,9 @@
+{
+  "profile_version": "creator_profile_v2",
+  "status": "BLOCKED_NO_CONFIRMED_IDENTITY",
+  "creators": {
+    "Saruei": {"candidates": 0, "pseudo_trusted": 0, "human_confirmed": 0, "rejected": 0, "duration_ms": 0, "recordings": 0},
+    "anny": {"candidates": 0, "pseudo_trusted": 0, "human_confirmed": 0, "rejected": 0, "duration_ms": 0, "recordings": 0}
+  },
+  "strict_gate_lowered": false
+}

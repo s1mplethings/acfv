@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "run_artifact": "var/creator-adaptive-validation-v6/voice-profile-real-validation.json",
+  "provider": {"name": "resemblyzer", "version": "0.1.4", "license": "Apache-2.0", "os": "Windows", "device": "NVIDIA GeForce RTX 4050 Laptop GPU", "lexical_evidence_supported": false},
+  "profiles": {
+    "Saruei": {"segments": 20, "duration_ms": 70000, "temporal_regions": 4, "retained": 13, "outliers": 7},
+    "anny": {"segments": 20, "duration_ms": 70000, "temporal_regions": 4, "retained": 17, "outliers": 3}
+  },
+  "holdout": {
+    "Saruei": {"positive": 285, "negative": 167, "threshold": 0.7317779593714437, "false_reject_rate": 0.5787234042553191, "false_accept_rate": 0.03418803418803419},
+    "anny": {"positive": 167, "negative": 285, "threshold": 0.7376985387694781, "false_reject_rate": 0.4700854700854701, "false_accept_rate": 0.02553191489361702}
+  },
+  "performance_ms": {"samples": 492, "mean": 35.00422560756579, "p95": 32.03059994848445},
+  "result": "PASS_WITH_LIMITATIONS",
+  "production_ready": false,
+  "limitations": ["Visual bootstrap unavailable", "No human speaker labels", "Music/overlap not labelled", "anny holdout includes Collab speakers", "Cosine scores are not probabilities"]
+}

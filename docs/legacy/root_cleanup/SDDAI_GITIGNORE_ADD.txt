@@ -1,0 +1,5 @@
+Add these patterns to your repo .gitignore to avoid committing caches:
+
+__pycache__/
+*.pyc
+.pytest_cache/

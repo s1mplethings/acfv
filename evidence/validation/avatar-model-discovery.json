@@ -1,0 +1,75 @@
+{
+  "status": "BLOCKED_MODEL_PATH",
+  "configured_model": "",
+  "configured_entrypoint": "",
+  "searched_locations": [
+    "F:\\ACFV-Derived\\acfv-compact-human-review",
+    "F:\\ACFV-Derived",
+    "D:\\Cliper",
+    "E:\\work",
+    "E:\\.WORK",
+    "D:\\.py_projects\\hentaiviewer",
+    "C:\\Users\\sunom\\Documents\\Codex",
+    "C:\\Users\\sunom\\Downloads"
+  ],
+  "candidate_count": 5,
+  "selected": null,
+  "candidates": [
+    {
+      "path": "E:\\work\\best.pt",
+      "format": "PYTORCH",
+      "size_bytes": 105729484,
+      "sha256": "6b240a38215ae1a80ebee0784f244c5486649bed79e829ddb04e042e814a2e38",
+      "runtime": "ultralytics/detect",
+      "label_count": 1185,
+      "creator_labels": [],
+      "classification": "REJECTED_NON_AVATAR_LABELS",
+      "evidence": "Japanese character labels"
+    },
+    {
+      "path": "E:\\work\\yolo11l.pt",
+      "format": "PYTORCH",
+      "size_bytes": 51387343,
+      "sha256": "9ebd0e09d59811db4b1d61e2bc6730649608b1ac47f8dd01e2da6bca7c20023f",
+      "runtime": "ultralytics/detect",
+      "label_count": 80,
+      "creator_labels": [],
+      "classification": "REJECTED_NON_AVATAR_LABELS",
+      "evidence": "generic COCO labels"
+    },
+    {
+      "path": "D:\\.py_projects\\hentaiviewer\\Hanteiviewer\\best.pt",
+      "format": "PYTORCH",
+      "size_bytes": 120068562,
+      "sha256": "1c183f8d2a84b9a7c580f919db2e7d12a7bbb9345b0dc7529607827d95faa205",
+      "runtime": "ultralytics/detect",
+      "label_count": 2391,
+      "creator_labels": [],
+      "classification": "REJECTED_NON_AVATAR_LABELS",
+      "evidence": "Japanese character labels"
+    },
+    {
+      "path": "D:\\.py_projects\\hentaiviewer\\Hanteiviewer\\yolo11l.pt",
+      "format": "PYTORCH",
+      "size_bytes": 51387343,
+      "sha256": "9ebd0e09d59811db4b1d61e2bc6730649608b1ac47f8dd01e2da6bca7c20023f",
+      "runtime": "ultralytics/detect",
+      "label_count": 80,
+      "creator_labels": [],
+      "classification": "REJECTED_NON_AVATAR_LABELS",
+      "evidence": "generic COCO labels"
+    },
+    {
+      "path": "D:\\.py_projects\\hentaiviewer\\Hanteiviewer\\yolo11n.pt",
+      "format": "PYTORCH",
+      "size_bytes": 5613764,
+      "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+      "runtime": "ultralytics/detect",
+      "label_count": 80,
+      "creator_labels": [],
+      "classification": "REJECTED_NON_AVATAR_LABELS",
+      "evidence": "generic COCO labels"
+    }
+  ],
+  "selection_rule": "explicit model path + executable entrypoint + explicit versioned label mapping; filename is never sufficient"
+}

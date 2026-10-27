@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acfv.local/specs/test_receipt.schema.json",
+  "title": "ACFV TestReceipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "change_id", "commit", "commands", "results", "passed", "environment"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "change_id": {"type": "string", "minLength": 1},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "commands": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "results": {"type": "array", "items": {"type": "object"}, "minItems": 1},
+    "passed": {"type": "boolean"},
+    "environment": {
+      "type": "object",
+      "required": ["os", "python"],
+      "properties": {"os": {"type": "string"}, "python": {"type": "string"}}
+    },
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "open_clip_torch": {
+    "version": "2.32.0",
+    "license": "MIT",
+    "use": "ViT-B-32-quickgelu OpenAI weights benchmark"
+  },
+  "timm": {
+    "version": "1.0.13",
+    "license": "Apache-2.0",
+    "use": "MobileNetV3 and ConvNeXt-Tiny benchmark"
+  },
+  "speechbrain": {
+    "version": "1.0.3",
+    "license": "Apache-2.0",
+    "use": "ECAPA support-only speaker embedding"
+  },
+  "transformers": {
+    "version": "4.51.3",
+    "license": "Apache-2.0",
+    "use": "DINOv2 benchmark"
+  },
+  "resemblyzer": {
+    "version": "0.1.4",
+    "license": "Apache-2.0",
+    "use": "speaker embedding baseline"
+  },
+  "raw_media_redistribution": "PROHIBITED"
+}

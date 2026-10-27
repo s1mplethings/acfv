@@ -1,0 +1,45 @@
+{
+  "case_id": "M12",
+  "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+  "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "b26bb98c-a7cd-4caa-a49f-15ac7790b3e7",
+  "start_ms": 12090000,
+  "end_ms": 12142000,
+  "timestamp": "03:21:30.000–03:22:22.000",
+  "duration_ms": 52000,
+  "length_bucket": "medium",
+  "summary": "I am the storm that is approaching Provoking black clouds in isolation I am reclaimer of my name Formed in flames, I have been blessed My family crest is a demon of death Forsake the night I am awakened, a phoenix, ashen, dark, divine Descending misery, destiny chasing time",
+  "moment_transcript": "I am the storm that is approaching Provoking black clouds in isolation I am reclaimer of my name Formed in flames, I have been blessed My family crest is a demon of death Forsake the night I am awakened, a phoenix, ashen, dark, divine Descending misery, destiny chasing time",
+  "context_30s": {
+    "before": "Thank you.",
+    "inside": "I am the storm that is approaching Provoking black clouds in isolation I am reclaimer of my name Formed in flames, I have been blessed My family crest is a demon of death Forsake the night I am awakened, a phoenix, ashen, dark, divine Descending misery, destiny chasing time",
+    "after": "Inherit the nightmare, surrounded by faith Can't run away Keep walking the line, between the light"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 28000,
+    "pause_after_ms": 8000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 12060000,
+      "end_ms": 12062000,
+      "text": "Thank you."
+    },
+    "next_segment": {
+      "start_ms": 12150000,
+      "end_ms": 12166000,
+      "text": "Inherit the nightmare, surrounded by faith"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

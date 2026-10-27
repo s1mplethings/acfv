@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-11",
+  "branch": "fix/language-quality-calibration",
+  "requested_base": "ae63f6f7f80e363f15f49fb78b871d9ea028455a",
+  "available_parent": "753add2",
+  "implementation_commit": "291df397428afb06942d4080b049e63808a08337",
+  "changes": [
+    {"path": "src/acfv/clips/refinement.py", "summary": "Four-state correction decisions, independently validated CorrectionEvidence, speech-form classification, and word-level explainable ASR risk."},
+    {"path": "src/acfv/clips/subtitles.py", "summary": "Typed entities, categorized semantic guards, Chinese/English number equivalence, calibrated profanity and source-copy handling, and risk-based release state."},
+    {"path": "src/acfv/clips/variants.py", "summary": "Combines ASR, translation, untranslated-cue, and timeline risks into READY / READY_WITH_WARNINGS / NEEDS_REVIEW."},
+    {"path": "src/acfv/clips/__init__.py", "summary": "Exports the calibrated language-quality types and helpers."},
+    {"path": "scripts/build_language_quality_calibration.py", "summary": "Deterministically audits and re-evaluates the frozen 12-Clip snapshot and builds the review pack."},
+    {"path": "tests/unit/test_language_quality_calibration.py", "summary": "Correction, risk, entity, broken-sentence, translation, release, and 30-case mutation regression."},
+    {"path": "tests/unit/test_language_quality_hardening.py", "summary": "Updates prior expectations for four-state correction and conversational fragments."},
+    {"path": "specs/capabilities/final_clip_transcript_refinement.md", "summary": "Specifies independent evidence, issue risk, and calibrated sentence/release behavior."},
+    {"path": "specs/capabilities/bilingual_subtitle.md", "summary": "Specifies typed entity and categorized semantic-guard contracts."},
+    {"path": "docs/repo_map.md", "summary": "Records canonical owners and the offline calibration tool."},
+    {"path": "docs/issue_memory/problem_registry.md", "summary": "Records missing baseline object, offline G drive, and Python source-path recovery."}
+  ],
+  "not_changed": ["GUI source", "Retrieval architecture", "Moment architecture", "Duration", "Download", "Live", "ASR model", "translation prompt structure"],
+  "new_dependencies": [],
+  "review_pack": {
+    "path": "C:\\Users\\sunom\\.codex\\deliverables\\language-quality-calibration-review-pack.zip",
+    "size_bytes": 46600617,
+    "sha256": "553DF580FD60CE404F69C8912098A15741F7E22BF725417612D7ACC827A06987",
+    "clips": 12
+  },
+  "rollback": "git revert 291df397428afb06942d4080b049e63808a08337"
+}

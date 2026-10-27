@@ -1,0 +1,10 @@
+{
+  "model_path": "G:/Cliper/acfv/model/best.pt",
+  "entrypoint": "src/acfv/providers/ultralytics_avatar.py",
+  "labels": {
+    "vtuber": null
+  },
+  "mapping_version": "recovered-vtuber-presence-v1",
+  "capability": "avatar_presence_only",
+  "identity_capable": false
+}

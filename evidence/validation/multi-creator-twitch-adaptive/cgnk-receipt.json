@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "doctor_ok": true,
+  "status_ok": true,
+  "initialized": true,
+  "brief_valid": true,
+  "workflow_state": "ready",
+  "brief_sha256": "7cc5897887b14f310e9a002c24486d123a5712ccb4c8d64269565966f566de11",
+  "formal_evidence_status": "NOT_EVALUATED",
+  "formal_evidence_note": "CGKN workflow state does not authorize product readiness; repository tests and recorded runtime evidence are authoritative.",
+  "cgkn_repository_revision": "bf66bfbc354ce432c8a18b7d792cbf1535a9bb88",
+  "plugin_version": "0.2.0-rc.2+codex.20261001183500"
+}

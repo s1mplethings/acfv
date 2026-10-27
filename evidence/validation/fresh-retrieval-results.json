@@ -1,0 +1,198 @@
+{
+  "supported": [
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+        "23d6835b-0dae-4f77-9881-20daa2a6bdfc",
+        "1827a4d4-f915-4cc1-b10b-1ea7a74f52b4",
+        "59209e75-d7c0-46c4-a44b-019c8971cf0d",
+        "b10046d9-b241-45cb-9ced-307f66261b06"
+      ],
+      "latency_seconds": 11.93094999997993
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+        "52206678-8803-4e3b-a6c6-079a8b3da682",
+        "f1668d5b-fb96-42e1-9a6d-dec944180fc6",
+        "b10046d9-b241-45cb-9ced-307f66261b06",
+        "bc640672-1e42-412d-baa1-604efb1ad40f"
+      ],
+      "latency_seconds": 1.1094178999774158
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+        "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+        "bef0073a-1574-4d39-9c3e-508c1aaf5ae4",
+        "fdb5e739-47ee-47dc-9185-e89817305713",
+        "385dfd99-3640-4612-803a-e7d07006eb70"
+      ],
+      "latency_seconds": 0.9125036000041291
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "f9196f84-56c7-4c74-b085-1cc2dec70407",
+        "bef0073a-1574-4d39-9c3e-508c1aaf5ae4",
+        "78f2c349-695f-4673-9019-43afe7ff9dd1",
+        "d701f02c-a376-4c66-a194-be4f9223dfcb",
+        "7fc39eaa-86a8-4841-aa0e-3534ea97baed"
+      ],
+      "latency_seconds": 1.0192607000062708
+    },
+    {
+      "moment_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "mean wouldn't like real life like",
+      "summary": "I mean, wouldn't it be like, in real life, you can put like a fake one, right? That one is, I mean...",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+        "f9137af3-36dc-4d2d-ad81-719da1f9aec4",
+        "69ff4feb-d1bd-4b31-a14b-2a2a42be4e3a",
+        "dcc29348-66a3-4d7c-8bf2-993733f78a91",
+        "bf6f3c5a-8dfd-4e95-98ae-25b8f3ce9e3d"
+      ],
+      "latency_seconds": 1.093309700023383
+    },
+    {
+      "moment_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "Like don't know like Sucking fingers",
+      "summary": "Like... I don't know, like...",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+        "c2c0ae6a-9ce1-4ff9-a089-898236ef96ca",
+        "c2fe59cd-0f40-461f-98f4-7679601db8a6",
+        "97ecdbdc-121e-4cec-acf1-a2dcd8d37d6d",
+        "e6c499c2-1000-4d4e-b910-b9e6677d0c4a"
+      ],
+      "latency_seconds": 1.0518490000104066
+    },
+    {
+      "moment_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "okay where shit toilet yeah cannot",
+      "summary": "okay what where are you the shit on the toilet yeah i cannot help oh bloody hand print on the sink it's just a fucking cinematic wait what is this being scared of are you friendly okay that means what okay you actually have like they give…",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+        "385dfd99-3640-4612-803a-e7d07006eb70",
+        "84f0b8bb-60bf-48a7-8a50-007029b3e669",
+        "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+        "696bc272-8151-4134-8fed-ddf45f20023d"
+      ],
+      "latency_seconds": 1.1124416000093333
+    },
+    {
+      "moment_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "yeah pools heard about game some",
+      "summary": "Oh yeah pools, I heard about this game and I saw some gameplay, it looks fine. It looks like...",
+      "rank": 1,
+      "top5": true,
+      "hits": [
+        "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+        "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+        "1a5730fe-1797-4bdb-8235-aa0805b4424f",
+        "78f2c349-695f-4673-9019-43afe7ff9dd1",
+        "982f6bfe-6eab-4689-889c-6f3e36827cc2"
+      ],
+      "latency_seconds": 1.0766926999785937
+    }
+  ],
+  "top1": 1.0,
+  "top3": 1.0,
+  "top5": 1.0,
+  "no_evidence": [
+    {
+      "query": "quantum pineapple tax treaty on Mars",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "pass": true
+    },
+    {
+      "query": "underwater violin volcano insurance",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "pass": true
+    },
+    {
+      "query": "火星菠萝税收条约",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "pass": true
+    },
+    {
+      "query": "海底小提琴火山保险",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "pass": true
+    }
+  ],
+  "no_evidence_accuracy": 1.0,
+  "latency_median_seconds": 1.0850012000009883,
+  "runtime": {
+    "embedding_backend": "transformers_mean_pooling",
+    "embedding_model": "intfloat/multilingual-e5-base",
+    "embedding_dimension": 768,
+    "embedding_device": "cpu",
+    "retrieval_mode": "REAL_MODEL",
+    "index_version": 5,
+    "representation_schema": "moment-representations-v2",
+    "parent_moments": 86,
+    "representations": 378,
+    "reranker_backend": "TransformersReranker",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_device": "cpu",
+    "reranker_enabled": true
+  }
+}

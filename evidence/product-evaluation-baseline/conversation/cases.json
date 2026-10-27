@@ -1,0 +1,866 @@
+[
+  {
+    "case_id": "C01",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say about not having played PUBG for a long time?",
+    "assistant_answer": "找到 5 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "4ee429f4-3145-4b86-a057-66f5b4100d31",
+      "39154966-11eb-40dd-b7e6-303cee61c77f",
+      "bbd1b665-f75d-4e40-af00-690915386daf",
+      "4d5c7111-41ec-4b92-b55b-f5ce0efa802a",
+      "12f1ee26-6c12-4386-b829-62e999e70994"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "4ee429f4-3145-4b86-a057-66f5b4100d31",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 6828000,
+        "end_ms": 6885120,
+        "timestamp": "01:53:48.000–01:54:45.120",
+        "score": 0.016129032258064516,
+        "summary": "Oh, okay. Excuse me, I forgot you're a man. And men can be sometimes lazy. I forgot how fucking stupid you can be sometimes. You don't need to go down. you need to pee you can just pee around somewhere like here no yeah you you can i'm sure there's somewhere you can pee yeah you would pee like around here i'm sure about it i'm sure you can you can pee by the edge you wouldn't bother going downstairs like us women would have to no wait what i cannot go down do i have a skill issue is it because i'm a woman the furnace what do you mean in the furnace what",
+        "transcript_excerpt": "Oh, okay. Excuse me, I forgot you're a man. And men can be sometimes lazy. I forgot how fucking stupid you can be sometimes. You don't need to go down. you need to pee you can just pee around somewhere like here no yeah you you can i'm sure there's somewhere you can pee yeah you would pee like around here i'm sure about it i'm sure you can you can pee by the edge you wouldn't bother going downstairs like us women would have to no wait what i cannot go down do i have a skill issue is it because i"
+      },
+      {
+        "rank": 2,
+        "moment_id": "39154966-11eb-40dd-b7e6-303cee61c77f",
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "recording_title": "anny 的xp rating",
+        "start_ms": 2605000,
+        "end_ms": 2663000,
+        "timestamp": "00:43:25.000–00:44:23.000",
+        "score": 0.015873015873015872,
+        "summary": "Look at that, I guess. Fucking blowy joe. Don't remind me of fucking blowy joe. It sounds so fucking cursed. Dog, babe. Dog, babe! Puke, uh... Dominating? I mean... It's alright? I'm more of a switch, so I don't know. It's, like, between the mid and okay. I mean, okay. I don't know. Dom... Dom... Domnastic... What does that mean even? Domination Mask Correction? Can I put them together? Correction...",
+        "transcript_excerpt": "Look at that, I guess. Fucking blowy joe. Don't remind me of fucking blowy joe. It sounds so fucking cursed. Dog, babe. Dog, babe! Puke, uh... Dominating? I mean... It's alright? I'm more of a switch, so I don't know. It's, like, between the mid and okay. I mean, okay. I don't know. Dom... Dom... Domnastic... What does that mean even? Domination Mask Correction? Can I put them together? Correction..."
+      },
+      {
+        "rank": 3,
+        "moment_id": "bbd1b665-f75d-4e40-af00-690915386daf",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 19231000,
+        "end_ms": 19289000,
+        "timestamp": "05:20:31.000–05:21:29.000",
+        "score": 0.014925373134328358,
+        "summary": "Nothing for me to do in here. Okay. Isn't that like a place where I can use the silver key again? I think those are gold. Hmm. King's Quest, thank you very much for the 30 month. Let's look one more time. Golden key here. Hmm. So yeah, we already checked this place before. Yeah, that place is still like filled with gas.",
+        "transcript_excerpt": "Nothing for me to do in here. Okay. Isn't that like a place where I can use the silver key again? I think those are gold. Hmm. King's Quest, thank you very much for the 30 month. Let's look one more time. Golden key here. Hmm. So yeah, we already checked this place before. Yeah, that place is still like filled with gas."
+      },
+      {
+        "rank": 4,
+        "moment_id": "4d5c7111-41ec-4b92-b55b-f5ce0efa802a",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 946400,
+        "end_ms": 1006000,
+        "timestamp": "00:15:46.400–00:16:46.000",
+        "score": 0.014705882352941176,
+        "summary": "Let me just uh, here we go Ah, that's better All right, let's restart this Hello! What is this? Yeah, I always keep my feet together Because I'm not a whore Yeah, I'm not patting my legs because it's like, you know, a bit of a bitch is claiming for fucking dicks No, no, no Might I keep them closed? Sometimes I open them if you say like, you know, nice words and you show me the right stuff Okay, so these are my shoes You know them, you've already seen them These are my socks Yeah, they're nice, I can show you like, you know, on the side Oh my god, this is 3D! Wow! Pretty neat, huh?",
+        "transcript_excerpt": "Let me just uh, here we go Ah, that's better All right, let's restart this Hello! What is this? Yeah, I always keep my feet together Because I'm not a whore Yeah, I'm not patting my legs because it's like, you know, a bit of a bitch is claiming for fucking dicks No, no, no Might I keep them closed? Sometimes I open them if you say like, you know, nice words and you show me the right stuff Okay, so these are my shoes You know them, you've already seen them These are my socks Yeah, they're nice, I"
+      },
+      {
+        "rank": 5,
+        "moment_id": "12f1ee26-6c12-4386-b829-62e999e70994",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 21360000,
+        "end_ms": 21416560,
+        "timestamp": "05:56:00.000–05:56:56.560",
+        "score": 0.014492753623188406,
+        "summary": "What if I make them fall Oh fuck Where's the bonfire? Where's the bonfire? Where's the bonfire? I'm not coming back to this gorgeous view ahead Uh huh, uh huh, uh huh, tell me more about it Yump! Where am I? Okay, I thought that was like a big bear or some shit Where am I? Fuck Okay, what's this? Constipation pad",
+        "transcript_excerpt": "What if I make them fall Oh fuck Where's the bonfire? Where's the bonfire? Where's the bonfire? I'm not coming back to this gorgeous view ahead Uh huh, uh huh, uh huh, tell me more about it Yump! Where am I? Okay, I thought that was like a big bear or some shit Where am I? Fuck Okay, what's this? Constipation pad"
+      }
+    ],
+    "evidence_moment_count": 5,
+    "evidence_recording_count": 4,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 5,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C02",
+    "evaluation_type": "SUPPORTED",
+    "question": "Why didn't she want to leave her room even though she was hungry?",
+    "assistant_answer": "找到 1 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "6f4e6f9c-69e2-454a-b08e-ea5356f0d744"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "6f4e6f9c-69e2-454a-b08e-ea5356f0d744",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 4028000,
+        "end_ms": 4086960,
+        "timestamp": "01:07:08.000–01:08:06.960",
+        "score": 0.01639344262295082,
+        "summary": "Huge With 9000, 9000, 99 Wait, they're not done with it yet? I never realized how ugly this one is What is that? Damn, they like made him younger They didn't have to make him younger, but like fluid animations and updated visual effects and if you listen closely you might even be able to",
+        "transcript_excerpt": "Huge With 9000, 9000, 99 Wait, they're not done with it yet? I never realized how ugly this one is What is that? Damn, they like made him younger They didn't have to make him younger, but like fluid animations and updated visual effects and if you listen closely you might even be able to"
+      }
+    ],
+    "evidence_moment_count": 1,
+    "evidence_recording_count": 1,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 1,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C03",
+    "evaluation_type": "SUPPORTED",
+    "question": "What control did she identify as the right trigger in Crow Country?",
+    "assistant_answer": "找到 7 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "eae2fb8b-8312-4078-95b4-3e6e350ee43f",
+      "89ce92d1-c9fa-4e44-b68b-ba7f4baad63e",
+      "c438c510-02df-464e-9eb2-b0eb5550ac5d",
+      "9f668d4b-bd2a-4714-ac84-d83fa075d433",
+      "1b1ae5b2-6958-40bd-8e52-54db7f4db171",
+      "240fac0b-890f-4b1f-81c5-25f4f2056102",
+      "ba2d620d-7707-48f1-8bbd-187695f3fc57"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "eae2fb8b-8312-4078-95b4-3e6e350ee43f",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 12320280,
+        "end_ms": 12379440,
+        "timestamp": "03:25:20.280–03:26:19.440",
+        "score": 0.01639344262295082,
+        "summary": "Why why are you laughing? One second What is What am I Please don't modify that to be green What are you talking about? Okay, that's so good you're right What are you talking about Vidal? I'm saying I don't want to be a horse. I sure hope no one turns me into a horse Okay, I'll respect your wish and not turn you into a horse or a pony or any, any other similar creature. Okay. Thank you.",
+        "transcript_excerpt": "Why why are you laughing? One second What is What am I Please don't modify that to be green What are you talking about? Okay, that's so good you're right What are you talking about Vidal? I'm saying I don't want to be a horse. I sure hope no one turns me into a horse Okay, I'll respect your wish and not turn you into a horse or a pony or any, any other similar creature. Okay. Thank you."
+      },
+      {
+        "rank": 2,
+        "moment_id": "89ce92d1-c9fa-4e44-b68b-ba7f4baad63e",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 1464080,
+        "end_ms": 1522160,
+        "timestamp": "00:24:24.080–00:25:22.160",
+        "score": 0.016129032258064516,
+        "summary": "you know the weird Iod thingy into your your arm and then they put you know giant machine and yeah talking of which when um Sunday I came and see the daughter is like we're not going to like do you do another scanner to you because we don't want to radiate you and I'm like no shit I don't want to become a fucking ghoul and uh so if we did like a scan and they haven't found anything it can be like a cancer right shouldn't have put your face right up that nuclear waste wait do you mean like you know so you check you know um bomb at Megatron all right let me see let me see let me see uh oh god I'm getting scared now I don't know like I mean if it's like wait if it actually gets unswollen cannot be like",
+        "transcript_excerpt": "you know the weird Iod thingy into your your arm and then they put you know giant machine and yeah talking of which when um Sunday I came and see the daughter is like we're not going to like do you do another scanner to you because we don't want to radiate you and I'm like no shit I don't want to become a fucking ghoul and uh so if we did like a scan and they haven't found anything it can be like a cancer right shouldn't have put your face right up that nuclear waste wait do you mean like you kn"
+      },
+      {
+        "rank": 3,
+        "moment_id": "c438c510-02df-464e-9eb2-b0eb5550ac5d",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+        "start_ms": 7996240,
+        "end_ms": 7999140,
+        "timestamp": "02:13:16.240–02:13:19.140",
+        "score": 0.015873015873015872,
+        "summary": "What the fuck are you doing i'm patting it",
+        "transcript_excerpt": "What the fuck are you doing i'm patting it"
+      },
+      {
+        "rank": 4,
+        "moment_id": "9f668d4b-bd2a-4714-ac84-d83fa075d433",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 2750400,
+        "end_ms": 2809500,
+        "timestamp": "00:45:50.400–00:46:49.500",
+        "score": 0.015151515151515152,
+        "summary": "Whoa, it's so old school. Whoa. Can I run? Okay, so B is for running, RB... Okay, I need to hold this. And here I can point and shoot. Okay, so I have no ammo. Why... Why does this agent go somewhere with a gun but with no ammo? Okay. This is a really nice car, but it's covered in trash. I guess the owner doesn't care for it anymore. Wait, is it, like, loud enough? What's that? It's a medkit, take it. Okay. Wait, what's here? Oh, just some trash. Does it look like maybe an ammo box? Wait, can I look in my car? There's something important stored in here. Open it. It's my box of handgun ammo!",
+        "transcript_excerpt": "Whoa, it's so old school. Whoa. Can I run? Okay, so B is for running, RB... Okay, I need to hold this. And here I can point and shoot. Okay, so I have no ammo. Why... Why does this agent go somewhere with a gun but with no ammo? Okay. This is a really nice car, but it's covered in trash. I guess the owner doesn't care for it anymore. Wait, is it, like, loud enough? What's that? It's a medkit, take it. Okay. Wait, what's here? Oh, just some trash. Does it look like maybe an ammo box? Wait, can I "
+      },
+      {
+        "rank": 5,
+        "moment_id": "1b1ae5b2-6958-40bd-8e52-54db7f4db171",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 11294000,
+        "end_ms": 11352000,
+        "timestamp": "03:08:14.000–03:09:12.000",
+        "score": 0.014925373134328358,
+        "summary": "Wait, wasn't there like another Silent Hill that also got like a trailer? Isn't it Silent Hill with like flowers? Or RF trailer? Yeah, what about this one? When is it going to get released? Release date? 2025! Another year! So I guess it would be in Japan this time. Which is interesting because I always did America before. And how can you have a Silent Hill that is not in Silent Hill you know?",
+        "transcript_excerpt": "Wait, wasn't there like another Silent Hill that also got like a trailer? Isn't it Silent Hill with like flowers? Or RF trailer? Yeah, what about this one? When is it going to get released? Release date? 2025! Another year! So I guess it would be in Japan this time. Which is interesting because I always did America before. And how can you have a Silent Hill that is not in Silent Hill you know?"
+      },
+      {
+        "rank": 6,
+        "moment_id": "240fac0b-890f-4b1f-81c5-25f4f2056102",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 7231000,
+        "end_ms": 7290000,
+        "timestamp": "02:00:31.000–02:01:30.000",
+        "score": 0.014492753623188406,
+        "summary": "That is also Kanban Ice cream That is surprising What is under panties? Asking important questions, bro Okay, I wouldn't know what the fuck this is Oh my god, I wonder what this word is Coffee Menu Smartphone Kanban",
+        "transcript_excerpt": "That is also Kanban Ice cream That is surprising What is under panties? Asking important questions, bro Okay, I wouldn't know what the fuck this is Oh my god, I wonder what this word is Coffee Menu Smartphone Kanban"
+      },
+      {
+        "rank": 7,
+        "moment_id": "ba2d620d-7707-48f1-8bbd-187695f3fc57",
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+        "start_ms": 3911520,
+        "end_ms": 3950280,
+        "timestamp": "01:05:11.520–01:05:50.280",
+        "score": 0.014285714285714285,
+        "summary": "What do you mean she ducked irl Where is it So Yeah, I need this Uh, uh, you I should actually keep it Oh Well, you're not really good at like, you know keeping the flood threat inside your own fucking building",
+        "transcript_excerpt": "What do you mean she ducked irl Where is it So Yeah, I need this Uh, uh, you I should actually keep it Oh Well, you're not really good at like, you know keeping the flood threat inside your own fucking building"
+      }
+    ],
+    "evidence_moment_count": 7,
+    "evidence_recording_count": 6,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 7,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C04",
+    "evaluation_type": "SUPPORTED",
+    "question": "What internet solution came up for streaming from a boat?",
+    "assistant_answer": "找到 5 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "1c52ef04-ce70-4c41-9026-8258f30da17d",
+      "d63d8e6a-d742-4bfd-97fa-6886205f2542",
+      "18bc0ba8-9a43-474a-9cbf-37a84aa594f5",
+      "e5306966-c5ca-48ef-9a91-e153d0cf8a0d",
+      "728abbd0-2021-46bc-8edc-6e7799a2fb59"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "1c52ef04-ce70-4c41-9026-8258f30da17d",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 9448000,
+        "end_ms": 9463000,
+        "timestamp": "02:37:28.000–02:37:43.000",
+        "score": 0.015873015873015872,
+        "summary": "Imagine instead like you know it's me here. And watching. From outside. And they would smack it. Oh s**t, I don't know what I meant to move.",
+        "transcript_excerpt": "Imagine instead like you know it's me here. And watching. From outside. And they would smack it. Oh s**t, I don't know what I meant to move."
+      },
+      {
+        "rank": 2,
+        "moment_id": "d63d8e6a-d742-4bfd-97fa-6886205f2542",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+        "start_ms": 2695000,
+        "end_ms": 2754000,
+        "timestamp": "00:44:55.000–00:45:54.000",
+        "score": 0.014925373134328358,
+        "summary": "Oops Shit I was so invested in this fucking machine I don't know why, these machines look so cool But they're like nothing special, but it looks so nice I want one I want one that only has water on it You're also very invested Chat! Yo! Here! I got it for you! I got for everyone Hell yeah, chat! Eat it! Bah! Oh no, I spilled everything Yo, fries Yo, you want... You want the fries, I got them I got the fries for you",
+        "transcript_excerpt": "Oops Shit I was so invested in this fucking machine I don't know why, these machines look so cool But they're like nothing special, but it looks so nice I want one I want one that only has water on it You're also very invested Chat! Yo! Here! I got it for you! I got for everyone Hell yeah, chat! Eat it! Bah! Oh no, I spilled everything Yo, fries Yo, you want... You want the fries, I got them I got the fries for you"
+      },
+      {
+        "rank": 3,
+        "moment_id": "18bc0ba8-9a43-474a-9cbf-37a84aa594f5",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+        "start_ms": 14714680,
+        "end_ms": 14755680,
+        "timestamp": "04:05:14.680–04:05:55.680",
+        "score": 0.014705882352941176,
+        "summary": "I'm done. I'm done. I'm done. I'm done. Yo, look at this car. Bella! Bella, me when I see you. Oh, thanks, babe. Thank you. Did you wear these on me? Oh, what the fuck? Oh, does it switch here? Can I play it? I'm done. I'm done. I'm done. I'm done.",
+        "transcript_excerpt": "I'm done. I'm done. I'm done. I'm done. Yo, look at this car. Bella! Bella, me when I see you. Oh, thanks, babe. Thank you. Did you wear these on me? Oh, what the fuck? Oh, does it switch here? Can I play it? I'm done. I'm done. I'm done. I'm done."
+      },
+      {
+        "rank": 4,
+        "moment_id": "e5306966-c5ca-48ef-9a91-e153d0cf8a0d",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 5510000,
+        "end_ms": 5570000,
+        "timestamp": "01:31:50.000–01:32:50.000",
+        "score": 0.014492753623188406,
+        "summary": "Show me your penis, babe. What? That doesn't even go that well. Welcome to Shasingo. Here, you'll use your camera to create unique photo flashcards for learning Japanese. You're free to explore your surroundings and study at your own pace without any pressure. In-world translations! Besides learning new vocabulary with your camera, you'll also come across Japanese text in various places while exploring. Interacting with the text will allow you to view the original Japanese text along with the translation. Let's open up your camera when you're ready so you can learn how to use it. When I'm ready. Sakura Eki. Cute. Does it show the kanjis too? Ah, it says question mark for now.",
+        "transcript_excerpt": "Show me your penis, babe. What? That doesn't even go that well. Welcome to Shasingo. Here, you'll use your camera to create unique photo flashcards for learning Japanese. You're free to explore your surroundings and study at your own pace without any pressure. In-world translations! Besides learning new vocabulary with your camera, you'll also come across Japanese text in various places while exploring. Interacting with the text will allow you to view the original Japanese text along with the tr"
+      },
+      {
+        "rank": 5,
+        "moment_id": "728abbd0-2021-46bc-8edc-6e7799a2fb59",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 14291000,
+        "end_ms": 14347000,
+        "timestamp": "03:58:11.000–03:59:07.000",
+        "score": 0.014285714285714285,
+        "summary": "There you go, let's go in. Maybe I get to jump from the other side, I hope. Oh no. Oh, I shoot pretty good. Pretty good. Fuck. Hey, I'm pretty good now. Grenade! Grenade! Oh yeah, right. There can be traps, I need to be careful. Was that a trap? I didn't saw any.",
+        "transcript_excerpt": "There you go, let's go in. Maybe I get to jump from the other side, I hope. Oh no. Oh, I shoot pretty good. Pretty good. Fuck. Hey, I'm pretty good now. Grenade! Grenade! Oh yeah, right. There can be traps, I need to be careful. Was that a trap? I didn't saw any."
+      }
+    ],
+    "evidence_moment_count": 5,
+    "evidence_recording_count": 4,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 5,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C05",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say helps memorize words?",
+    "assistant_answer": "找到 4 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "a2e4152e-9d45-4488-bd40-c617074107f3",
+      "3ba75e9c-f5f0-467b-b847-5906c49fcf13",
+      "4f72daac-c604-424b-978c-bc6b0f7996cc",
+      "12afb3d3-4b06-47f8-8f71-e812696ac3c6"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "a2e4152e-9d45-4488-bd40-c617074107f3",
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+        "start_ms": 12097920,
+        "end_ms": 12106120,
+        "timestamp": "03:21:37.920–03:21:46.120",
+        "score": 0.01639344262295082,
+        "summary": "My god, what the fuck what are they doing to him? Oh",
+        "transcript_excerpt": "My god, what the fuck what are they doing to him? Oh"
+      },
+      {
+        "rank": 2,
+        "moment_id": "3ba75e9c-f5f0-467b-b847-5906c49fcf13",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+        "start_ms": 8460560,
+        "end_ms": 8519680,
+        "timestamp": "02:21:00.560–02:21:59.680",
+        "score": 0.016129032258064516,
+        "summary": "that's a lot to me oh of course i forgot you're you can't handle it oh she says i'm an alcoholic gets fucking drunk from three percent one drink of a three percent drink oh yeah guys i'm such a bad person i'm alcoholic three percent alcohol holy no there's another alcohol that is 20 it's the one i spilled uh a few days ago and they like more than a half of the drink was like lemon sour it was 20 and then you put lemon melon melon soda for the other half and you mix it and it's so fucking good but i spilled it sounds good oh i'm surprised my eastern european is showing she's more eastern european than i am what the fuck you mean she's",
+        "transcript_excerpt": "that's a lot to me oh of course i forgot you're you can't handle it oh she says i'm an alcoholic gets fucking drunk from three percent one drink of a three percent drink oh yeah guys i'm such a bad person i'm alcoholic three percent alcohol holy no there's another alcohol that is 20 it's the one i spilled uh a few days ago and they like more than a half of the drink was like lemon sour it was 20 and then you put lemon melon melon soda for the other half and you mix it and it's so fucking good bu"
+      },
+      {
+        "rank": 3,
+        "moment_id": "4f72daac-c604-424b-978c-bc6b0f7996cc",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 18176440,
+        "end_ms": 18236440,
+        "timestamp": "05:02:56.440–05:03:56.440",
+        "score": 0.015625,
+        "summary": "Pony's, ponies, ponies, ponies, swag. Pony's, ponies, ponies, ponies, swag. Pony's, ponies, ponies, ponies, swag. Oh my gosh, am I lost or am I lost or am I lost? Pony's, ponies, ponies, ponies, swag. Oh my gosh, am I lost or am I lost or am I lost? Swagburg, not a clever pony on the track, though. Fuck a fuck, I say in farce, never made a wack show. A peeping MLP, make you Harvey to the lactose. But I can't front as if we ever gonna lactose. Slow it down so far, rap some fucking, Kickin' hard like Applebuckin'. Even Dash is askin', wondering Who's that man, that swag is somethin'? Come to think of it I'm very rarely Based like base, God, rare like rarity Dense heads hedge on the feminist fences Don't give shit if you care about parody That's I.T.Y., now I see why They said it was a cartoon I should try Call me Diamond Dog, I am iced out fly Rocking magic ass raps with the twilight eyes Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags Ponies, ponies, ponies, swags",
+        "transcript_excerpt": "Pony's, ponies, ponies, ponies, swag. Pony's, ponies, ponies, ponies, swag. Pony's, ponies, ponies, ponies, swag. Oh my gosh, am I lost or am I lost or am I lost? Pony's, ponies, ponies, ponies, swag. Oh my gosh, am I lost or am I lost or am I lost? Swagburg, not a clever pony on the track, though. Fuck a fuck, I say in farce, never made a wack show. A peeping MLP, make you Harvey to the lactose. But I can't front as if we ever gonna lactose. Slow it down so far, rap some fucking, Kickin' hard l"
+      },
+      {
+        "rank": 4,
+        "moment_id": "12afb3d3-4b06-47f8-8f71-e812696ac3c6",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 10848000,
+        "end_ms": 10908000,
+        "timestamp": "03:00:48.000–03:01:48.000",
+        "score": 0.014705882352941176,
+        "summary": "Self-defense? That's your favorite sword? I really like it too, but I think I need to get it stronger. Chat, why am I attacking things when I... Wait, chat! Is it bugging again? I got me! Take it back, Tom! Tab out and tab in? Tab out, tab in. Look, he's doing that again! What the f... Hello? Okay. I don't want to kill her by accident. Hold on. If I do this... Okay. It seems fine now.",
+        "transcript_excerpt": "Self-defense? That's your favorite sword? I really like it too, but I think I need to get it stronger. Chat, why am I attacking things when I... Wait, chat! Is it bugging again? I got me! Take it back, Tom! Tab out and tab in? Tab out, tab in. Look, he's doing that again! What the f... Hello? Okay. I don't want to kill her by accident. Hold on. If I do this... Okay. It seems fine now."
+      }
+    ],
+    "evidence_moment_count": 4,
+    "evidence_recording_count": 4,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 4,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C06",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What game-related moments mention weapons or ammo?",
+    "assistant_answer": "找到 5 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "a9238e07-c414-414b-8cfb-d42b80559bc4",
+      "6267e599-17e0-4b38-b462-2fde884096f5",
+      "4e288d18-b11b-4a2c-9e7d-af13f3593205",
+      "86289651-bc53-44ad-8483-97eff8abd54e",
+      "401ed060-0fc8-4833-bfd0-ca7a6df1f57e"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "a9238e07-c414-414b-8cfb-d42b80559bc4",
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "recording_title": "anny 的xp rating",
+        "start_ms": 1879000,
+        "end_ms": 1910000,
+        "timestamp": "00:31:19.000–00:31:50.000",
+        "score": 0.016129032258064516,
+        "summary": "Cause nothing changed in my mind after reading what you... What you said. Cheating! Um... What do we think about it? Vegan videos? Dunno? I don't know? Um... Cheerleader? Not puke. Uh... Eh?",
+        "transcript_excerpt": "Cause nothing changed in my mind after reading what you... What you said. Cheating! Um... What do we think about it? Vegan videos? Dunno? I don't know? Um... Cheerleader? Not puke. Uh... Eh?"
+      },
+      {
+        "rank": 2,
+        "moment_id": "6267e599-17e0-4b38-b462-2fde884096f5",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 120000,
+        "end_ms": 160000,
+        "timestamp": "00:02:00.000–00:02:40.000",
+        "score": 0.015384615384615385,
+        "summary": "3, 2, 1, go! Ha! You think this is a lyrical competition? This isn't a rap game, man! This is the Fast Lane, son! Oh, you think you'd be equivalent to Mark 1? When I'm far past Mark 11 in this pitch, man! I'm just following the rules of the road, you know? You ought to try following the rules of the road yourself, kid. I'm saying 3, 2, 1, go! I'm going to the Fast Lane, I'm going to the Fast Lane All I want is to speed up, ha ha ha Homeboy, here's Robin with the E-brake on! Ah! Get ready to enjoy the essence of my exhaust pipe, brother! Let's go!",
+        "transcript_excerpt": "3, 2, 1, go! Ha! You think this is a lyrical competition? This isn't a rap game, man! This is the Fast Lane, son! Oh, you think you'd be equivalent to Mark 1? When I'm far past Mark 11 in this pitch, man! I'm just following the rules of the road, you know? You ought to try following the rules of the road yourself, kid. I'm saying 3, 2, 1, go! I'm going to the Fast Lane, I'm going to the Fast Lane All I want is to speed up, ha ha ha Homeboy, here's Robin with the E-brake on! Ah! Get ready to enjo"
+      },
+      {
+        "rank": 3,
+        "moment_id": "4e288d18-b11b-4a2c-9e7d-af13f3593205",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 30208560,
+        "end_ms": 30264280,
+        "timestamp": "08:23:28.560–08:24:24.280",
+        "score": 0.015151515151515152,
+        "summary": "care. I actually when I saw when I saw the fucking stream. No, wait, what was it? What the fuck wasn't? Yeah, the stream I did. I was like, okay, there's gonna be fucking drama happening. I literally just quit Twitter for a day. Oh, my fucking God. Yeah, the black screen stream. Yeah, I think you're better off not knowing. It's okay. I like how the whole chat knows about it though. If you were streaming consistently and if you were there, chat would watch you",
+        "transcript_excerpt": "care. I actually when I saw when I saw the fucking stream. No, wait, what was it? What the fuck wasn't? Yeah, the stream I did. I was like, okay, there's gonna be fucking drama happening. I literally just quit Twitter for a day. Oh, my fucking God. Yeah, the black screen stream. Yeah, I think you're better off not knowing. It's okay. I like how the whole chat knows about it though. If you were streaming consistently and if you were there, chat would watch you"
+      },
+      {
+        "rank": 4,
+        "moment_id": "86289651-bc53-44ad-8483-97eff8abd54e",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 2697000,
+        "end_ms": 2755000,
+        "timestamp": "00:44:57.000–00:45:55.000",
+        "score": 0.014925373134328358,
+        "summary": "Brother! Bro, they don't... They don't free for me Bro, no no no no no What's going on here? What's going on here? I can tell you it definitely wasn't free for you Just tell me why, like... I don't know Maybe you could try telling me how much you admire it Bro, bro, bro That's 40... 30 million dollars, chat! I don't have 30 million dollars! I mean, I could try stealing it from the bank She instantly came up with a solution You can apply to make yourself bankrupt if you cannot pay your debts Oh my god! My god, Annie, and chat I have a confession to make",
+        "transcript_excerpt": "Brother! Bro, they don't... They don't free for me Bro, no no no no no What's going on here? What's going on here? I can tell you it definitely wasn't free for you Just tell me why, like... I don't know Maybe you could try telling me how much you admire it Bro, bro, bro That's 40... 30 million dollars, chat! I don't have 30 million dollars! I mean, I could try stealing it from the bank She instantly came up with a solution You can apply to make yourself bankrupt if you cannot pay your debts Oh m"
+      },
+      {
+        "rank": 5,
+        "moment_id": "401ed060-0fc8-4833-bfd0-ca7a6df1f57e",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 4069920,
+        "end_ms": 4129500,
+        "timestamp": "01:07:49.920–01:08:49.500",
+        "score": 0.014492753623188406,
+        "summary": "Soap. I have honey! Oh my fucking god. I have honey! You guys are fucking crazy. You guys are crazy! She's so dumb. Wait... What the f*** you mean she's so dumb? Yes I am, so what? I'm okay, chat. No, I'm f***ing drunk already. F***! I feel it hitting me. I feel... I can eat something. Okay, I have... Rice crackers. Is that good enough? No, no, no, no, no. I'm not eating... I'm not drinking on an empty stomach. I did have a little bit of food before the stream. Why is it sweet? Ew.",
+        "transcript_excerpt": "Soap. I have honey! Oh my fucking god. I have honey! You guys are fucking crazy. You guys are crazy! She's so dumb. Wait... What the f*** you mean she's so dumb? Yes I am, so what? I'm okay, chat. No, I'm f***ing drunk already. F***! I feel it hitting me. I feel... I can eat something. Okay, I have... Rice crackers. Is that good enough? No, no, no, no, no. I'm not eating... I'm not drinking on an empty stomach. I did have a little bit of food before the stream. Why is it sweet? Ew."
+      }
+    ],
+    "evidence_moment_count": 5,
+    "evidence_recording_count": 4,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 5,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C07",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she talks about being hungry or food.",
+    "assistant_answer": "找到 3 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "1c55e1aa-3781-4be4-a36e-16aa8544dc17",
+      "a17f3e50-1735-43ce-b435-a5a5fb73e322",
+      "a6d94bb0-aa6b-47fb-9ce9-ab4040290d9d"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "1c55e1aa-3781-4be4-a36e-16aa8544dc17",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 10971640,
+        "end_ms": 10992640,
+        "timestamp": "03:02:51.640–03:03:12.640",
+        "score": 0.01639344262295082,
+        "summary": "What's that song called where she says the F word? F word, where she says fuck Not the F word, Monka lol You've gone too far You... You... Wait, what? You're gonna go far? You're gonna... Go...",
+        "transcript_excerpt": "What's that song called where she says the F word? F word, where she says fuck Not the F word, Monka lol You've gone too far You... You... Wait, what? You're gonna go far? You're gonna... Go..."
+      },
+      {
+        "rank": 2,
+        "moment_id": "a17f3e50-1735-43ce-b435-a5a5fb73e322",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+        "start_ms": 1777000,
+        "end_ms": 1828000,
+        "timestamp": "00:29:37.000–00:30:28.000",
+        "score": 0.015873015873015872,
+        "summary": "Try it. I already did. The maximum is 100. I think which death said something about something won the ground behind you. I can't be bothered. It's fine. I hate the lag. Can I just sit? What if I sit? It's not going to be better, isn't it? It is not going to be better. I'm not so cute. Not as so cute.",
+        "transcript_excerpt": "Try it. I already did. The maximum is 100. I think which death said something about something won the ground behind you. I can't be bothered. It's fine. I hate the lag. Can I just sit? What if I sit? It's not going to be better, isn't it? It is not going to be better. I'm not so cute. Not as so cute."
+      },
+      {
+        "rank": 3,
+        "moment_id": "a6d94bb0-aa6b-47fb-9ce9-ab4040290d9d",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 1055600,
+        "end_ms": 1109000,
+        "timestamp": "00:17:35.600–00:18:29.000",
+        "score": 0.015151515151515152,
+        "summary": "doing so far. Wait, the music is too loud. Here we go. So you were wondering about like my cheek and, uh, it's doing better. Uh, so I went again in the emergency and well, this time, you know, they did the blood test and they didn't find anything. So it means like it's not, you know, Um, and he just gave me more inflammatory, anti-inflammatory of course. Uh, and um, that's it, that's it. So then he gave me like an appointment with like, what's called an ORL, which is basically, I don't know how you translate that in English, but that's for the ears and the nostrils because you are thinking maybe like, it's related to the sinus. So, I had my appointment yesterday in the morning,",
+        "transcript_excerpt": "doing so far. Wait, the music is too loud. Here we go. So you were wondering about like my cheek and, uh, it's doing better. Uh, so I went again in the emergency and well, this time, you know, they did the blood test and they didn't find anything. So it means like it's not, you know, Um, and he just gave me more inflammatory, anti-inflammatory of course. Uh, and um, that's it, that's it. So then he gave me like an appointment with like, what's called an ORL, which is basically, I don't know how "
+      }
+    ],
+    "evidence_moment_count": 3,
+    "evidence_recording_count": 3,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 3,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C08",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What moments mention music or songs?",
+    "assistant_answer": "找到 7 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "2ff02287-9078-4dea-91e0-02b28215b2af",
+      "6df89977-2dc0-4e0d-8223-5c77b25f4a67",
+      "c56ac60a-ee0d-4c3e-97b5-1f73ab22ae72",
+      "afe52d60-7eab-4040-b117-b0ec34565723",
+      "318998a4-5c69-4eb0-95fd-d81339b7445b",
+      "c4362908-ecee-4dc7-ad65-6a2997ec03e3",
+      "6c8ae46d-a475-4ac4-aa09-10d8fe92d14d"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "2ff02287-9078-4dea-91e0-02b28215b2af",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 6694040,
+        "end_ms": 6752000,
+        "timestamp": "01:51:34.040–01:52:32.000",
+        "score": 0.016129032258064516,
+        "summary": "Oh, 44 7, thank you for the force even And name Jack, I don't have a family name Oh Don't worry didn't copy Why don't you both ask to chat and get to know each other? And then, like, you know, since it's been, like, you know, while we haven't, like, you know, had sex, we can just, you know, dirty talk to each other, like, you know, by the radio. Oh my god. Oh, something else I'd like me to bite. Goodnight, Conor. Talk to you tomorrow. Okay, what do I do now? Do I just go to bed? I guess I go to bed. What time is it? Do I have the hour somewhere? Yeah, I need to go to bed before midnight. That's the job. I guess I go to bed.",
+        "transcript_excerpt": "Oh, 44 7, thank you for the force even And name Jack, I don't have a family name Oh Don't worry didn't copy Why don't you both ask to chat and get to know each other? And then, like, you know, since it's been, like, you know, while we haven't, like, you know, had sex, we can just, you know, dirty talk to each other, like, you know, by the radio. Oh my god. Oh, something else I'd like me to bite. Goodnight, Conor. Talk to you tomorrow. Okay, what do I do now? Do I just go to bed? I guess I go to "
+      },
+      {
+        "rank": 2,
+        "moment_id": "6df89977-2dc0-4e0d-8223-5c77b25f4a67",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 3952000,
+        "end_ms": 4011000,
+        "timestamp": "01:05:52.000–01:06:51.000",
+        "score": 0.015873015873015872,
+        "summary": "Basically there's a layer mode Did I move this by accident? What the fuck Thank you, stranger of paradise. Subscribing. New subber. Oh yeah, I put Hiyori as a reference again. Because I still want to like... I was trying to do the similar kind of body on this one, but like she ended up feeling too fucking long. She looks like a noodle. Because I tried to reference Hiyori. So I made her shorter, and now she's like more or less the same height, size, whatever the fuck.",
+        "transcript_excerpt": "Basically there's a layer mode Did I move this by accident? What the fuck Thank you, stranger of paradise. Subscribing. New subber. Oh yeah, I put Hiyori as a reference again. Because I still want to like... I was trying to do the similar kind of body on this one, but like she ended up feeling too fucking long. She looks like a noodle. Because I tried to reference Hiyori. So I made her shorter, and now she's like more or less the same height, size, whatever the fuck."
+      },
+      {
+        "rank": 3,
+        "moment_id": "c56ac60a-ee0d-4c3e-97b5-1f73ab22ae72",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 1317000,
+        "end_ms": 1374000,
+        "timestamp": "00:21:57.000–00:22:54.000",
+        "score": 0.015625,
+        "summary": "Happy Christmas Uh, I don't drink. Nah, I- Listen, I hate drinking. It's not fun for me. Only when I did with chat and like a little bit. And also I don't drink vodka at all. I don't like the taste. Perfect panther thinking of Resub. Yeah, I know about Neuron- Neuron death. That's so fucking funny. Man, I wake up and so much shit has happened. Ah, Xylexis, thank you. I also like saw some clips from Stanley Parable. I didn't really watch anything yet. Like Vito playing Stanley Parable and it said in the title, Any Parable. I wonder what happened. Any Parable? I don't know what happened. I'll have to see the clips. I mean, you know what? We can do it now. If you guys want.",
+        "transcript_excerpt": "Happy Christmas Uh, I don't drink. Nah, I- Listen, I hate drinking. It's not fun for me. Only when I did with chat and like a little bit. And also I don't drink vodka at all. I don't like the taste. Perfect panther thinking of Resub. Yeah, I know about Neuron- Neuron death. That's so fucking funny. Man, I wake up and so much shit has happened. Ah, Xylexis, thank you. I also like saw some clips from Stanley Parable. I didn't really watch anything yet. Like Vito playing Stanley Parable and it said"
+      },
+      {
+        "rank": 4,
+        "moment_id": "afe52d60-7eab-4040-b117-b0ec34565723",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 8679000,
+        "end_ms": 8739000,
+        "timestamp": "02:24:39.000–02:25:39.000",
+        "score": 0.015384615384615385,
+        "summary": "Hello? Can anyone hear me? Minish Jack, tower 11. Thank goodness. I'm lost and I'm really starting to freak out. What's going on? I don't even know where to start. I went out to explore the area and lost track of time. And now it's dark and I can't remember the trail back to my truck. I think I'm lost. I'm in the middle of the woods, on this trail surrounded by trees. Everything looks different at night. I thought shooting a few flare gun shots might get someone's attention, but no one's come yet. All I did was light up the trees and make everything look even scarier. I just want to find a way out of here. Do you remember any landmarks? I remember passing a small stream earlier.",
+        "transcript_excerpt": "Hello? Can anyone hear me? Minish Jack, tower 11. Thank goodness. I'm lost and I'm really starting to freak out. What's going on? I don't even know where to start. I went out to explore the area and lost track of time. And now it's dark and I can't remember the trail back to my truck. I think I'm lost. I'm in the middle of the woods, on this trail surrounded by trees. Everything looks different at night. I thought shooting a few flare gun shots might get someone's attention, but no one's come ye"
+      },
+      {
+        "rank": 5,
+        "moment_id": "318998a4-5c69-4eb0-95fd-d81339b7445b",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 2930520,
+        "end_ms": 2990160,
+        "timestamp": "00:48:50.520–00:49:50.160",
+        "score": 0.015151515151515152,
+        "summary": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again Quick turn oh, it's with B. Okay, so if I do this, okay, cool What's that it's a bottle containing an antidote",
+        "transcript_excerpt": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again "
+      },
+      {
+        "rank": 6,
+        "moment_id": "c4362908-ecee-4dc7-ad65-6a2997ec03e3",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 12851920,
+        "end_ms": 12889120,
+        "timestamp": "03:34:11.920–03:34:49.120",
+        "score": 0.014705882352941176,
+        "summary": "oh you can even move the camera it's so cool i'm sure like it's again an indie game oh what is this light no i have no balls that's true i have a pussy that's the thing between you and i i'm a woman so what do you want rescue creepy",
+        "transcript_excerpt": "oh you can even move the camera it's so cool i'm sure like it's again an indie game oh what is this light no i have no balls that's true i have a pussy that's the thing between you and i i'm a woman so what do you want rescue creepy"
+      },
+      {
+        "rank": 7,
+        "moment_id": "6c8ae46d-a475-4ac4-aa09-10d8fe92d14d",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 25518160,
+        "end_ms": 25575000,
+        "timestamp": "07:05:18.160–07:06:15.000",
+        "score": 0.014285714285714285,
+        "summary": "No, yes Elaine, he could speak. Just barely. He told me who he was, and why he had come. I wrote it down, word for word, on a little piece of paper. And then, I went back to harvesting the roots. No subsequent guests were capable of speech. You may now understand why I am choosing not to take the cure. My time is short. Before I die, I must look upon what I have wrote. You're going through the pool? Hold out your hand. What? Take it. Now that it is in your hand, I'm going through the pool. You'll be mutated, it'll kill you. A failing hand. Perhaps, if I'm lucky, I may get a glimpse of what lies on the other side.",
+        "transcript_excerpt": "No, yes Elaine, he could speak. Just barely. He told me who he was, and why he had come. I wrote it down, word for word, on a little piece of paper. And then, I went back to harvesting the roots. No subsequent guests were capable of speech. You may now understand why I am choosing not to take the cure. My time is short. Before I die, I must look upon what I have wrote. You're going through the pool? Hold out your hand. What? Take it. Now that it is in your hand, I'm going through the pool. You'l"
+      }
+    ],
+    "evidence_moment_count": 7,
+    "evidence_recording_count": 5,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 7,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C09",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Where does she talk about streaming or chat?",
+    "assistant_answer": "找到 1 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "c2f9c038-1749-4cbc-a579-758e8f534056"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "c2f9c038-1749-4cbc-a579-758e8f534056",
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "recording_title": "anny 的xp rating",
+        "start_ms": 505200,
+        "end_ms": 542720,
+        "timestamp": "00:08:25.200–00:09:02.720",
+        "score": 0.014705882352941176,
+        "summary": "Bell Dolphin okay her I got was pretty hot Oh Yeah, but it doesn't make me feel anything Is that make sense? Like if I was with a girl. I wouldn't want her to I got me cuz like what is she I hate going about Panting face I guess It's not something that Me on personal And I'll put it here I like it on art I feel like I feel like we need like a separate tier list of art",
+        "transcript_excerpt": "Bell Dolphin okay her I got was pretty hot Oh Yeah, but it doesn't make me feel anything Is that make sense? Like if I was with a girl. I wouldn't want her to I got me cuz like what is she I hate going about Panting face I guess It's not something that Me on personal And I'll put it here I like it on art I feel like I feel like we need like a separate tier list of art"
+      }
+    ],
+    "evidence_moment_count": 1,
+    "evidence_recording_count": 1,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 1,
+      "multi_evidence_requirement_met": false
+    }
+  },
+  {
+    "case_id": "C10",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she sounds scared or talks about fear.",
+    "assistant_answer": "找到 3 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "3f00465c-01ed-4c2f-82fc-40f577c766ee",
+      "339efaf6-25ef-4ab2-8da4-81dd487387c9",
+      "0e2501ff-7f8a-4030-9e75-b6d709057a1f"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "3f00465c-01ed-4c2f-82fc-40f577c766ee",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 2482000,
+        "end_ms": 2537000,
+        "timestamp": "00:41:22.000–00:42:17.000",
+        "score": 0.01639344262295082,
+        "summary": "Any sub-gifters? Any sub-gifters? Hahaha She knows! She fucking knows Wait, what? Why is she talking about scams? No, why are they noting it? Don't Don't Thanks for the second... They're noting it! Evil. Stop! Evil. Wow.",
+        "transcript_excerpt": "Any sub-gifters? Any sub-gifters? Hahaha She knows! She fucking knows Wait, what? Why is she talking about scams? No, why are they noting it? Don't Don't Thanks for the second... They're noting it! Evil. Stop! Evil. Wow."
+      },
+      {
+        "rank": 2,
+        "moment_id": "339efaf6-25ef-4ab2-8da4-81dd487387c9",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 14437000,
+        "end_ms": 14496000,
+        "timestamp": "04:00:37.000–04:01:36.000",
+        "score": 0.016129032258064516,
+        "summary": "She... Wait, what is this? I'm so glad that this... She's the one who wrote on the graves! I wonder what happened to her! What happened to her? Oh, it's zoom-like! That's awesome! We've joined... ...Ni... ...Silverhand. Oh man... Right in the face! I hope we can have a sub in 2077 too! I don't want to see the mods. I don't care about the mods. I want anything that is canon! Okay. I think I'm going to stop the stream from here. It's already 1am for me. So if I stay, you know, stream longer, I'm going to go to bed like, you know, much more later. So I'd rather like, you know, stop now.",
+        "transcript_excerpt": "She... Wait, what is this? I'm so glad that this... She's the one who wrote on the graves! I wonder what happened to her! What happened to her? Oh, it's zoom-like! That's awesome! We've joined... ...Ni... ...Silverhand. Oh man... Right in the face! I hope we can have a sub in 2077 too! I don't want to see the mods. I don't care about the mods. I want anything that is canon! Okay. I think I'm going to stop the stream from here. It's already 1am for me. So if I stay, you know, stream longer, I'm g"
+      },
+      {
+        "rank": 3,
+        "moment_id": "0e2501ff-7f8a-4030-9e75-b6d709057a1f",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 1652640,
+        "end_ms": 1711320,
+        "timestamp": "00:27:32.640–00:28:31.320",
+        "score": 0.014925373134328358,
+        "summary": "No, uh, yeah, yeah, it's, it's a black panty. Now you know the color of my panties, it's black, just like, just like my soul, yeah. It does feel weird to, like, not have my face tracking. It's just, it's just my voice. But it's still pretty cool. Um, all right. So, I guess that's it for the reveal, you know, I don't want to do anything fancy because I don't even know how long I will be using this model. I was thinking maybe it would be nice to just use it when I do like a low-poly game, maybe? And so today we're going to play Alcrow Country. So apparently it have a lot of really good reviews and people said it's like a masterpiece, so yeah. Wait, you got to put your voice through a filter so it sounds slow-poly.",
+        "transcript_excerpt": "No, uh, yeah, yeah, it's, it's a black panty. Now you know the color of my panties, it's black, just like, just like my soul, yeah. It does feel weird to, like, not have my face tracking. It's just, it's just my voice. But it's still pretty cool. Um, all right. So, I guess that's it for the reveal, you know, I don't want to do anything fancy because I don't even know how long I will be using this model. I was thinking maybe it would be nice to just use it when I do like a low-poly game, maybe? A"
+      }
+    ],
+    "evidence_moment_count": 3,
+    "evidence_recording_count": 3,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 3,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C11",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she was planning to stop streaming next month?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "citations": [],
+    "retrieved_evidence": [],
+    "evidence_moment_count": 0,
+    "evidence_recording_count": 0,
+    "automatic_facts": {
+      "returned_no_evidence": true,
+      "citation_count": 0,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C12",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce that she was moving permanently to Berlin?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "citations": [],
+    "retrieved_evidence": [],
+    "evidence_moment_count": 0,
+    "evidence_recording_count": 0,
+    "automatic_facts": {
+      "returned_no_evidence": true,
+      "citation_count": 0,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C13",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce a weekly cooking podcast?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "citations": [],
+    "retrieved_evidence": [],
+    "evidence_moment_count": 0,
+    "evidence_recording_count": 0,
+    "automatic_facts": {
+      "returned_no_evidence": true,
+      "citation_count": 0,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C14",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she signed a sponsorship with Logitech?",
+    "assistant_answer": "找到 3 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "3fde2cde-2411-4cc2-9bd8-fe8378816f61",
+      "336619b1-420c-4f3c-972e-c28cc4a3fadd",
+      "b51a6337-0559-4d8d-9122-25315e5af61f"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "3fde2cde-2411-4cc2-9bd8-fe8378816f61",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 13188000,
+        "end_ms": 13229600,
+        "timestamp": "03:39:48.000–03:40:29.600",
+        "score": 0.016129032258064516,
+        "summary": "I mean, with the Cyberpunk, like, anime, I'm sure they're making up the profit right now. Okay. like sending data or sending money to each other by touching personal links or the ability to scan the environment through our eyes. These are just some of the many things people in 2077 can do. Thanks to advancements in other fields of research, we can also cure illnesses and diseases that wasn't possible before. But because of this rises new illnesses and old illnesses with different methods of its sprouting. For example, poor nutrition and mental isolation can be caused by overuse of brain dance. Those previously mentioned effects aren't new illnesses, but the method by which you acquire them... Well, if you do too much brain dances, you can become sick from it.",
+        "transcript_excerpt": "I mean, with the Cyberpunk, like, anime, I'm sure they're making up the profit right now. Okay. like sending data or sending money to each other by touching personal links or the ability to scan the environment through our eyes. These are just some of the many things people in 2077 can do. Thanks to advancements in other fields of research, we can also cure illnesses and diseases that wasn't possible before. But because of this rises new illnesses and old illnesses with different methods of its "
+      },
+      {
+        "rank": 2,
+        "moment_id": "336619b1-420c-4f3c-972e-c28cc4a3fadd",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 59000,
+        "end_ms": 119000,
+        "timestamp": "00:00:59.000–00:01:59.000",
+        "score": 0.014705882352941176,
+        "summary": "Comma rated intake, fossil fueling with a turbo boost Cross the finish line because I'm cranking, watch you! Buckle up the safety cause you know we're about to blast though Broken all the records told you son, you better back off Speeding like a demon, thirsty, dreaming that my ass lost That's the thing, the speed of time! Yeah! Life goes on fastly! Life goes on fastly! All I wanted is to speed it till I find you I'm saying three, two, one, go! Black fucking afterburner, look this bitch and watch me zoom Iron eagle in a test, buzz the towers, shake the crew Drinking Dr. Locomotor, riding solo, pull the brakes Pass the foot and no return, we're heating up the intertakes I'm like tornado, probably really fatal When I'm rapping all my shit they're like, ate away the weight of food All the competition can get left in the pay You can't touch it in your lane cause I'm just so sad All is gone, back in the fast lane, back in the fast lane All I wanted is to speed it till I find you I'm saying three, two, one, go!",
+        "transcript_excerpt": "Comma rated intake, fossil fueling with a turbo boost Cross the finish line because I'm cranking, watch you! Buckle up the safety cause you know we're about to blast though Broken all the records told you son, you better back off Speeding like a demon, thirsty, dreaming that my ass lost That's the thing, the speed of time! Yeah! Life goes on fastly! Life goes on fastly! All I wanted is to speed it till I find you I'm saying three, two, one, go! Black fucking afterburner, look this bitch and watc"
+      },
+      {
+        "rank": 3,
+        "moment_id": "b51a6337-0559-4d8d-9122-25315e5af61f",
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "recording_title": "anny 的xp rating",
+        "start_ms": 1052000,
+        "end_ms": 1083800,
+        "timestamp": "00:17:32.000–00:18:03.800",
+        "score": 0.014285714285714285,
+        "summary": "Okay, ballsucking I'm fucking not I wouldn't say I mean, I guess I would say it's F But because I Never really had Or tried What the fuck What To do So... So, anyway, both sides...",
+        "transcript_excerpt": "Okay, ballsucking I'm fucking not I wouldn't say I mean, I guess I would say it's F But because I Never really had Or tried What the fuck What To do So... So, anyway, both sides..."
+      }
+    ],
+    "evidence_moment_count": 3,
+    "evidence_recording_count": 2,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 3,
+      "multi_evidence_requirement_met": true
+    }
+  },
+  {
+    "case_id": "C15",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she cancel an upcoming convention because of a passport problem?",
+    "assistant_answer": "找到 1 个有明确视频证据的片段。",
+    "grounded": true,
+    "confidence": "supported",
+    "citations": [
+      "72d75c33-4031-4a43-a767-442bd888e7bf"
+    ],
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "72d75c33-4031-4a43-a767-442bd888e7bf",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 11880000,
+        "end_ms": 11938200,
+        "timestamp": "03:18:00.000–03:18:58.200",
+        "score": 0.014285714285714285,
+        "summary": "You already went there, some anti-death we cannot take because you're a fool. Yeah, I mean, yeah I wasn't physically- oh fuck, I was thinking it was like the physics not working or collision or whatever else. We cannot enter here. It says like we need a golden key or- yeah okay so the solution was maybe regarding like the key and leave it into the water for a certain amount of time and it would maybe turn it into something else maybe? Wait, we already went through this door? Oh no, there's people now.",
+        "transcript_excerpt": "You already went there, some anti-death we cannot take because you're a fool. Yeah, I mean, yeah I wasn't physically- oh fuck, I was thinking it was like the physics not working or collision or whatever else. We cannot enter here. It says like we need a golden key or- yeah okay so the solution was maybe regarding like the key and leave it into the water for a certain amount of time and it would maybe turn it into something else maybe? Wait, we already went through this door? Oh no, there's peopl"
+      }
+    ],
+    "evidence_moment_count": 1,
+    "evidence_recording_count": 1,
+    "automatic_facts": {
+      "returned_no_evidence": false,
+      "citation_count": 1,
+      "multi_evidence_requirement_met": true
+    }
+  }
+]

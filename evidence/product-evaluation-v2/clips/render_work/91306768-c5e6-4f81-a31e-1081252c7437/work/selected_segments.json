@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "units": "ms",
+  "sort": "score_desc_start_ms_asc_end_ms_asc",
+  "segments": [
+    {
+      "start_ms": 10824760,
+      "end_ms": 10846000,
+      "score": 1.0,
+      "rank": 1
+    }
+  ]
+}

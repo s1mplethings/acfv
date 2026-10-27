@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "base": "4b9a709",
+  "implementation_head": "8b0f1064334e0b66894ad64b6a171a1bf0edaf6c",
+  "commits": [
+    {"sha": "cfe015a", "subject": "Add watchability-ranked target clip candidates"},
+    {"sha": "f991889", "subject": "Register clip candidate capability in guards"},
+    {"sha": "8b0f106", "subject": "Complete clip candidate capability contract"}
+  ],
+  "summary": {
+    "files_changed": 21,
+    "insertions": 1116,
+    "deletions": 78
+  },
+  "capabilities": [
+    "target material classification",
+    "source-edge eligibility guard",
+    "three-way clip candidate generation",
+    "watchability scoring and ranking",
+    "candidate preview rendering",
+    "word-timestamp subtitle grouping",
+    "720p subtitle visual sizing",
+    "retrieval fusion/reranker rank blending",
+    "GUI candidate metadata",
+    "CGNK capability contract"
+  ]
+}

@@ -1,0 +1,16 @@
+# Project-scoped Codex configuration.
+# Loaded only when the project is trusted.
+# See: https://developers.openai.com/codex/config-reference/
+
+project_doc_fallback_filenames = [
+  "PATCH_README.md",
+  "BUILD.md",
+  "TREE.md",
+  "README.md",
+  "ai_context/00_AI_CONTRACT.md",
+]
+project_doc_max_bytes = 65536
+file_opener = "vscode"
+
+[features]
+web_search_request = true

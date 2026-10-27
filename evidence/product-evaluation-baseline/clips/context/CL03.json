@@ -1,0 +1,56 @@
+{
+  "case_id": "CL03",
+  "file": "media/clip_03.mp4",
+  "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+  "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "3ab4e5ec-32b1-456c-9810-6cbcd4dbc747",
+  "query": "结局附近她认出 Rebecca 时说了什么？",
+  "group": "STRONG_RETRIEVAL",
+  "selection_reason": "rank-1 production result for fixed retrieval case R03; expected target rank NOT FOUND",
+  "moment_start_ms": 27645000,
+  "moment_end_ms": 27704000,
+  "proposed_start_ms": 27637000,
+  "proposed_end_ms": 27716000,
+  "final_start_ms": 27637000,
+  "final_end_ms": 27716000,
+  "proposal_duration_ms": 79000,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "Thank you for the follow, LoftZenith underscore Yeah Thank you for the follows, Aileen Wait, wait, wait, what the fuck is going on? Wait, no!",
+    "inside": "Are they gifting? Yeah, for some reason Maybe they've saved up a lot of money since the subathon, you know Wait, what? Maybe they've saved up a lot of money since the subathon Since the sub... Oh my fucking guys Bro, when I usually say it, nothing happens So like, this time I was also like, I was just trying to switch the topic I mean, yeah, I mean, I guess it does switch the topic now Raise the timer Dude, when I left Vido to talk to chat I got flashed back during my subathon when Vido did that And then I come back and everyone's fucking gifting subs I was like, what the fuck? Oh fuck, I still forgot to watch the bits when I would go AFK and you would talk to the chat I have never seen that I need to go back and look Guys! Stop! Can I get some subs to Vido?",
+    "after": "No, please don't give subs to active streamers Even? Oh my god I can't hear shit Oh my god Raise the timer they say Can you please repeat that?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 7000,
+    "pause_after_ms": 0,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 27628000,
+      "end_ms": 27630000,
+      "text": "Wait, no!"
+    },
+    "next_segment": {
+      "start_ms": 27716000,
+      "end_ms": 27720000,
+      "text": "No, please don't give subs to active streamers"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 79.033,
+      "size_bytes": 10408467,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.023834,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

@@ -1,0 +1,5 @@
+- [x] Inspect import point for `create_clips_manager`
+- [x] Verify `__all__` definition matches function name
+- [x] Ensure function `create_clips_manager` defined
+- [x] Update module exports or imports if needed
+- [x] Verify clips directory detection at runtime

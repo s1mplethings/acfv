@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "NEW_TWITCH_VALIDATION_V1",
+  "dataset_version": "creator_visual_identity_v2_new_twitch",
+  "profile_version": "creator_profile_v4_new_twitch",
+  "split_revision": {
+    "revision": 2,
+    "previous_sha256": "24ec0093cf675abf2aa7f3777f4f5fec1aaeb8abbc3b57d048d5a83ec4d422e1",
+    "reason": "Before training, anny 70-130m failed strict decode; 10-20m diagnostic passed and the frozen holdout was moved to the clean 10-60m range."
+  },
+  "frozen_before_training": true,
+  "leakage_invariant": "HOLDOUT VOD cannot enter visual training, voice profile training, trusted memory, lexicon, or threshold tuning; UNKNOWN cannot create known-Creator trusted memory.",
+  "rows": [
+    {
+      "creator": "Saruei",
+      "vod_id": "2897884895",
+      "url": "https://www.twitch.tv/videos/2897884895",
+      "role": "HOLDOUT",
+      "unknown_partition": null,
+      "range_start_ms": 7200000,
+      "range_end_ms": 10800000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2896930589",
+      "url": "https://www.twitch.tv/videos/2896930589",
+      "role": "VALIDATION",
+      "unknown_partition": null,
+      "range_start_ms": 5400000,
+      "range_end_ms": 9000000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2895982534",
+      "url": "https://www.twitch.tv/videos/2895982534",
+      "role": "TRAIN",
+      "unknown_partition": null,
+      "range_start_ms": 2700000,
+      "range_end_ms": 6300000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2895222160",
+      "url": "https://www.twitch.tv/videos/2895222160",
+      "role": "TRAIN",
+      "unknown_partition": null,
+      "range_start_ms": 3600000,
+      "range_end_ms": 7200000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2894283807",
+      "url": "https://www.twitch.tv/videos/2894283807",
+      "role": "TRAIN",
+      "unknown_partition": null,
+      "range_start_ms": 4500000,
+      "range_end_ms": 8100000,
+      "quality": "720p"
+    },
+    {
+      "creator": "anny",
+      "vod_id": "2853235966",
+      "url": "https://www.twitch.tv/videos/2853235966",
+      "role": "HOLDOUT",
+      "unknown_partition": null,
+      "range_start_ms": 600000,
+      "range_end_ms": 3600000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Shylily",
+      "vod_id": "2898966148",
+      "url": "https://www.twitch.tv/videos/2898966148",
+      "role": "UNKNOWN",
+      "unknown_partition": "CALIBRATION",
+      "range_start_ms": 2400000,
+      "range_end_ms": 4200000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Zentreya",
+      "vod_id": "2899063581",
+      "url": "https://www.twitch.tv/videos/2899063581",
+      "role": "UNKNOWN",
+      "unknown_partition": "HOLDOUT",
+      "range_start_ms": 3000000,
+      "range_end_ms": 4800000,
+      "quality": "720p"
+    },
+    {
+      "creator": "Ironmouse",
+      "vod_id": "2899332592",
+      "url": "https://www.twitch.tv/videos/2899332592",
+      "role": "UNKNOWN",
+      "unknown_partition": "HOLDOUT",
+      "range_start_ms": 4200000,
+      "range_end_ms": 6000000,
+      "quality": "720p"
+    }
+  ]
+}

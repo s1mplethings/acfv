@@ -1,0 +1,19 @@
+# 关键词记忆（供 AI 快速检索/关联）
+baseline: v1.1.0
+verify_cmds:
+  windows: "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  nix: "bash scripts/verify.sh"
+runtime_dirs: ["var", "runs", "clips"]
+entry_points:
+  gui: "python -m acfv.cli gui"
+  pipeline: "python -m acfv.cli pipe clip"
+  launcher: "python launcher.py"
+forbidden:
+  - "add reports in repo root"
+  - "rename CLI params"
+  - "commit runtime outputs"
+logging:
+  stdout_echo: "ACFV_ECHO_STDOUT"
+  debug_echo: "ACFV_ECHO_DEBUG"
+issue_memory: "docs/issue_memory/problem_registry.md"
+playbook: "docs/AI_AGENT_PLAYBOOK.md"

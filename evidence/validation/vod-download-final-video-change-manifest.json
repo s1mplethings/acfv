@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "branch": "validation/vod-download-final-video",
+  "base_sha": "90ab5333fe906fd674e0b2749934d8d28946c9ba",
+  "implementation_sha": "ff2b572aed3bc6cf9d7f5b5b1c30233d31382442",
+  "commits": [
+    "5f5c332 Add canonical Twitch VOD download lifecycle",
+    "e73584a Keep VOD download progress monotonic",
+    "f5b4ea3 Finalize VOD processing and reviewed video workflow",
+    "8fb62d4 Bound degraded conversation endpoint retries",
+    "3e0a94c Reflow long ASR subtitles for readable clips",
+    "f1bd955 Cover VOD provider failures and muted media",
+    "ec5ffbf Tighten grounded yes-no evidence gate",
+    "ff2b572 Expand VOD provider regression coverage"
+  ],
+  "canonical_owner": "acfv.library.vod_download.VodDownloadService",
+  "provider_adapter": "acfv.providers.download",
+  "capability_spec": "specs/capabilities/vod_download.md",
+  "registry": "specs/capabilities/index.yaml",
+  "runtime_outputs_ignored": true,
+  "rollback": "git revert ff2b572 ec5ffbf f1bd955 3e0a94c 8fb62d4 f5b4ea3 e73584a 5f5c332"
+}

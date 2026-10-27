@@ -1,0 +1,154 @@
+{
+  "case_id": "R12",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "Where's the praise-the-sun bit where the armor makes her look suddenly thicc?",
+  "ground_truth": {
+    "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+    "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+    "moment_id": "0239a68c-cd09-4a0c-975e-7f3ba72b43ca",
+    "start_ms": 13902000,
+    "end_ms": 13953000,
+    "timestamp": "03:51:42.000–03:52:33.000",
+    "transcript_excerpt": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my... Okay What else can I drop? Is Sato here? Am I fucking blind? Oh, or is it a different Sato? What? Try bone? Bone shine? Bone?"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "efce212a-e190-40ca-81f5-72d1fe242528",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 4792000,
+      "end_ms": 4807000,
+      "timestamp": "01:19:52.000–01:20:07.000",
+      "score": 0.01639344262295082,
+      "summary": "Am I really that evil? I am not going to leave until this is over And you won't make me Hello, Hell.",
+      "transcript_excerpt": "Am I really that evil? I am not going to leave until this is over And you won't make me Hello, Hell."
+    },
+    {
+      "rank": 2,
+      "moment_id": "6a1333fb-2d12-43e2-9fa4-46a333a4d9ee",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 19047000,
+      "end_ms": 19080000,
+      "timestamp": "05:17:27.000–05:18:00.000",
+      "score": 0.016129032258064516,
+      "summary": "Hmm... Am I missing something? That way, thanks Which way? Which way is that way? Look, it all leads me here To the wolves Why? Why? All leads me to the wolves",
+      "transcript_excerpt": "Hmm... Am I missing something? That way, thanks Which way? Which way is that way? Look, it all leads me here To the wolves Why? Why? All leads me to the wolves"
+    },
+    {
+      "rank": 3,
+      "moment_id": "61aa0345-8ea3-4a73-83ec-a87c361efa71",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 9926560,
+      "end_ms": 9984000,
+      "timestamp": "02:45:26.560–02:46:24.000",
+      "score": 0.015873015873015872,
+      "summary": "well, to be honest with you, all this new technology, it's not really my thing. Dare I say it, these computers are probably going to take all our jobs one day. They're going to take our job one day, I hope you just get better than the computer, huh? Anyways, for now, use the console to run the new system update. We're a young man like you can figure it out. That's what I think, you know. Okay, I can already, uh, but Todd, this is raining, we're around. And we are back! So how do you feel about being a plant? Do you moisturize? Fascinating! What do you do for a living? Mama?",
+      "transcript_excerpt": "well, to be honest with you, all this new technology, it's not really my thing. Dare I say it, these computers are probably going to take all our jobs one day. They're going to take our job one day, I hope you just get better than the computer, huh? Anyways, for now, use the console to run the new system update. We're a young man like you can figure it out. That's what I think, you know. Okay, I can already, uh, but Todd, this is raining, we're around. And we are back! So how do you feel about b"
+    },
+    {
+      "rank": 4,
+      "moment_id": "2b9b7c17-ab04-47c5-814b-ec6cb140c09a",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 6295880,
+      "end_ms": 6343200,
+      "timestamp": "01:44:55.880–01:45:43.200",
+      "score": 0.015625,
+      "summary": "The crank machine is not working, like I don't know, I don't, I really don't know. There's definitely something inside. Hmm. Get all in, thanks for sub. I just, I just have no idea. But what do I do? There's a card here, I need to find a chest, where the crank would be, but I don't even know where that chest would be. What about, again, going maybe here?",
+      "transcript_excerpt": "The crank machine is not working, like I don't know, I don't, I really don't know. There's definitely something inside. Hmm. Get all in, thanks for sub. I just, I just have no idea. But what do I do? There's a card here, I need to find a chest, where the crank would be, but I don't even know where that chest would be. What about, again, going maybe here?"
+    },
+    {
+      "rank": 5,
+      "moment_id": "f5dd7187-c818-4ea9-a4ab-652a822c69e8",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 13950000,
+      "end_ms": 13958720,
+      "timestamp": "03:52:30.000–03:52:38.720",
+      "score": 0.015384615384615385,
+      "summary": "I Okay, two shotgun is actually pretty good on it, it's not too bad",
+      "transcript_excerpt": "I Okay, two shotgun is actually pretty good on it, it's not too bad"
+    },
+    {
+      "rank": 6,
+      "moment_id": "c2f9c038-1749-4cbc-a579-758e8f534056",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 505200,
+      "end_ms": 542720,
+      "timestamp": "00:08:25.200–00:09:02.720",
+      "score": 0.015151515151515152,
+      "summary": "Bell Dolphin okay her I got was pretty hot Oh Yeah, but it doesn't make me feel anything Is that make sense? Like if I was with a girl. I wouldn't want her to I got me cuz like what is she I hate going about Panting face I guess It's not something that Me on personal And I'll put it here I like it on art I feel like I feel like we need like a separate tier list of art",
+      "transcript_excerpt": "Bell Dolphin okay her I got was pretty hot Oh Yeah, but it doesn't make me feel anything Is that make sense? Like if I was with a girl. I wouldn't want her to I got me cuz like what is she I hate going about Panting face I guess It's not something that Me on personal And I'll put it here I like it on art I feel like I feel like we need like a separate tier list of art"
+    },
+    {
+      "rank": 7,
+      "moment_id": "d6c96309-b622-4539-9ba1-160e27436773",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 31915040,
+      "end_ms": 31973000,
+      "timestamp": "08:51:55.040–08:52:53.000",
+      "score": 0.014925373134328358,
+      "summary": "If we had a choice we could just like Yeah, we don't have to do it. Yeah, I'm just saying like, you know, so... Oh my god. My throat is fucked up. Because of so much choking and laughing and talking and having fun. It's been a while. Okay, that sounded wrong. That's not what I meant. Yup. 10 out of 10 neuro impression. You like my neuro impression? Hi. Beetle. Yeah, I can give you sentences to read out. Hi. I'm alone. It's like she's... almost like she's here.",
+      "transcript_excerpt": "If we had a choice we could just like Yeah, we don't have to do it. Yeah, I'm just saying like, you know, so... Oh my god. My throat is fucked up. Because of so much choking and laughing and talking and having fun. It's been a while. Okay, that sounded wrong. That's not what I meant. Yup. 10 out of 10 neuro impression. You like my neuro impression? Hi. Beetle. Yeah, I can give you sentences to read out. Hi. I'm alone. It's like she's... almost like she's here."
+    },
+    {
+      "rank": 8,
+      "moment_id": "3c88248a-d039-44f8-b390-d03b2f5ee8d8",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3017000,
+      "end_ms": 3069000,
+      "timestamp": "00:50:17.000–00:51:09.000",
+      "score": 0.014705882352941176,
+      "summary": "Oh, nice! Oh, the shotgun is so good. Oh, that's not a hole, it's just stairs, I guess? I mean... Nice! Nice, over shield! Yeah, bead is my favorite weapon. This is against those monsters because they are... They've got a lot of endurance and life. Bitch. Okay, switching... Upla! Upla! Wow!",
+      "transcript_excerpt": "Oh, nice! Oh, the shotgun is so good. Oh, that's not a hole, it's just stairs, I guess? I mean... Nice! Nice, over shield! Yeah, bead is my favorite weapon. This is against those monsters because they are... They've got a lot of endurance and life. Bitch. Okay, switching... Upla! Upla! Wow!"
+    },
+    {
+      "rank": 9,
+      "moment_id": "f720e31e-1d03-47a3-9ad0-fe1773997852",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12073000,
+      "end_ms": 12129920,
+      "timestamp": "03:21:13.000–03:22:09.920",
+      "score": 0.014492753623188406,
+      "summary": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a... A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink",
+      "transcript_excerpt": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a... A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is t"
+    },
+    {
+      "rank": 10,
+      "moment_id": "6f7a7435-a8a6-43ac-8558-ea1309d1377f",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 25735000,
+      "end_ms": 25736000,
+      "timestamp": "07:08:55.000–07:08:56.000",
+      "score": 0.014285714285714285,
+      "summary": "Okay.",
+      "transcript_excerpt": "Okay."
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

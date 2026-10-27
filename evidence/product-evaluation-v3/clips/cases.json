@@ -1,0 +1,852 @@
+[
+  {
+    "case_id": "CL01",
+    "file": null,
+    "source_recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+    "source_recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+    "moment_id": "eb2b2556-5e92-4e06-b67e-1d3952d17ff8",
+    "query": "哪一段把某个恐怖游戏描述成会用人的思想和实体沟通？",
+    "group": "STRONG_RETRIEVAL",
+    "selection_reason": "rank-1 production result for fixed retrieval case R01; expected target rank NOT FOUND",
+    "moment_start_ms": 10043000,
+    "moment_end_ms": 10098080,
+    "proposed_start_ms": null,
+    "proposed_end_ms": null,
+    "final_start_ms": 10035000,
+    "final_end_ms": 10110080,
+    "proposal_duration_ms": 75080,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "Don't do it like that, I promise It wasn't me It wasn't me It wasn't me It was a bug, I promise Holy Where's my chat? Oh, I lost my chat I think I farted just now, no",
+      "inside": "I think I farted just now, no You heard nothing You didn't hear anything You didn't hear anything You didn't hear anything I didn't I don't I didn't Wait, no, what about chat? What about chat? What about chat? Stop Chat, you didn't hear it, right? You didn't hear it You didn't hear it You didn't hear it You didn't hear it You didn't hear it, right? Fuck You heard? Fuck I'm ending this stream My career is fucking ruined I'm changing the city I'm changing my name I'm fucking re- I'm graduating I'm fucking Oh my fucking god Holy shit This is my graduation stream, it was fun while it lasted Any seven I can't do any seven. Why why can I not do any seven? It was fun. Oh, yeah",
+      "after": "It was fun. Oh, yeah Oh, yeah"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 6000,
+      "pause_after_ms": 9600,
+      "start_splits_transcript_segment": true,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 10028000,
+        "end_ms": 10029000,
+        "text": "Oh, I lost my chat"
+      },
+      "next_segment": {
+        "start_ms": 10119680,
+        "end_ms": 10121680,
+        "text": "Oh, yeah"
+      }
+    },
+    "automated_checks": {},
+    "automatic_result": "AUTO_REJECTED_EXPECTED",
+    "suspect_reasons": [],
+    "old_moment_id": "88603a75-4d4e-4552-a067-da42f0f1d2b1",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": true,
+    "rejected_reason": "Insufficient retrieval evidence for a confident Clip proposal",
+    "chosen_start_reason": null,
+    "chosen_end_reason": null
+  },
+  {
+    "case_id": "CL02",
+    "file": null,
+    "source_recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+    "source_recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+    "moment_id": "52e471a5-40e0-49dc-84ea-2fae0b8dd345",
+    "query": "她饿了却为什么还是不愿意走出房间？",
+    "group": "STRONG_RETRIEVAL",
+    "selection_reason": "rank-1 production result for fixed retrieval case R02; expected target rank NOT FOUND",
+    "moment_start_ms": 11265000,
+    "moment_end_ms": 11316600,
+    "proposed_start_ms": null,
+    "proposed_end_ms": null,
+    "final_start_ms": 11257000,
+    "final_end_ms": 11328600,
+    "proposal_duration_ms": 71600,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "I need 20,000 souls. So I can buy. There's a ugly dude here. Okay, I'm gonna explore, like, every place and get all the items.",
+      "inside": "Okay, I'm gonna explore, like, every place and get all the items. Is there another one? I'm at the last boss, but there's so much that I missed. Are you guys fine with watching me explore? Oh, hell no He's fighting on me, please stop I'm poisoned Yeah, come here make it real dark Don't drop that, what is that? What's happening? I don't think I've been here. Oh Okay",
+      "after": "Okay Okay At least I'm strong enough for these guys now, I don't think I've been here Oh What was that other entrance"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 2000,
+      "pause_after_ms": 960,
+      "start_splits_transcript_segment": true,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 11241000,
+        "end_ms": 11255000,
+        "text": "There's a ugly dude here."
+      },
+      "next_segment": {
+        "start_ms": 11329560,
+        "end_ms": 11331560,
+        "text": "Okay"
+      }
+    },
+    "automated_checks": {},
+    "automatic_result": "AUTO_REJECTED_EXPECTED",
+    "suspect_reasons": [],
+    "old_moment_id": "9c268fc4-4b31-48f4-ad67-7911c58599a3",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": true,
+    "rejected_reason": "Insufficient retrieval evidence for a confident Clip proposal",
+    "chosen_start_reason": null,
+    "chosen_end_reason": null
+  },
+  {
+    "case_id": "CL03",
+    "file": null,
+    "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "90f623cc-08b7-447e-9408-ebb5ff9fa058",
+    "query": "结局附近她认出 Rebecca 时说了什么？",
+    "group": "STRONG_RETRIEVAL",
+    "selection_reason": "rank-1 production result for fixed retrieval case R03; expected target rank NOT FOUND",
+    "moment_start_ms": 27645000,
+    "moment_end_ms": 27704000,
+    "proposed_start_ms": null,
+    "proposed_end_ms": null,
+    "final_start_ms": 27637000,
+    "final_end_ms": 27716000,
+    "proposal_duration_ms": 79000,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "Thank you for the follow, LoftZenith underscore Yeah Thank you for the follows, Aileen Wait, wait, wait, what the fuck is going on? Wait, no!",
+      "inside": "Are they gifting? Yeah, for some reason Maybe they've saved up a lot of money since the subathon, you know Wait, what? Maybe they've saved up a lot of money since the subathon Since the sub... Oh my fucking guys Bro, when I usually say it, nothing happens So like, this time I was also like, I was just trying to switch the topic I mean, yeah, I mean, I guess it does switch the topic now Raise the timer Dude, when I left Vido to talk to chat I got flashed back during my subathon when Vido did that And then I come back and everyone's fucking gifting subs I was like, what the fuck? Oh fuck, I still forgot to watch the bits when I would go AFK and you would talk to the chat I have never seen that I need to go back and look Guys! Stop! Can I get some subs to Vido?",
+      "after": "No, please don't give subs to active streamers Even? Oh my god I can't hear shit Oh my god Raise the timer they say Can you please repeat that?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 7000,
+      "pause_after_ms": 0,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 27628000,
+        "end_ms": 27630000,
+        "text": "Wait, no!"
+      },
+      "next_segment": {
+        "start_ms": 27716000,
+        "end_ms": 27720000,
+        "text": "No, please don't give subs to active streamers"
+      }
+    },
+    "automated_checks": {},
+    "automatic_result": "AUTO_REJECTED_EXPECTED",
+    "suspect_reasons": [],
+    "old_moment_id": "3ab4e5ec-32b1-456c-9810-6cbcd4dbc747",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": true,
+    "rejected_reason": "Insufficient retrieval evidence for a confident Clip proposal",
+    "chosen_start_reason": null,
+    "chosen_end_reason": null
+  },
+  {
+    "case_id": "CL04",
+    "file": null,
+    "source_recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+    "source_recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+    "moment_id": "05512245-2a5a-4f7b-a2bf-12f0ceae2276",
+    "query": "哪段像在做天气播报，先说外面很晴朗后来又说多云？",
+    "group": "STRONG_RETRIEVAL",
+    "selection_reason": "rank-1 production result for fixed retrieval case R04; expected target rank NOT FOUND",
+    "moment_start_ms": 2130000,
+    "moment_end_ms": 2162000,
+    "proposed_start_ms": null,
+    "proposed_end_ms": null,
+    "final_start_ms": 2122000,
+    "final_end_ms": 2174000,
+    "proposal_duration_ms": 52000,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid",
+      "inside": "Let's see, where the heck? Where did she? AHHHHH! No! Not the fucking tits! Um, she was drawing! She drew us together Look at her! So cute! Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+      "after": "What, me? Huh? I-there is a lacrosse underwear on me! Huh?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 0,
+      "pause_after_ms": 13000,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 2120000,
+        "end_ms": 2122000,
+        "text": "I'm stupid"
+      },
+      "next_segment": {
+        "start_ms": 2187000,
+        "end_ms": 2188000,
+        "text": "What, me?"
+      }
+    },
+    "automated_checks": {},
+    "automatic_result": "AUTO_REJECTED_EXPECTED",
+    "suspect_reasons": [],
+    "old_moment_id": "5ce6868d-d490-4d33-88ba-5c678b1779bd",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": true,
+    "rejected_reason": "Insufficient retrieval evidence for a confident Clip proposal",
+    "chosen_start_reason": null,
+    "chosen_end_reason": null
+  },
+  {
+    "case_id": "CL05",
+    "file": null,
+    "source_recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "source_recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+    "moment_id": "194f3df9-98c8-48f6-a39d-02cd42a9040e",
+    "query": "她什么时候反思自己可能把一些分类看得太轻了？",
+    "group": "STRONG_RETRIEVAL",
+    "selection_reason": "rank-1 production result for fixed retrieval case R05; expected target rank NOT FOUND",
+    "moment_start_ms": 4254000,
+    "moment_end_ms": 4305000,
+    "proposed_start_ms": null,
+    "proposed_end_ms": null,
+    "final_start_ms": 4246000,
+    "final_end_ms": 4317000,
+    "proposal_duration_ms": 71000,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "But where I'm like, oh, if a monster jumps on my face, as long as I don't scream I don't have game overs and it's less scary. Okay, let me start Fear of Adam now and I'm going to change the game category. Fear to Fathom. In Bark Lookout.",
+      "inside": "Okay. I'll use the slider until the first F is barely visible. Well, that's... Wish first F. Like, I cannot see shit if it's barely visible like this. Oh my God, it's laggy. Don't worry. Don't worry. I'm going to fix it after. I'm just going to leave it like... this. No, I cannot see shit. I want to see shit like this because my screen is actually pretty... pretty dark. I think I just need to ins... like, here we go. V-sync, now it's working. FPS can't turn, no. Window at... No, I guess it's good. It's done. I want Bark Lookout because we did like the three of them, I think, before in the past. Oh my God, it's already fucking cold now that I opened my window. No, I'm working now. Look. No more two FPS. Harder. And this, you were requesting story submission while I was watching a YouTuber play Fear of Adam Carson House. What I'm about to recount happened when I was 24 or so at the time.",
+      "after": "What I'm about to recount happened when I was 24 or so at the time. This kind of weird telling anyone about this because of the bizarre and absurd nature of the whole thing. But I feel like doing so might help me process my memories of it. I knew that sharing this story anywhere else would be a dumb idea because people would say I was lying. As I'm writing this, this was the scariest experience of my life."
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 6000,
+      "pause_after_ms": 3000,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 4238000,
+        "end_ms": 4240000,
+        "text": "In Bark Lookout."
+      },
+      "next_segment": {
+        "start_ms": 4320000,
+        "end_ms": 4326000,
+        "text": "This kind of weird telling anyone about this because of the bizarre and absurd nature of the whole thing."
+      }
+    },
+    "automated_checks": {},
+    "automatic_result": "AUTO_REJECTED_EXPECTED",
+    "suspect_reasons": [],
+    "old_moment_id": "cd60c74f-c8e8-4b18-8e4d-fe4f06cfabc4",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": true,
+    "rejected_reason": "Insufficient retrieval evidence for a confident Clip proposal",
+    "chosen_start_reason": null,
+    "chosen_end_reason": null
+  },
+  {
+    "case_id": "CL06",
+    "file": "clips\\media\\clip_06.mp4",
+    "source_recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+    "source_recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "4149b3ca-d74c-4ac3-86c1-2854562b051c",
+    "query": "",
+    "group": "RANDOM_FINAL",
+    "selection_reason": "fixed-seed random FINAL Moment",
+    "moment_start_ms": 7224500,
+    "moment_end_ms": 7241700,
+    "proposed_start_ms": 7224500,
+    "proposed_end_ms": 7241700,
+    "final_start_ms": 7216500,
+    "final_end_ms": 7253700,
+    "proposal_duration_ms": 37200,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "Don't believe anything you see or hear. It's propaganda, propaganda, propaganda. And even newer Chads. Do you want to increase the timer? Fine! I'll do it myself!",
+      "inside": "Fuck, it's making me do the fucking... ...hard winking again! I- I- I- I- Oh, someone did it. That- That- That- Fuck! That's why I twitch! It's making me... ...do everything from scratch. And I can't.",
+      "after": "Annie, evil should have a completely different attitude than you are. Like, evil is not just a copycat. Okay, tell that to Veedo. Veedo literally told me to not over-complicate things. Why are you like this?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 1160,
+      "pause_after_ms": 1200,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 7213340,
+        "end_ms": 7215340,
+        "text": "Fine! I'll do it myself!"
+      },
+      "next_segment": {
+        "start_ms": 7254900,
+        "end_ms": 7258700,
+        "text": "Annie, evil should have a completely different attitude than you are."
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 17.233333,
+        "size_bytes": 10482620,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "4149b3ca-d74c-4ac3-86c1-2854562b051c",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL07",
+    "file": "clips\\media\\clip_07.mp4",
+    "source_recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+    "source_recording_title": "anny 的xp rating",
+    "moment_id": "3c0a9b62-a66b-4091-a91b-fa3a6977179f",
+    "query": "",
+    "group": "RANDOM_FINAL",
+    "selection_reason": "fixed-seed random FINAL Moment",
+    "moment_start_ms": 8848600,
+    "moment_end_ms": 8857400,
+    "proposed_start_ms": 8848600,
+    "proposed_end_ms": 8857400,
+    "final_start_ms": 8840600,
+    "final_end_ms": 8869400,
+    "proposal_duration_ms": 28800,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "I'm surprised I was like... I don't know... I don't know...",
+      "inside": "Builder of Tetris houses... Listener of the Sacred Five Songs... Protector of OSU... Farmer of Urms... Viola of the Almighty Hex... This is kinda hard to even, like, rate all these...",
+      "after": "This is kinda hard to even, like, rate all these... I mean, put them in the order... I feel like everything that is after the first line is kind of out of order... I don't really care... I guess... So whatever"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 4000,
+      "pause_after_ms": 1200,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 8835600,
+        "end_ms": 8836600,
+        "text": "I don't know..."
+      },
+      "next_segment": {
+        "start_ms": 8870600,
+        "end_ms": 8872400,
+        "text": "I mean, put them in the order..."
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 8.81,
+        "size_bytes": 3083424,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "3c0a9b62-a66b-4091-a91b-fa3a6977179f",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL08",
+    "file": "clips\\media\\clip_08.mp4",
+    "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "e5c3728b-531a-45dc-9e08-a07928f1a5e3",
+    "query": "",
+    "group": "RANDOM_FINAL",
+    "selection_reason": "fixed-seed random FINAL Moment",
+    "moment_start_ms": 31489000,
+    "moment_end_ms": 31547000,
+    "proposed_start_ms": 31469000,
+    "proposed_end_ms": 31511000,
+    "final_start_ms": 31481000,
+    "final_end_ms": 31559000,
+    "proposal_duration_ms": 78000,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "No. No. I can turn you into a bottle. It's him. I am, in fact, a bottle. I mean...",
+      "inside": "What is... What is wrong with you? What? What is wrong with you? Great. Great. That's so cool. That's really cool. Yeah. After making me tweet this and then you just... Yeah. Great. That's cool. XTT. XTT. You know what? I'm going to find someone to respond to you with. What? You have nothing. You have nothing. That's what you think. You have nothing. Just you wait. Chat, can we ratio him? Please. Everybody, can we ratio him? Please. Everybody go like my tweet now. Can I ratio him? Please. Please. This is embarrassing. Please. Please. Let's ratio him. What's embarrassing? You being almost ratioed? You attempting to ratio me? No, no, no, no. As well as... Oh, you think I can ratio you?",
+      "after": "As well as... Oh, you think I can ratio you? How many followers do you have on Twitter? 173,000 I see Fuck, I should have just responded with Rachel Fuck Rachel"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 0,
+      "pause_after_ms": 1000,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 31476000,
+        "end_ms": 31481000,
+        "text": "I mean..."
+      },
+      "next_segment": {
+        "start_ms": 31560000,
+        "end_ms": 31563000,
+        "text": "How many followers do you have on Twitter?"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 42.033333,
+        "size_bytes": 12645510,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "e6a6d7fa-aa2f-46d5-b57c-6326701d3b51",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL09",
+    "file": "clips\\media\\clip_09.mp4",
+    "source_recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+    "source_recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+    "moment_id": "5c11dd0b-7b93-4551-ad63-16690edb3bff",
+    "query": "",
+    "group": "RANDOM_FINAL",
+    "selection_reason": "fixed-seed random FINAL Moment",
+    "moment_start_ms": 12864640,
+    "moment_end_ms": 12911040,
+    "proposed_start_ms": 12831440,
+    "proposed_end_ms": 12927920,
+    "final_start_ms": 12856640,
+    "final_end_ms": 12923040,
+    "proposal_duration_ms": 66400,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "That terrible Because like no matter how perfect you're just Japanese is gonna be, people are still gonna fucking jozu you, like, no matter if your Japanese is perfect or bad, they're still gonna say nihongo jozu to you, so to Japanese people you're always just gonna be a foreigner, they will always assume you don't speak the language,",
+      "inside": "you're always just gonna be a foreigner, they will always assume you don't speak the language, which is like crazy. Find a JP girlfriend, how's that gonna help you? I'm just sad that language schools are only like two years in a lifetime that you can attend, you can't like at least like be on a visa I guess, I need to figure out if they can accept you if you're on a different visa. Newest, oldest, weak? Word amount too? Favorites, oh let's do the favorites. I already regret this. Is it this? No! Ah plant, okay it's gonna fucking",
+      "after": "do the favorites. I already regret this. Is it this? No! Ah plant, okay it's gonna fucking capture the lamp. Shokubutsu is a plant. The fuck was that again?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 200,
+      "pause_after_ms": 4880,
+      "start_splits_transcript_segment": true,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 12849440,
+        "end_ms": 12856440,
+        "text": "Japanese is perfect or bad, they're still gonna say nihongo jozu to you, so to Japanese people"
+      },
+      "next_segment": {
+        "start_ms": 12927920,
+        "end_ms": 12952600,
+        "text": "capture the lamp. Shokubutsu is a plant. The fuck was that again?"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 96.516667,
+        "size_bytes": 115533702,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "ea3ac189-ccc3-43b3-b093-407a2c772d7c",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL10",
+    "file": "clips\\media\\clip_10.mp4",
+    "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "e34be2c9-f0d9-4d00-837b-722920ee36bc",
+    "query": "",
+    "group": "RANDOM_FINAL",
+    "selection_reason": "fixed-seed random FINAL Moment",
+    "moment_start_ms": 6476000,
+    "moment_end_ms": 6524580,
+    "proposed_start_ms": 6455000,
+    "proposed_end_ms": 6524580,
+    "final_start_ms": 6468000,
+    "final_end_ms": 6536580,
+    "proposal_duration_ms": 68580,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "Little dirty beach, I love to funk Young savage, why you trapping so hard? Why these niggas capping so hard? I grew up in the streets without no bar, I'm praying to my Glock in my car I sit back and read like cat in a hat, 21 service, the cat with the mat",
+      "inside": "I sit back and read like cat in a hat, 21 service, the cat with the mat 21 service, not boys on the hood, but I pull up on you, shoot your ass in the back You still a little hurting, niggas some racks, I can feel the cheese, bitch I got racks I'm a real street nigga, bitch, I am not one of these niggas banging on wax Pussy nigga So much dope that it broke the scale They say crack kills, n***a, my crack's ill My brother in the kitchen and he rapping in the bed Louis V in my bag and Louis V on my bed I'm hungry Thank you, my smarts",
+      "after": "If you try to step to me, it'll be the last time I got dirt on my name, six feet in the ground I got people in my past trying to bring me down Say I'm losing my mind, I don't wanna be found Grew up in the shadow but I know they watching me now One night, on the go, I'm all been sitting Pull up on ya, I got drama right behind me Bike a-pooling, so I try to single-handedly I'ma show you how to crush a pony"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 1000,
+      "pause_after_ms": 4000,
+      "start_splits_transcript_segment": true,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 6461000,
+        "end_ms": 6467000,
+        "text": "I grew up in the streets without no bar, I'm praying to my Glock in my car"
+      },
+      "next_segment": {
+        "start_ms": 6540580,
+        "end_ms": 6554580,
+        "text": "If you try to step to me, it'll be the last time I got dirt on my name, six feet in the ground I got people in my past trying to bring me down Say I'm losing my mind, I don't wanna be found Grew up in the shadow but I know they watching me now"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 69.6,
+        "size_bytes": 20914440,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "41c4758e-27fa-49e8-8c52-2612d16b4a5c",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL11",
+    "file": "clips\\media\\clip_11.mp4",
+    "source_recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+    "source_recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+    "moment_id": "5eae189e-e0a7-4cfe-90fa-1a6494e56425",
+    "query": "",
+    "group": "DIFFICULT_BOUNDARY",
+    "selection_reason": "boundary difficulty score 12.0: short_moment, starts_lowercase, end_splits_transcript_segment, silence_before_candidate, silence_after_candidate",
+    "moment_start_ms": 18838720,
+    "moment_end_ms": 18842000,
+    "proposed_start_ms": 18786000,
+    "proposed_end_ms": 18842000,
+    "final_start_ms": 18830720,
+    "final_end_ms": 18854000,
+    "proposal_duration_ms": 23280,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "oh okay it makes me travel from here to left gotcha wait so why is it selected in red again what does it mean um and solve the puzzle oh so there's definitely a puzzle here",
+      "inside": "and solve the puzzle oh so there's definitely a puzzle here here No, there's a break room here.",
+      "after": "Yeah, but I can eat something here."
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 5040,
+      "pause_after_ms": 17000,
+      "start_splits_transcript_segment": true,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 18823840,
+        "end_ms": 18825680,
+        "text": "um"
+      },
+      "next_segment": {
+        "start_ms": 18871000,
+        "end_ms": 18873000,
+        "text": "Yeah, but I can eat something here."
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 56.033333,
+        "size_bytes": 19254426,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "1326bb73-757f-44f6-b407-3a8f9f504935",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL12",
+    "file": "clips\\media\\clip_12.mp4",
+    "source_recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+    "source_recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+    "moment_id": "6d74df7a-5023-4211-9257-5e801166e247",
+    "query": "",
+    "group": "DIFFICULT_BOUNDARY",
+    "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+    "moment_start_ms": 9630800,
+    "moment_end_ms": 9631840,
+    "proposed_start_ms": 9657840,
+    "proposed_end_ms": 9694000,
+    "final_start_ms": 9622800,
+    "final_end_ms": 9643840,
+    "proposal_duration_ms": 21040,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "you can see like how the chopsticks are getting like weird like this or even like you know the way her face looks like with her mouth I mean her his mouth sorry open but it's like really impressive like for a TikTok video of someone dancing and shit like that yeah",
+      "inside": "oh",
+      "after": "oh no Oh, what's happening? Did he take it?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 160,
+      "pause_after_ms": 14000,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 9619680,
+        "end_ms": 9622640,
+        "text": "and shit like that yeah"
+      },
+      "next_segment": {
+        "start_ms": 9657840,
+        "end_ms": 9658340,
+        "text": "oh no"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 36.2,
+        "size_bytes": 27176302,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "06013da1-d332-4fb8-ae87-e3464dcf181a",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL13",
+    "file": "clips\\media\\clip_13.mp4",
+    "source_recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+    "source_recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+    "moment_id": "69d14f44-8314-4da0-a0a4-0255f11dbd05",
+    "query": "",
+    "group": "DIFFICULT_BOUNDARY",
+    "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+    "moment_start_ms": 10800200,
+    "moment_end_ms": 10802520,
+    "proposed_start_ms": 10824760,
+    "proposed_end_ms": 10846000,
+    "final_start_ms": 10792200,
+    "final_end_ms": 10814520,
+    "proposal_duration_ms": 22320,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "her entire chat is just gifts subs hell yeah hell yeah yeah i love you guys thank you thank you matthew thank you hearing that",
+      "inside": "lmaoo",
+      "after": "I'm sorry What? What? What? What? What? What did you tell them?"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 4600,
+      "pause_after_ms": 10240,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 10785600,
+        "end_ms": 10787600,
+        "text": "hearing that"
+      },
+      "next_segment": {
+        "start_ms": 10824760,
+        "end_ms": 10826280,
+        "text": "I'm sorry"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 21.283333,
+        "size_bytes": 12478867,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "1f3dfa3c-5d22-43c8-8667-09abe6e33df6",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL14",
+    "file": "clips\\media\\clip_14.mp4",
+    "source_recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+    "source_recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+    "moment_id": "2cfee875-c1e9-4144-9ca3-90f1ccdd4fc2",
+    "query": "",
+    "group": "DIFFICULT_BOUNDARY",
+    "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+    "moment_start_ms": 8624160,
+    "moment_end_ms": 8629120,
+    "proposed_start_ms": 8624160,
+    "proposed_end_ms": 8629120,
+    "final_start_ms": 8616160,
+    "final_end_ms": 8641120,
+    "proposal_duration_ms": 24960,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "wanna okay so",
+      "inside": "i got that on video N toi besides me",
+      "after": "N toi besides me N compris après moi Aen 'Mando Because you I'm 昨天"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 1040,
+      "pause_after_ms": 2160,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": true,
+      "previous_segment": {
+        "start_ms": 8610800,
+        "end_ms": 8615120,
+        "text": "so"
+      },
+      "next_segment": {
+        "start_ms": 8643280,
+        "end_ms": 8646340,
+        "text": "N compris après moi"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 5.0,
+        "size_bytes": 7135835,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "2cfee875-c1e9-4144-9ca3-90f1ccdd4fc2",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  },
+  {
+    "case_id": "CL15",
+    "file": "clips\\media\\clip_15.mp4",
+    "source_recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+    "source_recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+    "moment_id": "2eccb033-5c94-481d-a709-7337c4c14684",
+    "query": "",
+    "group": "DIFFICULT_BOUNDARY",
+    "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+    "moment_start_ms": 6641920,
+    "moment_end_ms": 6646400,
+    "proposed_start_ms": 6641920,
+    "proposed_end_ms": 6646400,
+    "final_start_ms": 6633920,
+    "final_end_ms": 6658400,
+    "proposal_duration_ms": 24480,
+    "long_clip": false,
+    "proxy": true,
+    "context_20s": {
+      "before": "i'm in normal difficulty and i think it's already hard let's go i don't guess we're about to fight huh",
+      "inside": "okay fuck okay fuck oh it's hard",
+      "after": "i mean the big one is good but like it's too slow weapon without the index so we need to go this way are halo's primary firing mechanisms"
+    },
+    "boundary_diagnostics": {
+      "pause_before_ms": 5920,
+      "pause_after_ms": 7840,
+      "start_splits_transcript_segment": false,
+      "end_splits_transcript_segment": false,
+      "previous_segment": {
+        "start_ms": 6626000,
+        "end_ms": 6628000,
+        "text": "i don't guess we're about to fight huh"
+      },
+      "next_segment": {
+        "start_ms": 6666240,
+        "end_ms": 6668240,
+        "text": "i mean the big one is good but like it's too slow"
+      }
+    },
+    "automated_checks": {
+      "ffprobe": {
+        "returncode": 0,
+        "video": true,
+        "audio": true,
+        "duration_seconds": 4.516667,
+        "size_bytes": 6193733,
+        "duration_matches_proposal": true,
+        "pass": true
+      }
+    },
+    "automatic_result": "AUTO_PASS",
+    "suspect_reasons": [],
+    "old_moment_id": "2eccb033-5c94-481d-a709-7337c4c14684",
+    "retrieval_target_rank": null,
+    "retrieval_score": null,
+    "expected_bad_source_rejected": false,
+    "rejected_reason": null,
+    "chosen_start_reason": "moment_transcript_boundary",
+    "chosen_end_reason": "moment_transcript_boundary"
+  }
+]

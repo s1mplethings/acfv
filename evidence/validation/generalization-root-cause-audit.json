@@ -1,0 +1,968 @@
+{
+  "schema_version": "1.0",
+  "phase": "ROOT_CAUSE_AUDIT_BEFORE_CODE_CHANGE",
+  "source_database": "E:\\Cliper\\acfv-mvp-product\\var\\intelligence_quality_20261008\\library_v2.db",
+  "raw_transcript_policy": "immutable; hashes captured before repair",
+  "recording_language_root_cause": {
+    "summary": "Five anny recordings inherit a single raw Whisper 'ja' label even though language truth varies by span and repeated background lyric/noise segments dominate portions of the transcript.",
+    "recordings": [
+      {
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "creator": "anny",
+        "legacy_artifact_root": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "legacy_exists": true,
+        "canonical_relative_locator": "runs/19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "en",
+          "raw_transcript_sha256": "d28bd8f32fc136fda62a6312ba9f9b1869c142f136cfc98674c5ee42d4e0b2fb",
+          "segment_count": 2953,
+          "script_character_counts": {
+            "latin": 54662,
+            "hiragana": 275,
+            "katakana": 140,
+            "han": 87,
+            "hangul": 6
+          },
+          "segment_script_distribution": {
+            "japanese_only": 58,
+            "latin_only": 2879,
+            "mixed": 3,
+            "other_or_symbolic": 13
+          },
+          "repeated_segment_instances": 586,
+          "repeated_segment_fraction": 0.1984,
+          "low_signal_segments": 138,
+          "top_repeated_text": [
+            {
+              "text": "i don t know",
+              "count": 60
+            },
+            {
+              "text": "what",
+              "count": 33
+            },
+            {
+              "text": "um",
+              "count": 26
+            },
+            {
+              "text": "no",
+              "count": 25
+            },
+            {
+              "text": "i mean",
+              "count": 24
+            },
+            {
+              "text": "okay",
+              "count": 18
+            },
+            {
+              "text": "yeah",
+              "count": 13
+            },
+            {
+              "text": "i",
+              "count": 13
+            },
+            {
+              "text": "i don t think so",
+              "count": 13
+            },
+            {
+              "text": "i mean in real life you can put like a fake one right",
+              "count": 11
+            },
+            {
+              "text": "come on",
+              "count": 11
+            },
+            {
+              "text": "i guess",
+              "count": 10
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "creator": "anny",
+        "legacy_artifact_root": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "legacy_exists": true,
+        "canonical_relative_locator": "runs/2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "368abc70c8652235347bb7a54ace2304e618bfde531db59cfd7de386f3bfecd5",
+          "segment_count": 6239,
+          "script_character_counts": {
+            "latin": 119024,
+            "hiragana": 2733,
+            "katakana": 709,
+            "han": 1079,
+            "hangul": 36
+          },
+          "segment_script_distribution": {
+            "japanese_only": 447,
+            "latin_only": 5636,
+            "mixed": 48,
+            "other_or_symbolic": 108
+          },
+          "repeated_segment_instances": 1624,
+          "repeated_segment_fraction": 0.2603,
+          "low_signal_segments": 650,
+          "top_repeated_text": [
+            {
+              "text": "me",
+              "count": 217
+            },
+            {
+              "text": "you",
+              "count": 111
+            },
+            {
+              "text": "i",
+              "count": 61
+            },
+            {
+              "text": "a",
+              "count": 52
+            },
+            {
+              "text": "thank you",
+              "count": 49
+            },
+            {
+              "text": "oh",
+              "count": 47
+            },
+            {
+              "text": "yeah",
+              "count": 42
+            },
+            {
+              "text": "what",
+              "count": 36
+            },
+            {
+              "text": "no",
+              "count": 30
+            },
+            {
+              "text": "pllt",
+              "count": 30
+            },
+            {
+              "text": "hello",
+              "count": 29
+            },
+            {
+              "text": "i m sorry",
+              "count": 29
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "b3333c7cd9d7cf76b4bb4b2dfb1f33fabe4b9d7f4b6c3d8f7b4d7b96adbb0668",
+          "segment_count": 3750,
+          "script_character_counts": {
+            "latin": 75541,
+            "hiragana": 2622,
+            "katakana": 991,
+            "han": 1043,
+            "hangul": 3
+          },
+          "segment_script_distribution": {
+            "japanese_only": 343,
+            "latin_only": 3367,
+            "mixed": 24,
+            "other_or_symbolic": 16
+          },
+          "repeated_segment_instances": 794,
+          "repeated_segment_fraction": 0.2117,
+          "low_signal_segments": 132,
+          "top_repeated_text": [
+            {
+              "text": "yeah",
+              "count": 46
+            },
+            {
+              "text": "me",
+              "count": 42
+            },
+            {
+              "text": "okay",
+              "count": 33
+            },
+            {
+              "text": "you",
+              "count": 33
+            },
+            {
+              "text": "i m hungry",
+              "count": 32
+            },
+            {
+              "text": "i don t know",
+              "count": 26
+            },
+            {
+              "text": "thank you",
+              "count": 25
+            },
+            {
+              "text": "i m sorry",
+              "count": 23
+            },
+            {
+              "text": "what",
+              "count": 21
+            },
+            {
+              "text": "oh",
+              "count": 20
+            },
+            {
+              "text": "i m honey",
+              "count": 19
+            },
+            {
+              "text": "eyes on me",
+              "count": 14
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "creator": "anny",
+        "legacy_artifact_root": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "legacy_exists": true,
+        "canonical_relative_locator": "runs/4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "2ae3d5b1c2655b1eda59fbd907e839a6b7ed1c1c059358724da33d504252aa8b",
+          "segment_count": 5082,
+          "script_character_counts": {
+            "latin": 101416,
+            "hiragana": 431,
+            "katakana": 89,
+            "han": 209,
+            "hangul": 0
+          },
+          "segment_script_distribution": {
+            "japanese_only": 60,
+            "latin_only": 4978,
+            "mixed": 34,
+            "other_or_symbolic": 10
+          },
+          "repeated_segment_instances": 1040,
+          "repeated_segment_fraction": 0.2046,
+          "low_signal_segments": 250,
+          "top_repeated_text": [
+            {
+              "text": "me",
+              "count": 78
+            },
+            {
+              "text": "thank you",
+              "count": 57
+            },
+            {
+              "text": "okay",
+              "count": 44
+            },
+            {
+              "text": "oh",
+              "count": 40
+            },
+            {
+              "text": "no",
+              "count": 25
+            },
+            {
+              "text": "ah",
+              "count": 23
+            },
+            {
+              "text": "fuck",
+              "count": 23
+            },
+            {
+              "text": "stop it",
+              "count": 22
+            },
+            {
+              "text": "what",
+              "count": 21
+            },
+            {
+              "text": "oh my god",
+              "count": 20
+            },
+            {
+              "text": "i m hungry",
+              "count": 19
+            },
+            {
+              "text": "i don t know",
+              "count": 19
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "0b9cb7ddc8375eb9230398ad5196a235f3bc5d6c8ade509a744a0fc0587be362",
+          "segment_count": 3850,
+          "script_character_counts": {
+            "latin": 72141,
+            "hiragana": 269,
+            "katakana": 88,
+            "han": 81,
+            "hangul": 0
+          },
+          "segment_script_distribution": {
+            "japanese_only": 39,
+            "latin_only": 3795,
+            "mixed": 3,
+            "other_or_symbolic": 13
+          },
+          "repeated_segment_instances": 878,
+          "repeated_segment_fraction": 0.2281,
+          "low_signal_segments": 172,
+          "top_repeated_text": [
+            {
+              "text": "oh my god",
+              "count": 52
+            },
+            {
+              "text": "thank you",
+              "count": 48
+            },
+            {
+              "text": "me",
+              "count": 41
+            },
+            {
+              "text": "yeah",
+              "count": 37
+            },
+            {
+              "text": "fuck",
+              "count": 30
+            },
+            {
+              "text": "you",
+              "count": 27
+            },
+            {
+              "text": "what the fuck",
+              "count": 26
+            },
+            {
+              "text": "what",
+              "count": 24
+            },
+            {
+              "text": "okay",
+              "count": 19
+            },
+            {
+              "text": "stop",
+              "count": 18
+            },
+            {
+              "text": "ah",
+              "count": 16
+            },
+            {
+              "text": "oh",
+              "count": 16
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "4e3aab6a8d102e69ae25ff1ee490ad11ee282ab6804b54e7626cfd7942efd034",
+          "segment_count": 3366,
+          "script_character_counts": {
+            "latin": 66644,
+            "hiragana": 283,
+            "katakana": 472,
+            "han": 227,
+            "hangul": 1
+          },
+          "segment_script_distribution": {
+            "japanese_only": 181,
+            "latin_only": 3098,
+            "mixed": 28,
+            "other_or_symbolic": 59
+          },
+          "repeated_segment_instances": 562,
+          "repeated_segment_fraction": 0.167,
+          "low_signal_segments": 168,
+          "top_repeated_text": [
+            {
+              "text": "what",
+              "count": 39
+            },
+            {
+              "text": "oh my god",
+              "count": 21
+            },
+            {
+              "text": "hello",
+              "count": 18
+            },
+            {
+              "text": "huh",
+              "count": 16
+            },
+            {
+              "text": "okay",
+              "count": 15
+            },
+            {
+              "text": "thank you",
+              "count": 14
+            },
+            {
+              "text": "what the fuck",
+              "count": 14
+            },
+            {
+              "text": "i don t know",
+              "count": 13
+            },
+            {
+              "text": "yeah",
+              "count": 13
+            },
+            {
+              "text": "no",
+              "count": 12
+            },
+            {
+              "text": "ah",
+              "count": 12
+            },
+            {
+              "text": "what is that",
+              "count": 11
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "moment_quality_root_cause": {
+    "final_moments": 3211,
+    "single_token_low_info": 5,
+    "low_info_sample": [
+      {
+        "moment_id": "e2beb368-2c43-4830-b2e0-3294d1ceff14",
+        "text": "Fuck!",
+        "start_ms": 9803000
+      },
+      {
+        "moment_id": "4158cd5d-c760-4320-bdb8-52c3b3593c3a",
+        "text": "Hi!",
+        "start_ms": 13320000
+      },
+      {
+        "moment_id": "e3bfaaab-faee-4196-8e5a-045aae75bb62",
+        "text": "Wicked!",
+        "start_ms": 2418000
+      },
+      {
+        "moment_id": "d4a191f0-ce25-4136-a495-7e4fb372f3a2",
+        "text": "Camera!",
+        "start_ms": 18870000
+      },
+      {
+        "moment_id": "5a41b9fd-7b26-48d6-bf5b-dc16b3d1e316",
+        "text": "R.E.B.",
+        "start_ms": 3390000
+      }
+    ],
+    "exact_normalized_duplicate_groups": 20,
+    "exact_normalized_duplicate_excess": 31,
+    "duplicate_group_sample": [
+      [
+        "24959f24-87be-4782-ae41-a552e274e421",
+        "44411010-7409-4f3e-b027-0a1a576d5284"
+      ],
+      [
+        "64d4b981-002a-4009-a7d0-b23b5e0d1a3c",
+        "3853c02a-b8a2-4681-99a9-9714440208d6",
+        "c22ee71f-8f4d-4813-9b63-0ba81535ba9c"
+      ],
+      [
+        "aecbb4e6-c257-43f9-bdb2-125b7027f8cd",
+        "773f77a7-2aac-4312-8bf6-2661e680cd63"
+      ],
+      [
+        "03007867-9b1b-4df0-8f5b-5feeb9217afb",
+        "e0cc5036-f573-4060-9a45-82d78b69c29f",
+        "00400d36-b1b6-40ad-8315-d32b8aa9660a",
+        "ce3ab258-2c69-4275-8e7e-207401949a43",
+        "f82a650c-c837-4f12-9795-ebd99a019ff6",
+        "64a0f9a1-6a24-4f04-b588-4c544e640773",
+        "ebb3ef11-1539-4510-a89d-18510bf4d88c",
+        "292338df-00ef-4e7c-8bd5-2aa148c3bfa1"
+      ],
+      [
+        "69a93a08-7c92-4d41-a152-3184c6830540",
+        "4cbd68c6-b8e2-4a04-8507-1103da71bcf0"
+      ],
+      [
+        "de7a8775-1a8a-429b-8656-fc03d361e1b5",
+        "a2784abb-392f-43f1-9c82-9e9c06154dda"
+      ],
+      [
+        "b31e8beb-ce64-4015-9e1d-579594cb1475",
+        "16ead10a-2060-418b-860a-ddfa1292b3c4",
+        "007cad9f-ce49-4c1a-90a2-0e4e0d374a66"
+      ],
+      [
+        "98307ace-5dbf-4617-ac52-a853b0746902",
+        "ea8ce864-ad2f-4da4-a512-89084269e9b6"
+      ],
+      [
+        "6613691b-c745-42ff-936d-0368911eeaab",
+        "2858a4b5-1085-4d97-a599-b0f92853c09a",
+        "a34b7e66-c6b6-4beb-8175-60529b15172a"
+      ],
+      [
+        "aa898a58-bffc-42e2-af5f-8e3c0245e8a2",
+        "6ef3db6c-09b5-4e63-b78e-f2616d170798"
+      ],
+      [
+        "48dc3e0b-d14e-47e9-b243-5089f5c5691d",
+        "7b381b3b-a278-45f7-8a9c-c89180d734a3"
+      ],
+      [
+        "2f5f9c82-f93b-4459-97e4-414500abf5ca",
+        "adb59ce1-40c0-4f5a-bdcf-00e5ee3a3f00"
+      ],
+      [
+        "e5512231-2890-4cc4-a066-6ca2684b2b4e",
+        "562bcc32-e3aa-471d-bd74-2c8740fcdf05"
+      ],
+      [
+        "6a0da977-b4bb-4f94-b4c5-18a37aa04c4b",
+        "6c60c4fd-1f22-4423-9e33-f80efce29911"
+      ],
+      [
+        "9b8cc6eb-9072-4dc4-a540-14f817f3d255",
+        "6de5e836-911b-4cbe-8cba-6faff74ec5cf"
+      ],
+      [
+        "4c742c79-bd61-4570-bc88-953211db6bc3",
+        "bc9b3286-104f-4a7e-9101-4cdf967e0bee"
+      ],
+      [
+        "8c059e07-899e-48bb-844d-c64d7efef953",
+        "57d5f1fd-7367-4c84-933d-ec4f838bf672"
+      ],
+      [
+        "a6642f2e-3794-45cf-a190-875f96c42781",
+        "af2cad63-5657-449d-b357-d6b13b07073c",
+        "76309f61-3e1b-48b7-9f6a-9fff6ae1034b"
+      ],
+      [
+        "b0f6094e-75f5-4617-91ca-cfd387146c26",
+        "c208a364-6cd8-4d00-9580-76816a7193e6",
+        "b1c36e15-2bf0-4e0b-a619-d9d87600dcf8"
+      ],
+      [
+        "dcbb0dc3-61bb-4632-a82e-bbe582db8c8c",
+        "a5800045-02a9-433c-a93b-01112882c0f9"
+      ]
+    ],
+    "pathological_adjacent_overlap": 0,
+    "pathological_overlap_sample": []
+  },
+  "retrieval_root_cause": {
+    "baseline_top5": 8,
+    "queries": 12,
+    "failures": [
+      {
+        "case_id": "R05",
+        "query": "她什么时候反思自己可能把一些分类看得太轻了？",
+        "top5_rank": null,
+        "expected_moment_ids": [
+          "4ed40638-d6d3-4dd2-96d1-82a8c0bf06e8",
+          "67b82873-1181-489a-a008-ac9f33253af6",
+          "8a56ab25-9e6e-493f-9bba-fba5d71ed4b0",
+          "a615bdbd-1131-4680-a9aa-7b499f99effb"
+        ],
+        "target_moment_id": "67b82873-1181-489a-a008-ac9f33253af6",
+        "ground_truth_transcript": "I need to like, put something... Like, in between or... Yeah, like that. Jeans... It's so fucking dumb! When they say giant, they mean... Giant, like taller, like a middle thing? Okay, then... Probably not. Okay, I'm taking some of these too lightly, I feel like. Like, it's the same as the conflation thing. Like, I took it lighter than it actually... What it is. The same for, like, the stuff I did last time. I took, like, some things, like, lightly. Not necessarily, just sometimes. Whatever it is. But what... Glasses? Uh... On irons. I guess. No, I don't really feel anything for it. Glorious hole.",
+        "target_passage_dense_rank": 7137,
+        "target_parent_dense_rank": 2636,
+        "target_fts_representation_rank": null,
+        "root_cause": "cross-language semantic representation miss"
+      },
+      {
+        "case_id": "R08",
+        "query": "Which moment has Japanese lyrics repeatedly asking someone to turn this way again?",
+        "top5_rank": null,
+        "expected_moment_ids": [
+          "fedb9574-8fbe-4c3c-a366-46077629ee26"
+        ],
+        "target_moment_id": "fedb9574-8fbe-4c3c-a366-46077629ee26",
+        "ground_truth_transcript": "切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+        "target_passage_dense_rank": 19,
+        "target_parent_dense_rank": 19,
+        "target_fts_representation_rank": null,
+        "root_cause": "background Japanese lyric span not represented as a classified lyric span"
+      },
+      {
+        "case_id": "R14",
+        "query": "哪段是 chat 狂送 subs，她一边道谢一边说饿了？",
+        "top5_rank": null,
+        "expected_moment_ids": [
+          "06838602-3d81-4e7c-a5ce-d0758813cb5d",
+          "214c985e-915d-4e4e-8635-dbf64d371a07",
+          "b8c40f21-f22b-44f8-8fc5-97c916557b04"
+        ],
+        "target_moment_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d",
+        "ground_truth_transcript": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted! Thank you so fucking much! I am writing the entire name! I am writing the entire name! Did I forget someone? I'm hungry! Damn, my playlist decided to play all Ayose's songs for some fucking reason! I don't know why!",
+        "target_passage_dense_rank": 4508,
+        "target_parent_dense_rank": 486,
+        "target_fts_representation_rank": null,
+        "root_cause": "cross-language semantic representation miss"
+      },
+      {
+        "case_id": "R20",
+        "query": "有没有哪次她解释为什么经常碰到同一个词会更容易记住？",
+        "top5_rank": 10,
+        "expected_moment_ids": [
+          "7970974f-f888-47f6-9e79-2c0540b20474",
+          "c168fe62-7c79-4079-a669-0f8a9b59b455"
+        ],
+        "target_moment_id": "c168fe62-7c79-4079-a669-0f8a9b59b455",
+        "ground_truth_transcript": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize. If you never run into it... Even if you study it at a language school or whatever the f**k you're gonna forget. Unless you had, like, some kind of text that you memorize. From school. I remembered the word for some fucking reason Well, there's a lot of fucking tabemono But I remember... There was like a ramen there",
+        "target_passage_dense_rank": 316,
+        "target_parent_dense_rank": 42,
+        "target_fts_representation_rank": null,
+        "root_cause": "cross-language semantic representation miss"
+      }
+    ],
+    "finding": "The failures are not one defect: three are Chinese-to-English semantic misses with weak lexical fallback; R08 is a Japanese background-lyric span that needs explicit span metadata instead of recording-wide relabeling."
+  },
+  "artifact_locator_root_cause": {
+    "stale_absolute_roots": 6,
+    "all_have_existing_canonical_candidate": true,
+    "affected": [
+      {
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "b3333c7cd9d7cf76b4bb4b2dfb1f33fabe4b9d7f4b6c3d8f7b4d7b96adbb0668",
+          "segment_count": 3750,
+          "script_character_counts": {
+            "latin": 75541,
+            "hiragana": 2622,
+            "katakana": 991,
+            "han": 1043,
+            "hangul": 3
+          },
+          "segment_script_distribution": {
+            "japanese_only": 343,
+            "latin_only": 3367,
+            "mixed": 24,
+            "other_or_symbolic": 16
+          },
+          "repeated_segment_instances": 794,
+          "repeated_segment_fraction": 0.2117,
+          "low_signal_segments": 132,
+          "top_repeated_text": [
+            {
+              "text": "yeah",
+              "count": 46
+            },
+            {
+              "text": "me",
+              "count": 42
+            },
+            {
+              "text": "okay",
+              "count": 33
+            },
+            {
+              "text": "you",
+              "count": 33
+            },
+            {
+              "text": "i m hungry",
+              "count": 32
+            },
+            {
+              "text": "i don t know",
+              "count": 26
+            },
+            {
+              "text": "thank you",
+              "count": 25
+            },
+            {
+              "text": "i m sorry",
+              "count": 23
+            },
+            {
+              "text": "what",
+              "count": 21
+            },
+            {
+              "text": "oh",
+              "count": 20
+            },
+            {
+              "text": "i m honey",
+              "count": 19
+            },
+            {
+              "text": "eyes on me",
+              "count": 14
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "0b9cb7ddc8375eb9230398ad5196a235f3bc5d6c8ade509a744a0fc0587be362",
+          "segment_count": 3850,
+          "script_character_counts": {
+            "latin": 72141,
+            "hiragana": 269,
+            "katakana": 88,
+            "han": 81,
+            "hangul": 0
+          },
+          "segment_script_distribution": {
+            "japanese_only": 39,
+            "latin_only": 3795,
+            "mixed": 3,
+            "other_or_symbolic": 13
+          },
+          "repeated_segment_instances": 878,
+          "repeated_segment_fraction": 0.2281,
+          "low_signal_segments": 172,
+          "top_repeated_text": [
+            {
+              "text": "oh my god",
+              "count": 52
+            },
+            {
+              "text": "thank you",
+              "count": 48
+            },
+            {
+              "text": "me",
+              "count": 41
+            },
+            {
+              "text": "yeah",
+              "count": 37
+            },
+            {
+              "text": "fuck",
+              "count": 30
+            },
+            {
+              "text": "you",
+              "count": 27
+            },
+            {
+              "text": "what the fuck",
+              "count": 26
+            },
+            {
+              "text": "what",
+              "count": 24
+            },
+            {
+              "text": "okay",
+              "count": 19
+            },
+            {
+              "text": "stop",
+              "count": 18
+            },
+            {
+              "text": "ah",
+              "count": 16
+            },
+            {
+              "text": "oh",
+              "count": 16
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "creator": "anny",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "resolved_candidate_exists": true,
+        "transcript": {
+          "raw_whisper_language": "ja",
+          "raw_transcript_sha256": "4e3aab6a8d102e69ae25ff1ee490ad11ee282ab6804b54e7626cfd7942efd034",
+          "segment_count": 3366,
+          "script_character_counts": {
+            "latin": 66644,
+            "hiragana": 283,
+            "katakana": 472,
+            "han": 227,
+            "hangul": 1
+          },
+          "segment_script_distribution": {
+            "japanese_only": 181,
+            "latin_only": 3098,
+            "mixed": 28,
+            "other_or_symbolic": 59
+          },
+          "repeated_segment_instances": 562,
+          "repeated_segment_fraction": 0.167,
+          "low_signal_segments": 168,
+          "top_repeated_text": [
+            {
+              "text": "what",
+              "count": 39
+            },
+            {
+              "text": "oh my god",
+              "count": 21
+            },
+            {
+              "text": "hello",
+              "count": 18
+            },
+            {
+              "text": "huh",
+              "count": 16
+            },
+            {
+              "text": "okay",
+              "count": 15
+            },
+            {
+              "text": "thank you",
+              "count": 14
+            },
+            {
+              "text": "what the fuck",
+              "count": 14
+            },
+            {
+              "text": "i don t know",
+              "count": 13
+            },
+            {
+              "text": "yeah",
+              "count": 13
+            },
+            {
+              "text": "no",
+              "count": 12
+            },
+            {
+              "text": "ah",
+              "count": 12
+            },
+            {
+              "text": "what is that",
+              "count": 11
+            }
+          ]
+        }
+      },
+      {
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "creator": "saruei",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "resolved_candidate_exists": true
+      },
+      {
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "creator": "saruei",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "resolved_candidate_exists": true
+      },
+      {
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "creator": "saruei",
+        "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "legacy_exists": false,
+        "canonical_relative_locator": "runs/90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "resolved_candidate": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "resolved_candidate_exists": true
+      }
+    ],
+    "finding": "Six DB rows persist machine-specific E: absolute roots while the same run identities exist under the active F: library root. Resolution policy is implicit and scattered rather than represented by a portable locator."
+  },
+  "repair_constraints": {
+    "do_not_modify_raw_transcripts": true,
+    "derive_language_and_span_metadata": true,
+    "retain_legacy_artifact_root_fallback": true,
+    "migration_must_be_idempotent": true
+  }
+}

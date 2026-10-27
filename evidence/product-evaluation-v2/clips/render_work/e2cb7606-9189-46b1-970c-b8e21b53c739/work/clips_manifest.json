@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "stage": "build_clip_manifest",
+  "units": "ms",
+  "source_media": "F:\\.work\\[5-23-24] Saruei - \u2728\ud83e\uddc1 NEW MODEL \ud83e\uddc1\u2728 IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER \u2665.mp4",
+  "clip_count": 1,
+  "clips": [
+    {
+      "clip_id": "clip_001",
+      "rank": 1,
+      "start_ms": 9657840,
+      "end_ms": 9694000,
+      "output": {
+        "video": "clip.mp4"
+      },
+      "status": "ok"
+    }
+  ]
+}

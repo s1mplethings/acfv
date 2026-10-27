@@ -1,0 +1,29 @@
+# Final Clip Transcript Refinement
+
+- Purpose: create a publication-quality transcript only for a selected semantic event, without re-transcribing the Creator Library.
+- Canonical Interface: `acfv.clips.refinement.FinalClipTranscriptService`.
+- Implementation: `src/acfv/clips/refinement.py`, reusing the installed faster-whisper/WhisperX providers and the existing FFmpeg runner.
+- Inputs: source media, Recording/event identity, FULL_EVENT semantic boundaries, source language, Library transcript, ASR/alignment/correction configuration, and optional event/game/OCR context.
+- Outputs: an immutable `final_event_transcript.json` containing `raw_library_transcript`, `raw_final_asr`, `corrected_final_transcript`, and word-level `aligned_words`, plus `final_transcript_quality.json`, runtime diagnostics, local re-decode evidence, a content-addressed cache key, and explainable per-issue language-risk records.
+- Process: for Generate All, extract the union of every available semantic profile (`FULL_EVENT` when it passes the 15-300s safety rule) plus 5s context; for one selected profile, extract only that semantic boundary plus context. Then run high-quality VAD ASR -> word alignment -> conservative contextual source correction -> crop words back to the requested semantic scope -> reuse that aligned event track for every variant in the same Generate All request.
+- Effects: writes only below the selected variant output root; the Library transcript and source media are never overwritten.
+- Dependencies: existing FFmpeg runner, faster-whisper adapter, optional injected forced aligner, local JSON LLM client for conservative correction, and ClipVariantService for profile reuse.
+- Configuration: final-event ASR defaults to `large-v3`; unavailable configured models fail explicitly or use a caller-declared fallback. A caller may inject a forced aligner; the built-in reliable fallback records `faster-whisper-word-timestamps` explicitly. Low-confidence segments may be re-decoded once in a local ±2 second window; the whole event is never re-run for this check.
+- Errors: missing media, empty ASR, invalid word timing, unsafe correction, or unavailable required model/alignment returns an explicit failure; no fabricated transcript is emitted.
+- Cache: Recording, event identity, padded audio bounds, ASR model/config, alignment backend, and correction version form the key. Duration profile is deliberately excluded.
+- Resource lifecycle: ASR/alignment complete and release GPU state before translation and rendering begin.
+- Acceptance:
+  - only the selected event plus bounded context is transcribed;
+  - VAD and word timestamps are requested;
+  - raw Library text, raw final ASR, corrected text, and aligned words remain separately inspectable;
+  - correction cannot remove profanity, add unsupported claims, or silently replace low-confidence text;
+  - lexical correction requires at least two independent evidence classes, or strong acoustic support paired with an exact glossary/OCR match; contextual LLM preference is never independent evidence;
+  - correction decisions are `UNCHANGED_CONFIDENT`, `AUTO_CORRECTED`, `UNCHANGED_UNCERTAIN`, or `NEEDS_REVIEW`, and raw text is retained for every non-correction decision;
+  - every word preserves raw text, displayed text, timing, confidence, source, and objective quality flags;
+  - background lyrics are excluded from default creator-speech captions, while overlap and interrupted speech remain visibly uncertain;
+  - suspicious words carry semantic importance (`LOW`..`CRITICAL`) and event position (`SETUP`..`AFTERMATH`); the ASR release gate uses maximum and aggregate explainable risk rather than issue presence alone;
+  - unresolved negation/key-number/core-identity/payoff errors, invalid timing, and extremely-low-confidence payoff speech remain hard blockers, while an ordinary low-confidence filler is at most a warning;
+  - sentence classification distinguishes `TRUE_BROKEN`, `INTERRUPTED_SPEECH`, `VALID_FRAGMENT`, `REACTION`, and `ASR_ERROR`; interruption, reaction, and valid fragments do not block release merely for being short;
+  - a source-correction request that is too large for the local model preserves the full raw aligned text and records `UNCERTAIN_REFINER_INPUT_TOO_LONG` instead of truncating or blocking the batch;
+  - SHORT/STANDARD/LONG/FULL_EVENT slice one cached aligned event transcript instead of invoking ASR four times;
+  - subtitle timing names its backend and remains derived from audio alignment, never translation.

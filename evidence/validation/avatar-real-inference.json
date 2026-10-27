@@ -1,0 +1,11 @@
+{
+  "status": "NOT_EVALUATED",
+  "reason": "BLOCKED_MODEL_PATH",
+  "provider_status": "NOT_CONFIGURED",
+  "frames": 0,
+  "creators": {},
+  "predictions": 0,
+  "unknown": 0,
+  "latency_ms": null,
+  "raw_media_mutations": 0
+}

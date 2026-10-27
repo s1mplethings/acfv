@@ -1,0 +1,48 @@
+# 工作流（Spec-first，端到端）
+
+## 阶段流程与输入/输出
+1) **入口（GUI/CLI/守护）**  
+   - 输入：CLI 参数或 GUI 表单（URL/本地路径/out-dir/cfg），守护配置 `var/settings/stream_monitor.yaml`。  
+   - 输出：启动命令、参数解析结果，写入日志。
+2) **Ingest（下载/本地定位/录制）**  
+   - 输入：VOD URL 或本地媒体路径，Twitch API 凭证，录制目标列表。  
+   - 输出：本地媒体文件（`processing/` 或自定义目录）、chat JSON（守护或下载步骤）。  
+   - 契约：路径可访问、容器可解析、长路径处理。
+3) **预处理（抽取/重采样）**  
+   - 输入：媒体文件路径、ffmpeg/ffprobe。  
+   - 输出：标准化音频（wav/16k 或配置）、基础元数据（时长/声道）。  
+4) **转写（Transcribe Audio）**  
+   - 输入：音频路径、语言/模型/设备配置；参见 `specs/modules/transcribe_audio/*`。  
+   - 输出：转写 JSON（schema_version、segments 排序）、SRT/ASS 可选。  
+5) **分段/评分/选段**  
+   - 输入：转写/情绪/弹幕等中间件，评分规则。  
+   - 输出：候选段列表（时间戳+得分），可导出 JSON。  
+6) **渲染/导出**  
+   - 输入：选定段、媒体资源、模板配置。  
+   - 输出：剪辑视频、缩略图、字幕包；落盘至 `runs/out` 或配置目录，遵循命名契约。  
+7) **守护循环（Stream Monitor）**  
+   - 输入：配置文件 targets（房间名/路径）、轮询周期。  
+   - 输出：持续落盘的视频/弹幕、日志；触发后续流水线（可选）。
+
+## Spec 写作最低标准
+- 每个模块需覆盖 Purpose/Inputs/Outputs/Process/Config/Performance/Error/Edge/AC/Trace Links。
+- AC 采用 Given/When/Then，需可测且附样例输入输出；指向 tests 与契约文件。
+- 输入输出契约用表格列字段/类型/必填/约束/示例，并声明错误处理策略。
+
+## Tasks 拆解规则
+- 每条 task 必须有 DoD（完成定义）和验证命令。
+- 任务按小步迭代：更新 spec → 更新/新增测试 → 实现 → 运行 verify → 记录决策/问题。
+
+## 实现循环
+1) 选定 1 个 task，检查相关 spec/contract 是否最新。
+2) 先写/更新测试（unit/integration/e2e/golden），确保覆盖 AC。
+3) 实现或修复代码；保持与 spec 一致。
+4) 运行 `scripts/verify.ps1`；失败则记录 problem_registry 并修复。
+
+## Drift 处理流程
+- 发现实现与 spec 不符：先改 spec + tests，再改实现；若需临时偏离，记录 decision_log。
+- 发现输出契约变更：更新 contract_output + golden + tests。
+
+## 问题记忆规则
+- 任何构建/运行/测试失败必须记录到 `ai_context/problem_registry.md`（症状→根因→修复→预防）。
+- 复现步骤与日志片段需一并记录，便于后续 verify。

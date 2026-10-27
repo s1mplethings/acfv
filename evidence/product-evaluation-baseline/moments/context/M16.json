@@ -1,0 +1,45 @@
+{
+  "case_id": "M16",
+  "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+  "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+  "moment_id": "24c637e9-4433-4fd6-86fa-7d9acfadbd86",
+  "start_ms": 14878400,
+  "end_ms": 14885000,
+  "timestamp": "04:07:58.400–04:08:05.000",
+  "duration_ms": 6600,
+  "length_bucket": "short",
+  "summary": "I'm gonna die Get it? You could. Okay, I'm gonna roll off. What's this?",
+  "moment_transcript": "I'm gonna die Get it? You could. Okay, I'm gonna roll off. What's this?",
+  "context_30s": {
+    "before": "What? Bro, is that supposed to like... I'm hungry! Is that supposed to like... What? What's wrong with trying to play a new game? Jozo sozo, thank you The fuck? The gay keepers? Hello gay keeper? Chat, do I get the item or not? Do I get the item or not?",
+    "inside": "I'm gonna die Get it? You could. Okay, I'm gonna roll off. What's this?",
+    "after": "Hold on. I wanted to make my Christmas hat bigger. God, I hope it didn't make my... It did. Chat, why is it making my screen blue? Do I really have to..."
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 3840,
+    "pause_after_ms": 12000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 14872560,
+      "end_ms": 14874560,
+      "text": "Do I get the item or not?"
+    },
+    "next_segment": {
+      "start_ms": 14897000,
+      "end_ms": 14900000,
+      "text": "Hold on. I wanted to make my Christmas hat bigger."
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

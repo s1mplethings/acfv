@@ -1,0 +1,4 @@
+# Source of truth: pyproject.toml [project.optional-dependencies.dev]
+# Last synchronized: 2026-02-07
+-r requirements.txt
+.[dev]

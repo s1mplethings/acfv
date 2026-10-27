@@ -1,0 +1,45 @@
+{
+  "case_id": "M30",
+  "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+  "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+  "moment_id": "858cd9cd-9190-45f6-b1bc-cbf3e7bd8e25",
+  "start_ms": 5811000,
+  "end_ms": 5869000,
+  "timestamp": "01:36:51.000–01:37:49.000",
+  "duration_ms": 58000,
+  "length_bucket": "medium",
+  "summary": "Let's see. Photo album. Tab. Tab is a photo album. Heart stickers can be attached to your favorite photo flashcards so that they are neatly separated from the rest on your favorite tab. You can like favorite the words that you have the most trouble with so you can come back to them easier. Your photo album also contains multiple pages of Japanese lessons that feature dialect vocabulary lists and grammar notes for additional learning. Damn. It's recommended to use multiple sources besides Shashingo to learn Japanese proficiently. I mean, obviously. This is just a little, little small game. What the fuck? It's raining. Why? It's raining everywhere. Why is the camera not working? How do I use the camera?",
+  "moment_transcript": "Let's see. Photo album. Tab. Tab is a photo album. Heart stickers can be attached to your favorite photo flashcards so that they are neatly separated from the rest on your favorite tab. You can like favorite the words that you have the most trouble with so you can come back to them easier. Your photo album also contains multiple pages of Japanese lessons that feature dialect vocabulary lists and grammar notes for additional learning. Damn. It's recommended to use multiple sources besides Shashingo to learn Japanese proficiently. I mean, obviously. This is just a little, little small game. What the fuck? It's raining. Why? It's raining everywhere. Why is the camera not working? How do I use the camera?",
+  "context_30s": {
+    "before": "Taking a photo of a word you already have in your photo album will instead give you the option to overwrite it or discard it. Okay. Adorable.",
+    "inside": "Let's see. Photo album. Tab. Tab is a photo album. Heart stickers can be attached to your favorite photo flashcards so that they are neatly separated from the rest on your favorite tab. You can like favorite the words that you have the most trouble with so you can come back to them easier. Your photo album also contains multiple pages of Japanese lessons that feature dialect vocabulary lists and grammar notes for additional learning. Damn. It's recommended to use multiple sources besides Shashingo to learn Japanese proficiently. I mean, obviously. This is just a little, little small game. What the fuck? It's raining. Why? It's raining everywhere. Why is the camera not working? How do I use the camera?",
+    "after": "Sunny, thank you for the resub and rings are. Wait, where's my? Oh, I have this button instead. Wow, that's a big zoom Station, that means station Korea Is this supposed to be fucking SEGA?"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 9000,
+    "pause_after_ms": 1000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 5801000,
+      "end_ms": 5802000,
+      "text": "Adorable."
+    },
+    "next_segment": {
+      "start_ms": 5870000,
+      "end_ms": 5873000,
+      "text": "Sunny, thank you for the resub and rings are."
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

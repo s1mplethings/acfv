@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "change_id": "real-usage-mvp-2026-10-07",
+  "commit": "3be8996dde8b3ab6a9dce2f3c04571231ed112c6",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m acfv.cli live --help",
+    "python -m pytest -q",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov=acfv.live --cov-report=term:skip-covered",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {"check": "real_twitch_detection_and_capture", "status": "PASS_REAL", "segments": 9, "captured_seconds": 515.464},
+    {"check": "unexpected_ffmpeg_exit", "status": "PASS_REAL", "closed_segments_preserved": 9},
+    {"check": "gpu_asr", "status": "PASS_REAL_MEDIA_REPLAY_SCHEDULING", "device": "RTX 4050", "workers": 1, "rtf_samples": [0.571, 0.130]},
+    {"check": "live_search", "status": "REPLAY_ONLY"},
+    {"check": "twitch_chat", "status": "NOT_EVALUATED"},
+    {"check": "compileall", "status": "PASS"},
+    {"check": "cli", "status": "PASS", "count": 4},
+    {"check": "pytest", "status": "PASS", "passed": 217, "skipped": 0},
+    {"check": "coverage", "status": "PASS", "percent": 85},
+    {"check": "verify_ps1", "status": "PASS"},
+    {"check": "contract_checks", "status": "PASS"},
+    {"check": "dogfooding_20h", "status": "NOT_EVALUATED"},
+    {"check": "human_retrieval_moment_clip_gates", "status": "NOT_EVALUATED"}
+  ],
+  "passed": false,
+  "verdict": "MVP_NOT_READY",
+  "environment": {"os": "Windows 11", "python": "3.12.3", "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU 6141 MiB"}
+}

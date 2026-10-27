@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "stage": "build_clip_manifest",
+  "units": "ms",
+  "source_media": "F:\\.work\\[3-2-24] Saruei - \u3010HALO_ COMBAT EVOLVED\u3011PART 2.mp4",
+  "clip_count": 1,
+  "clips": [
+    {
+      "clip_id": "clip_001",
+      "rank": 1,
+      "start_ms": 6641920,
+      "end_ms": 6646400,
+      "output": {
+        "video": "clip.mp4"
+      },
+      "status": "planned"
+    }
+  ]
+}

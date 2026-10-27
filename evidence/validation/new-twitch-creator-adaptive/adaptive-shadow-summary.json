@@ -1,0 +1,10 @@
+{
+  "samples": 100,
+  "high_risk": 50,
+  "random": 50,
+  "actions": {
+    "UNCHANGED_UNCERTAIN": 100
+  },
+  "human_ground_truth": "PENDING",
+  "wer": "PENDING"
+}

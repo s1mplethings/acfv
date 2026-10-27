@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "timing_source": "faster-whisper word timestamps",
+  "coordinate_system": "recording-relative absolute milliseconds converted to clip-relative milliseconds",
+  "display_mode": "ZH_EN",
+  "completeness": "COMPLETE",
+  "translation_provider": "argos en_zh 1.9",
+  "variants": {
+    "SHORT": {"cue_count": 6, "average_duration_ms": 2586.667, "min_duration_ms": 520, "max_duration_ms": 4900, "overlap_count": 0, "out_of_range_cues": 0, "untranslated_cues": 0, "coverage": 1.0, "zh_cps_max": 5.725, "en_cps_max": 20.408, "timeline_valid": true},
+    "STANDARD": {"cue_count": 12, "average_duration_ms": 2806.667, "min_duration_ms": 740, "max_duration_ms": 5880, "overlap_count": 0, "out_of_range_cues": 0, "untranslated_cues": 0, "coverage": 1.0, "zh_cps_max": 6.604, "en_cps_max": 20.408, "timeline_valid": true},
+    "LONG": {"cue_count": 16, "average_duration_ms": 2790.0, "min_duration_ms": 740, "max_duration_ms": 5880, "overlap_count": 0, "out_of_range_cues": 0, "untranslated_cues": 0, "coverage": 1.0, "zh_cps_max": 6.604, "en_cps_max": 20.408, "timeline_valid": true},
+    "FULL_EVENT": {"cue_count": 16, "average_duration_ms": 2790.0, "min_duration_ms": 740, "max_duration_ms": 5880, "overlap_count": 0, "out_of_range_cues": 0, "untranslated_cues": 0, "coverage": 1.0, "zh_cps_max": 6.604, "en_cps_max": 20.408, "timeline_valid": true}
+  },
+  "hard_gates": {
+    "negative_times": 0,
+    "overlaps": 0,
+    "out_of_range": 0,
+    "empty_bilingual_cues": 0,
+    "hard_duration_violations": 0,
+    "coverage_at_least_95_percent": true
+  },
+  "visual_sampling": "Three frames per variant inspected; top safe-area bilingual lines remain readable without obscuring the central event.",
+  "result": "PASS"
+}

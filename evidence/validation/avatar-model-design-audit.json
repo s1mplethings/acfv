@@ -1,0 +1,14 @@
+{
+  "framework": "Ultralytics 8.3.53 / PyTorch",
+  "task": "detect",
+  "architecture": "YOLO11l, 3-channel backbone, P3/P4/P5 Detect head",
+  "input": {"kind": "OpenCV BGR frame", "imgsz": 640, "native_ultralytics_letterbox": true},
+  "output": ["xyxy bbox", "confidence", "class id"],
+  "classes": {"0": "vtuber"},
+  "identity_capable": false,
+  "training": {"base": "yolo11l.pt", "epochs": 100, "batch": 16, "device": "cuda", "workers": 8, "optimizer": "auto", "amp": true, "seed": 0, "deterministic": true},
+  "dataset_format": "Ultralytics YOLO images/labels plus train/val data.yaml",
+  "metrics": "NOT_AVAILABLE_IN_CHECKPOINT",
+  "source_of_truth": ["checkpoint metadata", "G:/Cliper/yolo_funcs training/label/inference code"],
+  "report": "docs/avatar-model-design.md"
+}

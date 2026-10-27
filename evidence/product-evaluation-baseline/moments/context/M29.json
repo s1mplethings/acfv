@@ -1,0 +1,45 @@
+{
+  "case_id": "M29",
+  "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+  "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+  "moment_id": "5aeb68fc-4227-4a26-9847-3bcad5c9a098",
+  "start_ms": 7003000,
+  "end_ms": 7060000,
+  "timestamp": "01:56:43.000–01:57:40.000",
+  "duration_ms": 57000,
+  "length_bucket": "medium",
+  "summary": "HELLO? They don't even... Okay, I think the game hates me now シャター シャター ランプ 換気口 換気口 What do you think this word is? 暖ボール箱 Okay, thank god it's not a fucking 箱 スツール スツール スツール ボトルクレート What? Not even ramen?",
+  "moment_transcript": "HELLO? They don't even... Okay, I think the game hates me now シャター シャター ランプ 換気口 換気口 What do you think this word is? 暖ボール箱 Okay, thank god it's not a fucking 箱 スツール スツール スツール ボトルクレート What? Not even ramen?",
+  "context_30s": {
+    "before": "No fucking way! What do you think this word is? What do you think this word is? ドル Hello? It's not ドル, it's ドア It's ドア It's not ドル ドル is fucking ドル Why is it not taking a picture though? Hello?",
+    "inside": "HELLO? They don't even... Okay, I think the game hates me now シャター シャター ランプ 換気口 換気口 What do you think this word is? 暖ボール箱 Okay, thank god it's not a fucking 箱 スツール スツール スツール ボトルクレート What? Not even ramen?",
+    "after": "スマホ スマホ I love learning English Right? Don't let me take a picture of the... Pipe! Pipe! Your favorite!"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 1000,
+    "pause_after_ms": 6000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 7001000,
+      "end_ms": 7002000,
+      "text": "Hello?"
+    },
+    "next_segment": {
+      "start_ms": 7066000,
+      "end_ms": 7067000,
+      "text": "スマホ"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

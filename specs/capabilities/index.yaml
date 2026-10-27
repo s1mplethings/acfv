@@ -1,0 +1,214 @@
+schema_version: "1.0"
+capabilities:
+  - id: creator_identity
+    name: Creator Identity Fusion
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: VALIDATED
+    runtime_mode: SHADOW
+    production_status: NOT_EVALUATED
+    interface: acfv.creator_identity.CreatorIdentityService
+    implementation: [src/acfv/creator_identity/, src/acfv/creator_adaptive/]
+    spec: specs/capabilities/creator_identity.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_multi_creator_adaptive.py]
+    owner_layer: product
+  - id: voice_profile
+    name: Creator Voice Profile
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: VALIDATED
+    runtime_mode: SHADOW_SUPPORT_SIGNAL
+    production_status: NOT_EVALUATED
+    interface: acfv.voice_profile.CreatorVoiceProfileService
+    implementation: [src/acfv/voice_profile/]
+    spec: specs/capabilities/voice_profile.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_multi_creator_adaptive.py]
+    owner_layer: product
+  - id: trusted_speech_memory
+    name: Trusted Speech Memory
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: VALIDATED
+    runtime_mode: SHADOW
+    production_status: NOT_EVALUATED
+    interface: acfv.trusted_speech_memory.TrustedSpeechMemoryService
+    implementation: [src/acfv/trusted_speech_memory/]
+    spec: specs/capabilities/trusted_speech_memory.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_multi_creator_adaptive.py]
+    owner_layer: product
+  - id: creator_lexicon
+    name: Creator Scoped Lexicon
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: VALIDATED
+    runtime_mode: SHADOW
+    production_status: NOT_EVALUATED
+    interface: acfv.trusted_speech_memory.TrustedSpeechMemoryService
+    implementation: [src/acfv/trusted_speech_memory/]
+    spec: specs/capabilities/creator_lexicon.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_multi_creator_adaptive.py]
+    owner_layer: product
+  - id: creator_adaptive_asr
+    name: Creator Adaptive ASR
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: VALIDATED
+    runtime_mode: SHADOW
+    production_status: NOT_EVALUATED
+    interface: acfv.creator_adaptive_asr.CreatorAdaptiveASRService
+    implementation: [src/acfv/creator_adaptive_asr/]
+    spec: specs/capabilities/creator_adaptive_asr.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_multi_creator_adaptive.py]
+    owner_layer: product
+  - id: avatar_identity_provider
+    name: Existing Avatar Presence Provider
+    status: optional
+    implementation_status: IMPLEMENTED
+    validation_status: REAL_MODEL_PRESENCE_VALIDATED_IDENTITY_UNAVAILABLE
+    runtime_mode: OPTIONAL_PROVIDER
+    production_status: NOT_EVALUATED
+    interface: acfv.providers.avatar_identity.AvatarIdentityProvider
+    implementation: [src/acfv/providers/avatar_identity.py, src/acfv/providers/ultralytics_avatar.py]
+    spec: specs/capabilities/avatar_identity_provider.md
+    tests: [tests/unit/test_creator_adaptive_understanding.py, tests/unit/test_ultralytics_avatar_provider.py]
+    owner_layer: provider
+  - id: creator_visual_identity
+    name: Creator Visual Identity
+    status: shadow
+    implementation_status: IMPLEMENTED
+    validation_status: REAL_PROXY_VALIDATED_HUMAN_PENDING
+    runtime_mode: SHADOW_VISUAL_IDENTITY
+    production_status: NOT_EVALUATED
+    interface: acfv.creator_visual_identity.CreatorVisualIdentityService
+    implementation: [src/acfv/creator_visual_identity/]
+    spec: specs/capabilities/creator_visual_identity.md
+    tests: [tests/unit/test_creator_visual_identity.py]
+    owner_layer: provider
+  - id: human_review
+    name: Human Review Lab
+    status: production
+    interface: acfv.human_review.HumanReviewRepository
+    implementation: [src/acfv/human_review/]
+    spec: specs/capabilities/human_review.md
+    tests: [tests/unit/test_human_review.py, tests/unit/test_human_review_gui.py]
+    owner_layer: product
+  - id: live_processing
+    name: Live Processing
+    status: production
+    interface: acfv.live.service.LiveProcessingService
+    implementation: [src/acfv/live/]
+    spec: specs/capabilities/live_processing.md
+    tests: [tests/unit/test_live_processing.py, tests/e2e/test_live_product_e2e.py]
+    owner_layer: product
+  - id: twitch_capture
+    name: Twitch Capture
+    status: production
+    interface: acfv.library.capture.StreamLibraryBridge
+    implementation: [src/acfv/library/capture.py, src/acfv/runtime/stream_monitor.py]
+    spec: specs/capabilities/twitch_capture.md
+    tests: [tests/unit/test_library_capture.py]
+    owner_layer: product
+  - id: vod_download
+    name: Twitch VOD Download
+    status: production
+    interface: acfv.library.vod_download.VodDownloadService
+    implementation: [src/acfv/library/vod_download.py, src/acfv/providers/download.py]
+    spec: specs/capabilities/vod_download.md
+    tests: [tests/unit/test_vod_download.py, tests/unit/test_multi_creator_adaptive.py, tests/e2e/test_clip_workflow_e2e.py]
+    owner_layer: product
+  - id: video_processing
+    name: Processing Pipeline
+    status: production
+    interface: acfv.backend.service.create_job
+    implementation: [src/acfv/backend/, src/acfv/pipeline/, src/acfv/modular/, src/acfv/steps/, src/acfv/providers/]
+    spec: specs/capabilities/video_processing.md
+    tests: [tests/integration/test_clip_workflow_smoke.py, tests/e2e/test_clip_workflow_e2e.py]
+    owner_layer: processing
+  - id: creator_library
+    name: Creator Library
+    status: production
+    interface: acfv.library.service.LibraryService
+    implementation: [src/acfv/library/]
+    spec: specs/capabilities/creator_library.md
+    tests: [tests/unit/test_library_service.py, tests/e2e/test_mvp_product_e2e.py]
+    owner_layer: product
+  - id: moment_lifecycle
+    name: Moment Lifecycle
+    status: production
+    interface: acfv.moments.service.MomentService
+    implementation: [src/acfv/moments/]
+    spec: specs/capabilities/moment_lifecycle.md
+    tests: [tests/unit/test_provisional_moments.py, tests/unit/test_moment_finalization.py]
+    owner_layer: product
+  - id: retrieval
+    name: Retrieval
+    status: production
+    interface: acfv.retrieval.service.HybridRetrievalService
+    implementation: [src/acfv/retrieval/]
+    spec: specs/capabilities/retrieval.md
+    tests: [tests/integration/test_hybrid_retrieval.py, tests/integration/test_moment_index_persistence.py]
+    owner_layer: product
+  - id: grounded_conversation
+    name: Grounded Conversation
+    status: production
+    interface: acfv.conversation.service.GroundedConversationService
+    implementation: [src/acfv/conversation/]
+    spec: specs/capabilities/grounded_conversation.md
+    tests: [tests/unit/test_grounded_conversation.py]
+    owner_layer: product
+  - id: clip_rendering
+    name: Clip Rendering
+    status: production
+    interface: acfv.clips.service.ClipService.render
+    implementation: [src/acfv/clips/, src/acfv/backend/service.py]
+    spec: specs/capabilities/clip_rendering.md
+    tests: [tests/unit/test_clip_service.py, tests/integration/test_query_to_clip_render.py]
+    owner_layer: product
+  - id: clip_candidate_selection
+    name: Clip Candidate Selection
+    status: production
+    interface: acfv.clips.candidates.ClipCandidateSelector
+    implementation: [src/acfv/clips/candidates.py]
+    spec: specs/capabilities/clip_candidate_selection.md
+    tests: [tests/unit/test_clip_candidates.py]
+    owner_layer: product
+  - id: bilingual_subtitle
+    name: Bilingual Subtitle
+    status: production
+    interface: acfv.clips.subtitles.BilingualSubtitleService
+    implementation: [src/acfv/clips/subtitles.py]
+    spec: specs/capabilities/bilingual_subtitle.md
+    tests: [tests/unit/test_bilingual_subtitles.py]
+    owner_layer: product
+  - id: clip_duration_profile
+    name: Clip Duration Profile
+    status: production
+    interface: acfv.clips.variants.ClipVariantService
+    implementation: [src/acfv/clips/duration.py, src/acfv/clips/variants.py]
+    spec: specs/capabilities/clip_duration_profile.md
+    tests: [tests/unit/test_clip_duration_profiles.py]
+    owner_layer: product
+  - id: final_clip_transcript_refinement
+    name: Final Clip Transcript Refinement
+    status: production
+    interface: acfv.clips.refinement.FinalClipTranscriptService
+    implementation: [src/acfv/clips/refinement.py]
+    spec: specs/capabilities/final_clip_transcript_refinement.md
+    tests: [tests/unit/test_final_clip_transcript_refinement.py]
+    owner_layer: product
+  - id: clip_review
+    name: Clip Review
+    status: production
+    interface: acfv.clips.service.ClipService.update_review
+    implementation: [src/acfv/clips/service.py, src/acfv/clips/gui_workflow.py, src/acfv/ui/tabs/review_tab.py]
+    spec: specs/capabilities/clip_review.md
+    tests: [tests/unit/test_clip_service.py, tests/unit/test_gui_variant_workflow.py, tests/e2e/test_mvp_product_e2e.py]
+    owner_layer: product
+  - id: feedback
+    name: Feedback
+    status: production
+    interface: acfv.feedback.service.FeedbackService
+    implementation: [src/acfv/feedback/]
+    spec: specs/capabilities/feedback.md
+    tests: [tests/unit/test_feedback_service.py]
+    owner_layer: product

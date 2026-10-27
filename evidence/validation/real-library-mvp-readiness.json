@@ -1,0 +1,39 @@
+{
+  "recordings": 10,
+  "hours": 52.430644,
+  "processed_recordings": 10,
+  "indexed_recordings": 10,
+  "final_moments": 3999,
+  "index_rows": 3999,
+  "known_p0": 0,
+  "known_p1": 0,
+  "automated_verification": "PASS",
+  "human": {
+    "retrieval": {
+      "required": 10,
+      "rated": 0,
+      "passing_scores": 0,
+      "threshold": 7,
+      "pass": false
+    },
+    "moments": {
+      "required": 20,
+      "rated": 0,
+      "passing_scores": 0,
+      "threshold": 16,
+      "pass": false
+    },
+    "clips": {
+      "required": 10,
+      "rated": 0,
+      "passing_scores": 0,
+      "threshold": 6,
+      "pass": false
+    },
+    "gui_pass": false
+  },
+  "MVP_CODE_READY": true,
+  "REAL_LIBRARY_READY": true,
+  "PRODUCT_VALIDATION_PENDING": true,
+  "MVP_READY_FOR_REAL_USAGE": false
+}

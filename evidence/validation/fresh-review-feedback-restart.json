@@ -1,0 +1,99 @@
+{
+  "decisions": [
+    {
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "id": "2cf3bbe2-97c7-4d30-a1fb-f3f8b03ce209",
+      "decision": "ACCEPTED",
+      "original_end_ms": 319540,
+      "final_end_ms": 319540,
+      "boundary_delta_end": 0,
+      "reason": "fresh validation accepted",
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "query": "Okay anyways there's nobody here can't",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "original_start_ms": 215420,
+      "final_start_ms": 248280,
+      "boundary_delta_start": 32860,
+      "subtitle_edit": "",
+      "created_at": "2026-10-12T02:33:05.008556Z"
+    },
+    {
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "id": "311e4528-8877-46a4-888c-c00b1aa4df5f",
+      "decision": "ACCEPTED",
+      "original_end_ms": 123500,
+      "final_end_ms": 123500,
+      "boundary_delta_end": 0,
+      "reason": "fresh validation accepted",
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "query": "Spicy Lazy trail already drunk already",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "original_start_ms": 71180,
+      "final_start_ms": 55700,
+      "boundary_delta_start": -15480,
+      "subtitle_edit": "",
+      "created_at": "2026-10-12T02:33:05.251321Z"
+    },
+    {
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "id": "6dec862a-6285-4e92-af17-153b42a7220c",
+      "decision": "REJECTED",
+      "original_end_ms": 327000,
+      "final_end_ms": 319980,
+      "boundary_delta_end": -7020,
+      "reason": "fresh validation rejected",
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "query": "Yeah yeah good times could there",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "original_start_ms": 240000,
+      "final_start_ms": 252360,
+      "boundary_delta_start": 12360,
+      "subtitle_edit": "",
+      "created_at": "2026-10-12T02:33:05.441879Z"
+    },
+    {
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "id": "c040fa80-c1d4-493f-be9e-d8a44b956413",
+      "decision": "REJECTED",
+      "original_end_ms": 548860,
+      "final_end_ms": 539100,
+      "boundary_delta_end": -9760,
+      "reason": "fresh validation rejected",
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "query": "back there's like like tiny little",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "original_start_ms": 480000,
+      "final_start_ms": 472400,
+      "boundary_delta_start": -7600,
+      "subtitle_edit": "",
+      "created_at": "2026-10-12T02:33:05.634035Z"
+    }
+  ],
+  "preferences": [
+    {
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "text": "prefer complete reaction",
+      "created_at": "2026-10-12T02:33:05.740019Z",
+      "id": "08886233-2324-46e3-88f9-1e18b5b86c72",
+      "source": "USER_EXPLICIT"
+    },
+    {
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "text": "prefer complete argument",
+      "created_at": "2026-10-12T02:33:05.832001Z",
+      "id": "35252430-71b1-4cc5-85f2-390343252183",
+      "source": "USER_EXPLICIT"
+    },
+    {
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "text": "{\"creator_scope\": \"763d6db5-d95b-4634-84bb-b1ef0a998883\", \"game_scope\": \"\", \"preferred_translation\": \"跳脸惊吓\", \"recording_scope\": \"2a407bf2-05bd-40a9-b5e7-d164ac475d76\", \"source_phrase\": \"jump scare\"}",
+      "created_at": "2026-10-12T02:33:05.949413Z",
+      "id": "aa2abe93-582b-4609-97fb-74b001d2461d",
+      "source": "USER_EXPLICIT_TRANSLATION_PREFERENCE"
+    }
+  ],
+  "persisted_feedback": 4,
+  "persisted_preferences": 3,
+  "reopened_index_rows": 86,
+  "reopened_recordings": 14
+}

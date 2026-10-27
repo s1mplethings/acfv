@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-10",
+  "branch": "feature/bilingual-subtitle-duration-profiles",
+  "implementation_head": "20e3bbfecb76eedca8e3ef47d5a66329de1d9e30",
+  "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "regression": {
+    "run_1": {
+      "compileall": "PASS",
+      "cli_help": "PASS",
+      "pytest": "352 passed, 11 warnings",
+      "verify": "PASS",
+      "contract_checks": "PASS"
+    },
+    "run_2": {
+      "compileall": "PASS",
+      "cli_help": "PASS",
+      "pytest": "352 passed, 11 warnings",
+      "verify": "PASS",
+      "contract_checks": "PASS"
+    },
+    "skips_or_xfails_added": false
+  },
+  "focused_coverage": {
+    "tests": "29 passed, 3 warnings",
+    "total_percent": 81,
+    "duration_percent": 92,
+    "subtitle_percent": 83,
+    "clip_service_percent": 82,
+    "variant_service_percent": 65,
+    "note": "Full-suite coverage plugin collection is affected by the host NumPy/transformers reload conflict; normal full-suite regression is unaffected."
+  },
+  "real_media": {
+    "variants": 4,
+    "mp4_files_scanned": 8,
+    "ffprobe": "PASS",
+    "decode_scan": "PASS",
+    "video": "H.264 yuv420p",
+    "audio": "AAC",
+    "burn_in": "PASS",
+    "clean_bilingual_hashes_differ": true
+  },
+  "result": "PASS_WITH_GUI_HUMAN_FLOW_PENDING"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "change_id": "new-twitch-creator-adaptive-validation",
+  "summary": "New public Twitch corpus acquisition, visual/voice benchmarks, strict adaptive safety and review dataset",
+  "capabilities": [
+    "vod_download",
+    "creator_visual_identity",
+    "voice_profile",
+    "trusted_speech_memory",
+    "creator_lexicon",
+    "creator_adaptive_asr",
+    "human_review"
+  ],
+  "files_changed": [
+    "config/new_twitch_validation_v1.json",
+    "docs/context/current_state.md",
+    "knowledge/operations/new-twitch-validation-corpus.md",
+    "pyproject.toml",
+    "scripts/acquire_new_twitch_validation.py",
+    "scripts/benchmark_creator_visual_identity.py",
+    "scripts/build_creator_visual_dataset.py",
+    "scripts/build_new_twitch_review_dataset.py",
+    "scripts/evaluate_visual_background_challenge.py",
+    "scripts/run_new_twitch_creator_adaptive.py",
+    "specs/capabilities/creator_adaptive_asr.md",
+    "specs/capabilities/creator_lexicon.md",
+    "specs/capabilities/creator_visual_identity.md",
+    "specs/capabilities/trusted_speech_memory.md",
+    "specs/capabilities/vod_download.md",
+    "specs/capabilities/voice_profile.md",
+    "src/acfv/creator_visual_identity/dataset.py",
+    "src/acfv/creator_visual_identity/encoders.py",
+    "src/acfv/human_review/dataset.py",
+    "src/acfv/library/vod_download.py",
+    "src/acfv/providers/download.py",
+    "src/acfv/providers/speaker_embedding.py",
+    "src/acfv/utils/twitch_downloader_setup.py",
+    "tests/unit/test_creator_adaptive_understanding.py",
+    "tests/unit/test_vod_download.py"
+  ],
+  "behavior_change": true,
+  "contract_change": false,
+  "migration_required": false,
+  "compatibility": "Generic ASR remains authoritative; all new identity/adaptation remains shadow",
+  "risks": [
+    "anny temporal visual generalization failed",
+    "ECAPA holdout FAR is non-zero",
+    "no Trusted Speech passed strict automatic gate",
+    "crop-scale sensitivity",
+    "human labels pending"
+  ]
+}

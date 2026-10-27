@@ -1,0 +1,1778 @@
+{
+  "schema_version": "1.0",
+  "provider": "faster-whisper-large-v3",
+  "device": "cuda",
+  "human_ground_truth": "PENDING",
+  "rows": [
+    {
+      "creator": "atelieranoko",
+      "vod_id": "2898984086",
+      "duration_ms": 600005,
+      "detected_language": "en",
+      "language_probability": 0.99951171875,
+      "speech_segments": 106,
+      "transcript_characters": 7447,
+      "mean_engineering_confidence": 0.7538971099457081,
+      "low_confidence_segments": 17,
+      "runtime_seconds": 63.46755050000502,
+      "text_preview": "keep her up here so you guys know who i'm talking about bailey's graphics are insane i'm on her vgen right now just scrolling through and it's all so so pretty oh my gosh i might need to calm her i actually have some graphics that i have currently commissioned and they're going to be animated so that's pretty cool they were the most expensive graphics i've ever commissioned so i hope you you guys like them uh thank you for the head fat sora hi calvin welcome in yeah i'm excited for those graphic",
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 4480,
+          "text": "keep her up here so you guys know who i'm talking about bailey's graphics are insane i'm on her vgen",
+          "engineering_confidence": 0.9287877497662891
+        },
+        {
+          "start_ms": 4480,
+          "end_ms": 14810,
+          "text": "right now just scrolling through and it's all so so pretty oh my gosh i might need to calm her i",
+          "engineering_confidence": 0.9287877497662891
+        },
+        {
+          "start_ms": 14810,
+          "end_ms": 21170,
+          "text": "actually have some graphics that i have currently commissioned and they're going to be animated so",
+          "engineering_confidence": 0.9287877497662891
+        },
+        {
+          "start_ms": 21170,
+          "end_ms": 26650,
+          "text": "that's pretty cool they were the most expensive graphics i've ever commissioned so i hope you",
+          "engineering_confidence": 0.9287877497662891
+        },
+        {
+          "start_ms": 26650,
+          "end_ms": 34150,
+          "text": "you guys like them uh thank you for the head fat sora hi calvin welcome in yeah i'm excited for",
+          "engineering_confidence": 0.7921953780237846
+        },
+        {
+          "start_ms": 34150,
+          "end_ms": 44110,
+          "text": "those graphics i really hope you guys like them in the end yeah hi terrence welcome in welcome in",
+          "engineering_confidence": 0.7921953780237846
+        },
+        {
+          "start_ms": 44110,
+          "end_ms": 52230,
+          "text": "wait you're a member oh my gosh are you the first youtube member since i got remonetized",
+          "engineering_confidence": 0.7921953780237846
+        },
+        {
+          "start_ms": 52230,
+          "end_ms": 58530,
+          "text": "maybe i just enabled them again i forgot to enable them so it just came back like a few days ago",
+          "engineering_confidence": 0.792516939659693
+        },
+        {
+          "start_ms": 58530,
+          "end_ms": 65650,
+          "text": "you might be the first one back whoa that's so cool praying i don't get demonetized and your",
+          "engineering_confidence": 0.792516939659693
+        },
+        {
+          "start_ms": 65650,
+          "end_ms": 73210,
+          "text": "money doesn't just go down the drain towards youtube um youtube i have a bone to pick with",
+          "engineering_confidence": 0.792516939659693
+        },
+        {
+          "start_ms": 73210,
+          "end_ms": 81570,
+          "text": "youtube i love the aesthetics yeah so pretty she does some fan overlays too",
+          "engineering_confidence": 0.7877251219634266
+        },
+        {
+          "start_ms": 83350,
+          "end_ms": 96500,
+          "text": "there was few wait what were we talking about i just i just got takeout chinese food and it was",
+          "engineering_confidence": 0.7877251219634266
+        },
+        {
+          "start_ms": 96500,
+          "end_ms": 102980,
+          "text": "so good calvin thank you for the headpads but yeah it was so so yummy i love chinese food",
+          "engineering_confidence": 0.7877251219634266
+        },
+        {
+          "start_ms": 102980,
+          "end_ms": 111640,
+          "text": "i think asian food in general as like a takeaway food is like it's kind of like up there you know",
+          "engineering_confidence": 0.8328198910686481
+        },
+        {
+          "start_ms": 111640,
+          "end_ms": 118860,
+          "text": "it's like in in the rankings you can't really beat asian food i don't know it's it's hard it's hard",
+          "engineering_confidence": 0.8328198910686481
+        },
+        {
+          "start_ms": 120140,
+          "end_ms": 135240,
+          "text": "yeah uh it's so bad once once i'm on vgen it's over like i will start i will start buying things",
+          "engineering_confidence": 0.8328198910686481
+        },
+        {
+          "start_ms": 135240,
+          "end_ms": 141620,
+          "text": "immediately i love scrolling on vgen i don't know if you guys have that same issue if you're not",
+          "engineering_confidence": 0.816482038364003
+        },
+        {
+          "start_ms": 141620,
+          "end_ms": 148180,
+          "text": "a vtuber or a streamer streamers can also use this oh my gosh you just saw the most gorgeous art",
+          "engineering_confidence": 0.816482038364003
+        },
+        {
+          "start_ms": 148180,
+          "end_ms": 155040,
+          "text": "saving that saving that for later i might be commissioning this person oh oh my gosh oh no",
+          "engineering_confidence": 0.816482038364003
+        },
+        {
+          "start_ms": 155040,
+          "end_ms": 162480,
+          "text": "oh no i'm tempted oh gosh i oh my gosh that's gorgeous fuck i'm so commissioning a bunch of art",
+          "engineering_confidence": 0.816482038364003
+        },
+        {
+          "start_ms": 162480,
+          "end_ms": 170100,
+          "text": "no uh you know what i was doing the majority of today i was like i bought these like um",
+          "engineering_confidence": 0.9043149306271429
+        },
+        {
+          "start_ms": 170100,
+          "end_ms": 177180,
+          "text": "peel and stick tile kind of things and i've been decorating our bathroom it's so cute i'll have to",
+          "engineering_confidence": 0.9043149306271429
+        },
+        {
+          "start_ms": 177180,
+          "end_ms": 183460,
+          "text": "show you guys when it's done but it's all coming together but i realized i didn't buy enough which",
+          "engineering_confidence": 0.9043149306271429
+        },
+        {
+          "start_ms": 183460,
+          "end_ms": 189900,
+          "text": "is kind of crazy uh i got like a 30 pack of these peel and stick tile things and that's not even",
+          "engineering_confidence": 0.9043149306271429
+        },
+        {
+          "start_ms": 189900,
+          "end_ms": 195080,
+          "text": "covered one-third of the bathroom so yeah I think I'm gonna be spending like",
+          "engineering_confidence": 0.6694751263160191
+        },
+        {
+          "start_ms": 195080,
+          "end_ms": 202620,
+          "text": "at least 150 on these peel and stick tiles but it's looking so cute I'm so",
+          "engineering_confidence": 0.6694751263160191
+        },
+        {
+          "start_ms": 202620,
+          "end_ms": 209820,
+          "text": "excited to customize the bathroom yeah hi I'm early everyone what's up dog oh",
+          "engineering_confidence": 0.6694751263160191
+        },
+        {
+          "start_ms": 209820,
+          "end_ms": 210280,
+          "text": "Oh my gosh.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 210620,
+          "end_ms": 211580,
+          "text": "Hi, Ace.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 211580,
+          "end_ms": 212560,
+          "text": "Welcome in.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 213060,
+          "end_ms": 214540,
+          "text": "I hope you're doing good.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 215980,
+          "end_ms": 216280,
+          "text": "Whoa.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 217180,
+          "end_ms": 217480,
+          "text": "Hi.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 217540,
+          "end_ms": 218400,
+          "text": "Hi, Ekoren.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 220350,
+          "end_ms": 221650,
+          "text": "Hey, girly.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 221650,
+          "end_ms": 223570,
+          "text": "I hope you had a nice stream.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 223930,
+          "end_ms": 224410,
+          "text": "Hi.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 225510,
+          "end_ms": 226370,
+          "text": "Hello, hello.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 227170,
+          "end_ms": 228570,
+          "text": "How you guys doing?",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 228930,
+          "end_ms": 230330,
+          "text": "Hello, my name's Anoko.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 230530,
+          "end_ms": 232490,
+          "text": "I am a pink Pomeranian VTuber.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 232690,
+          "end_ms": 235290,
+          "text": "I'm a voice actress and a designer,",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 235530,
+          "end_ms": 237030,
+          "text": "and I also do ASMR.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 237370,
+          "end_ms": 239670,
+          "text": "I know Ekos really good at ASMR, yeah.",
+          "engineering_confidence": 0.4895431755342095
+        },
+        {
+          "start_ms": 239670,
+          "end_ms": 245350,
+          "text": "Yeah, I don't know if I could match up to her, but I do have some Asmr on my YouTube as well.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 247750,
+          "end_ms": 249310,
+          "text": "I love Pomeranians.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 249450,
+          "end_ms": 254590,
+          "text": "Oh, do you like me?",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 256209,
+          "end_ms": 258130,
+          "text": "Thank you for the head pat, Stirrin.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 258730,
+          "end_ms": 260130,
+          "text": "Yeah, welcome in, guys.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 260250,
+          "end_ms": 260990,
+          "text": "Oh my gosh.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 261089,
+          "end_ms": 265350,
+          "text": "Oh, wait, your category was set to music.",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 265470,
+          "end_ms": 269130,
+          "text": "Wait, were you like singing or what were you guys up to?",
+          "engineering_confidence": 0.7683392488769786
+        },
+        {
+          "start_ms": 269670,
+          "end_ms": 274310,
+          "text": "i like you so much i like you so much",
+          "engineering_confidence": 0.8778964177372184
+        },
+        {
+          "start_ms": 274310,
+          "end_ms": 283010,
+          "text": "i was just telling chad about um how i was just redecorating our bathroom because i bought these",
+          "engineering_confidence": 0.8778964177372184
+        },
+        {
+          "start_ms": 283010,
+          "end_ms": 288770,
+          "text": "like really cute peel and stick tile thingies and that's just basically took up like half of my day",
+          "engineering_confidence": 0.8778964177372184
+        },
+        {
+          "start_ms": 288770,
+          "end_ms": 297670,
+          "text": "just trying to redecorate because i moved to this new flat right and i don't know the bathroom",
+          "engineering_confidence": 0.8778964177372184
+        },
+        {
+          "start_ms": 297670,
+          "end_ms": 303090,
+          "text": "bathroom wasn't looking great i'm not gonna lie but but a little a little you know anoko's touch",
+          "engineering_confidence": 0.7485809318621153
+        },
+        {
+          "start_ms": 303090,
+          "end_ms": 310290,
+          "text": "here and there you know i can fix anything i can make it look cute trigger thank you so much for",
+          "engineering_confidence": 0.7485809318621153
+        },
+        {
+          "start_ms": 310290,
+          "end_ms": 317050,
+          "text": "the follow welcome in yeah singing karaoke oh and i miss that fuck karaoke streams are like my",
+          "engineering_confidence": 0.7485809318621153
+        },
+        {
+          "start_ms": 317050,
+          "end_ms": 322870,
+          "text": "favorite kind of stream i love tuning into karaoke i gotta catch up on that vaude i gotta catch up",
+          "engineering_confidence": 0.7485809318621153
+        },
+        {
+          "start_ms": 322870,
+          "end_ms": 333170,
+          "text": "on that. Yeah. I dread to think what state it was in. Yeah. Honestly, the biggest issue with",
+          "engineering_confidence": 0.7961095407835261
+        },
+        {
+          "start_ms": 333170,
+          "end_ms": 339510,
+          "text": "the bathroom or like what it looked like before I started fiddling with it was that it was super",
+          "engineering_confidence": 0.7961095407835261
+        },
+        {
+          "start_ms": 339510,
+          "end_ms": 349750,
+          "text": "plain. A lot of it was just white and it looked very hospital core. A bit hospital core and a",
+          "engineering_confidence": 0.7961095407835261
+        },
+        {
+          "start_ms": 349750,
+          "end_ms": 356630,
+          "text": "a bit of wear and tear here and there but nothing nothing your dog can't fix okay i can i can fix it",
+          "engineering_confidence": 0.9193225176031151
+        },
+        {
+          "start_ms": 356630,
+          "end_ms": 363570,
+          "text": "yeah i got like some really cute peel and stick tiles and they look so cute so far but i just",
+          "engineering_confidence": 0.9193225176031151
+        },
+        {
+          "start_ms": 363570,
+          "end_ms": 368550,
+          "text": "reordered some they take a little bit to send because i'm ordering them off like a chinese",
+          "engineering_confidence": 0.9193225176031151
+        },
+        {
+          "start_ms": 368550,
+          "end_ms": 378930,
+          "text": "website aliexpress my god i love aliexpress but even even so they're not cheap like",
+          "engineering_confidence": 0.9193225176031151
+        },
+        {
+          "start_ms": 378930,
+          "end_ms": 385530,
+          "text": "Like a pack of 30 of these, which covered one third of my bathroom, cost me around 70 euros.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 385990,
+          "end_ms": 390370,
+          "text": "So now I have to buy like two more packs, I think, because one third of the bathroom got covered up.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 390510,
+          "end_ms": 393070,
+          "text": "So that's going to be quite a bit in the end.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 393150,
+          "end_ms": 399470,
+          "text": "I can't imagine what like regular prices at a store not in China would cost.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 399570,
+          "end_ms": 400350,
+          "text": "I don't know.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 401190,
+          "end_ms": 402330,
+          "text": "Hospital core, perfect.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 402370,
+          "end_ms": 405230,
+          "text": "Just needs a few sliders of blood here and there for the Halloween spirit.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 405370,
+          "end_ms": 406270,
+          "text": "Oh my gosh.",
+          "engineering_confidence": 0.7930578768586409
+        },
+        {
+          "start_ms": 406270,
+          "end_ms": 412410,
+          "text": "oh my gosh ah i'm so excited for this week's streams though that we have planned next stream",
+          "engineering_confidence": 0.7349322582387079
+        },
+        {
+          "start_ms": 412410,
+          "end_ms": 419350,
+          "text": "guys this is gonna be on wednesday i have i have a movie watch along stream with mip and we're gonna",
+          "engineering_confidence": 0.7349322582387079
+        },
+        {
+          "start_ms": 419350,
+          "end_ms": 424110,
+          "text": "be we're gonna be taking shots we were talking about at what moments in the movie we're gonna",
+          "engineering_confidence": 0.7349322582387079
+        },
+        {
+          "start_ms": 424110,
+          "end_ms": 429990,
+          "text": "be taking shots we're watching wait nosferatu i think was the name of the movie apparently it's",
+          "engineering_confidence": 0.7349322582387079
+        },
+        {
+          "start_ms": 429990,
+          "end_ms": 437570,
+          "text": "a movie that is like um it's a it's a movie you can watch on stream it's like safe to watch like",
+          "engineering_confidence": 0.8200294553620819
+        },
+        {
+          "start_ms": 437570,
+          "end_ms": 442870,
+          "text": "i forgot the name of it um like what what those kind of movies are called where like",
+          "engineering_confidence": 0.8200294553620819
+        },
+        {
+          "start_ms": 444330,
+          "end_ms": 449770,
+          "text": "you can you can it's it's okay to watch those on stream so we can all watch it together and",
+          "engineering_confidence": 0.8200294553620819
+        },
+        {
+          "start_ms": 449770,
+          "end_ms": 456490,
+          "text": "it's safe yeah public domain yes that yeah it's public domain so yeah it was mip's idea",
+          "engineering_confidence": 0.8200294553620819
+        },
+        {
+          "start_ms": 456490,
+          "end_ms": 462930,
+          "text": "yeah she's kind of she's kind of really smart for that yeah but yeah i saw i actually i've never",
+          "engineering_confidence": 0.8658525914612798
+        },
+        {
+          "start_ms": 462930,
+          "end_ms": 469150,
+          "text": "really seen anything from nosferatu before but i looked it up and i saw some screenshots and",
+          "engineering_confidence": 0.8658525914612798
+        },
+        {
+          "start_ms": 469150,
+          "end_ms": 475870,
+          "text": "looks super goofy so i i asked mip if maybe we should take a shot every time we laugh",
+          "engineering_confidence": 0.8658525914612798
+        },
+        {
+          "start_ms": 476950,
+          "end_ms": 485490,
+          "text": "wait wait let me show you what i've seen from nosferatu just like random screenshots because",
+          "engineering_confidence": 0.8658525914612798
+        },
+        {
+          "start_ms": 485490,
+          "end_ms": 488170,
+          "text": "Cause it looks so, I'm sorry, it looked goofy as hell.",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 488310,
+          "end_ms": 491970,
+          "text": "Like, what, wait, oh shit, I need to download the pictures.",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 494480,
+          "end_ms": 496240,
+          "text": "Oh, yeah, it's a JPEG, okay, good.",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 496660,
+          "end_ms": 499260,
+          "text": "Uh, bro, what do you mean?",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 500240,
+          "end_ms": 501600,
+          "text": "What, what do you mean?",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 502220,
+          "end_ms": 503160,
+          "text": "What is this?",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 503540,
+          "end_ms": 507140,
+          "text": "What is this?",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 508180,
+          "end_ms": 511620,
+          "text": "Tell, explain how, he's just a guy.",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 511740,
+          "end_ms": 513260,
+          "text": "This is not gonna be a scary movie.",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 515980,
+          "end_ms": 518960,
+          "text": "I don't, I don't, wait, are those fingers?",
+          "engineering_confidence": 0.7328204205982356
+        },
+        {
+          "start_ms": 518960,
+          "end_ms": 543000,
+          "text": "I don't know. I don't know, but we're going to be watching this on Wednesday. So if you guys are, if you guys, if you guys are down, if you guys want to watch a scary, a scary, quote unquote, scary movie, we'll be here and we'll be here taking shots while drinking this, drinking, watching this. Gosh, I'm tired. Sorry.",
+          "engineering_confidence": 0.601912698968385
+        },
+        {
+          "start_ms": 543000,
+          "end_ms": 550970,
+          "text": "sorry um one of the most influential horror movies of all of all time and this dog anime",
+          "engineering_confidence": 0.7771399025223569
+        },
+        {
+          "start_ms": 550970,
+          "end_ms": 559230,
+          "text": "girl finds it funny what do you mean influential apparently this guy's name is count orlock",
+          "engineering_confidence": 0.7771399025223569
+        },
+        {
+          "start_ms": 560090,
+          "end_ms": 567390,
+          "text": "count orlock you you looking a little freaky i'm not gonna lie this is the 1920s version",
+          "engineering_confidence": 0.7771399025223569
+        },
+        {
+          "start_ms": 567390,
+          "end_ms": 574330,
+          "text": "there's an older one older i believe it's german oh my gosh wait is that why mip knew about it",
+          "engineering_confidence": 0.7771399025223569
+        },
+        {
+          "start_ms": 574330,
+          "end_ms": 579250,
+          "text": "but you're saying it's like really influential i've never heard of this before it looks really",
+          "engineering_confidence": 0.8959211479263451
+        },
+        {
+          "start_ms": 579250,
+          "end_ms": 587210,
+          "text": "silly i don't know yeah we're gonna be watching that on wednesday i'm really excited about that",
+          "engineering_confidence": 0.8959211479263451
+        },
+        {
+          "start_ms": 588010,
+          "end_ms": 594390,
+          "text": "yeah and then on thursday another alice alice madness return stream and on sunday we're just",
+          "engineering_confidence": 0.8959211479263451
+        },
+        {
+          "start_ms": 594390,
+          "end_ms": 599790,
+          "text": "gonna be watching videos and doing sort of like a react stream i guess yeah my mom",
+          "engineering_confidence": 0.8959211479263451
+        }
+      ],
+      "accent_accuracy": "NOT_EVALUATED_WITHOUT_HUMAN_GROUND_TRUTH"
+    },
+    {
+      "creator": "snuffy",
+      "vod_id": "2900140146",
+      "duration_ms": 600005,
+      "detected_language": "en",
+      "language_probability": 0.9990234375,
+      "speech_segments": 75,
+      "transcript_characters": 6667,
+      "mean_engineering_confidence": 0.8001234245697041,
+      "low_confidence_segments": 0,
+      "runtime_seconds": 48.832349099975545,
+      "text_preview": "headphones the it has headphones why i'm a wizard well i'm a witch i'm gonna put my fucking chill beads to cast spells too uh socks wait i can take my socks off no wait no i can it's that's not true i can wait new outfit no it's not it's really old old this is from like 2021 you guys this is like five years ago five years ago i think i look i look back at my messages to find these files and i got them in 2021 so um it is very elderly but i mean if it's new to you it's still pretty cool right tha",
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 7750,
+          "text": "headphones the it has headphones why i'm a wizard well i'm a witch i'm gonna put my",
+          "engineering_confidence": 0.8668571830508527
+        },
+        {
+          "start_ms": 7750,
+          "end_ms": 17270,
+          "text": "fucking chill beads to cast spells too uh socks wait i can take my socks off no wait",
+          "engineering_confidence": 0.8668571830508527
+        },
+        {
+          "start_ms": 17270,
+          "end_ms": 35000,
+          "text": "no i can it's that's not true i can wait new outfit no it's not it's really old",
+          "engineering_confidence": 0.8668571830508527
+        },
+        {
+          "start_ms": 35000,
+          "end_ms": 42640,
+          "text": "old this is from like 2021 you guys this is like five years ago five years ago",
+          "engineering_confidence": 0.8211746389380924
+        },
+        {
+          "start_ms": 43940,
+          "end_ms": 49600,
+          "text": "i think i look i look back at my messages to find these files and i got them in 2021 so um",
+          "engineering_confidence": 0.8211746389380924
+        },
+        {
+          "start_ms": 51420,
+          "end_ms": 57200,
+          "text": "it is very elderly but i mean if it's new to you it's still pretty cool right that's why i wanted",
+          "engineering_confidence": 0.8211746389380924
+        },
+        {
+          "start_ms": 57200,
+          "end_ms": 62980,
+          "text": "to see it again is because it's not it's not like it sucks it's not like i mean it's old but it's",
+          "engineering_confidence": 0.8211746389380924
+        },
+        {
+          "start_ms": 62980,
+          "end_ms": 69260,
+          "text": "not like old like most old things where it's gotten dust it still holds up really good this",
+          "engineering_confidence": 0.7931016887467288
+        },
+        {
+          "start_ms": 69260,
+          "end_ms": 75980,
+          "text": "was by uh nanolist as the artist and art gun as the rigging artist if you guys didn't see it back",
+          "engineering_confidence": 0.7931016887467288
+        },
+        {
+          "start_ms": 75980,
+          "end_ms": 86840,
+          "text": "in its prime to find how to put my tail down oh you guys wait huge news today to sell oh to",
+          "engineering_confidence": 0.7931016887467288
+        },
+        {
+          "start_ms": 86840,
+          "end_ms": 94440,
+          "text": "celebrate i got chips i got chips i got chips and salsa i got chips and salsa today and i got",
+          "engineering_confidence": 0.7931016887467288
+        },
+        {
+          "start_ms": 94440,
+          "end_ms": 99600,
+          "text": "I got Haritos, but I gotta open it up, and I don't know where my bottle opener is",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 105640,
+          "end_ms": 111160,
+          "text": "Do you think do you think if I use my Wii sensor bar as a as a bottle opener? It'll break",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 111800,
+          "end_ms": 113780,
+          "text": "Those things are flimsy as fuck",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 114480,
+          "end_ms": 116640,
+          "text": "No, what flavor? I got lime",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 117420,
+          "end_ms": 117900,
+          "text": "lime",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 118900,
+          "end_ms": 120340,
+          "text": "Miss Lime-oo flavor",
+          "engineering_confidence": 0.6309741863358359
+        },
+        {
+          "start_ms": 133720,
+          "end_ms": 139840,
+          "text": "this thing has so many buttons i feel like this is kind of why i ended up toning down my models",
+          "engineering_confidence": 0.9245806488975297
+        },
+        {
+          "start_ms": 139840,
+          "end_ms": 145660,
+          "text": "a little bit is like the the shock factor was always fun but i realized i started stumbling",
+          "engineering_confidence": 0.9245806488975297
+        },
+        {
+          "start_ms": 145660,
+          "end_ms": 150580,
+          "text": "and forgetting someone it's like i don't know if there was actually as much applicable use",
+          "engineering_confidence": 0.9245806488975297
+        },
+        {
+          "start_ms": 150580,
+          "end_ms": 156920,
+          "text": "but i really like this hand up one that is so good that is definitely i'm gonna maybe ask if",
+          "engineering_confidence": 0.9245806488975297
+        },
+        {
+          "start_ms": 156920,
+          "end_ms": 163380,
+          "text": "if i can get this on the maid outfit that would just be fantastic i think thank you guys so much",
+          "engineering_confidence": 0.9053568442626693
+        },
+        {
+          "start_ms": 163380,
+          "end_ms": 168140,
+          "text": "for all the resubs and the gift subs um i'm gonna thank everybody when i'm done finding the the",
+          "engineering_confidence": 0.9053568442626693
+        },
+        {
+          "start_ms": 168140,
+          "end_ms": 177580,
+          "text": "button wait i don't see it anywhere i might have had to make it myself because i had to re-download",
+          "engineering_confidence": 0.9053568442626693
+        },
+        {
+          "start_ms": 177580,
+          "end_ms": 193550,
+          "text": "the the folder you could do it on both sides wait what do you mean oh there's i bet you'd have to do",
+          "engineering_confidence": 0.9053568442626693
+        },
+        {
+          "start_ms": 193550,
+          "end_ms": 197650,
+          "text": "that in the files and maybe it's as easy as just like mirroring it but i don't think i can do that",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 197650,
+          "end_ms": 201330,
+          "text": "in the program myself i would probably have to ask like a rigging artist how to do something",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 201330,
+          "end_ms": 205930,
+          "text": "like that but i could i think i could in the new model and that would be powerful",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 207950,
+          "end_ms": 212090,
+          "text": "that just makes me think of like a sleepover model where i'm like got my boobs on the floor",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 212090,
+          "end_ms": 216210,
+          "text": "and i'm like kicking my little feeties that's definitely been done but i'd like to do it myself",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 217070,
+          "end_ms": 223540,
+          "text": "kick my feet around and not have to lay on the floor for real because that hurts my neck",
+          "engineering_confidence": 0.8240867656426781
+        },
+        {
+          "start_ms": 224100,
+          "end_ms": 230760,
+          "text": "egg you should i literally i keep telling people i just want to do sleepover collabs mostly because",
+          "engineering_confidence": 0.8427227425274748
+        },
+        {
+          "start_ms": 230760,
+          "end_ms": 236800,
+          "text": "i stream at night but i just think it'd be so cute to do a sleepover collab just everything",
+          "engineering_confidence": 0.8427227425274748
+        },
+        {
+          "start_ms": 236800,
+          "end_ms": 241660,
+          "text": "about like spending time with people i'm just i don't know more than just playing a game i like",
+          "engineering_confidence": 0.8427227425274748
+        },
+        {
+          "start_ms": 241660,
+          "end_ms": 251660,
+          "text": "to just occupy your space i like to unfairly occupy your time with a greedy ask i okay hold",
+          "engineering_confidence": 0.8427227425274748
+        },
+        {
+          "start_ms": 251660,
+          "end_ms": 261240,
+          "text": "on there was a way i could have a wand i think i have to make it myself okay hot key action",
+          "engineering_confidence": 0.7058875483653866
+        },
+        {
+          "start_ms": 261240,
+          "end_ms": 274240,
+          "text": "hocus pocus and dude okay before we get too far into the stream i do have a sponsor today",
+          "engineering_confidence": 0.7058875483653866
+        },
+        {
+          "start_ms": 274240,
+          "end_ms": 279940,
+          "text": "actually that's what got my feet up in the air today now i got somebody tapped me on the shoulder",
+          "engineering_confidence": 0.7058875483653866
+        },
+        {
+          "start_ms": 279940,
+          "end_ms": 286620,
+          "text": "and was like hey baby you wanna you wanna play our game and i was like what play a sponsor i i don't",
+          "engineering_confidence": 0.7058875483653866
+        },
+        {
+          "start_ms": 286620,
+          "end_ms": 297050,
+          "text": "know and i opened my eyes and it was john capcom and i was like come summer so we're gonna play",
+          "engineering_confidence": 0.8404177611156395
+        },
+        {
+          "start_ms": 297050,
+          "end_ms": 302910,
+          "text": "dragon's dogma because you know how it is you know how it is we gotta go back we gotta run it back",
+          "engineering_confidence": 0.8404177611156395
+        },
+        {
+          "start_ms": 302910,
+          "end_ms": 309810,
+          "text": "and check out dark arisen the new expansion for dragon's dogma 2 i'm so excited i literally was",
+          "engineering_confidence": 0.8404177611156395
+        },
+        {
+          "start_ms": 309810,
+          "end_ms": 313870,
+          "text": "so excited i can't wait to play this game again i haven't played since last time so",
+          "engineering_confidence": 0.8404177611156395
+        },
+        {
+          "start_ms": 314870,
+          "end_ms": 322210,
+          "text": "figure some things out again i might just start fresh i don't know so you guys will have to be",
+          "engineering_confidence": 0.8802563147660296
+        },
+        {
+          "start_ms": 322210,
+          "end_ms": 326850,
+          "text": "patient with me i'm gonna have to figure this game out again but uh there was something fuck",
+          "engineering_confidence": 0.8802563147660296
+        },
+        {
+          "start_ms": 326850,
+          "end_ms": 330430,
+          "text": "there was something else i wanted to talk to you guys about oh i really want to yap about all the",
+          "engineering_confidence": 0.8802563147660296
+        },
+        {
+          "start_ms": 330430,
+          "end_ms": 336430,
+          "text": "shit that's come out this month other than video games there's so many things we gotta watch oh my",
+          "engineering_confidence": 0.8802563147660296
+        },
+        {
+          "start_ms": 336430,
+          "end_ms": 343570,
+          "text": "god i disappeared into the woods for a bit october hit and it is beautiful the weather has been nice",
+          "engineering_confidence": 0.8802563147660296
+        },
+        {
+          "start_ms": 343570,
+          "end_ms": 348310,
+          "text": "i went outside into the forest and did a little bit of camping and running around while the weather",
+          "engineering_confidence": 0.6818279252349239
+        },
+        {
+          "start_ms": 348310,
+          "end_ms": 354790,
+          "text": "was good but now i'm back and i'm so fucking ready we gotta watch baking and i really want to watch",
+          "engineering_confidence": 0.6818279252349239
+        },
+        {
+          "start_ms": 354790,
+          "end_ms": 358450,
+          "text": "avatar with you guys dude don't even get me started don't even get me i'm gonna talk about",
+          "engineering_confidence": 0.6818279252349239
+        },
+        {
+          "start_ms": 358450,
+          "end_ms": 364270,
+          "text": "avatar i'm gonna talk the fuck about avatar holy shit i'm never gonna stop talking about this",
+          "engineering_confidence": 0.6818279252349239
+        },
+        {
+          "start_ms": 365790,
+          "end_ms": 372490,
+          "text": "hold on set unset expression and i went to set um",
+          "engineering_confidence": 0.6818279252349239
+        },
+        {
+          "start_ms": 372490,
+          "end_ms": 382050,
+          "text": "um balls what does that even mean ghost boy oh my god oh my god wait i forgot wait oh shit oh",
+          "engineering_confidence": 0.9080188645245281
+        },
+        {
+          "start_ms": 382050,
+          "end_ms": 404160,
+          "text": "fuck oh i forgot about this wait wait wait wait oh shit oh oh yes wait can i need to dye my hair",
+          "engineering_confidence": 0.9080188645245281
+        },
+        {
+          "start_ms": 404160,
+          "end_ms": 409700,
+          "text": "white in this model and it'll be perfect this will be perfect it'll work super well it's already blue",
+          "engineering_confidence": 0.9080188645245281
+        },
+        {
+          "start_ms": 410260,
+          "end_ms": 417650,
+          "text": "and that's basically it i just have to dye my hair blue i think that'll be so good or white",
+          "engineering_confidence": 0.9080188645245281
+        },
+        {
+          "start_ms": 417650,
+          "end_ms": 424250,
+          "text": "or silver whatever you guys want to call that shit the soft snuffy creams okay what else can",
+          "engineering_confidence": 0.6227100786843434
+        },
+        {
+          "start_ms": 424250,
+          "end_ms": 431690,
+          "text": "i do where's my wand oh my god yeah you guys new avatar and i mean not like the blue but like the",
+          "engineering_confidence": 0.6227100786843434
+        },
+        {
+          "start_ms": 432910,
+          "end_ms": 441230,
+          "text": "elementals a gun i have two guns which one's the right gun there's so much there's so much to this",
+          "engineering_confidence": 0.6227100786843434
+        },
+        {
+          "start_ms": 441230,
+          "end_ms": 454370,
+          "text": "model that i forgot about what about my special magic wand i could forget the my",
+          "engineering_confidence": 0.7219674621240237
+        },
+        {
+          "start_ms": 457700,
+          "end_ms": 465560,
+          "text": "skip the spell books that's so cool oh i saw the wand okay wait if this is gun what's",
+          "engineering_confidence": 0.7219674621240237
+        },
+        {
+          "start_ms": 465560,
+          "end_ms": 473420,
+          "text": "goober what did i say oh this is the one that i can like move and just point there you go this",
+          "engineering_confidence": 0.7219674621240237
+        },
+        {
+          "start_ms": 473420,
+          "end_ms": 481460,
+          "text": "is the one that had the the pointing i cast a bullet hell yeah i'm gonna just use this one for",
+          "engineering_confidence": 0.7219674621240237
+        },
+        {
+          "start_ms": 481460,
+          "end_ms": 490330,
+          "text": "halloween i think this works hype chest guys we got a hype chest headphones hard eyes mad",
+          "engineering_confidence": 0.8602645443633004
+        },
+        {
+          "start_ms": 490330,
+          "end_ms": 504840,
+          "text": "mask half up mask down no fire mask gone my funny eyeballs yes give me the eyes oh wait",
+          "engineering_confidence": 0.8602645443633004
+        },
+        {
+          "start_ms": 514220,
+          "end_ms": 524410,
+          "text": "oh yeah this is good my evil anime eyes i look so villainous i just wanted my spells",
+          "engineering_confidence": 0.8602645443633004
+        },
+        {
+          "start_ms": 524410,
+          "end_ms": 531210,
+          "text": "it didn't have to come to this okay wait i'll find it wait okay so we have the ghosts we've",
+          "engineering_confidence": 0.7676393103442306
+        },
+        {
+          "start_ms": 531210,
+          "end_ms": 541830,
+          "text": "got the gun i've got the mask right i want to mask fire i need to do mask fire i'll do that",
+          "engineering_confidence": 0.7676393103442306
+        },
+        {
+          "start_ms": 541830,
+          "end_ms": 547830,
+          "text": "so then if i put the mask down i'm gonna do this no what why does mask fire make it go up",
+          "engineering_confidence": 0.7676393103442306
+        },
+        {
+          "start_ms": 547830,
+          "end_ms": 566630,
+          "text": "i do not know oh wait i'm so cool i'm so fucking cool it's all the way over here i'm",
+          "engineering_confidence": 0.7676393103442306
+        },
+        {
+          "start_ms": 566630,
+          "end_ms": 573170,
+          "text": "swinging the world's longest blunt right now but it's off screen it's off screen so we can keep",
+          "engineering_confidence": 0.8738761182928081
+        },
+        {
+          "start_ms": 573170,
+          "end_ms": 580910,
+          "text": "the tv rating e for everybody it's just a really long stick that i hold dude maddie i saw you say",
+          "engineering_confidence": 0.8738761182928081
+        },
+        {
+          "start_ms": 580910,
+          "end_ms": 585210,
+          "text": "aura and this whole model had me like living in the past and i thought you just asked me to say",
+          "engineering_confidence": 0.8738761182928081
+        },
+        {
+          "start_ms": 585210,
+          "end_ms": 599350,
+          "text": "aura aura and i was just like no welcome back it's 2022 streamer can you say aura aura you're so sexy",
+          "engineering_confidence": 0.8738761182928081
+        }
+      ],
+      "accent_accuracy": "NOT_EVALUATED_WITHOUT_HUMAN_GROUND_TRUTH"
+    },
+    {
+      "creator": "laphipi",
+      "vod_id": "2897831198",
+      "duration_ms": 600015,
+      "detected_language": "en",
+      "language_probability": 0.99755859375,
+      "speech_segments": 106,
+      "transcript_characters": 6792,
+      "mean_engineering_confidence": 0.7322423692372345,
+      "low_confidence_segments": 12,
+      "runtime_seconds": 57.87060109997401,
+      "text_preview": "grinding more and like get the best deck combination and everything so i do understand i understand why people like i think you've got the hydrate i actually i have guys i have a tea here and the tea i'm drinking it out of my uni unico cup which my mom gifted me to my birthday for my birthday like five years ago there's there's my old model on it yeah make it sound like champ memory is kind of what's equivalent to sticker star i don't know what sticker star is but i mean it kinda it kinda is it'",
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 4900,
+          "text": "grinding more and like get the best deck combination and everything so i do understand",
+          "engineering_confidence": 0.8122271687097763
+        },
+        {
+          "start_ms": 4900,
+          "end_ms": 11700,
+          "text": "i understand why people like i think you've got the hydrate i actually i have guys i have a tea",
+          "engineering_confidence": 0.8122271687097763
+        },
+        {
+          "start_ms": 11700,
+          "end_ms": 16620,
+          "text": "here and the tea i'm drinking it out of my uni unico cup which my mom gifted me to my birthday",
+          "engineering_confidence": 0.8122271687097763
+        },
+        {
+          "start_ms": 16620,
+          "end_ms": 22480,
+          "text": "for my birthday like five years ago there's there's my old model on it yeah make it sound",
+          "engineering_confidence": 0.8122271687097763
+        },
+        {
+          "start_ms": 22480,
+          "end_ms": 26440,
+          "text": "like champ memory is kind of what's equivalent to sticker star i don't know what sticker star is but",
+          "engineering_confidence": 0.8122271687097763
+        },
+        {
+          "start_ms": 26440,
+          "end_ms": 32080,
+          "text": "i mean it kinda it kinda is it's like you know breath of the wild and the zella series like i",
+          "engineering_confidence": 0.7934424442275014
+        },
+        {
+          "start_ms": 32080,
+          "end_ms": 37140,
+          "text": "don't play breath of the wild it doesn't it doesn't really scratch the zelda itch you know but maybe",
+          "engineering_confidence": 0.7934424442275014
+        },
+        {
+          "start_ms": 37140,
+          "end_ms": 41800,
+          "text": "that's just me i'm not a fake fan i just couldn't play it as a kid and then when i tried it then",
+          "engineering_confidence": 0.7934424442275014
+        },
+        {
+          "start_ms": 41800,
+          "end_ms": 50060,
+          "text": "i didn't like it and it's like i um and uh i i have watched the cut scenes like back then so",
+          "engineering_confidence": 0.7934424442275014
+        },
+        {
+          "start_ms": 50060,
+          "end_ms": 52440,
+          "text": "So that counts for something, right?",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 54580,
+          "end_ms": 57440,
+          "text": "I played Nier Replicant prior to this review because I am a real fan.",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 58260,
+          "end_ms": 61140,
+          "text": "I still gotta play Replicant actually, I want to play the remake.",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 61320,
+          "end_ms": 62160,
+          "text": "I only played Automata.",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 63200,
+          "end_ms": 64860,
+          "text": "That was a good game.",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 66260,
+          "end_ms": 70560,
+          "text": "We have fake- YOU CAN'T DO- NO ONE CAN CALL ME A FAKE KINGDOM HORDS FAN!",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 70560,
+          "end_ms": 77340,
+          "text": "A fake Chain of Memories fan, maybe, but- Oh wait, I need to- I'm realizing I need to",
+          "engineering_confidence": 0.5602630163689709
+        },
+        {
+          "start_ms": 77340,
+          "end_ms": 82600,
+          "text": "turn off the freaking youtube auto translation again because right now i see your messages in",
+          "engineering_confidence": 0.7384615082606577
+        },
+        {
+          "start_ms": 82600,
+          "end_ms": 87860,
+          "text": "german and that is annoying me it's so dumb that you have to turn it off for every single stream",
+          "engineering_confidence": 0.7384615082606577
+        },
+        {
+          "start_ms": 87860,
+          "end_ms": 92980,
+          "text": "separately oh god where do i even do it i did it for the last one but uh can i do it while i'm",
+          "engineering_confidence": 0.7384615082606577
+        },
+        {
+          "start_ms": 92980,
+          "end_ms": 98100,
+          "text": "live i don't think i can oh no oh no it's too late i'm just gonna have to translate your messages in",
+          "engineering_confidence": 0.7384615082606577
+        },
+        {
+          "start_ms": 98100,
+          "end_ms": 106140,
+          "text": "my head again yeah um it's not allowed to stream kingdom hearts commercially everyone streams",
+          "engineering_confidence": 0.7384615082606577
+        },
+        {
+          "start_ms": 106140,
+          "end_ms": 112820,
+          "text": "streams kingdom hearts i mean it's like nintendo technically doesn't allow you to stream any games",
+          "engineering_confidence": 0.505235304168507
+        },
+        {
+          "start_ms": 112820,
+          "end_ms": 119260,
+          "text": "either you know neek beats isn't that the guy who used to make videos with iblali or something",
+          "engineering_confidence": 0.505235304168507
+        },
+        {
+          "start_ms": 120840,
+          "end_ms": 124780,
+          "text": "uh it was the time i hadn't learned japanese and entire the whole game was in japanese",
+          "engineering_confidence": 0.505235304168507
+        },
+        {
+          "start_ms": 124780,
+          "end_ms": 129400,
+          "text": "wait chain of memories chain of memories could be a topic your heart's game would be balanced",
+          "engineering_confidence": 0.505235304168507
+        },
+        {
+          "start_ms": 129400,
+          "end_ms": 135360,
+          "text": "and actually more reacting than fighting i don't know i mean you just need to concentrate very",
+          "engineering_confidence": 0.505235304168507
+        },
+        {
+          "start_ms": 135360,
+          "end_ms": 142440,
+          "text": "hard and it tires me out quickly you get it it's different from uh yeah he doesn't",
+          "engineering_confidence": 0.6516883288782689
+        },
+        {
+          "start_ms": 142440,
+          "end_ms": 146560,
+          "text": "care about that rule well that's dumb because even hollow life uh people are streaming kingdom",
+          "engineering_confidence": 0.6516883288782689
+        },
+        {
+          "start_ms": 146560,
+          "end_ms": 152920,
+          "text": "hearts iron mouse was streaming kingdom hearts what is he talking about uh no you can't say",
+          "engineering_confidence": 0.6516883288782689
+        },
+        {
+          "start_ms": 152920,
+          "end_ms": 159220,
+          "text": "that you can't call i i did not have breakdowns over kingdom hearts 3 and now kingdom hearts 4",
+          "engineering_confidence": 0.6516883288782689
+        },
+        {
+          "start_ms": 159220,
+          "end_ms": 166780,
+          "text": "for over 10 years to be called a fake fam now okay um is the volume good guys or is it a bit quiet",
+          "engineering_confidence": 0.8287435449131432
+        },
+        {
+          "start_ms": 166780,
+          "end_ms": 171660,
+          "text": "i turned it down a little but it might be a bit quiet now i'm not sure but yeah so basically we",
+          "engineering_confidence": 0.8287435449131432
+        },
+        {
+          "start_ms": 171660,
+          "end_ms": 178200,
+          "text": "are oh my god i i have been playing so much fire emblem with the pro controller that it feels so",
+          "engineering_confidence": 0.8287435449131432
+        },
+        {
+          "start_ms": 178200,
+          "end_ms": 183540,
+          "text": "weird to hold this ps5 controller in my hands right now oh my goodness i didn't realize how",
+          "engineering_confidence": 0.8287435449131432
+        },
+        {
+          "start_ms": 183540,
+          "end_ms": 192580,
+          "text": "different they feel oh boy oh oh this feels weird um we are in what i think is the last world",
+          "engineering_confidence": 0.8186112792599453
+        },
+        {
+          "start_ms": 193200,
+          "end_ms": 199180,
+          "text": "of the game well world an exclamation mark so we are in the castle oblivion if we take a look over",
+          "engineering_confidence": 0.8186112792599453
+        },
+        {
+          "start_ms": 199180,
+          "end_ms": 204700,
+          "text": "here oh boy it's been like three weeks since we last played i think hope i still remember stuff",
+          "engineering_confidence": 0.8186112792599453
+        },
+        {
+          "start_ms": 206340,
+          "end_ms": 210340,
+          "text": "oh uh will you do the rickus action oh god i forgot about that",
+          "engineering_confidence": 0.8186112792599453
+        },
+        {
+          "start_ms": 210340,
+          "end_ms": 210780,
+          "text": "God, fuck!",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 211260,
+          "end_ms": 213400,
+          "text": "Yes, I did want to do the Riku section.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 214280,
+          "end_ms": 215380,
+          "text": "That was the plan.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 215600,
+          "end_ms": 216440,
+          "text": "Yes, I will.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 216620,
+          "end_ms": 217240,
+          "text": "Oh, boy.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 217680,
+          "end_ms": 218840,
+          "text": "Oh, it's so Jover.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 222880,
+          "end_ms": 224760,
+          "text": "Axel the Echidna or M-",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 224760,
+          "end_ms": 227920,
+          "text": "Oh, wait, I still need to defeat Axel too.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 228800,
+          "end_ms": 230140,
+          "text": "Okay, let's just go.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 230340,
+          "end_ms": 231300,
+          "text": "Let's just go.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 231760,
+          "end_ms": 232480,
+          "text": "Oh, got it.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 232600,
+          "end_ms": 234620,
+          "text": "Oh, no, I'm so used to Fire Emblem.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 234700,
+          "end_ms": 236140,
+          "text": "I forgot that I can jump, guys.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 236240,
+          "end_ms": 237180,
+          "text": "It's so over.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 237300,
+          "end_ms": 239520,
+          "text": "My muscle memory non-existent.",
+          "engineering_confidence": 0.7186172485082798
+        },
+        {
+          "start_ms": 240340,
+          "end_ms": 241220,
+          "text": "What am I going to do?",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 243280,
+          "end_ms": 244160,
+          "text": "Oh, boy.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 246200,
+          "end_ms": 250520,
+          "text": "OK, let's just I do remember kind of how to play the game.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 250700,
+          "end_ms": 254240,
+          "text": "So, oh, no, I'm pressing circle instead of X",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 254240,
+          "end_ms": 256680,
+          "text": "because of the A button on the switch controller.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 258839,
+          "end_ms": 260240,
+          "text": "OK, so this is our deck.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 260480,
+          "end_ms": 262200,
+          "text": "I think it's just a lot of Sonic.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 263360,
+          "end_ms": 264700,
+          "text": "What is OK?",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 269330,
+          "end_ms": 270430,
+          "text": "Dexun, yeah, that's good.",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 270810,
+          "end_ms": 272410,
+          "text": "Do I need to use this card?",
+          "engineering_confidence": 0.7168532229103166
+        },
+        {
+          "start_ms": 273710,
+          "end_ms": 282060,
+          "text": "i need to use it right this is my boss deck okay let's go yeah surely it's gonna come back",
+          "engineering_confidence": 0.8284603290382776
+        },
+        {
+          "start_ms": 282060,
+          "end_ms": 288900,
+          "text": "all right oh wait this is the door where i need to i don't have a joker isn't this where i need",
+          "engineering_confidence": 0.8284603290382776
+        },
+        {
+          "start_ms": 288900,
+          "end_ms": 295280,
+          "text": "like a hundred and i i haven't gotten a new joker yet it's so freaking jover guys it's so over",
+          "engineering_confidence": 0.8284603290382776
+        },
+        {
+          "start_ms": 296720,
+          "end_ms": 304380,
+          "text": "uh that's a four freak around is more fun yeah that's what i've been told because the set is",
+          "engineering_confidence": 0.8284603290382776
+        },
+        {
+          "start_ms": 304380,
+          "end_ms": 309580,
+          "text": "predetermined so that takes a lot of the muscle stuff like the thinking stuff away which is good",
+          "engineering_confidence": 0.7318985167315409
+        },
+        {
+          "start_ms": 318350,
+          "end_ms": 323470,
+          "text": "no it's not it's not java it's beautiful i mean it's spooky month so the scarier the stream is",
+          "engineering_confidence": 0.7318985167315409
+        },
+        {
+          "start_ms": 323470,
+          "end_ms": 330170,
+          "text": "the better the more i cry and the more on topic it is oh god i have so little cards why do i have",
+          "engineering_confidence": 0.7318985167315409
+        },
+        {
+          "start_ms": 330170,
+          "end_ms": 335190,
+          "text": "Huh? I have like nothing!",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 338350,
+          "end_ms": 339990,
+          "text": "I guess I have to use a 9.",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 341190,
+          "end_ms": 342370,
+          "text": "You gotta fight some people.",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 344930,
+          "end_ms": 345730,
+          "text": "Gamester controller?",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 347270,
+          "end_ms": 348410,
+          "text": "I mean- Ah! Ah!",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 349050,
+          "end_ms": 351070,
+          "text": "Alright, let's see. So this is",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 351070,
+          "end_ms": 352730,
+          "text": "log on. Oh crap, I already",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 352730,
+          "end_ms": 357470,
+          "text": "fucked up! Oh god, I'm not really",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 357470,
+          "end_ms": 358690,
+          "text": "dealing damage, am I?",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 358930,
+          "end_ms": 361430,
+          "text": "I think we need to- we need",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 361430,
+          "end_ms": 362350,
+          "text": "to do this a lot.",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 363470,
+          "end_ms": 365310,
+          "text": "Oh right, I can't spam, I forgot.",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 365550,
+          "end_ms": 366890,
+          "text": "Oh god, are you kidding me?",
+          "engineering_confidence": 0.703764249303918
+        },
+        {
+          "start_ms": 370970,
+          "end_ms": 381330,
+          "text": "beautiful oh boy i can't hit them in the air no i need to switch decks badly",
+          "engineering_confidence": 0.8594229305740807
+        },
+        {
+          "start_ms": 382070,
+          "end_ms": 388350,
+          "text": "we need to switch decks this is my vexing deck i think oh what am i gonna do",
+          "engineering_confidence": 0.8594229305740807
+        },
+        {
+          "start_ms": 389770,
+          "end_ms": 394970,
+          "text": "oh god he's coming for me what is he doing he's spinning never never seen a neo shadow do that",
+          "engineering_confidence": 0.8594229305740807
+        },
+        {
+          "start_ms": 394970,
+          "end_ms": 408690,
+          "text": "move uh go forth oh what oh what is happening oh wow oh wow whoa explosion what the heck",
+          "engineering_confidence": 0.8220515088939109
+        },
+        {
+          "start_ms": 408690,
+          "end_ms": 418390,
+          "text": "i've never seen that before thank you guys thank you donald thank you goofy okay um",
+          "engineering_confidence": 0.8220515088939109
+        },
+        {
+          "start_ms": 419830,
+          "end_ms": 427070,
+          "text": "let me switch my dax uh i think this one would be good for this that's my running around deck",
+          "engineering_confidence": 0.8220515088939109
+        },
+        {
+          "start_ms": 427930,
+          "end_ms": 436910,
+          "text": "using kaboos yeah i mean we need to we need to get some cards so i need to fight a little bit",
+          "engineering_confidence": 0.7085300322348187
+        },
+        {
+          "start_ms": 436910,
+          "end_ms": 447610,
+          "text": "take this boom take this take this boom oh crap",
+          "engineering_confidence": 0.7085300322348187
+        },
+        {
+          "start_ms": 447610,
+          "end_ms": 456540,
+          "text": "oh boy this is really bad did i do i not have my blizzard deck anymore",
+          "engineering_confidence": 0.7085300322348187
+        },
+        {
+          "start_ms": 456540,
+          "end_ms": 468060,
+          "text": "more back off oh that's a good one cloud is good for this oh come on can i get another trinity",
+          "engineering_confidence": 0.7698147627704836
+        },
+        {
+          "start_ms": 468060,
+          "end_ms": 481620,
+          "text": "ouch my archicanum i'm dying thank you do it again oh what's the trinity is it like donald",
+          "engineering_confidence": 0.7698147627704836
+        },
+        {
+          "start_ms": 481620,
+          "end_ms": 492420,
+          "text": "Goofy and the nine maybe? Yo, Donald. Can I have another Goofy? Goofy again! Go Goofy!",
+          "engineering_confidence": 0.7554102338415113
+        },
+        {
+          "start_ms": 493560,
+          "end_ms": 499780,
+          "text": "Why is there so many of them? Can I get a Goofy? One Goofy from off of here. Oh no.",
+          "engineering_confidence": 0.7554102338415113
+        },
+        {
+          "start_ms": 504360,
+          "end_ms": 511400,
+          "text": "Yeah, yeah. Stop that. Stop that. Oh no! Too bad. Okay guys, this- I don't think we're beating the",
+          "engineering_confidence": 0.7554102338415113
+        },
+        {
+          "start_ms": 511400,
+          "end_ms": 517220,
+          "text": "game today i'm gonna be so real with you i maybe i overestimated myself",
+          "engineering_confidence": 0.8965311563602296
+        },
+        {
+          "start_ms": 518080,
+          "end_ms": 523780,
+          "text": "i didn't know that i have so little car like room cards",
+          "engineering_confidence": 0.8965311563602296
+        },
+        {
+          "start_ms": 527120,
+          "end_ms": 529940,
+          "text": "sonic blade isn't good i think i need more clouds for this",
+          "engineering_confidence": 0.8965311563602296
+        },
+        {
+          "start_ms": 538920,
+          "end_ms": 545100,
+          "text": "yeah it's useless sonic blade is useless here where's my goofy i need a goofy",
+          "engineering_confidence": 0.8965311563602296
+        },
+        {
+          "start_ms": 550350,
+          "end_ms": 553450,
+          "text": "any people like card well then it would be great to get another goofy",
+          "engineering_confidence": 0.8965311563602296
+        },
+        {
+          "start_ms": 556170,
+          "end_ms": 567830,
+          "text": "please what is going on force oh no oh god so should i run should i run and switch my set",
+          "engineering_confidence": 0.7303127375808544
+        },
+        {
+          "start_ms": 567830,
+          "end_ms": 574110,
+          "text": "no i can't preserve i can't do this it's the final boss of the game now ouch ouch",
+          "engineering_confidence": 0.7303127375808544
+        },
+        {
+          "start_ms": 577770,
+          "end_ms": 588030,
+          "text": "i don't need craft attack no i don't watch anything minecraft related honestly",
+          "engineering_confidence": 0.7604348832955554
+        },
+        {
+          "start_ms": 588030,
+          "end_ms": 599860,
+          "text": "ah never have never will probably uh oh but i saw on twitter there was like a tech",
+          "engineering_confidence": 0.7604348832955554
+        }
+      ],
+      "accent_accuracy": "NOT_EVALUATED_WITHOUT_HUMAN_GROUND_TRUTH"
+    }
+  ]
+}

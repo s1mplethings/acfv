@@ -1,0 +1,45 @@
+{
+  "case_id": "M15",
+  "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+  "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "30c74a65-34e1-4acd-ac50-683230abdd84",
+  "start_ms": 5361000,
+  "end_ms": 5366000,
+  "timestamp": "01:29:21.000–01:29:26.000",
+  "duration_ms": 5000,
+  "length_bucket": "short",
+  "summary": "I've heard this song before. I think it's Sesshousen.",
+  "moment_transcript": "I've heard this song before. I think it's Sesshousen.",
+  "context_30s": {
+    "before": "I've heard this song before. I've heard this song before. I think it's Sesshousen. Thank you.",
+    "inside": "I've heard this song before. I think it's Sesshousen.",
+    "after": "Thank you for watching!"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 11000,
+    "pause_after_ms": 25000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 5347000,
+      "end_ms": 5350000,
+      "text": "Thank you."
+    },
+    "next_segment": {
+      "start_ms": 5391000,
+      "end_ms": 5400000,
+      "text": "Thank you for watching!"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

@@ -1,0 +1,59 @@
+{
+  "case_id": "CL01",
+  "file": "media/clip_01.mp4",
+  "source_recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+  "source_recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+  "moment_id": "88603a75-4d4e-4552-a067-da42f0f1d2b1",
+  "query": "哪一段把某个恐怖游戏描述成会用人的思想和实体沟通？",
+  "group": "STRONG_RETRIEVAL",
+  "selection_reason": "rank-1 production result for fixed retrieval case R01; expected target rank NOT FOUND",
+  "moment_start_ms": 10043000,
+  "moment_end_ms": 10098080,
+  "proposed_start_ms": 10035000,
+  "proposed_end_ms": 10110080,
+  "final_start_ms": 10035000,
+  "final_end_ms": 10110080,
+  "proposal_duration_ms": 75080,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "Don't do it like that, I promise It wasn't me It wasn't me It wasn't me It was a bug, I promise Holy Where's my chat? Oh, I lost my chat I think I farted just now, no",
+    "inside": "I think I farted just now, no You heard nothing You didn't hear anything You didn't hear anything You didn't hear anything I didn't I don't I didn't Wait, no, what about chat? What about chat? What about chat? Stop Chat, you didn't hear it, right? You didn't hear it You didn't hear it You didn't hear it You didn't hear it You didn't hear it, right? Fuck You heard? Fuck I'm ending this stream My career is fucking ruined I'm changing the city I'm changing my name I'm fucking re- I'm graduating I'm fucking Oh my fucking god Holy shit This is my graduation stream, it was fun while it lasted Any seven I can't do any seven. Why why can I not do any seven? It was fun. Oh, yeah",
+    "after": "It was fun. Oh, yeah Oh, yeah"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 6000,
+    "pause_after_ms": 9600,
+    "start_splits_transcript_segment": true,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 10028000,
+      "end_ms": 10029000,
+      "text": "Oh, I lost my chat"
+    },
+    "next_segment": {
+      "start_ms": 10119680,
+      "end_ms": 10121680,
+      "text": "Oh, yeah"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 75.1,
+      "size_bytes": 15540791,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "starts_mid_transcript_segment",
+    "ends_mid_transcript_segment"
+  ]
+}

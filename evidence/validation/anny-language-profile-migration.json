@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "recordings": [
+    {
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "old_language": "ja",
+      "new_primary_language": "en",
+      "secondary_languages": [
+        "ja"
+      ],
+      "mixed_language": true,
+      "confidence": 0.9873,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "4e3aab6a8d102e69ae25ff1ee490ad11ee282ab6804b54e7626cfd7942efd034",
+      "raw_preserved": true,
+      "changed": true
+    },
+    {
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "old_language": "ja",
+      "new_primary_language": "en",
+      "secondary_languages": [
+        "ja"
+      ],
+      "mixed_language": true,
+      "confidence": 0.942,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "b3333c7cd9d7cf76b4bb4b2dfb1f33fabe4b9d7f4b6c3d8f7b4d7b96adbb0668",
+      "raw_preserved": true,
+      "changed": true
+    },
+    {
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "old_language": "ja",
+      "new_primary_language": "en",
+      "secondary_languages": [],
+      "mixed_language": false,
+      "confidence": 0.9938,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "0b9cb7ddc8375eb9230398ad5196a235f3bc5d6c8ade509a744a0fc0587be362",
+      "raw_preserved": true,
+      "changed": true
+    },
+    {
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "old_language": "ja",
+      "new_primary_language": "en",
+      "secondary_languages": [],
+      "mixed_language": false,
+      "confidence": 0.9936,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "2ae3d5b1c2655b1eda59fbd907e839a6b7ed1c1c059358724da33d504252aa8b",
+      "raw_preserved": true,
+      "changed": true
+    },
+    {
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "old_language": "ja",
+      "new_primary_language": "en",
+      "secondary_languages": [
+        "ja"
+      ],
+      "mixed_language": true,
+      "confidence": 0.9649,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "368abc70c8652235347bb7a54ace2304e618bfde531db59cfd7de386f3bfecd5",
+      "raw_preserved": true,
+      "changed": true
+    },
+    {
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "old_language": "en",
+      "new_primary_language": "en",
+      "secondary_languages": [],
+      "mixed_language": false,
+      "confidence": 0.9905,
+      "reason": "transcript_segments overrides recording-wide metadata when transcript evidence conflicts",
+      "raw_transcript_sha256": "d28bd8f32fc136fda62a6312ba9f9b1869c142f136cfc98674c5ee42d4e0b2fb",
+      "raw_preserved": true,
+      "changed": true
+    }
+  ],
+  "raw_transcript_hashes_unchanged": true,
+  "repeat_changed": 0
+}

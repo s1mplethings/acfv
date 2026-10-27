@@ -1,0 +1,597 @@
+{
+  "case_id": "R10",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "How did streaming from a boat turn into an argument about satellites and an antenna?",
+  "ground_truth": {
+    "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+    "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+    "start_ms": 12073000,
+    "end_ms": 12129920,
+    "timestamp": "03:21:13.000–03:22:09.920",
+    "transcript_excerpt": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a... A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink",
+    "old_moment_id": "f720e31e-1d03-47a3-9ad0-fe1773997852",
+    "acceptable_child_ids": [
+      "3ad97744-96b8-4c21-bb0b-5448114308dd",
+      "e247b401-817e-4829-9b58-5cf1fcd3f63a"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 3983.86,
+  "target_diagnostics": {
+    "dense_rank": 5,
+    "dense_score": 0.8691264390945435,
+    "fts_rank": 1,
+    "fusion_score": 0.03177805800756621,
+    "reranker_score": -0.999101996421814,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12091000,
+      "end_ms": 12173440,
+      "score": -0.999101996421814,
+      "summary": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the…",
+      "transcript_excerpt": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink Sorry, I kind ",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.8691264390945435,
+        "fts_rank": 1,
+        "fusion_score": 0.03177805800756621,
+        "reranker_score": -0.999101996421814,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "3ad97744-96b8-4c21-bb0b-5448114308dd",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12067000,
+      "end_ms": 12090000,
+      "score": -2.251958131790161,
+      "summary": "True Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection?",
+      "transcript_excerpt": "True Do you think if I got like a big enough boat, I could like stream from the middle of the ocean? What about the internet connection? Bro, we got satellite internet in space, man What f*** an event You're gonna buy a satellite to attach to the boat? No, you don't need to buy a...",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.8821372389793396,
+        "fts_rank": 2,
+        "fusion_score": 0.03252247488101534,
+        "reranker_score": -2.251958131790161,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "e6506365-9cbf-439f-b90a-2f0fac381d87",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 4714120,
+      "end_ms": 4798120,
+      "score": -4.864359378814697,
+      "summary": "i just don't understand how you guys beat up an american and then i come get her eyes why is he saying that bro why how is that an argument what you wasn't in on the hospital i don't know what you're talking about i want to answer my…",
+      "transcript_excerpt": "i just don't understand how you guys beat up an american and then i come get her eyes why is he saying that bro why how is that an argument what you wasn't in on the hospital i don't know what you're talking about i want to answer my question that's a crime why did you guys beat an american i have a lawyer i'll talk to my lawyer i'm gonna make a lawsuit big lawsuits big lawsuits i do i'm gonna make a big lawsuit i'm talking to my lawyer good night i feel like his massive flaw here is he's live s",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -4.864359378814697,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "ae827949-431e-496d-8208-0694d33aebf2",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12174400,
+      "end_ms": 12252440,
+      "score": -5.8858795166015625,
+      "summary": "Okay, okay it's also it's made of fiberglass fiberglass high tech What was that? What why did you say that?",
+      "transcript_excerpt": "Okay, okay it's also it's made of fiberglass fiberglass high tech What was that? What why did you say that? Wow What? That's like wow Oh like wow yeah yeah sorry I was just out of nowhere it was a little confusing Anyway point is five horsepower it'll be good. Dumbass Horsepower? Yeah five five entire horsepowers. Boats have horsepower but there's no horses Cars have horsepower but there are no are the horses hiding in the cars? Yeah yeah there are in the back there's like they got like tiny Lit",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8561326265335083,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -5.8858795166015625,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "502e8e08-1b96-45c3-ad96-21745cb33be0",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12027000,
+      "end_ms": 12067000,
+      "score": -7.729538440704346,
+      "summary": "What the f*** Em Would that be called the SS Corp or the SS Nuera? Is this Nuera?",
+      "transcript_excerpt": "What the f*** Em Would that be called the SS Corp or the SS Nuera? Is this Nuera? F*** What if someone walks by and recognizes it though? And they're like, oh my god, that's the Nuera boat Well, we literally showed that boat on stream so they would do that anyway Oh, you're saying we can't buy it? But then you said that if you're in the ocean, nobody's gonna see you there or dox you or... Yeah, yeah, while you're out there, but you have to like park it somewhere Yeah...",
+      "debug": {
+        "dense_rank": 6,
+        "dense_score": 0.8650850653648376,
+        "fts_rank": 11,
+        "fusion_score": 0.029236022193768675,
+        "reranker_score": -7.729538440704346,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "fb8b2025-d0a6-46ef-9918-deeb0a571f11",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 4680000,
+      "end_ms": 4713120,
+      "score": -7.811670780181885,
+      "summary": "second amendment shut the fuck up now his next plan is apparently to make a a big lawsuit how cringe can it get? yes stream is not loading nooo what the fuck does anybody else have that problem?",
+      "transcript_excerpt": "second amendment shut the fuck up now his next plan is apparently to make a a big lawsuit how cringe can it get? yes stream is not loading nooo what the fuck does anybody else have that problem?",
+      "debug": {
+        "fts_rank": 5,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -7.811670780181885,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "97ccd3a7-514f-4f69-9bef-67d84a37c379",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11880000,
+      "end_ms": 11925400,
+      "score": -8.055341720581055,
+      "summary": "You already went there, some anti-death we cannot take because you're a fool. Yeah, I mean, yeah I wasn't physically- oh fuck, I was thinking it was like the physics not working or collision or whatever else.",
+      "transcript_excerpt": "You already went there, some anti-death we cannot take because you're a fool. Yeah, I mean, yeah I wasn't physically- oh fuck, I was thinking it was like the physics not working or collision or whatever else. We cannot enter here. It says like we need a golden key or- yeah okay so the solution was maybe regarding like the key and leave it into the water for a certain amount of time and it would maybe turn it into something else maybe?",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.8612035512924194,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -8.055341720581055,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "aadbee80-0067-4357-b871-ff192f54fdb8",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 11726000,
+      "end_ms": 11746000,
+      "score": -8.309974670410156,
+      "summary": "True. True.",
+      "transcript_excerpt": "True. True. True. Yeah. That'd be cool, right? Okay. I'll get you a boat. Let's fucking go. What's my budget? Five dollars. Five dollars. Okay. Right.",
+      "debug": {
+        "dense_rank": 4,
+        "dense_score": 0.8738824129104614,
+        "fts_rank": 4,
+        "fusion_score": 0.03125,
+        "reranker_score": -8.309974670410156,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "f8d1da31-6fe3-4937-b8f3-cf784a602a56",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 4320000,
+      "end_ms": 4348280,
+      "score": -8.385050773620605,
+      "summary": "I cut that there for obvious reasons, but Johnny was then missing for a few hours and the internet was genuinely wondering what happened here. But then a couple hours later, he suddenly updated the world that he was fine but went to the…",
+      "transcript_excerpt": "I cut that there for obvious reasons, but Johnny was then missing for a few hours and the internet was genuinely wondering what happened here. But then a couple hours later, he suddenly updated the world that he was fine but went to the hospital for some stitches. So did he learn his lesson, stop IRL streaming and leave the country?",
+      "debug": {
+        "dense_rank": 16,
+        "dense_score": 0.8593957424163818,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -8.385050773620605,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "8b4dea15-a2be-4e1d-822b-958828c96a14",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 11874320,
+      "end_ms": 11875600,
+      "score": -8.65375804901123,
+      "summary": "Okay we already went there.",
+      "transcript_excerpt": "Okay we already went there.",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.860206663608551,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -8.65375804901123,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "b0449f9a-3205-4097-b132-772c79e2fb29",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 4890000,
+      "end_ms": 4986000,
+      "score": -8.666077613830566,
+      "summary": "People love to put label on everything Okay, let me see. Um, I just need to turn on my my my radar card and I'm good.",
+      "transcript_excerpt": "People love to put label on everything Okay, let me see. Um, I just need to turn on my my my radar card and I'm good. Wait, wait Wait, I don't even know. Wait, even Warudo is not working. I think it's my phone Wait, is it my phone that does this or wait, maybe I need to first close VC face Okay, let me close this and restart Let's see, what's the issue here? Why it doesn't work? I think maybe it's my phone that needs a second update Let me see the parameters I never fucking update my phone I do ",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -8.666077613830566,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "110d3d14-a8ea-42f1-8e10-d52df82e5fee",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 438000,
+      "end_ms": 456000,
+      "score": -8.820301055908203,
+      "summary": "Switch my current to AC, to DC, and unwind my vision. So they'll see, so they'll see over me.",
+      "transcript_excerpt": "Switch my current to AC, to DC, and unwind my vision. So they'll see, so they'll see over me. Can travel to AD, to BC, and we can unite. So they'll play, so they'll play. Hey, I can live, I can give you all the simulation.",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.8547726273536682,
+        "fusion_score": 0.011494252873563218,
+        "reranker_score": -8.820301055908203,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "5ff4dd82-7514-444a-826b-90b1eb31a9a1",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 4530000,
+      "end_ms": 4540000,
+      "score": -8.851885795593262,
+      "summary": "The installation was specifically built to study and contain the flood. They're working with a Japanese company.",
+      "transcript_excerpt": "The installation was specifically built to study and contain the flood. They're working with a Japanese company.",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8583027124404907,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -8.851885795593262,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "44c59ca9-ea23-4a33-b63e-077ba6ff18ef",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 11704000,
+      "end_ms": 11726000,
+      "score": -8.872029304504395,
+      "summary": "Dude! Chad, what do you say?",
+      "transcript_excerpt": "Dude! Chad, what do you say? This is a good deal. Think about the content. You have a boat stream? That'd be sick. Thank you. If you're in the middle of the ocean, no one's going to know what you want, right? Like, it's an IRL stream where you can't get like, doxxed. Because you'll just be in the middle of the ocean.",
+      "debug": {
+        "dense_rank": 3,
+        "dense_score": 0.8760744333267212,
+        "fts_rank": 10,
+        "fusion_score": 0.030158730158730156,
+        "reranker_score": -8.872029304504395,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "cae3dc6d-6849-44fd-a9f8-059a0126fa79",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 11682000,
+      "end_ms": 11701000,
+      "score": -8.927165985107422,
+      "summary": "At least... The boat.",
+      "transcript_excerpt": "At least... The boat. The boat. At least like... Twice a year. Okay. At least twice a year. Yeah, twice a year. You get to use the boat. Not by yourself, because I don't trust you with it. But... What the...",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8814550638198853,
+        "fts_rank": 9,
+        "fusion_score": 0.030621785881252923,
+        "reranker_score": -8.927165985107422,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "74222a10-a65a-4332-b114-37667bc2a518",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 25034000,
+      "end_ms": 25054000,
+      "score": -9.01818561553955,
+      "summary": "You know, you can help me with that. Please.",
+      "transcript_excerpt": "You know, you can help me with that. Please. If you don't, then like, I don't know. We're as good as dead. So, did anybody understand? Someone did, I'm sure. I need to put chiller music, cause like...",
+      "debug": {
+        "dense_rank": 28,
+        "dense_score": 0.8542248606681824,
+        "fusion_score": 0.011363636363636364,
+        "reranker_score": -9.01818561553955,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "88d6bd32-479d-40ee-bb75-83f10735e0b1",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 9821000,
+      "end_ms": 9836000,
+      "score": -9.252833366394043,
+      "summary": "Where is it now? See?",
+      "transcript_excerpt": "Where is it now? See? Yeah, I should add the discussion out of my streams.",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8598983287811279,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -9.252833366394043,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "99406343-abc5-4f72-bacb-9f5a90722a1d",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 15192760,
+      "end_ms": 15211760,
+      "score": -9.543153762817383,
+      "summary": "Oh, a little dot. Okay, so...",
+      "transcript_excerpt": "Oh, a little dot. Okay, so... This too... Another one... Etto... To-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to-to... Nintendo's Palace! It's this way here...",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8552735447883606,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -9.543153762817383,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "d2527ecc-6f70-4b41-b00c-cd06e4f8951f",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 4470000,
+      "end_ms": 4483000,
+      "score": -9.673466682434082,
+      "summary": "The installation was specifically built to study and contain the flood. Their survival as a race was dependent upon it.",
+      "transcript_excerpt": "The installation was specifically built to study and contain the flood. Their survival as a race was dependent upon it. I am grateful to see that some of them survived the flood.",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.8572251796722412,
+        "fusion_score": 0.0125,
+        "reranker_score": -9.673466682434082,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "c04972a8-1bce-4d1c-8b38-d104b798f4e2",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 4547500,
+      "end_ms": 4575000,
+      "score": -9.819822311401367,
+      "summary": "Wait, he screams them from America? What?",
+      "transcript_excerpt": "Wait, he screams them from America? What? Like the dude travels out to a war zone because he knows he's going to get attention. Then he just inserts himself into protests and chaos for the sake of attention on the internet. This is wild. I feel bad for everyone who has to interact with this dude. Give me a passport. Give me a passport. This is my stuff. Don't steal my stuff. What do you steal? I'm from America. I'm in the sidewalk. What did I do?",
+      "debug": {
+        "fts_rank": 7,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -9.819822311401367,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "34b9716e-abfa-47fe-ae0f-663f876b5a09",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10558000,
+      "end_ms": 10580040,
+      "score": -9.835301399230957,
+      "summary": "Would you take a screenshot? Here we go, this is saved.",
+      "transcript_excerpt": "Would you take a screenshot? Here we go, this is saved. But we need to find like first like the first like you know, number.",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -9.835301399230957,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "2451c3cb-b5f2-427e-a0f9-c3e2e7e9ad73",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 11310000,
+      "end_ms": 11381000,
+      "score": -9.894448280334473,
+      "summary": "Why you know what I didn't died and I got this and this Okay, how do I go up ah We should be able to get into the ship's control room Okay from here, where is it here because there's just so many different like path Got an ah the Covenant…",
+      "transcript_excerpt": "Why you know what I didn't died and I got this and this Okay, how do I go up ah We should be able to get into the ship's control room Okay from here, where is it here because there's just so many different like path Got an ah the Covenant battle net is a mess. I can't access the ship's schematic Ouch Ouch Look in the corners the flood are gathering bodies here That's my gun Guess we need to go down here I",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -9.894448280334473,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "01b31fd2-af81-43bd-8853-ab089bbbc4e6",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 17142000,
+      "end_ms": 17177000,
+      "score": -9.915261268615723,
+      "summary": "Pirate Hypetrain Succies Succies remastered The same as expensive? Well, luckily, I make money with streaming and then money goes into buying games and shit.",
+      "transcript_excerpt": "Pirate Hypetrain Succies Succies remastered The same as expensive? Well, luckily, I make money with streaming and then money goes into buying games and shit. It's like a cycle. I buy shit for stream.",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -9.915261268615723,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "006eb8a5-4914-47fe-8dd0-5c5efd48753e",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10162000,
+      "end_ms": 10183000,
+      "score": -10.064090728759766,
+      "summary": "Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat.",
+      "transcript_excerpt": "Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat. No, it's a submarine. Shotgun? I still haven't found a shotgun just yet.",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -10.064090728759766,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "ad333a08-1f9b-498d-bbca-355eb016cf70",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 11616000,
+      "end_ms": 11635000,
+      "score": -10.07518482208252,
+      "summary": "Okay, got it. I gave you an order, so turn up now.",
+      "transcript_excerpt": "Okay, got it. I gave you an order, so turn up now. He's delirious. In pain, we have to find him. I think I dropped my fucking, like, you know, shotgun by accident.",
+      "debug": {
+        "fts_rank": 24,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -10.07518482208252,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "adeae546-33b6-4c02-afab-5bf5b3dd83a3",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 4516500,
+      "end_ms": 4536500,
+      "score": -10.105037689208984,
+      "summary": "I love how quickly the dude switches up to being an American as soon as he actually gets in trouble. But, here's a more entertaining angle of all this.",
+      "transcript_excerpt": "I love how quickly the dude switches up to being an American as soon as he actually gets in trouble. But, here's a more entertaining angle of all this. I'm from America! What are you doing? I'm so sorry, his turn. I didn't see it.",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -10.105037689208984,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "03352f9f-eec9-4ac9-be1a-2eba5ce81907",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 8316000,
+      "end_ms": 8336000,
+      "score": -10.162381172180176,
+      "summary": "Wait, I need more music Let's do this one Then I turn into this Got more shit in here It has the juicer check Then I turn into this And then...",
+      "transcript_excerpt": "Wait, I need more music Let's do this one Then I turn into this Got more shit in here It has the juicer check Then I turn into this And then...",
+      "debug": {
+        "fts_rank": 28,
+        "fusion_score": 0.011363636363636364,
+        "reranker_score": -10.162381172180176,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "d023614c-490e-4274-9fb2-5adbde42b291",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 8246000,
+      "end_ms": 8316000,
+      "score": -10.187530517578125,
+      "summary": "I'm pretty sure I had... I had a final version with no lights.",
+      "transcript_excerpt": "I'm pretty sure I had... I had a final version with no lights. No cozy lights. But I think I lost it somewhere in my files. And then we have this one. Wait, what is this one? Oh, this is the non-Christmas one. Yes, this is the one that I used before. With the Elden Ring. And the Elden Ring in the frame. Giraffe also drew that Elden Ring in that... 《Cold of the Lamb》reference in tunic There's so many references in this background And then the Christmas tree There's even more references I love it ",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -10.187530517578125,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "8865a44a-a079-4f64-a4f8-3ff2f71e1c3f",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 15117000,
+      "end_ms": 15133000,
+      "score": -10.19230842590332,
+      "summary": "I... No, I was...",
+      "transcript_excerpt": "I... No, I was... Because I just plugged the wire in my wireless controller, and I'm not used to it, and I just... Okay, listen, I don't have to explain myself, shut up. Let me through.",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8567264080047607,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -10.19230842590332,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "f2146b1d-762d-43ed-a3a1-816ef0017fd2",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 11497000,
+      "end_ms": 11508000,
+      "score": -10.212112426757812,
+      "summary": "I see. It's cool that I own it, right?",
+      "transcript_excerpt": "I see. It's cool that I own it, right? Why are you driving a boat, Beedle? Why not? You don't want to drive a boat?",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.862534761428833,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -10.212112426757812,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

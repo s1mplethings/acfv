@@ -1,0 +1,56 @@
+{
+  "case_id": "CL13",
+  "file": "media/clip_13.mp4",
+  "source_recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+  "source_recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+  "moment_id": "1f3dfa3c-5d22-43c8-8667-09abe6e33df6",
+  "query": "",
+  "group": "DIFFICULT_BOUNDARY",
+  "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+  "moment_start_ms": 10800200,
+  "moment_end_ms": 10802520,
+  "proposed_start_ms": 10792200,
+  "proposed_end_ms": 10814520,
+  "final_start_ms": 10792200,
+  "final_end_ms": 10814520,
+  "proposal_duration_ms": 22320,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "her entire chat is just gifts subs hell yeah hell yeah yeah i love you guys thank you thank you matthew thank you hearing that",
+    "inside": "lmaoo",
+    "after": "I'm sorry What? What? What? What? What? What did you tell them?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 4600,
+    "pause_after_ms": 10240,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 10785600,
+      "end_ms": 10787600,
+      "text": "hearing that"
+    },
+    "next_segment": {
+      "start_ms": 10824760,
+      "end_ms": 10826280,
+      "text": "I'm sorry"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 22.35,
+      "size_bytes": 5245889,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

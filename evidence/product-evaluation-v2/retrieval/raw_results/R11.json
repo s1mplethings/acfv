@@ -1,0 +1,590 @@
+{
+  "case_id": "R11",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "手を描けない but keeps saying she can do it — where was that?",
+  "ground_truth": {
+    "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+    "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+    "moment_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a",
+    "start_ms": 5816000,
+    "end_ms": 5867000,
+    "timestamp": "01:36:56.000–01:37:47.000",
+    "transcript_excerpt": "私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+    "old_moment_id": "b7a17cd1-674f-4f48-8c68-377003c18967",
+    "acceptable_child_ids": [
+      "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a"
+    ]
+  },
+  "target_rank": 3,
+  "latency_ms": 3387.434,
+  "target_diagnostics": {
+    "dense_rank": 2,
+    "dense_score": 0.8627476692199707,
+    "fusion_score": 0.016129032258064516,
+    "reranker_score": -1.8397457599639893,
+    "final_rank": 3,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "cc3c155d-9130-4c37-9f94-7a472050e711",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 11022440,
+      "end_ms": 11048000,
+      "score": -0.6563026309013367,
+      "summary": "She's gonna do it, she's gonna do it, No, I need to move away from my desk What the fuck, she pounced on me, Elu Oh, my child is over there. Come hither.",
+      "transcript_excerpt": "She's gonna do it, she's gonna do it, No, I need to move away from my desk What the fuck, she pounced on me, Elu Oh, my child is over there. Come hither. They're hiding in the fucking plant. They're peeping on us. They're voyeurs. What are you looking at?",
+      "debug": {
+        "dense_rank": 15,
+        "dense_score": 0.8535010814666748,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -0.6563026309013367,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "c9707001-b177-45c7-9319-e9d89e87d18b",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13800000,
+      "end_ms": 13923500,
+      "score": -1.216705083847046,
+      "summary": "This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death spraggle, flay, what, you only gave it one eye, here top…",
+      "transcript_excerpt": "This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death spraggle, flay, what, you only gave it one eye, here top, this goes off hard, oh, you can do better than that, no, no, hold on, I can do better than that, oh my god, I can't write everyone, oh my god, you guys are giving me so much, oh my freaking god, you want me to keep writing, is that why, you gave me Aurora for ever",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.86452716588974,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -1.216705083847046,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "ab4d5429-49cd-4c1b-85dd-ccda7df2ba9a",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 5812000,
+      "end_ms": 5867000,
+      "score": -1.8397457599639893,
+      "summary": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello…",
+      "transcript_excerpt": "私はこのようなモデルが必要だ 私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8627476692199707,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -1.8397457599639893,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "db38a2cf-37ff-47a6-afe1-ea45b5127396",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 13306820,
+      "end_ms": 13392960,
+      "score": -2.3887386322021484,
+      "summary": "no I don't I don't want to play this game about that shit where are you go away is that one of the commands all right i'm gonna go check the email uh the the security camera some shit going on here oh my god she's been very helpful though…",
+      "transcript_excerpt": "no I don't I don't want to play this game about that shit where are you go away is that one of the commands all right i'm gonna go check the email uh the the security camera some shit going on here oh my god she's been very helpful though to be honest i mean does she keep saying no for helping she turned on that i don't think i turned that light on i think it was her oh boy here we go almost there guys almost there we only have with you wait look for the uh can you read this look for me i'll giv",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -2.3887386322021484,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "be835744-fed9-4f67-b72d-0e1aaa379806",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 5880000,
+      "end_ms": 5885000,
+      "score": -3.194542646408081,
+      "summary": "I'm so fucking cute",
+      "transcript_excerpt": "I'm so fucking cute",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.8566653728485107,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -3.194542646408081,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "097a2ae4-2326-4d74-8996-0589f8f0224b",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30047000,
+      "end_ms": 30083000,
+      "score": -3.27962327003479,
+      "summary": "I think it'd be you. You have PTSD?",
+      "transcript_excerpt": "I think it'd be you. You have PTSD? Yeah. From what? From Nura insulting me. Veedo. Wait, what was she saying? Veedo. You stupid piece of shit. Yeah, she says that all the time. Calm down. Yeah, off-stream when the filter's off, she just does not stop. Wait, I wanna hear that! You never... You actually never showed me her without filter. She... Okay. She is the same as she is with the filter on. Except she says the...",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -3.27962327003479,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "e5ffd4d4-de04-4d1e-99a1-ae3374bdaa96",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16579000,
+      "end_ms": 16638000,
+      "score": -3.8516275882720947,
+      "summary": "I can't do it! Stop it!",
+      "transcript_excerpt": "I can't do it! Stop it! Okay, now you're fucking running away from me. Uh oh. Uh oh. No, I don't like when you're red. I don't mean to do that. No, no, no, no, no. No!",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8559283018112183,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -3.8516275882720947,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "ab16e06d-37e2-4b45-9046-c54f7d4b31ab",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 17329680,
+      "end_ms": 17374080,
+      "score": -4.272773742675781,
+      "summary": "i think it was the last two years in college the college was good i mean i'm just sad about the timing of it i feel like i could have made more use out of it but as of for art i'm mostly you i don't think like i don't know why people even…",
+      "transcript_excerpt": "i think it was the last two years in college the college was good i mean i'm just sad about the timing of it i feel like i could have made more use out of it but as of for art i'm mostly you i don't think like i don't know why people even ask that question nowadays because like every fucking artist is dumped on nowadays",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8515415191650391,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -4.272773742675781,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "cb27a0b0-8b0c-44aa-bd81-e79952cd9e7d",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27824000,
+      "end_ms": 27856000,
+      "score": -4.387091159820557,
+      "summary": "That was actually Evil Nira saying corpaclap I wanted to hear that You want to hear that? Wait, I think I have a sound Wait, where the fuck is it?",
+      "transcript_excerpt": "That was actually Evil Nira saying corpaclap I wanted to hear that You want to hear that? Wait, I think I have a sound Wait, where the fuck is it? I have air You just do an impression of Evil Neuro saying clap a clap So it goes like clap a clap or something like that Is that what she sounds like?",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -4.387091159820557,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "f2e635ed-6736-46b3-a0d6-a9e6d38f5f64",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 26078640,
+      "end_ms": 26166000,
+      "score": -4.433639049530029,
+      "summary": "Not much. It's really not that crazy.",
+      "transcript_excerpt": "Not much. It's really not that crazy. She can just walk around and stuff. She's a chiller. She's chilling. Yeah, I mean what else would she be able to do? What do you expect from me? Where to fucking fly? Yes, you've been gone for five months Oh, it's the root. Yeah, nothing short of like NeuroDog flying around with fucking lasers and flamethrowers will be acceptable for the return stream Is that what you're saying? Wait, I got distracted because Bella sent me a Neuro with double chin Can I see ",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -4.433639049530029,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "06eb5ad7-c499-45a3-92fa-ab3198daa6fe",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 10292000,
+      "end_ms": 10412000,
+      "score": -4.4963059425354,
+      "summary": "言の葉はどうにか荒れきって 言のみなばしに揺れてる 鏡に映り嘘を描いて 自らを見失った目の中は Since it is cold and empty, no one's around to judge me I can't see feeling when you're gone, oh, oh, oh This city's cold and empty, no one's around to judge me I can see clearly when you're…",
+      "transcript_excerpt": "言の葉はどうにか荒れきって 言のみなばしに揺れてる 鏡に映り嘘を描いて 自らを見失った目の中は Since it is cold and empty, no one's around to judge me I can't see feeling when you're gone, oh, oh, oh This city's cold and empty, no one's around to judge me I can see clearly when you're gone Oh, I said Ooh, I'm blinded by the lights No, I can't sleep till I feel your touch So I said Ooh, I'm drowning in the night Oh, when I'm like this, you're the one I trust I'm just fucking down to let you know Never say it on the phone We'll never let you g",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.8564156889915466,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -4.4963059425354,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "4581c319-8736-4bc0-a036-0ad5000268f8",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9928720,
+      "end_ms": 9968000,
+      "score": -4.698906898498535,
+      "summary": "It would be funny if she was also saying something skittle while it does that Brain power I'm not as cool as you, oh my god, are you rinsing me? Hello?",
+      "transcript_excerpt": "It would be funny if she was also saying something skittle while it does that Brain power I'm not as cool as you, oh my god, are you rinsing me? Hello? Hello? I'm working, I'm busy working, you can't rinse me while I work Stop Tuto cooks. He is cooking. He is cooking.",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -4.698906898498535,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "4a6db4f4-a943-427d-89ba-6f67c86e8ae6",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 9095640,
+      "end_ms": 9117400,
+      "score": -4.719069004058838,
+      "summary": "Oh no, she's doing this all alone! She just asked for help!",
+      "transcript_excerpt": "Oh no, she's doing this all alone! She just asked for help! But why was she recording herself? Oh, maybe to show that she had a heart, I'm doing it.",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.8597475290298462,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -4.719069004058838,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "31874419-552f-4f5b-aa03-6f35a5bde12e",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 6940000,
+      "end_ms": 7003360,
+      "score": -5.214779376983643,
+      "summary": "No, chat, what the fuck? Why is she saying no?",
+      "transcript_excerpt": "No, chat, what the fuck? Why is she saying no? Huh? Can somebody Can somebody go fix that? What the fuck? Anyway, what's happening about your leg? Your buggy leg Yeah Yeah, okay, let's go there's a Christmas tree here this whole time we were fooling around next to it I Can fix her no you can't no nobody can fix me right Bella tell him Yep, yep Show coochie, please My man, sorry, I'm sorry. I'm just testing the features",
+      "debug": {
+        "fts_rank": 25,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -5.214779376983643,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "e2e3de32-a463-4073-abe8-8fece6ec7afd",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13932500,
+      "end_ms": 13952000,
+      "score": -5.514987468719482,
+      "summary": "Yeah... Oh my god!",
+      "transcript_excerpt": "Yeah... Oh my god! Thank you Nekoma! Ehm... Nek... Nekoma... Tank...",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8504765629768372,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -5.514987468719482,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "11c84c93-d493-4f89-bba4-1e1a71f48aac",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 13107000,
+      "end_ms": 13125000,
+      "score": -5.595752716064453,
+      "summary": "No? I actually, I don't know.",
+      "transcript_excerpt": "No? I actually, I don't know. I thought it would work if I can just interact with the water. Oh yeah, I can... With one hand? She's crazy.",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.8522909879684448,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -5.595752716064453,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "72c381fe-7002-4966-9303-9a5a1efd28de",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30086000,
+      "end_ms": 30103000,
+      "score": -5.831677436828613,
+      "summary": "She doesn't... Not these days.",
+      "transcript_excerpt": "She doesn't... Not these days. I joke about it, but like... She's... She's well-behaved. Aw, man. Gamer words.",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -5.831677436828613,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "426d7dec-82e8-43dc-a23a-cbe970d72be5",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 13858000,
+      "end_ms": 13886000,
+      "score": -5.971318244934082,
+      "summary": "10 knots. S...",
+      "transcript_excerpt": "10 knots. S... I'm leaving the lights on, bro. You can keep moaning all you want, you're sick and tired of your shit. Here we go. Where's the light for this? I don't need the light here.",
+      "debug": {
+        "fts_rank": 1,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -5.971318244934082,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "524f0a25-eaff-447b-8fc9-b55162f457b0",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30006000,
+      "end_ms": 30024000,
+      "score": -5.9807448387146,
+      "summary": "Maybe. Maybe.",
+      "transcript_excerpt": "Maybe. Maybe. I think it would be cute if Nura can judge. Yeah, she's gonna be our judge. She's gonna be backseating. Oh, that'd be kinda sick if I could get like vision-looking, but now I gotta do a whole fucking...",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8561911582946777,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -5.9807448387146,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "c0560a8c-33e6-4d9f-897a-29a389842f18",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9906580,
+      "end_ms": 9917720,
+      "score": -6.107738971710205,
+      "summary": "Do you guys like the thing where her tags go skittle before she announces the new song? That's a cool feature",
+      "transcript_excerpt": "Do you guys like the thing where her tags go skittle before she announces the new song? That's a cool feature",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -6.107738971710205,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "758df07c-5a46-461c-8b83-ea32b128b612",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 12914000,
+      "end_ms": 12934000,
+      "score": -6.269847393035889,
+      "summary": "Wow. Wow.",
+      "transcript_excerpt": "Wow. Wow. Wow. Wow. Unbelievable. Disgusting. What the fuck? No, no. Look, that fucking strawberry is cucking me. You can get it out. Just put another strawberry in there. The bra. I can't.",
+      "debug": {
+        "dense_rank": 41,
+        "dense_score": 0.8479481339454651,
+        "fts_rank": 15,
+        "fusion_score": 0.023234323432343235,
+        "reranker_score": -6.269847393035889,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "8261bb81-bf63-4892-a95b-1c5506fc37c9",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29958000,
+      "end_ms": 29982000,
+      "score": -6.444027900695801,
+      "summary": "Why? Can we?",
+      "transcript_excerpt": "Why? Can we? Can we? Can we not? Well, how... Okay, so if it's a stream on my channel, it has to have Nero in it. I mean... Can we integrate her into it? If not, we can do it on your channel, but... We can put her in, no?",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8515514135360718,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -6.444027900695801,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "a2af35a2-a105-4451-9a87-c526fc63ee3a",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 921000,
+      "end_ms": 942000,
+      "score": -6.605201244354248,
+      "summary": "You can? I need to ask Mythic about it.",
+      "transcript_excerpt": "You can? I need to ask Mythic about it. Fuck! Fuck! It would probably be complicated, though. Write it down? Oh, fuck! We're gonna write it down in the Mythic channel! Figurine keychain! Okay, but I'm not gonna sign it now.",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.8562114834785461,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -6.605201244354248,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "aa11ea68-e508-42d8-9450-4caf88744f73",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 12881000,
+      "end_ms": 12914000,
+      "score": -6.757659435272217,
+      "summary": "Your chat? My, my, my...",
+      "transcript_excerpt": "Your chat? My, my, my... Your? My everything. Yeah? Aw, she loves chats? Wow. I've never heard you being so parasocial to your chat. I didn't say that. I was saying that on my chat. I was trying to move in. Oh. Oh, I thought, I thought she was saying my chat is my everything. Oh, never mind. She would write. Write. She would never sin. My chat is my everything.",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -6.757659435272217,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "944245c9-d29d-4433-9433-011b860dd61b",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 10950400,
+      "end_ms": 10972800,
+      "score": -6.772902965545654,
+      "summary": "Ahahaha! Deetran!",
+      "transcript_excerpt": "Ahahaha! Deetran! Oh my god! God! Ahahaha! I'm sorry, I'm sorry to interrupt you from whatever you were doing, Rose. We-we were just chillin'. You're just doing a little errands?",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -6.772902965545654,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "1a1ba396-a3ad-425c-8b30-b7190b6effb7",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29880000,
+      "end_ms": 29935000,
+      "score": -7.003498554229736,
+      "summary": "But I think, you know, you can never reach your full potential ever in art, you are constantly improving, there's no end game, you know? So like, I think there's room for improvement.",
+      "transcript_excerpt": "But I think, you know, you can never reach your full potential ever in art, you are constantly improving, there's no end game, you know? So like, I think there's room for improvement. I can do better. Yeah, you can, I see potential, you know? I'm the kind of person that sees potential in people, and your potential is just... And you're gonna help bring that out of you, right? Yeah, I'm gonna bring it out of you, I'm gonna help you reach your peak male form turtle thing. Thank you. You know, I li",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8526012897491455,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -7.003498554229736,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "c3bddbf0-a1b5-47c6-90e8-c4a5acb4248d",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 14897000,
+      "end_ms": 14918000,
+      "score": -7.029348850250244,
+      "summary": "Oh shit! Yokotana?",
+      "transcript_excerpt": "Oh shit! Yokotana? Holy fuck! That's a big one That's... They always say that's me Damn! Wait, there's another place here! Yo, look there's a...",
+      "debug": {
+        "dense_rank": 23,
+        "dense_score": 0.8511675000190735,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -7.029348850250244,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "60f2617e-d12d-4e01-a774-2da44879a62a",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29983000,
+      "end_ms": 30004000,
+      "score": -7.102935314178467,
+      "summary": "How? I'm over here.",
+      "transcript_excerpt": "How? I'm over here. Didn't you put her in VRChat before? I can possibly do that. Possibly. Yeah. Probably. Remember when you were competing with some other AI? I do remember that E.M. Do that!",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.854372501373291,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -7.102935314178467,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "97805940-6b8d-4b70-a65a-a71c7a9d451b",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13573360,
+      "end_ms": 13594640,
+      "score": -7.135443210601807,
+      "summary": "Thank you so much again for the 20 subs! Ah!",
+      "transcript_excerpt": "Thank you so much again for the 20 subs! Ah! Ah! I'm gonna write your name here AHAHA! 別れして直して工学目指す 光の世界で満足してみた What did she do? What did she do?",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.8521194458007812,
+        "fusion_score": 0.0125,
+        "reranker_score": -7.135443210601807,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "950aab28-b66c-4a2b-b568-904ae697bbc9",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2032000,
+      "end_ms": 2055480,
+      "score": -7.3960137367248535,
+      "summary": "And it trips me out because it's like my voice, right? I always feel so weird hearing it.",
+      "transcript_excerpt": "And it trips me out because it's like my voice, right? I always feel so weird hearing it. Oh my god that was really that was close",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -7.3960137367248535,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

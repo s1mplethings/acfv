@@ -1,0 +1,1137 @@
+{
+  "summary": {
+    "items": 33,
+    "actions": {
+      "REVIEW": 9,
+      "KEEP": 1,
+      "UNCHANGED_UNCERTAIN": 23
+    },
+    "official_transcript_mutations": 0
+  },
+  "items": [
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 8620,
+      "end_ms": 10440,
+      "generic_text": "Oh, that's the end of the game, this place.",
+      "adaptive_text": "Oh, that's the end of the game, this player",
+      "action": "REVIEW",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.5483872784075597,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "a7525c1c-27df-443a-897f-62a651361d57",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 10740,
+      "end_ms": 12260,
+      "generic_text": "Oh, that's why it says all the tombs.",
+      "adaptive_text": "oh that's right it says oh it's a tomb",
+      "action": "REVIEW",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.6124877870777611,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "5a726031-eaa9-44a6-9163-3276a55e498b",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 14440,
+      "end_ms": 23210,
+      "generic_text": "Are we going to be fishing our conversation?",
+      "adaptive_text": "We're getting fishing at work on",
+      "action": "REVIEW",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.39895617025329455,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "87746bcf-7694-4a55-a929-9a59027724db",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-01",
+      "start_ms": 13720,
+      "end_ms": 17120,
+      "generic_text": "a realistic horror game that uses your mind to communicate with",
+      "adaptive_text": "a realistic horror game that uses your mind to communicate with",
+      "action": "KEEP",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.41294446834201515,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.5249927522574727,
+        "comparison": "SAME"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "d020c951-28a3-48f5-874b-1e3d668886a3",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-01.wav"
+    },
+    {
+      "recording_id": "saruei-clean-02",
+      "start_ms": 210,
+      "end_ms": 12650,
+      "generic_text": "but i don't want to go out but i'm hungry i mean out of my room it's just right there",
+      "adaptive_text": "But I don't want to go out but I'm hungry I mean out of my room My mate is just right there",
+      "action": "REVIEW",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.7401115527736427,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.7751890485976192,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "9a0cb813-2a9f-4450-90c0-40a7e7cc2100",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-02.wav"
+    },
+    {
+      "recording_id": "saruei-clean-02",
+      "start_ms": 32259,
+      "end_ms": 42640,
+      "generic_text": "like open the door for her and shit while i hide in my room she's here she don't care yeah but i",
+      "adaptive_text": "like open the door for her and shit while i hide in my room she's here she don't care yeah but i",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.7401115527736427,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "04f4816b-d2fe-4fb9-9bf4-179583930fea",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-02.wav"
+    },
+    {
+      "recording_id": "saruei-clean-02",
+      "start_ms": 42640,
+      "end_ms": 49420,
+      "generic_text": "care wait do i even have like sometimes like i have my my sweater who have like you know",
+      "adaptive_text": "care wait do i even have like sometimes like i have my my sweater who have like you know",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.851684809548483,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "5aa716c6-d095-4806-be91-9442e376acea",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-02.wav"
+    },
+    {
+      "recording_id": "saruei-clean-02",
+      "start_ms": 52560,
+      "end_ms": 57180,
+      "generic_text": "filthy dump on it because sometimes i eat so fast i put like you know food on my fucking sweater",
+      "adaptive_text": "filthy dump on it because sometimes i eat so fast i put like you know food on my fucking sweater",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.851684809548483,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "ca97c0a0-4fe6-4101-b6bb-99b4d2ef6c41",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-02.wav"
+    },
+    {
+      "recording_id": "saruei-clean-02",
+      "start_ms": 59640,
+      "end_ms": 63060,
+      "generic_text": "no boys okay i go i go you",
+      "adaptive_text": "no boys okay i go i go you",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.851684809548483,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "7008e5fe-45e9-4450-8164-fea7c3f19347",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-02.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 38510,
+      "end_ms": 40610,
+      "generic_text": "You're the only family I ever had.",
+      "adaptive_text": "You're the only family I ever had.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "2eca59ab-0dfe-42b9-8dce-7e34311aa4c1",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 47390,
+      "end_ms": 51150,
+      "generic_text": "You didn't take me to the moon, but you were there with me.",
+      "adaptive_text": "You didn't take me to the moon, but you were there with me.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "ef72f0f6-a370-4657-9c23-840f89778d72",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 51530,
+      "end_ms": 59930,
+      "generic_text": "Oh, that's so deep.",
+      "adaptive_text": "Oh, that's so deep.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5483442073993777,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "7efa718e-735d-4eb8-8d0b-fbd3ef826319",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "saruei-clean-03",
+      "start_ms": 65660,
+      "end_ms": 66780,
+      "generic_text": "Gloria Martinez, you were right.",
+      "adaptive_text": "Gloria Martinez, you were right.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "saruei",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.764260442492539,
+        "hotwords": [
+          "gloria",
+          "martinez",
+          "right"
+        ],
+        "historical": {
+          "gloria": 1,
+          "martinez": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "714d52e2-7901-4992-baab-f9d7aa71018c",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\saruei-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-01",
+      "start_ms": 500,
+      "end_ms": 11770,
+      "generic_text": "What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop?",
+      "adaptive_text": "was a crop What are all these three crops paddles canes whip",
+      "action": "REVIEW",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5184886800367492,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.6212120795591566,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "9370eba2-aba0-4b44-abcf-9d5d81ce0073",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-01.wav"
+    },
+    {
+      "recording_id": "anny-clean-01",
+      "start_ms": 18050,
+      "end_ms": 22570,
+      "generic_text": "What's paddles? Ah, this is all BDSM?",
+      "adaptive_text": "paddles. Ah, this is all BDSM?",
+      "action": "REVIEW",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5184886800367492,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.5530736603126308,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "d9313564-b74d-4431-840a-647fbc3fb23b",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-01.wav"
+    },
+    {
+      "recording_id": "anny-clean-01",
+      "start_ms": 23990,
+      "end_ms": 27350,
+      "generic_text": "I... then I can't really rate it, I don't fucking know.",
+      "adaptive_text": "I, then, I can't really read it, I don't fucking know",
+      "action": "REVIEW",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.5184886800367492,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.6261726805811721,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "5344bf23-8c9e-4197-9360-493f7cbe3941",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-01.wav"
+    },
+    {
+      "recording_id": "anny-clean-01",
+      "start_ms": 34530,
+      "end_ms": 35970,
+      "generic_text": "Preference, I guess? I don't fucking know.",
+      "adaptive_text": "reference, I guess, I don't fucking know",
+      "action": "REVIEW",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.7269964642447192,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.47614159453901767,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "d07e0326-f1d4-4367-b7cd-d76069872bfd",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-01.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 80,
+      "end_ms": 1800,
+      "generic_text": "I have not played Fushida in a very long time.",
+      "adaptive_text": "I have not thought about it for a very long time.",
+      "action": "REVIEW",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "adaptive_confidence": 0.45780707136363535,
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "24a140d5-da5e-4ba3-8255-e131acf953a2",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 3440,
+      "end_ms": 4860,
+      "generic_text": "The PUBG days!",
+      "adaptive_text": "The PUBG days!",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "12c03ffa-1aaf-4166-a6fa-fdad1351e692",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 5900,
+      "end_ms": 7280,
+      "generic_text": "Feels strong, man.",
+      "adaptive_text": "Feels strong, man.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "556fe83a-3cf7-4e76-ab85-9d8fe0f8e6bb",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 11040,
+      "end_ms": 12980,
+      "generic_text": "Nah, he already played it takes two.",
+      "adaptive_text": "Nah, he already played it takes two.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "afab9dce-297b-4447-b75e-a255966b51d2",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 16680,
+      "end_ms": 19100,
+      "generic_text": "Did you ask me that? I mean, you must have, right?",
+      "adaptive_text": "Did you ask me that? I mean, you must have, right?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "377b1ab6-50d9-4434-bb55-107f82347597",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 29600,
+      "end_ms": 30980,
+      "generic_text": "Fanboy Simulator M?",
+      "adaptive_text": "Fanboy Simulator M?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.4300785217365586,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "6388fcb4-3d99-44ea-a00b-eb0cf5ad189e",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 46500,
+      "end_ms": 47420,
+      "generic_text": "Well, you would know.",
+      "adaptive_text": "Well, you would know.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8013978545576751,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "fcfc49a6-e867-4193-82c8-2f54dfe9f0b5",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 49340,
+      "end_ms": 51120,
+      "generic_text": "Why would I know? I don't need a simulator.",
+      "adaptive_text": "Why would I know? I don't need a simulator.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8013978545576751,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "788152b0-5cae-46b5-9b4f-947019614241",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-03",
+      "start_ms": 65349,
+      "end_ms": 66590,
+      "generic_text": "I love Terraria.",
+      "adaptive_text": "I love Terraria.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8013978545576751,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "2c1d752c-aace-473f-b434-576f7377919f",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-03.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 6640,
+      "end_ms": 11840,
+      "generic_text": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean?",
+      "adaptive_text": "Do you think if I got like a big enough boat, I could like stream from the middle of the ocean?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.396067845176776,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "c7e6307c-243a-4bdf-b2b3-ae084be217ac",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 12520,
+      "end_ms": 14260,
+      "generic_text": "What about the internet connection?",
+      "adaptive_text": "What about the internet connection?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.396067845176776,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "df21d153-2b18-4015-99c2-c39f0ce60f71",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 15000,
+      "end_ms": 17940,
+      "generic_text": "Bro, we got satellite internet in this basement. We're fucking advanced.",
+      "adaptive_text": "Bro, we got satellite internet in this basement. We're fucking advanced.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.396067845176776,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "bee18277-bca2-4268-8b38-13affdd556e5",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 27620,
+      "end_ms": 30460,
+      "generic_text": "Buy a satellite to attach to the boat, is that what you just told me?",
+      "adaptive_text": "Buy a satellite to attach to the boat, is that what you just told me?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.396067845176776,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "7a22a650-f35d-4fce-8e02-f5935914b254",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 41950,
+      "end_ms": 43630,
+      "generic_text": "Motherfucker, just buy a fucking antenna.",
+      "adaptive_text": "Motherfucker, just buy a fucking antenna.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8667876784806221,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "5e566354-3aa6-49cc-820e-8680b5841f1a",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 48380,
+      "end_ms": 52260,
+      "generic_text": "Yeah, the satellite goes in space, not in the boat.",
+      "adaptive_text": "Yeah, the satellite goes in space, not in the boat.",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8667876784806221,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "6d137083-7b05-457b-b1c5-7faa1e993b2e",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    },
+    {
+      "recording_id": "anny-clean-04",
+      "start_ms": 63040,
+      "end_ms": 63940,
+      "generic_text": "What about Neuralink?",
+      "adaptive_text": "What about Neuralink?",
+      "action": "UNCHANGED_UNCERTAIN",
+      "creator_id": "anny",
+      "identity_state": "CONFIRMED",
+      "evidence": {
+        "base_confidence": 0.8667876784806221,
+        "hotwords": [
+          "again",
+          "antenna",
+          "kinda",
+          "right",
+          "satellite",
+          "schnoozer",
+          "stardew",
+          "these"
+        ],
+        "historical": {
+          "again": 1,
+          "these": 1,
+          "stardew": 1,
+          "kinda": 1,
+          "schnoozer": 1,
+          "antenna": 1,
+          "satellite": 1,
+          "right": 1
+        },
+        "reason": "no local redecode or candidates",
+        "comparison": "UNRESOLVED"
+      },
+      "profile_version": "creator_profile_v3",
+      "id": "dbd6b60e-b9eb-413f-acd2-3b9e3209090c",
+      "media": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\creator-adaptive-v3-real\\audio\\anny-clean-04.wav"
+    }
+  ]
+}

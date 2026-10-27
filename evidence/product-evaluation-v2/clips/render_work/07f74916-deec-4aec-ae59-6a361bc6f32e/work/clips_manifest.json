@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "stage": "build_clip_manifest",
+  "units": "ms",
+  "source_media": "F:\\.work\\[2-25-24] anny - \u2591E\u2591R\u2591M\u2591I\u2591N\u2591B\u2591I\u2591O\u2591 \ud83d\udd1e \ud83c\udf4a !tts.mp4",
+  "clip_count": 1,
+  "clips": [
+    {
+      "clip_id": "clip_001",
+      "rank": 1,
+      "start_ms": 31469000,
+      "end_ms": 31511000,
+      "output": {
+        "video": "clip.mp4"
+      },
+      "status": "ok"
+    }
+  ]
+}

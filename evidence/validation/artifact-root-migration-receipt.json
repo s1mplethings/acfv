@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "dry_run_receipt": "E:\\Cliper\\acfv-mvp-product\\var\\generalization_quality_repair\\migration-dry-run.json",
+  "migrations": [
+    {
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    },
+    {
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    },
+    {
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    },
+    {
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    },
+    {
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    },
+    {
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "before": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "after": {
+        "library_root_id": "real-library-build-20261007",
+        "relative_artifact_path": "runs/5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "schema_version": "1.0"
+      },
+      "legacy_artifact_root": "E:\\Cliper\\acfv-mvp-product\\var\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "resolved_path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "exists": true,
+      "changed": true,
+      "dry_run": false
+    }
+  ],
+  "repeat_changed": 0,
+  "integrity_check": "ok",
+  "foreign_key_violations": 0,
+  "orphan_moments": 0,
+  "restart_resolutions": [
+    {
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "exists": true
+    },
+    {
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "exists": true
+    },
+    {
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "exists": true
+    },
+    {
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "exists": true
+    },
+    {
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "exists": true
+    },
+    {
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "resolved": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "exists": true
+    }
+  ],
+  "restart": "PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "M22",
+  "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+  "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+  "moment_id": "fb071a42-77b9-4561-b2ed-3a6fbafd45bb",
+  "start_ms": 15390160,
+  "end_ms": 15401520,
+  "timestamp": "04:16:30.160–04:16:41.520",
+  "duration_ms": 11360,
+  "length_bucket": "short",
+  "summary": "Oh Wait, how can I find the puzzle? Like where where's the solution",
+  "moment_transcript": "Oh Wait, how can I find the puzzle? Like where where's the solution",
+  "context_30s": {
+    "before": "Hmm, they don't talk about like the drink in here It was like the code for the door that we already open this cannot be open because we need like some shit first",
+    "inside": "Oh Wait, how can I find the puzzle? Like where where's the solution",
+    "after": "It is in the same room, okay I"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 13320,
+    "pause_after_ms": 14200,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 15370960,
+      "end_ms": 15376840,
+      "text": "It was like the code for the door that we already open this cannot be open because we need like some shit first"
+    },
+    "next_segment": {
+      "start_ms": 15415720,
+      "end_ms": 15417720,
+      "text": "It is in the same room, okay"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

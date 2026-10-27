@@ -1,0 +1,32 @@
+schema_version: "1.0"
+tasks:
+  - task: Modify Moment Finalization
+    capability: moment_lifecycle
+    spec: specs/capabilities/moment_lifecycle.md
+    skill: .agents/skills/product-layer-change/SKILL.md
+    source: src/acfv/moments/finalize.py
+    tests: [tests/unit/test_moment_finalization.py]
+  - task: Modify Twitch Recording
+    capability: twitch_capture
+    spec: specs/capabilities/twitch_capture.md
+    skill: .agents/skills/product-layer-change/SKILL.md
+    source: src/acfv/library/capture.py
+    tests: [tests/unit/test_library_capture.py]
+  - task: Modify Retrieval Ranking
+    capability: retrieval
+    spec: specs/capabilities/retrieval.md
+    skill: .agents/skills/product-layer-change/SKILL.md
+    source: src/acfv/retrieval/service.py
+    tests: [tests/integration/test_hybrid_retrieval.py]
+  - task: Modify Clip Boundary
+    capability: clip_review
+    spec: specs/capabilities/clip_review.md
+    skill: .agents/skills/product-layer-change/SKILL.md
+    source: src/acfv/clips/service.py
+    tests: [tests/unit/test_clip_service.py, tests/integration/test_query_to_clip_render.py]
+  - task: Modify Feedback Persistence
+    capability: feedback
+    spec: specs/capabilities/feedback.md
+    skill: .agents/skills/product-layer-change/SKILL.md
+    source: src/acfv/feedback/service.py
+    tests: [tests/unit/test_feedback_service.py]

@@ -1,0 +1,14 @@
+{
+  "mode": "SHADOW_ONLY",
+  "status": "BLOCKED_NO_TRUSTED_CREATOR_CONTEXT",
+  "eligible": 0,
+  "same": 0,
+  "changed": 0,
+  "conflict": 0,
+  "fallback": 1000,
+  "high_risk_changed": 0,
+  "generic_authoritative": true,
+  "official_transcript_mutations": 0,
+  "human_ground_truth": "NOT_EVALUATED",
+  "recommendations": {"saruei": "KEEP_SHADOW", "anny": "KEEP_SHADOW"}
+}

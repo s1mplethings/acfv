@@ -1,0 +1,43 @@
+{
+  "schema_version": "1",
+  "change_id": "creator-adaptive-understanding-2026-10-13",
+  "commit": "5698b1e8d79e3fad15425f014a95ee12dd34f289",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli pipe --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli creator-profile --help",
+    "python -m acfv.cli review-lab --help",
+    "python -m pytest -q",
+    "python scripts/contract_checks.py",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {"check": "round_1_compileall", "status": "PASS"},
+    {"check": "round_1_cli_smoke", "status": "PASS", "count": 5},
+    {"check": "round_1_pytest", "status": "PASS", "passed": 543, "skipped": 0},
+    {"check": "round_1_contract_checks", "status": "PASS"},
+    {"check": "round_1_verify_ps1", "status": "PASS", "passed": 543},
+    {"check": "round_2_compileall", "status": "PASS"},
+    {"check": "round_2_cli_smoke", "status": "PASS", "count": 5},
+    {"check": "round_2_pytest", "status": "PASS", "passed": 543, "skipped": 0},
+    {"check": "round_2_contract_checks", "status": "PASS"},
+    {"check": "round_2_verify_ps1", "status": "PASS", "passed": 543},
+    {"check": "real_voice_profile_build", "status": "PASS", "creators": 2, "segments": 40},
+    {"check": "human_review_v2_native_validation", "status": "PASS", "samples": 786, "identity_items": 100, "adaptive_asr_items": 0},
+    {"check": "real_avatar_model_inference", "status": "NOT_EVALUATED", "reason": "No existing avatar model path or inference entry point was present in the repository, environment, or audited local project locations."},
+    {"check": "human_asr_ground_truth_wer", "status": "NOT_EVALUATED", "reason": "The preserved review database contains no human-corrected ASR transcripts."}
+  ],
+  "passed": true,
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.12.3"
+  },
+  "limitations": [
+    "The avatar provider adapter and its custom-model contract are validated, but no real avatar model was discoverable, so avatar inference is not production-ready.",
+    "Resemblyzer voice holdout false-reject rates remain too high for production identity gating; results are shadow-only.",
+    "No human-corrected ASR truth was available, so creator-adaptive WER improvement and regression could not be measured.",
+    "Collaboration recordings lack human speaker attribution, overlap, and music labels; cross-speaker attribution remains pending."
+  ]
+}

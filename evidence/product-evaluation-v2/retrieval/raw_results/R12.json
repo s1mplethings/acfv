@@ -1,0 +1,588 @@
+{
+  "case_id": "R12",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "Where's the praise-the-sun bit where the armor makes her look suddenly thicc?",
+  "ground_truth": {
+    "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+    "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+    "moment_id": "877e635c-552d-40d8-bab8-cd8fa4756eff",
+    "start_ms": 13902000,
+    "end_ms": 13953000,
+    "timestamp": "03:51:42.000–03:52:33.000",
+    "transcript_excerpt": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my... Okay What else can I drop? Is Sato here? Am I fucking blind? Oh, or is it a different Sato? What? Try bone? Bone shine? Bone?",
+    "old_moment_id": "0239a68c-cd09-4a0c-975e-7f3ba72b43ca",
+    "acceptable_child_ids": [
+      "877e635c-552d-40d8-bab8-cd8fa4756eff",
+      "e5603ada-88f2-4066-8c53-bfbf6b7aad28"
+    ]
+  },
+  "target_rank": 4,
+  "latency_ms": 3572.048,
+  "target_diagnostics": {
+    "dense_rank": 1,
+    "dense_score": 0.8671201467514038,
+    "fts_rank": 1,
+    "fusion_score": 0.03278688524590164,
+    "reranker_score": -8.095402717590332,
+    "final_rank": 4,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "2a39e8ad-1fe8-4948-af12-309af1c7b18d",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9047000,
+      "end_ms": 9122000,
+      "score": -5.935873508453369,
+      "summary": "Brief, brief, brief moment of silence That girl woke up and chose violence And the thing in your praise is la, la, la Screaming your name out, la, la, la This is why we're immortal now Cause once you play God, once you play God They're…",
+      "transcript_excerpt": "Brief, brief, brief moment of silence That girl woke up and chose violence And the thing in your praise is la, la, la Screaming your name out, la, la, la This is why we're immortal now Cause once you play God, once you play God They're gonna crumble one by one Then we gonna ride right into the sun Like it's the day my kingdom come Baby, we're God, God, God, God, God, God Yeah, we're God, God, God, God, God, God, God I'm on my knees, praying for glory, anyone read this underdog story, I can't los",
+      "debug": {
+        "fts_rank": 15,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -5.935873508453369,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "d3e5b748-79a0-4711-8e40-9a110f2bf4a4",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8962300,
+      "end_ms": 8965300,
+      "score": -6.669829368591309,
+      "summary": "一人の贈り物のサブシーロ、本当に愛してるよ、ハート",
+      "transcript_excerpt": "一人の贈り物のサブシーロ、本当に愛してるよ、ハート",
+      "debug": {
+        "fts_rank": 14,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -6.669829368591309,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "8fd11a5a-8daa-43bc-b7db-64227bd2ce08",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8992300,
+      "end_ms": 9047000,
+      "score": -7.499471664428711,
+      "summary": "私は本当に愛してるよ Just open, and the saint in your praise is la, la, la Screaming your name out, la, la, la One more step, you're immortal now Cause once you play God, once you play God They're gonna crumble one by one Then we gonna ride right…",
+      "transcript_excerpt": "私は本当に愛してるよ Just open, and the saint in your praise is la, la, la Screaming your name out, la, la, la One more step, you're immortal now Cause once you play God, once you play God They're gonna crumble one by one Then we gonna ride right into the sun Like it's the day my kingdom come Baby, we're God, God, God, God, God, God Yeah, we're God, God, God, God, God, God Welcome to the big show, next on the ladder Is it your name in the rafters?",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -7.499471664428711,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "877e635c-552d-40d8-bab8-cd8fa4756eff",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13902000,
+      "end_ms": 13933000,
+      "score": -8.095402717590332,
+      "summary": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now?",
+      "transcript_excerpt": "So cute Armor of the Sun Dripping What the fuck? Praise the sun Why am I so fat now? I have tits now Wait, what was my... What was my... Is this my...",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.8671201467514038,
+        "fts_rank": 1,
+        "fusion_score": 0.03278688524590164,
+        "reranker_score": -8.095402717590332,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "ebef9d3f-29d4-4c2e-8a64-2c8ec0d02a06",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 12873000,
+      "end_ms": 12905000,
+      "score": -8.218703269958496,
+      "summary": "Okay. It's all good, right?",
+      "transcript_excerpt": "Okay. It's all good, right? Okay. Now you come here! Yeah. Oh, this doesn't look sus at all. If only I had a friendship. There's a lot of loot here. PepeLaugh? I don't like when you guys do that.",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.8517488241195679,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -8.218703269958496,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "67c05110-a7c1-41f3-8a6c-e7b0c6c45583",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14408000,
+      "end_ms": 14427000,
+      "score": -8.609129905700684,
+      "summary": "A month ago! Oh wait, so I forgot that the finishing of our conversation is from actually Lucy?",
+      "transcript_excerpt": "A month ago! Oh wait, so I forgot that the finishing of our conversation is from actually Lucy? Oh, it's what she actually left!",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -8.609129905700684,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "496aff58-64d1-4122-b511-34a8fed5c245",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 14967000,
+      "end_ms": 14979000,
+      "score": -8.80729866027832,
+      "summary": "I don't have brakes!",
+      "transcript_excerpt": "I don't have brakes!",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -8.80729866027832,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "a706d355-ed4e-4adc-8004-9b5a452ff265",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10080000,
+      "end_ms": 10096000,
+      "score": -8.916559219360352,
+      "summary": "I'm not going to bother with those tiny shits. Wait, what?",
+      "transcript_excerpt": "I'm not going to bother with those tiny shits. Wait, what? I couldn't see this one! Okay, so there's a place I can open. It's here.",
+      "debug": {
+        "dense_rank": 26,
+        "dense_score": 0.848146915435791,
+        "fts_rank": 11,
+        "fusion_score": 0.02571241401899771,
+        "reranker_score": -8.916559219360352,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "e5603ada-88f2-4066-8c53-bfbf6b7aad28",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13933000,
+      "end_ms": 13953000,
+      "score": -9.130038261413574,
+      "summary": "Okay What else can I drop? Is Sato here?",
+      "transcript_excerpt": "Okay What else can I drop? Is Sato here? Am I fucking blind? Oh, or is it a different Sato? What? Try bone? Bone shine? Bone?",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -9.130038261413574,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "c3b9cc38-2111-4013-8b5b-1b7151254c19",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 4809520,
+      "end_ms": 4831800,
+      "score": -9.228363990783691,
+      "summary": "Oh, I do get this kind of vibe, yes. Oh, it's like when you do like a visual dating game and you date the guy who is like extremely dark and mysterious and when he shows like a bit of affection, you're blushing.",
+      "transcript_excerpt": "Oh, I do get this kind of vibe, yes. Oh, it's like when you do like a visual dating game and you date the guy who is like extremely dark and mysterious and when he shows like a bit of affection, you're blushing. And you're like, oh my god, I wasn't expecting that, it's really good.",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -9.228363990783691,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "00a258e7-c2f7-4eb4-9468-460272f27947",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 17562000,
+      "end_ms": 17579000,
+      "score": -9.252867698669434,
+      "summary": "So many fucking subs Are you kidding me? Praise the sun Dude, I don't know why I just started playing this boss This was like, what?",
+      "transcript_excerpt": "So many fucking subs Are you kidding me? Praise the sun Dude, I don't know why I just started playing this boss This was like, what? How many tries did I do this time?",
+      "debug": {
+        "fts_rank": 9,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -9.252867698669434,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "24ddac1e-aefb-42e6-aae5-7aa380896557",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30790080,
+      "end_ms": 30815200,
+      "score": -9.262406349182129,
+      "summary": "You don't know about the toodle but you do it's the channel in my discord No, I don't want turtle safari. Wait.",
+      "transcript_excerpt": "You don't know about the toodle but you do it's the channel in my discord No, I don't want turtle safari. Wait. Oh, there it is. What is that? It just they made it And you bro, that's your server, you know that well you could delete that I don't think I could you know",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -9.262406349182129,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "7b298dfa-de22-403f-b6c9-73e41549e70f",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29066000,
+      "end_ms": 29084000,
+      "score": -9.282732009887695,
+      "summary": "It brings tears to my eyes. Truly, that's...",
+      "transcript_excerpt": "It brings tears to my eyes. Truly, that's... It's truly beautiful. Oh my god, there's so many of them! Look at all these first-time armors! I'm awestruck. Oh my god, oh my... Look how many! Holy shit.",
+      "debug": {
+        "fts_rank": 5,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -9.282732009887695,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "bfcd60b4-805e-4dc5-8bf6-cc775655f576",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 20659500,
+      "end_ms": 20693500,
+      "score": -9.628210067749023,
+      "summary": "Let's go! Baby gets beat Man, I really like how this turned out Fuck Maybe I need to move this side a little bit as well I don't know, we'll see I'm just so scared to start mine-arting this and end up hating this art I'm so scared now…",
+      "transcript_excerpt": "Let's go! Baby gets beat Man, I really like how this turned out Fuck Maybe I need to move this side a little bit as well I don't know, we'll see I'm just so scared to start mine-arting this and end up hating this art I'm so scared now, that's what always happens Mine-art is such a tough stage to go through It makes your art look so ugly Until you start like...",
+      "debug": {
+        "fts_rank": 18,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -9.628210067749023,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "43b2ce8b-486e-4dfb-bba1-992cf2ac952e",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 9556000,
+      "end_ms": 9575000,
+      "score": -9.637824058532715,
+      "summary": "Coming... HQ?",
+      "transcript_excerpt": "Coming... HQ? Oh my god! My hip is... I have the same issue with my hippocene! Pose!",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.8544453382492065,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -9.637824058532715,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "52e54d5c-bb11-4c00-83a4-2e0f268d09a9",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11677960,
+      "end_ms": 11696680,
+      "score": -9.718170166015625,
+      "summary": "I don't know why I really cannot, like, you know, fucking hide in the toilets. But let me see if I can go downstairs first.",
+      "transcript_excerpt": "I don't know why I really cannot, like, you know, fucking hide in the toilets. But let me see if I can go downstairs first. I can! Oh, don't feel the safe. Fuck it. OK, basically, we see, like, a spoiler alert. If you don't want to be spoiled by this game, do not watch what's happening right now.",
+      "debug": {
+        "dense_rank": 17,
+        "dense_score": 0.8500101566314697,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -9.718170166015625,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "70d305a8-1c11-4447-8588-fa2f308c90dc",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 17585000,
+      "end_ms": 17591000,
+      "score": -9.787611961364746,
+      "summary": "Thank you Thank you Pasta again for the 100 100",
+      "transcript_excerpt": "Thank you Thank you Pasta again for the 100 100",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -9.787611961364746,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "03e01874-6b87-4638-94ba-52359d592b9b",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 6540000,
+      "end_ms": 6542000,
+      "score": -9.86054801940918,
+      "summary": "Are you kidding me?",
+      "transcript_excerpt": "Are you kidding me?",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8489466905593872,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -9.86054801940918,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "a39e4f17-d113-40ac-ac52-000f29181b40",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 1016920,
+      "end_ms": 1044540,
+      "score": -9.873867988586426,
+      "summary": "Everything? It's a season 3?",
+      "transcript_excerpt": "Everything? It's a season 3? I guess. I don't know, like when you look at season 3, like Kai Iwatari, he lost like all of his like fucking muscle for some reason. So yeah, anyway. Yeah, he like, he was so big and then he became like skinny and I'm like, what the fuck? What have you done to my boy? He was good with the muscles on.",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -9.873867988586426,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "715ea77c-7045-4355-986a-c16f4b1386c5",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 4016560,
+      "end_ms": 4039200,
+      "score": -9.90093994140625,
+      "summary": "it looks like you're getting stitches bitches oh my god i forgot that we have a stroking emote bam bam bam bam bam Mae'n cael ei trochi? Beth mae'n cael ei trochi?",
+      "transcript_excerpt": "it looks like you're getting stitches bitches oh my god i forgot that we have a stroking emote bam bam bam bam bam Mae'n cael ei trochi? Beth mae'n cael ei trochi?",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8512300848960876,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -9.90093994140625,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "28f5b685-6e61-4906-b791-2388c5c9ad99",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 6665000,
+      "end_ms": 6685000,
+      "score": -10.05031967163086,
+      "summary": "What is she doing? Are you maid dancing?",
+      "transcript_excerpt": "What is she doing? Are you maid dancing? Oh my god. Holy shit. Oh my god. Jesus Christ. Holy... Okay. Dude, you're gonna get me banned, bitch.",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8485707640647888,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -10.05031967163086,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "c52ed50c-06ae-4a35-bf5a-e3cb55b4807e",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 20639000,
+      "end_ms": 20656000,
+      "score": -10.057744026184082,
+      "summary": "Do not Meet your heroes Checkmark? Who's the checkmark?",
+      "transcript_excerpt": "Do not Meet your heroes Checkmark? Who's the checkmark? Wait, it's... It's Skye! Are you bullying her?",
+      "debug": {
+        "fts_rank": 21,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -10.057744026184082,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "b91284c2-db45-468e-ae51-2e4779a14d70",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14472000,
+      "end_ms": 14519000,
+      "score": -10.062708854675293,
+      "summary": "Oh man... Right in the face!",
+      "transcript_excerpt": "Oh man... Right in the face! I hope we can have a sub in 2077 too! I don't want to see the mods. I don't care about the mods. I want anything that is canon! Okay. I think I'm going to stop the stream from here. It's already 1am for me. So if I stay, you know, stream longer, I'm going to go to bed like, you know, much more later. So I'd rather like, you know, stop now. So I don't know what game or what activities we're going to do tomorrow, but I will keep you updated, okay? So just be patient. I",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.8546230792999268,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -10.062708854675293,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "b22ede05-993d-4057-9818-b8688a181b2c",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1383000,
+      "end_ms": 1406000,
+      "score": -10.113533973693848,
+      "summary": "It makes everything look so cute. What the fuck, TC?",
+      "transcript_excerpt": "It makes everything look so cute. What the fuck, TC? Thank you! No! No. No la la la. No la la la. No! I love this one.",
+      "debug": {
+        "fts_rank": 24,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -10.113533973693848,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "2970f655-f319-4181-bcaa-375b37011184",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13873000,
+      "end_ms": 13889000,
+      "score": -10.180170059204102,
+      "summary": "Firebomb? I don't think I have one What if I drop that?",
+      "transcript_excerpt": "Firebomb? I don't think I have one What if I drop that? Oh no Wait, what do I do? What's wrong? Sigbrell",
+      "debug": {
+        "fts_rank": 2,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -10.180170059204102,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "b614999e-201a-42d2-a284-493bb633d62c",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29040000,
+      "end_ms": 29066000,
+      "score": -10.237262725830078,
+      "summary": "The first-time armor? Oh my god, there's still more first-time armors!",
+      "transcript_excerpt": "The first-time armor? Oh my god, there's still more first-time armors! Do you see that? Isn't that beautiful, Lido? It is beautiful. That's a life moment. There aren't many sights on this, on God's green earth that are better than the first-time armor.",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -10.237262725830078,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "952486e4-1fbb-4a5d-a171-70fd539363c3",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 5172000,
+      "end_ms": 5192000,
+      "score": -10.273796081542969,
+      "summary": "Wow, you thought I was touching my boob? Cuz I'm a...",
+      "transcript_excerpt": "Wow, you thought I was touching my boob? Cuz I'm a... Cuz I'm a whore on Twitch? LOL We'd never do that What the fuck, it was all orange There's an orange hidden What do you mean yes? Stop! Stop!",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8481687307357788,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -10.273796081542969,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "17d38de1-33c3-4b36-a2ec-091408884f0b",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 4207000,
+      "end_ms": 4226000,
+      "score": -10.28627872467041,
+      "summary": "Wait! Guys!",
+      "transcript_excerpt": "Wait! Guys! What are you looking at? Huh? What are you looking at?",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8496362566947937,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -10.28627872467041,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "77e25673-3aee-43af-afd4-4dd52ec4130e",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3952000,
+      "end_ms": 3967000,
+      "score": -10.29615306854248,
+      "summary": "Basically there's a layer mode Did I move this by accident? What the fuck Thank you, stranger of paradise.",
+      "transcript_excerpt": "Basically there's a layer mode Did I move this by accident? What the fuck Thank you, stranger of paradise. Subscribing. New subber.",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8515646457672119,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -10.29615306854248,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "160dfbc5-389f-48be-93c7-2e70d55e757e",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2249000,
+      "end_ms": 2269000,
+      "score": -10.3101224899292,
+      "summary": "What? To use it for a med max?",
+      "transcript_excerpt": "What? To use it for a med max? Oh... Was it like, at the start or some shit? Aram? What the... What was... What is that? What is that?",
+      "debug": {
+        "dense_rank": 6,
+        "dense_score": 0.8558817505836487,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -10.3101224899292,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

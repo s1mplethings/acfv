@@ -1,0 +1,45 @@
+{
+  "case_id": "M01",
+  "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+  "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+  "moment_id": "1f6fe719-93c8-4e6d-91b5-f8ee8047987b",
+  "start_ms": 11024480,
+  "end_ms": 11044000,
+  "timestamp": "03:03:44.480–03:04:04.000",
+  "duration_ms": 19520,
+  "length_bucket": "short",
+  "summary": "It was announced last year, but Nothing for the release yet I hope it's going to be good. I'm a bit scared because we know how it is with Konami Let me look again at the teaser of Silent Hill 2.",
+  "moment_transcript": "It was announced last year, but Nothing for the release yet I hope it's going to be good. I'm a bit scared because we know how it is with Konami Let me look again at the teaser of Silent Hill 2.",
+  "context_30s": {
+    "before": "Sign into to remake trailer and what about Metal Gear Solid 3? 3 Metal Gear Solid 3 Release remake release date It says 2024 No dates",
+    "inside": "It was announced last year, but Nothing for the release yet I hope it's going to be good. I'm a bit scared because we know how it is with Konami Let me look again at the teaser of Silent Hill 2.",
+    "after": "Yeah, it's just a cutscene, I want to see the gameplay. I'm with Dream of the Doggy, she takes a lot of space."
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 9840,
+    "pause_after_ms": 11000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 11012640,
+      "end_ms": 11014640,
+      "text": "No dates"
+    },
+    "next_segment": {
+      "start_ms": 11055000,
+      "end_ms": 11057000,
+      "text": "Yeah, it's just a cutscene, I want to see the gameplay."
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "change_id": "core-product-2026-10-07",
+  "summary": "Implement segmented live capture processing, provisional live search, reconciliation, and product surfaces.",
+  "capabilities": ["live_processing", "twitch_capture", "video_processing", "creator_library", "moment_lifecycle", "retrieval", "grounded_conversation", "clip_rendering", "clip_review", "feedback"],
+  "files_changed": ["src/acfv/live/", "src/acfv/runtime/stream_monitor.py", "src/acfv/library/", "src/acfv/conversation/", "src/acfv/cli/live.py", "src/acfv/ui/tabs/", "specs/capabilities/", "tests/"],
+  "behavior_change": true,
+  "contract_change": true,
+  "migration_required": false,
+  "compatibility": "Existing CLI, GUI, pipeline, one-file imports, models, render path, and persisted schema remain compatible.",
+  "risks": ["Real Twitch live chat transport is not exercised.", "Real Twitch latency and 20-hour dogfooding gates remain unevaluated."]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-13",
+  "branch": "feature/real-avatar-model-integration",
+  "base_commit": "4f97d4fc05fd8f001331accf9345a2bfd4ab543c",
+  "implementation_commit": "5368adce048e7c971dbd906f3fd8aa58c45b48aa",
+  "real_model": {
+    "path": "G:/Cliper/acfv/model/best.pt",
+    "sha256": "48d0f7058739ec1f7baaa6ed58d9192130e9caa377be1dad238ba7288d4f1580",
+    "gpu_frames": 1000,
+    "saruei_regions": 10,
+    "anny_regions": 5,
+    "result": "PASS_PRESENCE_ONLY"
+  },
+  "targeted": {"command": "pytest avatar/creator-adaptive/CGKN tests", "passed": 38, "failed": 0},
+  "verification_round_1": {"pytest_passed": 560, "failed": 0, "skipped": 0, "xfailed": 0, "contract_checks": "PASS", "verify": "PASS"},
+  "verification_round_2": {"pytest_passed": 560, "failed": 0, "skipped": 0, "xfailed": 0, "contract_checks": "PASS", "verify": "PASS"},
+  "cli_smoke": ["root", "gui", "review-lab", "creator-profile", "clip", "live", "download"],
+  "compileall": "PASS",
+  "git_diff_check": "PASS",
+  "warnings": "third-party deprecation warnings only",
+  "formal_cgkn_evidence_status": "NOT_EVALUATED_ADVISORY_ONLY"
+}

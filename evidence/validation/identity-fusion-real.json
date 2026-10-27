@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_PRESENCE_MODEL_NOT_IDENTITY_MODEL",
+  "profile_version": "creator_profile_v2_not_created",
+  "raw_frames": {"saruei": 500, "anny": 500},
+  "visual_presence_detections": {"saruei": 492, "anny": 500},
+  "creator_identity_observations": 0,
+  "visual_spans": {"VISUAL_STRONG": 0, "VISUAL_PROBABLE": 0, "VISUAL_AMBIGUOUS": 0, "VISUAL_UNKNOWN": 12},
+  "fusion": {"CONFIRMED": 0, "PROBABLE": 0, "AMBIGUOUS": 0, "UNKNOWN": 12, "CONFLICT": 0},
+  "recording_prior_used_to_rewrite_prediction": false,
+  "reason": "The checkpoint has only class vtuber and no evidence-backed Saruei/anny label mapping."
+}

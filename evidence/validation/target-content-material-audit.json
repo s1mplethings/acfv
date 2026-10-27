@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "classification": "TARGET_PRODUCT_CONTENT",
+  "source": "existing Creator Library",
+  "creator": "Saruei",
+  "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "title": "[11-19-23] Saruei - PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! TTS ON 100 BITS",
+  "content_type": "vtuber_game_reaction",
+  "duration_sec": 14593.237,
+  "language": "en",
+  "authorization_status": "USER_EXISTING_LIBRARY",
+  "target_vod_url_status": "TARGET_VOD_REQUIRED",
+  "expected_event_types": ["horror scare", "failure", "denial", "emotional reaction", "chat-overlay context"],
+  "suitable_for_download_engineering": true,
+  "suitable_for_product_quality": true,
+  "reason": "The source contains a complete fear-to-scare-to-failure-to-reaction sequence and is already present in the user's Creator Library.",
+  "chat_artifact": "CHAT_UNAVAILABLE",
+  "visual_automation": "UNAVAILABLE; screenshots and source video were inspected without frame-by-frame VLM"
+}

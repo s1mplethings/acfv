@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-10-08T14:37:22+08:00",
+  "branch": "validation/real-library-build",
+  "base": "80826f1345a235236cc1e614fcf7714fba9d7286",
+  "implementation_head": "397135d297400e2e3ebe2cb8f7fd95620957082c",
+  "delivery": {
+    "committed_locally": true,
+    "pushed": false,
+    "merged": false
+  },
+  "scope": {
+    "files_changed_before_evidence_commit": 27,
+    "insertions": 2462,
+    "deletions": 61,
+    "categories": {
+      "orchestration_and_validation": [
+        "scripts/build_real_library.py",
+        "scripts/validate_real_library.py",
+        "scripts/check_mvp_readiness.py"
+      ],
+      "runtime_fixes": [
+        "src/acfv/library/service.py",
+        "src/acfv/modular/pipeline.py",
+        "src/acfv/modular/plugins/analyze_segments.py",
+        "src/acfv/modular/plugins/render_clips.py",
+        "src/acfv/modular/plugins/transcribe_audio.py",
+        "src/acfv/moments/finalize.py",
+        "src/acfv/retrieval/index.py",
+        "src/acfv/retrieval/service.py",
+        "src/acfv/steps/analyze_segments/impl.py",
+        "src/acfv/steps/transcribe_audio/impl.py"
+      ],
+      "tests": [
+        "tests/integration/test_hybrid_retrieval.py",
+        "tests/integration/test_phase3_runtime_state.py",
+        "tests/integration/test_render_clips_priority.py",
+        "tests/integration/test_validate_real_library.py",
+        "tests/unit/test_analyze_segments_logging.py",
+        "tests/unit/test_analyze_segments_pipeline_config.py",
+        "tests/unit/test_check_mvp_readiness.py",
+        "tests/unit/test_library_service.py",
+        "tests/unit/test_moment_finalization.py",
+        "tests/unit/test_real_library_builder.py",
+        "tests/unit/test_transcribe_audio_impl.py"
+      ],
+      "documentation_and_data": [
+        "docs/issue_memory/problem_registry.md",
+        "src/acfv/data/rag_database.json",
+        "evidence/validation/real-library-reuse-matrix.md"
+      ]
+    }
+  },
+  "implementation_commits": [
+    "fa7af0a", "bb081ae", "c7a50ad", "125d57d", "644ad32", "9df0f20",
+    "dde5362", "4e74142", "9996e7e", "760490f", "b9b1399", "872cc7c",
+    "55baa18", "5f0ca40", "9705533", "d49f6e5", "fb1644e", "fda20c8",
+    "5b0088a", "e9080a6", "14b2971", "72d2497", "da26a68", "19d2914",
+    "2fd7088", "fc1d2dc", "a31c783", "0f135bc", "397135d"
+  ],
+  "artifacts": [
+    "evidence/validation/real-library-build-2026-10-08.md",
+    "evidence/validation/real-library-build-receipt.json",
+    "evidence/validation/real-library-build-test-receipt.json",
+    "evidence/validation/real-library-mvp-readiness.json",
+    "evidence/validation/real-library-reuse-matrix.md",
+    "evidence/validation/final-human-retrieval-review.md",
+    "evidence/validation/final-human-moment-review.md",
+    "evidence/validation/final-human-clip-review.md",
+    "evidence/validation/final-gui-checklist.md",
+    "evidence/validation/human-review-results.json"
+  ],
+  "verification": {
+    "real_library_validator": "PASS",
+    "recordings_ready": 10,
+    "hours": 52.43064361111111,
+    "final_moments": 3999,
+    "index_rows": 3999,
+    "clips_auto_pass": 10,
+    "pytest_runs": [
+      "262 passed, 11 warnings in 81.26s",
+      "262 passed, 11 warnings in 61.73s"
+    ],
+    "verify_runs": [
+      "PASS; 262 passed, 11 warnings in 64.22s; contract_checks PASS",
+      "PASS; 262 passed, 11 warnings in 62.97s; contract_checks PASS"
+    ],
+    "product_layer_coverage_percent": 87
+  },
+  "readiness": {
+    "MVP_CODE_READY": true,
+    "REAL_LIBRARY_READY": true,
+    "PRODUCT_VALIDATION_PENDING": true,
+    "MVP_READY_FOR_REAL_USAGE": false
+  },
+  "external_optional_enrichment": {
+    "twitch_chat": "BLOCKED_EXTERNAL"
+  }
+}

@@ -1,0 +1,29 @@
+entrypoints:
+  gui: "python -m acfv.cli gui"
+  pipeline: "python -m acfv.cli.pipeline clip"
+  launcher: "python launcher.py"
+  verify: "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+
+invariants:
+  - schema_version is required in all generated JSON outputs
+  - segments sorted: score_desc_start_ms_asc_end_ms_asc
+  - outputs must live under runs/ or var/ (gitignored)
+  - logging must mirror to stdout and file
+
+error_signatures:
+  - ffmpeg not found
+  - no segments to clip
+  - numpy/sklearn ABI mismatch
+  - soundfile backend failed
+
+hotspots:
+  - src/acfv/steps/render_clips/impl.py
+  - src/acfv/steps/analyze_segments/impl.py
+  - src/acfv/modular/plugins/render_clips.py
+  - src/acfv/runtime/stream_monitor.py
+
+tags:
+  - render
+  - analyze
+  - logging
+  - ingestion

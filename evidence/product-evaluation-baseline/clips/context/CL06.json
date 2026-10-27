@@ -1,0 +1,56 @@
+{
+  "case_id": "CL06",
+  "file": "media/clip_06.mp4",
+  "source_recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+  "source_recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "4149b3ca-d74c-4ac3-86c1-2854562b051c",
+  "query": "",
+  "group": "RANDOM_FINAL",
+  "selection_reason": "fixed-seed random FINAL Moment",
+  "moment_start_ms": 7224500,
+  "moment_end_ms": 7241700,
+  "proposed_start_ms": 7216500,
+  "proposed_end_ms": 7253700,
+  "final_start_ms": 7216500,
+  "final_end_ms": 7253700,
+  "proposal_duration_ms": 37200,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "Don't believe anything you see or hear. It's propaganda, propaganda, propaganda. And even newer Chads. Do you want to increase the timer? Fine! I'll do it myself!",
+    "inside": "Fuck, it's making me do the fucking... ...hard winking again! I- I- I- I- Oh, someone did it. That- That- That- Fuck! That's why I twitch! It's making me... ...do everything from scratch. And I can't.",
+    "after": "Annie, evil should have a completely different attitude than you are. Like, evil is not just a copycat. Okay, tell that to Veedo. Veedo literally told me to not over-complicate things. Why are you like this?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 1160,
+    "pause_after_ms": 1200,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 7213340,
+      "end_ms": 7215340,
+      "text": "Fine! I'll do it myself!"
+    },
+    "next_segment": {
+      "start_ms": 7254900,
+      "end_ms": 7258700,
+      "text": "Annie, evil should have a completely different attitude than you are."
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 37.233,
+      "size_bytes": 6440312,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

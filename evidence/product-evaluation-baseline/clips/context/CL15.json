@@ -1,0 +1,56 @@
+{
+  "case_id": "CL15",
+  "file": "media/clip_15.mp4",
+  "source_recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+  "source_recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+  "moment_id": "2eccb033-5c94-481d-a709-7337c4c14684",
+  "query": "",
+  "group": "DIFFICULT_BOUNDARY",
+  "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+  "moment_start_ms": 6641920,
+  "moment_end_ms": 6646400,
+  "proposed_start_ms": 6633920,
+  "proposed_end_ms": 6658400,
+  "final_start_ms": 6633920,
+  "final_end_ms": 6658400,
+  "proposal_duration_ms": 24480,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "i'm in normal difficulty and i think it's already hard let's go i don't guess we're about to fight huh",
+    "inside": "okay fuck okay fuck oh it's hard",
+    "after": "i mean the big one is good but like it's too slow weapon without the index so we need to go this way are halo's primary firing mechanisms"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 5920,
+    "pause_after_ms": 7840,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 6626000,
+      "end_ms": 6628000,
+      "text": "i don't guess we're about to fight huh"
+    },
+    "next_segment": {
+      "start_ms": 6666240,
+      "end_ms": 6668240,
+      "text": "i mean the big one is good but like it's too slow"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 24.517,
+      "size_bytes": 8350475,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}
