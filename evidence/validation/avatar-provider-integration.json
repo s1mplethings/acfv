@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "provider_contract": "AvatarIdentityProvider.identify_frame(frame,timestamp_ms)",
+  "adapter": "acfv.providers.avatar_identity.ExistingAvatarModelAdapter",
+  "environment_variable": "ACFV_AVATAR_MODEL_PATH",
+  "searched_locations": ["repository", "F:/ACFV-Derived", "C:/Users/sunom/Documents", "C:/Users/sunom/Downloads"],
+  "configured_path": "",
+  "detected_format": "NOT_CONFIGURED",
+  "real_model_inference": "NOT_EVALUATED",
+  "custom_python_contract_test": "PASS",
+  "format_detection": ["custom Python", "ONNX", "PyTorch/TorchScript", "TensorRT", "custom directory"],
+  "failure_isolation": "PASS",
+  "domain_write_guard": "PASS",
+  "result": "ADAPTER_READY_MODEL_NOT_CONFIGURED",
+  "limitations": ["No existing avatar model path or inference entry point was discoverable; model weights were not copied or replaced."]
+}

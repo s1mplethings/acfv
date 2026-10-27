@@ -1,0 +1,67 @@
+{
+  "dataset": {
+    "dataset_version": "fixed37-human-review-v1",
+    "fixed37_hash": "acff329191e7b0aa7b4419a43b71beaa91a709a4c6ceb34f58fc034f34a3cda3",
+    "random_seed": 37012026,
+    "source_root": "F:\\ACFV-Derived\\acfv-large-scale-generation-quality",
+    "media_available": 427,
+    "sample_count": 686,
+    "counts": {
+      "asr": 200,
+      "translation": 120,
+      "boundary": 37,
+      "watchability": 74,
+      "subtitle": 218,
+      "publishability": 37
+    },
+    "missing_sources": []
+  },
+  "counts": {
+    "asr": 200,
+    "translation": 120,
+    "boundary": 37,
+    "watchability": 74,
+    "subtitle": 218,
+    "publishability": 37
+  },
+  "annotations_before_restart": {
+    "asr": 0,
+    "translation": 0,
+    "boundary": 0,
+    "watchability": 0,
+    "subtitle": 0,
+    "publishability": 0
+  },
+  "annotations_after_restart": {
+    "asr": 0,
+    "translation": 0,
+    "boundary": 0,
+    "watchability": 0,
+    "subtitle": 0,
+    "publishability": 0
+  },
+  "integrity": "ok",
+  "duplicate_sample_ids": 0,
+  "formal_pair_count": 194,
+  "unique_formal_pair_count": 194,
+  "consistency_controls": 71,
+  "timings": {
+    "startup_ms": 115.29590003192425,
+    "analysis_refresh_ms": 2.521399990655482,
+    "switch_asr_ms": 143.91969999996945,
+    "media_load_asr_ms": 0.7581000099889934,
+    "switch_translation_ms": 50.94619997544214,
+    "switch_boundary_ms": 71.24159997329116,
+    "media_load_boundary_ms": 3.325899946503341,
+    "switch_watchability_ms": 54.35220000799745,
+    "switch_subtitle_ms": 76.04169996920973,
+    "media_load_subtitle_ms": 0.7660000119358301,
+    "switch_publishability_ms": 45.817800040822476
+  },
+  "scale": 1.5,
+  "resolution": [
+    1280,
+    720
+  ],
+  "production_db_touched": false
+}

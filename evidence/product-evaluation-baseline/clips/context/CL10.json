@@ -1,0 +1,58 @@
+{
+  "case_id": "CL10",
+  "file": "media/clip_10.mp4",
+  "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+  "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "41c4758e-27fa-49e8-8c52-2612d16b4a5c",
+  "query": "",
+  "group": "RANDOM_FINAL",
+  "selection_reason": "fixed-seed random FINAL Moment",
+  "moment_start_ms": 6476000,
+  "moment_end_ms": 6524580,
+  "proposed_start_ms": 6468000,
+  "proposed_end_ms": 6536580,
+  "final_start_ms": 6468000,
+  "final_end_ms": 6536580,
+  "proposal_duration_ms": 68580,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "Little dirty beach, I love to funk Young savage, why you trapping so hard? Why these niggas capping so hard? I grew up in the streets without no bar, I'm praying to my Glock in my car I sit back and read like cat in a hat, 21 service, the cat with the mat",
+    "inside": "I sit back and read like cat in a hat, 21 service, the cat with the mat 21 service, not boys on the hood, but I pull up on you, shoot your ass in the back You still a little hurting, niggas some racks, I can feel the cheese, bitch I got racks I'm a real street nigga, bitch, I am not one of these niggas banging on wax Pussy nigga So much dope that it broke the scale They say crack kills, n***a, my crack's ill My brother in the kitchen and he rapping in the bed Louis V in my bag and Louis V on my bed I'm hungry Thank you, my smarts",
+    "after": "If you try to step to me, it'll be the last time I got dirt on my name, six feet in the ground I got people in my past trying to bring me down Say I'm losing my mind, I don't wanna be found Grew up in the shadow but I know they watching me now One night, on the go, I'm all been sitting Pull up on ya, I got drama right behind me Bike a-pooling, so I try to single-handedly I'ma show you how to crush a pony"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 1000,
+    "pause_after_ms": 4000,
+    "start_splits_transcript_segment": true,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 6461000,
+      "end_ms": 6467000,
+      "text": "I grew up in the streets without no bar, I'm praying to my Glock in my car"
+    },
+    "next_segment": {
+      "start_ms": 6540580,
+      "end_ms": 6554580,
+      "text": "If you try to step to me, it'll be the last time I got dirt on my name, six feet in the ground I got people in my past trying to bring me down Say I'm losing my mind, I don't wanna be found Grew up in the shadow but I know they watching me now"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 68.6,
+      "size_bytes": 7967281,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "starts_mid_transcript_segment"
+  ]
+}

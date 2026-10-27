@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "change_id": "creator-adaptive-phase2-2026-10-13",
+  "commit": "5d391a1ba0886f107738534182077c46286759ac",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli review-lab --help",
+    "python -m acfv.cli creator-profile --help",
+    "python -m acfv.cli download --help",
+    "python -m acfv.cli live --help",
+    "python -m acfv.cli clip --help",
+    "python -m pytest -q",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "python -m pytest -q tests/unit/test_creator_adaptive_understanding.py tests/unit/test_human_review_gui.py tests/unit/test_product_gui_contract.py tests/unit/test_product_gui_redesign.py tests/integration/test_creator_adaptive_architecture_guards.py tests/integration/test_cgnk_repository_guards.py"
+  ],
+  "results": [
+    {"check": "targeted_creator_adaptive_and_gui", "status": "PASS", "passed": 64},
+    {"check": "round_1_compileall", "status": "PASS"},
+    {"check": "round_1_cli_smoke", "status": "PASS", "count": 7},
+    {"check": "round_1_pytest", "status": "PASS", "passed": 557, "skipped": 0, "xfailed": 0, "warnings": 9, "duration_seconds": 111.49},
+    {"check": "round_1_contract_checks", "status": "PASS"},
+    {"check": "round_1_verify_ps1", "status": "PASS", "passed": 557, "duration_seconds": 102.10},
+    {"check": "round_2_compileall", "status": "PASS"},
+    {"check": "round_2_cli_smoke", "status": "PASS", "count": 7},
+    {"check": "round_2_pytest", "status": "PASS", "passed": 557, "skipped": 0, "xfailed": 0, "warnings": 9, "duration_seconds": 93.46},
+    {"check": "round_2_contract_checks", "status": "PASS"},
+    {"check": "round_2_verify_ps1", "status": "PASS", "passed": 557, "duration_seconds": 97.49},
+    {"check": "clean_checkout", "status": "PASS", "path": "F:\\ACFV-Derived\\acfv-avatar-phase2-clean-5d391a1", "commit": "5d391a1ba0886f107738534182077c46286759ac", "focused_passed": 57, "product_gui_import": "PASS", "review_lab_import": "PASS", "provider_generic_fallback": "PASS", "working_tree": "clean"},
+    {"check": "human_review_v2_native_validation", "status": "PASS", "samples": 686, "missing_media": 0, "database_integrity": "ok", "production_db_touched": false},
+    {"check": "database_migration", "status": "PASS", "schema_version": 2, "backup_created": true, "foreign_key_violations": 0, "restart_safe": true},
+    {"check": "real_avatar_model_inference", "status": "NOT_EVALUATED", "reason": "Five candidate weights were runtime-probed and rejected as Japanese character or generic COCO models; no explicitly configured Avatar model remained."},
+    {"check": "human_asr_ground_truth_wer", "status": "NOT_EVALUATED", "reason": "No human-corrected transcript ground truth is available."},
+    {"check": "cgnk", "status": "PASS", "workflow_state": "ready", "brief_valid": true, "formal_evidence_status": "NOT_EVALUATED"}
+  ],
+  "passed": true,
+  "environment": {"os": "Windows 11", "python": "3.12.3", "test_environment": "D:\\anaconda\\envs\\clip"},
+  "limitations": [
+    "Real Avatar inference, visual identity bootstrap, v2 voice profiles, trusted speech, lexicon, acoustic exemplars, and Adaptive ASR samples remain blocked by the missing proven Avatar model path.",
+    "Generic ASR remains authoritative and Creator-specific production adaptation remains disabled.",
+    "WER and CER cannot be reported without independent human transcripts.",
+    "CGKN workflow readiness is not formal delivery evidence; formal_evidence_status remains NOT_EVALUATED."
+  ]
+}

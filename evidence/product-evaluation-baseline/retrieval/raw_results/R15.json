@@ -1,0 +1,154 @@
+{
+  "case_id": "R15",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "Crow Country 里她搞混 RB/RT controls 是哪一段？",
+  "ground_truth": {
+    "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+    "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+    "moment_id": "b6237bc5-1be2-44e2-9345-7d9c576ac5cf",
+    "start_ms": 2990160,
+    "end_ms": 3049280,
+    "timestamp": "00:49:50.160–00:50:49.280",
+    "transcript_excerpt": "Oh Okay, I guess you can get poison You can read it the camera with our so the camera will quickly face forward when you press RB to use a weapon oh oh that's cool i think it's actually faster than like you know the other things they told me okay you can hold b and rt to turn rt right t wait what is rt again i mean does this this is rt no this is rb for like so this is rt oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "9fec8720-396b-4808-989b-ad7d36dbaf19",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 1578040,
+      "end_ms": 1637820,
+      "timestamp": "00:26:18.040–00:27:17.820",
+      "score": 0.01639344262295082,
+      "summary": "You would be the cutest Hunchback ever, oh no. Now you just like, you know, put me like Hunchback loli version, you know, in my head. And it's not cute. It's like, it's small, but like it's not cute. What am I going to do? The booboo? Yeah, but I don't know if it's like related to the bone, because they didn't say anything related to the bone, buddy. They said, like, you know, it was a fat tissue. That's what I said. Anyway, let's like, you know, skip this talk and just wait until I go and see you then I'll be a dentist on Monday and I still need to take a fucking appointment with like a dermatologist. I just, you know, with all the doctor I would be seeing this early in the year, I won't need to see any for like the, until the end of 2024. Hmm.",
+      "transcript_excerpt": "You would be the cutest Hunchback ever, oh no. Now you just like, you know, put me like Hunchback loli version, you know, in my head. And it's not cute. It's like, it's small, but like it's not cute. What am I going to do? The booboo? Yeah, but I don't know if it's like related to the bone, because they didn't say anything related to the bone, buddy. They said, like, you know, it was a fat tissue. That's what I said. Anyway, let's like, you know, skip this talk and just wait until I go and see y"
+    },
+    {
+      "rank": 2,
+      "moment_id": "d01d1d8a-8cd7-4d92-9ad7-4aa8f676d65b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 20601440,
+      "end_ms": 20616240,
+      "timestamp": "05:43:21.440–05:43:36.240",
+      "score": 0.016129032258064516,
+      "summary": "I have to take two gummies a day. Wow, I got scared.",
+      "transcript_excerpt": "I have to take two gummies a day. Wow, I got scared."
+    },
+    {
+      "rank": 3,
+      "moment_id": "c577937f-37a2-452e-ae4c-36a788e88e5b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 10136000,
+      "end_ms": 10196000,
+      "timestamp": "02:48:56.000–02:49:56.000",
+      "score": 0.015873015873015872,
+      "summary": "I'm okay. Okay, alright, fellas. We are deep in the sea. Give me ammo or meds. Okay, well, that's good too. What is this? Storage stuff only. And that is broken. Fuck you. I can't find of any way to open it. Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat. No, it's a submarine. Shotgun? I still haven't found a shotgun just yet. That's mine. Grenade. Here we go. Okay, what about this here? Wow, grenades! What is this? An arm decoration?",
+      "transcript_excerpt": "I'm okay. Okay, alright, fellas. We are deep in the sea. Give me ammo or meds. Okay, well, that's good too. What is this? Storage stuff only. And that is broken. Fuck you. I can't find of any way to open it. Yeah, keep the traps here. I'm looking first for any loot before wanting to go in a boat. No, it's a submarine. Shotgun? I still haven't found a shotgun just yet. That's mine. Grenade. Here we go. Okay, what about this here? Wow, grenades! What is this? An arm decoration?"
+    },
+    {
+      "rank": 4,
+      "moment_id": "ae0f5c16-308f-4770-9333-29ccbaa8169b",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 11010000,
+      "end_ms": 11013000,
+      "timestamp": "03:03:30.000–03:03:33.000",
+      "score": 0.015625,
+      "summary": "So many!",
+      "transcript_excerpt": "So many!"
+    },
+    {
+      "rank": 5,
+      "moment_id": "4f34c381-8a94-4102-8d7f-83bef976d1d0",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 31134000,
+      "end_ms": 31193000,
+      "timestamp": "08:38:54.000–08:39:53.000",
+      "score": 0.015384615384615385,
+      "summary": "10 viewers turned into drones and fight to death for 100 million dollars. I sent a drone with improvised explosive devices to 10 of my viewers' houses. Oh my god. Wicked. I'd watch that to be fair. Oh my god, that's so funny. Is that the real Veedle? No, it's fake. It's AI. Veedle, can you prove that you're an AI? I just want to let you know that my hamster, Mr. Squiggles, has escaped again. He is very fast, so it's hard for him to find cover. Oh, there you go. I wish I were a bottle so that people would try to open me.",
+      "transcript_excerpt": "10 viewers turned into drones and fight to death for 100 million dollars. I sent a drone with improvised explosive devices to 10 of my viewers' houses. Oh my god. Wicked. I'd watch that to be fair. Oh my god, that's so funny. Is that the real Veedle? No, it's fake. It's AI. Veedle, can you prove that you're an AI? I just want to let you know that my hamster, Mr. Squiggles, has escaped again. He is very fast, so it's hard for him to find cover. Oh, there you go. I wish I were a bottle so that peo"
+    },
+    {
+      "rank": 6,
+      "moment_id": "6cc57522-ad30-4056-bdb5-d89af2b1704a",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 6890000,
+      "end_ms": 6912000,
+      "timestamp": "01:54:50.000–01:55:12.000",
+      "score": 0.015151515151515152,
+      "summary": "So! Fuck, fuck, fuck, fuck! I'm going to cheat weapon and do this instead.",
+      "transcript_excerpt": "So! Fuck, fuck, fuck, fuck! I'm going to cheat weapon and do this instead."
+    },
+    {
+      "rank": 7,
+      "moment_id": "199979fd-d7ab-4b2f-80ec-1cdc122345ae",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2120720,
+      "end_ms": 2162400,
+      "timestamp": "00:35:20.720–00:36:02.400",
+      "score": 0.014925373134328358,
+      "summary": "Woah, woah, woah, woah, woah! Wait, I need to scratch my eyes, I have shit in the corner. The merchant of sand came and they put them into my eyes. Okay, okay, okay, okay, come, come, come, come, come, come, come. Oh shit! It's a bit loud, no? Is it too loud for you? Should I use a clover like you know, the volume of the game?",
+      "transcript_excerpt": "Woah, woah, woah, woah, woah! Wait, I need to scratch my eyes, I have shit in the corner. The merchant of sand came and they put them into my eyes. Okay, okay, okay, okay, come, come, come, come, come, come, come. Oh shit! It's a bit loud, no? Is it too loud for you? Should I use a clover like you know, the volume of the game?"
+    },
+    {
+      "rank": 8,
+      "moment_id": "b34575c4-116f-467d-a30d-21e14f37a763",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 24197000,
+      "end_ms": 24219000,
+      "timestamp": "06:43:17.000–06:43:39.000",
+      "score": 0.014705882352941176,
+      "summary": "Daddy bug, thanks for the BDS, hello? Micron07, thank you very much for the sub as well. Okay, so by where do I enter? I'm all the way here. That would be maybe like... Here in the middle, right? Go on my right.",
+      "transcript_excerpt": "Daddy bug, thanks for the BDS, hello? Micron07, thank you very much for the sub as well. Okay, so by where do I enter? I'm all the way here. That would be maybe like... Here in the middle, right? Go on my right."
+    },
+    {
+      "rank": 9,
+      "moment_id": "5d19b88f-0978-4350-8bab-5ce1cca5b832",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 6109040,
+      "end_ms": 6110240,
+      "timestamp": "01:41:49.040–01:41:50.240",
+      "score": 0.014492753623188406,
+      "summary": "Skyfall.",
+      "transcript_excerpt": "Skyfall."
+    },
+    {
+      "rank": 10,
+      "moment_id": "0f3bfbea-eccc-4140-9053-7a4a6c578330",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13294000,
+      "end_ms": 13295000,
+      "timestamp": "03:41:34.000–03:41:35.000",
+      "score": 0.014285714285714285,
+      "summary": "I knew it!",
+      "transcript_excerpt": "I knew it!"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

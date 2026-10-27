@@ -1,0 +1,20 @@
+{
+  "winner": "mobilenetv3-linear",
+  "ranking": [
+    "mobilenetv3-linear",
+    "convnext-tiny-linear",
+    "dinov2",
+    "openclip",
+    "resnet18-linear"
+  ],
+  "policy": [
+    "strong_precision",
+    "unknown_rejection",
+    "strong_coverage",
+    "holdout_top1",
+    "fps"
+  ],
+  "production_status": "SHADOW_VISUAL_IDENTITY",
+  "human_precision_status": "NOT_EVALUATED",
+  "training_data_note": "New Twitch Saruei TRAIN plus historical anny TRAIN only; current Twitch exposes one anny archive, which remains new-VOD HOLDOUT. All validation/holdout metrics are from NEW_TWITCH_VALIDATION_V1."
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "change_id": "creator-adaptive-understanding-2026-10-13",
+  "summary": "Add provider-isolated Creator identity, robust voice profiles, provenance-gated trusted speech/lexicon memory, adaptive ASR shadow decisions, CLI, Product GUI status, and Human Review v2.",
+  "capabilities": ["avatar_identity_provider", "creator_identity", "voice_profile", "trusted_speech_memory", "creator_lexicon", "creator_adaptive_asr", "human_review"],
+  "files_changed": ["src/acfv/creator_adaptive/", "src/acfv/creator_identity/", "src/acfv/voice_profile/", "src/acfv/trusted_speech_memory/", "src/acfv/creator_adaptive_asr/", "src/acfv/providers/avatar_identity.py", "src/acfv/providers/speaker_embedding.py", "src/acfv/human_review/", "src/acfv/product_gui/", "specs/capabilities/", "specs/contracts/"],
+  "behavior_change": true,
+  "contract_change": true,
+  "migration_required": true,
+  "compatibility": "Forward-only idempotent tables; feature disabled by default; generic ASR and existing pipeline remain authoritative.",
+  "risks": ["Existing avatar model not configured", "Voice thresholds are not production calibrated", "No human ASR ground truth", "Collab speaker labels unavailable"]
+}

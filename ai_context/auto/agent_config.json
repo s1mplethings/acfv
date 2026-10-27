@@ -1,0 +1,7 @@
+{
+  "agent_name": "your-agent",
+  "ai_cmd": "echo 'TODO: configure ai_context/auto/agent_config.json ai_cmd to run your agent' && exit 2",
+  "workdir": ".",
+  "task_prompt_file": "ai_context/auto/generated_task_prompt.md",
+  "max_runtime_minutes": 25
+}

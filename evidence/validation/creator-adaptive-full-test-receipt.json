@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "change_id": "creator-visual-identity-full-v3",
+  "commit": "0f11fc56805c39f8e920ca326253ff183dfa87d7",
+  "commands": [
+    "python -m compileall -q src + root/gui/review-lab/creator-profile/creator-visual/clip/live/download help + python -m pytest -q (round 1)",
+    "powershell -File scripts/verify.ps1 (round 1)",
+    "python -m compileall -q src + root/gui/review-lab/creator-profile/creator-visual/clip/live/download help + python -m pytest -q (round 2)",
+    "powershell -File scripts/verify.ps1 (round 2)",
+    "CGKN doctor and status",
+    "clean detached worktree manifest/provider load and focused regression"
+  ],
+  "results": [
+    {"name": "pytest1", "status": "PASS", "passed": 572, "skipped": 0, "xfailed": 0, "duration_seconds": 153.15},
+    {"name": "verify1", "status": "PASS", "pytest_passed": 572, "contracts": "PASS", "duration_seconds": 109.93},
+    {"name": "pytest2", "status": "PASS", "passed": 572, "skipped": 0, "xfailed": 0, "duration_seconds": 106.71},
+    {"name": "verify2", "status": "PASS", "pytest_passed": 572, "contracts": "PASS", "duration_seconds": 108.26},
+    {"name": "cli_help", "status": "PASS", "commands": 8},
+    {"name": "cgkn_doctor", "status": "PASS", "formal_evidence_status": "NOT_EVALUATED"},
+    {"name": "clean_checkout", "status": "PASS", "commit": "c262b8b7a1f4ec7818b8579c42c0d500a105c4fa", "manifest_samples": 1445, "provider_loaded": true, "focused_tests_passed": 55}
+  ],
+  "passed": true,
+  "environment": {
+    "os": "Windows",
+    "python": "3.11.11"
+  },
+  "limitations": [
+    "Visual labels are recording-prior proxy truth until the v4 frame review pack is completed.",
+    "Adaptive WER and production enablement remain NOT_EVALUATED without independent human transcripts.",
+    "CGKN workflow state is valid and doctor-ready, but CGKN formal evidence remains NOT_EVALUATED."
+  ]
+}

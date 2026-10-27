@@ -1,0 +1,56 @@
+{
+  "case_id": "CL04",
+  "file": "media/clip_04.mp4",
+  "source_recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+  "source_recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+  "moment_id": "5ce6868d-d490-4d33-88ba-5c678b1779bd",
+  "query": "哪段像在做天气播报，先说外面很晴朗后来又说多云？",
+  "group": "STRONG_RETRIEVAL",
+  "selection_reason": "rank-1 production result for fixed retrieval case R04; expected target rank NOT FOUND",
+  "moment_start_ms": 2130000,
+  "moment_end_ms": 2162000,
+  "proposed_start_ms": 2122000,
+  "proposed_end_ms": 2174000,
+  "final_start_ms": 2122000,
+  "final_end_ms": 2174000,
+  "proposal_duration_ms": 52000,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid",
+    "inside": "Let's see, where the heck? Where did she? AHHHHH! No! Not the fucking tits! Um, she was drawing! She drew us together Look at her! So cute! Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+    "after": "What, me? Huh? I-there is a lacrosse underwear on me! Huh?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 0,
+    "pause_after_ms": 13000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 2120000,
+      "end_ms": 2122000,
+      "text": "I'm stupid"
+    },
+    "next_segment": {
+      "start_ms": 2187000,
+      "end_ms": 2188000,
+      "text": "What, me?"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 52.033,
+      "size_bytes": 9271795,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

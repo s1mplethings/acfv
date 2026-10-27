@@ -1,0 +1,6 @@
+download:
+  save_dir: "data/downloads"
+  concurrency: 2
+process:
+  work_dir: "outputs"
+  log_dir: "logs"

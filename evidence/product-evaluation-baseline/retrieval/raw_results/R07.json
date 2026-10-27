@@ -1,0 +1,154 @@
+{
+  "case_id": "R07",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "What was she changing before asking where the music went?",
+  "ground_truth": {
+    "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "1b6634a3-c60c-40b5-b4a1-16804dc89740",
+    "start_ms": 13778140,
+    "end_ms": 13816000,
+    "timestamp": "03:49:38.140–03:50:16.000",
+    "transcript_excerpt": "And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "9ed54500-3181-4e6a-890e-0de518e9a321",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 7758760,
+      "end_ms": 7811760,
+      "timestamp": "02:09:18.760–02:10:11.760",
+      "score": 0.01639344262295082,
+      "summary": "Oh, there's an handle. I broke it. Wait, so I got it right? Maybe they need to look each other's but that would be dumb. I'm gonna try anyway. Normally that wouldn't make sense. Yeah. Okay, wait, I want to make sure. Let's tell. That would be east for E, right? This one is Solomon whistled by. So it's either south or it is either west. no this one norbert east lee i would say maybe you need to like look east it could be north as well",
+      "transcript_excerpt": "Oh, there's an handle. I broke it. Wait, so I got it right? Maybe they need to look each other's but that would be dumb. I'm gonna try anyway. Normally that wouldn't make sense. Yeah. Okay, wait, I want to make sure. Let's tell. That would be east for E, right? This one is Solomon whistled by. So it's either south or it is either west. no this one norbert east lee i would say maybe you need to like look east it could be north as well"
+    },
+    {
+      "rank": 2,
+      "moment_id": "3b634183-26ec-450d-96b5-673a6234757f",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 22947280,
+      "end_ms": 22993360,
+      "timestamp": "06:22:27.280–06:23:13.360",
+      "score": 0.016129032258064516,
+      "summary": "If you think about it, it's crazy, but it's not a fact that they stay, but still, but still. It might be late, but thank you gifted, it's never too late, it's never too late, it's not too late, it's never too late, even if I said it'll be alright, you wanna end your life.",
+      "transcript_excerpt": "If you think about it, it's crazy, but it's not a fact that they stay, but still, but still. It might be late, but thank you gifted, it's never too late, it's never too late, it's not too late, it's never too late, even if I said it'll be alright, you wanna end your life."
+    },
+    {
+      "rank": 3,
+      "moment_id": "2c889819-74d7-496c-9580-1d411dcc0007",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 1100000,
+      "end_ms": 1159000,
+      "timestamp": "00:18:20.000–00:19:19.000",
+      "score": 0.015873015873015872,
+      "summary": "Oh wait! I do a little bit! Wait! Wait, hold on! Do I have... Oh! Hold up! I didn't know about this! Oh! Where am I bugging? F**k! There's one more part... Of this outfit... That I didn't show you yet... I'm kinda scared! I'm kinda scared... I'm kinda scared... Oh shit! I dropped my controller! Oh no! That is so unfortunate! F**k! I bumped into something!",
+      "transcript_excerpt": "Oh wait! I do a little bit! Wait! Wait, hold on! Do I have... Oh! Hold up! I didn't know about this! Oh! Where am I bugging? F**k! There's one more part... Of this outfit... That I didn't show you yet... I'm kinda scared! I'm kinda scared... I'm kinda scared... Oh shit! I dropped my controller! Oh no! That is so unfortunate! F**k! I bumped into something!"
+    },
+    {
+      "rank": 4,
+      "moment_id": "0b52cc74-6f3b-4f73-919c-cf5d9dd303ea",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8123000,
+      "end_ms": 8145000,
+      "timestamp": "02:15:23.000–02:15:45.000",
+      "score": 0.015625,
+      "summary": "What? My child disappeared Are you seeing this? Thank you so much for the applause What the fuck? What happened? What? Ah I missed her talk",
+      "transcript_excerpt": "What? My child disappeared Are you seeing this? Thank you so much for the applause What the fuck? What happened? What? Ah I missed her talk"
+    },
+    {
+      "rank": 5,
+      "moment_id": "6a9459b8-cd80-4d67-8d4d-0ee25ee096c6",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 10507920,
+      "end_ms": 10558100,
+      "timestamp": "02:55:07.920–02:55:58.100",
+      "score": 0.015384615384615385,
+      "summary": "Okay, I can go I can go Okay, I'm going to finish again within the game Oh wait, I just came back here it's fucking useless than what I did. I just need to like, you know fucking survive the long ass, right? Wow, they move so quickly the ufp is so bad it's like I'm lagging, you know I don't know. I think it's kind of bad Okay, nobody's actually like, you know creepy on me right now they could have you know I've been like, you know, so focused in the games. They could have just crept on me Okay, let's see how many duck dicks we have tonight",
+      "transcript_excerpt": "Okay, I can go I can go Okay, I'm going to finish again within the game Oh wait, I just came back here it's fucking useless than what I did. I just need to like, you know fucking survive the long ass, right? Wow, they move so quickly the ufp is so bad it's like I'm lagging, you know I don't know. I think it's kind of bad Okay, nobody's actually like, you know creepy on me right now they could have you know I've been like, you know, so focused in the games. They could have just crept on me Okay, "
+    },
+    {
+      "rank": 6,
+      "moment_id": "b45f8875-62d8-49c4-9d90-34c5fdc08c35",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 1690800,
+      "end_ms": 1749040,
+      "timestamp": "00:28:10.800–00:29:09.040",
+      "score": 0.015151515151515152,
+      "summary": "the figure before i even got it myself um i mean yeah for the weekend i need to distress you know it's like you want to eat something sweet you want to do something with your body you want to like you know raise your brain and watch something completely stupid do you know which i like you know watch smiling friends episode 3 i really didn't like episode 2 because i don't know why they decided to bring like politics and still like you know try to joke about uh what's his name again uh donald trump because who cares about donald trump like i want to watch i want to watch a cartoon and i do not want to like see or hear anything related to politics so episode 2 of smiling friends was like one of the worst and most boring episode i've ever watched because even the last episode of season one was better where they are at the airport don't don't please don't bring like politic talks or leftist or rightist or whatever the fuck is",
+      "transcript_excerpt": "the figure before i even got it myself um i mean yeah for the weekend i need to distress you know it's like you want to eat something sweet you want to do something with your body you want to like you know raise your brain and watch something completely stupid do you know which i like you know watch smiling friends episode 3 i really didn't like episode 2 because i don't know why they decided to bring like politics and still like you know try to joke about uh what's his name again uh donald trum"
+    },
+    {
+      "rank": 7,
+      "moment_id": "5ca53c06-95eb-4e81-ac34-d99a98f0b7e4",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 16199000,
+      "end_ms": 16245000,
+      "timestamp": "04:29:59.000–04:30:45.000",
+      "score": 0.014925373134328358,
+      "summary": "Any I Love You leaves. Hey, I don't give a damn about an iota I'm on the look of a stranger's show I'm on a quest, I wish I'd known that I could heal myself We'll be there, even though this ain't it When it's over, don't scare myself You're the only one who can see it I promise that All you want me with is you You're the only one who can see it What is this? What is that?",
+      "transcript_excerpt": "Any I Love You leaves. Hey, I don't give a damn about an iota I'm on the look of a stranger's show I'm on a quest, I wish I'd known that I could heal myself We'll be there, even though this ain't it When it's over, don't scare myself You're the only one who can see it I promise that All you want me with is you You're the only one who can see it What is this? What is that?"
+    },
+    {
+      "rank": 8,
+      "moment_id": "423d4a75-6800-4cc4-94a6-a5212cc5b1c8",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1130000,
+      "end_ms": 1188000,
+      "timestamp": "00:18:50.000–00:19:48.000",
+      "score": 0.014705882352941176,
+      "summary": "Or am I missing something? Wait, hello? It's just Mimikyu, right? Looks so fucking dumb PokeM A Poke... Pokemon? I thought it... Okay, I'm fucking bugging, bro I thought you meant that there's a different Pokemon Oh no, what did it load from start? Fuck Aramahan Fucking lover Lover So you're Annie, huh? Yeah Name every armor Wait, Kaizu is not one of them Shadowy Fox, Sektive Tiger Man, Blamey",
+      "transcript_excerpt": "Or am I missing something? Wait, hello? It's just Mimikyu, right? Looks so fucking dumb PokeM A Poke... Pokemon? I thought it... Okay, I'm fucking bugging, bro I thought you meant that there's a different Pokemon Oh no, what did it load from start? Fuck Aramahan Fucking lover Lover So you're Annie, huh? Yeah Name every armor Wait, Kaizu is not one of them Shadowy Fox, Sektive Tiger Man, Blamey"
+    },
+    {
+      "rank": 9,
+      "moment_id": "87cad853-eaca-422c-b02e-9200e29965f4",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8696000,
+      "end_ms": 8754000,
+      "timestamp": "02:24:56.000–02:25:54.000",
+      "score": 0.014492753623188406,
+      "summary": "​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ 私にわたって 風に吹かれたら 何処へだって飛べるよ 願う優しさ ハッピー・ハイ・ステで 触れ合う手と手 離さないようにギュッとね 生きれば美しさ伝わるよ はしみ出したストーリー",
+      "transcript_excerpt": "​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ 私にわたって 風に吹かれたら 何処へだって飛べるよ 願う優しさ ハッピー・ハイ・ステで 触れ合う手と手 離さないようにギュッとね 生きれば美しさ伝わるよ はしみ出したストーリー"
+    },
+    {
+      "rank": 10,
+      "moment_id": "be15d904-03cc-47d6-8c76-4c8fccb0653b",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 12092840,
+      "end_ms": 12143000,
+      "timestamp": "03:21:32.840–03:22:23.000",
+      "score": 0.014285714285714285,
+      "summary": "Maybe there's a jump scare here, no? People got stuck when playing the game and they're just putting this part again. Wait is that it? No, it's coming. It is... that's it? That's... No? Yeah sorry I know it was really loud.",
+      "transcript_excerpt": "Maybe there's a jump scare here, no? People got stuck when playing the game and they're just putting this part again. Wait is that it? No, it's coming. It is... that's it? That's... No? Yeah sorry I know it was really loud."
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

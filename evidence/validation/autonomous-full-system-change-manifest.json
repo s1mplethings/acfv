@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "change_id": "autonomous-full-system-2026-10-07",
+  "summary": "Fix live transcript boundary overlap, harden Creator/Source validation, remove owned UTC deprecations, and add stress regressions.",
+  "capabilities": ["creator_library", "twitch_capture", "live_processing", "video_processing", "moment_lifecycle", "retrieval", "grounded_conversation", "clip_rendering", "clip_review", "feedback"],
+  "files_changed": [
+    "docs/issue_memory/problem_registry.md",
+    "src/acfv/library/service.py",
+    "src/acfv/live/service.py",
+    "src/acfv/modular/progress.py",
+    "src/acfv/runtime/stream_monitor.py",
+    "tests/integration/test_library_concurrency.py",
+    "tests/unit/test_grounded_conversation.py",
+    "tests/unit/test_library_service.py",
+    "tests/unit/test_live_processing.py",
+    "tests/unit/test_progress_timestamp.py",
+    "evidence/validation/autonomous-full-system-2026-10-07.md",
+    "evidence/validation/autonomous-full-system-change-manifest.json",
+    "evidence/validation/autonomous-full-system-test-receipt.json"
+  ],
+  "behavior_change": true,
+  "contract_change": false,
+  "migration_required": false,
+  "compatibility": "Database schema, public CLI, and capability interfaces remain compatible. Transcript bounding removes only evidence outside a closed segment interval.",
+  "risks": [
+    "Previously generated transcript artifacts are not rewritten automatically.",
+    "REAL Twitch Chat remains blocked by credentials.",
+    "Human and native-GUI visual quality gates remain pending."
+  ]
+}

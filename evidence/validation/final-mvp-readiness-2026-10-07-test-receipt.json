@@ -1,0 +1,127 @@
+{
+  "schema_version": "1",
+  "change_id": "final-mvp-readiness-2026-10-07",
+  "commit": "d999cecbea6fff923b0db0ca96c2124dc0e265ec",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m acfv.cli live --help",
+    "python -m pytest -q",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov=acfv.live --cov-report=term:skip-covered",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {
+      "check": "real_twitch_capture",
+      "status": "PASS_REAL",
+      "seconds": 895.962,
+      "segments": 15
+    },
+    {
+      "check": "gpu_asr",
+      "status": "PASS_REAL",
+      "device": "RTX 4050 Laptop GPU",
+      "segments": 15,
+      "workers": 1
+    },
+    {
+      "check": "during_live_search",
+      "status": "PASS_REAL",
+      "queries": 5,
+      "correct": 5,
+      "ttfs_max_sec": 60.98
+    },
+    {
+      "check": "live_no_evidence",
+      "status": "PASS_REAL",
+      "queries": 2,
+      "unsupported_claims": 0
+    },
+    {
+      "check": "controlled_finalization",
+      "status": "PASS_REAL",
+      "recording_status": "COMPLETE"
+    },
+    {
+      "check": "restart_recovery",
+      "status": "PASS_REAL",
+      "segments_preserved": 15,
+      "final_moments": 22
+    },
+    {
+      "check": "finalization_idempotence",
+      "status": "PASS",
+      "runs": 3,
+      "stable_moments": 22
+    },
+    {
+      "check": "real_clip_render",
+      "status": "PASS_REAL",
+      "proposals": 20,
+      "clips": 10
+    },
+    {
+      "check": "dataset_import",
+      "status": "PASS_REAL_LOCAL",
+      "recordings": 10,
+      "hours": 52.431
+    },
+    {
+      "check": "gui_smoke",
+      "status": "PARTIAL_REAL",
+      "creator": "PASS",
+      "conversation_no_evidence": "PASS",
+      "review_surface": "PASS"
+    },
+    {
+      "check": "twitch_chat",
+      "status": "BLOCKED_BY_CREDENTIAL"
+    },
+    {
+      "check": "compileall",
+      "status": "PASS"
+    },
+    {
+      "check": "cli",
+      "status": "PASS",
+      "count": 4
+    },
+    {
+      "check": "pytest",
+      "status": "PASS",
+      "passed": 226,
+      "skipped": 0
+    },
+    {
+      "check": "coverage",
+      "status": "PASS",
+      "percent": 85
+    },
+    {
+      "check": "verify_ps1",
+      "status": "PASS"
+    },
+    {
+      "check": "contract_checks",
+      "status": "PASS"
+    },
+    {
+      "check": "human_gates",
+      "status": "NOT_EVALUATED",
+      "worksheets": 3
+    }
+  ],
+  "passed": false,
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.12.3",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU 6141 MiB"
+  },
+  "limitations": [
+    "Twitch chat REAL validation is blocked by credential availability.",
+    "Human retrieval, Moment, Clip, and full GUI dogfood gates remain pending.",
+    "Final verdict is MVP_NOT_READY until those gates are completed."
+  ]
+}

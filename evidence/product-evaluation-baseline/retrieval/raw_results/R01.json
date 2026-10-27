@@ -1,0 +1,154 @@
+{
+  "case_id": "R01",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "哪一段把某个恐怖游戏描述成会用人的思想和实体沟通？",
+  "ground_truth": {
+    "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+    "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+    "moment_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a",
+    "start_ms": 12309800,
+    "end_ms": 12339800,
+    "timestamp": "03:25:09.800–03:25:39.800",
+    "transcript_excerpt": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities."
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "88603a75-4d4e-4552-a067-da42f0f1d2b1",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 10043000,
+      "end_ms": 10098080,
+      "timestamp": "02:47:23.000–02:48:18.080",
+      "score": 0.01639344262295082,
+      "summary": "You didn't hear anything I didn't I don't I didn't Wait, no, what about chat? What about chat? What about chat? Stop Chat, you didn't hear it, right? You didn't hear it You didn't hear it You didn't hear it You didn't hear it You didn't hear it, right? Fuck You heard? Fuck I'm ending this stream My career is fucking ruined I'm changing the city I'm changing my name I'm fucking re- I'm graduating I'm fucking Oh my fucking god Holy shit This is my graduation stream, it was fun while it lasted Any seven I can't do any seven. Why why can I not do any seven?",
+      "transcript_excerpt": "You didn't hear anything I didn't I don't I didn't Wait, no, what about chat? What about chat? What about chat? Stop Chat, you didn't hear it, right? You didn't hear it You didn't hear it You didn't hear it You didn't hear it You didn't hear it, right? Fuck You heard? Fuck I'm ending this stream My career is fucking ruined I'm changing the city I'm changing my name I'm fucking re- I'm graduating I'm fucking Oh my fucking god Holy shit This is my graduation stream, it was fun while it lasted Any "
+    },
+    {
+      "rank": 2,
+      "moment_id": "55ebeef0-3711-4c97-9fbd-7925ffd62f77",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 14899000,
+      "end_ms": 14925000,
+      "timestamp": "04:08:19.000–04:08:45.000",
+      "score": 0.016129032258064516,
+      "summary": "Negative, negative! We have a wildcat destabilization of the ship's fusion core. The engines must have sustained more damage than we thought. Analyzing. We have six minutes before the fusion drives detonate. We need to evac now! Activating final countdown timer. When it reaches zero, the engines will detonate. The explosion will generate a temperature of almost 100 million degrees. Don't tell me here when it blows.",
+      "transcript_excerpt": "Negative, negative! We have a wildcat destabilization of the ship's fusion core. The engines must have sustained more damage than we thought. Analyzing. We have six minutes before the fusion drives detonate. We need to evac now! Activating final countdown timer. When it reaches zero, the engines will detonate. The explosion will generate a temperature of almost 100 million degrees. Don't tell me here when it blows."
+    },
+    {
+      "rank": 3,
+      "moment_id": "94b8fdbf-f953-4e65-852c-5ed43d2f59f2",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 13818000,
+      "end_ms": 13844000,
+      "timestamp": "03:50:18.000–03:50:44.000",
+      "score": 0.015873015873015872,
+      "summary": "Wait, I haven't been in there yet. There can be a knob with a switch under that floor panel. What the fuck was that shadow here? Ah, nothing in here, ok.",
+      "transcript_excerpt": "Wait, I haven't been in there yet. There can be a knob with a switch under that floor panel. What the fuck was that shadow here? Ah, nothing in here, ok."
+    },
+    {
+      "rank": 4,
+      "moment_id": "421a2f8d-eb6c-436c-99a0-1358280ca215",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 5986000,
+      "end_ms": 6009000,
+      "timestamp": "01:39:46.000–01:40:09.000",
+      "score": 0.015625,
+      "summary": "When the word reaches a higher mastery level for the first time, you'll be given a bonus New filters? Yo, we can play gacha? Classic I got a random filter I'm no dupes, you know? Thank you, my buds Am",
+      "transcript_excerpt": "When the word reaches a higher mastery level for the first time, you'll be given a bonus New filters? Yo, we can play gacha? Classic I got a random filter I'm no dupes, you know? Thank you, my buds Am"
+    },
+    {
+      "rank": 5,
+      "moment_id": "1f1e2a4e-2c4d-4920-8d1f-0c4afae6d1b1",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 7764000,
+      "end_ms": 7784000,
+      "timestamp": "02:09:24.000–02:09:44.000",
+      "score": 0.015384615384615385,
+      "summary": "Because I speak so often in English, when I speak in French people are like, oh you have an accent, you have an accent. And I'm like, no I don't. And they're like, are you from the south part of France? Are you from the north part of France? And I'm like, no it's just because I speak so often like English that I started to have an accent when speaking in French. What's that noise?",
+      "transcript_excerpt": "Because I speak so often in English, when I speak in French people are like, oh you have an accent, you have an accent. And I'm like, no I don't. And they're like, are you from the south part of France? Are you from the north part of France? And I'm like, no it's just because I speak so often like English that I started to have an accent when speaking in French. What's that noise?"
+    },
+    {
+      "rank": 6,
+      "moment_id": "2c758b19-d420-4838-a0f9-9209e8190728",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 6626600,
+      "end_ms": 6686120,
+      "timestamp": "01:50:26.600–01:51:26.120",
+      "score": 0.015151515151515152,
+      "summary": "Hope it's that with a condition cloudy get up Ouch, yeah, it's pretty clear to me It's clear yeah, I'd say them of hikers zero Oh Reported by What's my name again? And we wait, what is the temperature like isn't that a good? Temperature somewhere Oh 45 Wait, can you tell me like, you know how much it is from here Oh It's like five",
+      "transcript_excerpt": "Hope it's that with a condition cloudy get up Ouch, yeah, it's pretty clear to me It's clear yeah, I'd say them of hikers zero Oh Reported by What's my name again? And we wait, what is the temperature like isn't that a good? Temperature somewhere Oh 45 Wait, can you tell me like, you know how much it is from here Oh It's like five"
+    },
+    {
+      "rank": 7,
+      "moment_id": "5270921b-e03a-48e2-8c2e-10b1a636a293",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2323000,
+      "end_ms": 2380000,
+      "timestamp": "00:38:43.000–00:39:40.000",
+      "score": 0.014925373134328358,
+      "summary": "And as I do my arms actually, I realized in the inner side of my arm where, you know, you bend the arm, I had like those like fucking red marks and I was like, oh my god, like what the fuck is this? And I look on my other arm and I have the exact same one and I was wondering, what the fuck is this? Oh shit, I'm going to die. I'm going to die. I'm going to die. Stop shooting. And I realized that, oh my god, they're always here. That actually, so when I did my cosplay yesterday, basically like, you know, my cosplay come from China because it's only in China, as I said, actually it's cosplay. Like you don't have an actual shop in like, you know, not from China. All the clothes are from China. And even people will resell like, you know, clothes are from there. Oh my god, they are so annoying. They come from non-stop everywhere.",
+      "transcript_excerpt": "And as I do my arms actually, I realized in the inner side of my arm where, you know, you bend the arm, I had like those like fucking red marks and I was like, oh my god, like what the fuck is this? And I look on my other arm and I have the exact same one and I was wondering, what the fuck is this? Oh shit, I'm going to die. I'm going to die. I'm going to die. Stop shooting. And I realized that, oh my god, they're always here. That actually, so when I did my cosplay yesterday, basically like, yo"
+    },
+    {
+      "rank": 8,
+      "moment_id": "39253db1-456a-486b-8956-9a139779b3ac",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 11303840,
+      "end_ms": 11360480,
+      "timestamp": "03:08:23.840–03:09:20.480",
+      "score": 0.014705882352941176,
+      "summary": "I'm an am-type brat. I used to help run organized BDSM King classes events. Damn. I... Didn't know that. Jesus. Teach me. Teach me about BDSM. Sure, anytime. Okay, no, I don't know. I would probably... If actually, I would probably rather a guy who likes BDSM get me into it. I don't know. Something like that. Maybe. Because, I mean, I like girls. But I... I can't imagine, like, something, like... Too sexual happening with a girl. I didn't mean to teach you like that. I mean... Yeah, but like... Anyway... Um...",
+      "transcript_excerpt": "I'm an am-type brat. I used to help run organized BDSM King classes events. Damn. I... Didn't know that. Jesus. Teach me. Teach me about BDSM. Sure, anytime. Okay, no, I don't know. I would probably... If actually, I would probably rather a guy who likes BDSM get me into it. I don't know. Something like that. Maybe. Because, I mean, I like girls. But I... I can't imagine, like, something, like... Too sexual happening with a girl. I didn't mean to teach you like that. I mean... Yeah, but like... "
+    },
+    {
+      "rank": 9,
+      "moment_id": "fb252ffd-e4b6-478c-83d6-479cd91bc9ee",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1487000,
+      "end_ms": 1546000,
+      "timestamp": "00:24:47.000–00:25:46.000",
+      "score": 0.014492753623188406,
+      "summary": "L.O.L. The other three songs are not uploaded? I never finished a single song yet, and... There's some stuff that I worked with someone that I'm not in contact anymore with. So I have to do stuff from scratch and do it with Avelia. Avelia, please don't fucking leave me. I'm gonna fucking cry. Ah... Avelia is dying of COVID? No, don't die, I need you. Don't die, you're so sexy. Well... Avelia, don't cry.",
+      "transcript_excerpt": "L.O.L. The other three songs are not uploaded? I never finished a single song yet, and... There's some stuff that I worked with someone that I'm not in contact anymore with. So I have to do stuff from scratch and do it with Avelia. Avelia, please don't fucking leave me. I'm gonna fucking cry. Ah... Avelia is dying of COVID? No, don't die, I need you. Don't die, you're so sexy. Well... Avelia, don't cry."
+    },
+    {
+      "rank": 10,
+      "moment_id": "31af684c-000f-4d0c-ba8f-eb123adfee18",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7037000,
+      "end_ms": 7052000,
+      "timestamp": "01:57:17.000–01:57:32.000",
+      "score": 0.014285714285714285,
+      "summary": "I said lovingly, stop D-ing I'm saying it in a loving way It's like me calling you a dumbass Dumbass",
+      "transcript_excerpt": "I said lovingly, stop D-ing I'm saying it in a loving way It's like me calling you a dumbass Dumbass"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

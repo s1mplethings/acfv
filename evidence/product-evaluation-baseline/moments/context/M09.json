@@ -1,0 +1,45 @@
+{
+  "case_id": "M09",
+  "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+  "recording_title": "anny 的xp rating",
+  "moment_id": "0bbc97d1-f489-43f1-9023-fbb2b7c54398",
+  "start_ms": 11799000,
+  "end_ms": 11858000,
+  "timestamp": "03:16:39.000–03:17:38.000",
+  "duration_ms": 59000,
+  "length_bucket": "medium",
+  "summary": "As it says in garbage tiers... Well, there's no garbage tier There's what tier because I don't fucking know what I feel about it Like, I didn't know where to put these Like, Twin Tales was like so out of nowhere Like, why is there a ponytail in Twin Tales But like, no other hairstyles, you know? But also, I don't feel anything about these sexually or whatever I agree with most of the rest, but... What the fuck? Wait, man! Wait, what happened? Which one? Humiliation is an F? Okay, the way I think about it Is that I wouldn't want someone to humiliate me in a way that makes me fucking... Feel bad? Like, I like degradation, I guess Okay, I don't want to admit that But it is in my SSS-list tier But humiliation feels like something that would probably hurt me mentally",
+  "moment_transcript": "As it says in garbage tiers... Well, there's no garbage tier There's what tier because I don't fucking know what I feel about it Like, I didn't know where to put these Like, Twin Tales was like so out of nowhere Like, why is there a ponytail in Twin Tales But like, no other hairstyles, you know? But also, I don't feel anything about these sexually or whatever I agree with most of the rest, but... What the fuck? Wait, man! Wait, what happened? Which one? Humiliation is an F? Okay, the way I think about it Is that I wouldn't want someone to humiliate me in a way that makes me fucking... Feel bad? Like, I like degradation, I guess Okay, I don't want to admit that But it is in my SSS-list tier But humiliation feels like something that would probably hurt me mentally",
+  "context_30s": {
+    "before": "And then you just make tears Shouldn't be that hard What are you doing? I think you're the prime Annie, show a rosier list properly Oh, do you wanna see it? I... It's whatever It's whatever Ah, she wants to see the F-list Ah, this?",
+    "inside": "As it says in garbage tiers... Well, there's no garbage tier There's what tier because I don't fucking know what I feel about it Like, I didn't know where to put these Like, Twin Tales was like so out of nowhere Like, why is there a ponytail in Twin Tales But like, no other hairstyles, you know? But also, I don't feel anything about these sexually or whatever I agree with most of the rest, but... What the fuck? Wait, man! Wait, what happened? Which one? Humiliation is an F? Okay, the way I think about it Is that I wouldn't want someone to humiliate me in a way that makes me fucking... Feel bad? Like, I like degradation, I guess Okay, I don't want to admit that But it is in my SSS-list tier But humiliation feels like something that would probably hurt me mentally",
+    "after": "No, shut the fuck up, chat Humiliation is the embarrassment facet of degradation I don't know, the way I see it is just... I don't like it No Without context valid?"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 4000,
+    "pause_after_ms": 3000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 11794000,
+      "end_ms": 11795000,
+      "text": "Ah, this?"
+    },
+    "next_segment": {
+      "start_ms": 11861000,
+      "end_ms": 11863000,
+      "text": "No, shut the fuck up, chat"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

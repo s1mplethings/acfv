@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "launch_timestamp": "2026-10-10T15:58:33.6729514+08:00",
+  "launch_command": "D:\\anaconda\\python.exe -m acfv.cli gui --open-recording 121a99a3-affb-4e74-80de-c5fd13ed7c4b --open-review --event-plan E:\\Cliper\\acfv-mvp-product\\var\\bilingual-duration\\target-event-plan.json --output-root E:\\Cliper\\acfv-mvp-product\\outputs\\bilingual-duration-validation\\121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "python_executable": "D:\\anaconda\\python.exe",
+  "gui": {
+    "pid": 40600,
+    "window_title": "视频处理工具 - 模块化版本",
+    "window_handle": 110758258,
+    "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "review_page": true,
+    "selected_variant": "STANDARD",
+    "process_alive_at_handoff": true
+  },
+  "video": {
+    "pid": 38016,
+    "application": "vlc",
+    "path": "E:\\Cliper\\acfv-mvp-product\\outputs\\bilingual-duration-validation\\121a99a3-affb-4e74-80de-c5fd13ed7c4b\\standard\\revisions\\revision_001\\clip_bilingual.mp4",
+    "window_handle": 15665910,
+    "opened": true
+  },
+  "explorer": {
+    "pid": 13624,
+    "window_title": "revision_001 - 文件资源管理器",
+    "window_handle": 331166,
+    "opened": true
+  },
+  "persistent_review_state": {
+    "cue_edit_count": 1,
+    "render_revision": 1,
+    "decision": "ACCEPTED"
+  },
+  "observation_note": "Native Computer Use inventory was unavailable in this host session; visibility was established by non-zero Windows main-window handles, the non-fallback MainWindow title, deep-link integration tests, and persisted Review state."
+}

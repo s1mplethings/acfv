@@ -1,0 +1,128 @@
+{
+  "profile_version": "creator_profile_v4_new_twitch",
+  "voice": {
+    "same_frozen_spans": true,
+    "providers": {
+      "resemblyzer": {
+        "model_version": "resemblyzer-voice-encoder",
+        "train_spans": 55,
+        "validation": {
+          "positive_spans": 23,
+          "negative_spans": 31,
+          "threshold": 0.8720399397335533,
+          "far": 0.0,
+          "frr": 0.4782608695652174,
+          "support_precision": 1.0,
+          "accepted_positive": 12,
+          "accepted_negative": 0,
+          "positive_score_min": 0.7134408982299985,
+          "positive_score_median": 0.872965727954448,
+          "negative_score_max": 0.8719399397335533
+        },
+        "holdout": {
+          "positive_spans": 146,
+          "negative_spans": 217,
+          "threshold": 0.8720399397335533,
+          "far": 0.12442396313364056,
+          "frr": 0.5684931506849316,
+          "support_precision": 0.7,
+          "accepted_positive": 63,
+          "accepted_negative": 27,
+          "positive_score_min": 0.6627239809473069,
+          "positive_score_median": 0.8647356878291965,
+          "negative_score_max": 0.9113703992049452
+        }
+      },
+      "ecapa": {
+        "model_version": "speechbrain-ecapa:speechbrain/spkrec-ecapa-voxceleb",
+        "train_spans": 55,
+        "validation": {
+          "positive_spans": 23,
+          "negative_spans": 31,
+          "threshold": 0.285053620324066,
+          "far": 0.0,
+          "frr": 0.21739130434782605,
+          "support_precision": 1.0,
+          "accepted_positive": 18,
+          "accepted_negative": 0,
+          "positive_score_min": 0.06894945793690363,
+          "positive_score_median": 0.6476004493323206,
+          "negative_score_max": 0.284953620324066
+        },
+        "holdout": {
+          "positive_spans": 146,
+          "negative_spans": 217,
+          "threshold": 0.285053620324066,
+          "far": 0.04608294930875576,
+          "frr": 0.03424657534246578,
+          "support_precision": 0.9337748344370861,
+          "accepted_positive": 141,
+          "accepted_negative": 10,
+          "positive_score_min": 0.002237483724947101,
+          "positive_score_median": 0.64954812359853,
+          "negative_score_max": 0.40033467494048486
+        }
+      }
+    },
+    "anny": "INSUFFICIENT_CURRENT_PUBLIC_VODS: no new TRAIN VOD",
+    "winner": "ecapa",
+    "role": "SUPPORT_ONLY"
+  },
+  "trusted_speech": {
+    "creator_id": "saruei",
+    "profile_version": "creator_profile_v4_new_twitch",
+    "candidates": 55,
+    "pseudo_trusted": 0,
+    "human_confirmed": 0,
+    "rejected": 55,
+    "auto_high_confidence": 0,
+    "duration_ms": 0,
+    "recordings": 0
+  },
+  "lexicon": {
+    "creator_id": "saruei",
+    "profile_version": "creator_profile_v4_new_twitch",
+    "trusted_units": 0,
+    "candidates": 0,
+    "promoted": 0,
+    "human_confirmed_terms": 0,
+    "acoustic_exemplars": 0
+  },
+  "adaptive_shadow": {
+    "samples": 100,
+    "high_risk": 50,
+    "random": 50,
+    "actions": {
+      "UNCHANGED_UNCERTAIN": 100
+    },
+    "human_ground_truth": "PENDING",
+    "wer": "PENDING"
+  },
+  "unknown_safety": {
+    "attack_samples": 217,
+    "generic_fallback": 217,
+    "memory_leakage": 0
+  },
+  "anny": {
+    "profile": "INSUFFICIENT_DATA",
+    "adaptive": "GENERIC_FALLBACK",
+    "reason": "only one current public VOD; frozen HOLDOUT"
+  },
+  "production": "KEEP_SHADOW",
+  "voice_profile": {
+    "creator_id": "saruei",
+    "profile_version": "creator_profile_v4_new_twitch",
+    "segments": 55,
+    "duration_ms": 660000,
+    "temporal_regions": 3,
+    "retained": 30,
+    "outliers": 25,
+    "strong_threshold": 0.4948986014239168,
+    "score_min": -0.011108994868700438,
+    "score_median": 0.5748986014239168,
+    "score_max": 1.0,
+    "score_kind": "cosine_similarity_not_probability",
+    "provider": "ecapa",
+    "role": "SUPPORT_ONLY"
+  }
+}

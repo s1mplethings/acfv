@@ -1,0 +1,58 @@
+{
+  "case_id": "CL05",
+  "file": "media/clip_05.mp4",
+  "source_recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "source_recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+  "moment_id": "cd60c74f-c8e8-4b18-8e4d-fe4f06cfabc4",
+  "query": "她什么时候反思自己可能把一些分类看得太轻了？",
+  "group": "STRONG_RETRIEVAL",
+  "selection_reason": "rank-1 production result for fixed retrieval case R05; expected target rank NOT FOUND",
+  "moment_start_ms": 4254000,
+  "moment_end_ms": 4305000,
+  "proposed_start_ms": 4246000,
+  "proposed_end_ms": 4317000,
+  "final_start_ms": 4246000,
+  "final_end_ms": 4317000,
+  "proposal_duration_ms": 71000,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "But where I'm like, oh, if a monster jumps on my face, as long as I don't scream I don't have game overs and it's less scary. Okay, let me start Fear of Adam now and I'm going to change the game category. Fear to Fathom. In Bark Lookout.",
+    "inside": "Okay. I'll use the slider until the first F is barely visible. Well, that's... Wish first F. Like, I cannot see shit if it's barely visible like this. Oh my God, it's laggy. Don't worry. Don't worry. I'm going to fix it after. I'm just going to leave it like... this. No, I cannot see shit. I want to see shit like this because my screen is actually pretty... pretty dark. I think I just need to ins... like, here we go. V-sync, now it's working. FPS can't turn, no. Window at... No, I guess it's good. It's done. I want Bark Lookout because we did like the three of them, I think, before in the past. Oh my God, it's already fucking cold now that I opened my window. No, I'm working now. Look. No more two FPS. Harder. And this, you were requesting story submission while I was watching a YouTuber play Fear of Adam Carson House. What I'm about to recount happened when I was 24 or so at the time.",
+    "after": "What I'm about to recount happened when I was 24 or so at the time. This kind of weird telling anyone about this because of the bizarre and absurd nature of the whole thing. But I feel like doing so might help me process my memories of it. I knew that sharing this story anywhere else would be a dumb idea because people would say I was lying. As I'm writing this, this was the scariest experience of my life."
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 6000,
+    "pause_after_ms": 3000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 4238000,
+      "end_ms": 4240000,
+      "text": "In Bark Lookout."
+    },
+    "next_segment": {
+      "start_ms": 4320000,
+      "end_ms": 4326000,
+      "text": "This kind of weird telling anyone about this because of the bizarre and absurd nature of the whole thing."
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 71.033,
+      "size_bytes": 7435206,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.016608,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "ends_mid_transcript_segment"
+  ]
+}

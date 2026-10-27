@@ -1,0 +1,21 @@
+# 质量门（Quality Gates）
+
+## Gate 顺序
+1) format/lint/typecheck（可选，若启用需列命令）
+2) unit（快速逻辑检查）
+3) integration（强制：输入契约→输出契约）
+4) e2e（至少 1 条主路径，建议）
+5) contract checks（强制，涵盖 schema_version/排序/精度）
+6) golden（建议：关键输出快照）
+
+## 失败处理与记录
+- 任一 gate 失败即视为 verify 失败；记录到 `ai_context/problem_registry.md`，附命令与日志片段。
+- 若需要临时豁免，必须记录到 `ai_context/decision_log.md`，并设定后续补齐计划。
+
+## verify 定义
+- 单一入口：`scripts/verify.ps1`
+- 默认步骤：环境自检（可选）→ unit/integration/e2e/golden 测试 → 汇总结果
+- 可按参数扩展 lint/typecheck，但需保持 CI 与本地一致。
+
+## CI 要求
+- CI（若存在）必须执行 `scripts/verify.ps1` 同步的步骤，避免与本地分歧。

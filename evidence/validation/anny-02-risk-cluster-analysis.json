@@ -1,0 +1,1637 @@
+{
+  "clip_id": "anny-02-0861efd7",
+  "before_findings": 34,
+  "after_clusters": 34,
+  "before_risk": 10.35,
+  "after_cluster_risk": 10.35,
+  "state": "NEEDS_REVIEW",
+  "root_cause": "The suspected duplicate-guard inflation was not present in this archived clip. Its 34 findings resolve to 34 distinct source-word/cue roots; conservative clustering therefore keeps them separate and preserves NEEDS_REVIEW instead of hiding evidence.",
+  "clusters": [
+    {
+      "cluster_id": "language-cluster:3509b7abd4b5a0622278",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 0,
+      "end_ms": 0,
+      "root_cause": "finding:84517ef022096cf9e91e",
+      "member_findings": [
+        {
+          "issue_id": "source-correction:decision",
+          "timestamp": 0,
+          "type": "SOURCE_CORRECTION_UNRESOLVED",
+          "clip_id": "",
+          "start_ms": 0,
+          "end_ms": 0,
+          "root_cause_key": "finding:84517ef022096cf9e91e",
+          "evidence_source": "same-rule",
+          "semantic_consequence": "SOURCE_CORRECTION_UNRESOLVED",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "state": "UNCHANGED_UNCERTAIN",
+            "reasons": [
+              "EMPTY_CORRECTION"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "KEEP_RAW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "state": "UNCHANGED_UNCERTAIN",
+          "reasons": [
+            "EMPTY_CORRECTION"
+          ]
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "KEEP_RAW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:0b39233ad8284aab3f21",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 0,
+      "end_ms": 5204,
+      "root_cause": "translation:anny-02-0861efd7:0001:ENTITY_MISMATCH:PC",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 0,
+          "end_ms": 5204,
+          "root_cause_key": "translation:anny-02-0861efd7:0001:ENTITY_MISMATCH:PC",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "PC"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:70fc44b7a6236b96322a",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 5204,
+      "end_ms": 10987,
+      "root_cause": "translation:anny-02-0861efd7:0002:ENTITY_MISMATCH:So",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 5204,
+          "end_ms": 10987,
+          "root_cause_key": "translation:anny-02-0861efd7:0002:ENTITY_MISMATCH:So",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "So"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:f9ae2f2a37d2f7c5911c",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 10987,
+      "end_ms": 13879,
+      "root_cause": "translation:anny-02-0861efd7:0003:PROFANITY_STRENGTH_MISMATCH:2->0",
+      "member_findings": [
+        {
+          "issue_id": "translation:PROFANITY_STRENGTH_MISMATCH:1",
+          "timestamp": 0,
+          "type": "PROFANITY_STRENGTH_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 10987,
+          "end_ms": 13879,
+          "root_cause_key": "translation:anny-02-0861efd7:0003:PROFANITY_STRENGTH_MISMATCH:2->0",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "PROFANITY_STRENGTH_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {},
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "PROFANITY_STRENGTH_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "2->0"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {}
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:bab04da8fad0f1f66d1e",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13879,
+      "end_ms": 19661,
+      "root_cause": "translation:anny-02-0861efd7:0004:PROFANITY_STRENGTH_MISMATCH:2->0",
+      "member_findings": [
+        {
+          "issue_id": "translation:PROFANITY_STRENGTH_MISMATCH:1",
+          "timestamp": 0,
+          "type": "PROFANITY_STRENGTH_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 13879,
+          "end_ms": 19661,
+          "root_cause_key": "translation:anny-02-0861efd7:0004:PROFANITY_STRENGTH_MISMATCH:2->0",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "PROFANITY_STRENGTH_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {},
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "PROFANITY_STRENGTH_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "2->0"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {}
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:e30bce2f99bad36d4336",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13879,
+      "end_ms": 19661,
+      "root_cause": "translation:anny-02-0861efd7:0004:ENTITY_MISMATCH:You",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:2",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 13879,
+          "end_ms": 19661,
+          "root_cause_key": "translation:anny-02-0861efd7:0004:ENTITY_MISMATCH:You",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "You"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:2fe9cfdb8e627fa64256",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 19661,
+      "end_ms": 25444,
+      "root_cause": "translation:anny-02-0861efd7:0005:ENTITY_MISMATCH:She",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:2",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 19661,
+          "end_ms": 25444,
+          "root_cause_key": "translation:anny-02-0861efd7:0005:ENTITY_MISMATCH:She",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "She"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:6817e6ba7b53819ef033",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 19661,
+      "end_ms": 25444,
+      "root_cause": "translation:anny-02-0861efd7:0005:ENTITY_MISMATCH:You",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 19661,
+          "end_ms": 25444,
+          "root_cause_key": "translation:anny-02-0861efd7:0005:ENTITY_MISMATCH:You",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "You"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:2320e79c216c85fe8c1f",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 25444,
+      "end_ms": 31227,
+      "root_cause": "translation:anny-02-0861efd7:0006:ENTITY_MISMATCH:Welcome",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:2",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 25444,
+          "end_ms": 31227,
+          "root_cause_key": "translation:anny-02-0861efd7:0006:ENTITY_MISMATCH:Welcome",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "Welcome"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:d0bb20c1a509b1c0bf5b",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 25444,
+      "end_ms": 31227,
+      "root_cause": "translation:anny-02-0861efd7:0006:ENTITY_MISMATCH:That",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 25444,
+          "end_ms": 31227,
+          "root_cause_key": "translation:anny-02-0861efd7:0006:ENTITY_MISMATCH:That",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "That"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:8bb7b1e9eacb723ede74",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 31227,
+      "end_ms": 37010,
+      "root_cause": "translation:anny-02-0861efd7:0007:ENTITY_MISMATCH:Uh",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 31227,
+          "end_ms": 37010,
+          "root_cause_key": "translation:anny-02-0861efd7:0007:ENTITY_MISMATCH:Uh",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "Uh"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:c86d2cb466f94fd864a7",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 37010,
+      "end_ms": 41058,
+      "root_cause": "translation:anny-02-0861efd7:0008:ENTITY_MISMATCH:She",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 37010,
+          "end_ms": 41058,
+          "root_cause_key": "translation:anny-02-0861efd7:0008:ENTITY_MISMATCH:She",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "She"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:25185602d0395e8522a0",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 41058,
+      "end_ms": 46840,
+      "root_cause": "translation:anny-02-0861efd7:0009:ENTITY_MISMATCH:And",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 41058,
+          "end_ms": 46840,
+          "root_cause_key": "translation:anny-02-0861efd7:0009:ENTITY_MISMATCH:And",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "And"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:4104c8397517ae1a2b7b",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 50888,
+      "end_ms": 53780,
+      "root_cause": "translation:anny-02-0861efd7:0011:ENTITY_MISMATCH:Thank",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 50888,
+          "end_ms": 53780,
+          "root_cause_key": "translation:anny-02-0861efd7:0011:ENTITY_MISMATCH:Thank",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "Thank"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:5f1bfb625831557a62a7",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 57828,
+      "end_ms": 61297,
+      "root_cause": "translation:anny-02-0861efd7:0013:ENTITY_MISMATCH:Thank",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 57828,
+          "end_ms": 61297,
+          "root_cause_key": "translation:anny-02-0861efd7:0013:ENTITY_MISMATCH:Thank",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "Thank"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:5f84c9cbaf1f920f9626",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 61297,
+      "end_ms": 67080,
+      "root_cause": "translation:anny-02-0861efd7:0014:ENTITY_MISMATCH:Thank",
+      "member_findings": [
+        {
+          "issue_id": "translation:ENTITY_MISMATCH:1",
+          "timestamp": 0,
+          "type": "ENTITY_MISMATCH",
+          "clip_id": "anny-02-0861efd7",
+          "start_ms": 61297,
+          "end_ms": 67080,
+          "root_cause_key": "translation:anny-02-0861efd7:0014:ENTITY_MISMATCH:Thank",
+          "evidence_source": "translation-semantic-guard",
+          "semantic_consequence": "ENTITY_MISMATCH",
+          "severity": "WARNING",
+          "semantic_importance": "LOW",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+            "capitalization_only": true
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.45,
+          "recommended_action": "REVIEW",
+          "hard_blocker": false,
+          "code": "ENTITY_MISMATCH",
+          "category": "STYLE",
+          "critical": false,
+          "detail": "Thank"
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "LOW",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "entity_type": "UNKNOWN_CAPITALIZED_TOKEN",
+          "capitalization_only": true
+        }
+      ],
+      "cluster_risk": 0.45,
+      "recommended_action": "REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:be86b2a131befb3dedb2",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13746791,
+      "end_ms": 13747370,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000005",
+      "member_findings": [
+        {
+          "issue_id": "asr:5:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13747080,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13746791,
+          "end_ms": 13747370,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000005",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "SETUP",
+          "evidence": {
+            "word": "for",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.8,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "SETUP",
+      "evidence": [
+        {
+          "word": "for",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.8,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:b81339ce191d2c4cc36f",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13749104,
+      "end_ms": 13749683,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000009",
+      "member_findings": [
+        {
+          "issue_id": "asr:9:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13749393,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13749104,
+          "end_ms": 13749683,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000009",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "SETUP",
+          "evidence": {
+            "word": "I",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.8,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "SETUP",
+      "evidence": [
+        {
+          "word": "I",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.8,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:1c059123f2aad34a9b27",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13752574,
+      "end_ms": 13753152,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000015",
+      "member_findings": [
+        {
+          "issue_id": "asr:15:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13752863,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13752574,
+          "end_ms": 13753152,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000015",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "SETUP",
+          "evidence": {
+            "word": "so",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.8,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "SETUP",
+      "evidence": [
+        {
+          "word": "so",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.8,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:633622a9eb276517625f",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13758935,
+      "end_ms": 13759513,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000026",
+      "member_findings": [
+        {
+          "issue_id": "asr:26:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13759224,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13758935,
+          "end_ms": 13759513,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000026",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "word": "the",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.9,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "word": "the",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.9,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:d7ae2fd9385f5c999529",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13764718,
+      "end_ms": 13765296,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000036",
+      "member_findings": [
+        {
+          "issue_id": "asr:36:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13765007,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13764718,
+          "end_ms": 13765296,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000036",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "word": "You",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.9,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "word": "You",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.9,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:dad0f3eaf02eb1a1089a",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13768188,
+      "end_ms": 13768766,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000042",
+      "member_findings": [
+        {
+          "issue_id": "asr:42:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13768477,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13768188,
+          "end_ms": 13768766,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000042",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CONTEXT",
+          "evidence": {
+            "word": "She",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.9,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CONTEXT",
+      "evidence": [
+        {
+          "word": "She",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.9,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:6327bffd5e84dd7b4ab6",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13782644,
+      "end_ms": 13783223,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000067",
+      "member_findings": [
+        {
+          "issue_id": "asr:67:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13782933,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13782644,
+          "end_ms": 13783223,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000067",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "She",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "She",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:b42db1a567550caf44a1",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13791897,
+      "end_ms": 13792475,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000083",
+      "member_findings": [
+        {
+          "issue_id": "asr:83:LOW_WORD_CONFIDENCE",
+          "timestamp": 13792186,
+          "type": "LOW_WORD_CONFIDENCE",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13791897,
+          "end_ms": 13792475,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000083",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "LOW_WORD_CONFIDENCE",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "different",
+            "confidence": null,
+            "flags": [
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "different",
+          "confidence": null,
+          "flags": [
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:cdc6c2726159b7c38476",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13792475,
+      "end_ms": 13793053,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000084",
+      "member_findings": [
+        {
+          "issue_id": "asr:84:LOW_WORD_CONFIDENCE",
+          "timestamp": 13792764,
+          "type": "LOW_WORD_CONFIDENCE",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13792475,
+          "end_ms": 13793053,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000084",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "LOW_WORD_CONFIDENCE",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "design",
+            "confidence": null,
+            "flags": [
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "design",
+          "confidence": null,
+          "flags": [
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:f522fa6ae9cf4bbdc922",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13793053,
+      "end_ms": 13793632,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000085",
+      "member_findings": [
+        {
+          "issue_id": "asr:85:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13793342,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13793053,
+          "end_ms": 13793632,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000085",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "Where's",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE",
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "Where's",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE",
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:8a793eab4370303bf4b9",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13796523,
+      "end_ms": 13797101,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000091",
+      "member_findings": [
+        {
+          "issue_id": "asr:91:LOW_WORD_CONFIDENCE",
+          "timestamp": 13796812,
+          "type": "LOW_WORD_CONFIDENCE",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13796523,
+          "end_ms": 13797101,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000091",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "LOW_WORD_CONFIDENCE",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "Thank",
+            "confidence": null,
+            "flags": [
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "Thank",
+          "confidence": null,
+          "flags": [
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:2c457770049a1b0c3974",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13797101,
+      "end_ms": 13797680,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000092",
+      "member_findings": [
+        {
+          "issue_id": "asr:92:LOW_WORD_CONFIDENCE",
+          "timestamp": 13797390,
+          "type": "LOW_WORD_CONFIDENCE",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13797101,
+          "end_ms": 13797680,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000092",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "LOW_WORD_CONFIDENCE",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "you,",
+            "confidence": null,
+            "flags": [
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "you,",
+          "confidence": null,
+          "flags": [
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:18ad693f1e60e57d3e23",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13797680,
+      "end_ms": 13798258,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000093",
+      "member_findings": [
+        {
+          "issue_id": "asr:93:LOW_WORD_CONFIDENCE",
+          "timestamp": 13797969,
+          "type": "LOW_WORD_CONFIDENCE",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13797680,
+          "end_ms": 13798258,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000093",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "LOW_WORD_CONFIDENCE",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "CORE",
+          "evidence": {
+            "word": "Joe",
+            "confidence": null,
+            "flags": [
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.3,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "CORE",
+      "evidence": [
+        {
+          "word": "Joe",
+          "confidence": null,
+          "flags": [
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.3,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:6897027e8c2d208e8169",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13798258,
+      "end_ms": 13798836,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000094",
+      "member_findings": [
+        {
+          "issue_id": "asr:94:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13798547,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13798258,
+          "end_ms": 13798836,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000094",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "PAYOFF",
+          "evidence": {
+            "word": "I'm",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE",
+              "LOW_WORD_CONFIDENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.6,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "PAYOFF",
+      "evidence": [
+        {
+          "word": "I'm",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE",
+            "LOW_WORD_CONFIDENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.6,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:6849fe71a7d5fe0e7502",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13799993,
+      "end_ms": 13800571,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000097",
+      "member_findings": [
+        {
+          "issue_id": "asr:97:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13800282,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13799993,
+          "end_ms": 13800571,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000097",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "PAYOFF",
+          "evidence": {
+            "word": "I",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.6,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "PAYOFF",
+      "evidence": [
+        {
+          "word": "I",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.6,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:0d4e6f937a9f24174099",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13801149,
+      "end_ms": 13801728,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000099",
+      "member_findings": [
+        {
+          "issue_id": "asr:99:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13801438,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13801149,
+          "end_ms": 13801728,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000099",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "PAYOFF",
+          "evidence": {
+            "word": "you,",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 1.6,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "PAYOFF",
+      "evidence": [
+        {
+          "word": "you,",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 1.6,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:caa3bccfd994de5112bb",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13804619,
+      "end_ms": 13805197,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000105",
+      "member_findings": [
+        {
+          "issue_id": "asr:105:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13804908,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13804619,
+          "end_ms": 13805197,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000105",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "AFTERMATH",
+          "evidence": {
+            "word": "you,",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.7,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "AFTERMATH",
+      "evidence": [
+        {
+          "word": "you,",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.7,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    },
+    {
+      "cluster_id": "language-cluster:0067c7503a3f47083fed",
+      "clip_id": "anny-02-0861efd7",
+      "start_ms": 13805776,
+      "end_ms": 13806354,
+      "root_cause": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000107",
+      "member_findings": [
+        {
+          "issue_id": "asr:107:TRUE_BROKEN_OR_ASR_ERROR",
+          "timestamp": 13806065,
+          "type": "TRUE_BROKEN_OR_ASR_ERROR",
+          "clip_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+          "start_ms": 13805776,
+          "end_ms": 13806354,
+          "root_cause_key": "asr:0861efd7-8afd-4453-b1e9-80341fb58433:w000107",
+          "evidence_source": "final-asr-word-quality",
+          "semantic_consequence": "TRUE_BROKEN_OR_ASR_ERROR",
+          "severity": "WARNING",
+          "semantic_importance": "MEDIUM",
+          "semantic_position": "AFTERMATH",
+          "evidence": {
+            "word": "I'm",
+            "confidence": null,
+            "flags": [
+              "BROKEN_SENTENCE"
+            ]
+          },
+          "evidence_confidence": 1.0,
+          "risk_contribution": 0.7,
+          "recommended_action": "ACCEPT_OR_REVIEW",
+          "hard_blocker": false
+        }
+      ],
+      "max_severity": "WARNING",
+      "semantic_importance": "MEDIUM",
+      "semantic_position": "AFTERMATH",
+      "evidence": [
+        {
+          "word": "I'm",
+          "confidence": null,
+          "flags": [
+            "BROKEN_SENTENCE"
+          ]
+        }
+      ],
+      "cluster_risk": 0.7,
+      "recommended_action": "ACCEPT_OR_REVIEW",
+      "hard_blocker": false
+    }
+  ]
+}

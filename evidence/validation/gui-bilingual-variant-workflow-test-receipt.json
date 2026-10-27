@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-10",
+  "branch": "feature/gui-bilingual-variant-workflow",
+  "implementation_head": "296be92f86edb9e175a82061c8d63c16a0a845dd",
+  "environment": {"os": "Windows", "python": "D:\\anaconda\\python.exe"},
+  "run_1": {
+    "compileall": "PASS",
+    "cli_help": "PASS",
+    "pytest": "360 passed, 11 warnings",
+    "verify_pytest": "360 passed, 11 warnings",
+    "contract_checks": "PASS",
+    "verify": "PASS"
+  },
+  "run_2": {
+    "compileall": "PASS",
+    "cli_help": "PASS",
+    "pytest": "360 passed, 11 warnings",
+    "verify_pytest": "360 passed, 11 warnings",
+    "contract_checks": "PASS",
+    "verify": "PASS"
+  },
+  "skips_or_xfails_added": false,
+  "focused_coverage": {
+    "tests": "39 passed, 2 warnings",
+    "aggregate_percent": 74,
+    "gui_workflow_percent": 86,
+    "variant_service_percent": 88,
+    "clip_service_percent": 82,
+    "subtitle_service_percent": 82,
+    "review_widget_percent": 66
+  },
+  "real_workflow": {
+    "output_revision": "gui-validation-revision-002",
+    "generate_all": "PASS",
+    "profiles_ready": ["SHORT", "STANDARD", "LONG", "FULL_EVENT"],
+    "default_selected": "STANDARD",
+    "ffprobe_decode": "PASS for all four bilingual outputs",
+    "one_variant_failure_isolated": "PASS by automated test"
+  },
+  "result": "PASS"
+}

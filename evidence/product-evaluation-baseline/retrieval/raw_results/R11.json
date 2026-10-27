@@ -1,0 +1,154 @@
+{
+  "case_id": "R11",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "手を描けない but keeps saying she can do it — where was that?",
+  "ground_truth": {
+    "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+    "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+    "moment_id": "b7a17cd1-674f-4f48-8c68-377003c18967",
+    "start_ms": 5816000,
+    "end_ms": 5867000,
+    "timestamp": "01:36:56.000–01:37:47.000",
+    "transcript_excerpt": "私の目については何もない ああ、私は無理だ 僕は君の手を描くことはできない 私は君の手を描くことができない 僕は君の手を描くことを学ぶことを知ることができる 私は君の手を描くことができる 私は君の手を描くことができる あなたの手に挑戦しなきゃ 私はそれができる 私は君の手に挑戦しなきゃ 私はそれができる 私はそれができる 私の手に気をつけないで あなたは君の手に気をつけないで Hello, I love you Hello, hello, I'm your Hello, I love you"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "f40a784b-6feb-469f-a036-e012965fd56e",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 12351000,
+      "end_ms": 12372000,
+      "timestamp": "03:25:51.000–03:26:12.000",
+      "score": 0.01639344262295082,
+      "summary": "I'm not ready yet I'm not ready yet, I'm scared Thanks for watching It's gonna fuck me in the ass. Chat, is there any bonfire- any bonfireers? Sorry for party rocking...",
+      "transcript_excerpt": "I'm not ready yet I'm not ready yet, I'm scared Thanks for watching It's gonna fuck me in the ass. Chat, is there any bonfire- any bonfireers? Sorry for party rocking..."
+    },
+    {
+      "rank": 2,
+      "moment_id": "e81218e2-f8fd-4d9a-ac60-c85a431dbf60",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 6977000,
+      "end_ms": 7033160,
+      "timestamp": "01:56:17.000–01:57:13.160",
+      "score": 0.016129032258064516,
+      "summary": "It's going to fly away. Oh shit. You know I really want to have friends coming over to my place. I'm feeling lonely again. Maybe in June I will have like a few people coming over. You don't know them. They are like friends from Paris. I asked two girls to come over.",
+      "transcript_excerpt": "It's going to fly away. Oh shit. You know I really want to have friends coming over to my place. I'm feeling lonely again. Maybe in June I will have like a few people coming over. You don't know them. They are like friends from Paris. I asked two girls to come over."
+    },
+    {
+      "rank": 3,
+      "moment_id": "bbb683c6-20ef-4302-b47c-8153b5dc2d1e",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 15012000,
+      "end_ms": 15041000,
+      "timestamp": "04:10:12.000–04:10:41.000",
+      "score": 0.015873015873015872,
+      "summary": "Baka baka, baka baka Yo, we're in the shower together? Hot Do do do do do do do do I can hear Bella just like making random sounds Come here Showering together",
+      "transcript_excerpt": "Baka baka, baka baka Yo, we're in the shower together? Hot Do do do do do do do do I can hear Bella just like making random sounds Come here Showering together"
+    },
+    {
+      "rank": 4,
+      "moment_id": "970c5836-e8a8-4416-8aed-61d4ed125ec2",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 478000,
+      "end_ms": 537000,
+      "timestamp": "00:07:58.000–00:08:57.000",
+      "score": 0.015625,
+      "summary": "Why the fuck would you sub otherwise? What the fuck would you sub if you hated me? I love you! Thank you, daddy! How are you guys doing? You got the plush, that's fucking cool! I might look at the plushies, there might be some pictures to look at But man, I woke up so like... Early but late Early in terms of that I didn't get 8 hours of sleep Late in terms that it was fucking 5pm And I did the collab with Tobes who played Content Warning I was so fucking dead inside Oh my god And then I went to Camilla's gym and then she called me and I was so fucking hungry and tired Fuck, I wasn't at my best And now I'm like feeling sluggish as fuck Some people might just do it out of spite, strange world I mean... Damn, this is... I mean, it doesn't do harm for me, so go ahead Go ahead and sub out of spite",
+      "transcript_excerpt": "Why the fuck would you sub otherwise? What the fuck would you sub if you hated me? I love you! Thank you, daddy! How are you guys doing? You got the plush, that's fucking cool! I might look at the plushies, there might be some pictures to look at But man, I woke up so like... Early but late Early in terms of that I didn't get 8 hours of sleep Late in terms that it was fucking 5pm And I did the collab with Tobes who played Content Warning I was so fucking dead inside Oh my god And then I went to "
+    },
+    {
+      "rank": 5,
+      "moment_id": "474009c6-5313-4314-9776-b46b1bee3ce8",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 8357000,
+      "end_ms": 8414000,
+      "timestamp": "02:19:17.000–02:20:14.000",
+      "score": 0.015384615384615385,
+      "summary": "Because, you know, they are out of the helium, whatever I don't know if you can find it right now I also have this version The lights And I also have this version I have so many versions It's because XQC used to play in the dark like this But I just prefer warm lights More, I guess I also have a Forsen background This one is a little big I have a normal Forsen I think that was the version without the stars too But the Forsen background Is weak Forsen, XQC, most critical So, Asmon is next. Dude, I'm having so much fun with this background. It's so funny. And it's funny to see, like, people's reaction to it, too. Oh, there's one with the tops, too. Oops.",
+      "transcript_excerpt": "Because, you know, they are out of the helium, whatever I don't know if you can find it right now I also have this version The lights And I also have this version I have so many versions It's because XQC used to play in the dark like this But I just prefer warm lights More, I guess I also have a Forsen background This one is a little big I have a normal Forsen I think that was the version without the stars too But the Forsen background Is weak Forsen, XQC, most critical So, Asmon is next. Dude, "
+    },
+    {
+      "rank": 6,
+      "moment_id": "a12fdc5c-22da-4f3e-9702-416d232147dc",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 10433000,
+      "end_ms": 10444000,
+      "timestamp": "02:53:53.000–02:54:04.000",
+      "score": 0.015151515151515152,
+      "summary": "okay yay Oh yeah, we're going by order, re-disorder.",
+      "transcript_excerpt": "okay yay Oh yeah, we're going by order, re-disorder."
+    },
+    {
+      "rank": 7,
+      "moment_id": "3964a12d-5f5f-4453-bf15-a7f1ac395c74",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 19740000,
+      "end_ms": 19754320,
+      "timestamp": "05:29:00.000–05:29:14.320",
+      "score": 0.014925373134328358,
+      "summary": "エビzと事前 どこかに!",
+      "transcript_excerpt": "エビzと事前 どこかに!"
+    },
+    {
+      "rank": 8,
+      "moment_id": "f7faa2bb-facd-4beb-98f3-89462f14ac5d",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 4920000,
+      "end_ms": 4977000,
+      "timestamp": "01:22:00.000–01:22:57.000",
+      "score": 0.014705882352941176,
+      "summary": "I was supposed to be on the first collab, I was busy as such. Valentine's Day is special. Flushed. 200k followers in February! Did he hit 500k yet? He must hit it during the Sabaton.",
+      "transcript_excerpt": "I was supposed to be on the first collab, I was busy as such. Valentine's Day is special. Flushed. 200k followers in February! Did he hit 500k yet? He must hit it during the Sabaton."
+    },
+    {
+      "rank": 9,
+      "moment_id": "5d053774-7cda-4734-a57f-4ef95dbb0e48",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 10779200,
+      "end_ms": 10838000,
+      "timestamp": "02:59:39.200–03:00:38.000",
+      "score": 0.014492753623188406,
+      "summary": "I- I saw on Twitter just when I was on a little fucking toilet It wasn't Man like big dicks, too, because when I suck a little dick on OnlyFans, they be mad Porn is male-oriented I'm gonna try something else It's ruining Oh yeah, there's like no... There is like big Boing Boing, small Boing Boing but there's no big dick or small dick or like a chau or like a grower There's nothing... There's nothing like that in the list too This is so male-oriented Also, I know we don't talk super often, but you give Brad energy more than Switch energy? Yeah? Can Brad not be Switch? What?",
+      "transcript_excerpt": "I- I saw on Twitter just when I was on a little fucking toilet It wasn't Man like big dicks, too, because when I suck a little dick on OnlyFans, they be mad Porn is male-oriented I'm gonna try something else It's ruining Oh yeah, there's like no... There is like big Boing Boing, small Boing Boing but there's no big dick or small dick or like a chau or like a grower There's nothing... There's nothing like that in the list too This is so male-oriented Also, I know we don't talk super often, but yo"
+    },
+    {
+      "rank": 10,
+      "moment_id": "93e311e5-c704-4cd2-92c8-4b7abab73ab1",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8697700,
+      "end_ms": 8733700,
+      "timestamp": "02:24:57.700–02:25:33.700",
+      "score": 0.014285714285714285,
+      "summary": "Now it's just too late And we can't go back I'm sorry I can't be perfect Nothing's gonna change the things that you said And nothing's gonna make this right again Please don't turn your back I can't believe it's hard just to talk to you But you don't understand",
+      "transcript_excerpt": "Now it's just too late And we can't go back I'm sorry I can't be perfect Nothing's gonna change the things that you said And nothing's gonna make this right again Please don't turn your back I can't believe it's hard just to talk to you But you don't understand"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

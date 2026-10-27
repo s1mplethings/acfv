@@ -1,0 +1,154 @@
+{
+  "case_id": "R04",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "哪段像在做天气播报，先说外面很晴朗后来又说多云？",
+  "ground_truth": {
+    "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+    "moment_id": "5e4584ab-5916-41bb-bc08-9b0b1cbac5d7",
+    "start_ms": 9166920,
+    "end_ms": 9223080,
+    "timestamp": "02:32:46.920–02:33:43.080",
+    "transcript_excerpt": "See say do and it was me five zero Jack I need to look outside. It looks clear to me, right? It looks clear. I'm with you. Yeah, I'm a good reporter That's clear Okay, no, it's not what I meant to do Clear and Hmm Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "5ce6868d-d490-4d33-88ba-5c678b1779bd",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2130000,
+      "end_ms": 2162000,
+      "timestamp": "00:35:30.000–00:36:02.000",
+      "score": 0.01639344262295082,
+      "summary": "Um, she was drawing! She drew us together Look at her! So cute! Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+      "transcript_excerpt": "Um, she was drawing! She drew us together Look at her! So cute! Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!"
+    },
+    {
+      "rank": 2,
+      "moment_id": "ab39d873-e184-4332-a97d-04c311980429",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 12639000,
+      "end_ms": 12643000,
+      "timestamp": "03:30:39.000–03:30:43.000",
+      "score": 0.016129032258064516,
+      "summary": "Good fucking explosion I like it Oh no no not them",
+      "transcript_excerpt": "Good fucking explosion I like it Oh no no not them"
+    },
+    {
+      "rank": 3,
+      "moment_id": "b2b2d6ac-a246-4660-9113-ad1f2bb3da3c",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 15170000,
+      "end_ms": 15180000,
+      "timestamp": "04:12:50.000–04:13:00.000",
+      "score": 0.015873015873015872,
+      "summary": "Is there another room in this world? Put the helmet on the wrong way. No, I didn't put the helmet on the wrong way.",
+      "transcript_excerpt": "Is there another room in this world? Put the helmet on the wrong way. No, I didn't put the helmet on the wrong way."
+    },
+    {
+      "rank": 4,
+      "moment_id": "43a4e5aa-2fcc-4306-b967-e659ca4d3aac",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 32143720,
+      "end_ms": 32173600,
+      "timestamp": "08:55:43.720–08:56:13.600",
+      "score": 0.015625,
+      "summary": "adorable. I love me. Well, at least they're not bullying people for fun. Aha. You intending to burn all the bullies. In an ideal world, bullies would just light themselves on fire. Fire is cool and all, but I think it would have problems with wardrobe.",
+      "transcript_excerpt": "adorable. I love me. Well, at least they're not bullying people for fun. Aha. You intending to burn all the bullies. In an ideal world, bullies would just light themselves on fire. Fire is cool and all, but I think it would have problems with wardrobe."
+    },
+    {
+      "rank": 5,
+      "moment_id": "f8e33c64-1697-4672-8690-d8f3ef9c990b",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 14862400,
+      "end_ms": 14886420,
+      "timestamp": "04:07:42.400–04:08:06.420",
+      "score": 0.015384615384615385,
+      "summary": "This one is dead, right? It's dead. Better check, you know. Couchade boss, like Kazuhira meters. Yeah, right. I'm so fucking badass. Sorry. I got a bit excited. It's been a while. I haven't heard his name. I kind of miss him",
+      "transcript_excerpt": "This one is dead, right? It's dead. Better check, you know. Couchade boss, like Kazuhira meters. Yeah, right. I'm so fucking badass. Sorry. I got a bit excited. It's been a while. I haven't heard his name. I kind of miss him"
+    },
+    {
+      "rank": 6,
+      "moment_id": "1fadcc8f-867d-455d-aa98-a28d80feecae",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 10456120,
+      "end_ms": 10514640,
+      "timestamp": "02:54:16.120–02:55:14.640",
+      "score": 0.015151515151515152,
+      "summary": "You know that Switch has fucking JP branch or whatever, like moderators and shit? Oh, so these words are fun, but Blowy Jolly. Blowjob is to blade and for Jeff Bezos. And deepthroat is... God. I don't know. All these things combined don't look as job and shit. That altogether doesn't look sus at all. But Blowjob is... You can just type BJ. You can just type BJ. That's slightly plausible enough deniability. That's good enough. I don't know. Well, we have fucking tags now on stream, so whatever. Okay, but I made you laugh with Blowy Jolly, so I mean, I think...",
+      "transcript_excerpt": "You know that Switch has fucking JP branch or whatever, like moderators and shit? Oh, so these words are fun, but Blowy Jolly. Blowjob is to blade and for Jeff Bezos. And deepthroat is... God. I don't know. All these things combined don't look as job and shit. That altogether doesn't look sus at all. But Blowjob is... You can just type BJ. You can just type BJ. That's slightly plausible enough deniability. That's good enough. I don't know. Well, we have fucking tags now on stream, so whatever. O"
+    },
+    {
+      "rank": 7,
+      "moment_id": "775f98e0-0261-4ca9-9e3a-685d1ef4b83a",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3423000,
+      "end_ms": 3482000,
+      "timestamp": "00:57:03.000–00:58:02.000",
+      "score": 0.014925373134328358,
+      "summary": "Hello Ariana, Foxtom, and welcome! It's my first time at Halo because Chad keeps suggesting me games and I just do them. I enjoyed when they told me to play Metal Gear and now I'm like ok, I'll next do Halo because you've been crying about it for years. Where do I go? Oh, this way. Are you liking the game so far? It's a good game, it reminds me a bit of Half-Life. You know, because the parasites are a bit like crab heads in a way. It's a good game, it's a good game. Where's the Roboto? Here.",
+      "transcript_excerpt": "Hello Ariana, Foxtom, and welcome! It's my first time at Halo because Chad keeps suggesting me games and I just do them. I enjoyed when they told me to play Metal Gear and now I'm like ok, I'll next do Halo because you've been crying about it for years. Where do I go? Oh, this way. Are you liking the game so far? It's a good game, it reminds me a bit of Half-Life. You know, because the parasites are a bit like crab heads in a way. It's a good game, it's a good game. Where's the Roboto? Here."
+    },
+    {
+      "rank": 8,
+      "moment_id": "f88f13bc-3a03-47c8-804d-bfe6f456b668",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7620500,
+      "end_ms": 7679000,
+      "timestamp": "02:07:00.500–02:07:59.000",
+      "score": 0.014705882352941176,
+      "summary": "Oh! Oh! Oh! Oh! Oh! Oh! Oh! Oh! Oh! Penny, are you okay? Will you tell us That you're okay? There's a sign in the window That he struck you A crescendo, Annie He came into your apartment He left blood stains on the carpet And when you ran into the bedroom You almost cracked down, it was your doom Penny, are you okay? Will you tell us That you're okay? There's a sign in the window That he struck you A crescendo, Annie He came into your apartment He left blood stains on the carpet And when you ran into the bedroom You almost cracked down, it was your doom Penny! Oh! Oh! Oh! Oh!",
+      "transcript_excerpt": "Oh! Oh! Oh! Oh! Oh! Oh! Oh! Oh! Oh! Penny, are you okay? Will you tell us That you're okay? There's a sign in the window That he struck you A crescendo, Annie He came into your apartment He left blood stains on the carpet And when you ran into the bedroom You almost cracked down, it was your doom Penny, are you okay? Will you tell us That you're okay? There's a sign in the window That he struck you A crescendo, Annie He came into your apartment He left blood stains on the carpet And when you ran"
+    },
+    {
+      "rank": 9,
+      "moment_id": "8a8ea397-d66b-469f-92b3-6a018b75b737",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 7936000,
+      "end_ms": 7992000,
+      "timestamp": "02:12:16.000–02:13:12.000",
+      "score": 0.014492753623188406,
+      "summary": "I thought you had it Yeah ok Come on, next time you ask for a song I won't give it to you then You take us to McDonald's, I'm not allowed to have money from daddy and mommy You're the only one who have money from McDonald's ok, come on So wait, is it right or did I got it wrong? I don't get it Isn't that it? Isn't that it? Yeah but like maybe if you activate something else, south west He's looking south west North east, he's looking north east, it's this way Yeah but like you dumb ass, you can maybe open something else Maybe activate something, don't you think?",
+      "transcript_excerpt": "I thought you had it Yeah ok Come on, next time you ask for a song I won't give it to you then You take us to McDonald's, I'm not allowed to have money from daddy and mommy You're the only one who have money from McDonald's ok, come on So wait, is it right or did I got it wrong? I don't get it Isn't that it? Isn't that it? Yeah but like maybe if you activate something else, south west He's looking south west North east, he's looking north east, it's this way Yeah but like you dumb ass, you can m"
+    },
+    {
+      "rank": 10,
+      "moment_id": "f6e718b8-d5b3-490a-b77e-0ff254cf278e",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 3772000,
+      "end_ms": 3832000,
+      "timestamp": "01:02:52.000–01:03:52.000",
+      "score": 0.014285714285714285,
+      "summary": "For real? Is it a rocket launcher? I only saw it like last minute! Ouch, ouch, ouch! Oh god! I bought a VR! VR! That's your first message in my stream and you're like, I bought a VR!",
+      "transcript_excerpt": "For real? Is it a rocket launcher? I only saw it like last minute! Ouch, ouch, ouch! Oh god! I bought a VR! VR! That's your first message in my stream and you're like, I bought a VR!"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "capability": "vod_download",
+  "implementation_sha": "ff2b572aed3bc6cf9d7f5b5b1c30233d31382442",
+  "date": "2026-10-10",
+  "real_e2e": {
+    "level": "REAL_RANGE_DOWNLOAD",
+    "recording_id": "452b2d8b-5db8-414f-aba7-26b3de70e3f0",
+    "download": "PASS",
+    "media_integrity": "PASS",
+    "asr_transcript": "PASS",
+    "moments_index": "PASS",
+    "retrieval": "PASS",
+    "conversation": "PASS_EVIDENCE_ONLY_PROVIDER_502",
+    "clip_subtitle_render": "PASS",
+    "review_feedback_restart": "PASS",
+    "final_mp4": "PASS"
+  },
+  "fixed_set": {
+    "top1": 11,
+    "top3": 14,
+    "top5": 15,
+    "top10": 17,
+    "top30": 18,
+    "mrr": 0.6325,
+    "no_evidence": "5/5",
+    "invalid_citations": 0,
+    "unsupported_claims": 0,
+    "clip_ffprobe": "10/10"
+  },
+  "verification": {
+    "run_1": {"compileall": "PASS", "cli": "PASS", "pytest": "328 passed", "verify": "PASS", "contracts": "PASS"},
+    "run_2": {"compileall": "PASS", "cli": "PASS", "pytest": "328 passed", "verify": "PASS", "contracts": "PASS"},
+    "focused_coverage_percent": 87,
+    "focused_tests": 48
+  },
+  "cgnk": {"registry": "PASS", "spec": "PASS", "guards": "PASS", "formal_evaluation": "NOT_EVALUATED"}
+}

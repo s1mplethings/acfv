@@ -1,0 +1,17 @@
+{
+  "mode": "SHADOW_ONLY",
+  "status": "BLOCKED_NO_TRUSTED_CONTEXT",
+  "eligible_spans": 0,
+  "generic": 0,
+  "adaptive": 0,
+  "same": 0,
+  "changed": 0,
+  "conflict": 0,
+  "fallback": 0,
+  "high_risk_changed": 0,
+  "official_transcript_mutations": 0,
+  "generic_authoritative": true,
+  "generic_wer": "NOT_EVALUATED",
+  "adaptive_wer": "NOT_EVALUATED",
+  "recommendations": {"Saruei": "KEEP_SHADOW", "anny": "KEEP_SHADOW"}
+}

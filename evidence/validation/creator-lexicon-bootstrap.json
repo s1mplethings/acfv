@@ -1,0 +1,10 @@
+{
+  "profile_version": "creator_profile_v2",
+  "status": "BLOCKED_NO_TRUSTED_SPEECH",
+  "creators": {
+    "Saruei": {"candidates": 0, "promoted": 0, "human_confirmed": 0},
+    "anny": {"candidates": 0, "promoted": 0, "human_confirmed": 0}
+  },
+  "acoustic_exemplars": 0,
+  "raw_asr_used_as_authority": false
+}

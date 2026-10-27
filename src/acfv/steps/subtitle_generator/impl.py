@@ -1,0 +1,274 @@
+from __future__ import annotations
+
+import os
+import re
+import json
+import math
+from typing import List, Dict, Any, Tuple
+
+from acfv.processing.subtitle_contract import generate_subtitle
+
+
+def _read_transcription(transcription_file: str) -> List[Dict[str, Any]]:
+    if not transcription_file or not os.path.exists(transcription_file):
+        return []
+    try:
+        with open(transcription_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if isinstance(data, dict) and 'segments' in data:
+            return data.get('segments', [])
+        if isinstance(data, list):
+            return data
+    except Exception:
+        return []
+    return []
+
+
+def _parse_clip_time_from_name(filename: str) -> Tuple[float, float]:
+    # Current naming: clip_001_00h00m00s_0-270000.mp4 (ms)
+    m = re.search(r"clip_\d+_[^_]+_(\d+)-(\d+)\.mp4$", filename)
+    if m:
+        start_ms = float(m.group(1))
+        end_ms = float(m.group(2))
+        if end_ms > start_ms:
+            return start_ms / 1000.0, end_ms / 1000.0
+    # Legacy naming: clip_001_123.4s-234.5s.mp4
+    m = re.search(r"clip_\d+_(\d+(?:\.\d+)?)s-(\d+(?:\.\d+)?)s\.mp4$", filename)
+    if m:
+        return float(m.group(1)), float(m.group(2))
+    # fallback: no match
+    return 0.0, 0.0
+
+
+def _format_srt_time(sec: float) -> str:
+    sec = max(0.0, sec)
+    h = int(sec // 3600)
+    m = int((sec % 3600) // 60)
+    s = int(sec % 60)
+    ms = int(round((sec - math.floor(sec)) * 1000))
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+
+
+def _split_sentences(text: str) -> List[str]:
+    if not text:
+        return []
+    # Split by Chinese and English punctuation, keep delimiters
+    parts = re.split(r"([。！？!?；;])", text)
+    sentences = []
+    buf = ""
+    for i in range(0, len(parts), 2):
+        chunk = parts[i].strip()
+        delim = parts[i+1] if i+1 < len(parts) else ""
+        if chunk:
+            buf = chunk + (delim if delim else "")
+            sentences.append(buf.strip())
+            buf = ""
+    # Fallback: if nothing split, try by commas
+    if not sentences and text:
+        sentences = [t.strip() for t in re.split(r"[，,]", text) if t.strip()]
+    return sentences
+
+
+def _wrap_two_lines(text: str, max_line_chars: int | None = None) -> str:
+    """Wrap display text without changing its timestamps or creating extra cues."""
+    compact = " ".join(text.split())
+    if not compact:
+        return ""
+    cjk = len(re.findall(r"[\u3400-\u9fff\u3040-\u30ff]", compact))
+    limit = max_line_chars or (20 if cjk >= max(2, len(compact) // 4) else 42)
+    if len(compact) <= limit:
+        return compact
+    words = compact.split()
+    if len(words) == 1:
+        return compact[:limit] + "\n" + compact[limit : limit * 2]
+    best = min(range(1, len(words)), key=lambda i: abs(len(" ".join(words[:i])) - len(compact) / 2))
+    first, second = " ".join(words[:best]), " ".join(words[best:])
+    if len(first) <= limit and len(second) <= limit:
+        return first + "\n" + second
+    # Keep at most two visual lines. Word-timestamp grouping is responsible for
+    # making the cue shorter before this display-only wrapper is reached.
+    current, lines = "", []
+    for word in words:
+        proposed = f"{current} {word}".strip()
+        if current and len(proposed) > limit and len(lines) == 0:
+            lines.append(current)
+            current = word
+        else:
+            current = proposed
+    lines.append(current)
+    return "\n".join(lines[:2])
+
+
+def group_word_timestamps(
+    words: List[Dict[str, Any]],
+    *,
+    clip_start: float,
+    clip_end: float,
+    pause_threshold: float = 0.45,
+    max_duration: float = 4.0,
+    max_chars: int = 84,
+) -> List[Dict[str, Any]]:
+    """Build readable cues from real ASR word timings.
+
+    Timing boundaries always come from words. Character counts may limit how much
+    text is displayed, but are never used to synthesize time.
+    """
+    normalized: List[Dict[str, Any]] = []
+    for item in words:
+        try:
+            start = float(item.get("start"))
+            end = float(item.get("end"))
+        except (TypeError, ValueError):
+            continue
+        text = str(item.get("word") or item.get("text") or "").strip()
+        if text and end > start and end > clip_start and start < clip_end:
+            normalized.append({"start": max(start, clip_start), "end": min(end, clip_end), "text": text})
+    normalized.sort(key=lambda item: (item["start"], item["end"]))
+    cues: List[Dict[str, Any]] = []
+    current: List[Dict[str, Any]] = []
+
+    def flush() -> None:
+        if not current:
+            return
+        text = " ".join(item["text"] for item in current).strip()
+        cues.append({"start": current[0]["start"], "end": current[-1]["end"], "text": _wrap_two_lines(text)})
+        current.clear()
+
+    for word in normalized:
+        if current:
+            gap = word["start"] - current[-1]["end"]
+            duration = word["end"] - current[0]["start"]
+            prospective = " ".join(item["text"] for item in [*current, word])
+            punctuation_break = bool(re.search(r"[.!?。！？]$", current[-1]["text"]))
+            if gap >= pause_threshold or duration > max_duration or len(prospective) > max_chars or punctuation_break:
+                flush()
+        current.append(word)
+    flush()
+    return cues
+
+
+def _semantic_merge(sentences: List[Dict[str, Any]], sim_threshold: float, max_gap: float, min_chars: int) -> List[Dict[str, Any]]:
+    if not sentences:
+        return []
+    texts = [s['text'] for s in sentences]
+    if not any(texts):
+        return sentences
+    # Build TF-IDF vectors for similarity
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity
+
+        vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2))
+        X = vectorizer.fit_transform(texts)
+        sim = cosine_similarity(X)
+    except Exception:
+        sim = None
+
+    merged: List[Dict[str, Any]] = []
+    cur = sentences[0].copy()
+    for i in range(1, len(sentences)):
+        nxt = sentences[i]
+        time_gap = max(0.0, nxt['start'] - cur['end'])
+        cur_len = len(cur['text'])
+        nxt_len = len(nxt['text'])
+        similar = False
+        if sim is not None:
+            similar = (sim[i-1][i] if i-1 < sim.shape[0] and i < sim.shape[1] else 0.0) >= sim_threshold
+        # Merge if very short or similar and gap small
+        combined_duration = nxt['end'] - cur['start']
+        if (cur_len < min_chars or nxt_len < min_chars or similar) and time_gap <= max_gap and combined_duration <= 4.0:
+            cur['text'] = (cur['text'] + " " + nxt['text']).strip()
+            cur['end'] = max(cur['end'], nxt['end'])
+        else:
+            merged.append(cur)
+            cur = nxt.copy()
+    merged.append(cur)
+    return merged
+
+
+def _build_sentence_chunks(segments: List[Dict[str, Any]], clip_start: float, clip_end: float) -> List[Dict[str, Any]]:
+    # For each original segment overlapping with [clip_start, clip_end], split into sentences
+    chunks: List[Dict[str, Any]] = []
+    for seg in segments:
+        s = float(seg.get('start', 0.0))
+        e = float(seg.get('end', 0.0))
+        if e <= clip_start or s >= clip_end:
+            continue
+        text = (seg.get('text') or "").strip()
+        if not text:
+            continue
+        # Trim to clip window
+        s2 = max(s, clip_start)
+        e2 = min(e, clip_end)
+        if e2 <= s2:
+            continue
+        word_cues = group_word_timestamps(
+            list(seg.get("words") or []), clip_start=clip_start, clip_end=clip_end
+        )
+        if word_cues:
+            chunks.extend(word_cues)
+            continue
+        # A segment timestamp is real evidence. Without word timings, keep that
+        # interval intact instead of inventing character-proportional sub-times.
+        chunks.append({'start': s2, 'end': e2, 'text': _wrap_two_lines(text)})
+    # Ensure ordered
+    chunks.sort(key=lambda x: (x['start'], x['end']))
+    return chunks
+
+
+def generate_semantic_subtitles_for_clips(
+    output_clips_dir: str,
+    transcription_file: str,
+    cfg_manager,
+    clip_paths: List[str],
+    fmt: str = "srt",
+) -> int:
+    """Generate SRT subtitles per clip based on semantic sentence splitting and light merging.
+
+    Returns number of subtitle files written.
+    """
+    segments = _read_transcription(transcription_file)
+    if not segments:
+        return 0
+
+    # Configs
+    sim_threshold = float(cfg_manager.get("SEMANTIC_SIMILARITY_THRESHOLD", 0.65) or 0.65)
+    max_gap = float(cfg_manager.get("SEMANTIC_MAX_TIME_GAP", 2.0) or 2.0)
+    min_chars = int(cfg_manager.get("SUBTITLE_MIN_SENTENCE_CHARS", 6) or 6)
+
+    fmt = (fmt or "srt").lower()
+    if fmt not in ("srt", "ass"):
+        fmt = "srt"
+    written = 0
+    for clip_path in clip_paths:
+        try:
+            base = os.path.basename(clip_path)
+            s, e = _parse_clip_time_from_name(base)
+            if e <= s:
+                # fallback: no times -> skip
+                continue
+            # Collect sentence chunks
+            chunks = _build_sentence_chunks(segments, s, e)
+            # Merge semantically
+            chunks = _semantic_merge(chunks, sim_threshold, max_gap, min_chars)
+            # Filter very short items
+            chunks = [c for c in chunks if len((c['text'] or '').strip()) >= 1 and (c['end'] - c['start']) > 0.05]
+            if not chunks:
+                continue
+            # Write SRT via contract generator
+            out_dir = os.path.dirname(clip_path) or "."
+            source_name = os.path.splitext(os.path.basename(clip_path))[0]
+            payload = {
+                "segments": [{"start": c["start"] - s, "end": c["end"] - s, "text": c["text"]} for c in chunks],
+                "format": fmt,
+                "out_dir": out_dir,
+                "source_name": source_name,
+                "time_offset_sec": 0.0,
+            }
+            result = generate_subtitle(payload)
+            if result.get("subtitle_path"):
+                written += 1
+        except Exception:
+            # Skip errors for a single clip
+            continue
+    return written

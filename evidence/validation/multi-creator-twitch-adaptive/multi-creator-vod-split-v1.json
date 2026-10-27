@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "MULTI_CREATOR_TWITCH_V1",
+  "dataset_version": "multi_creator_twitch_v1",
+  "split_unit": "TWITCH_VOD_ID",
+  "frozen_before_training": true,
+  "leakage_guard": "HOLDOUT and UNKNOWN cannot enter visual/voice training, trusted speech, lexicon, acoustic exemplars, or threshold tuning; VALIDATION is threshold-only.",
+  "rows": [
+    {
+      "creator": "anny",
+      "vod_id": "2853235966",
+      "role": "HOLDOUT",
+      "url": "https://www.twitch.tv/videos/2853235966",
+      "published_at": "2026-08-22T11:46:36Z",
+      "duration_seconds": 13760,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "atelieranoko",
+      "vod_id": "2898984086",
+      "role": "HOLDOUT",
+      "url": "https://www.twitch.tv/videos/2898984086",
+      "published_at": "2026-10-12T17:56:01Z",
+      "duration_seconds": 12454,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "laphipi",
+      "vod_id": "2897831198",
+      "role": "HOLDOUT",
+      "url": "https://www.twitch.tv/videos/2897831198",
+      "published_at": "2026-10-11T11:30:01Z",
+      "duration_seconds": 9584,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2897884895",
+      "role": "HOLDOUT",
+      "url": "https://www.twitch.tv/videos/2897884895",
+      "published_at": "2026-10-11T13:00:40Z",
+      "duration_seconds": 14352,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "snuffy",
+      "vod_id": "2884984247",
+      "role": "HOLDOUT",
+      "url": "https://www.twitch.tv/videos/2884984247",
+      "published_at": "2026-09-26T23:08:02Z",
+      "duration_seconds": 24690,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "atelieranoko",
+      "vod_id": "2894403908",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2894403908",
+      "published_at": "2026-10-07T17:02:04Z",
+      "duration_seconds": 19792,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "atelieranoko",
+      "vod_id": "2896165071",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2896165071",
+      "published_at": "2026-10-09T17:24:28Z",
+      "duration_seconds": 14298,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "laphipi",
+      "vod_id": "2893473795",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2893473795",
+      "published_at": "2026-10-06T15:28:33Z",
+      "duration_seconds": 7335,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "laphipi",
+      "vod_id": "2894425039",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2894425039",
+      "published_at": "2026-10-07T17:28:59Z",
+      "duration_seconds": 10830,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2894283807",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2894283807",
+      "published_at": "2026-10-07T14:06:12Z",
+      "duration_seconds": 14518,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2895222160",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2895222160",
+      "published_at": "2026-10-08T15:58:43Z",
+      "duration_seconds": 10941,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2895982534",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2895982534",
+      "published_at": "2026-10-09T13:04:08Z",
+      "duration_seconds": 18399,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "snuffy",
+      "vod_id": "2872738058",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2872738058",
+      "published_at": "2026-09-13T01:26:33Z",
+      "duration_seconds": 12640,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "snuffy",
+      "vod_id": "2876880400",
+      "role": "TRAIN",
+      "url": "https://www.twitch.tv/videos/2876880400",
+      "published_at": "2026-09-17T21:22:02Z",
+      "duration_seconds": 18673,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "atelieranoko",
+      "vod_id": "2898100328",
+      "role": "VALIDATION",
+      "url": "https://www.twitch.tv/videos/2898100328",
+      "published_at": "2026-10-11T17:38:50Z",
+      "duration_seconds": 13983,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "laphipi",
+      "vod_id": "2896095029",
+      "role": "VALIDATION",
+      "url": "https://www.twitch.tv/videos/2896095029",
+      "published_at": "2026-10-09T15:58:29Z",
+      "duration_seconds": 9033,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "Saruei",
+      "vod_id": "2896930589",
+      "role": "VALIDATION",
+      "url": "https://www.twitch.tv/videos/2896930589",
+      "published_at": "2026-10-10T13:01:02Z",
+      "duration_seconds": 17660,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    },
+    {
+      "creator": "snuffy",
+      "vod_id": "2882220435",
+      "role": "VALIDATION",
+      "url": "https://www.twitch.tv/videos/2882220435",
+      "published_at": "2026-09-23T21:22:01Z",
+      "duration_seconds": 21700,
+      "vod_type": "archive",
+      "unknown_partition": ""
+    }
+  ],
+  "sha256": "90e272ca8798449faec258e890152906f7c15cad5f2753b60c5e7a078b99446f"
+}

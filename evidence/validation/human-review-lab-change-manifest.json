@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "change_id": "compact-human-review-lab-2026-10-13",
+  "summary": "Adds an independent, compact, single-window Human Review Lab with canonical dataset assembly, blind review, durable SQLite annotations, in-GUI analysis, export, backup, and native validation.",
+  "capabilities": [
+    "human_review"
+  ],
+  "files_changed": [
+    "README.md",
+    "specs/capabilities/index.yaml",
+    "specs/capabilities/human_review.md",
+    "src/acfv/cli/__main__.py",
+    "src/acfv/cli/review_lab.py",
+    "src/acfv/human_review/",
+    "tests/unit/test_human_review.py",
+    "tests/unit/test_human_review_gui.py",
+    "tests/integration/test_cgnk_repository_guards.py",
+    "scripts/validate_human_review_lab.py",
+    "evidence/validation/human-review-lab/"
+  ],
+  "behavior_change": true,
+  "contract_change": true,
+  "migration_required": false,
+  "compatibility": "The Product GUI, backend processing pipeline, canonical media artifacts, and existing databases are unchanged. Human Review uses its own production/test SQLite files and is launched through a new CLI command.",
+  "risks": [
+    "Some canonical evidence items intentionally have no directly resolvable local media and require Skip or Relink Media in the GUI.",
+    "Interactive SQLite writes use WAL/NORMAL for responsiveness; a sudden operating-system or power failure can lose the most recent uncheckpointed transactions, while app close, manual backup, and each 50-revision backup force a FULL checkpoint.",
+    "Qt offscreen screenshot capture validates geometry and scaling but cannot substitute for a human review of native font rasterization and media decoding."
+  ]
+}

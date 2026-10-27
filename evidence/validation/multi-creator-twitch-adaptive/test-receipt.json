@@ -1,0 +1,28 @@
+{
+  "schema_version": "1",
+  "change_id": "multi-creator-twitch-adaptive-validation",
+  "implementation_commit": "bc4fb81287b25ce8fd616d6f467e8773a2a8efa8",
+  "commands": [
+    "python -m compileall -q src scripts (x2)",
+    "eight CLI --help smokes (x2)",
+    "pytest -q (x2)",
+    "scripts/verify.ps1 (x2)",
+    "contract_checks.py --require-artifacts (inside verify, x2)",
+    "ruff check changed Python files",
+    "CGKN doctor + status"
+  ],
+  "results": [
+    {"name": "pytest1", "result": "589 passed, 9 warnings"},
+    {"name": "pytest2", "result": "589 passed, 9 warnings"},
+    {"name": "verify1", "result": "PASS; 589 tests; contracts PASS"},
+    {"name": "verify2", "result": "PASS; 589 tests; contracts PASS"},
+    {"name": "targeted", "result": "86 passed before final restart case; multi-creator module 11 passed after it was added"},
+    {"name": "ruff", "result": "PASS"},
+    {"name": "CGKN", "result": "doctor PASS; brief valid; formal evidence NOT_EVALUATED by design"}
+  ],
+  "passed": true,
+  "limitations": [
+    "Full-corpus stages are blocked by safe storage policy",
+    "Human ground truth remains PENDING"
+  ]
+}

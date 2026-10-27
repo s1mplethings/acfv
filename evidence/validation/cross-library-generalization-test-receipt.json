@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "implementation_commit": "d404d18f45b1be6f3970b84d9dc82c9535bb15d6",
+  "date": "2026-10-10",
+  "targeted_tests": {"result": "PASS", "passed": 27, "seconds": 12.43},
+  "focused_coverage": {"result": "PASS", "total": 92, "retrieval_service": 88, "clip_candidates": 92, "conversation_service": 98},
+  "inventory": {"creators": 4, "recordings": 12, "hours": 52.929524, "moments": 5259, "clips": 59},
+  "media": {"recording_ffprobe": "12/12", "selected_clip_ffprobe": "8/8", "selected_clip_decode": "8/8", "unique_clip_hashes": 7},
+  "retrieval": {"queries": 30, "top1": 20, "top3": 24, "top5": 26, "top10": 27, "no_evidence": "12/12"},
+  "fixed_20_regression": {"top5": "16/20", "required": "15/20", "result": "PASS"},
+  "evaluation_bundle": {"path": "var/deliverables/cross-library-evaluation-bundle.zip", "size_bytes": 135872246, "sha256": "2C23E605889C6040CBBBE9FE12FB0EDCDD7272FB88C8FFC008E2FAD7ED59697A", "files": 26},
+  "full_verification": {
+    "run_1": {"result": "PASS", "pytest": "367 passed, 11 warnings, 129.06s", "verify_pytest": "367 passed, 11 warnings, 146.90s", "contracts": "PASS"},
+    "run_2": {"result": "PASS", "pytest": "367 passed, 11 warnings, 142.21s", "verify_pytest": "367 passed, 11 warnings, 150.73s", "contracts": "PASS"}
+  },
+  "raw_receipts": [
+    "var/cross_library_generalization/inventory-raw.json",
+    "var/cross_library_generalization/moment-quality-metrics.json",
+    "var/cross_library_generalization/dogfood-retrieval-base-after-fix.json",
+    "var/cross_library_generalization/limited-libraries-retrieval.json",
+    "var/cross_library_generalization/conversation-validation.json",
+    "var/cross_library_generalization/clip-media-validation.json"
+  ]
+}

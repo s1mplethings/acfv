@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "model_version": "creator_visual_identity_v1",
+  "runtime_mode": "SHADOW_VISUAL_IDENTITY",
+  "creators": ["saruei", "anny"],
+  "detector_role": "AVATAR_PRESENCE_DETECTOR",
+  "detector_path": "G:/Cliper/acfv/model/best.pt",
+  "detector_sha256": "48d0f7058739ec1f7baaa6ed58d9192130e9caa377be1dad238ba7288d4f1580",
+  "encoder": "torchvision-resnet18-imagenet1k-v1-frozen",
+  "encoder_weights_filename": "resnet18-f37072fd.pth",
+  "encoder_weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "classifier": "linear-probe-with-open-set-support-distance",
+  "classifier_path": "resources/creator_visual_identity_v1/identity-model.joblib",
+  "classifier_sha256": "fcbea84149a5ea16f71bce2b4c3d80583cfcb327b20aca85941897c076fa8969",
+  "dataset_manifest_sha256": "524738ad39c9625d533fb80974e457ab1eed3aa1257dd05ff2a697f4762f4cf8",
+  "strong_score": 0.45,
+  "strong_margin": 0.2,
+  "minimum_support": 0.7738778293132782,
+  "unknown_enabled": true,
+  "new_creator_policy": "retrain_linear_head_and_recalibrate_open_set",
+  "human_precision_status": "PENDING"
+}

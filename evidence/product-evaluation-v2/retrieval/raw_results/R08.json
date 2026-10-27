@@ -1,0 +1,579 @@
+{
+  "case_id": "R08",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "Which moment has Japanese lyrics repeatedly asking someone to turn this way again?",
+  "ground_truth": {
+    "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "fedb9574-8fbe-4c3c-a366-46077629ee26",
+    "start_ms": 8515280,
+    "end_ms": 8564000,
+    "timestamp": "02:21:55.280–02:22:44.000",
+    "transcript_excerpt": "切ない心に魔法をかけてみましょう 未来への自己道ね 雨降られ笑顔で 君よ溶けちゃえ 今日の夜空を見つめ ちょっと頼みて もう一回こっち向いて 言いたいことがもっとあるから もう一回こっち向いて 本気が揺れる愛のfuture だからこっち向いて 回れ地球恋戻せ だからこっち向いて 偶然じゃないことfuture",
+    "old_moment_id": "a9e83a59-40c0-4cf7-9133-04188ede4979",
+    "acceptable_child_ids": [
+      "fedb9574-8fbe-4c3c-a366-46077629ee26"
+    ]
+  },
+  "target_rank": null,
+  "latency_ms": 3905.819,
+  "target_diagnostics": {},
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "a01a82bb-2c38-4ef4-a92c-30e50a26db8c",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 10432000,
+      "end_ms": 10512000,
+      "score": -3.0624396800994873,
+      "summary": "Dun, dun, dun, dun, dun, dun, dun I miss the way you shake I feel totally lost If I'm asking for help, it's all Because being with you has opened my eyes Could I ever believe such a perfect surprise? I keep asking myself, wondering how I…",
+      "transcript_excerpt": "Dun, dun, dun, dun, dun, dun, dun I miss the way you shake I feel totally lost If I'm asking for help, it's all Because being with you has opened my eyes Could I ever believe such a perfect surprise? I keep asking myself, wondering how I keep closing my eyes, but I can't let you out What if I go a place where it's just you and me? Nobody asks, so we can be free Nobody asks, so we can be free As the hours pass, I will let you know That I need to rest before I know How it feels to rest on your pat",
+      "debug": {
+        "fts_rank": 8,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -3.0624396800994873,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "b5854c60-7c5b-486d-9746-69537e6f69f0",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 13376000,
+      "end_ms": 13384000,
+      "score": -4.2823710441589355,
+      "summary": "That? Oh, f**k!",
+      "transcript_excerpt": "That? Oh, f**k! Let's go. Uh...",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8340697288513184,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -4.2823710441589355,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "42088841-c97e-46f1-a058-6630962f53ec",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6567000,
+      "end_ms": 6582000,
+      "score": -4.701895236968994,
+      "summary": "I love this. Turn it up.",
+      "transcript_excerpt": "I love this. Turn it up. You happy? Can you hear me? Hello? Hello? Look it. Look again.",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -4.701895236968994,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "d4d314f3-9364-4240-96cc-ccbca7f65637",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 9499280,
+      "end_ms": 9611080,
+      "score": -4.733394145965576,
+      "summary": "Humuhumu Naruto don't My voice is soothing Don't Make me blush Umu Oh no, the Japanese is getting timed out Talk about anything and listen for hours But I want you to listen what I'm talking about Bro, I like when people say that and then…",
+      "transcript_excerpt": "Humuhumu Naruto don't My voice is soothing Don't Make me blush Umu Oh no, the Japanese is getting timed out Talk about anything and listen for hours But I want you to listen what I'm talking about Bro, I like when people say that and then there are moments when I realized that no one was like listening to what I was saying at all. Is that why you're just like listening, but just like not to what I'm saying, just to me I can fall asleep to any anytime. Well, that's nice to fucking know Yeah, I'll",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8312901258468628,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -4.733394145965576,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "6a150955-e3f4-4852-b580-2cfa8967d9df",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 13520000,
+      "end_ms": 13540000,
+      "score": -5.090633869171143,
+      "summary": "The fuck was that again? Cho-chin.",
+      "transcript_excerpt": "The fuck was that again? Cho-chin. Stuck. Stuck. Stuck. Stuck. Stuck. Cho-chin.",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.836269736289978,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -5.090633869171143,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "8b85b793-9260-4c38-8929-6257b17f99f8",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14718000,
+      "end_ms": 14720000,
+      "score": -5.369636058807373,
+      "summary": "I'm honey",
+      "transcript_excerpt": "I'm honey",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -5.369636058807373,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "47dc9a5f-e927-4152-b4eb-7dddd882a75a",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7886000,
+      "end_ms": 7889000,
+      "score": -5.7228312492370605,
+      "summary": "Oh my god.",
+      "transcript_excerpt": "Oh my god.",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8443509340286255,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -5.7228312492370605,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "c9707001-b177-45c7-9319-e9d89e87d18b",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13800000,
+      "end_ms": 13923500,
+      "score": -5.733374118804932,
+      "summary": "This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death spraggle, flay, what, you only gave it one eye, here top…",
+      "transcript_excerpt": "This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death spraggle, flay, what, you only gave it one eye, here top, this goes off hard, oh, you can do better than that, no, no, hold on, I can do better than that, oh my god, I can't write everyone, oh my god, you guys are giving me so much, oh my freaking god, you want me to keep writing, is that why, you gave me Aurora for ever",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8285446763038635,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -5.733374118804932,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "4bd3e32d-f528-40dc-b630-8ed5e042f503",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12835200,
+      "end_ms": 12862440,
+      "score": -6.368288516998291,
+      "summary": "God, this is so funny. You have problems LORE ACCURATE TUTO LORE ACCURATE TUTO Not LORE ACCURATE, it's...",
+      "transcript_excerpt": "God, this is so funny. You have problems LORE ACCURATE TUTO LORE ACCURATE TUTO Not LORE ACCURATE, it's... This is blasphemy The suitcase, sorry, I forgot it There you go And the little...",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8281171321868896,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -6.368288516998291,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "33d4b3ca-7101-4edd-ae91-543f3f4ee00d",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 12760640,
+      "end_ms": 12830320,
+      "score": -6.4132513999938965,
+      "summary": "Also... I remember I met someone Who lived in Japan for like a very long time like nearly 10 years And they basically did not know Japanese at all And back then I looked at them and I was like How the fuck is that possible to live in Japan…",
+      "transcript_excerpt": "Also... I remember I met someone Who lived in Japan for like a very long time like nearly 10 years And they basically did not know Japanese at all And back then I looked at them and I was like How the fuck is that possible to live in Japan for 10 years And you still don't fucking know Japanese? And now I'm fucking 6 years later I still fucking struggle You're halfway there! Dude, it's gonna be embarrassing if I'm gonna live here for 10 years And I still am at where I am at right now That's why I",
+      "debug": {
+        "fts_rank": 15,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -6.4132513999938965,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "10c5cea2-a327-45c3-a59f-610b483d5b59",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 9475000,
+      "end_ms": 9498800,
+      "score": -6.765905857086182,
+      "summary": "Yeah, I'm listening to you. Do the buses have driver on the right as well?",
+      "transcript_excerpt": "Yeah, I'm listening to you. Do the buses have driver on the right as well? Yeah, the buses in Japan have driver on the right side. And you enter on the left. You love listening to me? Oh, why would you say that? What the fuck? What the fuck?",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8291246891021729,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -6.765905857086182,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "b3e12c44-47a8-4def-83f3-b63ef7294619",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28359000,
+      "end_ms": 28380000,
+      "score": -6.8306050300598145,
+      "summary": "Jesus Christ. D-P-Y-D-W-M-U-L, thanks for the one.",
+      "transcript_excerpt": "Jesus Christ. D-P-Y-D-W-M-U-L, thanks for the one. You know what? I'm gonna stop behaving like Nero. What are you gonna do? I'm gonna be Nero. You're gonna be Nero?",
+      "debug": {
+        "dense_rank": 17,
+        "dense_score": 0.8302136659622192,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -6.8306050300598145,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "a48f7683-d388-4ac6-bdc3-9fbab91e15df",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 5475000,
+      "end_ms": 5495000,
+      "score": -7.14647102355957,
+      "summary": "Listen, even though I might know some words, there's definitely gonna be words that I don't know or I forgot. Or like, I just wanna see how cute this game is.",
+      "transcript_excerpt": "Listen, even though I might know some words, there's definitely gonna be words that I don't know or I forgot. Or like, I just wanna see how cute this game is. I just wanna see the cute game again! Shasha. New game.",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.829046368598938,
+        "fts_rank": 1,
+        "fusion_score": 0.029051670471052088,
+        "reranker_score": -7.14647102355957,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "9ce642c5-77b5-4759-8288-e0825b37b69f",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 7709000,
+      "end_ms": 7747000,
+      "score": -7.154829502105713,
+      "summary": "Wanna try again? My knee, dude Yeah, where am I?",
+      "transcript_excerpt": "Wanna try again? My knee, dude Yeah, where am I? Alright So cute Wicked Chat Chat Oh my god Chat Oh my god I'm coming to you",
+      "debug": {
+        "dense_rank": 4,
+        "dense_score": 0.8383147716522217,
+        "fusion_score": 0.015625,
+        "reranker_score": -7.154829502105713,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "b29f4e51-5b8c-46b2-b0a3-9134cae8cdf5",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13042160,
+      "end_ms": 13082000,
+      "score": -7.15997838973999,
+      "summary": "beaten the ending this isn't to gloat but i feel like i'm the only person on youtube at this current moment that i've seen so far who has the footage of the fight i've seen no videos or screenshots of this mission at all the only source i…",
+      "transcript_excerpt": "beaten the ending this isn't to gloat but i feel like i'm the only person on youtube at this current moment that i've seen so far who has the footage of the fight i've seen no videos or screenshots of this mission at all the only source i have for the endings is rpg site dot net once again but this is without any proof of screenshots or videos i'm not saying don't believe these endings but i always like to see proof to claim that it's real the endings are essentially the ending three when you se",
+      "debug": {
+        "fts_rank": 18,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -7.15997838973999,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "218b1c8d-223b-4576-860c-4e90062897c5",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 7231000,
+      "end_ms": 7247000,
+      "score": -7.2043585777282715,
+      "summary": "That is also Kanban Ice cream That is surprising What is under panties?",
+      "transcript_excerpt": "That is also Kanban Ice cream That is surprising What is under panties?",
+      "debug": {
+        "fts_rank": 5,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -7.2043585777282715,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "f76b1ae8-db55-4871-8caa-018bb9aa5389",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 7251000,
+      "end_ms": 7332000,
+      "score": -7.428909778594971,
+      "summary": "Asking important questions, bro Okay, I wouldn't know what the fuck this is Oh my god, I wonder what this word is Coffee Menu Smartphone Kanban I'm learning so much Japanese right now Holy shit, I feel kawaii as fuck right now For real…",
+      "transcript_excerpt": "Asking important questions, bro Okay, I wouldn't know what the fuck this is Oh my god, I wonder what this word is Coffee Menu Smartphone Kanban I'm learning so much Japanese right now Holy shit, I feel kawaii as fuck right now For real, for real Dog Oh my god Dog He blinked, take again And take another picture Smug looking ass Inu Cute! Can I steal the money?",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -7.428909778594971,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "8508363f-09e9-4ae2-898e-11b3a9186862",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 16239000,
+      "end_ms": 16257000,
+      "score": -7.4715046882629395,
+      "summary": "Oh no, it's those monsters again. Ah fuck, they're going to be over me.",
+      "transcript_excerpt": "Oh no, it's those monsters again. Ah fuck, they're going to be over me. Ok, definitely now, maybe we can put the gem.",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.8317980766296387,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -7.4715046882629395,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "d75e5a39-a83e-40a9-bf7d-e0ba54be0d61",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 4436420,
+      "end_ms": 4445000,
+      "score": -7.4764485359191895,
+      "summary": "You Oh, Adrenaline did it right because they're working with Japanese. They're working with a Japanese company.",
+      "transcript_excerpt": "You Oh, Adrenaline did it right because they're working with Japanese. They're working with a Japanese company.",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -7.4764485359191895,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "bd1042c0-fc78-4296-8dfa-0c2bdbf7b0c4",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 7334000,
+      "end_ms": 7390000,
+      "score": -7.508560657501221,
+      "summary": "Okane Okane Yo, Rob! Thank you!",
+      "transcript_excerpt": "Okane Okane Yo, Rob! Thank you! Thank you for the raid! Yo, guys! Look, we're... Just like nothing changed We're still on the Rob stream Walking through Japan God, I'm so ESL I wanted to word it cooler, but I'm fucking lame I'm sorry Hello, welcome everybody Thank you, Rob! Thank you! You're raiding me so much! Thank you, I appreciate it That was a good stream Thank you Well met Welcome Welcome I'm just playing this chill game Even though most of the words are literally just katakana for English",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -7.508560657501221,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "339f0551-19f1-4ff3-ae04-8b46c5765b64",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 4461000,
+      "end_ms": 4466000,
+      "score": -7.557820796966553,
+      "summary": "Adrenaline is trigger. If you give anything to trigger, it can turn anything into a masterpiece, okay?",
+      "transcript_excerpt": "Adrenaline is trigger. If you give anything to trigger, it can turn anything into a masterpiece, okay?",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -7.557820796966553,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "cd9f7847-8054-4ae9-a538-bc2cb45060af",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 5450000,
+      "end_ms": 5472000,
+      "score": -7.818230628967285,
+      "summary": "This one Wow, I'm so blue I think it's only in this screen though I'll turn off the music, I'll just... Boop.",
+      "transcript_excerpt": "This one Wow, I'm so blue I think it's only in this screen though I'll turn off the music, I'll just... Boop. Yeah! Time to get fucking cozy! I wish someone made tea for me. I wish someone did.",
+      "debug": {
+        "fts_rank": 25,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -7.818230628967285,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "b37dae5c-700d-47d5-be8e-4ea561c4c895",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 938120,
+      "end_ms": 955640,
+      "score": -7.851963520050049,
+      "summary": "I said, like, I cannot I don't look scared with a treaty model. I don't I try to look like scared, but like, it's not even a target to look scared or sad or crying.",
+      "transcript_excerpt": "I said, like, I cannot I don't look scared with a treaty model. I don't I try to look like scared, but like, it's not even a target to look scared or sad or crying. There's none of that. So that's why I was thinking maybe it's not so good to have a treaty model. You know. Yeah.",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -7.851963520050049,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "ba6341ce-b524-4a2d-9908-82b39cea6460",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 19975520,
+      "end_ms": 20043680,
+      "score": -7.870038032531738,
+      "summary": "the underside is the x yeah which side is the other side you're fucking kidding me i knew it how did i get there where are they all coming from hello from the ew oh what's that oh so that's where he jumps from for some reason he doesn't go…",
+      "transcript_excerpt": "the underside is the x yeah which side is the other side you're fucking kidding me i knew it how did i get there where are they all coming from hello from the ew oh what's that oh so that's where he jumps from for some reason he doesn't go here okay ah oh chad Is this the good DLC that I'm playing, or is this the bad one?",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -7.870038032531738,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "fa3e30e5-4b9b-4267-a3af-93148e6c2cbf",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 12390000,
+      "end_ms": 12397000,
+      "score": -8.077330589294434,
+      "summary": "It says Gaito It says Gaito",
+      "transcript_excerpt": "It says Gaito It says Gaito",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8274324536323547,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -8.077330589294434,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "f4408fcd-cc08-4882-be2a-eef256867539",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3972000,
+      "end_ms": 4030000,
+      "score": -8.138650894165039,
+      "summary": "Oh yeah, I put Hiyori as a reference again. Because I still want to like...",
+      "transcript_excerpt": "Oh yeah, I put Hiyori as a reference again. Because I still want to like... I was trying to do the similar kind of body on this one, but like she ended up feeling too fucking long. She looks like a noodle. Because I tried to reference Hiyori. So I made her shorter, and now she's like more or less the same height, size, whatever the fuck. And I think I need to make the head smaller, which I think I'm gonna do later. Either make the head smaller or the body bigger, I don't know. We'll see. Maybe I",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.828991174697876,
+        "fusion_score": 0.0125,
+        "reranker_score": -8.138650894165039,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "dc4ca052-aca6-40d7-9d0f-2913739402d4",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 11221000,
+      "end_ms": 11224000,
+      "score": -8.280007362365723,
+      "summary": "I'm having such a danky moment",
+      "transcript_excerpt": "I'm having such a danky moment",
+      "debug": {
+        "fts_rank": 9,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -8.280007362365723,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "b9e59d84-436f-4c70-8517-1d5f8486b2b0",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 11172500,
+      "end_ms": 11206000,
+      "score": -8.355055809020996,
+      "summary": "Ah, the vent! Where the fuck is the vent?",
+      "transcript_excerpt": "Ah, the vent! Where the fuck is the vent? Yeah, like, words like that I- I'm not fucking even here in my daily life ever Maybe if I play the manga with Japanese people Do they have these memes with dancing? Probably not",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -8.355055809020996,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "f77bf37b-db71-4368-a664-2e4fd4ba5a05",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 12373600,
+      "end_ms": 12380800,
+      "score": -8.523049354553223,
+      "summary": "Gaito-u Gaito-u What the fuck is that again?",
+      "transcript_excerpt": "Gaito-u Gaito-u What the fuck is that again?",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8309570550918579,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -8.523049354553223,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "5407657a-b35f-4a84-a060-9ca963860c22",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 886800,
+      "end_ms": 910680,
+      "score": -8.628196716308594,
+      "summary": "Decent. Bro, it's supposed to be like a show for kids and they have song like this.",
+      "transcript_excerpt": "Decent. Bro, it's supposed to be like a show for kids and they have song like this. You are educating them to start like, you know, appreciating good music. It is good. Oh, man, the treaty is just so scuffed. You really want me to have it. I won't be even able to have like, you know, the shadow on my character when playing the game.",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -8.628196716308594,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "dataset_id": "NEW_TWITCH_VALIDATION_V1",
+  "sample_count": 500,
+  "counts": {
+    "identity": 250,
+    "trusted_speech": 50,
+    "adaptive_asr": 200
+  },
+  "media_available_local": 500,
+  "human_ground_truth": "PENDING"
+}

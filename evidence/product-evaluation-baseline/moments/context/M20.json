@@ -1,0 +1,45 @@
+{
+  "case_id": "M20",
+  "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+  "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+  "moment_id": "3c038eff-11f3-4cb4-9470-1bd45cf1ccad",
+  "start_ms": 15110000,
+  "end_ms": 15169000,
+  "timestamp": "04:11:50.000–04:12:49.000",
+  "duration_ms": 59000,
+  "length_bucket": "medium",
+  "summary": "Hi ~~ ~~ ~~ ~~ It always sounds to me like you're on my right even though you're on my left even though you're on... No, fuck, I don't fucking know. I get baited. I feel like I can go there but I can't. I somehow fell to the floor and I saw like some shit under here. You saw shit under here? What? Almost like there's another room.",
+  "moment_transcript": "Hi ~~ ~~ ~~ ~~ It always sounds to me like you're on my right even though you're on my left even though you're on... No, fuck, I don't fucking know. I get baited. I feel like I can go there but I can't. I somehow fell to the floor and I saw like some shit under here. You saw shit under here? What? Almost like there's another room.",
+  "context_30s": {
+    "before": "Is it like mic button for when you have e-sex in this room so that people outside this room cannot hear you? Or some shit like that? Like some earpiece setting? Is it? Wait, is it? Probably? Oh my god Try it? Yo, Bella, can you hear me after I click this? Ah wait, it's reverb override Wait, what the fuck? Can you hear me? Yeah, so I can hear you Oh, then I don't fucking know how to dance",
+    "inside": "Hi ~~ ~~ ~~ ~~ It always sounds to me like you're on my right even though you're on my left even though you're on... No, fuck, I don't fucking know. I get baited. I feel like I can go there but I can't. I somehow fell to the floor and I saw like some shit under here. You saw shit under here? What? Almost like there's another room.",
+    "after": "Is there another room in this world? Put the helmet on the wrong way. No, I didn't put the helmet on the wrong way. No, I don't know if there's any other room here. I don't think so."
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 3000,
+    "pause_after_ms": 1000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 15105000,
+      "end_ms": 15107000,
+      "text": "Oh, then I don't fucking know how to dance"
+    },
+    "next_segment": {
+      "start_ms": 15170000,
+      "end_ms": 15173000,
+      "text": "Is there another room in this world?"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

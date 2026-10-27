@@ -1,0 +1,35 @@
+{
+  "audit_scope": "G:/Cliper only, per user authorization",
+  "canonical_model_directory": "G:/Cliper/acfv/model",
+  "files": [
+    {
+      "path": "G:/Cliper/acfv/model/best.pt",
+      "size": 51176658,
+      "extension": ".pt",
+      "mtime": "2025-02-24T21:41:34+08:00",
+      "sha256": "48d0f7058739ec1f7baaa6ed58d9192130e9caa377be1dad238ba7288d4f1580",
+      "role": "canonical Ultralytics YOLO11l avatar-presence checkpoint",
+      "evidence": ["checkpoint task=detect", "names={0: vtuber}", "embedded train_args", "real inference passed"]
+    },
+    {
+      "path": "G:/Cliper/acfv/artifacts/secrets/best.pt",
+      "size": 51176658,
+      "extension": ".pt",
+      "mtime": "2025-02-24T21:41:34+08:00",
+      "sha256": "48d0f7058739ec1f7baaa6ed58d9192130e9caa377be1dad238ba7288d4f1580",
+      "role": "byte-identical duplicate; not selected",
+      "evidence": ["same size", "same mtime", "same SHA-256"]
+    }
+  ],
+  "supporting_code": [
+    {"path": "G:/Cliper/yolo_funcs/yolo_train.py", "role": "Ultralytics training wrapper", "sha256": "e83b979c3609a81816834cdf444451e3b44082b06804a7609cbb664a18e28e7d"},
+    {"path": "G:/Cliper/yolo_funcs/yolo_label_pyqt.py", "role": "YOLO annotation/split/data.yaml tool", "sha256": "1c8427d09db7eaca0a24abe0f55e350ac9d76eb0749efc4e12b22ab883af9f3e"},
+    {"path": "G:/Cliper/yolo_funcs/frames_stract.py", "role": "random video frame extraction", "sha256": "03adf3f61a9ce8adf9172ffb8d3964521ec4545ceaf939635105aff23fde2a7f"},
+    {"path": "G:/Cliper/yolo_funcs/video_process.py", "role": "historical raw-OpenCV-frame YOLO inference and crop postprocess", "sha256": "770bfbf220bcfcf1ad4cf3d9daf7d397f7e234ab746aa507b04cc83c279d1bf1"},
+    {"path": "G:/Cliper/config.json", "role": "historical configuration, not authoritative over embedded checkpoint args", "sha256": "d224040342990e6a5e828fa72815a57c230d6d5b0abc9b0963ff59ca217a2309"},
+    {"path": "G:/Cliper/main.py", "role": "historical application/training defaults", "sha256": "55c925380c4372741bd09c53302de9e69ebbb29c993f5271c7a1b4e5b1f2f791"}
+  ],
+  "excluded": [{"path": "G:/Cliper/model_training", "reason": "unrelated 2025 optical-flow/MoE regression and sign classification pipeline"}],
+  "weights_modified": false,
+  "weights_copied_to_repository": false
+}

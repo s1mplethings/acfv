@@ -1,0 +1,55 @@
+{
+  "dataset_version": "MULTI_CREATOR_TWITCH_V1_PROBE",
+  "manifest": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\multi-creator-twitch-v1\\probe-visual-dataset\\visual-dataset-manifest.jsonl",
+  "manifest_sha256": "6ecef822b8aa59d491bd6d547be45e601a6ed819d9d78dbcc55d876006e188bb",
+  "samples": 300,
+  "counts": {
+    "atelieranoko:holdout": 100,
+    "snuffy:holdout": 100,
+    "laphipi:holdout": 100
+  },
+  "recordings": 3,
+  "rejections": {
+    "near_duplicate": 57,
+    "no_single_dominant_avatar": 322
+  },
+  "source_reports": [
+    {
+      "creator_id": "atelieranoko",
+      "recording_id": "2898984086",
+      "split": "holdout",
+      "source_path": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\multi-creator-twitch-v1\\probe-media\\atelieranoko\\cfc9fb9f-8cfb-4b5b-b356-a84299b04f0f\\source.mp4",
+      "accepted": 100,
+      "rejections": {
+        "near_duplicate": 29,
+        "no_single_dominant_avatar": 116
+      }
+    },
+    {
+      "creator_id": "snuffy",
+      "recording_id": "2900140146",
+      "split": "holdout",
+      "source_path": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\multi-creator-twitch-v1\\probe-media\\snuffy\\7d4b64e3-ac08-40e3-b605-2b87d38d7f06\\source.mp4",
+      "accepted": 100,
+      "rejections": {
+        "no_single_dominant_avatar": 202,
+        "near_duplicate": 9
+      }
+    },
+    {
+      "creator_id": "laphipi",
+      "recording_id": "2897831198",
+      "split": "holdout",
+      "source_path": "F:\\ACFV-Derived\\acfv-compact-human-review\\var\\multi-creator-twitch-v1\\probe-media\\laphipi\\9a1191c2-b589-421f-9933-8cff1ac452e0\\source.mp4",
+      "accepted": 100,
+      "rejections": {
+        "no_single_dominant_avatar": 4,
+        "near_duplicate": 19
+      }
+    }
+  ],
+  "split_unit": "recording_id",
+  "recording_leakage": false,
+  "detector_model_version": "pytorch-234aeae28706",
+  "auto_label_policy": "explicit single-creator + one dominant high-quality avatar bbox"
+}

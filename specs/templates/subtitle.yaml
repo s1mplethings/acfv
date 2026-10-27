@@ -1,0 +1,34 @@
+# Subtitle Configuration - 字幕分句与换行规则
+
+# 分句规则
+segmentation:
+  min_duration: 0.8  # 最短片段时长（秒）
+  max_duration: 4.5  # 最长片段时长（秒）
+  
+  # 换行规则
+  max_line_chars:
+    zh: 18  # 中文每行最大字符数
+    en: 40  # 英文每行最大字符数
+  
+  # 优先断句位置（权重）
+  break_weights:
+    punctuation: 1.0  # 标点符号
+    connectors: 0.8  # 连词（and/but/的/了）
+    particles: 0.6  # 语气词（啊/吗/呢）
+  
+  # 避免在这些词附近断句
+  avoid_breaks:
+    - "的"
+    - "了"
+    - "啊"
+    - "吗"
+    - "呢"
+    - "and"
+    - "but"
+    - "or"
+
+# 字幕位置与边距
+position:
+  default_alignment: 2  # ASS对齐：2=底部居中
+  margin_v: 20  # 垂直边距（像素）
+  margin_h: 10  # 水平边距（像素）

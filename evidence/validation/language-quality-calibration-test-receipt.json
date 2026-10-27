@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-11",
+  "branch": "fix/language-quality-calibration",
+  "implementation_commit": "291df397428afb06942d4080b049e63808a08337",
+  "fixed_set": {
+    "clips": 12,
+    "words": 1184,
+    "low_confidence_words": 22,
+    "local_redecodes": 29,
+    "entity_findings": 25,
+    "broken_sentence_suspects": 30
+  },
+  "mutation_suite": {
+    "cases": 30,
+    "critical_cases": 10,
+    "critical_recall": 1.0,
+    "warning_cases": 10,
+    "warning_noncritical_rate": 1.0,
+    "harmless_cases": 10,
+    "harmless_false_critical": 0
+  },
+  "focused_coverage": {
+    "command": "python -m pytest -q -p pytest_cov tests/unit/test_language_quality_calibration.py tests/unit/test_language_quality_hardening.py tests/unit/test_bilingual_subtitles.py --cov=acfv.clips.refinement --cov=acfv.clips.subtitles --cov-report=term",
+    "tests": "78 passed",
+    "coverage": "84%",
+    "refinement": "86%",
+    "subtitles": "83%"
+  },
+  "full_regression": [
+    {
+      "run": 1,
+      "compileall": "PASS",
+      "cli_help": "PASS: root, gui, pipe clip, live, download",
+      "pytest": "475 passed, 11 warnings, 0 skipped, 0 xfailed",
+      "verify_pytest": "475 passed, 11 warnings, 0 skipped, 0 xfailed",
+      "contract_checks": "PASS",
+      "verify": "PASS"
+    },
+    {
+      "run": 2,
+      "compileall": "PASS",
+      "cli_help": "PASS: root, gui, pipe clip, live, download",
+      "pytest": "475 passed, 11 warnings, 0 skipped, 0 xfailed",
+      "verify_pytest": "475 passed, 11 warnings, 0 skipped, 0 xfailed",
+      "contract_checks": "PASS",
+      "verify": "PASS"
+    }
+  ],
+  "gui_source_changes": 0,
+  "g_drive_dependency": false
+}

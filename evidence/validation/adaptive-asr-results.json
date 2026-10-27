@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "mode": "SHADOW_ONLY",
+  "feature_flag": false,
+  "generic_asr_authoritative": true,
+  "official_transcript_mutations": 0,
+  "automated_shadow_cases": {"identity_conflict_fallback": "PASS", "unsupported_change_review": "PASS", "independently_supported_correction": "PASS", "redecode_failure_fallback": "PASS"},
+  "real_shadow_spans": 0,
+  "human_ground_truth_spans": 0,
+  "generic_wer": "NOT_EVALUATED",
+  "adaptive_wer": "NOT_EVALUATED",
+  "critical_error_delta": "NOT_EVALUATED",
+  "production_ready": false,
+  "reason": "No safe Creator identity plus independent human transcript set is available; forcing adaptive changes would violate the trust contract."
+}

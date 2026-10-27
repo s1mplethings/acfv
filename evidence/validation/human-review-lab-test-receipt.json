@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "change_id": "compact-human-review-lab-2026-10-13",
+  "commit": "6164bf72cef98fef1573d8a6fdacad368c653902",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m acfv.cli review-lab --help",
+    "python -m pytest -q",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "python scripts/validate_human_review_lab.py --source-root F:\\ACFV-Derived\\acfv-large-scale-generation-quality --output-root var/human-review-validation/release-native --scale 1.0 --annotate"
+  ],
+  "results": [
+    {"name": "round_1_compile_and_cli", "status": "PASS"},
+    {"name": "round_1_pytest", "status": "PASS", "detail": "524 passed, 0 skipped, 0 xfailed, 9 warnings, 190.95s"},
+    {"name": "round_1_verify", "status": "PASS", "detail": "524 passed; contract_checks PASS; verify PASS"},
+    {"name": "round_2_compile_and_cli", "status": "PASS"},
+    {"name": "round_2_pytest", "status": "PASS", "detail": "524 passed, 0 skipped, 0 xfailed, 9 warnings, 96.17s"},
+    {"name": "round_2_verify", "status": "PASS", "detail": "524 passed; contract_checks PASS; verify PASS"},
+    {"name": "native_test_database", "status": "PASS", "detail": "55 GUI annotations persisted across close/reopen; integrity_check ok; production DB untouched"},
+    {"name": "interaction_performance", "status": "PASS", "detail": "Save & Next average 32.28 ms, p95 41.86 ms; task switching 26-38 ms"},
+    {"name": "large_dataset", "status": "PASS", "detail": "686 unique samples; 194 unique formal pairs; 71 labelled controls; Fixed37 boundary 37/37"},
+    {"name": "dpi_geometry", "status": "PASS", "detail": "10 pages captured at 1920x1080/100%, 1280x720/125%, and 1280x720/150%"}
+  ],
+  "passed": true,
+  "environment": {
+    "os": "Windows 11, Asia/Shanghai",
+    "python": "D:\\anaconda\\envs\\clip\\python.exe"
+  },
+  "limitations": [
+    "Qt offscreen screenshots verify geometry and scaling but native font rasterization and actual media decoding still require the planned human viewing pass.",
+    "WAL/NORMAL makes interactive writes responsive; a sudden OS or power failure may lose the latest uncheckpointed transactions. Close, manual backup, and each 50-revision backup force a FULL checkpoint.",
+    "427 of 686 samples have automatically resolved local media. Text-only tasks remain usable; unresolved media items expose Skip and Relink Media without invalidating the dataset.",
+    "The conda shell prints a pre-existing libmamba QueryFormat warning before commands; it does not change command exit codes or test results."
+  ]
+}

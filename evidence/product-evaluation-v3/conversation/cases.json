@@ -1,0 +1,848 @@
+[
+  {
+    "case_id": "C01",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say about not having played PUBG for a long time?",
+    "assistant_answer": "PUBG? I haven't played PUBG in a very long time.",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E2"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E2",
+        "moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "start_ms": 13400000,
+        "end_ms": 13417000
+      }
+    ],
+    "latency_ms": 8714.627,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 13400000,
+        "end_ms": 13417000,
+        "score": 2.0234696865081787,
+        "summary": "PUBG? I haven't played PUBG in a very long time.",
+        "transcript_excerpt": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+        "debug": {
+          "dense_rank": 1,
+          "dense_score": 0.8651415967941284,
+          "winning_representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:summary:0",
+          "winning_representation_type": "SUMMARY",
+          "winning_representation_excerpt": "PUBG? I haven't played PUBG in a very long time.",
+          "representation_dense_rank": 2,
+          "second_representation_score": 0.8361382484436035,
+          "fts_rank": 1,
+          "fts_representation_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837:summary:0",
+          "fts_representation_type": "SUMMARY",
+          "fusion_score": 0.03278688524590164,
+          "reranker_score": 2.0234696865081787,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C02",
+    "evaluation_type": "SUPPORTED",
+    "question": "Why didn't she want to leave her room even though she was hungry?",
+    "assistant_answer": "She was shy and didn't want to leave her room even though she was hungry.",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E4"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "start_ms": 8103000,
+        "end_ms": 8119000
+      },
+      {
+        "evidence_id": "E4",
+        "moment_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "start_ms": 8083000,
+        "end_ms": 8099000
+      }
+    ],
+    "latency_ms": 5073.988,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8103000,
+        "end_ms": 8119000,
+        "score": -3.2328386306762695,
+        "summary": "I can hear her in the corridor. But I'm hungry.",
+        "transcript_excerpt": "I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room.",
+        "debug": {
+          "dense_rank": 2,
+          "dense_score": 0.8730899286270142,
+          "winning_representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:neighbor_context:0",
+          "winning_representation_type": "NEIGHBOR_CONTEXT",
+          "winning_representation_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater.",
+          "representation_dense_rank": 3,
+          "second_representation_score": 0.8375445604324341,
+          "fts_rank": 15,
+          "fts_representation_id": "7f490393-c82d-4086-85dc-8fb04f63b4d8:neighbor_context:0",
+          "fts_representation_type": "NEIGHBOR_CONTEXT",
+          "fusion_score": 0.02946236559139785,
+          "reranker_score": -3.2328386306762695,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "start_ms": 8083000,
+        "end_ms": 8099000,
+        "score": -6.528402805328369,
+        "summary": "But I don't want to go out. But I'm hungry.",
+        "transcript_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy!",
+        "debug": {
+          "dense_rank": 1,
+          "dense_score": 0.887571451663971,
+          "winning_representation_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy!",
+          "representation_dense_rank": 1,
+          "second_representation_score": 0.8701680898666382,
+          "fts_rank": 5,
+          "fts_representation_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66:full_transcript:0",
+          "fts_representation_type": "FULL_TRANSCRIPT",
+          "fusion_score": 0.03177805800756621,
+          "reranker_score": -6.528402805328369,
+          "final_rank": 7,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C03",
+    "evaluation_type": "SUPPORTED",
+    "question": "What control did she identify as the right trigger in Crow Country?",
+    "assistant_answer": "right trigger",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "f103faaa-bd0d-4496-895b-e0485cc3027b",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "start_ms": 3033840,
+        "end_ms": 3129280
+      }
+    ],
+    "latency_ms": 4160.409,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "f103faaa-bd0d-4496-895b-e0485cc3027b",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 3033840,
+        "end_ms": 3129280,
+        "score": -6.155627727508545,
+        "summary": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash…",
+        "transcript_excerpt": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash oh med kits it's actually like rewarding to uh explore and look everywhere trash hey a large med kit what's this okay it's a bathroom here does it mean i can actually enter or no wait oh handgun ammo okay cool the scrow here what is i eating that animal i can ",
+        "debug": {
+          "dense_rank": 81,
+          "dense_score": 0.7675489103794098,
+          "winning_representation_id": "f103faaa-bd0d-4496-895b-e0485cc3027b:summary:0",
+          "winning_representation_type": "SUMMARY",
+          "winning_representation_excerpt": "oh that's my id look guys it's really like resident evil okay cool um i'm just going to do click click click oh it's a right trigger oh that's better than you know having this annoying noise all the time okay got it trash can full of trash…",
+          "representation_dense_rank": 216,
+          "second_representation_score": 0.7439191937446594,
+          "fts_rank": 39,
+          "fts_representation_id": "f103faaa-bd0d-4496-895b-e0485cc3027b:summary:0",
+          "fts_representation_type": "SUMMARY",
+          "fusion_score": 0.017193208682570384,
+          "reranker_score": -6.155627727508545,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C04",
+    "evaluation_type": "SUPPORTED",
+    "question": "What internet solution came up for streaming from a boat?",
+    "assistant_answer": "A Starlink",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E2"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E2",
+        "moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "start_ms": 12091000,
+        "end_ms": 12173440
+      }
+    ],
+    "latency_ms": 3633.555,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 12091000,
+        "end_ms": 12173440,
+        "score": -2.2088990211486816,
+        "summary": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the…",
+        "transcript_excerpt": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word Yeah, the satellite goes in space I mean, if you buy your own... Satellite that can also like help right um I can just use stalling. It's okay I don't need the I don't need my own satellite tracking me. Neuralink Neuralink, that'd be pretty sick. Neuralink Sorry, I kind ",
+        "debug": {
+          "dense_rank": 7,
+          "dense_score": 0.803315840959549,
+          "winning_representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "A Starlink Buy a satellite to attach to the boat, is that what you just told me? Yeah Yeah, you know what, I'm gonna f***ing buy a satellite and strap it to the boat Motherf***, just buy a f***ing antenna The antenna is the word",
+          "representation_dense_rank": 13,
+          "second_representation_score": 0.7818322777748108,
+          "fts_rank": 5,
+          "fts_representation_id": "e247b401-817e-4829-9b58-5cf1fcd3f63a:neighbor_context:0",
+          "fts_representation_type": "NEIGHBOR_CONTEXT",
+          "fusion_score": 0.030309988518943745,
+          "reranker_score": -2.2088990211486816,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C05",
+    "evaluation_type": "SUPPORTED",
+    "question": "What did she say helps memorize words?",
+    "assistant_answer": "You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize.",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E2"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "b5854c60-7c5b-486d-9746-69537e6f69f0",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "start_ms": 13376000,
+        "end_ms": 13384000
+      },
+      {
+        "evidence_id": "E2",
+        "moment_id": "7970974f-f888-47f6-9e79-2c0540b20474",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "start_ms": 13404000,
+        "end_ms": 13424000
+      }
+    ],
+    "latency_ms": 6269.386,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "b5854c60-7c5b-486d-9746-69537e6f69f0",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13376000,
+        "end_ms": 13384000,
+        "score": -1.8230819702148438,
+        "summary": "That? Oh, f**k!",
+        "transcript_excerpt": "That? Oh, f**k! Let's go. Uh...",
+        "debug": {
+          "dense_rank": 59,
+          "dense_score": 0.8032403588294983,
+          "winning_representation_id": "b5854c60-7c5b-486d-9746-69537e6f69f0:neighbor_context:0",
+          "winning_representation_type": "NEIGHBOR_CONTEXT",
+          "winning_representation_excerpt": "No, it's not that. I said it before too. F**k, f**k, f**k. Coco-kun. It must have been here, no? I think, I think, I think, I think, I think. It's, it's, it's, it's... Uh... That? Oh, f**k! You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize",
+          "representation_dense_rank": 19,
+          "second_representation_score": null,
+          "fts_rank": 9,
+          "fts_representation_id": "b5854c60-7c5b-486d-9746-69537e6f69f0:neighbor_context:0",
+          "fts_representation_type": "NEIGHBOR_CONTEXT",
+          "fusion_score": 0.02289611496772622,
+          "reranker_score": -1.8230819702148438,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "7970974f-f888-47f6-9e79-2c0540b20474",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13404000,
+        "end_ms": 13424000,
+        "score": -2.642502546310425,
+        "summary": "You could do it, thank you. He believed in me.",
+        "transcript_excerpt": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize.",
+        "debug": {
+          "dense_rank": 4,
+          "dense_score": 0.8328491544723511,
+          "winning_representation_id": "7970974f-f888-47f6-9e79-2c0540b20474:full_transcript:0",
+          "winning_representation_type": "FULL_TRANSCRIPT",
+          "winning_representation_excerpt": "You could do it, thank you. He believed in me. Strange. I'm gonna forget that again though. But the more you repeat it, the better you... This is how you memorize it. You have to run into the words over and over. And then, that way... If you, like, often run into it, this is, like, the easiest way to memorize.",
+          "representation_dense_rank": 6,
+          "second_representation_score": 0.8104358911514282,
+          "fts_rank": 2,
+          "fts_representation_id": "7970974f-f888-47f6-9e79-2c0540b20474:passage:1",
+          "fts_representation_type": "PASSAGE",
+          "fusion_score": 0.031754032258064516,
+          "reranker_score": -2.642502546310425,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C06",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What game-related moments mention weapons or ammo?",
+    "assistant_answer": "武器或弹药被提及的游戏时刻包括：\n- E1: 提到“ammo”（弹药）。\n- E3: “raise weapon shoot and grenade”（举起武器射击和投掷手榴弹）。\n- E4: 请求“ammo or meds”（弹药或药品）。",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E3",
+      "E4"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "507357c6-0f1f-4449-ae88-cf721581f395",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "start_ms": 14692000,
+        "end_ms": 14708500
+      },
+      {
+        "evidence_id": "E3",
+        "moment_id": "895c760a-98df-4909-be18-225ba7764772",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "start_ms": 2930520,
+        "end_ms": 3030480
+      },
+      {
+        "evidence_id": "E4",
+        "moment_id": "58e8589e-8213-4688-8a40-743072fb7f6f",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "start_ms": 10145000,
+        "end_ms": 10161000
+      }
+    ],
+    "latency_ms": 7607.271,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "507357c6-0f1f-4449-ae88-cf721581f395",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 14692000,
+        "end_ms": 14708500,
+        "score": -1.8731038570404053,
+        "summary": "No, it's alright. Okay, ammo.",
+        "transcript_excerpt": "No, it's alright. Okay, ammo. Empty. Hello, Gabrielle.",
+        "debug": {
+          "dense_rank": 106,
+          "dense_score": 0.7914837872982026,
+          "winning_representation_id": "507357c6-0f1f-4449-ae88-cf721581f395:full_transcript:0",
+          "winning_representation_type": "FULL_TRANSCRIPT",
+          "winning_representation_excerpt": "No, it's alright. Okay, ammo. Empty. Hello, Gabrielle.",
+          "representation_dense_rank": 445,
+          "second_representation_score": 0.7759644389152527,
+          "fts_rank": 44,
+          "fts_representation_id": "507357c6-0f1f-4449-ae88-cf721581f395:summary:0",
+          "fts_representation_type": "SUMMARY",
+          "fusion_score": 0.015639481000926783,
+          "reranker_score": -1.8731038570404053,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "895c760a-98df-4909-be18-225ba7764772",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 2930520,
+        "end_ms": 3030480,
+        "score": -2.924842596054077,
+        "summary": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth.",
+        "transcript_excerpt": "Sorry, I just needed to scratch my nose Been taking too much cocaine when I woke up. It's a ticket booth. I have no intention of buying a ticket What's that it's a pocket lights looks like something dropped it take it a pocket light, okay Okay, no nothing here. Oh, what is this? It's a map. No, it's a diagram of a video game controller That's a tutorial okay quick turn on Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again ",
+        "debug": {
+          "dense_rank": 8,
+          "dense_score": 0.8163537049293518,
+          "winning_representation_id": "895c760a-98df-4909-be18-225ba7764772:passage:1",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "Flashlights raise weapon shoot and grenade I can have a grenade in this game. That's so cool. Okay Wait, how do I Wait again Quick turn oh, it's with B. Okay, so if I do this, okay, cool What's that it's a bottle containing an antidote Oh",
+          "representation_dense_rank": 15,
+          "second_representation_score": 0.7854713201522827,
+          "fusion_score": 0.014705882352941176,
+          "reranker_score": -2.924842596054077,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "58e8589e-8213-4688-8a40-743072fb7f6f",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+        "start_ms": 10145000,
+        "end_ms": 10161000,
+        "score": -2.9475109577178955,
+        "summary": "We are deep in the sea. Give me ammo or meds.",
+        "transcript_excerpt": "We are deep in the sea. Give me ammo or meds. Okay, well, that's good too. What is this? Storage stuff only. And that is broken. Fuck you. I can't find of any way to open it.",
+        "debug": {
+          "dense_rank": 43,
+          "dense_score": 0.8018319797515869,
+          "winning_representation_id": "58e8589e-8213-4688-8a40-743072fb7f6f:summary:0",
+          "winning_representation_type": "SUMMARY",
+          "winning_representation_excerpt": "We are deep in the sea. Give me ammo or meds.",
+          "representation_dense_rank": 215,
+          "second_representation_score": 0.7824102640151978,
+          "fts_rank": 7,
+          "fts_representation_id": "58e8589e-8213-4688-8a40-743072fb7f6f:summary:0",
+          "fts_representation_type": "SUMMARY",
+          "fusion_score": 0.024634110998406025,
+          "reranker_score": -2.9475109577178955,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C07",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she talks about being hungry or food.",
+    "assistant_answer": "她提到了几次饿的情况。例如，在E1中说‘I’m hungry!’，在E5和E6中也多次重复了这句话。",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E5"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "b8fe27f3-61d1-4297-981e-72bf78534685",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "start_ms": 12526000,
+        "end_ms": 12546000
+      },
+      {
+        "evidence_id": "E5",
+        "moment_id": "2deb767c-d28f-4123-8651-3beef53ac872",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "start_ms": 1484780,
+        "end_ms": 1504780
+      }
+    ],
+    "latency_ms": 6217.115,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "b8fe27f3-61d1-4297-981e-72bf78534685",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+        "start_ms": 12526000,
+        "end_ms": 12546000,
+        "score": -3.3049471378326416,
+        "summary": "I'm hungry! Gekukar.",
+        "transcript_excerpt": "I'm hungry! Gekukar. Stupid. Worm. Time for crab. And also explore what I missed here.",
+        "debug": {
+          "dense_rank": 9,
+          "dense_score": 0.851316533088684,
+          "winning_representation_id": "b8fe27f3-61d1-4297-981e-72bf78534685:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "I'm hungry! Gekukar. Stupid. Worm. Time for crab. And also explore what I missed here.",
+          "representation_dense_rank": 14,
+          "second_representation_score": 0.8346240520477295,
+          "fusion_score": 0.014492753623188406,
+          "reranker_score": -3.3049471378326416,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "2deb767c-d28f-4123-8651-3beef53ac872",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 1484780,
+        "end_ms": 1504780,
+        "score": -3.874343156814575,
+        "summary": "I'm hungry! Okay, my life is in trouble.",
+        "transcript_excerpt": "I'm hungry! Okay, my life is in trouble. I'm hungry! Okay, my life is in trouble. I'm hungry! I'm hungry! I'm hungry! Okay, my life is in trouble. I'm hungry!",
+        "debug": {
+          "dense_rank": 14,
+          "dense_score": 0.8463809382915497,
+          "winning_representation_id": "2deb767c-d28f-4123-8651-3beef53ac872:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "I'm hungry! Okay, my life is in trouble. I'm hungry! Okay, my life is in trouble. I'm hungry! I'm hungry!",
+          "representation_dense_rank": 23,
+          "second_representation_score": 0.8295232653617859,
+          "fts_rank": 38,
+          "fts_representation_id": "2deb767c-d28f-4123-8651-3beef53ac872:full_transcript:0",
+          "fts_representation_type": "FULL_TRANSCRIPT",
+          "fusion_score": 0.023717595146166573,
+          "reranker_score": -3.874343156814575,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C08",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "What moments mention music or songs?",
+    "assistant_answer": "以下时刻提到了音乐或歌曲：\nE1: Where's the music? We're chillin'. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers\nE3: oh no no no so not good not good not good god give it blow up so oh so oh the music is good wait there's someone with like a shotgun And where he went now?\nE4: Decent. Bro, it's supposed to be like a show for kids and they have song like this.",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E3",
+      "E4"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "start_ms": 13784140,
+        "end_ms": 13816000
+      },
+      {
+        "evidence_id": "E3",
+        "moment_id": "4887e1e9-fc86-448d-a8a0-2f5a3d0ae332",
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "start_ms": 12539520,
+        "end_ms": 12602000
+      },
+      {
+        "evidence_id": "E4",
+        "moment_id": "5407657a-b35f-4a84-a060-9ca963860c22",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "start_ms": 886800,
+        "end_ms": 910680
+      }
+    ],
+    "latency_ms": 10504.626,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "start_ms": 13784140,
+        "end_ms": 13816000,
+        "score": -2.8104822635650635,
+        "summary": "Where's the music? We're chillin'.",
+        "transcript_excerpt": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+        "debug": {
+          "dense_rank": 1,
+          "dense_score": 0.8229647707939148,
+          "winning_representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:full_transcript:0",
+          "winning_representation_type": "FULL_TRANSCRIPT",
+          "winning_representation_excerpt": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+          "representation_dense_rank": 2,
+          "second_representation_score": 0.7992736101150513,
+          "fts_rank": 33,
+          "fts_representation_id": "0861efd7-8afd-4453-b1e9-80341fb58433:summary:0",
+          "fts_representation_type": "SUMMARY",
+          "fusion_score": 0.027146130794993832,
+          "reranker_score": -2.8104822635650635,
+          "final_rank": 2,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "4887e1e9-fc86-448d-a8a0-2f5a3d0ae332",
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+        "start_ms": 12539520,
+        "end_ms": 12602000,
+        "score": -3.687464952468872,
+        "summary": "oh no no no so not good not good not good god give it blow up so oh so oh the music is good wait there's someone with like a shotgun And where he went now?",
+        "transcript_excerpt": "oh no no no so not good not good not good god give it blow up so oh so oh the music is good wait there's someone with like a shotgun And where he went now?",
+        "debug": {
+          "dense_rank": 100,
+          "dense_score": 0.7945359063148498,
+          "winning_representation_id": "4887e1e9-fc86-448d-a8a0-2f5a3d0ae332:summary:0",
+          "winning_representation_type": "SUMMARY",
+          "winning_representation_excerpt": "oh no no no so not good not good not good god give it blow up so oh so oh the music is good wait there's someone with like a shotgun And where he went now?",
+          "representation_dense_rank": 336,
+          "second_representation_score": 0.7789567708969116,
+          "fts_rank": 66,
+          "fts_representation_id": "4887e1e9-fc86-448d-a8a0-2f5a3d0ae332:passage:1",
+          "fts_representation_type": "PASSAGE",
+          "fusion_score": 0.014186507936507936,
+          "reranker_score": -3.687464952468872,
+          "final_rank": 4,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 3,
+        "moment_id": "5407657a-b35f-4a84-a060-9ca963860c22",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 886800,
+        "end_ms": 910680,
+        "score": -4.070866107940674,
+        "summary": "Decent. Bro, it's supposed to be like a show for kids and they have song like this.",
+        "transcript_excerpt": "Decent. Bro, it's supposed to be like a show for kids and they have song like this. You are educating them to start like, you know, appreciating good music. It is good. Oh, man, the treaty is just so scuffed. You really want me to have it. I won't be even able to have like, you know, the shadow on my character when playing the game.",
+        "debug": {
+          "dense_rank": 59,
+          "dense_score": 0.798183467388153,
+          "winning_representation_id": "5407657a-b35f-4a84-a060-9ca963860c22:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "Decent. Bro, it's supposed to be like a show for kids and they have song like this. You are educating them to start like, you know, appreciating good music. It is good. Oh, man, the treaty is just so scuffed. You really want me to have it. I won't be even able to have like, you know, the shadow on my character when playing the game.",
+          "representation_dense_rank": 181,
+          "second_representation_score": 0.782532811164856,
+          "fts_rank": 28,
+          "fts_representation_id": "5407657a-b35f-4a84-a060-9ca963860c22:neighbor_context:0",
+          "fts_representation_type": "NEIGHBOR_CONTEXT",
+          "fusion_score": 0.01976699770817418,
+          "reranker_score": -4.070866107940674,
+          "final_rank": 5,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C09",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Where does she talk about streaming or chat?",
+    "assistant_answer": "她在[4-8-24]的录音中提到了流媒体：anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "d09977ad-ad5d-4445-afec-f52cc687080e",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "start_ms": 2142100,
+        "end_ms": 2162000
+      }
+    ],
+    "latency_ms": 6056.928,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "d09977ad-ad5d-4445-afec-f52cc687080e",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 2142100,
+        "end_ms": 2162000,
+        "score": -2.7774977684020996,
+        "summary": "Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+        "transcript_excerpt": "Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+        "debug": {
+          "dense_rank": 2,
+          "dense_score": 0.8436691832542419,
+          "winning_representation_id": "d09977ad-ad5d-4445-afec-f52cc687080e:neighbor_context:0",
+          "winning_representation_type": "NEIGHBOR_CONTEXT",
+          "winning_representation_excerpt": "What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid Let's see, where the heck? Where did she? AHHHHH! No! Not the fucking tits! Um, she was drawing! She drew us together Look at her! So cute! Ass It's so awkward without the music I think she has it so that her VODs don't have music on th",
+          "representation_dense_rank": 2,
+          "second_representation_score": 0.7952425479888916,
+          "fusion_score": 0.016129032258064516,
+          "reranker_score": -2.7774977684020996,
+          "final_rank": 1,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C10",
+    "evaluation_type": "MULTI_EVIDENCE",
+    "question": "Find moments where she sounds scared or talks about fear.",
+    "assistant_answer": "她提到了害怕的事情，如狙击手直播中的狙击手（E1）。同时在E2中提到自己因为即将玩一个恐怖游戏而感到出汗。",
+    "grounded": true,
+    "confidence": "supported",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [
+      "E1",
+      "E2"
+    ],
+    "citation_details": [
+      {
+        "evidence_id": "E1",
+        "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "start_ms": 13894480,
+        "end_ms": 13979120
+      },
+      {
+        "evidence_id": "E2",
+        "moment_id": "8c2248d5-f9dc-47ed-beba-53001a8608d1",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "start_ms": 4141560,
+        "end_ms": 4217000
+      }
+    ],
+    "latency_ms": 5159.449,
+    "retrieved_evidence": [
+      {
+        "rank": 1,
+        "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+        "start_ms": 13894480,
+        "end_ms": 13979120,
+        "score": -4.89237642288208,
+        "summary": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is…",
+        "transcript_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is like always with Oni bro. I'm literally on my fucking own all the time Monka Monka I like this game. It's cozy and I learned the words I might need to write them down. I actually have like a Notebook where I write down the words. I don't fucking know when I watc",
+        "debug": {
+          "dense_rank": 12,
+          "dense_score": 0.8457042527198791,
+          "winning_representation_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56:passage:0",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers",
+          "representation_dense_rank": 24,
+          "second_representation_score": 0.8182076215744019,
+          "fts_rank": 41,
+          "fts_representation_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56:full_transcript:0",
+          "fts_representation_type": "FULL_TRANSCRIPT",
+          "fusion_score": 0.02378987898789879,
+          "reranker_score": -4.89237642288208,
+          "final_rank": 3,
+          "semantic_error": null
+        }
+      },
+      {
+        "rank": 2,
+        "moment_id": "8c2248d5-f9dc-47ed-beba-53001a8608d1",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "start_ms": 4141560,
+        "end_ms": 4217000,
+        "score": -5.331893444061279,
+        "summary": "My god, I'm sweating like my back You have plans to updated it a lot Oh, that's fine. That's fine then.",
+        "transcript_excerpt": "My god, I'm sweating like my back You have plans to updated it a lot Oh, that's fine. That's fine then. Um, what friends? Well, listen if I have like more people coming to friends at this, you know, I have a game for them to play out And we can like all be drunk and be behind them while like, you know, they like, you know play I don't know Oh my god. I'm so sweaty. My back is sweaty Okay, anyway That was funny. Okay, next game fear of Adam. That's a game. I really really want to do Don't don't s",
+        "debug": {
+          "dense_rank": 17,
+          "dense_score": 0.8431732821464538,
+          "winning_representation_id": "8c2248d5-f9dc-47ed-beba-53001a8608d1:passage:1",
+          "winning_representation_type": "PASSAGE",
+          "winning_representation_excerpt": "Oh my god. I'm so sweaty. My back is sweaty Okay, anyway That was funny. Okay, next game fear of Adam. That's a game. I really really want to do Don't don't scream was more like a like a little challenge, but I knew like it would be kind of easy. I think like Okay, it's It can be scary when you're jump-scared. Okay, because you don't expect when it happens",
+          "representation_dense_rank": 38,
+          "second_representation_score": 0.8238741159439087,
+          "fts_rank": 48,
+          "fts_representation_id": "8c2248d5-f9dc-47ed-beba-53001a8608d1:passage:1",
+          "fts_representation_type": "PASSAGE",
+          "fusion_score": 0.022246272246272247,
+          "reranker_score": -5.331893444061279,
+          "final_rank": 8,
+          "semantic_error": null
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "C11",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she was planning to stop streaming next month?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 3163.693,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C12",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce that she was moving permanently to Berlin?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 1648.448,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C13",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she announce a weekly cooking podcast?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 1786.338,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C14",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she say she signed a sponsorship with Logitech?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 1771.976,
+    "retrieved_evidence": []
+  },
+  {
+    "case_id": "C15",
+    "evaluation_type": "NO_EVIDENCE",
+    "question": "Did she cancel an upcoming convention because of a passport problem?",
+    "assistant_answer": "没有找到足够明确的视频证据。",
+    "grounded": false,
+    "confidence": "insufficient",
+    "runtime_mode": "DEGRADED",
+    "citations": [],
+    "citation_details": [],
+    "latency_ms": 1652.267,
+    "retrieved_evidence": []
+  }
+]

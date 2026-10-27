@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "implementation_commit": "d404d18f45b1be6f3970b84d9dc82c9535bb15d6",
+  "libraries": [
+    {"library": "Saruei", "media": "PASS", "transcript": "AUTO_PASS", "moments": "AUTO_SUSPECT", "retrieval_top5": "8/8", "conversation": "PARTIAL_EVIDENCE_ONLY", "clips": "2/2_DECODE_PASS", "bilingual_subtitle": "PASS_EXISTING", "duration_profiles": "PASS_EXISTING"},
+    {"library": "anny", "media": "PASS", "transcript": "AUTO_SUSPECT", "moments": "AUTO_SUSPECT", "retrieval_top5": "8/12", "conversation": "FAIL_FIXED_SAMPLE", "clips": "2/2_DECODE_PASS", "bilingual_subtitle": "NOT_EVALUATED", "duration_profiles": "NOT_EVALUATED"},
+    {"library": "Q8Pilot", "media": "PASS_LIMITED", "transcript": "AUTO_PASS", "moments": "AUTO_PASS_LIMITED", "retrieval_top5": "5/5", "conversation": "PARTIAL_EVIDENCE_ONLY", "clips": "2/2_DECODE_PASS_DUPLICATE_CONTENT", "bilingual_subtitle": "NOT_EVALUATED", "duration_profiles": "NOT_EVALUATED"},
+    {"library": "twitchplayspokemon", "media": "PASS_LIMITED", "transcript": "AUTO_PASS", "moments": "AUTO_SUSPECT_LIMITED", "retrieval_top5": "5/5", "conversation": "PARTIAL_EVIDENCE_ONLY", "clips": "2/2_DECODE_PASS", "bilingual_subtitle": "NOT_EVALUATED", "duration_profiles": "NOT_EVALUATED"}
+  ],
+  "retrieval_overall": {"queries": 30, "top1": 20, "top3": 24, "top5": 26, "top10": 27, "top5_rate": 0.8667, "no_evidence_pass": "12/12"},
+  "gates": {
+    "MULTI_LIBRARY_INGEST_READY": "YES",
+    "MULTI_LANGUAGE_ASR_READY": "NO",
+    "CROSS_LANGUAGE_RETRIEVAL_READY": "NO",
+    "MULTI_CONTENT_MOMENT_READY": "NO",
+    "MULTI_CONTENT_WATCHABILITY_READY": "NOT_EVALUATED",
+    "MULTI_LANGUAGE_SUBTITLE_READY": "NO",
+    "MULTI_LIBRARY_CONVERSATION_READY": "NO",
+    "CROSS_LIBRARY_GENERALIZATION_READY": "NO"
+  }
+}

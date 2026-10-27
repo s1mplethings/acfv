@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED_NO_TRUSTED_SPEECH",
+  "creators": {"saruei": {"candidates": 0, "promoted": 0}, "anny": {"candidates": 0, "promoted": 0}},
+  "names": 0,
+  "game_terms": 0,
+  "catchphrases": 0,
+  "other": 0,
+  "acoustic_exemplars": 0,
+  "raw_asr_used_as_authority": false
+}

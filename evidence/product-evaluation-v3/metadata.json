@@ -1,0 +1,65 @@
+{
+  "evaluation_version": "3.0.0",
+  "implementation_sha": "6e8270f9e01cdff8114c91c7073c2b47f141255a",
+  "seed": 20261008,
+  "holdout_seed": 20261009,
+  "library": {
+    "recordings": 10,
+    "final_moments": 5226,
+    "index_parents": 5226,
+    "index_representations": 24351
+  },
+  "runtime": {
+    "embedding_backend": "transformers_mean_pooling",
+    "embedding_model": "intfloat/multilingual-e5-base",
+    "embedding_dimension": 768,
+    "embedding_device": "cpu",
+    "retrieval_mode": "REAL_MODEL",
+    "index_version": 4,
+    "representation_schema": "moment-representations-v1",
+    "parent_moments": 5226,
+    "representations": 24351,
+    "reranker_backend": "TransformersReranker",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_device": "cpu",
+    "reranker_enabled": true,
+    "conversation_provider": "ollama",
+    "conversation_model": "qwen2.5:7b-instruct"
+  },
+  "metrics": {
+    "retrieval": {
+      "top1": 11,
+      "top3": 14,
+      "top5": 15,
+      "top10": 17,
+      "top30": 18,
+      "mrr": 0.6325000000000001,
+      "median_latency_ms": 1688.5729500063462,
+      "p90_latency_ms": 2088.375499995891
+    },
+    "conversation": {
+      "correct_no_evidence_rejects": 5,
+      "invalid_citations": 0,
+      "unsupported_claims": 0,
+      "multi_evidence_coverage": 3,
+      "median_latency_ms": 5073.988
+    },
+    "moments": {
+      "punctuation_only": 0,
+      "low_info_suspects": 0,
+      "near_60_seconds": 2,
+      "ge_50_seconds": 9,
+      "ge_55_seconds": 9,
+      "auto_suspect": 2,
+      "summary_copy": 10
+    },
+    "clips": {
+      "renders": 10,
+      "ffprobe_pass": 10,
+      "bad_retrieval_sources_rejected": 5,
+      "mid_start": 0,
+      "mid_end": 0,
+      "rendered_auto_suspect": 0
+    }
+  }
+}

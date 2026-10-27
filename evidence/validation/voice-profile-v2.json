@@ -1,0 +1,7 @@
+{
+  "profile_version": "creator_profile_v2",
+  "status": "BLOCKED_NO_VISUAL_CONFIRMED_REGIONS",
+  "Saruei": {"candidate_spans": 0, "retained": 0, "outliers": 0, "duration_ms": 0, "regions": 0, "threshold": "NOT_EVALUATED", "far": "NOT_EVALUATED", "frr": "NOT_EVALUATED"},
+  "anny": {"candidate_spans": 0, "retained": 0, "outliers": 0, "duration_ms": 0, "regions": 0, "threshold": "NOT_EVALUATED", "far": "NOT_EVALUATED", "frr": "NOT_EVALUATED"},
+  "v1_preserved": true
+}

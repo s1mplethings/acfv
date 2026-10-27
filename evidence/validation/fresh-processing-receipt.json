@@ -1,0 +1,45 @@
+{
+  "recordings": [
+    {
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "segments": 89,
+      "chunks": 6,
+      "completed_chunks": 6,
+      "status": "succeeded",
+      "last_timestamp_seconds": 602.0,
+      "zero_length": 0
+    },
+    {
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "segments": 149,
+      "chunks": 6,
+      "completed_chunks": 6,
+      "status": "succeeded",
+      "last_timestamp_seconds": 599.98,
+      "zero_length": 0
+    },
+    {
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "segments": 158,
+      "chunks": 6,
+      "completed_chunks": 6,
+      "status": "succeeded",
+      "last_timestamp_seconds": 599.98,
+      "zero_length": 0
+    },
+    {
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "segments": 88,
+      "chunks": 6,
+      "completed_chunks": 6,
+      "status": "succeeded",
+      "last_timestamp_seconds": 602.0,
+      "zero_length": 0
+    }
+  ],
+  "recording_count": 4,
+  "media_duration_ms": 2406224,
+  "media_minutes": 40.104,
+  "segments": 484,
+  "all_succeeded": true
+}

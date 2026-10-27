@@ -1,0 +1,154 @@
+{
+  "case_id": "R06",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "What items made her realize the list was about BDSM?",
+  "ground_truth": {
+    "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+    "recording_title": "anny 的xp rating",
+    "moment_id": "df0929f0-c67e-4e82-8289-f6c762ab6335",
+    "start_ms": 8737000,
+    "end_ms": 8775400,
+    "timestamp": "02:25:37.000–02:26:15.400",
+    "transcript_excerpt": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What? Those paddles. Ah, this is all BDSM? I... Then I can't really read it, I'm fucking not... Well... Okay, let me see... Again... I can sort these, but... I mean... Reference, I guess? I'm fucking not..."
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "a216080a-816d-4053-bbe9-58a995755eac",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 8074000,
+      "end_ms": 8080000,
+      "timestamp": "02:14:34.000–02:14:40.000",
+      "score": 0.01639344262295082,
+      "summary": "Grossy magazine. It's an adult magazine. Buff, no tanks. You mean, yes? Thank you.",
+      "transcript_excerpt": "Grossy magazine. It's an adult magazine. Buff, no tanks. You mean, yes? Thank you."
+    },
+    {
+      "rank": 2,
+      "moment_id": "30dc82d1-c978-40dc-9ba2-f69e6ee9cc57",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14900000,
+      "end_ms": 14931000,
+      "timestamp": "04:08:20.000–04:08:51.000",
+      "score": 0.016129032258064516,
+      "summary": "You know what else I was thinking? But Vito said don't overcomplicate it! I wanna, uh... Wait What's this? What is that? Why is there no skin color in it? One sec And And",
+      "transcript_excerpt": "You know what else I was thinking? But Vito said don't overcomplicate it! I wanna, uh... Wait What's this? What is that? Why is there no skin color in it? One sec And And"
+    },
+    {
+      "rank": 3,
+      "moment_id": "ef464a0c-3d1c-4d32-aa76-d9f7ec0d30a0",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 4457680,
+      "end_ms": 4517600,
+      "timestamp": "01:14:17.680–01:15:17.600",
+      "score": 0.015873015873015872,
+      "summary": "i even even like a trans woman as long as she she looks like you know a woman i'm like yeah like i dig that as long you know when i like a woman i like them women and if i like a man i like them very many you know it's like i like this kind of like very cliche i have a big strong man not too hairy but like i like you know there and girls very pretty with like skirts and and and long hair i mean they can have like medium hair but not so short you know like ray from evangelion but like in in anime i i love tomboy i actually have like a character i never showed to you that is a tomboy i mean she's still a feminine tomboy you know maybe when i show her to you guys asuka is not a tomboy she but a dress she have long hair she's feminine",
+      "transcript_excerpt": "i even even like a trans woman as long as she she looks like you know a woman i'm like yeah like i dig that as long you know when i like a woman i like them women and if i like a man i like them very many you know it's like i like this kind of like very cliche i have a big strong man not too hairy but like i like you know there and girls very pretty with like skirts and and and long hair i mean they can have like medium hair but not so short you know like ray from evangelion but like in in anime"
+    },
+    {
+      "rank": 4,
+      "moment_id": "5a41b9fd-7b26-48d6-bf5b-dc16b3d1e316",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 3390000,
+      "end_ms": 3393000,
+      "timestamp": "00:56:30.000–00:56:33.000",
+      "score": 0.015625,
+      "summary": "R.E.B.",
+      "transcript_excerpt": "R.E.B."
+    },
+    {
+      "rank": 5,
+      "moment_id": "2d7c4402-35f8-4699-92bd-0a8e40e5ed00",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 1159000,
+      "end_ms": 1215920,
+      "timestamp": "00:19:19.000–00:20:15.920",
+      "score": 0.015384615384615385,
+      "summary": "F**k! Man! I actually f**king hurt myself just now! What are you looking at? Why is everyone spamming... Looking? Emote... What did you see? Mind telling me? Mind telling me? Tell me now! I hear you man! Oh my god! The thing about VRChat is that... It's very hard to read... chat the chat is going so fast i actually cannot fucking read it oh my god you guys are going too fast you saw a bakery i love bread holy fuck do you want to",
+      "transcript_excerpt": "F**k! Man! I actually f**king hurt myself just now! What are you looking at? Why is everyone spamming... Looking? Emote... What did you see? Mind telling me? Mind telling me? Tell me now! I hear you man! Oh my god! The thing about VRChat is that... It's very hard to read... chat the chat is going so fast i actually cannot fucking read it oh my god you guys are going too fast you saw a bakery i love bread holy fuck do you want to"
+    },
+    {
+      "rank": 6,
+      "moment_id": "0b52cc74-6f3b-4f73-919c-cf5d9dd303ea",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8123000,
+      "end_ms": 8145000,
+      "timestamp": "02:15:23.000–02:15:45.000",
+      "score": 0.015151515151515152,
+      "summary": "What? My child disappeared Are you seeing this? Thank you so much for the applause What the fuck? What happened? What? Ah I missed her talk",
+      "transcript_excerpt": "What? My child disappeared Are you seeing this? Thank you so much for the applause What the fuck? What happened? What? Ah I missed her talk"
+    },
+    {
+      "rank": 7,
+      "moment_id": "d514e17b-e18b-49bd-8e54-daec7e65a052",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 5899500,
+      "end_ms": 5957000,
+      "timestamp": "01:38:19.500–01:39:17.000",
+      "score": 0.014925373134328358,
+      "summary": "And I can pick you up Yo! What the fuck? Coffee sucks, thank you! Wait, my shit broke Oh my god Wait, my fucking chat broke It stopped being attached to me My chat is not attached to me anymore Kelsak, thank you for 20 gift Thank you I don't fucking know what I'm using Hold on, I need to fix it There we go Somehow it got scuffed Okay, sorry Um Um Um Um I'm trying to find the world I think, um What? I can't grab it now The fuck? Okay, well Attachment issues",
+      "transcript_excerpt": "And I can pick you up Yo! What the fuck? Coffee sucks, thank you! Wait, my shit broke Oh my god Wait, my fucking chat broke It stopped being attached to me My chat is not attached to me anymore Kelsak, thank you for 20 gift Thank you I don't fucking know what I'm using Hold on, I need to fix it There we go Somehow it got scuffed Okay, sorry Um Um Um Um I'm trying to find the world I think, um What? I can't grab it now The fuck? Okay, well Attachment issues"
+    },
+    {
+      "rank": 8,
+      "moment_id": "b08e00db-0adc-47d1-b76d-ae397d9282de",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 5224720,
+      "end_ms": 5275020,
+      "timestamp": "01:27:04.720–01:27:55.020",
+      "score": 0.014705882352941176,
+      "summary": "couldn't play at Modern Warfare because I had to go to the emergency. So I was thinking we'd do Modern Warfare 1 on Saturday, Modern Warfare 2 on Sunday. Tomorrow we can maybe play something like... Or games? I got another message, one minute. Wait one sec.",
+      "transcript_excerpt": "couldn't play at Modern Warfare because I had to go to the emergency. So I was thinking we'd do Modern Warfare 1 on Saturday, Modern Warfare 2 on Sunday. Tomorrow we can maybe play something like... Or games? I got another message, one minute. Wait one sec."
+    },
+    {
+      "rank": 9,
+      "moment_id": "c9f007f7-f73e-4572-b5ed-5b2d99b06839",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 11448640,
+      "end_ms": 11462000,
+      "timestamp": "03:10:48.640–03:11:02.000",
+      "score": 0.014492753623188406,
+      "summary": "oh okay buttons",
+      "transcript_excerpt": "oh okay buttons"
+    },
+    {
+      "rank": 10,
+      "moment_id": "11675cbe-ea04-433c-9cc9-90b654a8daa9",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9928720,
+      "end_ms": 9984000,
+      "timestamp": "02:45:28.720–02:46:24.000",
+      "score": 0.014285714285714285,
+      "summary": "It would be funny if she was also saying something skittle while it does that Brain power I'm not as cool as you, oh my god, are you rinsing me? Hello? Hello? I'm working, I'm busy working, you can't rinse me while I work Stop Tuto cooks. He is cooking. He is cooking. Also, the burnout thing is very understandable. My YouTube is bugging. Oh.",
+      "transcript_excerpt": "It would be funny if she was also saying something skittle while it does that Brain power I'm not as cool as you, oh my god, are you rinsing me? Hello? Hello? I'm working, I'm busy working, you can't rinse me while I work Stop Tuto cooks. He is cooking. He is cooking. Also, the burnout thing is very understandable. My YouTube is bugging. Oh."
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

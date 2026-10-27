@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-09",
+  "branch": "fix/retrieval-conversation-final",
+  "implementation_sha": "6e8270f9e01cdff8114c91c7073c2b47f141255a",
+  "base_sha": "d7aa5c6ee03a7f048900ad0ce98d6957f45bb4ec",
+  "commands": [
+    "python -m pytest -q (two consecutive post-commit runs)",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov=acfv.live --cov-report=term:skip-covered",
+    "python scripts/evaluate_retrieval_conversation_final.py --baseline evidence/product-evaluation-baseline --v2 evidence/product-evaluation-v2 --database var/intelligence_quality_20261008/library_v2.db --index-root var/intelligence_quality_20261008/moment_index_v4_base --diagnostics var/intelligence_quality_20261008/retrieval_representation_diagnostics_base.json --output evidence/product-evaluation-v3 --replace-output"
+  ],
+  "results": [
+    {"check": "full_pytest_run_1", "status": "PASS", "passed": 292, "warnings": 11, "seconds": 157.83},
+    {"check": "full_pytest_run_2", "status": "PASS", "passed": 292, "warnings": 11, "seconds": 73.14},
+    {"check": "verify", "status": "PASS", "passed": 292, "contract_checks": "PASS", "seconds": 72.17},
+    {"check": "product_live_coverage", "status": "PASS", "percent": 86, "statements": 2028, "missed": 274, "passed": 292},
+    {"check": "retrieval_fixed_set", "status": "PASS", "top5": 15, "top10": 17, "top30": 18, "mrr": 0.6325},
+    {"check": "conversation_fixed_set", "status": "PASS", "no_evidence": "5/5", "invalid_citations": 0, "unsupported_claims": 0},
+    {"check": "moment_regression", "status": "PASS_WITH_REVIEW_ITEMS", "auto_suspect": 2},
+    {"check": "clip_regression", "status": "PASS", "renders": 10, "ffprobe_pass": 10, "rendered_auto_suspect": 0}
+  ]
+}

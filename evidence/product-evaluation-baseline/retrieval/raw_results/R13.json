@@ -1,0 +1,154 @@
+{
+  "case_id": "R13",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "bugged into the floor + sniffa spam, which moment?",
+  "ground_truth": {
+    "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+    "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+    "moment_id": "ffb2c4ed-08c8-4223-964f-dd9ccc1db8b8",
+    "start_ms": 690000,
+    "end_ms": 748400,
+    "timestamp": "00:11:30.000–00:12:28.400",
+    "transcript_excerpt": "I'm inside the floor, great You wanna sniff it? Sniff it Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue? Alright My legs are still bugging, by the way Check the sound Already? I'm sorry for my bugging Why are you gifting subs? Are you gifting subs because you already lost? What the f***? What the..."
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "37ade5a4-db50-4696-9e8f-68c54596f839",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 16055700,
+      "end_ms": 16101000,
+      "timestamp": "04:27:35.700–04:28:21.000",
+      "score": 0.01639344262295082,
+      "summary": "what did i just say wait wait what i said to kiss my ass kiss my ass ah kiss my ass we don't kink shame no we don't kink shame no Well, we don't keep saying no if you're in a way I won't say I'm sorry, we're like in LUDALF GIRLS and FUTA NARI DEL.",
+      "transcript_excerpt": "what did i just say wait wait what i said to kiss my ass kiss my ass ah kiss my ass we don't kink shame no we don't kink shame no Well, we don't keep saying no if you're in a way I won't say I'm sorry, we're like in LUDALF GIRLS and FUTA NARI DEL."
+    },
+    {
+      "rank": 2,
+      "moment_id": "0e7b1cfd-a705-4391-adca-cecc83800130",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 8340280,
+      "end_ms": 8399820,
+      "timestamp": "02:19:00.280–02:19:59.820",
+      "score": 0.016129032258064516,
+      "summary": "what? what? i think you're the only one who can sniff the air in your room right now and maybe your cat no the sound i heard the sound maybe your cat i locked her out nooooooooooo god i want to drink man i've been i have been drinking more than i ever should and now i have fucking alcoholism yeah i'm alcoholic I'm just joking I'm just joking nothing nothing nothing you're perfect the way you are thank you",
+      "transcript_excerpt": "what? what? i think you're the only one who can sniff the air in your room right now and maybe your cat no the sound i heard the sound maybe your cat i locked her out nooooooooooo god i want to drink man i've been i have been drinking more than i ever should and now i have fucking alcoholism yeah i'm alcoholic I'm just joking I'm just joking nothing nothing nothing you're perfect the way you are thank you"
+    },
+    {
+      "rank": 3,
+      "moment_id": "c27ac5fb-dd3f-4acd-b030-cc70c1cb7b50",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 7109000,
+      "end_ms": 7165000,
+      "timestamp": "01:58:29.000–01:59:25.000",
+      "score": 0.015873015873015872,
+      "summary": "Oh, this is kinda cool You can learn these, so when you travel to Japan, you're gonna know what exactly it says You're gonna know This one, this one is what matters most This county is for Ongaku This is the county for music And then it says game Music game And it's fucking rhythm games My favorite What the fuck? That was so goofy Okay, can I make it stop raining? What the fuck, man? Why the... Bro, I wanted to escape the reality With a cute game But it's fucking raining in game Just like IRL Hello? Kaban",
+      "transcript_excerpt": "Oh, this is kinda cool You can learn these, so when you travel to Japan, you're gonna know what exactly it says You're gonna know This one, this one is what matters most This county is for Ongaku This is the county for music And then it says game Music game And it's fucking rhythm games My favorite What the fuck? That was so goofy Okay, can I make it stop raining? What the fuck, man? Why the... Bro, I wanted to escape the reality With a cute game But it's fucking raining in game Just like IRL He"
+    },
+    {
+      "rank": 4,
+      "moment_id": "d20fd999-98b9-4165-8962-acd4e0d9ff06",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 12853640,
+      "end_ms": 12912080,
+      "timestamp": "03:34:13.640–03:35:12.080",
+      "score": 0.015625,
+      "summary": "The suitcase, sorry, I forgot it There you go And the little... Necktie Yeah Oh This is cute Look at him Ayaya Great Holy... Can't wait for Nuero to make fanart of that Nuero? LORE ACCURATE TUTO We need eyelash, please? No, but he... Wait, my chat is bugged My chat is not scrolled Oh my god, my chat is going crazy Guys, he broke my chat Why would you...",
+      "transcript_excerpt": "The suitcase, sorry, I forgot it There you go And the little... Necktie Yeah Oh This is cute Look at him Ayaya Great Holy... Can't wait for Nuero to make fanart of that Nuero? LORE ACCURATE TUTO We need eyelash, please? No, but he... Wait, my chat is bugged My chat is not scrolled Oh my god, my chat is going crazy Guys, he broke my chat Why would you..."
+    },
+    {
+      "rank": 5,
+      "moment_id": "b8b54df7-95b5-4f94-a7ba-861abff3937f",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 7466000,
+      "end_ms": 7526000,
+      "timestamp": "02:04:26.000–02:05:26.000",
+      "score": 0.015384615384615385,
+      "summary": "We have a lot of beautiful things. Yeah, that's Canadian. I don't fucking get it. Maybe there's another clip where he speaks more French. It's just I do a little bit of French. This guy speaks French. He negotiated with France in our place two years ago. This was rough. Leave Asbel out of this. Asbel is neutral. He's neutrality. Okay, then leave our country out of this. We have our land. We will take everything. We will put so many fancy and cool things. But we can't build if you guys keep attacking us. We can't build. I feel like speak his own language. Maybe he'll understand. Okay, okay. No, I'm understanding very well. Wait, he's going to speak French. We demand 50% of the land. Give us half and we'll stop attacking. Oh, it's really good. We refuse.",
+      "transcript_excerpt": "We have a lot of beautiful things. Yeah, that's Canadian. I don't fucking get it. Maybe there's another clip where he speaks more French. It's just I do a little bit of French. This guy speaks French. He negotiated with France in our place two years ago. This was rough. Leave Asbel out of this. Asbel is neutral. He's neutrality. Okay, then leave our country out of this. We have our land. We will take everything. We will put so many fancy and cool things. But we can't build if you guys keep attac"
+    },
+    {
+      "rank": 6,
+      "moment_id": "56e8efc6-1794-4ee6-8ef5-66c1e314f14d",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 11092000,
+      "end_ms": 11151000,
+      "timestamp": "03:04:52.000–03:05:51.000",
+      "score": 0.015151515151515152,
+      "summary": "Okay, it's fine now Everything was blue for him If I was blue, I would beat up a guy I would beat up a guy I would beat up a guy Hello Okay, so how do I find Easter's shard? Where is my weapon? Where is my weapon? Beat the game with the weakest items I can't",
+      "transcript_excerpt": "Okay, it's fine now Everything was blue for him If I was blue, I would beat up a guy I would beat up a guy I would beat up a guy Hello Okay, so how do I find Easter's shard? Where is my weapon? Where is my weapon? Beat the game with the weakest items I can't"
+    },
+    {
+      "rank": 7,
+      "moment_id": "39182b16-5cb0-413d-8211-48acaf794a9f",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 17373000,
+      "end_ms": 17385000,
+      "timestamp": "04:49:33.000–04:49:45.000",
+      "score": 0.014925373134328358,
+      "summary": "Fake dies, french fries.",
+      "transcript_excerpt": "Fake dies, french fries."
+    },
+    {
+      "rank": 8,
+      "moment_id": "df6d13d3-bcf3-46f4-b1c1-baf51c224447",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 23259600,
+      "end_ms": 23318640,
+      "timestamp": "06:27:39.600–06:28:38.640",
+      "score": 0.014705882352941176,
+      "summary": "Wait, what? I could just take all of them and she's like, oh, maybe all the people will need it. Well, so far I'm the one who's been cleaning like, you know, this fucking place. What the fuck? I'm excited. Tomorrow father and I are going camping in condor country over the river father says it is just a nickname as there are no condor in Georgia. I'm looking forward to the trip nonetheless. I love being outdoors all night. Sunday father and I found something strange a green shiny thing sticking out of the ground. It is wrinkling back and forth like a little bug but father says it is not a bug as it is made of metal. Monday we found a second wrinkling metal",
+      "transcript_excerpt": "Wait, what? I could just take all of them and she's like, oh, maybe all the people will need it. Well, so far I'm the one who's been cleaning like, you know, this fucking place. What the fuck? I'm excited. Tomorrow father and I are going camping in condor country over the river father says it is just a nickname as there are no condor in Georgia. I'm looking forward to the trip nonetheless. I love being outdoors all night. Sunday father and I found something strange a green shiny thing sticking o"
+    },
+    {
+      "rank": 9,
+      "moment_id": "a3efd91e-1e5b-4bf4-8b27-2dad999e1510",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7939000,
+      "end_ms": 7995000,
+      "timestamp": "02:12:19.000–02:13:15.000",
+      "score": 0.014492753623188406,
+      "summary": "The truth is hiding in your eyes And it's hanging on your tongue Just boiling in my blood But you think that I can't see What kind of man that you are If you're a man at all Well, I'll figure this one out On my own On my own How did we get here? When I used to know you so well And how did we get here?",
+      "transcript_excerpt": "The truth is hiding in your eyes And it's hanging on your tongue Just boiling in my blood But you think that I can't see What kind of man that you are If you're a man at all Well, I'll figure this one out On my own On my own How did we get here? When I used to know you so well And how did we get here?"
+    },
+    {
+      "rank": 10,
+      "moment_id": "39253db1-456a-486b-8956-9a139779b3ac",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 11303840,
+      "end_ms": 11360480,
+      "timestamp": "03:08:23.840–03:09:20.480",
+      "score": 0.014285714285714285,
+      "summary": "I'm an am-type brat. I used to help run organized BDSM King classes events. Damn. I... Didn't know that. Jesus. Teach me. Teach me about BDSM. Sure, anytime. Okay, no, I don't know. I would probably... If actually, I would probably rather a guy who likes BDSM get me into it. I don't know. Something like that. Maybe. Because, I mean, I like girls. But I... I can't imagine, like, something, like... Too sexual happening with a girl. I didn't mean to teach you like that. I mean... Yeah, but like... Anyway... Um...",
+      "transcript_excerpt": "I'm an am-type brat. I used to help run organized BDSM King classes events. Damn. I... Didn't know that. Jesus. Teach me. Teach me about BDSM. Sure, anytime. Okay, no, I don't know. I would probably... If actually, I would probably rather a guy who likes BDSM get me into it. I don't know. Something like that. Maybe. Because, I mean, I like girls. But I... I can't imagine, like, something, like... Too sexual happening with a girl. I didn't mean to teach you like that. I mean... Yeah, but like... "
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

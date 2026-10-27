@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acfv.local/specs/change_manifest.schema.json",
+  "title": "ACFV ChangeManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "change_id", "capabilities", "files_changed", "behavior_change", "contract_change", "migration_required", "risks"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "change_id": {"type": "string", "minLength": 1},
+    "summary": {"type": "string"},
+    "capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "files_changed": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "behavior_change": {"type": "boolean"},
+    "contract_change": {"type": "boolean"},
+    "migration_required": {"type": "boolean"},
+    "compatibility": {"type": "string"},
+    "risks": {"type": "array", "items": {"type": "string"}}
+  }
+}

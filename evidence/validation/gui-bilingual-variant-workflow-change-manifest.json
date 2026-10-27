@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-10",
+  "base": "59dc77be7b9f5537271f6baf0e9f596e5c301395",
+  "implementation_head": "296be92f86edb9e175a82061c8d63c16a0a845dd",
+  "capabilities": ["clip_review", "clip_duration_profile", "bilingual_subtitle", "feedback"],
+  "canonical_flow": "ReviewTab -> GuiVariantWorkflowService -> ClipVariantService/BilingualSubtitleService/ClipService/FeedbackService -> canonical renderer/repository",
+  "added": [
+    "src/acfv/clips/gui_workflow.py",
+    "tests/unit/test_gui_variant_workflow.py"
+  ],
+  "modified": [
+    "src/acfv/ui/tabs/review_tab.py",
+    "src/acfv/cli/gui.py",
+    "src/acfv/app/gui.py",
+    "src/acfv/main_window.py",
+    "src/acfv/clips/variants.py",
+    "src/acfv/clips/subtitles.py",
+    "src/acfv/clips/service.py",
+    "specs/capabilities/index.yaml",
+    "specs/capabilities/clip_review.md",
+    "specs/capabilities/clip_duration_profile.md",
+    "docs/repo_map.md"
+  ],
+  "guardrails": {
+    "gui_direct_sql": false,
+    "gui_direct_ffmpeg": false,
+    "gui_ass_srt_assembly": false,
+    "second_renderer": false,
+    "asr_or_segmentation_changed": false,
+    "existing_media_overwritten": false
+  }
+}

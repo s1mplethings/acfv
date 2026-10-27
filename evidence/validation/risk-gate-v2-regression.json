@@ -1,0 +1,110 @@
+{
+  "historical_12": {
+    "clips": 12,
+    "release_states": {
+      "READY_WITH_WARNINGS": 8,
+      "NEEDS_REVIEW": 4
+    }
+  },
+  "fresh_8": {
+    "clip_count": 8,
+    "raw_findings": 189,
+    "clusters": 189,
+    "release_states": {
+      "NEEDS_REVIEW": 7,
+      "READY_WITH_WARNINGS": 1
+    },
+    "local_redecodes": 30,
+    "confidence_delta_evidence_complete": true,
+    "auto_corrected": 0,
+    "invented_corrections": 0
+  },
+  "critical_mutations": {
+    "blocked": 10,
+    "total": 10
+  },
+  "warning_mutations": {
+    "false_critical": 0,
+    "total": 10
+  },
+  "harmless_mutations": {
+    "false_critical": 0,
+    "total": 10
+  },
+  "cluster_specific": {
+    "total": 10,
+    "passed": 10,
+    "cases": [
+      {
+        "case_id": "same-root-same-family",
+        "expected_clusters": 1,
+        "actual_clusters": 1,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "same-root-independent-evidence",
+        "expected_clusters": 1,
+        "actual_clusters": 1,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "separate-roots",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "non-overlap",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "overlap-chain",
+        "expected_clusters": 1,
+        "actual_clusters": 1,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "same-time-unrelated",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "same-root-different-consequence",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "mixed-severity",
+        "expected_clusters": 1,
+        "actual_clusters": 1,
+        "state": "READY_WITH_WARNINGS",
+        "passed": true
+      },
+      {
+        "case_id": "hard-blocker-preserved",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "NEEDS_REVIEW",
+        "passed": true
+      },
+      {
+        "case_id": "independent-critical-same-time",
+        "expected_clusters": 2,
+        "actual_clusters": 2,
+        "state": "NEEDS_REVIEW",
+        "passed": true
+      }
+    ]
+  }
+}

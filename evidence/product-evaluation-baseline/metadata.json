@@ -1,0 +1,42 @@
+{
+  "evaluation_version": "1.0.0",
+  "git_sha": "8a7b5c1fe087291ab6c79c4232566a2377ebbbcb",
+  "git_branch": "validation/real-library-build",
+  "library": {
+    "recordings": 10,
+    "hours": 52.43064361111111,
+    "final_moments": 3999,
+    "index_rows": 3999
+  },
+  "seed": 20261008,
+  "date": "2026-10-08T09:51:12.875015+00:00",
+  "models": {
+    "embedding_configured": "all-MiniLM-L6-v2",
+    "embedding_active_backend": "deterministic_sha256_hash_fallback_384d",
+    "reranker": null,
+    "conversation_llm": null
+  },
+  "retrieval_configuration": {
+    "pipeline": "HybridRetrievalService",
+    "top_k_saved": 10,
+    "candidate_k": 30,
+    "dense_diagnostic_depth": 100,
+    "fts_diagnostic_depth": 100
+  },
+  "reranker_configuration": {
+    "enabled": false,
+    "local_files_only": true
+  },
+  "sampling": {
+    "retrieval": "20 predeclared targets: two fixed-seed candidates per recording, four categories of five",
+    "moments": "one fixed-seed sample per short/medium/long bucket for each recording; fallback to remaining pool if a bucket is empty",
+    "clips": "the first five unique production Rank-1 results in fixed retrieval-case order, five fixed-seed random FINAL Moments, five highest deterministic boundary-difficulty scores"
+  },
+  "source_paths_in_bundle": false,
+  "code_modifications": false,
+  "bundle_validation": {
+    "status": "PASS",
+    "errors": [],
+    "checked_clips": 15
+  }
+}

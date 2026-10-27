@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "change_id": "creator-adaptive-phase2-2026-10-13",
+  "summary": "Add bounded Avatar-model discovery and explicit adapter configuration, versioned label mapping, raw visual observations, multi-frame visual spans, visual-first identity fusion, strict trusted-speech/lexicon/acoustic bootstrap, profile-isolated Adaptive ASR Shadow, Product GUI status, and Human Review v2 checks without manufacturing real results.",
+  "capabilities": ["avatar_identity_provider", "creator_identity", "voice_profile", "trusted_speech_memory", "creator_lexicon", "acoustic_exemplar_memory", "creator_adaptive_asr", "human_review", "product_gui"],
+  "files_changed": ["src/acfv/providers/", "src/acfv/creator_adaptive/", "src/acfv/creator_identity/", "src/acfv/trusted_speech_memory/", "src/acfv/creator_adaptive_asr/", "src/acfv/human_review/", "src/acfv/product_gui/", "src/acfv/cli/creator_profile.py", "specs/capabilities/", "specs/contracts/", "knowledge/", "docs/", "tests/", "scripts/validate_creator_adaptive_phase2.py", "scripts/validate_human_review_lab.py", "evidence/validation/"],
+  "behavior_change": true,
+  "contract_change": true,
+  "migration_required": true,
+  "compatibility": "Schema v2 is forward-only and idempotent. Existing creator_profile_v1 and memory are preserved. New profile versions do not reuse incompatible memory by default. Generic ASR remains authoritative and the feature remains Shadow-only.",
+  "risks": ["Real Avatar model path and entrypoint remain unavailable", "Voice Profile v2 cannot be built without visual-confirmed clean speech", "No real trusted corpus or Creator lexicon is available", "No independent human ASR ground truth exists", "Creator-adaptive production gate remains closed"]
+}

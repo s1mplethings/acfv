@@ -1,0 +1,167 @@
+from __future__ import annotations
+
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from contextlib import contextmanager
+
+from acfv import config as app_config
+from acfv.modular.contracts import ART_SEGMENTS, ART_SEGMENTS_SEMANTIC, ART_TRANSCRIPT
+from acfv.modular.store import ArtifactStore
+from acfv.modular.types import ArtifactEnvelope, ModuleContext
+from acfv.modular.plugins.semantic_merge import spec as semantic_spec
+
+
+def _ctx(run_dir: Path, transcript_payload, segments_payload):
+    store = ArtifactStore(run_dir)
+    inputs = {
+        ART_TRANSCRIPT: ArtifactEnvelope(
+            artifact_id="transcript",
+            type=ART_TRANSCRIPT,
+            payload=transcript_payload,
+        ),
+        ART_SEGMENTS: ArtifactEnvelope(
+            artifact_id="segments",
+            type=ART_SEGMENTS,
+            payload=segments_payload,
+        ),
+    }
+    return ModuleContext(inputs=inputs, params={}, store=store, run_id=run_dir.name, progress=None)
+
+
+@contextmanager
+def _with_config(temp_values: dict):
+    cm = app_config.config_manager
+    original = dict(cm.config)
+    cm.config.update(temp_values)
+    try:
+        yield
+    finally:
+        cm.config = original
+
+
+def test_semantic_merge_empty_transcript():
+    with TemporaryDirectory() as tmp:
+        run_dir = Path(tmp)
+        ctx = _ctx(run_dir, {"segments": []}, {"segments": [{"start_ms": 0, "end_ms": 10000, "score": 1.2}]})
+        result = semantic_spec.run(ctx)
+        payload = result[ART_SEGMENTS_SEMANTIC]
+        assert payload["segments"], "should pass-through when transcript empty"
+
+
+def test_semantic_merge_target_window():
+    segments = []
+    for idx in range(200):
+        start = float(idx * 2)
+        segments.append({"start": start, "end": start + 2.0, "text": "hello world"})
+    transcript = {"segments": segments}
+    with TemporaryDirectory() as tmp:
+        run_dir = Path(tmp)
+        ctx = _ctx(run_dir, transcript, {"segments": []})
+        with _with_config(
+            {
+                "SEMANTIC_SEGMENT_MODE": True,
+                "SEMANTIC_TARGET_DURATION": 300.0,
+                "MIN_CLIP_DURATION": 180.0,
+                "MAX_CLIP_DURATION": 600.0,
+                "MIN_TARGET_CLIP_DURATION": 180.0,
+                "SEMANTIC_SIMILARITY_THRESHOLD": 0.1,
+                "SEMANTIC_MAX_TIME_GAP": 2.0,
+            }
+        ):
+            result = semantic_spec.run(ctx)
+        payload = result[ART_SEGMENTS_SEMANTIC]
+        segments = payload["segments"]
+        assert segments, "should produce semantic segments"
+        first = segments[0]
+        duration = (first["end_ms"] - first["start_ms"]) / 1000.0
+        assert duration >= 180.0, "segment should respect min duration"
+
+
+def test_semantic_merge_similarity_break():
+    segments = []
+    for idx in range(200):
+        start = float(idx * 2)
+        text = "alpha alpha" if idx < 120 else "beta beta"
+        segments.append({"start": start, "end": start + 2.0, "text": text})
+    transcript = {"segments": segments}
+    with TemporaryDirectory() as tmp:
+        run_dir = Path(tmp)
+        ctx = _ctx(run_dir, transcript, {"segments": []})
+        with _with_config(
+            {
+                "SEMANTIC_SEGMENT_MODE": True,
+                "SEMANTIC_TARGET_DURATION": 300.0,
+                "MIN_CLIP_DURATION": 180.0,
+                "MAX_CLIP_DURATION": 600.0,
+                "MIN_TARGET_CLIP_DURATION": 180.0,
+                "SEMANTIC_SIMILARITY_THRESHOLD": 0.99,
+                "SEMANTIC_MAX_TIME_GAP": 10.0,
+            }
+        ):
+            result = semantic_spec.run(ctx)
+        payload = result[ART_SEGMENTS_SEMANTIC]
+        assert len(payload["segments"]) >= 2, "should split when similarity is low"
+
+
+def test_semantic_merge_trims_long_semantic_window_to_highlight_core():
+    transcript_segments = []
+    for idx in range(100):
+        start = float(idx * 2)
+        transcript_segments.append({"start": start, "end": start + 2.0, "text": "same topic same topic"})
+    transcript = {"segments": transcript_segments}
+    analysis = {
+        "units": "ms",
+        "segments": [
+            {"start_ms": 80000, "end_ms": 94000, "score": 0.9},
+            {"start_ms": 95000, "end_ms": 108000, "score": 1.0},
+            {"start_ms": 109000, "end_ms": 118000, "score": 0.82},
+            {"start_ms": 150000, "end_ms": 165000, "score": 0.2},
+        ],
+    }
+    with TemporaryDirectory() as tmp:
+        run_dir = Path(tmp)
+        ctx = _ctx(run_dir, transcript, analysis)
+        with _with_config(
+            {
+                "SEMANTIC_SEGMENT_MODE": True,
+                "SEMANTIC_TARGET_DURATION": 90.0,
+                "MIN_CLIP_DURATION": 45.0,
+                "MAX_CLIP_DURATION": 180.0,
+                "MIN_TARGET_CLIP_DURATION": 45.0,
+                "SEMANTIC_SIMILARITY_THRESHOLD": 0.1,
+                "SEMANTIC_MAX_TIME_GAP": 8.0,
+                "SEMANTIC_STICKINESS_SEC": 15.0,
+                "CLIP_SEMANTIC_TAIL_SECONDS": 1.5,
+            }
+        ):
+            result = semantic_spec.run(ctx)
+        payload = result[ART_SEGMENTS_SEMANTIC]
+        assert payload["segments"], "should produce semantic segments"
+        first = payload["segments"][0]
+        duration = (first["end_ms"] - first["start_ms"]) / 1000.0
+        assert duration < 80.0, "semantic window should be trimmed to the highlight core instead of staying near fixed target"
+        assert 70000 <= first["start_ms"] <= 90000
+        assert 112000 <= first["end_ms"] <= 126000
+
+
+def test_semantic_merge_without_highlight_overlap_does_not_score_duration_as_interest():
+    transcript = {"segments": [
+        {"start": float(index * 2), "end": float(index * 2 + 2), "text": "quiet unrelated context"}
+        for index in range(100)
+    ]}
+    with TemporaryDirectory() as tmp:
+        ctx = _ctx(Path(tmp), transcript, {"segments": []})
+        with _with_config({
+            "SEMANTIC_SEGMENT_MODE": True,
+            "SEMANTIC_TARGET_DURATION": 90.0,
+            "MIN_CLIP_DURATION": 45.0,
+            "MAX_CLIP_DURATION": 180.0,
+            "MIN_TARGET_CLIP_DURATION": 45.0,
+            "SEMANTIC_SIMILARITY_THRESHOLD": 0.1,
+            "SEMANTIC_MAX_TIME_GAP": 8.0,
+        }):
+            result = semantic_spec.run(ctx)
+        rows = result[ART_SEGMENTS_SEMANTIC]["segments"]
+        assert rows
+        assert all(row["score"] == 0.0 for row in rows)

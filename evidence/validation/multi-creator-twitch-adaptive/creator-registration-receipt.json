@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "rows": [
+    {
+      "login": "saruei",
+      "creator_id": "665e8693-cfa0-497e-8e09-7196c6e27142",
+      "source_id": "bf343053-40d3-426b-8dcb-6e14abe95fcb"
+    },
+    {
+      "login": "anny",
+      "creator_id": "508e0185-6707-47f3-b917-df077c25909b",
+      "source_id": "1d53ad50-c529-4e33-9a8e-ffb9358ea99f"
+    },
+    {
+      "login": "atelieranoko",
+      "creator_id": "3e5c398e-535f-46fc-8931-cb0a67f64f4e",
+      "source_id": "a36995ff-09f7-4e04-bc0b-c07497759915"
+    },
+    {
+      "login": "snuffy",
+      "creator_id": "396b8ee7-ccfe-42de-8de5-4416c27ef58f",
+      "source_id": "baf0d4ae-fbcf-40c2-9231-2a2368ab3144"
+    },
+    {
+      "login": "laphipi",
+      "creator_id": "c4ff4bf1-28e9-4ac2-b6df-16d4667fcaff",
+      "source_id": "66c33dbc-0392-4ce3-8873-c7360841d41d"
+    }
+  ]
+}

@@ -1,0 +1,1905 @@
+{
+  "events": [
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 264940,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 248280,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 204860,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 176940,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 91520,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 55700,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 121840,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "natural_event_boundaries+SOURCE_EDGE"
+        }
+      ]
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 274500,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 252360,
+          "end_ms": 319980,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 171640,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 93860,
+          "end_ms": 478080,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "full_event_outside_15_to_300s_safety_range"
+        }
+      ]
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 491880,
+          "end_ms": 524220,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 472400,
+          "end_ms": 539100,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 414000,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 329180,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    },
+    {
+      "moment_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "mean wouldn't like real life like",
+      "summary": "I mean, wouldn't it be like, in real life, you can put like a fake one, right? That one is, I mean...",
+      "clip_id": "056eafa1-9286-4523-a63d-640c56a6e89f",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 168420,
+          "end_ms": 194420,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    },
+    {
+      "moment_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "Like don't know like Sucking fingers",
+      "summary": "Like... I don't know, like...",
+      "clip_id": "61c4ff57-2b5e-48d0-8bbe-9fbe16b865f1",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 526780,
+          "end_ms": 559260,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 492080,
+          "end_ms": 559260,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 480000,
+          "end_ms": 562220,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "event_shorter_than_profile_target_preserved"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 480000,
+          "end_ms": 565960,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    },
+    {
+      "moment_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "okay where shit toilet yeah cannot",
+      "summary": "okay what where are you the shit on the toilet yeah i cannot help oh bloody hand print on the sink it's just a fucking cinematic wait what is this being scared of are you friendly okay that means what okay you actually have like they give…",
+      "clip_id": "2264b99f-5315-4056-ad24-8bffabccee36",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 437460,
+          "end_ms": 470100,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 407660,
+          "end_ms": 475520,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 401660,
+          "end_ms": 485400,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "event_shorter_than_profile_target_preserved"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 401140,
+          "end_ms": 485400,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    },
+    {
+      "moment_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "yeah pools heard about game some",
+      "summary": "Oh yeah pools, I heard about this game and I saw some gameplay, it looks fine. It looks like...",
+      "clip_id": "96ed57b4-2246-4b6a-bd77-f73f658b078a",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 354940,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 264940,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 248280,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 204860,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 176940,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "SHORT",
+      "status": "READY",
+      "start_ms": 264700,
+      "end_ms": 320000,
+      "duration_ms": 55300,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\01-309acc3c\\short\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "55.333333",
+            "size": "52698576"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 642.182174000016
+    },
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 264940,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 248280,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 204860,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 176940,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 248090,
+      "end_ms": 320000,
+      "duration_ms": 71910,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\01-309acc3c\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "71.950000",
+            "size": "76273871"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 644.9634652000095
+    },
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 264940,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 248280,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 204860,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 176940,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "LONG",
+      "status": "READY",
+      "start_ms": 204850,
+      "end_ms": 340200,
+      "duration_ms": 135350,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\01-309acc3c\\long\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "135.383333",
+            "size": "168871217"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 645.0525414000149
+    },
+    {
+      "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Okay anyways there's nobody here can't",
+      "summary": "Okay, anyways, there's nobody here. I can't go, like, over this.",
+      "clip_id": "1dec541f-37c9-4f00-8aec-979ad068dd9b",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 264940,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 248280,
+          "end_ms": 319540,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 204860,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 176940,
+          "end_ms": 340200,
+          "event_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "payoff_anchor_ms": 267480,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "FULL_EVENT",
+      "status": "READY",
+      "start_ms": 176940,
+      "end_ms": 340200,
+      "duration_ms": 163260,
+      "reason": "natural_event_boundaries",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\01-309acc3c\\full_event\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "163.300000",
+            "size": "212270978"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 645.1466004000104
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 91520,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 55700,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 121840,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "natural_event_boundaries+SOURCE_EDGE"
+        }
+      ],
+      "profile": "SHORT",
+      "status": "READY",
+      "start_ms": 91510,
+      "end_ms": 123500,
+      "duration_ms": 31990,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\02-0e44066a\\short\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "32.016667",
+            "size": "38830161"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 222.25227070000255
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 91520,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 55700,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 121840,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "natural_event_boundaries+SOURCE_EDGE"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 55460,
+      "end_ms": 123500,
+      "duration_ms": 68040,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\02-0e44066a\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "68.066667",
+            "size": "98039611"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 225.41576689999783
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 91520,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 55700,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 121840,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "natural_event_boundaries+SOURCE_EDGE"
+        }
+      ],
+      "profile": "LONG",
+      "status": "NOT_AVAILABLE",
+      "start_ms": 0,
+      "end_ms": 121840,
+      "duration_ms": 121840,
+      "reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE",
+      "output": null,
+      "probe": null,
+      "elapsed_seconds": 225.41579270001967
+    },
+    {
+      "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+      "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "simulation",
+      "query": "Spicy Lazy trail already drunk already",
+      "summary": "Spicy air, mmm. Lazy trail, this way.",
+      "clip_id": "b4404628-5cc2-4b8d-ade9-f9f62911ad67",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 91520,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 55700,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 121840,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "semantic_boundaries_nearest_profile_target+SOURCE_EDGE"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 0,
+          "end_ms": 123500,
+          "event_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "payoff_anchor_ms": 97340,
+          "extension_reason": "natural_event_boundaries+SOURCE_EDGE"
+        }
+      ],
+      "profile": "FULL_EVENT",
+      "status": "NOT_AVAILABLE",
+      "start_ms": 0,
+      "end_ms": 123500,
+      "duration_ms": 123500,
+      "reason": "natural_event_boundaries+SOURCE_EDGE",
+      "output": null,
+      "probe": null,
+      "elapsed_seconds": 225.41579759999877
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 274500,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 252360,
+          "end_ms": 319980,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 171640,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 93860,
+          "end_ms": 478080,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "full_event_outside_15_to_300s_safety_range"
+        }
+      ],
+      "profile": "SHORT",
+      "status": "READY",
+      "start_ms": 274500,
+      "end_ms": 307820,
+      "duration_ms": 33320,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\03-f5ff84d1\\short\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "33.350000",
+            "size": "14451360"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 261.19478590000654
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 274500,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 252360,
+          "end_ms": 319980,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 171640,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 93860,
+          "end_ms": 478080,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "full_event_outside_15_to_300s_safety_range"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 251660,
+      "end_ms": 320810,
+      "duration_ms": 69150,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\03-f5ff84d1\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "69.183333",
+            "size": "27827239"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 263.2626414000115
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 274500,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 252360,
+          "end_ms": 319980,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 171640,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 93860,
+          "end_ms": 478080,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "full_event_outside_15_to_300s_safety_range"
+        }
+      ],
+      "profile": "LONG",
+      "status": "READY",
+      "start_ms": 171460,
+      "end_ms": 307820,
+      "duration_ms": 136360,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\03-f5ff84d1\\long\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "136.383333",
+            "size": "52576660"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 263.34574650001014
+    },
+    {
+      "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "Yeah yeah good times could there",
+      "summary": "Yeah, yeah The good times you could have in there raising the good times like what sniffing cocaine You could you know, I'm not I'm not your words not mine, but I'm Would that be called the SS corporal or the SS new era What if someone…",
+      "clip_id": "15522ef2-73c3-48c9-96b9-f5d7b45fcb74",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 274500,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 252360,
+          "end_ms": 319980,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 171640,
+          "end_ms": 306580,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 93860,
+          "end_ms": 478080,
+          "event_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "payoff_anchor_ms": 283500,
+          "extension_reason": "full_event_outside_15_to_300s_safety_range"
+        }
+      ],
+      "profile": "FULL_EVENT",
+      "status": "NOT_AVAILABLE",
+      "start_ms": 93860,
+      "end_ms": 478080,
+      "duration_ms": 384220,
+      "reason": "full_event_outside_15_to_300s_safety_range",
+      "output": null,
+      "probe": null,
+      "elapsed_seconds": 263.34576530000777
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 491880,
+          "end_ms": 524220,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 472400,
+          "end_ms": 539100,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 414000,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 329180,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "SHORT",
+      "status": "READY",
+      "start_ms": 491760,
+      "end_ms": 524220,
+      "duration_ms": 32460,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\04-f9196f84\\short\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "32.483333",
+            "size": "15793975"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 523.8155360999808
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 491880,
+          "end_ms": 524220,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 472400,
+          "end_ms": 539100,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 414000,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 329180,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 472160,
+      "end_ms": 539100,
+      "duration_ms": 66940,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\04-f9196f84\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "66.966667",
+            "size": "32264941"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 525.7676817000029
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 491880,
+          "end_ms": 524220,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 472400,
+          "end_ms": 539100,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 414000,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 329180,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "LONG",
+      "status": "READY",
+      "start_ms": 413990,
+      "end_ms": 548860,
+      "duration_ms": 134870,
+      "reason": "semantic_boundaries_nearest_profile_target+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\04-f9196f84\\long\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "134.900000",
+            "size": "61065062"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 525.8598510999873
+    },
+    {
+      "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+      "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "collab",
+      "query": "back there's like like tiny little",
+      "summary": "in the back there's like they got like tiny little horses they run on the uh little treadmills and that powers the engine isn't that animal cruelty no they like it how do you know they enjoy running okay you never seen a small horse i've…",
+      "clip_id": "40d103f7-eadb-4e64-83dd-4db4efd8bd84",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 491880,
+          "end_ms": 524220,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 472400,
+          "end_ms": 539100,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 414000,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 329180,
+          "end_ms": 548860,
+          "event_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "payoff_anchor_ms": 514430,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "FULL_EVENT",
+      "status": "READY",
+      "start_ms": 329150,
+      "end_ms": 548860,
+      "duration_ms": 219710,
+      "reason": "natural_event_boundaries+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\04-f9196f84\\full_event\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "219.750000",
+            "size": "95407214"
+          }
+        },
+        "full_decode": null
+      },
+      "elapsed_seconds": 525.951802399999
+    },
+    {
+      "moment_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "mean wouldn't like real life like",
+      "summary": "I mean, wouldn't it be like, in real life, you can put like a fake one, right? That one is, I mean...",
+      "clip_id": "056eafa1-9286-4523-a63d-640c56a6e89f",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 168420,
+          "end_ms": 192580,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 168420,
+          "end_ms": 194420,
+          "event_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "payoff_anchor_ms": 177090,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 168420,
+      "end_ms": 192580,
+      "duration_ms": 24160,
+      "reason": "event_shorter_than_profile_target_preserved",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\05-96b40ca0\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            }
+          ],
+          "format": {
+            "duration": "24.170000",
+            "size": "9135408"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 140.27581530000316
+    },
+    {
+      "moment_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+      "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+      "creator_id": "a8f4bf07-88bc-40aa-bf38-989c4eab6396",
+      "content_type": "chatting",
+      "query": "Like don't know like Sucking fingers",
+      "summary": "Like... I don't know, like...",
+      "clip_id": "61c4ff57-2b5e-48d0-8bbe-9fbe16b865f1",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 526780,
+          "end_ms": 559260,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 492080,
+          "end_ms": 559260,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 480000,
+          "end_ms": 562220,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "event_shorter_than_profile_target_preserved"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 480000,
+          "end_ms": 565960,
+          "event_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "payoff_anchor_ms": 552980,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 492080,
+      "end_ms": 559260,
+      "duration_ms": 67180,
+      "reason": "semantic_boundaries_nearest_profile_target",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\06-f19579ac\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            }
+          ],
+          "format": {
+            "duration": "67.200000",
+            "size": "31717662"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 86.13634309999179
+    },
+    {
+      "moment_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "okay where shit toilet yeah cannot",
+      "summary": "okay what where are you the shit on the toilet yeah i cannot help oh bloody hand print on the sink it's just a fucking cinematic wait what is this being scared of are you friendly okay that means what okay you actually have like they give…",
+      "clip_id": "2264b99f-5315-4056-ad24-8bffabccee36",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 437460,
+          "end_ms": 470100,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "READY",
+          "start_ms": 407660,
+          "end_ms": 475520,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "extended_for_sentence_or_payoff"
+        },
+        {
+          "profile": "LONG",
+          "status": "READY",
+          "start_ms": 401660,
+          "end_ms": 485400,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "event_shorter_than_profile_target_preserved"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 401140,
+          "end_ms": 485400,
+          "event_id": "c3c67f9e-c0a2-410d-bc56-ec0cef7acaad",
+          "payoff_anchor_ms": 443270,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 407620,
+      "end_ms": 475680,
+      "duration_ms": 68060,
+      "reason": "extended_for_sentence_or_payoff+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\07-c3c67f9e\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "68.100000",
+            "size": "30390705"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 108.34642400001758
+    },
+    {
+      "moment_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+      "recording_id": "8b6b1b0d-cf21-4f1b-9230-fdc6ffb9bec3",
+      "creator_id": "763d6db5-d95b-4634-84bb-b1ef0a998883",
+      "content_type": "reaction",
+      "query": "yeah pools heard about game some",
+      "summary": "Oh yeah pools, I heard about this game and I saw some gameplay, it looks fine. It looks like...",
+      "clip_id": "96ed57b4-2246-4b6a-bd77-f73f658b078a",
+      "duration_profiles": [
+        {
+          "profile": "SHORT",
+          "status": "READY",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "semantic_boundaries_nearest_profile_target"
+        },
+        {
+          "profile": "STANDARD",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "LONG",
+          "status": "NOT_AVAILABLE",
+          "start_ms": 358600,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "profile_has_no_distinct_semantic_boundary"
+        },
+        {
+          "profile": "FULL_EVENT",
+          "status": "READY",
+          "start_ms": 354940,
+          "end_ms": 387520,
+          "event_id": "c93fe2ca-4dfe-4d77-9dc7-5effc38e3f65",
+          "payoff_anchor_ms": 371230,
+          "extension_reason": "natural_event_boundaries"
+        }
+      ],
+      "profile": "STANDARD",
+      "status": "READY",
+      "start_ms": 358580,
+      "end_ms": 387520,
+      "duration_ms": 28940,
+      "reason": "event_shorter_than_profile_target_preserved+aligned_word_completion",
+      "output": "F:\\ACFV-Derived\\acfv-current-machine-validation\\final-clips\\08-c93fe2ca\\standard\\clip_bilingual.mp4",
+      "probe": {
+        "ffprobe": true,
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 1920,
+              "height": 1080
+            },
+            {
+              "codec_type": "audio"
+            },
+            {
+              "codec_type": "data"
+            }
+          ],
+          "format": {
+            "duration": "28.966667",
+            "size": "17801651"
+          }
+        },
+        "full_decode": true
+      },
+      "elapsed_seconds": 34.688784199999645
+    }
+  ],
+  "standard_ready": 8
+}

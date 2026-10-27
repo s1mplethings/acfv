@@ -1,0 +1,68 @@
+{
+  "model": "G:\\Cliper\\acfv\\model\\best.pt",
+  "device": "cuda:0",
+  "load_time_s": 1.3084844999830239,
+  "load_ram_delta_mb": 223.6328125,
+  "identity_capable": false,
+  "class_mapping": {
+    "0": "vtuber"
+  },
+  "creators": {
+    "saruei": {
+      "frames": 500,
+      "regions": 10,
+      "detected_frames": 492,
+      "unknown_identity_frames": 500,
+      "identity_predictions": 0,
+      "wrong_label_against_recording_prior": "NOT_APPLICABLE_PRESENCE_ONLY_MODEL",
+      "prediction_labels": {
+        "vtuber": 493
+      },
+      "confidence": {
+        "min": 0.2678118944168091,
+        "median": 0.8814145922660828,
+        "mean": 0.8531863407116632,
+        "max": 0.9433640241622925,
+        "p10": 0.7615419030189514,
+        "p90": 0.9215574264526367
+      },
+      "temporal_presence_consistency": 0.984,
+      "elapsed_s": 12.858960699988529,
+      "batch_fps": 38.88339125264191,
+      "raw_prediction_semantics": "vtuber_presence_not_creator_identity",
+      "visual_spans": 11,
+      "visual_levels": {
+        "VISUAL_UNKNOWN": 11
+      }
+    },
+    "anny": {
+      "frames": 500,
+      "regions": 5,
+      "detected_frames": 500,
+      "unknown_identity_frames": 500,
+      "identity_predictions": 0,
+      "wrong_label_against_recording_prior": "NOT_APPLICABLE_PRESENCE_ONLY_MODEL",
+      "prediction_labels": {
+        "vtuber": 500
+      },
+      "confidence": {
+        "min": 0.833220899105072,
+        "median": 0.9570951461791992,
+        "mean": 0.9527810169458389,
+        "max": 0.9685512781143188,
+        "p10": 0.9415090084075928,
+        "p90": 0.9631913900375366
+      },
+      "temporal_presence_consistency": 1.0,
+      "elapsed_s": 10.993454100040253,
+      "batch_fps": 45.48161073398844,
+      "raw_prediction_semantics": "vtuber_presence_not_creator_identity",
+      "visual_spans": 1,
+      "visual_levels": {
+        "VISUAL_UNKNOWN": 1
+      }
+    }
+  },
+  "gpu_peak_mb": 1014.67333984375,
+  "ram_final_mb": 1286.44921875
+}

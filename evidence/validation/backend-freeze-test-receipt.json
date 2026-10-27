@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-12",
+  "implementation_sha": "72c7ab05b58ecd92b67fc10889d98754ae7e5f96",
+  "focused": {
+    "language_library_builder": {"status": "PASS", "passed": 77},
+    "contract_verifier_external_cwd": {"status": "PASS", "passed": 3},
+    "clean_checkout_services_gui": {"status": "PASS", "passed": 68}
+  },
+  "full_regression_1": {
+    "compileall": "PASS",
+    "cli": "PASS",
+    "pytest": {"status": "PASS", "passed": 482, "warnings": 9},
+    "verify": {"status": "PASS", "pytest_passed": 482, "contract_checks": "PASS"}
+  },
+  "full_regression_2": {
+    "compileall": "PASS",
+    "cli": "PASS",
+    "pytest": {"status": "PASS", "passed": 482, "warnings": 9},
+    "verify": {"status": "PASS", "pytest_passed": 482, "contract_checks": "PASS"}
+  },
+  "skip_added": 0,
+  "xfail_added": 0,
+  "gui_source_changes": 0,
+  "logs": [
+    "F:\\ACFV-Derived\\acfv-current-machine-validation\\logs\\full-regression-final-1.log",
+    "F:\\ACFV-Derived\\acfv-current-machine-validation\\logs\\full-regression-final-2.log",
+    "F:\\ACFV-Derived\\acfv-current-machine-validation\\logs\\clean-checkout-final-focused-tests.log"
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "MULTI_CREATOR_TWITCH_V1",
+  "dataset_version": "multi_creator_twitch_v1",
+  "profile_version": "creator_profile_v5_multi_creator",
+  "root_alias": "BULK_MEDIA_ROOT",
+  "estimated_bitrate_bps": 6000000,
+  "estimated_corpus_size": 198481500000,
+  "estimated_corpus_gib": 184.8503015935421,
+  "status": "BULK_STORAGE_NOT_AVAILABLE",
+  "selected_drive": null,
+  "selected_root_alias": "BULK_MEDIA_ROOT",
+  "reserve_bytes": 300057152102,
+  "estimated_corpus_bytes": 198481500000,
+  "projected_free_bytes": 43490654368,
+  "probe_allowed": true,
+  "reasons": [
+    "no healthy non-system volume remains above SAFE_RESERVE",
+    "Q: capacity below 1 TiB",
+    "Q: free space would breach SAFE_RESERVE"
+  ],
+  "candidates": [
+    {
+      "drive_letter": "C",
+      "capacity_bytes": 484665790464,
+      "free_bytes": 14386122752,
+      "health_status": "Healthy",
+      "operational_status": "OK",
+      "drive_type": "Fixed",
+      "disk_number": 0,
+      "friendly_name": "NVMe WD PC SN740 SDDPNQD-512G-1002",
+      "bus_type": "NVMe",
+      "media_type": "SSD",
+      "is_boot": true,
+      "is_system": true,
+      "file_system": "NTFS",
+      "file_system_label": "OS",
+      "safe_reserve_bytes": 214748364800,
+      "projected_free_bytes": -184095377248,
+      "eligible": false,
+      "rejection_reasons": [
+        "system or boot volume",
+        "capacity below 1 TiB",
+        "free space would breach SAFE_RESERVE"
+      ]
+    },
+    {
+      "drive_letter": "E",
+      "capacity_bytes": 2000363188224,
+      "free_bytes": 96490627072,
+      "health_status": "Healthy",
+      "operational_status": "OK",
+      "drive_type": "Fixed",
+      "disk_number": 5,
+      "friendly_name": "WD Elements SE 2622",
+      "bus_type": "USB",
+      "media_type": "HDD",
+      "is_boot": false,
+      "is_system": false,
+      "file_system": "NTFS",
+      "file_system_label": "WCY",
+      "safe_reserve_bytes": 300054478233,
+      "projected_free_bytes": -101990872928,
+      "eligible": false,
+      "rejection_reasons": [
+        "free space would breach SAFE_RESERVE"
+      ]
+    },
+    {
+      "drive_letter": "F",
+      "capacity_bytes": 2000381014016,
+      "free_bytes": 241972154368,
+      "health_status": "Healthy",
+      "operational_status": "OK",
+      "drive_type": "Fixed",
+      "disk_number": 2,
+      "friendly_name": "WDC WD20 EZBX-00AYRA0",
+      "bus_type": "USB",
+      "media_type": "SSD",
+      "is_boot": false,
+      "is_system": false,
+      "file_system": "NTFS",
+      "file_system_label": "G",
+      "safe_reserve_bytes": 300057152102,
+      "projected_free_bytes": 43490654368,
+      "eligible": false,
+      "rejection_reasons": [
+        "free space would breach SAFE_RESERVE"
+      ]
+    },
+    {
+      "drive_letter": "Q",
+      "capacity_bytes": 256059109376,
+      "free_bytes": 49457393664,
+      "health_status": "Healthy",
+      "operational_status": "OK",
+      "drive_type": "Fixed",
+      "disk_number": 3,
+      "friendly_name": "MTFDHBA2 56TCK-1AS1AABHA",
+      "bus_type": "USB",
+      "media_type": "SSD",
+      "is_boot": false,
+      "is_system": false,
+      "file_system": "NTFS",
+      "file_system_label": "新加卷",
+      "safe_reserve_bytes": 214748364800,
+      "projected_free_bytes": -149024106336,
+      "eligible": false,
+      "rejection_reasons": [
+        "capacity below 1 TiB",
+        "free space would breach SAFE_RESERVE"
+      ]
+    },
+    {
+      "drive_letter": "D",
+      "capacity_bytes": 512107737088,
+      "free_bytes": 14061924352,
+      "health_status": "Healthy",
+      "operational_status": "OK",
+      "drive_type": "Fixed",
+      "disk_number": 1,
+      "friendly_name": "NVMe MAIGUANG V800 512GB",
+      "bus_type": "NVMe",
+      "media_type": "SSD",
+      "is_boot": false,
+      "is_system": false,
+      "file_system": "NTFS",
+      "file_system_label": "",
+      "safe_reserve_bytes": 214748364800,
+      "projected_free_bytes": -184419575648,
+      "eligible": false,
+      "rejection_reasons": [
+        "capacity below 1 TiB",
+        "free space would breach SAFE_RESERVE"
+      ]
+    },
+    {
+      "drive_letter": "G",
+      "capacity_bytes": 1000152236032,
+      "free_bytes": 4635754496,
+      "health_status": "Warning",
+      "operational_status": "Full Repair Needed",
+      "drive_type": "Fixed",
+      "disk_number": 4,
+      "friendly_name": "SanDisk Extreme Pro 55AF",
+      "bus_type": "USB",
+      "media_type": "SSD",
+      "is_boot": false,
+      "is_system": false,
+      "file_system": "exFAT",
+      "file_system_label": "work",
+      "safe_reserve_bytes": 214748364800,
+      "projected_free_bytes": -193845745504,
+      "eligible": false,
+      "rejection_reasons": [
+        "unhealthy: Warning",
+        "not operational: Full Repair Needed",
+        "capacity below 1 TiB",
+        "free space would breach SAFE_RESERVE"
+      ]
+    }
+  ]
+}

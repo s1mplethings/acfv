@@ -1,0 +1,45 @@
+{
+  "case_id": "M28",
+  "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+  "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+  "moment_id": "dde3965f-9573-413b-8de4-edce66d6360e",
+  "start_ms": 12305000,
+  "end_ms": 12311000,
+  "timestamp": "03:25:05.000–03:25:11.000",
+  "duration_ms": 6000,
+  "length_bucket": "short",
+  "summary": "Is it that? F**k!",
+  "moment_transcript": "Is it that? F**k!",
+  "context_30s": {
+    "before": "Ta... Cho-jin Cho-jin... Cho-jin Him",
+    "inside": "Is it that? F**k!",
+    "after": "街灯 Gaito 街灯 Gaito? 街...街灯 Gaito? 街灯 Gaito"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 9000,
+    "pause_after_ms": 12000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 12294000,
+      "end_ms": 12296000,
+      "text": "Him"
+    },
+    "next_segment": {
+      "start_ms": 12323000,
+      "end_ms": 12325000,
+      "text": "街灯 Gaito"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

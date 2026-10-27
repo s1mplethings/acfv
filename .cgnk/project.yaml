@@ -1,0 +1,32 @@
+schema_version: "1.0"
+project:
+  id: acfv
+  name: ACFV
+  type: application
+  language: [python]
+truth:
+  product: docs/context/product.md
+  architecture: docs/context/architecture.md
+  current_state: docs/context/current_state.md
+  roadmap: docs/context/roadmap.md
+  repository_map: docs/repo_map.md
+specs:
+  root: specs/
+  contracts: specs/contracts/
+knowledge:
+  root: knowledge/
+skills:
+  root: .agents/skills/
+evidence:
+  root: evidence/
+runtime:
+  roots: [runs/, var/]
+source:
+  roots: [src/acfv/, scripts/]
+tests:
+  root: tests/
+verification:
+  windows: scripts/verify.ps1
+  posix: scripts/verify.sh
+capabilities:
+  registry: specs/capabilities/index.yaml

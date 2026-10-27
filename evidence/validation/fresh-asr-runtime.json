@@ -1,0 +1,23 @@
+{
+  "model": "medium",
+  "device": "cuda",
+  "compute_type": "float16",
+  "cuda_verified_by_real_decode": true,
+  "library_media_duration_ms": 2406224,
+  "direct_smoke": {
+    "media_duration_seconds": 60.0,
+    "wall_time_seconds": 21.161,
+    "rtf": 0.3527,
+    "model_load_seconds": 3.146,
+    "segments": 9
+  },
+  "environment": {
+    "python": "3.11.11",
+    "torch": "2.5.1+cu121",
+    "faster_whisper": "1.2.1",
+    "ctranslate2": "4.4.0",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "vram_mib": 6141,
+    "driver": "617.42"
+  }
+}

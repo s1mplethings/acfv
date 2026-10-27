@@ -1,0 +1,48 @@
+{
+  "case_id": "M13",
+  "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+  "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "ee5565ad-0f81-4b37-863c-06706bf9e7ab",
+  "start_ms": 3750000,
+  "end_ms": 3752000,
+  "timestamp": "01:02:30.000–01:02:32.000",
+  "duration_ms": 2000,
+  "length_bucket": "short",
+  "summary": "Water. Water.",
+  "moment_transcript": "Water. Water.",
+  "context_30s": {
+    "before": "フット? Oh, no. Oh, no. Water. Water.",
+    "inside": "Water. Water.",
+    "after": "What's this song?"
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": true,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 10000,
+    "pause_after_ms": 26000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 3739000,
+      "end_ms": 3740000,
+      "text": "Water."
+    },
+    "next_segment": {
+      "start_ms": 3778000,
+      "end_ms": 3779000,
+      "text": "What's this song?"
+    }
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "unusually_short",
+    "duplicate_transcript"
+  ]
+}

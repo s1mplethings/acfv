@@ -1,0 +1,51 @@
+{
+  "schema_version": "1",
+  "change_id": "autonomous-full-system-2026-10-07",
+  "commit": "b753fec4572297f0ca8c0fefb34b6dbbdc138ffe",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m acfv.cli live --help",
+    "python -m pytest -q (Run #1)",
+    "python -m pytest -q (Run #2)",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov=acfv.live --cov-report=term:skip-covered",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {"check": "compileall", "status": "PASS"},
+    {"check": "cli_smoke", "status": "PASS"},
+    {"check": "full_regression_1", "status": "PASS", "passed": 232, "skipped": 0, "seconds": 86.16},
+    {"check": "full_regression_2", "status": "PASS", "passed": 232, "skipped": 0, "seconds": 80.57},
+    {"check": "coverage", "status": "PASS", "percent": 85, "passed": 232},
+    {"check": "verify_ps1", "status": "PASS", "passed": 232},
+    {"check": "contract_checks", "status": "PASS"},
+    {"check": "real_twitch_capture_reused", "status": "PASS_REAL", "seconds": 895.962, "segments": 15},
+    {"check": "gpu_asr_reused", "status": "PASS_REAL", "device": "NVIDIA GeForce RTX 4050 Laptop GPU", "workers": 1},
+    {"check": "during_live_search_reused", "status": "PASS_REAL", "queries": 5, "ttfs_max_sec": 61.0},
+    {"check": "segment_stress", "status": "PASS_REAL", "full_30s": 15, "full_60s": 7, "full_90s": 5},
+    {"check": "artifact_integrity", "status": "PASS", "json_files": 83, "jsonl_records": 179},
+    {"check": "processed_library", "status": "PASS", "final_moments": 22, "index_rows": 22, "orphans": 0},
+    {"check": "dataset_media", "status": "PASS_REAL_LOCAL", "recordings": 10, "hours": 52.4306435, "missing": 0, "corrupt": 0},
+    {"check": "moment_machine_screen", "status": "AUTO_PASS", "reviewed": 20, "suspect": 0},
+    {"check": "clip_machine_screen", "status": "AUTO_PASS", "reviewed": 10, "suspect": 0},
+    {"check": "gui_contract", "status": "PASS", "passed": 27},
+    {"check": "gui_native_path", "status": "BLOCKED_EXTERNAL"},
+    {"check": "twitch_chat_real", "status": "BLOCKED_EXTERNAL"},
+    {"check": "human_quality_gates", "status": "HUMAN_REQUIRED"}
+  ],
+  "passed": false,
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.12.3",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU 6141 MiB",
+    "ffmpeg": "N-116931-g8517ff2082-20240908"
+  },
+  "limitations": [
+    "REAL Twitch Chat is blocked by absent credentials.",
+    "Native GUI click-through is blocked by the current Computer Use surface.",
+    "Human retrieval, Moment, Clip, and visual gates remain pending.",
+    "The 52.431h library has no derived transcript/Moment artifacts and was not retranscribed."
+  ]
+}

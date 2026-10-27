@@ -1,0 +1,17 @@
+{
+  "winner": "resnet18-linear",
+  "ranking": [
+    "resnet18-linear",
+    "dinov2",
+    "openclip"
+  ],
+  "policy": [
+    "strong_precision",
+    "unknown_rejection",
+    "strong_coverage",
+    "holdout_top1",
+    "fps"
+  ],
+  "production_status": "SHADOW_VISUAL_IDENTITY",
+  "human_precision_status": "NOT_EVALUATED"
+}

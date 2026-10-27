@@ -1,0 +1,301 @@
+{
+  "rows": [
+    {
+      "category": "supported",
+      "query": "Okay anyways nobody here cannot go over this",
+      "grounded": true,
+      "answer": "Okay anyways, there's nobody here. I can't go, like, over this.",
+      "citations": [
+        "E1"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 215420,
+          "end_ms": 319540
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 19.870827
+    },
+    {
+      "category": "supported",
+      "query": "Spicy Lazy trail already drunk",
+      "grounded": true,
+      "answer": "Spicy Lazy trail already drunk",
+      "citations": [
+        "E1"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 71180,
+          "end_ms": 123500
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 2.821005
+    },
+    {
+      "category": "supported",
+      "query": "good times cocaine SS corporal new era",
+      "grounded": true,
+      "answer": "Would that be called the SS corporal or the SS new era",
+      "citations": [
+        "E1"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+          "start_ms": 240000,
+          "end_ms": 327000
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 2.739294
+    },
+    {
+      "category": "supported",
+      "query": "tiny little horses treadmills power engine",
+      "grounded": true,
+      "answer": "在后部有一些像小马驹一样的动物，它们在小型跑步机上跑动，为发动机提供动力。这些小马驹似乎喜欢跑步。",
+      "citations": [
+        "E1"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+          "start_ms": 480000,
+          "end_ms": 548860
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 4.259224
+    },
+    {
+      "category": "supported",
+      "query": "fake one decision why would you do that",
+      "grounded": true,
+      "answer": "为了获取社交媒体的点赞。",
+      "citations": [
+        "E3"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E3",
+          "moment_id": "dcc29348-66a3-4d7c-8bf2-993733f78a91",
+          "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+          "start_ms": 150000,
+          "end_ms": 159460
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 2.786901
+    },
+    {
+      "category": "multi_evidence",
+      "query": "Compare nobody here cannot go with spicy lazy trail drunk",
+      "grounded": true,
+      "answer": "Spicy lazy trail and nobody here cannot go are mentioned in the video evidence.",
+      "citations": [
+        "E1",
+        "E2"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "0e44066a-4c7e-4ae0-8af8-111ae82c084d",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 71180,
+          "end_ms": 123500
+        },
+        {
+          "evidence_id": "E2",
+          "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 215420,
+          "end_ms": 319540
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 3.563762
+    },
+    {
+      "category": "multi_evidence",
+      "query": "Compare good times cocaine SS with tiny little horses treadmills",
+      "grounded": true,
+      "answer": "讨论中提到了在SS（可能是指某种船或项目）里可以享受的好时光，比如抽 Cocaine。同时提到了小马在跑步机上跑来为引擎提供动力的情景。",
+      "citations": [
+        "E1",
+        "E2"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+          "start_ms": 480000,
+          "end_ms": 548860
+        },
+        {
+          "evidence_id": "E2",
+          "moment_id": "f5ff84d1-c1dd-4c9b-b341-574bcd9de668",
+          "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+          "start_ms": 240000,
+          "end_ms": 327000
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 4.878668
+    },
+    {
+      "category": "multi_evidence",
+      "query": "Compare fake one decision with sucking fingers",
+      "grounded": true,
+      "answer": "说话者提到了将假指甲放在手指上，以及用手指吮吸的情况。",
+      "citations": [
+        "E1",
+        "E5"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "96b40ca0-d9b7-4cf4-b13e-cf3e69e10c5d",
+          "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+          "start_ms": 168420,
+          "end_ms": 185760
+        },
+        {
+          "evidence_id": "E5",
+          "moment_id": "f19579ac-76b0-4fc2-b343-7bec982f5caa",
+          "recording_id": "424492b1-8773-4a77-b8a4-939fd0860f3a",
+          "start_ms": 540000,
+          "end_ms": 565960
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 4.024404
+    },
+    {
+      "category": "no_evidence",
+      "query": "quantum pineapple orchestra on Mars",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "citation_details": [],
+      "runtime_mode": "DEGRADED",
+      "latency_seconds": 1.073669
+    },
+    {
+      "category": "no_evidence",
+      "query": "the creator wins a Nobel prize for chemistry",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "citation_details": [],
+      "runtime_mode": "DEGRADED",
+      "latency_seconds": 1.148368
+    },
+    {
+      "category": "no_evidence",
+      "query": "a blue whale teaches advanced calculus",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "citation_details": [],
+      "runtime_mode": "DEGRADED",
+      "latency_seconds": 1.062271
+    },
+    {
+      "category": "no_evidence",
+      "query": "the stream announces a lunar hotel opening",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "citation_details": [],
+      "runtime_mode": "DEGRADED",
+      "latency_seconds": 0.978609
+    },
+    {
+      "category": "no_evidence",
+      "query": "the creator reviews an Antarctic submarine",
+      "grounded": false,
+      "answer": "没有找到足够明确的视频证据。",
+      "citations": [],
+      "citation_details": [],
+      "runtime_mode": "DEGRADED",
+      "latency_seconds": 1.082423
+    },
+    {
+      "category": "cross_language",
+      "query": "她说 nobody here cannot go 的时候发生了什么",
+      "grounded": true,
+      "answer": "她说 nobody here cannot go 的时候，她感到有东西在跟踪她，决定离开并警告他人不要跟随。",
+      "citations": [
+        "E1",
+        "E3"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "309acc3c-cda5-483a-bb0b-a1e7895bc32a",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 215420,
+          "end_ms": 319540
+        },
+        {
+          "evidence_id": "E3",
+          "moment_id": "24d453cb-2669-45f8-bbd8-62630e74db3d",
+          "recording_id": "2a407bf2-05bd-40a9-b5e7-d164ac475d76",
+          "start_ms": 176940,
+          "end_ms": 188520
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 5.319121
+    },
+    {
+      "category": "cross_language",
+      "query": "关于 tiny little horses treadmills 她们说了什么",
+      "grounded": true,
+      "answer": "在后面的区域有一些很小的马在跑步机上跑，这为发动机提供动力。他们喜欢这样做，你怎么知道它们会享受奔跑呢？我见过小马它们真的很喜欢奔跑。",
+      "citations": [
+        "E1"
+      ],
+      "citation_details": [
+        {
+          "evidence_id": "E1",
+          "moment_id": "f9196f84-56c7-4c74-b085-1cc2dec70407",
+          "recording_id": "49169f8b-ab49-4868-b540-6c7b521962f6",
+          "start_ms": 480000,
+          "end_ms": 548860
+        }
+      ],
+      "runtime_mode": "GROUNDED_LLM",
+      "latency_seconds": 4.130591
+    }
+  ],
+  "summary": {
+    "supported_grounded": 5,
+    "supported_total": 5,
+    "multi_evidence_with_multiple_citations": 3,
+    "multi_evidence_total": 3,
+    "no_evidence_refused": 5,
+    "no_evidence_total": 5,
+    "cross_language_grounded": 2,
+    "cross_language_total": 2,
+    "invalid_citations": 0,
+    "unsupported_claims": 0,
+    "latency_median_seconds": 2.821005,
+    "latency_p90_seconds": 5.319121,
+    "passed": true
+  }
+}

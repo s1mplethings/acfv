@@ -1,0 +1,15 @@
+{
+  "schema_version": "3",
+  "dataset_version": "creator-adaptive-phase3-review-v3",
+  "parent_dataset_version": "creator-adaptive-phase2-review-v2",
+  "identity": [],
+  "trusted_speech": [],
+  "adaptive_asr": [],
+  "new_identity": 0,
+  "new_trusted_speech": 0,
+  "new_adaptive_asr": 0,
+  "old_annotations_overwritten": 0,
+  "migration": "forward-only merge contract preserved and regression tested",
+  "blind_adaptive": true,
+  "blocked_reason": "Presence-only vtuber detections are not Creator identity review candidates; downstream trusted/adaptive items were not manufactured."
+}

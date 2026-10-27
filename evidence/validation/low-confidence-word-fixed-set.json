@@ -1,0 +1,1166 @@
+{
+  "count": 22,
+  "items": [
+    {
+      "recording_id": "5a9caed4-3682-40fc-8bfe-062320a03a59",
+      "clip_id": "anny-01-5a9caed4",
+      "timestamp": 8754238,
+      "raw_library_ASR": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What? Those paddles. Ah, this is all BDSM? I... Then I can't really read it, I'm fucking not... Well... Okay, let me see... Again... I can sort these, but... I mean... Reference, I guess? I'm fucking not...",
+      "final_large_v3_ASR": "Crops? What's a crop? What are all these three? Crops, paddles, canes Whip? Riding crop? Huh? No What? What's paddles? Ah, this is all BDSM? Then I can't really rate it, I don't fucking know Well, okay, let me see Again, I can sort these by, I mean, preference, I guess I don't fucking know",
+      "local_redecode_result": [
+        ""
+      ],
+      "previous_words": [
+        "Ah,",
+        "this",
+        "is"
+      ],
+      "current_word": "all",
+      "next_words": [
+        "BDSM?",
+        "Then",
+        "I"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.26985980695653183,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 1,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Reaction",
+        "game": "anny 的xp rating",
+        "event": {
+          "setup": "Those paddles. Ah, this is all BDSM?",
+          "payoff": "Those paddles. Ah, this is all BDSM?",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Those paddles. Ah, this is all BDSM?",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 1
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "5a9caed4-3682-40fc-8bfe-062320a03a59",
+      "clip_id": "anny-01-5a9caed4",
+      "timestamp": 8754886,
+      "raw_library_ASR": "Crops? What's a crop? What are all these three? Crops, paddles, canes. Whip? Riding crop? Huh? No. What? Those paddles. Ah, this is all BDSM? I... Then I can't really read it, I'm fucking not... Well... Okay, let me see... Again... I can sort these, but... I mean... Reference, I guess? I'm fucking not...",
+      "final_large_v3_ASR": "Crops? What's a crop? What are all these three? Crops, paddles, canes Whip? Riding crop? Huh? No What? What's paddles? Ah, this is all BDSM? Then I can't really rate it, I don't fucking know Well, okay, let me see Again, I can sort these by, I mean, preference, I guess I don't fucking know",
+      "local_redecode_result": [
+        ""
+      ],
+      "previous_words": [
+        "this",
+        "is",
+        "all"
+      ],
+      "current_word": "BDSM?",
+      "next_words": [
+        "Then",
+        "I",
+        "can't"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.26985980695653183,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Reaction",
+        "game": "anny 的xp rating",
+        "event": {
+          "setup": "Those paddles. Ah, this is all BDSM?",
+          "payoff": "Those paddles. Ah, this is all BDSM?",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Those paddles. Ah, this is all BDSM?",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13791897,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "a",
+        "little",
+        "bit"
+      ],
+      "current_word": "different",
+      "next_words": [
+        "design",
+        "Where's",
+        "the"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13792475,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "little",
+        "bit",
+        "different"
+      ],
+      "current_word": "design",
+      "next_words": [
+        "Where's",
+        "the",
+        "music?"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13793053,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "bit",
+        "different",
+        "design"
+      ],
+      "current_word": "Where's",
+      "next_words": [
+        "the",
+        "music?",
+        "I'm"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE",
+        "BROKEN_SENTENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13796523,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "I'm",
+        "with",
+        "chillin'"
+      ],
+      "current_word": "Thank",
+      "next_words": [
+        "you,",
+        "Joe",
+        "I'm"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 2,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 2
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13797101,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "with",
+        "chillin'",
+        "Thank"
+      ],
+      "current_word": "you,",
+      "next_words": [
+        "Joe",
+        "I'm",
+        "entirely"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 6,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 6
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13797680,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "chillin'",
+        "Thank",
+        "you,"
+      ],
+      "current_word": "Joe",
+      "next_words": [
+        "I'm",
+        "entirely",
+        "fart"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "clip_id": "anny-02-0861efd7",
+      "timestamp": 13798258,
+      "raw_library_ASR": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks! holy f consider yourself lucky I'm... I'm lagging. Main holding in the face! Thank you! Dude, I saw you've been building PC for 7 hours? Hey, it turned out great! It's... very good. I hope it didn't explode. It's still not done, but it works. It looks very clean. When I built my PC for the first time, I just wanted to... I just wanted to build it so it works. So it was a fucking mess, like with the wires and shit. You have a lot of patience. You have a lot of patience. She didn't break anything at least. That's a good sign. Welcome, everyone. I'm just focusing on art. I'm drawing... I'm redrawing... Neuro-sama's model. Yes. She was very nudely, so I made her shorter. And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "final_large_v3_ASR": "When I built my PC for the first time, I just wanted to build it so it works So it was a fucking mess, like with the wires and shit You have a lot of patience You have a lot of patience She didn't break anything at least That's a good sign Welcome everyone I'm just focusing on art I'm drawing, I'm redrawing Uh, Neuro-sama's model Yes She was very nudely, so I made her shorter And I'm giving her a little bit different design Where's the music? I'm with chillin' Thank you, Joe I'm entirely fart I feel you, man Thank you I feel you, man I'm horny Thank you, Sae Yes, in the belly",
+      "local_redecode_result": [],
+      "previous_words": [
+        "Thank",
+        "you,",
+        "Joe"
+      ],
+      "current_word": "I'm",
+      "next_words": [
+        "entirely",
+        "fart",
+        "I"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.34151785040185567,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 6,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "anny",
+        "content_type": "Collab",
+        "game": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+        "event": {
+          "setup": "Where's the music? We're chillin'.",
+          "payoff": "Where's the music? We're chillin'.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "Where's the music? We're chillin'.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE",
+        "BROKEN_SENTENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 6
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a",
+      "clip_id": "Saruei-01-8d310288",
+      "timestamp": 12322080,
+      "raw_library_ASR": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+      "final_large_v3_ASR": "Nyeh. A realistic horror game that uses your mind to communicate with... ...entities.",
+      "local_redecode_result": [
+        "Nyeh."
+      ],
+      "previous_words": [],
+      "current_word": "Nyeh.",
+      "next_words": [
+        "A",
+        "realistic",
+        "horror"
+      ],
+      "word_confidence": 0.3915201822916667,
+      "avg_logprob": -0.5192587486533231,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Reaction",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+          "payoff": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE",
+        "UNCERTAIN_PROPER_NOUN"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "8d310288-b8ff-422b-88ea-e28d99deaa1a",
+      "clip_id": "Saruei-01-8d310288",
+      "timestamp": 12326210,
+      "raw_library_ASR": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+      "final_large_v3_ASR": "Nyeh. A realistic horror game that uses your mind to communicate with... ...entities.",
+      "local_redecode_result": [
+        "a realistic horror game that uses your mind to communicate with entities"
+      ],
+      "previous_words": [
+        "Nyeh."
+      ],
+      "current_word": "A",
+      "next_words": [
+        "realistic",
+        "horror",
+        "game"
+      ],
+      "word_confidence": 0.434814453125,
+      "avg_logprob": -0.5192587486533231,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Reaction",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+          "payoff": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "It's kind of a Spider-Human or something like this. A realistic horror game that uses your mind to communicate with entities.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8082680,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "but i don't want to go out but i'm hungry i mean out of my room it's just right there"
+      ],
+      "previous_words": [],
+      "current_word": "but",
+      "next_words": [
+        "i",
+        "don't",
+        "want"
+      ],
+      "word_confidence": 0.07147216796875,
+      "avg_logprob": -0.14933893963312492,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 3,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 3
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8083240,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "but i don't want to go out but i'm hungry i mean out of my room it's just right there"
+      ],
+      "previous_words": [
+        "but"
+      ],
+      "current_word": "i",
+      "next_words": [
+        "don't",
+        "want",
+        "to"
+      ],
+      "word_confidence": 0.4970703125,
+      "avg_logprob": -0.14933893963312492,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 11,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 11
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8113480,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "And I'm shy. I can hear her in the corridor. But I'm hungry. I barely see her. It was just my brother to open the door for her.",
+        "see her was as my brother to like open the door for her and while i hide in my room she's here she don't care yeah but i care"
+      ],
+      "previous_words": [
+        "barely",
+        "see",
+        "her"
+      ],
+      "current_word": "with",
+      "next_words": [
+        "my",
+        "brother",
+        "to"
+      ],
+      "word_confidence": 0.5283203125,
+      "avg_logprob": -0.14933893963312492,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8116720,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "And I'm shy. I can hear her in the corridor. But I'm hungry. I barely see her. It was just my brother to open the door for her.",
+        "see her was as my brother to like open the door for her and while i hide in my room she's here she don't care yeah but i care"
+      ],
+      "previous_words": [
+        "for",
+        "her",
+        "and"
+      ],
+      "current_word": "shit",
+      "next_words": [
+        "while",
+        "i",
+        "hide"
+      ],
+      "word_confidence": 0.11859130859375,
+      "avg_logprob": -0.14933893963312492,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8125320,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "see her was as my brother to like open the door for her and while i hide in my room she's here she don't care yeah but i care"
+      ],
+      "previous_words": [
+        "yeah",
+        "but",
+        "i"
+      ],
+      "current_word": "care",
+      "next_words": [
+        "wait",
+        "do",
+        "i"
+      ],
+      "word_confidence": 8.398294448852539e-05,
+      "avg_logprob": -0.1344460292295976,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 1,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 1
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8135680,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [],
+      "previous_words": [
+        "you",
+        "know",
+        "filthy"
+      ],
+      "current_word": "damp",
+      "next_words": [
+        "on",
+        "it",
+        "because"
+      ],
+      "word_confidence": 0.52685546875,
+      "avg_logprob": -0.1344460292295976,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8139180,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [],
+      "previous_words": [
+        "food",
+        "on",
+        "my"
+      ],
+      "current_word": "fucking",
+      "next_words": [
+        "sweater",
+        "no",
+        "boys"
+      ],
+      "word_confidence": 0.31396484375,
+      "avg_logprob": -0.1344460292295976,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": false,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0c6e3e2a-80a8-453c-bcea-1fc8a50eeb66",
+      "clip_id": "Saruei-02-0c6e3e2a",
+      "timestamp": 8143860,
+      "raw_library_ASR": "But I don't want to go out. But I'm hungry. I mean out of my room. But I don't want to go out. But I'm hungry. I mean out of my room. My maid is just right there. And I'm shy! My maid is just right there. And I'm shy! I can hear her in the corridor. But I'm hungry. I barely see her with my brother to like open the door for her and shit while I hide in my room. She's here. She don't care yet but I care! Wait do I even have like, sometimes I have my sweater who have like you know filthy dump on it. Because sometimes I eat so fast I put like you know food on my fucking sweater. No boys okay I go I go! Fuck you! Oh! Telling me I have no balls here! Look at this!",
+      "final_large_v3_ASR": "but i don't want to go out but i'm hungry i mean out of my room it's just right there and i'm shy i can hear her in the corridor but i'm hungry i barely see her with my brother to like open the door for her and shit while i hide in my room she's here she don't care yeah but i care wait do i even have like sometimes like i have my my sweater who have like you know filthy damp on it because sometimes i eat so fast i put like you know food on my fucking sweater no boys okay i go i go fuck you",
+      "local_redecode_result": [
+        "No boys, okay, I go I go fuck you"
+      ],
+      "previous_words": [
+        "go",
+        "i",
+        "go"
+      ],
+      "current_word": "fuck",
+      "next_words": [
+        "you"
+      ],
+      "word_confidence": 0.343994140625,
+      "avg_logprob": -0.1344460292295976,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Chatting",
+        "game": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+        "event": {
+          "setup": "But I don't want to go out. But I'm hungry.",
+          "payoff": "But I don't want to go out. But I'm hungry.",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "But I don't want to go out. But I'm hungry.",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_CONFIDENT",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "independent acoustic agreement or repeated high-confidence usage supports raw"
+    },
+    {
+      "recording_id": "0e04994c-e1f1-4875-bd8b-d618f1892353",
+      "clip_id": "Saruei-03-0e04994c",
+      "timestamp": 13979178,
+      "raw_library_ASR": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. You didn't take me to the moon, but you were there with me. Man! Oh, that's so deep. Gloria Martinez, you were right. Man! Oh, that's so deep. Gloria Martinez, you were right. David reached the top of Arzaga Tower. Oh, man. You can have Rebecca's gun? Wait, let me see.",
+      "final_large_v3_ASR": "Oh, that's the end of the game, this place. Oh, that's why it says all the tombs. No way. Wait. Are we going to finish our conversation? Rebecca! Maine! You're the only family I ever had. You didn't take me to the moon, but you were there with me. Oh, that's so deep! Gloria Martinez, you were right. David reached the top of Arasaka Tower.",
+      "local_redecode_result": [
+        ""
+      ],
+      "previous_words": [
+        "Are",
+        "we",
+        "going"
+      ],
+      "current_word": "to",
+      "next_words": [
+        "finish",
+        "our",
+        "conversation?"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.2744348293289225,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 1,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Collab",
+        "game": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "event": {
+          "setup": "You didn't take me to the moon, but you were there with me. Man!",
+          "payoff": "You didn't take me to the moon, but you were there with me. Man!",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "You didn't take me to the moon, but you were there with me. Man!",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 1
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0e04994c-e1f1-4875-bd8b-d618f1892353",
+      "clip_id": "Saruei-03-0e04994c",
+      "timestamp": 13982770,
+      "raw_library_ASR": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. You didn't take me to the moon, but you were there with me. Man! Oh, that's so deep. Gloria Martinez, you were right. Man! Oh, that's so deep. Gloria Martinez, you were right. David reached the top of Arzaga Tower. Oh, man. You can have Rebecca's gun? Wait, let me see.",
+      "final_large_v3_ASR": "Oh, that's the end of the game, this place. Oh, that's why it says all the tombs. No way. Wait. Are we going to finish our conversation? Rebecca! Maine! You're the only family I ever had. You didn't take me to the moon, but you were there with me. Oh, that's so deep! Gloria Martinez, you were right. David reached the top of Arasaka Tower.",
+      "local_redecode_result": [
+        ""
+      ],
+      "previous_words": [
+        "finish",
+        "our",
+        "conversation?"
+      ],
+      "current_word": "Rebecca!",
+      "next_words": [
+        "Maine!",
+        "You're",
+        "the"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.2744348293289225,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Collab",
+        "game": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "event": {
+          "setup": "You didn't take me to the moon, but you were there with me. Man!",
+          "payoff": "You didn't take me to the moon, but you were there with me. Man!",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "You didn't take me to the moon, but you were there with me. Man!",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    },
+    {
+      "recording_id": "0e04994c-e1f1-4875-bd8b-d618f1892353",
+      "clip_id": "Saruei-03-0e04994c",
+      "timestamp": 13983668,
+      "raw_library_ASR": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. You didn't take me to the moon, but you were there with me. Man! Oh, that's so deep. Gloria Martinez, you were right. Man! Oh, that's so deep. Gloria Martinez, you were right. David reached the top of Arzaga Tower. Oh, man. You can have Rebecca's gun? Wait, let me see.",
+      "final_large_v3_ASR": "Oh, that's the end of the game, this place. Oh, that's why it says all the tombs. No way. Wait. Are we going to finish our conversation? Rebecca! Maine! You're the only family I ever had. You didn't take me to the moon, but you were there with me. Oh, that's so deep! Gloria Martinez, you were right. David reached the top of Arasaka Tower.",
+      "local_redecode_result": [
+        ""
+      ],
+      "previous_words": [
+        "our",
+        "conversation?",
+        "Rebecca!"
+      ],
+      "current_word": "Maine!",
+      "next_words": [
+        "You're",
+        "the",
+        "only"
+      ],
+      "word_confidence": null,
+      "avg_logprob": -0.2744348293289225,
+      "source_language": "en",
+      "glossary_match": false,
+      "repeated_occurrence_elsewhere": 0,
+      "OCR_evidence": "",
+      "event_context": {
+        "creator": "Saruei",
+        "content_type": "Collab",
+        "game": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+        "event": {
+          "setup": "You didn't take me to the moon, but you were there with me. Man!",
+          "payoff": "You didn't take me to the moon, but you were there with me. Man!",
+          "reaction": ""
+        },
+        "tone": "",
+        "speaker_relations": "",
+        "current_topic": "You didn't take me to the moon, but you were there with me. Man!",
+        "previous_callback": "",
+        "glossary": {},
+        "ocr": ""
+      },
+      "current_quality_flags": [
+        "LOW_WORD_CONFIDENCE"
+      ],
+      "old_decision": "NEEDS_REVIEW",
+      "new_decision": "UNCHANGED_UNCERTAIN",
+      "evidence": {
+        "local_redecode": true,
+        "high_confidence_repetition_count": 0
+      },
+      "risk": "LOW",
+      "reason": "raw preserved; no independent evidence supports replacement"
+    }
+  ]
+}

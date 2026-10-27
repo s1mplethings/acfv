@@ -1,0 +1,154 @@
+{
+  "case_id": "R19",
+  "category": "DIFFICULT_AMBIGUOUS",
+  "language_style": "vague",
+  "query": "之前看图的时候，她拿一个腿很长的女人跟某款游戏角色作比较，是哪段？",
+  "ground_truth": {
+    "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+    "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+    "moment_id": "7c42545f-8a22-44d8-8734-8b0c5aadf219",
+    "start_ms": 2622000,
+    "end_ms": 2681000,
+    "timestamp": "00:43:42.000–00:44:41.000",
+    "transcript_excerpt": "Oh yeah! Look at these fan art! I mean not fan art so I have to skip these But the artist did not bother to put like the yellow details. These outfits look off Holy shit Bella is so like... Why is she so big? She looks like the fucking... What's the name of the game? Bayonetta? Whatever the fuck... The woman with long legs Holy shit No, this is not the accurate size I look tall if anything Like Bella should be this height I'm like smaller Her model is large? Yeah, I know But she wanted to reduce her legs Sorry Also, this one is fucking funny Pain Hub I think... Dude, Pasta Did you take that idea from one of my fucking sketches?"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "6c86c65c-b84f-4ddf-a90b-fc6afac3acd8",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 9999960,
+      "end_ms": 10052000,
+      "timestamp": "02:46:39.960–02:47:32.000",
+      "score": 0.01639344262295082,
+      "summary": "oh my god I'm surprised I'm not sorry I'm not sorry I'm not sorry So i'm scared to get close and i hate being alone I'm scared to get close and i hate being alone I run for that feeling to not feel at all Blie, i get below, i'll sink I can't drown my demons, they know how i swim me ああああああ me me me me",
+      "transcript_excerpt": "oh my god I'm surprised I'm not sorry I'm not sorry I'm not sorry So i'm scared to get close and i hate being alone I'm scared to get close and i hate being alone I run for that feeling to not feel at all Blie, i get below, i'll sink I can't drown my demons, they know how i swim me ああああああ me me me me"
+    },
+    {
+      "rank": 2,
+      "moment_id": "ca0005f7-a010-4a32-914e-55279f5b5fec",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 11700000,
+      "end_ms": 11759000,
+      "timestamp": "03:15:00.000–03:15:59.000",
+      "score": 0.016129032258064516,
+      "summary": "Oh, I, I did not save a picture. Wait. Thank you, Kori! You're so awesome! Thank you. Who's looking at me? Okay, I want to do Gacha one again. Thank you, Matthew! Thank you. アーティア Really? My favorite is when it gives me fucking words in Kadokana, and I don't learn shit. But actually, when I was in the language school, a lot of people struggled with, uh, I guess it's like an advantage if you know English, because like, for example, I had a lot of people from Vietnam in my class at school, so they, they struggled.",
+      "transcript_excerpt": "Oh, I, I did not save a picture. Wait. Thank you, Kori! You're so awesome! Thank you. Who's looking at me? Okay, I want to do Gacha one again. Thank you, Matthew! Thank you. アーティア Really? My favorite is when it gives me fucking words in Kadokana, and I don't learn shit. But actually, when I was in the language school, a lot of people struggled with, uh, I guess it's like an advantage if you know English, because like, for example, I had a lot of people from Vietnam in my class at school, so they"
+    },
+    {
+      "rank": 3,
+      "moment_id": "1bb64f55-dd83-4f95-93d3-ad5fb3f56b4b",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 13830000,
+      "end_ms": 13838000,
+      "timestamp": "03:50:30.000–03:50:38.000",
+      "score": 0.015873015873015872,
+      "summary": "Don't worry, I have access to the reactor scabbards and procedures. Don't worry, I have access to the reactor scabbards and procedures.",
+      "transcript_excerpt": "Don't worry, I have access to the reactor scabbards and procedures. Don't worry, I have access to the reactor scabbards and procedures."
+    },
+    {
+      "rank": 4,
+      "moment_id": "63159b4c-976c-4760-9946-5ff43af2d1f7",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 15570000,
+      "end_ms": 15628000,
+      "timestamp": "04:19:30.000–04:20:28.000",
+      "score": 0.015625,
+      "summary": "Wait, did I meet myself? Oh. My mouth was closed. Nice to meet you, Annie. Okay. Ozzy is like probably one of the only people who knows me the longest here. My hair is on my face. And my cheeks hurt so much. Like not in the way from like smiling a lot, that's a different pain, but like on top of cheeks. Because I put my helmet on. It's so much super tight... on me Wait, Bella, you invaded me? Why'd you invade me? I said I was getting up soon too Thank you, my wife, I had a lot of fun Please follow Bella, she's my everything Fuck you I guess...",
+      "transcript_excerpt": "Wait, did I meet myself? Oh. My mouth was closed. Nice to meet you, Annie. Okay. Ozzy is like probably one of the only people who knows me the longest here. My hair is on my face. And my cheeks hurt so much. Like not in the way from like smiling a lot, that's a different pain, but like on top of cheeks. Because I put my helmet on. It's so much super tight... on me Wait, Bella, you invaded me? Why'd you invade me? I said I was getting up soon too Thank you, my wife, I had a lot of fun Please foll"
+    },
+    {
+      "rank": 5,
+      "moment_id": "353c71c2-1c77-4e8d-a4e5-a9672d4ca96d",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 21215440,
+      "end_ms": 21271400,
+      "timestamp": "05:53:35.440–05:54:31.400",
+      "score": 0.015384615384615385,
+      "summary": "My souls Is that bonfire? Is that bonfire? Is that bonfire? No, it's not! It's a guy Oh, not the wolves. Oh no. Don't wolf. Wolf Ah! Stop it Oh God camera the camera. Oh no that does I don't like that I Think he saw me. What was that sound scared? He has red eyes, chat.",
+      "transcript_excerpt": "My souls Is that bonfire? Is that bonfire? Is that bonfire? No, it's not! It's a guy Oh, not the wolves. Oh no. Don't wolf. Wolf Ah! Stop it Oh God camera the camera. Oh no that does I don't like that I Think he saw me. What was that sound scared? He has red eyes, chat."
+    },
+    {
+      "rank": 6,
+      "moment_id": "0fe29163-64ac-4085-8fb2-88345a0d3e46",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 24800000,
+      "end_ms": 24828000,
+      "timestamp": "06:53:20.000–06:53:48.000",
+      "score": 0.015151515151515152,
+      "summary": "He's out in the staff parking area, in my white Fiesta. Would you check on him too? I've left him alone way too long. Of course, we can do that too. Thank you. Mara, what are you going to do? I'm going to do what I came here to do. We'll be waiting by your car, okay? Okay, thanks. Come along, Mr. Tollman, we've got a lot to do. We're reaching the end, we're reaching the end.",
+      "transcript_excerpt": "He's out in the staff parking area, in my white Fiesta. Would you check on him too? I've left him alone way too long. Of course, we can do that too. Thank you. Mara, what are you going to do? I'm going to do what I came here to do. We'll be waiting by your car, okay? Okay, thanks. Come along, Mr. Tollman, we've got a lot to do. We're reaching the end, we're reaching the end."
+    },
+    {
+      "rank": 7,
+      "moment_id": "6d8b9d89-bec6-41c9-ba3e-0382a8158c00",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 5804000,
+      "end_ms": 5822000,
+      "timestamp": "01:36:44.000–01:37:02.000",
+      "score": 0.014925373134328358,
+      "summary": "Oh god, oh god, oh god, oh god, oh god, oh god, oh god! I think I can stop my shit again. Okay, one minute. Let me restart the software, I think it is ready.",
+      "transcript_excerpt": "Oh god, oh god, oh god, oh god, oh god, oh god, oh god! I think I can stop my shit again. Okay, one minute. Let me restart the software, I think it is ready."
+    },
+    {
+      "rank": 8,
+      "moment_id": "2e7b726f-9074-4461-b442-d0c60b3f0efd",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 3480000,
+      "end_ms": 3486760,
+      "timestamp": "00:58:00.000–00:58:06.760",
+      "score": 0.014705882352941176,
+      "summary": "2009 art hello, it's her first scan. I don't remember this shit. What the fuck?",
+      "transcript_excerpt": "2009 art hello, it's her first scan. I don't remember this shit. What the fuck?"
+    },
+    {
+      "rank": 9,
+      "moment_id": "32514996-1f0c-4869-b0d1-24865a83984c",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 419000,
+      "end_ms": 478000,
+      "timestamp": "00:06:59.000–00:07:58.000",
+      "score": 0.014492753623188406,
+      "summary": "3D stuff like Overwatch It's pretty mid to me It really depends, I'll put it as C I rarely must have Only turns me on if it's my model I wouldn't jack off to koi katsu stuff for example It doesn't turn me on Unless it's a specific fucking angle I don't know, it's pretty specific Narcissistic? What? Me? What? No, I meant like Because my model is hot Let me in I got all I mean you naturally do that face If you're fucking enjoying the fuck out of it, right?",
+      "transcript_excerpt": "3D stuff like Overwatch It's pretty mid to me It really depends, I'll put it as C I rarely must have Only turns me on if it's my model I wouldn't jack off to koi katsu stuff for example It doesn't turn me on Unless it's a specific fucking angle I don't know, it's pretty specific Narcissistic? What? Me? What? No, I meant like Because my model is hot Let me in I got all I mean you naturally do that face If you're fucking enjoying the fuck out of it, right?"
+    },
+    {
+      "rank": 10,
+      "moment_id": "fc62b305-6673-4751-87e0-eec7df17bde7",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 960000,
+      "end_ms": 991200,
+      "timestamp": "00:16:00.000–00:16:31.200",
+      "score": 0.014285714285714285,
+      "summary": "Oh wait, yeah it's the bottom part too. Drop down here. Okay, little mirror. Yeah, yeah, okay good. Wait, maybe crop a little bit here as well and a little bit there. Okay. Ah, perfect. Okay, I can spoil you. It's like finger in the mouth.",
+      "transcript_excerpt": "Oh wait, yeah it's the bottom part too. Drop down here. Okay, little mirror. Yeah, yeah, okay good. Wait, maybe crop a little bit here as well and a little bit there. Okay. Ah, perfect. Okay, I can spoil you. It's like finger in the mouth."
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

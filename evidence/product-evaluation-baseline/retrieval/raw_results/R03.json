@@ -1,0 +1,154 @@
+{
+  "case_id": "R03",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "结局附近她认出 Rebecca 时说了什么？",
+  "ground_truth": {
+    "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+    "moment_id": "dafd0049-fc89-4879-89cc-4ed1531b132b",
+    "start_ms": 13950000,
+    "end_ms": 14007140,
+    "timestamp": "03:52:30.000–03:53:27.140",
+    "transcript_excerpt": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. Man!"
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "3ab4e5ec-32b1-456c-9810-6cbcd4dbc747",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27645000,
+      "end_ms": 27704000,
+      "timestamp": "07:40:45.000–07:41:44.000",
+      "score": 0.01639344262295082,
+      "summary": "Maybe they've saved up a lot of money since the subathon, you know Wait, what? Maybe they've saved up a lot of money since the subathon Since the sub... Oh my fucking guys Bro, when I usually say it, nothing happens So like, this time I was also like, I was just trying to switch the topic I mean, yeah, I mean, I guess it does switch the topic now Raise the timer Dude, when I left Vido to talk to chat I got flashed back during my subathon when Vido did that And then I come back and everyone's fucking gifting subs I was like, what the fuck? Oh fuck, I still forgot to watch the bits when I would go AFK and you would talk to the chat",
+      "transcript_excerpt": "Maybe they've saved up a lot of money since the subathon, you know Wait, what? Maybe they've saved up a lot of money since the subathon Since the sub... Oh my fucking guys Bro, when I usually say it, nothing happens So like, this time I was also like, I was just trying to switch the topic I mean, yeah, I mean, I guess it does switch the topic now Raise the timer Dude, when I left Vido to talk to chat I got flashed back during my subathon when Vido did that And then I come back and everyone's fuc"
+    },
+    {
+      "rank": 2,
+      "moment_id": "a4666646-e003-4136-a6a3-f26f1d1eb4f3",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 24310000,
+      "end_ms": 24316000,
+      "timestamp": "06:45:10.000–06:45:16.000",
+      "score": 0.016129032258064516,
+      "summary": "Good My back hurts",
+      "transcript_excerpt": "Good My back hurts"
+    },
+    {
+      "rank": 3,
+      "moment_id": "0fdf945b-e5b2-4765-a82f-26911069bfeb",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 2633520,
+      "end_ms": 2675000,
+      "timestamp": "00:43:53.520–00:44:35.000",
+      "score": 0.015873015873015872,
+      "summary": "okay I guess I guess it's good we can start Do you think everything is in order? Maybe no, the sound of the game. I need to change the volume. Maybe like this is going to be better. No. Just a tiny bit more. Okay, I hope it's like good enough like this. You tell me if it's like too loud or not enough. Oh, survival or danger may be lurking around every corner. Exploration model, you will not be attacked. Experience the game freely. Well, I mean... We're here to experience the Darkshard survival role, right?",
+      "transcript_excerpt": "okay I guess I guess it's good we can start Do you think everything is in order? Maybe no, the sound of the game. I need to change the volume. Maybe like this is going to be better. No. Just a tiny bit more. Okay, I hope it's like good enough like this. You tell me if it's like too loud or not enough. Oh, survival or danger may be lurking around every corner. Exploration model, you will not be attacked. Experience the game freely. Well, I mean... We're here to experience the Darkshard survival r"
+    },
+    {
+      "rank": 4,
+      "moment_id": "d4053eb2-1e2b-4074-97d7-115350b19ce3",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1547000,
+      "end_ms": 1604000,
+      "timestamp": "00:25:47.000–00:26:44.000",
+      "score": 0.015625,
+      "summary": "What the heck? Jesus fucking Christ, I don't look like this, but... I guess this is like a parallel universe anywhere. I look like a mommy-ass fuck. Mommy-ass fuck. Why not? I don't look like this! Holy shit, this art is so good though Jesus Christ Look at that back Annie, if she went to the gym No, if I went to the gym I don't want to be muscular Tilly, I'll be your prey and welcome Welcome! Of course The ponytail though The tail and ears look so 3D Holy shit I love you!",
+      "transcript_excerpt": "What the heck? Jesus fucking Christ, I don't look like this, but... I guess this is like a parallel universe anywhere. I look like a mommy-ass fuck. Mommy-ass fuck. Why not? I don't look like this! Holy shit, this art is so good though Jesus Christ Look at that back Annie, if she went to the gym No, if I went to the gym I don't want to be muscular Tilly, I'll be your prey and welcome Welcome! Of course The ponytail though The tail and ears look so 3D Holy shit I love you!"
+    },
+    {
+      "rank": 5,
+      "moment_id": "633b76c2-f242-437b-9e4b-cd011c3c3238",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3621000,
+      "end_ms": 3661000,
+      "timestamp": "01:00:21.000–01:01:01.000",
+      "score": 0.015384615384615385,
+      "summary": "First time Lebron Jammer Jesus She trusts someone who can't make up their mind Or alternatively, trust them with your life As an evil character, you can always count on them to backstab you in the end If you're evil, that is Nice ring vitality Thanks for the sub-boss phobia, I won't get scared now Well, I'm still scared of the dark, but you know, baby steps She's scared of something? I thought evil is not scared of anything",
+      "transcript_excerpt": "First time Lebron Jammer Jesus She trusts someone who can't make up their mind Or alternatively, trust them with your life As an evil character, you can always count on them to backstab you in the end If you're evil, that is Nice ring vitality Thanks for the sub-boss phobia, I won't get scared now Well, I'm still scared of the dark, but you know, baby steps She's scared of something? I thought evil is not scared of anything"
+    },
+    {
+      "rank": 6,
+      "moment_id": "c8632b57-b75f-4b60-8b34-593c620d60cf",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 4640800,
+      "end_ms": 4689440,
+      "timestamp": "01:17:20.800–01:18:09.440",
+      "score": 0.015151515151515152,
+      "summary": "it's maybe it was her name yeah but for like the new one I'm talking about it's not a thing uh it's a recent vampire anime recent and the dude have to fall in love with like the vampire girl to be able to like become a vampire because I think he hates human or something like this I don't remember and this is a woman who smoked cigarettes and she have like her hair tied and she have like glasses ah that is code of the night okay okay yeah I think you know like I wouldn't date a woman like this but like I don't know in the anime you're like oh she is a detective i wasn't even sure if she was a detective i just said like you know",
+      "transcript_excerpt": "it's maybe it was her name yeah but for like the new one I'm talking about it's not a thing uh it's a recent vampire anime recent and the dude have to fall in love with like the vampire girl to be able to like become a vampire because I think he hates human or something like this I don't remember and this is a woman who smoked cigarettes and she have like her hair tied and she have like glasses ah that is code of the night okay okay yeah I think you know like I wouldn't date a woman like this bu"
+    },
+    {
+      "rank": 7,
+      "moment_id": "e6a9d69a-3675-400a-ae73-3fa7269be4d3",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 9810000,
+      "end_ms": 9868720,
+      "timestamp": "02:43:30.000–02:44:28.720",
+      "score": 0.014925373134328358,
+      "summary": "You don't want to try to fight my dad for her. He will break you in half. He's fucking dangerous. He's not like a regular dad. He's actually the one you're scared of. And he's starting to grow with each passing day. He's the type of guy who have tattoos on his body. He goes to, what is it called again? He goes to the highest of men to watch the fucking bite tournament. He's fucking hardcore, he's the one who teaches me to appreciate metal and rock. So if I were you, you don't want to try to fuck my mom. I mean you can, I don't care, but he would fuck you up. My anhyze was starting to grow with each passing day. So when I sighed off that night, I told myself that it was just a change of environment that I needed to get used to. The strangeness I'd seen so far in those woods was not enough to go as an unarmed yet.",
+      "transcript_excerpt": "You don't want to try to fight my dad for her. He will break you in half. He's fucking dangerous. He's not like a regular dad. He's actually the one you're scared of. And he's starting to grow with each passing day. He's the type of guy who have tattoos on his body. He goes to, what is it called again? He goes to the highest of men to watch the fucking bite tournament. He's fucking hardcore, he's the one who teaches me to appreciate metal and rock. So if I were you, you don't want to try to fuck"
+    },
+    {
+      "rank": 8,
+      "moment_id": "06135913-da66-43cc-85bb-9f584b632c4f",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 7225000,
+      "end_ms": 7233000,
+      "timestamp": "02:00:25.000–02:00:33.000",
+      "score": 0.014705882352941176,
+      "summary": "If you could go outside, then I'll take you outside.",
+      "transcript_excerpt": "If you could go outside, then I'll take you outside."
+    },
+    {
+      "rank": 9,
+      "moment_id": "f69ac88e-f288-4373-889f-b51b47bc2e5f",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 2108720,
+      "end_ms": 2111720,
+      "timestamp": "00:35:08.720–00:35:11.720",
+      "score": 0.014492753623188406,
+      "summary": "Okay, okay, okay, okay, come, come, come, come, come, come, come.",
+      "transcript_excerpt": "Okay, okay, okay, okay, come, come, come, come, come, come, come."
+    },
+    {
+      "rank": 10,
+      "moment_id": "a30300cf-ef08-4ef3-8ded-111700c024df",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13787480,
+      "end_ms": 13846240,
+      "timestamp": "03:49:47.480–03:50:46.240",
+      "score": 0.014285714285714285,
+      "summary": "Hang on. Your name is so long. You see it? Don't hug me! You see it? This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death",
+      "transcript_excerpt": "Hang on. Your name is so long. You see it? Don't hug me! You see it? This girl can draw a perfect circle, draw a perfect circle, do it, do it, the joke is running out, oh my god, she did it, no fucking way, holy fuck, thank you, lady in the death"
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

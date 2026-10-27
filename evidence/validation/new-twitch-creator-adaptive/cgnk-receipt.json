@@ -1,0 +1,9 @@
+{
+  "doctor": "PASS",
+  "provider_mainline_available": true,
+  "repository_guards": "PASS in 577-test regression",
+  "brief_sha256": "7b178df2dd682db6f939c85d14e8a1c5a2f126c16e8e2cbc562e31fda3aec20b",
+  "knowledge": "knowledge/operations/new-twitch-validation-corpus.md",
+  "generation": "NOT_REQUIRED",
+  "formal_generation_evidence": "NOT_EVALUATED"
+}

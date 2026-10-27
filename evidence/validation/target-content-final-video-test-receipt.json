@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-10",
+  "branch": "validation/target-content-final-video",
+  "base": "4b9a709",
+  "implementation_head": "8b0f1064334e0b66894ad64b6a171a1bf0edaf6c",
+  "material_classification": "TARGET_PRODUCT_CONTENT",
+  "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+  "selected_candidate": "candidate_02",
+  "automatic_clip_verdict": "AUTO_PASS",
+  "final_target_video_ready": "NO",
+  "retrieval_target_fixed_set": {"top1": 7, "top3": 10, "top5": 12, "positive": 16},
+  "retrieval_regression_20": {"top1": 9, "top3": 13, "top5": 15, "top10": 17, "top30": 18, "mrr": 0.5722619048},
+  "conversation_target_fixed_set": {"correct_gate": 9, "total": 16, "positive_with_evidence": 4, "positive_total": 11, "no_evidence_correct": 5, "no_evidence_total": 5},
+  "subtitle": {"word_level": true, "word_count": 113, "cue_count": 27, "average_duration_sec": 1.602, "max_duration_sec": 3.16, "max_lines": 2},
+  "media": {"ffprobe": "PASS", "decode_clean": "PASS", "decode_subtitled": "PASS", "video": "h264", "audio": "aac", "pixel_format": "yuv420p", "resolution": "1920x1080"},
+  "validation": {
+    "run_1": {"compileall": "PASS", "cli": "PASS", "pytest": "337 passed", "verify": "PASS", "contracts": "PASS"},
+    "run_2": {"compileall": "PASS", "cli": "PASS", "pytest": "337 passed", "verify": "PASS", "contracts": "PASS"},
+    "focused_coverage": "86%"
+  },
+  "human_review": "PENDING"
+}

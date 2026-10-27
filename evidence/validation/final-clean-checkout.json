@@ -1,0 +1,32 @@
+{
+  "worktree": "F:\\ACFV-Derived\\acfv-final-clean-smoke",
+  "implementation_sha": "72c7ab05b58ecd92b67fc10889d98754ae7e5f96",
+  "detached_head": true,
+  "tracked_and_untracked_source_copied": false,
+  "cli": "PASS",
+  "fresh_db_open": "PASS",
+  "library": {
+    "status": "PASS",
+    "recordings": 14
+  },
+  "search": {
+    "status": "PASS",
+    "hits": 5,
+    "top_moment": "309acc3c-cda5-483a-bb0b-a1e7895bc32a"
+  },
+  "conversation": {
+    "status": "PASS",
+    "runtime_mode": "GROUNDED_LLM",
+    "citations": ["E1"]
+  },
+  "clip_service": "PASS",
+  "translation_service": "PASS",
+  "render_service": "PASS",
+  "gui_and_service_focused_tests": {
+    "status": "PASS",
+    "passed": 68,
+    "warnings": 7
+  },
+  "working_tree_clean": true,
+  "result": "PASS"
+}

@@ -1,0 +1,180 @@
+{
+  "generated_at": "2026-10-08T06:18:14.010311+00:00",
+  "recordings": [
+    {
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "duration_ms": 14241984,
+      "action": "REUSE",
+      "transcript_entries": 3366,
+      "moment_count": 291,
+      "index_count": 291,
+      "processing_time_seconds": 0.03199999999196734,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "duration_ms": 14593237,
+      "action": "REUSE",
+      "transcript_entries": 2824,
+      "moment_count": 293,
+      "index_count": 293,
+      "processing_time_seconds": 0.01600000000325963,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "duration_ms": 14659616,
+      "action": "REUSE",
+      "transcript_entries": 2242,
+      "moment_count": 306,
+      "index_count": 306,
+      "processing_time_seconds": 0.01600000000325963,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "duration_ms": 15805013,
+      "action": "REUSE",
+      "transcript_entries": 2092,
+      "moment_count": 372,
+      "index_count": 372,
+      "processing_time_seconds": 0.014999999999417923,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "duration_ms": 17060032,
+      "action": "REUSE",
+      "transcript_entries": 3750,
+      "moment_count": 361,
+      "index_count": 361,
+      "processing_time_seconds": 0.01600000000325963,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "duration_ms": 18245866,
+      "action": "REUSE",
+      "transcript_entries": 3850,
+      "moment_count": 389,
+      "index_count": 389,
+      "processing_time_seconds": 0.01600000000325963,
+      "asr": {
+        "elapsed_seconds": null,
+        "rtf": null,
+        "chunks": null,
+        "failed_chunks": null,
+        "retry_count": null
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "duration_ms": 23151872,
+      "action": "REUSE",
+      "transcript_entries": 5082,
+      "moment_count": 473,
+      "index_count": 473,
+      "processing_time_seconds": 0.01600000000325963,
+      "asr": {
+        "elapsed_seconds": 2386.0,
+        "rtf": 0.103059,
+        "chunks": 193,
+        "failed_chunks": 0,
+        "retry_count": 0
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "duration_ms": 26075399,
+      "action": "REUSE",
+      "transcript_entries": 3968,
+      "moment_count": 566,
+      "index_count": 566,
+      "processing_time_seconds": 0.015999999988707714,
+      "asr": {
+        "elapsed_seconds": 3115.0,
+        "rtf": 0.119461,
+        "chunks": 218,
+        "failed_chunks": 0,
+        "retry_count": 0
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "duration_ms": 32831765,
+      "action": "REUSE",
+      "transcript_entries": 6239,
+      "moment_count": 711,
+      "index_count": 711,
+      "processing_time_seconds": 0.014999999999417923,
+      "asr": {
+        "elapsed_seconds": 3587.0,
+        "rtf": 0.109254,
+        "chunks": 274,
+        "failed_chunks": 0,
+        "retry_count": 0
+      },
+      "status": "READY"
+    },
+    {
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "duration_ms": 12085533,
+      "action": "REUSE",
+      "transcript_entries": 2953,
+      "moment_count": 237,
+      "index_count": 237,
+      "processing_time_seconds": 0.015999999988707714,
+      "asr": {
+        "elapsed_seconds": 7.0,
+        "rtf": 0.000579,
+        "chunks": 101,
+        "failed_chunks": 0,
+        "retry_count": 0
+      },
+      "status": "READY"
+    }
+  ],
+  "total_hours": 52.43064361111111,
+  "ready_recordings": 10,
+  "indexed_recordings": 10,
+  "final_moments": 3999,
+  "failures": []
+}

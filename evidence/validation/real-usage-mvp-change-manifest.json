@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "change_id": "real-usage-mvp-2026-10-07",
+  "summary": "Add the Analysis Profile selector and fix failures exposed by real Twitch capture and target-machine GPU ASR validation.",
+  "capabilities": ["creator_library", "live_processing", "twitch_capture"],
+  "commits": [
+    "a53a2f62fa5e089313cad94a8ad65cf32351a7ff",
+    "3be8996dde8b3ab6a9dce2f3c04571231ed112c6"
+  ],
+  "files_changed": [
+    "src/acfv/library/service.py",
+    "src/acfv/library/capture.py",
+    "src/acfv/ui/tabs/library_tab.py",
+    "src/acfv/runtime/stream_monitor.py",
+    "src/acfv/steps/transcribe_audio/impl.py",
+    "specs/capabilities/creator_library.md",
+    "specs/capabilities/live_processing.md",
+    "docs/repo_map.md",
+    "docs/issue_memory/problem_registry.md",
+    "tests/unit/test_analysis_profile.py",
+    "tests/unit/test_live_processing.py",
+    "tests/unit/test_stream_monitor_segmented.py",
+    "tests/unit/test_transcribe_audio_impl.py"
+  ],
+  "behavior_change": true,
+  "contract_change": true,
+  "migration_required": false,
+  "compatibility": "Existing CLI, output paths, persisted schema, and one-worker ASR configuration remain compatible.",
+  "risks": [
+    "Real Twitch chat and during-stream search remain unverified.",
+    "The real dataset and human retrieval/Moment/Clip gates remain incomplete.",
+    "CUDA reuse depends on a discoverable compatible Conda environment or equivalent runtime DLL installation."
+  ]
+}

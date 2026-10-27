@@ -1,0 +1,11 @@
+{
+  "profile_version": "creator_profile_v2",
+  "status": "BLOCKED_MODEL_PATH",
+  "visual_spans": 0,
+  "confirmed": 0,
+  "probable": 0,
+  "ambiguous": 0,
+  "unknown": 0,
+  "conflict": 0,
+  "visual_presence_implies_active_speaker": false
+}

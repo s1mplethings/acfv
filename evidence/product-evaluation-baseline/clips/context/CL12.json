@@ -1,0 +1,56 @@
+{
+  "case_id": "CL12",
+  "file": "media/clip_12.mp4",
+  "source_recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+  "source_recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+  "moment_id": "06013da1-d332-4fb8-ae87-e3464dcf181a",
+  "query": "",
+  "group": "DIFFICULT_BOUNDARY",
+  "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+  "moment_start_ms": 9630800,
+  "moment_end_ms": 9631840,
+  "proposed_start_ms": 9622800,
+  "proposed_end_ms": 9643840,
+  "final_start_ms": 9622800,
+  "final_end_ms": 9643840,
+  "proposal_duration_ms": 21040,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "you can see like how the chopsticks are getting like weird like this or even like you know the way her face looks like with her mouth I mean her his mouth sorry open but it's like really impressive like for a TikTok video of someone dancing and shit like that yeah",
+    "inside": "oh",
+    "after": "oh no Oh, what's happening? Did he take it?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 160,
+    "pause_after_ms": 14000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 9619680,
+      "end_ms": 9622640,
+      "text": "and shit like that yeah"
+    },
+    "next_segment": {
+      "start_ms": 9657840,
+      "end_ms": 9658340,
+      "text": "oh no"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 21.067,
+      "size_bytes": 5154786,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.192162,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

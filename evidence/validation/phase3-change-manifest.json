@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "branch": "feature/real-avatar-model-integration",
+  "base_commit": "4f97d4fc05fd8f001331accf9345a2bfd4ab543c",
+  "implementation_commit": "5368adce048e7c971dbd906f3fd8aa58c45b48aa",
+  "changes": [
+    "Added a lazy Ultralytics adapter that verifies and preserves the one-class vtuber contract.",
+    "Added an explicit external model configuration with vtuber mapped to null.",
+    "Distinguished SELECTED_IDENTITY from SELECTED_PRESENCE_ONLY discovery states.",
+    "Restricted default discovery to the user-authorized G:/Cliper root.",
+    "Added repeatable 500-frame-per-Creator real validation.",
+    "Updated current truth, capability registry, knowledge, tests, and observed evidence."
+  ],
+  "excluded": ["model weights", "raw media", "SQLite databases", "secrets", "temporary sampled frames"],
+  "raw_media_mutations": 0,
+  "official_transcript_mutations": 0,
+  "gate_reductions": 0
+}

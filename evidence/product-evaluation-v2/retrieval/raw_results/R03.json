@@ -1,0 +1,605 @@
+{
+  "case_id": "R03",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "结局附近她认出 Rebecca 时说了什么？",
+  "ground_truth": {
+    "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+    "moment_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53",
+    "start_ms": 13950000,
+    "end_ms": 14007140,
+    "timestamp": "03:52:30.000–03:53:27.140",
+    "transcript_excerpt": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA! Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had. You didn't take me to the moon, but you were there with me. Man!",
+    "old_moment_id": "dafd0049-fc89-4879-89cc-4ed1531b132b",
+    "acceptable_child_ids": [
+      "0e04994c-e1f1-4875-bd8b-d618f1892353",
+      "7c3762a3-3768-4eaa-b836-01a65714d95d",
+      "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 2552.133,
+  "target_diagnostics": {
+    "dense_rank": 6,
+    "dense_score": 0.84107506275177,
+    "fts_rank": 2,
+    "fusion_score": 0.03128054740957967,
+    "reranker_score": -2.7529079914093018,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "cd3a6dd2-bb48-4b42-b661-d23a9b3fdd53",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13950000,
+      "end_ms": 13968640,
+      "score": -2.7529079914093018,
+      "summary": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs.",
+      "transcript_excerpt": "Oh, that's the end of the game, this place. Oh, that's where it says all the tombs. No, wait. Wait. WAIT, IT'S REBECCA!",
+      "debug": {
+        "dense_rank": 6,
+        "dense_score": 0.84107506275177,
+        "fts_rank": 2,
+        "fusion_score": 0.03128054740957967,
+        "reranker_score": -2.7529079914093018,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "24959f24-87be-4782-ae41-a552e274e421",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 150000,
+      "end_ms": 152000,
+      "score": -3.1374905109405518,
+      "summary": "アイスハウスニー",
+      "transcript_excerpt": "アイスハウスニー",
+      "debug": {
+        "dense_rank": 26,
+        "dense_score": 0.8265008926391602,
+        "fusion_score": 0.011627906976744186,
+        "reranker_score": -3.1374905109405518,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "2a942797-bf52-4c9d-80d3-4274e1e9e9b4",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 79480,
+      "end_ms": 123000,
+      "score": -3.3971073627471924,
+      "summary": "秘密の 宙を 捕らえて ベピーコーラー 歩球 回るままの 卓球 歩球 さよなら 二人の秘密 アウトは コンピネージの ベルが 聞こえたの 秘密の 魔法をかけるの ベピーコーラー 壊れた道を止めて ラップを止める アイスハウスニー",
+      "transcript_excerpt": "秘密の 宙を 捕らえて ベピーコーラー 歩球 回るままの 卓球 歩球 さよなら 二人の秘密 アウトは コンピネージの ベルが 聞こえたの 秘密の 魔法をかけるの ベピーコーラー 壊れた道を止めて ラップを止める アイスハウスニー",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.826107919216156,
+        "fusion_score": 0.011494252873563218,
+        "reranker_score": -3.3971073627471924,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "7c3762a3-3768-4eaa-b836-01a65714d95d",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13971840,
+      "end_ms": 13990640,
+      "score": -3.578892707824707,
+      "summary": "Are we going to be fishing our conversation? Rebecca!",
+      "transcript_excerpt": "Are we going to be fishing our conversation? Rebecca! Hey, you! Main! We're the only family I ever had.",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8359799385070801,
+        "fts_rank": 1,
+        "fusion_score": 0.03009207275993712,
+        "reranker_score": -3.578892707824707,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "6dc41c1b-2ff3-479f-84ba-1e0b788c4dfc",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14016900,
+      "end_ms": 14028980,
+      "score": -3.580836057662964,
+      "summary": "David reached the top of Arzaga Tower. Oh, man.",
+      "transcript_excerpt": "David reached the top of Arzaga Tower. Oh, man. You can have Rebecca's gun? Wait, let me see.",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -3.580836057662964,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "70a5be4c-cb4b-4554-b6bb-2d586ac5d335",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14040000,
+      "end_ms": 14059000,
+      "score": -3.8331239223480225,
+      "summary": "What does he find? Is it on the floor or...?",
+      "transcript_excerpt": "What does he find? Is it on the floor or...? Oh, it is on the floor! It's really like Rebecca's gun! The same color and everything!",
+      "debug": {
+        "dense_rank": 50,
+        "dense_score": 0.819416880607605,
+        "fts_rank": 5,
+        "fusion_score": 0.024475524475524476,
+        "reranker_score": -3.8331239223480225,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "9438991a-169b-4605-8bb2-82973617b139",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28790000,
+      "end_ms": 28810000,
+      "score": -3.8865301609039307,
+      "summary": "What kind of slurs do you know Vido? I know so many You do?",
+      "transcript_excerpt": "What kind of slurs do you know Vido? I know so many You do? Can you teach me some? 嗯 Yeah. 嗯 Um. 嗯 Yeah. 嗯 Yeah. 嗯 She told me.",
+      "debug": {
+        "dense_rank": 46,
+        "dense_score": 0.8203420042991638,
+        "fusion_score": 0.009433962264150943,
+        "reranker_score": -3.8865301609039307,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "50b975a1-28ce-44a5-a1e8-08be5d98fcb5",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 0,
+      "end_ms": 69480,
+      "score": -3.922548770904541,
+      "summary": "ん ん ん ん ん ん ん ん 一回仕掛けの アウトは 絡まる糸ほどいて 動き出す あなたを映す 青色 バランスの 瞳の軋む足で 踊りましょう 秘密の 宙を 捕らえて ベピーコーラー 歯車 回るままの 卓球 歩球 アイズ・ハルニー",
+      "transcript_excerpt": "ん ん ん ん ん ん ん ん 一回仕掛けの アウトは 絡まる糸ほどいて 動き出す あなたを映す 青色 バランスの 瞳の軋む足で 踊りましょう 秘密の 宙を 捕らえて ベピーコーラー 歯車 回るままの 卓球 歩球 アイズ・ハルニー",
+      "debug": {
+        "dense_rank": 35,
+        "dense_score": 0.8224613070487976,
+        "fusion_score": 0.010526315789473684,
+        "reranker_score": -3.922548770904541,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "3127884e-60f7-4946-9960-fe9df7316046",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14060000,
+      "end_ms": 14071000,
+      "score": -3.9355552196502686,
+      "summary": "That's awesome! Yeah, I know for that he's jacket again.",
+      "transcript_excerpt": "That's awesome! Yeah, I know for that he's jacket again. Oh, I thought he would have a double one, not just a single one.",
+      "debug": {
+        "dense_rank": 29,
+        "dense_score": 0.8248195648193359,
+        "fts_rank": 7,
+        "fusion_score": 0.026161328190508135,
+        "reranker_score": -3.9355552196502686,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "a9318e4f-bdce-42f8-8385-c83c8b0fe6ae",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11722040,
+      "end_ms": 11736320,
+      "score": -4.308457851409912,
+      "summary": "Of course, they're going to see me. And I'll be like, oh, my God, so I'm going to run away.",
+      "transcript_excerpt": "Of course, they're going to see me. And I'll be like, oh, my God, so I'm going to run away. And oh, my God, there's someone down there. I didn't stop, dude. Well, I'm going to leave the door open and go underneath the bed.",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8374626040458679,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -4.308457851409912,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "0e04994c-e1f1-4875-bd8b-d618f1892353",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13997680,
+      "end_ms": 14016900,
+      "score": -4.399716854095459,
+      "summary": "You didn't take me to the moon, but you were there with me. Man!",
+      "transcript_excerpt": "You didn't take me to the moon, but you were there with me. Man! Oh, that's so deep. Gloria Martinez, you were right.",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -4.399716854095459,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "8ea2d30d-21a0-4b14-8ed9-dc9daeaec439",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13939440,
+      "end_ms": 13940640,
+      "score": -4.4494733810424805,
+      "summary": "Fold one, this one.",
+      "transcript_excerpt": "Fold one, this one.",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -4.4494733810424805,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "57e20ca6-ae72-4482-aedc-0ce21a34f005",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28838000,
+      "end_ms": 28856000,
+      "score": -5.219061374664307,
+      "summary": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny.",
+      "transcript_excerpt": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny. 嗯 It be funny. 嗯 Won't be funny. 嗯 Filtered. 嗯 Um.",
+      "debug": {
+        "dense_rank": 30,
+        "dense_score": 0.8240100145339966,
+        "fusion_score": 0.011111111111111112,
+        "reranker_score": -5.219061374664307,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "9a6f1e14-2b18-4b98-89ac-278b19679be6",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 0,
+      "end_ms": 120000,
+      "score": -5.229011058807373,
+      "summary": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "transcript_excerpt": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "debug": {
+        "dense_rank": 43,
+        "dense_score": 0.8204956650733948,
+        "fusion_score": 0.009708737864077669,
+        "reranker_score": -5.229011058807373,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "97805940-6b8d-4b70-a65a-a71c7a9d451b",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13573360,
+      "end_ms": 13594640,
+      "score": -5.546346187591553,
+      "summary": "Thank you so much again for the 20 subs! Ah!",
+      "transcript_excerpt": "Thank you so much again for the 20 subs! Ah! Ah! I'm gonna write your name here AHAHA! 別れして直して工学目指す 光の世界で満足してみた What did she do? What did she do?",
+      "debug": {
+        "dense_rank": 45,
+        "dense_score": 0.8204549551010132,
+        "fusion_score": 0.009523809523809525,
+        "reranker_score": -5.546346187591553,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "b2ad5214-589c-4665-8181-fc1e42bda144",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 19765280,
+      "end_ms": 19785440,
+      "score": -5.904903411865234,
+      "summary": "やったー! 彼らが知ってるよ 笑顔については、何か名前を言ってください。",
+      "transcript_excerpt": "やったー! 彼らが知ってるよ 笑顔については、何か名前を言ってください。 サルトラン ありがとう、私はそれを知っている 何を言ったの? ありがとう、ありがとう",
+      "debug": {
+        "dense_rank": 38,
+        "dense_score": 0.8219139575958252,
+        "fusion_score": 0.01020408163265306,
+        "reranker_score": -5.904903411865234,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "a0663226-69fe-4e87-848a-90151e578e53",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16251300,
+      "end_ms": 16257300,
+      "score": -6.035608768463135,
+      "summary": "ああああああ 私はそれを忘れた 悪い",
+      "transcript_excerpt": "ああああああ 私はそれを忘れた 悪い",
+      "debug": {
+        "dense_rank": 28,
+        "dense_score": 0.8260864019393921,
+        "fusion_score": 0.011363636363636364,
+        "reranker_score": -6.035608768463135,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "f5e43d38-eb1a-4ac4-9afc-94f9c7419266",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 14135000,
+      "end_ms": 14152000,
+      "score": -6.358828067779541,
+      "summary": "Yeah, of course that would be the exact same location as where she got crushed. I'm not even surprised.",
+      "transcript_excerpt": "Yeah, of course that would be the exact same location as where she got crushed. I'm not even surprised. Man... No, I don't want to know that, I'm already depressed enough.",
+      "debug": {
+        "dense_rank": 40,
+        "dense_score": 0.8213868141174316,
+        "fusion_score": 0.01,
+        "reranker_score": -6.358828067779541,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "f7a2bd09-ed5e-44ca-acd7-f76fcc5bd601",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16280300,
+      "end_ms": 16284300,
+      "score": -6.398011684417725,
+      "summary": "まん ん",
+      "transcript_excerpt": "まん ん",
+      "debug": {
+        "dense_rank": 39,
+        "dense_score": 0.8215786218643188,
+        "fusion_score": 0.010101010101010102,
+        "reranker_score": -6.398011684417725,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "25e860a9-8c99-4908-8ed4-3aaf994ec385",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28810000,
+      "end_ms": 28838000,
+      "score": -6.4174675941467285,
+      "summary": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know.",
+      "transcript_excerpt": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know. 嗯 And then I would ask them. 嗯 Oh my god. 嗯 I wanna see that so bad. 嗯 That must have been so funny. 嗯 I don't think. 嗯 I don't think you do. 嗯 Oh. 嗯 Um 嗯 That's just a thought of her being 嗯 I know this one. 嗯 That's just the worst thing ever.",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.8322910070419312,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -6.4174675941467285,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "a144fe9d-f823-4e68-9437-79ea6c31c73b",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14798000,
+      "end_ms": 14816000,
+      "score": -6.5802435874938965,
+      "summary": "私たちは、今日の話をしていません。 私は、非常に集中しています。",
+      "transcript_excerpt": "私たちは、今日の話をしていません。 私は、非常に集中しています。 メイドに、",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8304528594017029,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -6.5802435874938965,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "50bf662f-ef90-45e6-80a1-0b9997aab353",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 21620000,
+      "end_ms": 21638000,
+      "score": -6.623861789703369,
+      "summary": "Wait what? Oh that's where maybe I can help, like you know so girl.",
+      "transcript_excerpt": "Wait what? Oh that's where maybe I can help, like you know so girl. Ask her to come over with me and help me. She said like she needs some help right? Right? Nicole thanks for the sub, welcome.",
+      "debug": {
+        "dense_rank": 32,
+        "dense_score": 0.8237085342407227,
+        "fusion_score": 0.010869565217391304,
+        "reranker_score": -6.623861789703369,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "893c4d25-01ac-464e-a17b-23b4711bc556",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3475000,
+      "end_ms": 3593000,
+      "score": -7.157151699066162,
+      "summary": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 23,
+        "dense_score": 0.829626202583313,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -7.157151699066162,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "533473d5-ebed-4ee7-8fc7-62ce739fefcc",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16230000,
+      "end_ms": 16241300,
+      "score": -7.311495780944824,
+      "summary": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "transcript_excerpt": "ああああああ、そこに времениがあれば遅れません、 Ferrariに行こうとys管理、 ああああああ ああああああ ああああああ",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.8325523138046265,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -7.311495780944824,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "0ba97afd-851d-4806-8f4f-758fb9af4690",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 8596000,
+      "end_ms": 8614000,
+      "score": -7.361283779144287,
+      "summary": "Right when she was like, you know, leaving the other bedroom. Oh god!",
+      "transcript_excerpt": "Right when she was like, you know, leaving the other bedroom. Oh god! Oh god! It was a really close one. And I closed the door right in by the time behind me before she could see me. I'm a ghost! Oh shit!",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8282743096351624,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -7.361283779144287,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "9adb69bc-eb98-4774-91b6-f58b4b03e33f",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 231320,
+      "end_ms": 247000,
+      "score": -7.413882255554199,
+      "summary": "按個鈴鐺,才能收到最新消息喔! You thought it was done, now it's not a game You thought it was done, now it's not a game",
+      "transcript_excerpt": "按個鈴鐺,才能收到最新消息喔! You thought it was done, now it's not a game You thought it was done, now it's not a game",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.8392212390899658,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -7.413882255554199,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "9c5f1ecf-e3bd-4208-a70d-c0e5d17388de",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14828000,
+      "end_ms": 14870300,
+      "score": -7.498220920562744,
+      "summary": "私は、 アプリコンを持っています。 私は、乾燥したアプリコンを持っています。",
+      "transcript_excerpt": "私は、 アプリコンを持っています。 私は、乾燥したアプリコンを持っています。 ここでお待たせだよ 僕もお待たせだよ ここを消えて ゼロと一緒に歓迎され 物語が無く落ち着く 外に何も残さないかよ 私に知らないから 向こう向きを伝え 早く映らなきゃいけないのかと それがオリジナルみたいなこともないと知って 解き得たことを 消して無駄じゃないと思ったよ 私は乾いたアプリカットを持っていたと言った あ! ああ! ファン! 私の唇を破った! ファン! ファン!",
+      "debug": {
+        "dense_rank": 34,
+        "dense_score": 0.8232284188270569,
+        "fusion_score": 0.010638297872340425,
+        "reranker_score": -7.498220920562744,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "e7d6824d-5d23-4904-bd76-456cd2b59dec",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 21643000,
+      "end_ms": 21654000,
+      "score": -7.5708441734313965,
+      "summary": "Ah here we go, I knew it. Is it this way?",
+      "transcript_excerpt": "Ah here we go, I knew it. Is it this way? I always get lost because like there's no way for me, like I think it's here.",
+      "debug": {
+        "dense_rank": 33,
+        "dense_score": 0.8232537508010864,
+        "fusion_score": 0.010752688172043012,
+        "reranker_score": -7.5708441734313965,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "3739c084-5e45-4935-a7c7-d37f5f16a0cd",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11790000,
+      "end_ms": 11804840,
+      "score": -7.661340236663818,
+      "summary": "ស្ៈល ស្្ ៤៕។៎៛ ប៖។ បៗ។។ បៗ។ ប។។",
+      "transcript_excerpt": "ស្ៈល ស្្ ៤៕។៎៛ ប៖។ បៗ។។ បៗ។ ប។។",
+      "debug": {
+        "dense_rank": 42,
+        "dense_score": 0.8209350109100342,
+        "fusion_score": 0.00980392156862745,
+        "reranker_score": -7.661340236663818,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "bb6ee75c-d267-4df3-9861-922558dc5331",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16133000,
+      "end_ms": 16163680,
+      "score": -7.697027206420898,
+      "summary": "me ああああああ ヘーフン 市ジャパン アプレイ ああああああ あああああ",
+      "transcript_excerpt": "me ああああああ ヘーフン 市ジャパン アプレイ ああああああ あああああ",
+      "debug": {
+        "dense_rank": 37,
+        "dense_score": 0.8221904039382935,
+        "fusion_score": 0.010309278350515464,
+        "reranker_score": -7.697027206420898,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-09",
+  "implementation_sha": "6e8270f9e01cdff8114c91c7073c2b47f141255a",
+  "library": {
+    "database": "var/intelligence_quality_20261008/library_v2.db",
+    "sha256": "82AB3A5976D65FE88DD8A696E2C8CB6C925FB5DEA37220AF09BDF9AFB1251F3C",
+    "recordings": 10,
+    "final_moments": 5226
+  },
+  "index": {
+    "root": "var/intelligence_quality_20261008/moment_index_v4_base",
+    "version": 4,
+    "parents": 5226,
+    "representations": 24351,
+    "size_bytes": 182864929,
+    "build_seconds": 1777.474,
+    "rss_before_bytes": 94486528,
+    "rss_after_bytes": 2211168256,
+    "embedding_model": "intfloat/multilingual-e5-base",
+    "embedding_dimension": 768,
+    "embedding_device": "cpu",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_device": "cpu"
+  },
+  "conversation": {
+    "provider": "ollama",
+    "model": "qwen2.5:7b-instruct",
+    "temperature": 0.0,
+    "median_overall_latency_ms": 5073.988,
+    "llm_ttft_ms": null,
+    "llm_ttft_note": "Provider was exercised through a non-streaming OpenAI-compatible JSON call; TTFT is not separately observable.",
+    "bounded_repair_attempts": 1
+  },
+  "retrieval": {
+    "median_latency_ms": 1688.573,
+    "p90_latency_ms": 2088.375,
+    "dense_depth": 128,
+    "fts_depth": 128,
+    "pre_rerank_parents": 50
+  },
+  "bundle": {
+    "path": "evidence/product-evaluation-v3/evaluation_bundle_v3.zip",
+    "size_bytes": 234958153,
+    "sha256": "ec27ae9cc5abd152982f21f8f1b1dc27daec454c9da8ce49a927ed3fb84242a0"
+  }
+}

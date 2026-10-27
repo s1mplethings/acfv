@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "change_id": "multi-creator-twitch-adaptive-validation",
+  "implementation_commit": "bc4fb81287b25ce8fd616d6f467e8773a2a8efa8",
+  "summary": "Fail-closed bulk storage, live five-Creator Twitch metadata corpus, VOD leakage guards, unnamed multi-mode voice profiles, lexical-acoustic research boundary, and review support",
+  "capabilities": [
+    "vod_download",
+    "creator_library",
+    "creator_identity",
+    "voice_profile",
+    "trusted_speech_memory",
+    "creator_lexicon",
+    "creator_adaptive_asr",
+    "human_review"
+  ],
+  "runtime_mode": "SHADOW",
+  "production_status": "NOT_EVALUATED",
+  "migration_required": false,
+  "compatibility": "Generic ASR remains authoritative; existing domains and old Human Review annotations are unchanged",
+  "risks": [
+    "BULK_STORAGE_NOT_AVAILABLE",
+    "full corpus media is not downloaded",
+    "anny has LIMITED_VOD_DIVERSITY",
+    "human identity and WER/CER truth is pending",
+    "speaker, visual and lexical benchmarks cannot run without frozen TRAIN media"
+  ]
+}

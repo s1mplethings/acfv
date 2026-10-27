@@ -1,0 +1,86 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and analysis caches
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.python-version
+
+# Build and packaging outputs
+build/
+dist/
+sdist/
+.eggs/
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Runtime outputs
+var/
+runs/
+/outputs/
+/clips/
+logs/
+thumbnails/
+/processing/
+artifacts/
+model/
+*.log
+tmp_*.txt
+
+# Local secrets and env files
+secrets/
+private/
+.agent_private/
+.env
+.env.*
+!.env.example
+config.txt
+config.local.*
+openai.env
+/huggingface_token.txt
+*_token.txt
+*.token
+*.key
+*.pem
+*.p12
+*.pfx
+*.secret
+*.credentials
+.npmrc
+.pypirc
+.netrc
+id_rsa*
+known_hosts
+ssh_config
+
+# Local tooling
+.codex/
+.cgkn/
+
+# Editor / OS noise
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Guard against accidental source-tree runtime dumps
+src/acfv/data/logs/*.log

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "automated_matrix": {
+    "visual_A_voice_A": "CONFIRMED",
+    "visual_A_voice_B": "CONFLICT_GENERIC_FALLBACK",
+    "visual_missing_voice_A": "PROBABLE",
+    "visual_A_voice_unknown": "UNKNOWN",
+    "both_unknown": "UNKNOWN",
+    "human_B_over_visual_A": "CONFIRMED_B"
+  },
+  "visual_integration": "NOT_EVALUATED",
+  "real_voice_holdout_segments": 452,
+  "identity_review_v2_items": 100,
+  "review_artifact": "var/creator-adaptive-validation-v6/creator-adaptive-review-v2.json",
+  "collab": {"forced_creator_assignment": false, "unknown_and_ambiguous_supported": true, "production_attribution_ready": false},
+  "result": "CONTRACT_PASS_REAL_FUSION_NOT_EVALUATED"
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "M18",
+  "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+  "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+  "moment_id": "386b9de5-c2dd-4461-b52d-e39146164b72",
+  "start_ms": 21510000,
+  "end_ms": 21567000,
+  "timestamp": "05:58:30.000–05:59:27.000",
+  "duration_ms": 57000,
+  "length_bucket": "medium",
+  "summary": "Come. I'm fucking farming. Come to me. Where's that item thing? Ah, here. All these chunks and no weapon that I want to use. Crazy. Crazy. Where did I go? This is the same place that I've been to. That I just ran through. I don't think I've been here.",
+  "moment_transcript": "Come. I'm fucking farming. Come to me. Where's that item thing? Ah, here. All these chunks and no weapon that I want to use. Crazy. Crazy. Where did I go? This is the same place that I've been to. That I just ran through. I don't think I've been here.",
+  "context_30s": {
+    "before": "Yes, the old one is down there. Oh, so the one that I used already. Where is the other one? Where is another bonfire?",
+    "inside": "Come. I'm fucking farming. Come to me. Where's that item thing? Ah, here. All these chunks and no weapon that I want to use. Crazy. Crazy. Where did I go? This is the same place that I've been to. That I just ran through. I don't think I've been here.",
+    "after": "Ow. I don't think I've been here. Oh, no, no, no. This is... Right. It's that one. Fuck. I could run here. Where did I go? I don't like this place. It's so hard to navigate."
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 12000,
+    "pause_after_ms": 0,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 21491000,
+      "end_ms": 21498000,
+      "text": "Where is the other one? Where is another bonfire?"
+    },
+    "next_segment": {
+      "start_ms": 21567000,
+      "end_ms": 21576000,
+      "text": "Ow."
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

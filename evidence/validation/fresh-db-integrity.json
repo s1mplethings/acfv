@@ -1,0 +1,40 @@
+{
+  "database": "F:\\ACFV-Derived\\acfv-current-machine-validation\\library\\acfv.db",
+  "integrity_check": "ok",
+  "foreign_key_violations": 0,
+  "schema_version": 7,
+  "tables": [
+    "library_clips",
+    "library_creators",
+    "library_explicit_preferences",
+    "library_feedback",
+    "library_folders",
+    "library_moments",
+    "library_recordings",
+    "library_schema_state",
+    "library_sources",
+    "library_vod_downloads"
+  ],
+  "counts": {
+    "library_clips": 8,
+    "library_creators": 2,
+    "library_explicit_preferences": 3,
+    "library_feedback": 4,
+    "library_folders": 0,
+    "library_moments": 86,
+    "library_recordings": 14,
+    "library_schema_state": 1,
+    "library_sources": 2,
+    "library_vod_downloads": 0
+  },
+  "orphans": {
+    "sources_without_creator": 0,
+    "recordings_without_creator": 0,
+    "recordings_without_source": 0,
+    "moments_without_recording": 0,
+    "clips_without_recording": 0,
+    "feedback_without_clip": 0,
+    "preferences_without_creator": 0
+  },
+  "passed": true
+}

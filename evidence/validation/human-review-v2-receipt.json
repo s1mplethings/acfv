@@ -1,0 +1,15 @@
+{
+  "old_items_retained": 686,
+  "prior_phase1_identity_artifact_preserved": 100,
+  "prior_phase1_identity_merged_into_this_blocked_dataset": false,
+  "validated_dataset_sample_count": 686,
+  "counts": {"asr": 200, "identity": 0, "trusted_speech": 0, "adaptive_asr": 0, "translation": 120, "boundary": 37, "watchability": 74, "subtitle": 218, "publishability": 37},
+  "blind_adaptive": true,
+  "migration": "forward-only merge path validated by tests",
+  "annotations_overwritten": 0,
+  "restart_persistence": true,
+  "database_integrity": "ok",
+  "foreign_key_violations": 0,
+  "production_db_touched": false,
+  "reason": "No real avatar model was selected; unsafe review items were not manufactured."
+}

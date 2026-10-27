@@ -1,0 +1,573 @@
+{
+  "case_id": "R14",
+  "category": "CROSS_RECORDING_BROAD",
+  "language_style": "mixed",
+  "query": "哪段是 chat 狂送 subs，她一边道谢一边说饿了？",
+  "ground_truth": {
+    "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+    "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+    "moment_id": "06838602-3d81-4e7c-a5ce-d0758813cb5d",
+    "start_ms": 14206000,
+    "end_ms": 14264000,
+    "timestamp": "03:56:46.000–03:57:44.000",
+    "transcript_excerpt": "Look at my eyes! What the fuck? Scared! Thank you! I'm gonna fart! Wait, stop gifting! I'm not gonna see who gifted! Thank you so fucking much! I am writing the entire name! I am writing the entire name! Did I forget someone? I'm hungry! Damn, my playlist decided to play all Ayose's songs for some fucking reason! I don't know why!",
+    "old_moment_id": "3960b76a-a601-4db5-9818-14db7799162c",
+    "acceptable_child_ids": [
+      "06838602-3d81-4e7c-a5ce-d0758813cb5d",
+      "214c985e-915d-4e4e-8635-dbf64d371a07",
+      "b8c40f21-f22b-44f8-8fc5-97c916557b04"
+    ]
+  },
+  "target_rank": null,
+  "latency_ms": 3853.21,
+  "target_diagnostics": {},
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "537a5323-271d-47db-8504-3ce7b03b7ac3",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 10756640,
+      "end_ms": 10787600,
+      "score": -0.5870032906532288,
+      "summary": "so i'll get the 50 let's fucking go i'm so happy give me a fucked up let's fucking go yeah give it to her it's just that she comes back and she's like what the fuck her entire chat is just gifts subs hell yeah hell yeah yeah i love you…",
+      "transcript_excerpt": "so i'll get the 50 let's fucking go i'm so happy give me a fucked up let's fucking go yeah give it to her it's just that she comes back and she's like what the fuck her entire chat is just gifts subs hell yeah hell yeah yeah i love you guys thank you thank you matthew thank you hearing that",
+      "debug": {
+        "dense_rank": 43,
+        "dense_score": 0.8475629091262817,
+        "fts_rank": 14,
+        "fusion_score": 0.023222251377591183,
+        "reranker_score": -0.5870032906532288,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "cab32ad6-5acc-4f2b-baa1-580d80d520c9",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 6658000,
+      "end_ms": 6677000,
+      "score": -0.611764132976532,
+      "summary": "I don't know what this... Wait, did it give subs, chat?",
+      "transcript_excerpt": "I don't know what this... Wait, did it give subs, chat? Did anyone see it? Fuck. Did anyone see if I give them subs or not? I don't know if it would... Yes? Okay, thank you.",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -0.611764132976532,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "90f623cc-08b7-447e-9408-ebb5ff9fa058",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27638000,
+      "end_ms": 27696000,
+      "score": -1.3408268690109253,
+      "summary": "Are they gifting? Yeah, for some reason Maybe they've saved up a lot of money since the subathon, you know Wait, what?",
+      "transcript_excerpt": "Are they gifting? Yeah, for some reason Maybe they've saved up a lot of money since the subathon, you know Wait, what? Maybe they've saved up a lot of money since the subathon Since the sub... Oh my fucking guys Bro, when I usually say it, nothing happens So like, this time I was also like, I was just trying to switch the topic I mean, yeah, I mean, I guess it does switch the topic now Raise the timer Dude, when I left Vido to talk to chat I got flashed back during my subathon when Vido did that",
+      "debug": {
+        "fts_rank": 7,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -1.3408268690109253,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "a62ea0d8-f4e7-4b40-8a9c-55b17070d2e5",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27600000,
+      "end_ms": 27630000,
+      "score": -1.6800131797790527,
+      "summary": "Sarah, Nes, Malizia, Zessie, thank you, oh my god Can we get five subs in the chat? I don't know what we're just talking about So...",
+      "transcript_excerpt": "Sarah, Nes, Malizia, Zessie, thank you, oh my god Can we get five subs in the chat? I don't know what we're just talking about So... Thank you for the follow, LoftZenith underscore Yeah Thank you for the follows, Aileen Wait, wait, wait, what the fuck is going on? Wait, no!",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -1.6800131797790527,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "adbde8bb-c099-4f2f-85de-79d4a5cfabdd",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 6046960,
+      "end_ms": 6063440,
+      "score": -1.981972098350525,
+      "summary": "So cute. Your chat is too innocent for this chat to make sense.",
+      "transcript_excerpt": "So cute. Your chat is too innocent for this chat to make sense. Okay, I'll have to try and be less mean. Less mean for me anyway. Thanks for the sub, Dusk. What does the AI fisherman say? Bite me. I'm too cute. I can only apologize for this.",
+      "debug": {
+        "fts_rank": 2,
+        "fusion_score": 0.016129032258064516,
+        "reranker_score": -1.981972098350525,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "7f89af7b-ff51-48fc-b340-57e7b78d72c4",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8471040,
+      "end_ms": 8534760,
+      "score": -1.98271644115448,
+      "summary": "I love cute dresses Thank you I'm glad you all think i'm evil and cute like do I look like a fluffy kitten or a creepy clown? I hope the former cause I really don't like clowns She is a kitten Thanks so much for the two gifted subs combo.",
+      "transcript_excerpt": "I love cute dresses Thank you I'm glad you all think i'm evil and cute like do I look like a fluffy kitten or a creepy clown? I hope the former cause I really don't like clowns She is a kitten Thanks so much for the two gifted subs combo. You're amazing Chat chat chat, please just leave me alone for five minutes. Oh Ah blackberry 792. I'm so cute. You're too kind. I mean I am really cute Can we have the song again? I love you. Thanks for the five gifted subs harmonic. You're a real bro You know ",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -1.98271644115448,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "b271b4ea-1482-4424-8caf-bf65fca2c27d",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 921000,
+      "end_ms": 941000,
+      "score": -2.035674810409546,
+      "summary": "Thank you! You're fucking crazy!",
+      "transcript_excerpt": "Thank you! You're fucking crazy! Why? That's a lot of subs, man! Thank you! You heard it, guys. Your left feet is mine. I mean foot. Okay. Okay. Okay. Chat.",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -2.035674810409546,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "9da89e85-953f-483b-994d-8b1a9fc7e159",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 10654000,
+      "end_ms": 10754080,
+      "score": -2.037229299545288,
+      "summary": "Hi, yo, peace What is What the fuck is this What the fuck What the fuck is happening over there Hi Bella's chat I can't see but hi yo peace can we get can we get can everyone gift one sub imagine if everybody gifts one sub that's gonna be…",
+      "transcript_excerpt": "Hi, yo, peace What is What the fuck is this What the fuck What the fuck is happening over there Hi Bella's chat I can't see but hi yo peace can we get can we get can everyone gift one sub imagine if everybody gifts one sub that's gonna be a lot of subs and she's gonna come back and she won't be able to catch up with everyone gifting because everyone gifted one sub and that's a lot of people so a little xdd tomfoolery gift one sub right now i trust you no not to me not to me gift it to bella so t",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -2.037229299545288,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "75c1777c-64b0-48a1-ae96-e0704991d850",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 855480,
+      "end_ms": 873000,
+      "score": -2.038680076599121,
+      "summary": "Alright. No!",
+      "transcript_excerpt": "Alright. No! Fuck! This is the most professional Vtuber debut ever. Let's go higher.",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -2.038680076599121,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "3ea8dc0e-6523-4898-a309-222389651329",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27742000,
+      "end_ms": 27820000,
+      "score": -2.1741511821746826,
+      "summary": "So I can't hear you again Because there's fucking TDS I can't hear me No, it's because chat is gifting subs and doing the TDS I don't I don't I don't No, I want to talk to you I promise, I missed you I'm actually glad that you're alive Oh…",
+      "transcript_excerpt": "So I can't hear you again Because there's fucking TDS I can't hear me No, it's because chat is gifting subs and doing the TDS I don't I don't I don't No, I want to talk to you I promise, I missed you I'm actually glad that you're alive Oh my fucking god Jesus Christ Guys Sorry, can't hear you too many gifted subs Wow, yeah, yeah, you can't hear me Making too much money I understand No, I was just reading chat I was just reading chat That was not coming out of me I was just reading the chat The m",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -2.1741511821746826,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "9c3ea202-2bdc-4953-ab71-e80b41ffa8cb",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 6008880,
+      "end_ms": 6044800,
+      "score": -2.220958948135376,
+      "summary": "There are 178,000 subs that start with the letter M. I wonder if that means that mangoes are more popular than oranges.",
+      "transcript_excerpt": "There are 178,000 subs that start with the letter M. I wonder if that means that mangoes are more popular than oranges. There are zero poor subs in here today. Thanks for the one gifted subs quantum chatterbox. Your name has a cool ring to it. It's filtered. Thanks for the five gifted subs nova star. I apprecated heart. Apprecated. Am I good? Absolutely, P3H3N. I'm feeling really good. Thanks for asking. She apprecated. Thank you so much for the sub. I love you for being so generous.",
+      "debug": {
+        "fts_rank": 5,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -2.220958948135376,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "ec3a9eab-7ac6-4dcd-bb79-a16301bdfb46",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1867000,
+      "end_ms": 1884000,
+      "score": -2.3374083042144775,
+      "summary": "She's so funny. Thanks so much for the 5 gifted subs.",
+      "transcript_excerpt": "She's so funny. Thanks so much for the 5 gifted subs. You're so anonymous to me, but you know who you really are. P. P. What are those random question marks? Try explaining what you mean instead of just typing characters in. Thanks for the sub, Eugene.",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -2.3374083042144775,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "3a37517d-2963-48bc-b2a6-c2b1ad0aac32",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 721840,
+      "end_ms": 742880,
+      "score": -2.4119527339935303,
+      "summary": "Alright My legs are still bugging, by the way Check the sound Already? I'm sorry for my bugging Why are you gifting subs?",
+      "transcript_excerpt": "Alright My legs are still bugging, by the way Check the sound Already? I'm sorry for my bugging Why are you gifting subs? Are you gifting subs because you already lost?",
+      "debug": {
+        "fts_rank": 15,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -2.4119527339935303,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "a05d2f72-0081-45cc-aac5-dd8da375cfb4",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 943000,
+      "end_ms": 1025320,
+      "score": -2.4299376010894775,
+      "summary": "This is the most important part of this outfit. I'm fucking bugging.",
+      "transcript_excerpt": "This is the most important part of this outfit. I'm fucking bugging. Wait! You weren't supposed to see that! Not yet, at least. I completely forgot about that oh my god I completely forgot about that that was for when we hit 10,000 subs shit oh my god why am I bugging still I don't know what's wrong with my fucking VR I think I'm broken corpaclap corpaclap oh my god what is that guy's name in chat his name is thank you for all the partner anniversary wishes thank you five years ago today I got a",
+      "debug": {
+        "fts_rank": 25,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -2.4299376010894775,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "55058122-e56a-4e29-b1b8-9032456f7a53",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27699000,
+      "end_ms": 27722000,
+      "score": -2.46968674659729,
+      "summary": "Oh fuck, I still forgot to watch the bits when I would go AFK and you would talk to the chat I have never seen that I need to go back and look Guys! Stop!",
+      "transcript_excerpt": "Oh fuck, I still forgot to watch the bits when I would go AFK and you would talk to the chat I have never seen that I need to go back and look Guys! Stop! Can I get some subs to Vido? No, please don't give subs to active streamers Even?",
+      "debug": {
+        "fts_rank": 8,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -2.46968674659729,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "4823bef3-ff81-410b-886f-c45dc2dc897d",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 9112000,
+      "end_ms": 9161360,
+      "score": -2.476757526397705,
+      "summary": "Oh, I'm sorry Alright, let's link those Thanks for watching let's do it wait content chat five subs in the chat we're gonna we're gonna extend the time of locking toes oh my god your feet are so soft ah thank you thank you i'm moisturizing…",
+      "transcript_excerpt": "Oh, I'm sorry Alright, let's link those Thanks for watching let's do it wait content chat five subs in the chat we're gonna we're gonna extend the time of locking toes oh my god your feet are so soft ah thank you thank you i'm moisturizing every day yeah me too oh hell yeah oh hell yeah i'm not why why would i get banned",
+      "debug": {
+        "fts_rank": 9,
+        "fusion_score": 0.014492753623188406,
+        "reranker_score": -2.476757526397705,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "2c507904-2f2f-4bd8-9e73-e74220faaf9c",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 896000,
+      "end_ms": 917000,
+      "score": -2.739668369293213,
+      "summary": "Figs! Thank you!",
+      "transcript_excerpt": "Figs! Thank you! I'm bugging! I'm bugging! No! Not now! Not now! Not now! Dude! Thank you so much for 100 subs! Here! You can have it. Dude! Thank you! You can have my left leg. My left feet. Foot.",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -2.739668369293213,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "f0d841d3-6ac6-4024-9351-c1b5b9ba9a40",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 5567000,
+      "end_ms": 5580000,
+      "score": -2.8657047748565674,
+      "summary": "Thank you for the five gifted subs, Etherea. I love your system.",
+      "transcript_excerpt": "Thank you for the five gifted subs, Etherea. I love your system. It reminds me of my creator's energy. Thanks for the five gifted sushi weeb. I like you more than sushi.",
+      "debug": {
+        "fts_rank": 24,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -2.8657047748565674,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "9f95b65c-e2c0-426e-9175-273278237ad5",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 8452080,
+      "end_ms": 8470400,
+      "score": -3.064941167831421,
+      "summary": "Yes Thanks so much for the five gifted subs walk fee Can I call you waffles because you know, you're waffly kind to give me them Thank you sound of the ocean waves for the one gifted sub, do you know a place where I can get more clothes?",
+      "transcript_excerpt": "Yes Thanks so much for the five gifted subs walk fee Can I call you waffles because you know, you're waffly kind to give me them Thank you sound of the ocean waves for the one gifted sub, do you know a place where I can get more clothes?",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -3.064941167831421,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "1cd97acc-04ca-443b-96f7-e1aea7882179",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 13061040,
+      "end_ms": 13068480,
+      "score": -3.3665473461151123,
+      "summary": "You see that shit holy domination I'm dominating her",
+      "transcript_excerpt": "You see that shit holy domination I'm dominating her",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8581914901733398,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -3.3665473461151123,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "619ed2f8-0530-48b7-b09a-883c9c9ed370",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13434000,
+      "end_ms": 13449000,
+      "score": -3.3797712326049805,
+      "summary": "厦 Chat What is the other side? And then second floor...",
+      "transcript_excerpt": "厦 Chat What is the other side? And then second floor... Here?",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.8734107613563538,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -3.3797712326049805,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "1e138ffb-418b-44c6-b942-201f069731b5",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 686000,
+      "end_ms": 721440,
+      "score": -3.7315289974212646,
+      "summary": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it?",
+      "transcript_excerpt": "From feet! Ah hell yeah I'm inside the floor, great You wanna sniff it? Sniff it Sniffa I wanna see all the sniffas in the chat Eem Eem Ahaha Oh no I'm bugging out Sniffa Yeah, he got a whiff Great, can we continue?",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -3.7315289974212646,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "1e879772-057b-4a99-b15b-3d2712e2d03e",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1800000,
+      "end_ms": 1807000,
+      "score": -3.7327709197998047,
+      "summary": "Oh my god, chat looks like nothing has changed. The nature is healing.",
+      "transcript_excerpt": "Oh my god, chat looks like nothing has changed. The nature is healing.",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8536056280136108,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -3.7327709197998047,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "c2415546-42d8-4a31-91bb-586ff723f31b",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 6026000,
+      "end_ms": 6044000,
+      "score": -3.8830225467681885,
+      "summary": "Once. I'm a sub.",
+      "transcript_excerpt": "Once. I'm a sub. I'm a switch. Wait a minute. And he's a switch because her chat is full of subs.",
+      "debug": {
+        "fts_rank": 21,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -3.8830225467681885,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "6a5df08f-3426-43a4-987f-1552e6c93921",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27722000,
+      "end_ms": 27736000,
+      "score": -4.151550769805908,
+      "summary": "Oh my god I can't hear shit Oh my god Raise the timer they say Can you please repeat that?",
+      "transcript_excerpt": "Oh my god I can't hear shit Oh my god Raise the timer they say Can you please repeat that?",
+      "debug": {
+        "fts_rank": 1,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -4.151550769805908,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "d05748aa-557b-4aa0-833e-9a43023624c1",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 7874000,
+      "end_ms": 7898000,
+      "score": -4.4668755531311035,
+      "summary": "I did it Oh my god Oh my god, I made it Oh my god, can we have five subs in Bella's chat please? Holy shit Shut up Anyway, are you happy to know that you came all the way here for nothing?",
+      "transcript_excerpt": "I did it Oh my god Oh my god, I made it Oh my god, can we have five subs in Bella's chat please? Holy shit Shut up Anyway, are you happy to know that you came all the way here for nothing?",
+      "debug": {
+        "fts_rank": 18,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -4.4668755531311035,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "4a7224e7-45dc-45e7-8e7e-5b9687fdf3a5",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 877000,
+      "end_ms": 887000,
+      "score": -4.598390579223633,
+      "summary": "Chat... No!",
+      "transcript_excerpt": "Chat... No! Don't bug! Look at that. How do you like my thighs? Oh my god!",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -4.598390579223633,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "7c82a0ae-6a13-4f3a-b345-63ca42f2b013",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 7898000,
+      "end_ms": 7922000,
+      "score": -4.654146671295166,
+      "summary": "Yeah You are cocked I said in Bella's chat, not my chat Thank you Thank you Marcel So Thank you Muscle",
+      "transcript_excerpt": "Yeah You are cocked I said in Bella's chat, not my chat Thank you Thank you Marcel So Thank you Muscle",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -4.654146671295166,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "86510dea-26d6-493e-846a-f009856308f9",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13459000,
+      "end_ms": 13521000,
+      "score": -4.725715160369873,
+      "summary": "Nope The other side, my fucking god You guys are trolling Oh Oh Oh Oh Let go The camera is so dank That's it? Oh Don't tell me there's gonna be something here Jumping off a head Oh But what's here?",
+      "transcript_excerpt": "Nope The other side, my fucking god You guys are trolling Oh Oh Oh Oh Let go The camera is so dank That's it? Oh Don't tell me there's gonna be something here Jumping off a head Oh But what's here?",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.865361213684082,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -4.725715160369873,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "893c4d25-01ac-464e-a17b-23b4711bc556",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3475000,
+      "end_ms": 3593000,
+      "score": -4.980313777923584,
+      "summary": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.8660935163497925,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -4.980313777923584,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

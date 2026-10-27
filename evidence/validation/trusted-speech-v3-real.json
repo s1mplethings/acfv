@@ -1,0 +1,24 @@
+{
+  "saruei": {
+    "creator_id": "saruei",
+    "profile_version": "creator_profile_v3",
+    "candidates": 13,
+    "pseudo_trusted": 1,
+    "human_confirmed": 0,
+    "rejected": 9,
+    "auto_high_confidence": 3,
+    "duration_ms": 1120,
+    "recordings": 1
+  },
+  "anny": {
+    "creator_id": "anny",
+    "profile_version": "creator_profile_v3",
+    "candidates": 54,
+    "pseudo_trusted": 4,
+    "human_confirmed": 0,
+    "rejected": 18,
+    "auto_high_confidence": 32,
+    "duration_ms": 12440,
+    "recordings": 3
+  }
+}

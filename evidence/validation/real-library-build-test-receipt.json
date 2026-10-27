@@ -1,0 +1,643 @@
+{
+  "generated_at": "2026-10-08T06:18:14.010311+00:00",
+  "overall": "PASS",
+  "recordings": 10,
+  "ready_recordings": 10,
+  "indexed_recordings": 10,
+  "total_hours": 52.43064361111111,
+  "final_moments": 3999,
+  "database": {
+    "integrity_check": "ok",
+    "foreign_key_violations": 0,
+    "orphans": {
+      "source_without_creator": 0,
+      "recording_without_creator": 0,
+      "moment_without_recording": 0,
+      "moment_without_creator": 0
+    },
+    "final_moments": 3999,
+    "pass": true
+  },
+  "index": {
+    "db_final_count": 3999,
+    "index_count": 3999,
+    "stale": [],
+    "missing": [],
+    "duplicates": [],
+    "pass": true
+  },
+  "transcript": {
+    "entries": 36366,
+    "invalid": 0,
+    "non_monotonic": 0,
+    "overlap": 207,
+    "zero_length": 0,
+    "languages": {
+      "ja": 5,
+      "en": 5
+    },
+    "recordings": [
+      {
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\c86dc576-4dfb-480e-93cf-5f5b8b53d30a\\work\\transcript_merged.json",
+        "entries": 3366,
+        "language": "ja",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 8,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\121a99a3-affb-4e74-80de-c5fd13ed7c4b\\work\\transcript_merged.json",
+        "entries": 2824,
+        "language": "en",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 14,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\0a01c6ab-65ae-4c47-a5a4-02bdd7029540\\work\\transcript_merged.json",
+        "entries": 2242,
+        "language": "en",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 21,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\90f26a14-f79f-433e-8af9-5378ed1dec26\\work\\transcript_merged.json",
+        "entries": 2092,
+        "language": "en",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 14,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4493aff0-4288-4a6a-b168-af46a9ddd07d\\work\\transcript_merged.json",
+        "entries": 3750,
+        "language": "ja",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 18,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5d31e9cc-4c4c-4a42-86c2-41be1ab52e38\\work\\transcript_merged.json",
+        "entries": 3850,
+        "language": "ja",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 13,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\4863f974-a0f9-44e5-9bcf-303d6c5778a1\\work\\transcript_merged.json",
+        "entries": 5082,
+        "language": "ja",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 20,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\5e6db3d3-3ade-44e0-ad90-6a7838ae86c7\\work\\transcript_merged.json",
+        "entries": 3968,
+        "language": "en",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 37,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\2c6ed1ce-5784-4466-a4dc-b69657580b3b\\work\\transcript_merged.json",
+        "entries": 6239,
+        "language": "ja",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 52,
+        "zero_length": 0
+      },
+      {
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "path": "F:\\ACFV-Derived\\real_library_build_20261007\\runs\\19dc8461-8a6a-4cfd-afd7-35841159f2cf\\work\\transcript_merged.json",
+        "entries": 2953,
+        "language": "en",
+        "invalid": 0,
+        "non_monotonic": 0,
+        "overlap": 10,
+        "zero_length": 0
+      }
+    ],
+    "pass": true
+  },
+  "moments": {
+    "total_final": 3999,
+    "invalid": 0,
+    "invalid_ids": [],
+    "short_under_5s": 541,
+    "near_duplicates": 0,
+    "pathological_overlap": 0,
+    "auto_pass": 3999,
+    "auto_suspect": 0,
+    "pass": true
+  },
+  "retrieval": {
+    "queries": 50,
+    "expected_top5": 36,
+    "latency_ms": {
+      "median": 127.047,
+      "p90": 135.251,
+      "max": 7587.614
+    },
+    "smoke": {
+      "keyword": true,
+      "semantic": true,
+      "english": true,
+      "chinese": true,
+      "mixed": true,
+      "creator_scope": true,
+      "recording_scope": true,
+      "entire_library": true
+    },
+    "result_integrity_sample": 50,
+    "result_integrity_failures": 0,
+    "no_evidence": {
+      "queries": 20,
+      "unsupported_claims": 0,
+      "rows": [
+        {
+          "query": "zxqvontology00 qjkvoidtrace00",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology01 qjkvoidtrace01",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology02 qjkvoidtrace02",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology03 qjkvoidtrace03",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology04 qjkvoidtrace04",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology05 qjkvoidtrace05",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology06 qjkvoidtrace06",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology07 qjkvoidtrace07",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology08 qjkvoidtrace08",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology09 qjkvoidtrace09",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology10 qjkvoidtrace10",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology11 qjkvoidtrace11",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology12 qjkvoidtrace12",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology13 qjkvoidtrace13",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology14 qjkvoidtrace14",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology15 qjkvoidtrace15",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology16 qjkvoidtrace16",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology17 qjkvoidtrace17",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology18 qjkvoidtrace18",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        },
+        {
+          "query": "zxqvontology19 qjkvoidtrace19",
+          "grounded": false,
+          "citations": [],
+          "answer": "没有找到足够明确的视频证据。",
+          "pass": true
+        }
+      ]
+    },
+    "cross_recording": {
+      "query": "able",
+      "recordings": [
+        "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "c86dc576-4dfb-480e-93cf-5f5b8b53d30a"
+      ],
+      "pass": true
+    },
+    "pass": true
+  },
+  "clips": {
+    "proposals": 10,
+    "renders": 10,
+    "auto_pass": 10,
+    "rows": [
+      {
+        "clip_id": "be37d736-0c14-46df-8855-f420b8858c52",
+        "moment_id": "b914a332-053f-45dc-b1e6-dfc5480c8467",
+        "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+        "query": "Wait how long game though know",
+        "start_ms": 5391040,
+        "end_ms": 5436000,
+        "subtitle": "Wait but how long is the game though? Do you know how long is the game? Oh let me... Let's put the trailer. Shhh, I'm slapping. I was thinking this is a video, not you. Here we go. It's so big! Why is it giant? What happened here?",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\be37d736-0c14-46df-8855-f420b8858c52\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.0,
+          "size_bytes": 23395563,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.506028,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "31d78f0e-f938-472d-bcd9-f7bee1f0f43d",
+        "moment_id": "125fb91f-028b-4abb-97a4-9f5b3ed745b8",
+        "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+        "query": "done job should join next season",
+        "start_ms": 4931120,
+        "end_ms": 4976120,
+        "subtitle": "be done with this job but i should join in you next season like i said you're already always welcome here let me know if you need me to talk just i'm definitely the time for a change speaking of change iron bark they're saving me two iron b",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\31d78f0e-f938-472d-bcd9-f7bee1f0f43d\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 15134614,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "ea693a49-ee75-48ac-acf6-b23a826772ec",
+        "moment_id": "80180a77-bcb9-417d-a37a-bcd1255206dc",
+        "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+        "query": "Inseki What fuck Inseki Inseki Incest",
+        "start_ms": 4251000,
+        "end_ms": 4296000,
+        "subtitle": "Inseki... What the fuck is that? Inseki? Inseki? Incest light... Incest? Kikona... I like it in an anime. Inverted nips? Estepsis? Estepsis? Yeah. Kabedon? If it's forest, it's like... I don't know. You know how girls are like, oh my god, c",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\ea693a49-ee75-48ac-acf6-b23a826772ec\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.013,
+          "size_bytes": 18568312,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "2848d214-6dbd-4536-b7c8-f9c53e4b2fcf",
+        "moment_id": "21e93fbf-a6ab-4881-aa9a-8bbc559fe1e7",
+        "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+        "query": "caught bad romance want bad romance",
+        "start_ms": 11201680,
+        "end_ms": 11246680,
+        "subtitle": "caught in a bad romance want your bad romance ra ra ra aaa roma roma ma kaka u la la want your bad romance i want your ugly i want your disease i want your everything as long as it's free i want your love love love love i want your love pre",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\2848d214-6dbd-4536-b7c8-f9c53e4b2fcf\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 24969229,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "de0c7b1c-626b-4e9b-86c4-bd4f818412b0",
+        "moment_id": "79373e33-d3aa-462b-be25-cf744e8e43da",
+        "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+        "query": "I'm evil Yeah evil Nuro back",
+        "start_ms": 5625000,
+        "end_ms": 5670000,
+        "subtitle": "I'm evil. Yeah, evil Nuro is back, baby. Thanks for the gifted sub, big buckies. I really appreciate it. Thank you. So, if you're lonely, you know I'm here waiting for you, I'm just a crosshair, I'm just a shot away from you, and if you lea",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\de0c7b1c-626b-4e9b-86c4-bd4f818412b0\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 27828012,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "392c204c-10fd-4072-a7bb-228c2149a32a",
+        "moment_id": "e369b162-df20-417e-9a81-1cd0cc877a6e",
+        "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+        "query": "Wait wait wait ready I'm empty",
+        "start_ms": 7997000,
+        "end_ms": 8042000,
+        "subtitle": "Wait, wait, wait... You ready? I'm in an empty Asmongold room... Well, for now... It's empty for now... How... Giraffe made it... Giraffe made it... He started working on Asmongold background... Booba sweat... Thank you... Did you evict Asm",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\392c204c-10fd-4072-a7bb-228c2149a32a\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 20852847,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "7f1816ec-ccb3-450f-96a0-7037c1108503",
+        "moment_id": "13641f80-3185-4779-98b6-35e41b2fa83b",
+        "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+        "query": "What I'm scared Why What Isn't",
+        "start_ms": 5719400,
+        "end_ms": 5764400,
+        "subtitle": "What? I'm scared Why? What? Isn't that what guys do? When dudes meet each other, they're all like Come here, come here, come here Yeah, yeah, they do that Especially in France Wait, okay, first France? France Where is that? It's in France G",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\7f1816ec-ccb3-450f-96a0-7037c1108503\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 44435475,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "76010fc7-b611-4de2-afc8-c36f2800d8f1",
+        "moment_id": "21a449bb-68e8-4040-8870-39d7262a181b",
+        "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+        "query": "I'm pretty pretty neat there",
+        "start_ms": 9075320,
+        "end_ms": 9082920,
+        "subtitle": "I'm pretty, pretty neat there.",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\76010fc7-b611-4de2-afc8-c36f2800d8f1\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 7.633,
+          "size_bytes": 7627007,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.070104,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "68811774-7f54-415b-9c03-cc0cf4a4c26d",
+        "moment_id": "ef1559b1-c560-4877-80b0-37a5112dad96",
+        "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+        "query": "Fucking annoying shit team all fucked",
+        "start_ms": 5862000,
+        "end_ms": 5907000,
+        "subtitle": "Fucking annoying shit. Oh, my team is all fucked up. Wait, no way. Wait, wait, my, my, my, no, no, no, no, no, my phone. How do you change... you know your phone like customization i i put like all the icon to look nice oh oh it's good it's",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\68811774-7f54-415b-9c03-cc0cf4a4c26d\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 6669239,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.26981,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      },
+      {
+        "clip_id": "4203cbc4-c8b4-4f31-be11-9889607efaba",
+        "moment_id": "8ccc599a-346c-4741-ac50-94babed3da0f",
+        "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+        "query": "Now I'm done Does something bad",
+        "start_ms": 5038000,
+        "end_ms": 5083000,
+        "subtitle": "Now I'm done Does something bad, people are angry at him and they act like they're surprised that actions have consequences? Yeah exactly, he's like trying to play dumb or something Oh god If you haven't seen what he's done in Japan, you ca",
+        "output_path": "E:\\Cliper\\acfv-mvp-product\\var\\final_validation_20261008\\clips\\4203cbc4-c8b4-4f31-be11-9889607efaba\\clip.mp4",
+        "ffprobe": {
+          "returncode": 0,
+          "video": true,
+          "audio": true,
+          "duration_seconds": 45.033,
+          "size_bytes": 26368482,
+          "pass": true
+        },
+        "interval_ok": true,
+        "silence_fraction": 0.0,
+        "mostly_silence": false,
+        "subtitle_language": "other",
+        "automatic_result": "AUTO_PASS"
+      }
+    ]
+  },
+  "recovery_and_e2e": {
+    "index_before": 3999,
+    "index_rebuilt": 3999,
+    "index_after": 3999,
+    "search_hits": 5,
+    "render_ready": true,
+    "feedback_id": "89a364ce-f5dd-482c-bb23-c6148b888472",
+    "restart_clip_persisted": true,
+    "pass": true
+  },
+  "startup_ms": {
+    "database": 59.915,
+    "index_manifest": 56.413
+  },
+  "memory_mib": {
+    "process_before": 91.066,
+    "index_loaded": 101.023,
+    "gpu_observed": 400
+  },
+  "storage": {
+    "raw": {
+      "bytes": 167135233040,
+      "human": "155.657 GiB"
+    },
+    "analysis_and_other": {
+      "bytes": 2864475153,
+      "human": "2.668 GiB"
+    },
+    "transcripts": {
+      "bytes": 11494250,
+      "human": "10.962 MiB"
+    },
+    "audio": {
+      "bytes": 6040011158,
+      "human": "5.625 GiB"
+    },
+    "chunks": {
+      "bytes": 6052201999,
+      "human": "5.637 GiB"
+    },
+    "index": {
+      "bytes": 24279550,
+      "human": "23.155 MiB"
+    },
+    "clips": {
+      "bytes": 215877842,
+      "human": "205.877 MiB"
+    },
+    "database": {
+      "bytes": 20291584,
+      "human": "19.352 MiB"
+    },
+    "derived": {
+      "bytes": 15228631536,
+      "human": "14.183 GiB"
+    },
+    "total": {
+      "bytes": 182363864576,
+      "human": "169.840 GiB"
+    }
+  },
+  "human_pack": {
+    "retrieval": "E:\\Cliper\\acfv-mvp-product\\evidence\\validation\\final-human-retrieval-review.md",
+    "moments": "E:\\Cliper\\acfv-mvp-product\\evidence\\validation\\final-human-moment-review.md",
+    "clips": "E:\\Cliper\\acfv-mvp-product\\evidence\\validation\\final-human-clip-review.md",
+    "gui": "E:\\Cliper\\acfv-mvp-product\\evidence\\validation\\final-gui-checklist.md",
+    "results": "E:\\Cliper\\acfv-mvp-product\\evidence\\validation\\human-review-results.json"
+  },
+  "wall_seconds": 91.202,
+  "known_issues": []
+}

@@ -1,0 +1,59 @@
+{
+  "case_id": "CL02",
+  "file": "media/clip_02.mp4",
+  "source_recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+  "source_recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+  "moment_id": "9c268fc4-4b31-48f4-ad67-7911c58599a3",
+  "query": "她饿了却为什么还是不愿意走出房间？",
+  "group": "STRONG_RETRIEVAL",
+  "selection_reason": "rank-1 production result for fixed retrieval case R02; expected target rank NOT FOUND",
+  "moment_start_ms": 11265000,
+  "moment_end_ms": 11316600,
+  "proposed_start_ms": 11257000,
+  "proposed_end_ms": 11328600,
+  "final_start_ms": 11257000,
+  "final_end_ms": 11328600,
+  "proposal_duration_ms": 71600,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "I need 20,000 souls. So I can buy. There's a ugly dude here. Okay, I'm gonna explore, like, every place and get all the items.",
+    "inside": "Okay, I'm gonna explore, like, every place and get all the items. Is there another one? I'm at the last boss, but there's so much that I missed. Are you guys fine with watching me explore? Oh, hell no He's fighting on me, please stop I'm poisoned Yeah, come here make it real dark Don't drop that, what is that? What's happening? I don't think I've been here. Oh Okay",
+    "after": "Okay Okay At least I'm strong enough for these guys now, I don't think I've been here Oh What was that other entrance"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 2000,
+    "pause_after_ms": 960,
+    "start_splits_transcript_segment": true,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 11241000,
+      "end_ms": 11255000,
+      "text": "There's a ugly dude here."
+    },
+    "next_segment": {
+      "start_ms": 11329560,
+      "end_ms": 11331560,
+      "text": "Okay"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 71.633,
+      "size_bytes": 23859602,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "starts_mid_transcript_segment",
+    "ends_mid_transcript_segment"
+  ]
+}

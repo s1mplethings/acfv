@@ -1,0 +1,154 @@
+{
+  "case_id": "R17",
+  "category": "DIFFICULT_AMBIGUOUS",
+  "language_style": "vague",
+  "query": "Did she find a usable shotgun after running out of ammo?",
+  "ground_truth": {
+    "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+    "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+    "moment_id": "298ebe56-7cb6-42a4-a2a1-4fa2d9e1e148",
+    "start_ms": 2630480,
+    "end_ms": 2659000,
+    "timestamp": "00:43:50.480–00:44:19.000",
+    "transcript_excerpt": "There's no shotguns I Don't see any I need I run out maybe here No. You mean before maybe? Nice. Good. Oh wait, this one has no ammo so I'd rather take this one instead."
+  },
+  "top10": [
+    {
+      "rank": 1,
+      "moment_id": "bb7c6a2a-82bb-4288-82ca-09f4b29c03a8",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 15420000,
+      "end_ms": 15422000,
+      "timestamp": "04:17:00.000–04:17:02.000",
+      "score": 0.01639344262295082,
+      "summary": "とても良い",
+      "transcript_excerpt": "とても良い"
+    },
+    {
+      "rank": 2,
+      "moment_id": "8f7d3bb8-87a2-45b3-aa7e-1f8f675a01e2",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 32667500,
+      "end_ms": 32725500,
+      "timestamp": "09:04:27.500–09:05:25.500",
+      "score": 0.016129032258064516,
+      "summary": "I'm actually very happy you're alive and that Neuron is fine and that you're coming back And I can't wait And I'm gonna keep working hard on the model I hope you like it Yeah Good, that's great Oh, can you do me one more favor? Yeah Can you say my catchphrase? So I don't have to Your catchphrase? Yeah Veedle out? He left Veedle out F**k Is that how it works? If I say it, he's f**king gone Well, chadj, that was it I'm gonna go rest cause I'm f**king tired Um It was nice",
+      "transcript_excerpt": "I'm actually very happy you're alive and that Neuron is fine and that you're coming back And I can't wait And I'm gonna keep working hard on the model I hope you like it Yeah Good, that's great Oh, can you do me one more favor? Yeah Can you say my catchphrase? So I don't have to Your catchphrase? Yeah Veedle out? He left Veedle out F**k Is that how it works? If I say it, he's f**king gone Well, chadj, that was it I'm gonna go rest cause I'm f**king tired Um It was nice"
+    },
+    {
+      "rank": 3,
+      "moment_id": "36ebbcd6-d408-4794-ba94-1a27bc4daead",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 7560000,
+      "end_ms": 7619340,
+      "timestamp": "02:06:00.000–02:06:59.340",
+      "score": 0.015873015873015872,
+      "summary": "I legit just ripped skin off my knee. I think oh It's fine. I'm okay You're doing this fucking you're doing the family guy Here for like a minute, so yeah, you're actually doing that Fucking god Oh You want me to send you a picture of my fucking knee Yeah My phone is not here, but actually",
+      "transcript_excerpt": "I legit just ripped skin off my knee. I think oh It's fine. I'm okay You're doing this fucking you're doing the family guy Here for like a minute, so yeah, you're actually doing that Fucking god Oh You want me to send you a picture of my fucking knee Yeah My phone is not here, but actually"
+    },
+    {
+      "rank": 4,
+      "moment_id": "ebac3453-1916-4dd2-9c7b-5f4f790b65e9",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 24834920,
+      "end_ms": 24891000,
+      "timestamp": "06:53:54.920–06:54:51.000",
+      "score": 0.015625,
+      "summary": "Oh 今は今はななな 今は今はななな んーやんーや 今は今は あ~~ あわい んー んー んー ばらばばば わばわばわばわば あ~~ 今はややや フォーク ねえ見たことある なに? 彼は生きてるんだよ",
+      "transcript_excerpt": "Oh 今は今はななな 今は今はななな んーやんーや 今は今は あ~~ あわい んー んー んー ばらばばば わばわばわばわば あ~~ 今はややや フォーク ねえ見たことある なに? 彼は生きてるんだよ"
+    },
+    {
+      "rank": 5,
+      "moment_id": "07786740-19df-40b0-8dee-1ba3cf7c7db6",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 11508000,
+      "end_ms": 11553460,
+      "timestamp": "03:11:48.000–03:12:33.460",
+      "score": 0.015384615384615385,
+      "summary": "I'm scared. Serious uptight... I don't know if that's the word. Stiff? Tight? Yeah, I don't know. You need to loosen up a little bit It's all for giggles and fun The normal one Can somebody please clip what happened at the start of our our At the start of when I met Bella today Can like someone like throw a flashback after she says that she's the normal one Oh",
+      "transcript_excerpt": "I'm scared. Serious uptight... I don't know if that's the word. Stiff? Tight? Yeah, I don't know. You need to loosen up a little bit It's all for giggles and fun The normal one Can somebody please clip what happened at the start of our our At the start of when I met Bella today Can like someone like throw a flashback after she says that she's the normal one Oh"
+    },
+    {
+      "rank": 6,
+      "moment_id": "c5e0efe9-457c-4587-86c1-12d5aa34a926",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14893760,
+      "end_ms": 14895760,
+      "timestamp": "04:08:13.760–04:08:15.760",
+      "score": 0.015151515151515152,
+      "summary": "Racing into the night",
+      "transcript_excerpt": "Racing into the night"
+    },
+    {
+      "rank": 7,
+      "moment_id": "2c9e4a23-e2a9-41b9-94c6-a9c0fcba1525",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 10481040,
+      "end_ms": 10485840,
+      "timestamp": "02:54:41.040–02:54:45.840",
+      "score": 0.014925373134328358,
+      "summary": "Okay, bye bitches, I don't care I can go through you I",
+      "transcript_excerpt": "Okay, bye bitches, I don't care I can go through you I"
+    },
+    {
+      "rank": 8,
+      "moment_id": "958a4d41-0e99-4854-ac4b-bf87ca1859a1",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 17460000,
+      "end_ms": 17462000,
+      "timestamp": "04:51:00.000–04:51:02.000",
+      "score": 0.014705882352941176,
+      "summary": "どこにいるの?",
+      "transcript_excerpt": "どこにいるの?"
+    },
+    {
+      "rank": 9,
+      "moment_id": "d7cebd20-b835-45ef-8170-a2188b2dbffe",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 9061000,
+      "end_ms": 9094000,
+      "timestamp": "02:31:01.000–02:31:34.000",
+      "score": 0.014492753623188406,
+      "summary": "Glasses Uhh I remember I saw Glasses on a konbini but it wasn't this one It was the other one But where the f**k is it? Umm Wait, where's the other konbini? Ah, this one",
+      "transcript_excerpt": "Glasses Uhh I remember I saw Glasses on a konbini but it wasn't this one It was the other one But where the f**k is it? Umm Wait, where's the other konbini? Ah, this one"
+    },
+    {
+      "rank": 10,
+      "moment_id": "5ff6ac41-41f6-4838-bb3a-851d7dcd6de7",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2071000,
+      "end_ms": 2130000,
+      "timestamp": "00:34:31.000–00:35:30.000",
+      "score": 0.014285714285714285,
+      "summary": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid Let's see, where the heck? Where did she? AHHHHH! No! Not the fucking tits!",
+      "transcript_excerpt": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid Let's see, where the heck? Where did she? "
+    }
+  ],
+  "target_rank": null,
+  "target_rank_label": "NOT FOUND",
+  "diagnostics": {
+    "dense_rank_top100": null,
+    "fts_rank_top100": null,
+    "reranker_rank_top30": null,
+    "final_rank_top30": null
+  },
+  "automatic_flags": [
+    "AUTO_SUSPECT"
+  ],
+  "automated_notes": {
+    "target_in_top1": false,
+    "target_in_top3": false,
+    "target_in_top5": false,
+    "target_in_top10": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "saruei": {
+    "creator_id": "saruei",
+    "profile_version": "creator_profile_v3",
+    "trusted_units": 1,
+    "candidates": 3,
+    "promoted": 0,
+    "human_confirmed_terms": 0,
+    "acoustic_exemplars": 0,
+    "entries": []
+  },
+  "anny": {
+    "creator_id": "anny",
+    "profile_version": "creator_profile_v3",
+    "trusted_units": 4,
+    "candidates": 6,
+    "promoted": 0,
+    "human_confirmed_terms": 0,
+    "acoustic_exemplars": 0,
+    "entries": []
+  }
+}

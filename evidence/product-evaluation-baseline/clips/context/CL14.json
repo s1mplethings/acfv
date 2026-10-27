@@ -1,0 +1,58 @@
+{
+  "case_id": "CL14",
+  "file": "media/clip_14.mp4",
+  "source_recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+  "source_recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+  "moment_id": "2cfee875-c1e9-4144-9ca3-90f1ccdd4fc2",
+  "query": "",
+  "group": "DIFFICULT_BOUNDARY",
+  "selection_reason": "boundary difficulty score 11.0: short_moment, starts_lowercase, ends_without_sentence_punctuation, silence_before_candidate, silence_after_candidate",
+  "moment_start_ms": 8624160,
+  "moment_end_ms": 8629120,
+  "proposed_start_ms": 8616160,
+  "proposed_end_ms": 8641120,
+  "final_start_ms": 8616160,
+  "final_end_ms": 8641120,
+  "proposal_duration_ms": 24960,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "wanna okay so",
+    "inside": "i got that on video N toi besides me",
+    "after": "N toi besides me N compris après moi Aen 'Mando Because you I'm 昨天"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 1040,
+    "pause_after_ms": 2160,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 8610800,
+      "end_ms": 8615120,
+      "text": "so"
+    },
+    "next_segment": {
+      "start_ms": 8643280,
+      "end_ms": 8646340,
+      "text": "N compris après moi"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 25.0,
+      "size_bytes": 6210868,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.271782,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "ends_mid_transcript_segment"
+  ]
+}

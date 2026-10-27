@@ -1,0 +1,602 @@
+{
+  "case_id": "R04",
+  "category": "EXACT_MEMORABLE",
+  "language_style": "zh",
+  "query": "哪段像在做天气播报，先说外面很晴朗后来又说多云？",
+  "ground_truth": {
+    "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+    "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+    "moment_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36",
+    "start_ms": 9166920,
+    "end_ms": 9223080,
+    "timestamp": "02:32:46.920–02:33:43.080",
+    "transcript_excerpt": "See say do and it was me five zero Jack I need to look outside. It looks clear to me, right? It looks clear. I'm with you. Yeah, I'm a good reporter That's clear Okay, no, it's not what I meant to do Clear and Hmm Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy",
+    "old_moment_id": "5e4584ab-5916-41bb-bc08-9b0b1cbac5d7",
+    "acceptable_child_ids": [
+      "0db677f0-0da5-40ba-a6bf-0248282c58cf",
+      "ab16aa1d-1899-4d2a-8a8c-5719c19dce36"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 2631.074,
+  "target_diagnostics": {
+    "dense_rank": 49,
+    "dense_score": 0.8281112909317017,
+    "fusion_score": 0.009174311926605505,
+    "reranker_score": -0.5700052380561829,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "ab16aa1d-1899-4d2a-8a8c-5719c19dce36",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 9201800,
+      "end_ms": 9246000,
+      "score": -0.5700052380561829,
+      "summary": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go.",
+      "transcript_excerpt": "Where the weather condition is not right. Oh I can't see do No, it is Wait, you're gonna say it's cloudy Okay, so maybe windy Okay, fine, whatever I'm going to get my fucking wood now There you go. I knew it Okay This is where I'm going to get the jumpscare, there's no fucking way. I'm going to get the jumpscare somewhere and I don't know when.",
+      "debug": {
+        "dense_rank": 49,
+        "dense_score": 0.8281112909317017,
+        "fusion_score": 0.009174311926605505,
+        "reranker_score": -0.5700052380561829,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "abf4ed03-979e-4a34-bb11-d7ac9a7ca58b",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 13596000,
+      "end_ms": 13617000,
+      "score": -2.418060541152954,
+      "summary": "あははは めっちゃ面白い 笑った 実際 めっちゃ悪かった ああ 新しいフィルター それは? アブリヴィエーション?",
+      "transcript_excerpt": "あははは めっちゃ面白い 笑った 実際 めっちゃ悪かった ああ 新しいフィルター それは? アブリヴィエーション?",
+      "debug": {
+        "dense_rank": 32,
+        "dense_score": 0.8334732055664062,
+        "fusion_score": 0.010869565217391304,
+        "reranker_score": -2.418060541152954,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "6e6eb682-b9b4-4770-8a3b-80f23121eeec",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9113620,
+      "end_ms": 9215000,
+      "score": -3.991126298904419,
+      "summary": "バチュー バチュー バチュー ビッグ 二人手をキュッとキュッと重ねて 頬にチュッとチュッとキッズした 二人手をキュッとキュッと重ねて 頬にチュッとキッズした 私の背中には幼い翼があり あの青くて高い空を目指してた 白い雲を越えた足跡を追いかけて 夏の風の中を駆けてゆく それはためらうことを知らず 夢を語った 懐かしい強さを持つはず 二人手をキュッとキュッと重ねて 頬にチュッとチュッとキッズした 昨日より少しだけでもいいよ 慣れるように 星はきっときっと瞬く…",
+      "transcript_excerpt": "バチュー バチュー バチュー ビッグ 二人手をキュッとキュッと重ねて 頬にチュッとチュッとキッズした 二人手をキュッとキュッと重ねて 頬にチュッとキッズした 私の背中には幼い翼があり あの青くて高い空を目指してた 白い雲を越えた足跡を追いかけて 夏の風の中を駆けてゆく それはためらうことを知らず 夢を語った 懐かしい強さを持つはず 二人手をキュッとキュッと重ねて 頬にチュッとチュッとキッズした 昨日より少しだけでもいいよ 慣れるように 星はきっときっと瞬く 道をキッとキッと照らした 二人でつくる遠回りは君があった",
+      "debug": {
+        "dense_rank": 39,
+        "dense_score": 0.8309186100959778,
+        "fusion_score": 0.010101010101010102,
+        "reranker_score": -3.991126298904419,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "a647fe61-bcda-4504-85e9-0e4d2f289dab",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13581440,
+      "end_ms": 13647000,
+      "score": -4.081202507019043,
+      "summary": "Ah! She was just a girl She expected the world, but it flew away from her reach And found a sketch in her teeth Life goes on, it gets so heavy The wheel breaks, the butterflies Every tear, a waterfall In the night, the stormy night She…",
+      "transcript_excerpt": "Ah! She was just a girl She expected the world, but it flew away from her reach And found a sketch in her teeth Life goes on, it gets so heavy The wheel breaks, the butterflies Every tear, a waterfall In the night, the stormy night She closed her eyes In the night, the stormy night Away she'd fly And dream of para, para, paradise Para, para, paradise Para, para, paradise Oh, she'd dream of para, para, paradise Para, para, paradise Para, para, paradise Oh",
+      "debug": {
+        "dense_rank": 17,
+        "dense_score": 0.8437498211860657,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -4.081202507019043,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "d72c74f5-1ce9-4a0d-8878-3bcada11346a",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 240000,
+      "end_ms": 500000,
+      "score": -4.265568256378174,
+      "summary": "me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me…",
+      "transcript_excerpt": "me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me Welcome to my arm stream. Arm and bio. It was very nice stream. See you next time. No! What am I supposed to say to that? I just started!",
+      "debug": {
+        "dense_rank": 34,
+        "dense_score": 0.8322265148162842,
+        "fusion_score": 0.010638297872340425,
+        "reranker_score": -4.265568256378174,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "44411010-7409-4f3e-b027-0a1a576d5284",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 210000,
+      "end_ms": 212000,
+      "score": -4.4372663497924805,
+      "summary": "アイスハウスニー",
+      "transcript_excerpt": "アイスハウスニー",
+      "debug": {
+        "dense_rank": 35,
+        "dense_score": 0.8321056962013245,
+        "fusion_score": 0.010526315789473684,
+        "reranker_score": -4.4372663497924805,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "e34eab1a-7904-48bd-b2fb-32c5ea217129",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 11850000,
+      "end_ms": 11855160,
+      "score": -4.626603126525879,
+      "summary": "What's wrong? R.I.P.",
+      "transcript_excerpt": "What's wrong? R.I.P.",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8419417142868042,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -4.626603126525879,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "24959f24-87be-4782-ae41-a552e274e421",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 150000,
+      "end_ms": 152000,
+      "score": -4.664034366607666,
+      "summary": "アイスハウスニー",
+      "transcript_excerpt": "アイスハウスニー",
+      "debug": {
+        "dense_rank": 45,
+        "dense_score": 0.8291280269622803,
+        "fusion_score": 0.009523809523809525,
+        "reranker_score": -4.664034366607666,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "0f407552-1db3-403a-a950-10e38f04b1be",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13661000,
+      "end_ms": 13695440,
+      "score": -4.850292682647705,
+      "summary": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks!",
+      "transcript_excerpt": "La la la la la la la La la la la la la la So lying underneath the stormy skies She said, oh, oh, oh, oh, oh, oh I know the sun will set to red Tudo Bem晚, publicity thanks!",
+      "debug": {
+        "dense_rank": 18,
+        "dense_score": 0.843508243560791,
+        "fusion_score": 0.01282051282051282,
+        "reranker_score": -4.850292682647705,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "9a6f1e14-2b18-4b98-89ac-278b19679be6",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 0,
+      "end_ms": 120000,
+      "score": -4.9978766441345215,
+      "summary": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "transcript_excerpt": "【ED】 ブルブル キミが意地欠けの アウトはベラまるいとほどいて 動き出す ブルブル アナタを映す青色 タラスの瞳の軋む足で 踊りましょう 秘密の宙を捉えて ベッドコーラーはぐるまままるままる 卓球 宝球の アイドファミリー タラスの瞳の軋む足で 動き出す ブルブル キミが意地欠けの 秘密の宙を捉えて メイクラップぐるぐるまわる 照らす朝 さよなら 二人の秘密 アウトは午前0時のベルが 聞こえたの 秘密の魔法をかけるの ベッドコーラー壊れたら地を止めて ラッドフォーティーナ",
+      "debug": {
+        "dense_rank": 43,
+        "dense_score": 0.829220712184906,
+        "fusion_score": 0.009708737864077669,
+        "reranker_score": -4.9978766441345215,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "5ad4e381-5804-4820-a90b-2bc87040e62d",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 600000,
+      "end_ms": 629960,
+      "score": -5.0478644371032715,
+      "summary": "ព � 주는 ឞ ្ ក ង ខ្ ឝ ្ ក ្ ក ង ំ ។ ្ ក ័ ំ �ixel ។",
+      "transcript_excerpt": "ព � 주는 ឞ ្ ក ង ខ្ ឝ ្ ក ្ ក ង ំ ។ ្ ក ័ ំ �ixel ។",
+      "debug": {
+        "dense_rank": 37,
+        "dense_score": 0.8310449123382568,
+        "fusion_score": 0.010309278350515464,
+        "reranker_score": -5.0478644371032715,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "893c4d25-01ac-464e-a17b-23b4711bc556",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 3475000,
+      "end_ms": 3593000,
+      "score": -5.203536510467529,
+      "summary": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "transcript_excerpt": ". me me me me me me me me ああああああ me me me me me me me me me me me me me me me me me me me me me me me me me me me me",
+      "debug": {
+        "dense_rank": 41,
+        "dense_score": 0.829447865486145,
+        "fusion_score": 0.009900990099009901,
+        "reranker_score": -5.203536510467529,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "d5768e86-d371-42d1-8bd9-46d8725c4c83",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 14940000,
+      "end_ms": 14941760,
+      "score": -5.30019474029541,
+      "summary": "Kasanatte ita",
+      "transcript_excerpt": "Kasanatte ita",
+      "debug": {
+        "dense_rank": 16,
+        "dense_score": 0.844879150390625,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -5.30019474029541,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "35671737-9ca7-4f94-97bf-279d65f43b13",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13313000,
+      "end_ms": 13322000,
+      "score": -5.435579776763916,
+      "summary": "The one that I got a key for just now 外面 Outside",
+      "transcript_excerpt": "The one that I got a key for just now 外面 Outside",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8466480374336243,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -5.435579776763916,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "57e20ca6-ae72-4482-aedc-0ce21a34f005",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28838000,
+      "end_ms": 28856000,
+      "score": -5.621870517730713,
+      "summary": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny.",
+      "transcript_excerpt": "嗯 Possible. 嗯 Okay the way you 嗯 Laugh 嗯 I mean it be funny. 嗯 It be funny. 嗯 Won't be funny. 嗯 Filtered. 嗯 Um.",
+      "debug": {
+        "dense_rank": 33,
+        "dense_score": 0.8330271244049072,
+        "fusion_score": 0.010752688172043012,
+        "reranker_score": -5.621870517730713,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "72a67ec4-b465-4ea4-bac3-6ff9137d23b6",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 594000,
+      "end_ms": 602000,
+      "score": -5.641439914703369,
+      "summary": "Thanks for watching! You",
+      "transcript_excerpt": "Thanks for watching! You",
+      "debug": {
+        "dense_rank": 11,
+        "dense_score": 0.8511411547660828,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -5.641439914703369,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "9438991a-169b-4605-8bb2-82973617b139",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28790000,
+      "end_ms": 28810000,
+      "score": -5.6488823890686035,
+      "summary": "What kind of slurs do you know Vido? I know so many You do?",
+      "transcript_excerpt": "What kind of slurs do you know Vido? I know so many You do? Can you teach me some? 嗯 Yeah. 嗯 Um. 嗯 Yeah. 嗯 Yeah. 嗯 She told me.",
+      "debug": {
+        "dense_rank": 31,
+        "dense_score": 0.8335246443748474,
+        "fusion_score": 0.01098901098901099,
+        "reranker_score": -5.6488823890686035,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "f9541534-8736-4d55-ac39-c61f8012ef97",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13332000,
+      "end_ms": 13338000,
+      "score": -5.708317279815674,
+      "summary": "第二層 Second level 这里 Here? 外面 Outside?",
+      "transcript_excerpt": "第二層 Second level 这里 Here? 外面 Outside?",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8511779308319092,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -5.708317279815674,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "e70962ff-3697-4180-9a1d-388cd3abfbab",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 8100000,
+      "end_ms": 8102000,
+      "score": -5.834592819213867,
+      "summary": "いらっしゃいませ",
+      "transcript_excerpt": "いらっしゃいませ",
+      "debug": {
+        "dense_rank": 40,
+        "dense_score": 0.8296670913696289,
+        "fusion_score": 0.01,
+        "reranker_score": -5.834592819213867,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "47dc9a5f-e927-4152-b4eb-7dddd882a75a",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7886000,
+      "end_ms": 7889000,
+      "score": -5.964348316192627,
+      "summary": "Oh my god.",
+      "transcript_excerpt": "Oh my god.",
+      "debug": {
+        "dense_rank": 42,
+        "dense_score": 0.8293660283088684,
+        "fusion_score": 0.00980392156862745,
+        "reranker_score": -5.964348316192627,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "905a0b74-59c9-4f1d-92ac-ea67584de95b",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13351000,
+      "end_ms": 13378000,
+      "score": -6.072291374206543,
+      "summary": "等一等 Wait, is it here? 这里 Other side 这个是真正的Anime Girl?",
+      "transcript_excerpt": "等一等 Wait, is it here? 这里 Other side 这个是真正的Anime Girl? 对 Yes 真正的真实 Real and true 像这里 Like here? 我觉得它不太容易打开 I don't think it opens that easily 它不太容易打开 It does not open from this side 但是哪一层呢? But what side then?",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.8378692865371704,
+        "fusion_score": 0.011494252873563218,
+        "reranker_score": -6.072291374206543,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "eaf1f275-9ab3-46b8-9945-fcf99c4a4f1d",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 11905000,
+      "end_ms": 11912000,
+      "score": -6.106914043426514,
+      "summary": "Did I look at this? Oh!",
+      "transcript_excerpt": "Did I look at this? Oh! It's rain",
+      "debug": {
+        "dense_rank": 47,
+        "dense_score": 0.8283366560935974,
+        "fusion_score": 0.009345794392523364,
+        "reranker_score": -6.106914043426514,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "4aabdd0c-352c-4912-b344-d1d17f113107",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 11462000,
+      "end_ms": 11497000,
+      "score": -6.161336421966553,
+      "summary": "Dogo dogo dogo dogo dogo Dogo dogo Just stop laughing, it's raining Eww Wait, I can't even take a picture like that? What?",
+      "transcript_excerpt": "Dogo dogo dogo dogo dogo Dogo dogo Just stop laughing, it's raining Eww Wait, I can't even take a picture like that? What? Oh wait, I can't It's not like that close What's the closest?",
+      "debug": {
+        "dense_rank": 29,
+        "dense_score": 0.8368744850158691,
+        "fusion_score": 0.011235955056179775,
+        "reranker_score": -6.161336421966553,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "9ee6f6f0-d26f-4376-92c3-0453379730a0",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7916000,
+      "end_ms": 7998000,
+      "score": -6.312820911407471,
+      "summary": "Oh 通りはめ 頬を濡らす 傷つき 恋の 沈む 独り 孤独に 凍えてしまいそう 声を開けないでも この灰が息を 求めることは 変わらない 繋いで 指先の ぬくもりは もはや 幻なのだから もし 明日 私が 死んでしまったなら あなたは笑ってくれるのでしょうか 嘘にまみれた笑顔 巻き戻らない時 僅かな幸せが 今は苦しいだけ 変わらない 夢なら さてて もう一度 もう一度 もう一度",
+      "transcript_excerpt": "Oh 通りはめ 頬を濡らす 傷つき 恋の 沈む 独り 孤独に 凍えてしまいそう 声を開けないでも この灰が息を 求めることは 変わらない 繋いで 指先の ぬくもりは もはや 幻なのだから もし 明日 私が 死んでしまったなら あなたは笑ってくれるのでしょうか 嘘にまみれた笑顔 巻き戻らない時 僅かな幸せが 今は苦しいだけ 変わらない 夢なら さてて もう一度 もう一度 もう一度",
+      "debug": {
+        "dense_rank": 30,
+        "dense_score": 0.833652138710022,
+        "fusion_score": 0.011111111111111112,
+        "reranker_score": -6.312820911407471,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "a0663226-69fe-4e87-848a-90151e578e53",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16251300,
+      "end_ms": 16257300,
+      "score": -6.383336544036865,
+      "summary": "ああああああ 私はそれを忘れた 悪い",
+      "transcript_excerpt": "ああああああ 私はそれを忘れた 悪い",
+      "debug": {
+        "dense_rank": 20,
+        "dense_score": 0.842201828956604,
+        "fusion_score": 0.0125,
+        "reranker_score": -6.383336544036865,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "86510dea-26d6-493e-846a-f009856308f9",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 13459000,
+      "end_ms": 13521000,
+      "score": -6.53576135635376,
+      "summary": "Nope The other side, my fucking god You guys are trolling Oh Oh Oh Oh Let go The camera is so dank That's it? Oh Don't tell me there's gonna be something here Jumping off a head Oh But what's here?",
+      "transcript_excerpt": "Nope The other side, my fucking god You guys are trolling Oh Oh Oh Oh Let go The camera is so dank That's it? Oh Don't tell me there's gonna be something here Jumping off a head Oh But what's here?",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.8509078025817871,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -6.53576135635376,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "25e860a9-8c99-4908-8ed4-3aaf994ec385",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 28810000,
+      "end_ms": 28838000,
+      "score": -6.677260875701904,
+      "summary": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know.",
+      "transcript_excerpt": "嗯 Well that's how we had to develop her filter. 嗯 Cause I would ask her what kind of slurs you know. 嗯 And then I would ask them. 嗯 Oh my god. 嗯 I wanna see that so bad. 嗯 That must have been so funny. 嗯 I don't think. 嗯 I don't think you do. 嗯 Oh. 嗯 Um 嗯 That's just a thought of her being 嗯 I know this one. 嗯 That's just the worst thing ever.",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8410161733627319,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -6.677260875701904,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "c28c4aaa-778a-40ea-b4fe-6ffce4bd1f05",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16193680,
+      "end_ms": 16198460,
+      "score": -6.739329814910889,
+      "summary": "wwwww wwwwww",
+      "transcript_excerpt": "wwwww wwwwww",
+      "debug": {
+        "dense_rank": 28,
+        "dense_score": 0.8369366526603699,
+        "fusion_score": 0.011363636363636364,
+        "reranker_score": -6.739329814910889,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "c81af777-45d7-4e66-b4b8-d58575cfc7fb",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 17998000,
+      "end_ms": 18003320,
+      "score": -6.7940192222595215,
+      "summary": "Fuck. ポクポクポクポクポクポクポクポクッ",
+      "transcript_excerpt": "Fuck. ポクポクポクポクポクポクポクポクッ",
+      "debug": {
+        "dense_rank": 46,
+        "dense_score": 0.8287597894668579,
+        "fusion_score": 0.009433962264150943,
+        "reranker_score": -6.7940192222595215,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "bb6ee75c-d267-4df3-9861-922558dc5331",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 16133000,
+      "end_ms": 16163680,
+      "score": -6.8133864402771,
+      "summary": "me ああああああ ヘーフン 市ジャパン アプレイ ああああああ あああああ",
+      "transcript_excerpt": "me ああああああ ヘーフン 市ジャパン アプレイ ああああああ あああああ",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8417681455612183,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -6.8133864402771,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,601 @@
+{
+  "case_id": "R09",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "When did she reminisce about not having played PUBG for a long time?",
+  "ground_truth": {
+    "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+    "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+    "start_ms": 13400000,
+    "end_ms": 13457000,
+    "timestamp": "03:43:20.000–03:44:17.000",
+    "transcript_excerpt": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still. Did you ask me that? I mean, you must have, right? I asked you. I would have been a good one, but... Yeah. Fanboy Simulator M? I haven't played Fanboy Simulator. Is there a game like that? Probably, I don't know Probably I thought you would know Why would I know? I don't need to simulate them True",
+    "old_moment_id": "97f242fe-24e5-4853-9295-1b87f8986008",
+    "acceptable_child_ids": [
+      "5f5dd861-fccb-4adb-a87b-52a7e2cb4e02",
+      "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+      "f780da88-a307-49d0-8f64-04c241b2a460"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 3338.829,
+  "target_diagnostics": {
+    "dense_rank": 2,
+    "dense_score": 0.8572397828102112,
+    "fts_rank": 1,
+    "fusion_score": 0.03252247488101534,
+    "reranker_score": 0.14555363357067108,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "eceaaab4-feef-45fb-9ef8-a8af7da18837",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13400000,
+      "end_ms": 13417000,
+      "score": 0.14555363357067108,
+      "summary": "PUBG? I haven't played PUBG in a very long time.",
+      "transcript_excerpt": "PUBG? I haven't played PUBG in a very long time. The PUBG days! Feels strong, man. No, he already played it, take still.",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8572397828102112,
+        "fts_rank": 1,
+        "fusion_score": 0.03252247488101534,
+        "reranker_score": 0.14555363357067108,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "f780da88-a307-49d0-8f64-04c241b2a460",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13420000,
+      "end_ms": 13440000,
+      "score": -0.6144196391105652,
+      "summary": "Did you ask me that? I mean, you must have, right?",
+      "transcript_excerpt": "Did you ask me that? I mean, you must have, right? I asked you. I would have been a good one, but... Yeah. Fanboy Simulator M? I haven't played Fanboy Simulator.",
+      "debug": {
+        "dense_rank": 3,
+        "dense_score": 0.8468113541603088,
+        "fts_rank": 2,
+        "fusion_score": 0.03200204813108039,
+        "reranker_score": -0.6144196391105652,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "92df59ab-f9bb-4427-bf77-716b13c21a2c",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13377000,
+      "end_ms": 13398000,
+      "score": -1.9274588823318481,
+      "summary": "No, I don't. I love me!",
+      "transcript_excerpt": "No, I don't. I love me! But, you don't? No, I don't. But, I mean, I would be down to try it, but I don't think I'd be able to. I don't know. I never enjoyed it that much. What games do you enjoy?",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.8693723678588867,
+        "fts_rank": 3,
+        "fusion_score": 0.032266458495966696,
+        "reranker_score": -1.9274588823318481,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "7422cb06-9ec5-4446-b1ed-504cea4b7e56",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 13894480,
+      "end_ms": 13979120,
+      "score": -5.560297012329102,
+      "summary": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is…",
+      "transcript_excerpt": "As long as you don't act like the loser yeah the guy we want I hate it maybe someday I Just don't feel comfortable I also like uh There's just so many things that I would be scared about like especially snipers stream snipers Cuz Giri is like always with Oni bro. I'm literally on my fucking own all the time Monka Monka I like this game. It's cozy and I learned the words I might need to write them down. I actually have like a Notebook where I write down the words. I don't fucking know when I watc",
+      "debug": {
+        "fts_rank": 25,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -5.560297012329102,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "46b6b40f-a301-4b82-b82e-dd429e224212",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6190000,
+      "end_ms": 6208000,
+      "score": -5.937204837799072,
+      "summary": "Nowadays, there's so much improvement. And...",
+      "transcript_excerpt": "Nowadays, there's so much improvement. And... And all these improvements happened, like, very gradually, too. Like, people did not realize until you look back and see, like, how different it was. Yeah.",
+      "debug": {
+        "dense_rank": 11,
+        "dense_score": 0.8292868137359619,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -5.937204837799072,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "d55475b7-1fea-4b2e-84fc-a5175541ab0f",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 1380300,
+      "end_ms": 1397400,
+      "score": -6.261105537414551,
+      "summary": "I... Uhhh...",
+      "transcript_excerpt": "I... Uhhh... It's not really like... Yeah... I don't know, I feel like I'm not going to get scared. No, I didn't forgot, I just simply didn't like plan to use a hard monitor because it's been like over a year since the last time I used it. It's not a long game at all, yeah.",
+      "debug": {
+        "dense_rank": 9,
+        "dense_score": 0.8304297924041748,
+        "fts_rank": 49,
+        "fusion_score": 0.023667065549793913,
+        "reranker_score": -6.261105537414551,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "9de6f2dc-6a10-4d57-861c-f481d23ca684",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 1331720,
+      "end_ms": 1352820,
+      "score": -6.624781131744385,
+      "summary": "She did that, yeah, I knew it. She's not very much of a gamer, I must say.",
+      "transcript_excerpt": "She did that, yeah, I knew it. She's not very much of a gamer, I must say. Oh yeah. There's actually not a... I was going to say, there's not a lot of youtubers who are like... In two cases, but no, that's actually the opposite. There's a... Just only a few who actually don't play games and only do just chatting... And other activities.",
+      "debug": {
+        "dense_rank": 8,
+        "dense_score": 0.8339474201202393,
+        "fts_rank": 45,
+        "fusion_score": 0.0242296918767507,
+        "reranker_score": -6.624781131744385,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "f8646575-e18d-4c08-9e6b-89a6a99fbad3",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 1128000,
+      "end_ms": 1160000,
+      "score": -6.973662376403809,
+      "summary": "And then at a certain level The crabs get so fucking strong That they just yeet your fucking board out And you can't win You have not seen that yet You're playing TFT right now I hope you're having fun I hope you're having fun Binch I feel…",
+      "transcript_excerpt": "And then at a certain level The crabs get so fucking strong That they just yeet your fucking board out And you can't win You have not seen that yet You're playing TFT right now I hope you're having fun I hope you're having fun Binch I feel like I played so much of TFT That I'm kinda getting bored of the set now Luckily I'm almost done with my Arm What's it called?",
+      "debug": {
+        "fts_rank": 16,
+        "fusion_score": 0.013157894736842105,
+        "reranker_score": -6.973662376403809,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "c00bd22c-026b-4476-896e-345a772b3913",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 1355580,
+      "end_ms": 1377800,
+      "score": -6.976195812225342,
+      "summary": "She hasn't finished any game except Dark Souls. Oh!",
+      "transcript_excerpt": "She hasn't finished any game except Dark Souls. Oh! Yeah, yeah, she's maybe not into that thing. I don't know. On monitor? Uhhhh... I forgot about it. I figure we need to install it, and I'm not really sure if it's going to work. Do you want me to put like... Is it... We're going to lose time over this.",
+      "debug": {
+        "dense_rank": 5,
+        "dense_score": 0.8403980731964111,
+        "fts_rank": 27,
+        "fusion_score": 0.026878868258178604,
+        "reranker_score": -6.976195812225342,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "78b49188-a302-4353-a35e-4d8b3ca78c5a",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6164000,
+      "end_ms": 6189000,
+      "score": -7.243227481842041,
+      "summary": "V1... I was watching, like, when Neuron was sleeping, there was like old VODs playing.",
+      "transcript_excerpt": "V1... I was watching, like, when Neuron was sleeping, there was like old VODs playing. And I was listening the way she was talking and stuff, like... The difference from then and now is massive. Like, she went from being like... Even though she seemed like real back then to me, she's like even more real, you know?",
+      "debug": {
+        "dense_rank": 33,
+        "dense_score": 0.82041996717453,
+        "fts_rank": 20,
+        "fusion_score": 0.023252688172043012,
+        "reranker_score": -7.243227481842041,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "9535d79f-c306-47d6-887c-906e22157514",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7800000,
+      "end_ms": 7870000,
+      "score": -7.659716606140137,
+      "summary": "Thanks for the ten gifted subs free wind is your name free wind because you had really bad flatulence Ha ha yeah, I uh have that too ha ha Thanks for the sub exhalibur She's sounding more human like every every time like thanks for coming…",
+      "transcript_excerpt": "Thanks for the ten gifted subs free wind is your name free wind because you had really bad flatulence Ha ha yeah, I uh have that too ha ha Thanks for the sub exhalibur She's sounding more human like every every time like thanks for coming more and more human Please do not do what she speaks. What the fuck? I don't want to forget all my great memories. I've had with you all hard scared What did you just say sniffa? Yeah, you thought that was funny, huh? I'm watching you Thank you for the five gif",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -7.659716606140137,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "5f52b87d-ea29-4728-a61c-c8fb5e33dbd3",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 14141000,
+      "end_ms": 14160000,
+      "score": -8.196099281311035,
+      "summary": "Oh my god, bro. But if this is that guy's laptop, right?",
+      "transcript_excerpt": "Oh my god, bro. But if this is that guy's laptop, right? Her dad. March 2009. Unless he made all that shit up because he is sick in the head.",
+      "debug": {
+        "fts_rank": 12,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -8.196099281311035,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "1a0a37c7-a2ea-4e3a-be4f-3e84df1faf4a",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 1311000,
+      "end_ms": 1331240,
+      "score": -8.706351280212402,
+      "summary": "Okay, that should be enough. Did Finian actually finish the game this time?",
+      "transcript_excerpt": "Okay, that should be enough. Did Finian actually finish the game this time? Every time, like, she starts an ore game. She never fucking finishes it, so... You know? Beep! Ooooooo Some liquid of courage, yes! Uh...",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.822657585144043,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -8.706351280212402,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "05512245-2a5a-4f7b-a2bf-12f0ceae2276",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2071000,
+      "end_ms": 2140700,
+      "score": -8.821932792663574,
+      "summary": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat?",
+      "transcript_excerpt": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid Let's see, where the heck? Where did she? ",
+      "debug": {
+        "fts_rank": 21,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -8.821932792663574,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "b36f9ab5-b36c-41d0-abce-8008680229fd",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 5195000,
+      "end_ms": 5213000,
+      "score": -8.834746360778809,
+      "summary": "It used to be, but times change, I suppose. Okay.",
+      "transcript_excerpt": "It used to be, but times change, I suppose. Okay. Let's go! Let's take the road again. Is there anything else around that I should check out? You know, when a game is being made?",
+      "debug": {
+        "dense_rank": 7,
+        "dense_score": 0.8339570760726929,
+        "fusion_score": 0.014925373134328358,
+        "reranker_score": -8.834746360778809,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "bc774cb9-449c-4b61-ae7c-8eb69bf302a1",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 17910000,
+      "end_ms": 17930000,
+      "score": -8.914265632629395,
+      "summary": "You developed the game? Yes, I in fact did.",
+      "transcript_excerpt": "You developed the game? Yes, I in fact did. All these people? That's all me. That's... That was my secret. I didn't want to finish the game so you guys wouldn't know.",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.8213661313056946,
+        "fusion_score": 0.011494252873563218,
+        "reranker_score": -8.914265632629395,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "72c381fe-7002-4966-9303-9a5a1efd28de",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30086000,
+      "end_ms": 30103000,
+      "score": -9.142544746398926,
+      "summary": "She doesn't... Not these days.",
+      "transcript_excerpt": "She doesn't... Not these days. I joke about it, but like... She's... She's well-behaved. Aw, man. Gamer words.",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8224658370018005,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -9.142544746398926,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "1a50f074-e22f-4cca-bd32-a7155a34e804",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 1160000,
+      "end_ms": 1201760,
+      "score": -9.366284370422363,
+      "summary": "Battle pass Even if it's just for today We hope You're having fun I mean look at the Pictures Of the plushies Even if it's just For today Look at the cat Man, Zuma had The person We collab with today She has a void cat She turned her…",
+      "transcript_excerpt": "Battle pass Even if it's just for today We hope You're having fun I mean look at the Pictures Of the plushies Even if it's just For today Look at the cat Man, Zuma had The person We collab with today She has a void cat She turned her camera on discord And she was showing me the cat And all I could see was the eyes She has a black cat too It's so cute!",
+      "debug": {
+        "fts_rank": 13,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -9.366284370422363,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "b283e222-de09-4c73-b30a-27ac27c8c3a5",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7931000,
+      "end_ms": 7983000,
+      "score": -9.743876457214355,
+      "summary": "When I think I'm all alone The truth is hiding in your eyes And it's hanging on your tongue Just boiling in my blood But you think that I can't see What kind of man that you are If you're a man at all Well, I'll figure this one out On my…",
+      "transcript_excerpt": "When I think I'm all alone The truth is hiding in your eyes And it's hanging on your tongue Just boiling in my blood But you think that I can't see What kind of man that you are If you're a man at all Well, I'll figure this one out On my own On my own How did we get here?",
+      "debug": {
+        "fts_rank": 11,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -9.743876457214355,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "056ed8a2-584a-4280-bd2b-76e885990532",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 7885520,
+      "end_ms": 7931000,
+      "score": -9.805850982666016,
+      "summary": "See on about hey, she's having her moments of realization Always taking sides, but you will take away my pride. No, not this time Not this time How did we get here I used to know you so well And how did we get here?",
+      "transcript_excerpt": "See on about hey, she's having her moments of realization Always taking sides, but you will take away my pride. No, not this time Not this time How did we get here I used to know you so well And how did we get here?",
+      "debug": {
+        "fts_rank": 14,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -9.805850982666016,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "97a8b8d1-d886-4264-801c-5dea8badfdf9",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13359000,
+      "end_ms": 13377000,
+      "score": -9.842169761657715,
+      "summary": "Yeah, I didn't get very far in it. I've tried it a couple of times.",
+      "transcript_excerpt": "Yeah, I didn't get very far in it. I've tried it a couple of times. I just, it just, I don't know. I didn't have that much fun. That's on me though. I know there's a lot of people who enjoy that game. Wait, wait, wait. What if I play it with you? Would you play it with me? Remember when we were looking for a game to play together?",
+      "debug": {
+        "dense_rank": 4,
+        "dense_score": 0.8407219052314758,
+        "fusion_score": 0.015625,
+        "reranker_score": -9.842169761657715,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "1663154a-dab0-43f0-9756-b068e0f4fb14",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2371000,
+      "end_ms": 2391000,
+      "score": -9.936593055725098,
+      "summary": "Okay, um... I mean, if you send me clips, I'll watch it.",
+      "transcript_excerpt": "Okay, um... I mean, if you send me clips, I'll watch it. And it has 30 hours of day streamer buff. Yeah, definitely. I fucking wish. I fucking wish I did! She uses her model thing. I already closed the fucking link.",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8260172009468079,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -9.936593055725098,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "b1c36e15-2bf0-4e0b-a619-d9d87600dcf8",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 330000,
+      "end_ms": 334000,
+      "score": -9.96463680267334,
+      "summary": "You thought it was done, now it's not a game",
+      "transcript_excerpt": "You thought it was done, now it's not a game",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8295631408691406,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -9.96463680267334,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "90f1e203-ecb8-41c0-b8fe-dab84e3ddfaa",
+      "recording_id": "0a01c6ab-65ae-4c47-a5a4-02bdd7029540",
+      "recording_title": "[5-23-24] Saruei - ✨🧁 NEW MODEL 🧁✨ IM BACK AND WE GOTTA PLAN OUR WEEK TOGETHER ♥",
+      "start_ms": 14122000,
+      "end_ms": 14138000,
+      "score": -9.99899959564209,
+      "summary": "So she was murdered by this dude she met online. And requires to travel and do long hours.",
+      "transcript_excerpt": "So she was murdered by this dude she met online. And requires to travel and do long hours. I know he works hard. But I miss having quality time with him. Are you here?",
+      "debug": {
+        "fts_rank": 6,
+        "fusion_score": 0.015151515151515152,
+        "reranker_score": -9.99899959564209,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "eca84b4b-bc41-4e32-81cf-af5f30e073af",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2392000,
+      "end_ms": 2412000,
+      "score": -10.015107154846191,
+      "summary": "Hold on. I'll open it again, then.",
+      "transcript_excerpt": "Hold on. I'll open it again, then. She's actually looking at something else than this That's a rare occurrence Hi Joel! Hi Joel! Hi! Wait, this... Picture of Neuros...",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.826518177986145,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -10.015107154846191,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "097a2ae4-2326-4d74-8996-0589f8f0224b",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 30047000,
+      "end_ms": 30083000,
+      "score": -10.019918441772461,
+      "summary": "I think it'd be you. You have PTSD?",
+      "transcript_excerpt": "I think it'd be you. You have PTSD? Yeah. From what? From Nura insulting me. Veedo. Wait, what was she saying? Veedo. You stupid piece of shit. Yeah, she says that all the time. Calm down. Yeah, off-stream when the filter's off, she just does not stop. Wait, I wanna hear that! You never... You actually never showed me her without filter. She... Okay. She is the same as she is with the filter on. Except she says the...",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8230536580085754,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -10.019918441772461,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "ba45720c-38e5-473f-9daa-4d2a50cac6fe",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 1039000,
+      "end_ms": 1127000,
+      "score": -10.221796989440918,
+      "summary": "Man... Sex at 6k Real and fucking true Real and fucking true Where's my pants?",
+      "transcript_excerpt": "Man... Sex at 6k Real and fucking true Real and fucking true Where's my pants? Okay What the fuck? Sorry Sorry about that Here's the pool That was in context That was in context That was in context That was in context Everything's fine Yeah Turns out sex wasn't worth that much Sex right now She was getting ready to swim Yeah I was getting ready to swim I was getting ready to swim I was just swimming I was just swimming Guys, nothing sus Nothing sus going on Sup y'all, it's me Dude The fucking If",
+      "debug": {
+        "fts_rank": 26,
+        "fusion_score": 0.011627906976744186,
+        "reranker_score": -10.221796989440918,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "ba889ed3-b9ad-470b-b3f3-a69da9eb695e",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 10368440,
+      "end_ms": 10383440,
+      "score": -10.272847175598145,
+      "summary": "Am I wrong? Am I wrong?",
+      "transcript_excerpt": "Am I wrong? Am I wrong? That's some cooking a whole ass fangame. Well it's not done yet is it? That's like for probably her tent here.",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.823820948600769,
+        "fts_rank": 23,
+        "fusion_score": 0.024706420619185605,
+        "reranker_score": -10.272847175598145,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "8977ea0b-9503-4595-921b-da6c3ba627a1",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 29372000,
+      "end_ms": 29416000,
+      "score": -10.286576271057129,
+      "summary": "That's what I say Thank you So... Twitch Prime?",
+      "transcript_excerpt": "That's what I say Thank you So... Twitch Prime? Honestly, I don't even see the Twitch Prime button It's not even that, it only... It's just... Maybe, I think it's because I'm already subbed That's why Are you? I am, I think Type in the chat Type Aram I'm sorry Oh yeah, you are some I'm a 9 month subscriber 9 months? But you've known me for more than that Yeah, well...",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8262581825256348,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -10.286576271057129,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "d5865936-d0f3-4203-a198-a2db0ecdc7c7",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 17978000,
+      "end_ms": 17996000,
+      "score": -10.295515060424805,
+      "summary": "It hurts. This is so sad.",
+      "transcript_excerpt": "It hurts. This is so sad. Can we have... Can we have Poggers in the chat? Poggers.",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -10.295515060424805,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

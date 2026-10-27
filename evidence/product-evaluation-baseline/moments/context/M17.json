@@ -1,0 +1,45 @@
+{
+  "case_id": "M17",
+  "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+  "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+  "moment_id": "f40a784b-6feb-469f-a036-e012965fd56e",
+  "start_ms": 12351000,
+  "end_ms": 12372000,
+  "timestamp": "03:25:51.000–03:26:12.000",
+  "duration_ms": 21000,
+  "length_bucket": "medium",
+  "summary": "I'm not ready yet I'm not ready yet, I'm scared Thanks for watching It's gonna fuck me in the ass. Chat, is there any bonfire- any bonfireers? Sorry for party rocking...",
+  "moment_transcript": "I'm not ready yet I'm not ready yet, I'm scared Thanks for watching It's gonna fuck me in the ass. Chat, is there any bonfire- any bonfireers? Sorry for party rocking...",
+  "context_30s": {
+    "before": "Do I fuck these guys? I didn't even notice this Notice What's happening to my accent? Hi",
+    "inside": "I'm not ready yet I'm not ready yet, I'm scared Thanks for watching It's gonna fuck me in the ass. Chat, is there any bonfire- any bonfireers? Sorry for party rocking...",
+    "after": "I am literally dodging! You fucking... ...bitch! Run it, run it, run it! Okay. I killed him. Now what? Assault scale."
+  },
+  "automated_structural_checks": {
+    "start_valid": true,
+    "end_valid": true,
+    "duplicate": false,
+    "maximum_overlap_ratio": 0.0,
+    "overlap_anomaly": false,
+    "summary_grounding_term_recall": 1.0,
+    "summary_grounding_low": false
+  },
+  "segmentation_inputs": {
+    "pause_before_ms": 14000,
+    "pause_after_ms": 9000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": false,
+    "previous_segment": {
+      "start_ms": 12336000,
+      "end_ms": 12337000,
+      "text": "Hi"
+    },
+    "next_segment": {
+      "start_ms": 12381000,
+      "end_ms": 12383000,
+      "text": "I am literally dodging!"
+    }
+  },
+  "automatic_result": "AUTO_PASS",
+  "suspect_reasons": []
+}

@@ -1,0 +1,591 @@
+{
+  "case_id": "R07",
+  "category": "SEMANTIC_PARAPHRASE",
+  "language_style": "en",
+  "query": "What was she changing before asking where the music went?",
+  "ground_truth": {
+    "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+    "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+    "moment_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+    "start_ms": 13778140,
+    "end_ms": 13816000,
+    "timestamp": "03:49:38.140–03:50:16.000",
+    "transcript_excerpt": "And I'm giving her a little bit different design. Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+    "old_moment_id": "1b6634a3-c60c-40b5-b4a1-16804dc89740",
+    "acceptable_child_ids": [
+      "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "5a0c2d2c-a89a-45d6-9f91-1cad0860fa91"
+    ]
+  },
+  "target_rank": 1,
+  "latency_ms": 3288.638,
+  "target_diagnostics": {
+    "fts_rank": 22,
+    "fusion_score": 0.012195121951219513,
+    "reranker_score": -3.845247983932495,
+    "final_rank": 1,
+    "semantic_error": null
+  },
+  "top30": [
+    {
+      "rank": 1,
+      "moment_id": "0861efd7-8afd-4453-b1e9-80341fb58433",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13784140,
+      "end_ms": 13816000,
+      "score": -3.845247983932495,
+      "summary": "Where's the music? We're chillin'.",
+      "transcript_excerpt": "Where's the music? We're chillin'. We can chill. I need fire, I need heart. Thank you I feel you man I feel you man I feel you man Thank you Sai See the bell Pongers",
+      "debug": {
+        "fts_rank": 22,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -3.845247983932495,
+        "final_rank": 1,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 2,
+      "moment_id": "30e3d6bc-f0a2-4573-8cb3-02754aa3ab71",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 12478000,
+      "end_ms": 12523120,
+      "score": -5.221725940704346,
+      "summary": "Thanks for watching! this thing is falling apart it'll hold we're not gonna make it we'll make it what the fuck you did that on purpose didn't you see men doesn't know how to drive we need to get to the bridge from there we can use the…",
+      "transcript_excerpt": "Thanks for watching! this thing is falling apart it'll hold we're not gonna make it we'll make it what the fuck you did that on purpose didn't you see men doesn't know how to drive we need to get to the bridge from there we can use the captain's neural implants to initiate an overload of the ship's fusion engines the explosion should damage enough system below it to destroy the ring got it not here",
+      "debug": {
+        "fts_rank": 20,
+        "fusion_score": 0.0125,
+        "reranker_score": -5.221725940704346,
+        "final_rank": 2,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 3,
+      "moment_id": "c0560a8c-33e6-4d9f-897a-29a389842f18",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9906580,
+      "end_ms": 9917720,
+      "score": -5.8743510246276855,
+      "summary": "Do you guys like the thing where her tags go skittle before she announces the new song? That's a cool feature",
+      "transcript_excerpt": "Do you guys like the thing where her tags go skittle before she announces the new song? That's a cool feature",
+      "debug": {
+        "dense_rank": 2,
+        "dense_score": 0.8119841814041138,
+        "fts_rank": 2,
+        "fusion_score": 0.03225806451612903,
+        "reranker_score": -5.8743510246276855,
+        "final_rank": 3,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 4,
+      "moment_id": "35814352-b8c5-4a14-b3aa-35a22554c844",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 9715080,
+      "end_ms": 9743060,
+      "score": -6.637933731079102,
+      "summary": "At my stage cuz I'm at the last boss can I even go back You can? Wait, that sounds so scuffed I thought that place is destroyed Billy's Navidad Dude, have you seen Nyaners fucking- Sorry, I'm switching the topic I just saw Nyaners on the…",
+      "transcript_excerpt": "At my stage cuz I'm at the last boss can I even go back You can? Wait, that sounds so scuffed I thought that place is destroyed Billy's Navidad Dude, have you seen Nyaners fucking- Sorry, I'm switching the topic I just saw Nyaners on the song thing Did you see her debuting her new outfit?",
+      "debug": {
+        "dense_rank": 11,
+        "dense_score": 0.8028901815414429,
+        "fusion_score": 0.014084507042253521,
+        "reranker_score": -6.637933731079102,
+        "final_rank": 4,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 5,
+      "moment_id": "22f70a06-3d62-4051-8d5b-ce8fc17f2a5a",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 13128000,
+      "end_ms": 13145000,
+      "score": -6.7954936027526855,
+      "summary": "That's pretty neat. Wait, was it moving before?",
+      "transcript_excerpt": "That's pretty neat. Wait, was it moving before? No. I do not know...",
+      "debug": {
+        "fts_rank": 24,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -6.7954936027526855,
+        "final_rank": 5,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 6,
+      "moment_id": "68b2a563-5c98-4377-ae29-e5e48e26e922",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 11402000,
+      "end_ms": 11423000,
+      "score": -6.830990314483643,
+      "summary": "My dub. Your Japanese dub.",
+      "transcript_excerpt": "My dub. Your Japanese dub. She switched the dub in her settings. To her original dub. Yeah. You sounded like an onee-san. You know, like those kind of characters. Oh, really? Like older sister.",
+      "debug": {
+        "dense_rank": 24,
+        "dense_score": 0.8001259565353394,
+        "fusion_score": 0.011904761904761904,
+        "reranker_score": -6.830990314483643,
+        "final_rank": 6,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 7,
+      "moment_id": "05512245-2a5a-4f7b-a2bf-12f0ceae2276",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2071000,
+      "end_ms": 2140700,
+      "score": -7.22166109085083,
+      "summary": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat?",
+      "transcript_excerpt": "Yeah, I linked it, and she linked mine, we traded I'm not gonna stay in it for too long But yeah, I just wanted to show that I have it, and it's all mine Hey guys, I'm fucking Camilla, yo yo yo What's up? What's up, chat? What did you see? Hello? Did anybody, did anybody see anything? Hi? Hello? Did did did did did did did do do do? What happened? What happened? How did I watch the stream? How did I, where is the VODs? Oh wait I put the clips I'm stupid Let's see, where the heck? Where did she? ",
+      "debug": {
+        "dense_rank": 16,
+        "dense_score": 0.8012863993644714,
+        "fts_rank": 18,
+        "fusion_score": 0.025978407557354925,
+        "reranker_score": -7.22166109085083,
+        "final_rank": 7,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 8,
+      "moment_id": "ba6341ce-b524-4a2d-9908-82b39cea6460",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 19975520,
+      "end_ms": 20043680,
+      "score": -7.277101516723633,
+      "summary": "the underside is the x yeah which side is the other side you're fucking kidding me i knew it how did i get there where are they all coming from hello from the ew oh what's that oh so that's where he jumps from for some reason he doesn't go…",
+      "transcript_excerpt": "the underside is the x yeah which side is the other side you're fucking kidding me i knew it how did i get there where are they all coming from hello from the ew oh what's that oh so that's where he jumps from for some reason he doesn't go here okay ah oh chad Is this the good DLC that I'm playing, or is this the bad one?",
+      "debug": {
+        "fts_rank": 19,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -7.277101516723633,
+        "final_rank": 8,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 9,
+      "moment_id": "46b6b40f-a301-4b82-b82e-dd429e224212",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 6190000,
+      "end_ms": 6208000,
+      "score": -7.354197978973389,
+      "summary": "Nowadays, there's so much improvement. And...",
+      "transcript_excerpt": "Nowadays, there's so much improvement. And... And all these improvements happened, like, very gradually, too. Like, people did not realize until you look back and see, like, how different it was. Yeah.",
+      "debug": {
+        "dense_rank": 37,
+        "dense_score": 0.797065794467926,
+        "fts_rank": 38,
+        "fusion_score": 0.020513359983168524,
+        "reranker_score": -7.354197978973389,
+        "final_rank": 9,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 10,
+      "moment_id": "d799454e-753b-47d9-a337-38032a28aac3",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 13554960,
+      "end_ms": 13578400,
+      "score": -7.964047908782959,
+      "summary": "footage is traumatic and honestly fucking disgusting. The last one is called Smoke on the Water.",
+      "transcript_excerpt": "footage is traumatic and honestly fucking disgusting. The last one is called Smoke on the Water. We see another peer with tons of dead bodies. An archived conversation from two people, Hideyoshi and Ken, talk about a killer who's hunting them. He killed 20 of them already, and tons of their businesses have been shut down. Yeah. She let them capture the killer's daughter, and he wants her back. Because of his destruction, they plan to get... Anyway, do we even get cyberpsychosis? ...and should ha",
+      "debug": {
+        "fts_rank": 23,
+        "fusion_score": 0.012048192771084338,
+        "reranker_score": -7.964047908782959,
+        "final_rank": 10,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 11,
+      "moment_id": "4e835f02-4d81-4077-88f0-4eb7b37ccadb",
+      "recording_id": "90f26a14-f79f-433e-8af9-5378ed1dec26",
+      "recording_title": "[3-2-24] Saruei - 【HALO_ COMBAT EVOLVED】PART 2",
+      "start_ms": 12615000,
+      "end_ms": 12630000,
+      "score": -8.044425964355469,
+      "summary": "Shit! Imagine like you know as I do a remake of Combat Evolved Visual graphics we have today",
+      "transcript_excerpt": "Shit! Imagine like you know as I do a remake of Combat Evolved Visual graphics we have today",
+      "debug": {
+        "fts_rank": 4,
+        "fusion_score": 0.015625,
+        "reranker_score": -8.044425964355469,
+        "final_rank": 11,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 12,
+      "moment_id": "4a6db4f4-a943-427d-89ba-6f67c86e8ae6",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 9095640,
+      "end_ms": 9117400,
+      "score": -8.115386009216309,
+      "summary": "Oh no, she's doing this all alone! She just asked for help!",
+      "transcript_excerpt": "Oh no, she's doing this all alone! She just asked for help! But why was she recording herself? Oh, maybe to show that she had a heart, I'm doing it.",
+      "debug": {
+        "dense_rank": 10,
+        "dense_score": 0.8031984567642212,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -8.115386009216309,
+        "final_rank": 12,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 13,
+      "moment_id": "6fdc4a2d-2675-48f3-aad7-041e16ce83a6",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 13878000,
+      "end_ms": 13897000,
+      "score": -8.228915214538574,
+      "summary": "Why? Oh, that...",
+      "transcript_excerpt": "Why? Oh, that... Okay, well, noted. Thanks. Thank you for coming. Have a good shower. Stinky. Thank you. See you later. Bye. He's gone!",
+      "debug": {
+        "dense_rank": 14,
+        "dense_score": 0.8017395734786987,
+        "fusion_score": 0.013513513513513514,
+        "reranker_score": -8.228915214538574,
+        "final_rank": 13,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 14,
+      "moment_id": "ff157814-da46-4abc-887a-ed649ec1d073",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 15018680,
+      "end_ms": 15106200,
+      "score": -8.507768630981445,
+      "summary": "Yeah, but like that's true like she's driving but maybe she could have stolen the car, you know, you don't know Oh What's missing a block of risen and So I need acid and I will need to put the acid into like the water tube thingy here…",
+      "transcript_excerpt": "Yeah, but like that's true like she's driving but maybe she could have stolen the car, you know, you don't know Oh What's missing a block of risen and So I need acid and I will need to put the acid into like the water tube thingy here, okay, I got it now I Know what to do So I'm trying to think I Know where to find acid, but I don't know how to open the cell door because it's inside like, you know, the prison jail thingy Like I Something here in Neptune's palace, I Guess we need to go there So w",
+      "debug": {
+        "dense_rank": 12,
+        "dense_score": 0.8025883436203003,
+        "fusion_score": 0.013888888888888888,
+        "reranker_score": -8.507768630981445,
+        "final_rank": 14,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 15,
+      "moment_id": "e3d3252b-0fe2-4f3d-81d8-8430c475217f",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1903000,
+      "end_ms": 1922000,
+      "score": -8.567240715026855,
+      "summary": "What did he ask her? Paranoid.",
+      "transcript_excerpt": "What did he ask her? Paranoid. Bugs. I don't know that song, but bugs! Or maybe I do. I usually just don't- I don't even know the titles of the song",
+      "debug": {
+        "dense_rank": 21,
+        "dense_score": 0.8008400797843933,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -8.567240715026855,
+        "final_rank": 15,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 16,
+      "moment_id": "e53f8d0d-0557-4fd0-886d-b0726e52fe71",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 9878580,
+      "end_ms": 9890580,
+      "score": -8.777548789978027,
+      "summary": "I don't know about the song though Terraria music? I don't know",
+      "transcript_excerpt": "I don't know about the song though Terraria music? I don't know",
+      "debug": {
+        "fts_rank": 3,
+        "fusion_score": 0.015873015873015872,
+        "reranker_score": -8.777548789978027,
+        "final_rank": 16,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 17,
+      "moment_id": "e08d0e84-0e3f-429d-bbca-29a4b444a25e",
+      "recording_id": "5d31e9cc-4c4c-4a42-86c2-41be1ab52e38",
+      "recording_title": "[1-15-24] anny - PARTNER ANNYVERSARY!! Stronge 🍊 !tts",
+      "start_ms": 11382000,
+      "end_ms": 11402000,
+      "score": -8.887728691101074,
+      "summary": "Who's here? Holy shit!",
+      "transcript_excerpt": "Who's here? Holy shit! That sounded like a completely different person! What the fuck? Who was that? It was me! I'm a voice actress.",
+      "debug": {
+        "dense_rank": 1,
+        "dense_score": 0.8220962285995483,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -8.887728691101074,
+        "final_rank": 17,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 18,
+      "moment_id": "6a4f7df4-7f85-4fbf-ad1b-02ab5ded718f",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 4657000,
+      "end_ms": 4677000,
+      "score": -9.12691593170166,
+      "summary": "Nothing happened. Did it change anything in here?",
+      "transcript_excerpt": "Nothing happened. Did it change anything in here? It was just for the water pound. Okay, it must be for the water pound, right? Cheer up a bit! It's fine, whatever.",
+      "debug": {
+        "dense_rank": 13,
+        "dense_score": 0.8021723628044128,
+        "fusion_score": 0.0136986301369863,
+        "reranker_score": -9.12691593170166,
+        "final_rank": 18,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 19,
+      "moment_id": "d09977ad-ad5d-4445-afec-f52cc687080e",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2142100,
+      "end_ms": 2162000,
+      "score": -9.346929550170898,
+      "summary": "Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+      "transcript_excerpt": "Ass It's so awkward without the music I think she has it so that her VODs don't have music on the background So when you watch the VOD, it's just like her just... Sitting there in silence and just like, yeah, acapella Roomie, hi!",
+      "debug": {
+        "dense_rank": 27,
+        "dense_score": 0.7999297976493835,
+        "fts_rank": 13,
+        "fusion_score": 0.02519288301054952,
+        "reranker_score": -9.346929550170898,
+        "final_rank": 19,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 20,
+      "moment_id": "50c03ad8-fda6-4b4a-bdc0-adef693e92bc",
+      "recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+      "recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 27147000,
+      "end_ms": 27166000,
+      "score": -9.406695365905762,
+      "summary": "I'm changing that. What?",
+      "transcript_excerpt": "I'm changing that. What? It's the worst stream on Twitch and YouTube. Possibly... I don't stream on YouTube. That... I'm saying it's... I know, I'm just saying it's worse than any stream on YouTube. And there are some bad streams on YouTube.",
+      "debug": {
+        "fts_rank": 1,
+        "fusion_score": 0.01639344262295082,
+        "reranker_score": -9.406695365905762,
+        "final_rank": 20,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 21,
+      "moment_id": "96a205bf-a637-40d8-8893-19d42bfbb5de",
+      "recording_id": "19dc8461-8a6a-4cfd-afd7-35841159f2cf",
+      "recording_title": "anny 的xp rating",
+      "start_ms": 9562000,
+      "end_ms": 9570000,
+      "score": -9.430464744567871,
+      "summary": "Oh my god. Neruga.",
+      "transcript_excerpt": "Oh my god. Neruga. Oh.",
+      "debug": {
+        "dense_rank": 22,
+        "dense_score": 0.8003330230712891,
+        "fusion_score": 0.012195121951219513,
+        "reranker_score": -9.430464744567871,
+        "final_rank": 21,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 22,
+      "moment_id": "67ebddaf-a4aa-4df1-adf0-9c4a205bb926",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 2187000,
+      "end_ms": 2210000,
+      "score": -9.446097373962402,
+      "summary": "What, me? Huh?",
+      "transcript_excerpt": "What, me? Huh? I-there is a lacrosse underwear on me! Huh? Thank you, Ms. Killaddy, and... Thank you, welcome back! You see what I was drawing this whole time! Aww! Russell, thank you for the tutu! What's that? Oh, oh, oh, oh, oh...",
+      "debug": {
+        "fts_rank": 17,
+        "fusion_score": 0.012987012987012988,
+        "reranker_score": -9.446097373962402,
+        "final_rank": 22,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 23,
+      "moment_id": "5bd0c5d5-c59f-4c59-b9b7-126ff96f66fb",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 1621040,
+      "end_ms": 1643040,
+      "score": -9.460745811462402,
+      "summary": "I don't know if I can show that I know some people... I don't know if people got banned for that I need to go break the piss And in the morning by me I'm so cute!",
+      "transcript_excerpt": "I don't know if I can show that I know some people... I don't know if people got banned for that I need to go break the piss And in the morning by me I'm so cute! I have a big prince's bed Damn!",
+      "debug": {
+        "fts_rank": 26,
+        "fusion_score": 0.011627906976744186,
+        "reranker_score": -9.460745811462402,
+        "final_rank": 23,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 24,
+      "moment_id": "e0db16a7-b8ea-4c6d-9223-0d5b3cfed422",
+      "recording_id": "121a99a3-affb-4e74-80de-c5fd13ed7c4b",
+      "recording_title": "[11-19-23] Saruei - 💥PLAYING DON'T SCREAM AND THEN FEAR TO FATHOM! _ TTS ON 100 BITS",
+      "start_ms": 5440000,
+      "end_ms": 5491000,
+      "score": -9.533171653747559,
+      "summary": "Wow, this music is unsettling. Is it here?",
+      "transcript_excerpt": "Wow, this music is unsettling. Is it here? Wait, no, I don't think I want to park it here. Oh. Let me park properly. I don't know what I could bother me. Okay. Wait. Because if I need to get up and leave, I don't want to have something right in front of me. I need to drive away. Oh, I have... Oh, that's my bag. For now, I'm going to leave it here.",
+      "debug": {
+        "dense_rank": 25,
+        "dense_score": 0.8000353574752808,
+        "fusion_score": 0.011764705882352941,
+        "reranker_score": -9.533171653747559,
+        "final_rank": 24,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 25,
+      "moment_id": "6e8fcb5b-376b-42e2-aced-d92b24d14977",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 1645040,
+      "end_ms": 1694000,
+      "score": -9.553712844848633,
+      "summary": "So cute! Wait, hold on I need...",
+      "transcript_excerpt": "So cute! Wait, hold on I need... What is this? Think of grandpa and the mumps Whatever that means My skit song You don't like the song? You're just a hater When I went to the convenience store today They were selling so many Christmas cakes And there was barely anybody There was barely anybody at the store And then... And when I bought my shit and went outside, I could hear like the Christmas music, I could hear the Christmas music like in the background and just me standing outside in the silen",
+      "debug": {
+        "fts_rank": 8,
+        "fusion_score": 0.014705882352941176,
+        "reranker_score": -9.553712844848633,
+        "final_rank": 25,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 26,
+      "moment_id": "70e77589-e898-45ce-ac31-4054f656002c",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 19888000,
+      "end_ms": 19974800,
+      "score": -9.6733980178833,
+      "summary": "What is this? Dark Souls What the fuck is this?",
+      "transcript_excerpt": "What is this? Dark Souls What the fuck is this? Why is the camera so dank? I was reading Dark Souls 3 Reddit And someone was asking What were they asking? They were asking if their level is Enough For something If it's not too high or some shit And someone wrote Overleveling Overleveling is not going to save you from the camera That's all he drops okay does not open from this side then from what side does it open huh is this where i have to go oh i killed their family are those fucking bug eggs ",
+      "debug": {
+        "fts_rank": 10,
+        "fusion_score": 0.014285714285714285,
+        "reranker_score": -9.6733980178833,
+        "final_rank": 26,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 27,
+      "moment_id": "61348eca-fcce-4afe-a890-f720d95de301",
+      "recording_id": "5e6db3d3-3ade-44e0-ad90-6a7838ae86c7",
+      "recording_title": "[5-24-24] Saruei - 【CROW COUNTRY】",
+      "start_ms": 16798080,
+      "end_ms": 16815680,
+      "score": -9.722149848937988,
+      "summary": "Let's save. Before we go to the Trident Mermaid fucking see shit Gotcha, I feel like we are actually doing some really good progress right now.",
+      "transcript_excerpt": "Let's save. Before we go to the Trident Mermaid fucking see shit Gotcha, I feel like we are actually doing some really good progress right now. It's really smooth",
+      "debug": {
+        "fts_rank": 21,
+        "fusion_score": 0.012345679012345678,
+        "reranker_score": -9.722149848937988,
+        "final_rank": 27,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 28,
+      "moment_id": "acd86fae-36ff-45fe-bfb3-ae2543184399",
+      "recording_id": "4863f974-a0f9-44e5-9bcf-303d6c5778a1",
+      "recording_title": "[12-25-23] anny - I'M BACK!! meryy chrinsnsmus gays!! trying strong zero for the first time today 💀🍊!tts",
+      "start_ms": 1695000,
+      "end_ms": 1708000,
+      "score": -9.841120719909668,
+      "summary": "Alone! It was a vibe.",
+      "transcript_excerpt": "Alone! It was a vibe. Bro, it's so hard to talk when the whole chat is spamming Skittle. I feel like nobody is listening to what I'm saying.",
+      "debug": {
+        "fts_rank": 5,
+        "fusion_score": 0.015384615384615385,
+        "reranker_score": -9.841120719909668,
+        "final_rank": 28,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 29,
+      "moment_id": "45a38d82-2417-438c-a498-b40c0c1cc204",
+      "recording_id": "4493aff0-4288-4a6a-b168-af46a9ddd07d",
+      "recording_title": "[2-29-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+      "start_ms": 1628000,
+      "end_ms": 1649000,
+      "score": -10.002299308776855,
+      "summary": "I haven't watched Frozen 2, so I don't know Someone in the chat said her own music or something, so I was like, wait, what? Yeah, it sounded too Disney Oh my god!",
+      "transcript_excerpt": "I haven't watched Frozen 2, so I don't know Someone in the chat said her own music or something, so I was like, wait, what? Yeah, it sounded too Disney Oh my god! Look at her! Look at the cinematic effect, wow!",
+      "debug": {
+        "dense_rank": 19,
+        "dense_score": 0.8011287450790405,
+        "fusion_score": 0.012658227848101266,
+        "reranker_score": -10.002299308776855,
+        "final_rank": 29,
+        "semantic_error": null
+      }
+    },
+    {
+      "rank": 30,
+      "moment_id": "59173d8a-0ebd-4b23-8d8c-6c3e828f5bf7",
+      "recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+      "recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+      "start_ms": 1753920,
+      "end_ms": 1774100,
+      "score": -10.036762237548828,
+      "summary": "My god, what's this? It was it was all the publicity stunts that he makes evil more popular.",
+      "transcript_excerpt": "My god, what's this? It was it was all the publicity stunts that he makes evil more popular. It was it was all plan guys I'm telling you Eww! What is this? What is this?",
+      "debug": {
+        "dense_rank": 15,
+        "dense_score": 0.8015322089195251,
+        "fusion_score": 0.013333333333333334,
+        "reranker_score": -10.036762237548828,
+        "final_rank": 30,
+        "semantic_error": null
+      }
+    }
+  ]
+}

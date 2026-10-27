@@ -1,0 +1,59 @@
+{
+  "case_id": "CL09",
+  "file": "media/clip_09.mp4",
+  "source_recording_id": "c86dc576-4dfb-480e-93cf-5f5b8b53d30a",
+  "source_recording_title": "[4-8-24] anny - chill strim cause not feeling well 🩷 !tts !onlyfox",
+  "moment_id": "ea3ac189-ccc3-43b3-b093-407a2c772d7c",
+  "query": "",
+  "group": "RANDOM_FINAL",
+  "selection_reason": "fixed-seed random FINAL Moment",
+  "moment_start_ms": 12864640,
+  "moment_end_ms": 12911040,
+  "proposed_start_ms": 12856640,
+  "proposed_end_ms": 12923040,
+  "final_start_ms": 12856640,
+  "final_end_ms": 12923040,
+  "proposal_duration_ms": 66400,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "That terrible Because like no matter how perfect you're just Japanese is gonna be, people are still gonna fucking jozu you, like, no matter if your Japanese is perfect or bad, they're still gonna say nihongo jozu to you, so to Japanese people you're always just gonna be a foreigner, they will always assume you don't speak the language,",
+    "inside": "you're always just gonna be a foreigner, they will always assume you don't speak the language, which is like crazy. Find a JP girlfriend, how's that gonna help you? I'm just sad that language schools are only like two years in a lifetime that you can attend, you can't like at least like be on a visa I guess, I need to figure out if they can accept you if you're on a different visa. Newest, oldest, weak? Word amount too? Favorites, oh let's do the favorites. I already regret this. Is it this? No! Ah plant, okay it's gonna fucking",
+    "after": "do the favorites. I already regret this. Is it this? No! Ah plant, okay it's gonna fucking capture the lamp. Shokubutsu is a plant. The fuck was that again?"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 200,
+    "pause_after_ms": 4880,
+    "start_splits_transcript_segment": true,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 12849440,
+      "end_ms": 12856440,
+      "text": "Japanese is perfect or bad, they're still gonna say nihongo jozu to you, so to Japanese people"
+    },
+    "next_segment": {
+      "start_ms": 12927920,
+      "end_ms": 12952600,
+      "text": "capture the lamp. Shokubutsu is a plant. The fuck was that again?"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 66.433,
+      "size_bytes": 17593290,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.0,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "starts_mid_transcript_segment",
+    "ends_mid_transcript_segment"
+  ]
+}

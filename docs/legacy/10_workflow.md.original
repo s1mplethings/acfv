@@ -1,0 +1,12 @@
+# Workflow
+
+## Human-driven
+1) Write/Update spec (if needed)
+2) Create Task Card
+3) Implement (smallest change)
+4) Run `bash scripts/verify.sh`
+5) If FAIL: record to `ai_context/problem_registry.md`
+6) If PASS: finalize PR
+
+## Auto loop (optional)
+Discover → Fix → Verify → Report

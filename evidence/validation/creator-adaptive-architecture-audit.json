@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "branch": "refactor/creator-adaptive-understanding",
+  "base_commit": "947efa311954776c8d4ed867cb622e9d8dffde35",
+  "implementation_commit": "5698b1e8d79e3fad15425f014a95ee12dd34f289",
+  "ancestry": [
+    "cb9a798 origin/main cleanup",
+    "ee758f9 backend freeze",
+    "73ea917 product GUI",
+    "ec87af7 Fixed37",
+    "947efa3 compact Human Review performance validation"
+  ],
+  "canonical_services": {
+    "creator_identity": "acfv.creator_identity.CreatorIdentityService",
+    "voice_profile": "acfv.voice_profile.CreatorVoiceProfileService",
+    "trusted_speech_memory": "acfv.trusted_speech_memory.TrustedSpeechMemoryService",
+    "creator_adaptive_asr": "acfv.creator_adaptive_asr.CreatorAdaptiveASRService"
+  },
+  "pipeline_change": "one optional layer before existing Moment/Retrieval/Clip consumers; no second processing engine",
+  "default_feature_flag": false,
+  "raw_media_mutations": 0,
+  "official_transcript_mutations": 0,
+  "cgnk_advisory_brief": ".cgkn/agent-kit/codex_capability_brief.json"
+}

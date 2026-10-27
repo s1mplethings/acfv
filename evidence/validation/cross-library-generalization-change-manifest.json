@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "base_commit": "3cb0a9d98e2cc91cebed48507f49a8acd101377f",
+  "implementation_commit": "d404d18f45b1be6f3970b84d9dc82c9535bb15d6",
+  "branch": "validation/cross-library-generalization",
+  "changes": [
+    {"capability": "retrieval", "files": ["src/acfv/retrieval/service.py", "tests/integration/test_hybrid_retrieval.py", "specs/capabilities/retrieval.md"], "summary": "scope FTS before limit and apply Recording-owner preference"},
+    {"capability": "grounded_conversation", "files": ["src/acfv/conversation/service.py", "tests/unit/test_grounded_conversation.py", "specs/capabilities/grounded_conversation.md"], "summary": "conservative cross-language semantic evidence gate"},
+    {"capability": "clip_candidate_selection", "files": ["src/acfv/clips/candidates.py", "tests/unit/test_clip_candidates.py", "specs/capabilities/clip_candidate_selection.md"], "summary": "CJK and complete-talking watchability signals"}
+  ],
+  "gui_files_changed": 0,
+  "dependencies_changed": false,
+  "creator_specific_rules_added": false,
+  "original_media_modified": false,
+  "push_or_merge_performed": false
+}

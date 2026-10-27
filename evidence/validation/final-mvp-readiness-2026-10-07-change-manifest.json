@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "change_id": "final-mvp-readiness-2026-10-07",
+  "summary": "Fix failures observed during final real Twitch, GPU ASR, recovery, rendering, and GUI validation.",
+  "capabilities": [
+    "creator_library",
+    "twitch_capture",
+    "live_processing",
+    "moment_lifecycle",
+    "retrieval",
+    "grounded_conversation",
+    "clip_rendering",
+    "clip_review",
+    "feedback"
+  ],
+  "files_changed": [
+    "docs/issue_memory/problem_registry.md",
+    "src/acfv/app/gui.py",
+    "src/acfv/cli/gui.py",
+    "src/acfv/library/capture.py",
+    "src/acfv/library/scanner.py",
+    "src/acfv/library/service.py",
+    "src/acfv/live/service.py",
+    "src/acfv/runtime/stream_monitor.py",
+    "tests/unit/test_grounded_conversation.py",
+    "tests/unit/test_gui_env_selection.py",
+    "tests/unit/test_gui_startup_doctor.py",
+    "tests/unit/test_library_capture.py",
+    "tests/unit/test_library_service.py",
+    "tests/unit/test_live_processing.py",
+    "tests/unit/test_stream_monitor_segmented.py"
+  ],
+  "behavior_change": true,
+  "contract_change": false,
+  "migration_required": false,
+  "compatibility": "Persisted schema and public CLI remain compatible; fixes harden existing MVP behavior.",
+  "risks": [
+    "Twitch chat is blocked by credentials and has no real-session evidence.",
+    "Human retrieval, Moment, and Clip worksheets still require user scoring.",
+    "Full GUI Evidence-to-Clip-to-Accept smoke requires a user-reviewed recording in the GUI library."
+  ]
+}

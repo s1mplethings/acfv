@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-09",
+  "base_sha": "d7aa5c6ee03a7f048900ad0ce98d6957f45bb4ec",
+  "implementation_sha": "6e8270f9e01cdff8114c91c7073c2b47f141255a",
+  "commits": [
+    "104dac3 Fix retrieval recall and grounded conversation",
+    "a13ea1e Include winning retrieval context in conversation",
+    "6e8270f Filter stopwords from lexical retrieval queries"
+  ],
+  "scope": {
+    "files_changed": 25,
+    "insertions": 936,
+    "deletions": 173,
+    "frozen_product_paths_modified": false,
+    "dependency_changes": false
+  },
+  "groups": {
+    "retrieval": ["src/acfv/retrieval/index.py", "src/acfv/retrieval/service.py", "src/acfv/ragstack/embeddings/encoder.py"],
+    "conversation_provider_ui": ["src/acfv/conversation/service.py", "src/acfv/llm/openai_client.py", "src/acfv/cli/search.py", "src/acfv/cli/live.py", "src/acfv/ui/tabs/conversation_tab.py"],
+    "configuration": ["src/acfv/config/default.yaml", "src/acfv/config/_config_impl.py", "src/acfv/features/modules/ui_components.py"],
+    "evaluation": ["scripts/benchmark_embedding_models.py", "scripts/diagnose_retrieval_representations.py", "scripts/evaluate_retrieval_conversation_final.py", "scripts/evaluate_intelligence_fixed_set.py"],
+    "tests": ["tests/unit/test_retrieval_representations.py", "tests/unit/test_grounded_conversation.py", "tests/unit/test_intelligence_runtime.py", "tests/integration/test_hybrid_retrieval.py"],
+    "documentation": ["docs/repo_map.md", "docs/issue_memory/problem_registry.md", "specs/capabilities/retrieval.md", "specs/capabilities/grounded_conversation.md", "specs/modules/retrieval/spec.md", "specs/modules/conversation/spec.md"]
+  },
+  "rollback": "git revert 6e8270f a13ea1e 104dac3"
+}

@@ -1,0 +1,53 @@
+# ROI Configuration - 电脑画面区与V区域配置
+# 适用于纯配置模式（档1）
+
+# 预设配置（per-channel）
+presets:
+  saruei:
+    PC:
+      x: 0
+      y: 0
+      w: 1280
+      h: 720
+    V:
+      x: 1100
+      y: 20
+      w: 160
+      h: 240
+
+  anny:
+    PC:
+      x: 0
+      y: 0
+      w: 1920
+      h: 1080
+    V:
+      x: 1650
+      y: 50
+      w: 240
+      h: 360
+
+  default:
+    PC:
+      x: 0
+      y: 0
+      w: 1920
+      h: 1080
+    V: null  # 无V区域
+
+# 检测模式（可选）
+mode: config  # config / auto_track / grounded_sam
+
+# 跟踪器配置（档2）
+tracker:
+  type: CSRT  # CSRT / KCF
+  reinit_threshold: 0.3  # 置信度低于此值重新初始化
+
+# 检测配置（档3）
+detection:
+  prompts:
+    - "monitor"
+    - "screen"
+    - "avatar"
+    - "anime character"
+  confidence_threshold: 0.5

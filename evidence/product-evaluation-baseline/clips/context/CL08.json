@@ -1,0 +1,58 @@
+{
+  "case_id": "CL08",
+  "file": "media/clip_08.mp4",
+  "source_recording_id": "2c6ed1ce-5784-4466-a4dc-b69657580b3b",
+  "source_recording_title": "[2-25-24] anny - ░E░R░M░I░N░B░I░O░ 🔞 🍊 !tts",
+  "moment_id": "e6a6d7fa-aa2f-46d5-b57c-6326701d3b51",
+  "query": "",
+  "group": "RANDOM_FINAL",
+  "selection_reason": "fixed-seed random FINAL Moment",
+  "moment_start_ms": 31489000,
+  "moment_end_ms": 31547000,
+  "proposed_start_ms": 31481000,
+  "proposed_end_ms": 31559000,
+  "final_start_ms": 31481000,
+  "final_end_ms": 31559000,
+  "proposal_duration_ms": 78000,
+  "long_clip": false,
+  "proxy": true,
+  "context_20s": {
+    "before": "No. No. I can turn you into a bottle. It's him. I am, in fact, a bottle. I mean...",
+    "inside": "What is... What is wrong with you? What? What is wrong with you? Great. Great. That's so cool. That's really cool. Yeah. After making me tweet this and then you just... Yeah. Great. That's cool. XTT. XTT. You know what? I'm going to find someone to respond to you with. What? You have nothing. You have nothing. That's what you think. You have nothing. Just you wait. Chat, can we ratio him? Please. Everybody, can we ratio him? Please. Everybody go like my tweet now. Can I ratio him? Please. Please. This is embarrassing. Please. Please. Let's ratio him. What's embarrassing? You being almost ratioed? You attempting to ratio me? No, no, no, no. As well as... Oh, you think I can ratio you?",
+    "after": "As well as... Oh, you think I can ratio you? How many followers do you have on Twitter? 173,000 I see Fuck, I should have just responded with Rachel Fuck Rachel"
+  },
+  "boundary_diagnostics": {
+    "pause_before_ms": 0,
+    "pause_after_ms": 1000,
+    "start_splits_transcript_segment": false,
+    "end_splits_transcript_segment": true,
+    "previous_segment": {
+      "start_ms": 31476000,
+      "end_ms": 31481000,
+      "text": "I mean..."
+    },
+    "next_segment": {
+      "start_ms": 31560000,
+      "end_ms": 31563000,
+      "text": "How many followers do you have on Twitter?"
+    }
+  },
+  "automated_checks": {
+    "ffprobe": {
+      "returncode": 0,
+      "video": true,
+      "audio": true,
+      "duration_seconds": 78.033,
+      "size_bytes": 9373959,
+      "duration_matches_proposal": true,
+      "pass": true
+    },
+    "silence_ratio": 0.01494,
+    "subtitle_present": true,
+    "subtitle_burned_by_canonical_renderer": true
+  },
+  "automatic_result": "AUTO_SUSPECT",
+  "suspect_reasons": [
+    "ends_mid_transcript_segment"
+  ]
+}

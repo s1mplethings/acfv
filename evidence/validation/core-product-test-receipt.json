@@ -1,0 +1,28 @@
+{
+  "schema_version": "1",
+  "change_id": "core-product-2026-10-07",
+  "commit": "23416a98387fcfdabfaddffff628030e50e3ab35",
+  "commands": [
+    "python -m compileall -q src",
+    "python -m acfv.cli --help",
+    "python -m acfv.cli gui --help",
+    "python -m acfv.cli pipe clip --help",
+    "python -m acfv.cli live --help",
+    "python -m pytest -q",
+    "python -m pytest -q -p pytest_cov --cov=acfv.library --cov=acfv.moments --cov=acfv.retrieval --cov=acfv.conversation --cov=acfv.clips --cov=acfv.feedback --cov=acfv.live --cov-report=term:skip-covered",
+    "powershell -ExecutionPolicy Bypass -File scripts/verify.ps1"
+  ],
+  "results": [
+    {"check": "compileall", "status": "PASS"},
+    {"check": "cli", "status": "PASS", "count": 4},
+    {"check": "pytest", "status": "PASS", "passed": 214, "skipped": 0},
+    {"check": "coverage", "status": "PASS", "percent": 85},
+    {"check": "contract_checks", "status": "PASS"},
+    {"check": "full_product_e2e", "status": "PASS_REPLAY"},
+    {"check": "real_twitch", "status": "NOT_EVALUATED"},
+    {"check": "dogfooding_20h", "status": "NOT_EVALUATED"}
+  ],
+  "passed": true,
+  "environment": {"os": "Windows 11", "python": "3.12.3"},
+  "limitations": ["No real Twitch session.", "No 10-recording/20-hour human dataset.", "Human Moment, Clip, and real latency gates not evaluated."]
+}
